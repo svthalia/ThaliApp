@@ -22,7 +22,8 @@
     "rules": {
         "indent": [
             "error",
-            2
+            2,
+            {"Switchcase": true}
         ],
         "linebreak-style": [
             "error",
