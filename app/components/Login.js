@@ -28,3 +28,8 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  loggedIn: React.PropTypes.bool.isRequired,
+  login: React.PropTypes.func.isRequired,
+};
