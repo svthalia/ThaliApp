@@ -1,20 +1,17 @@
-import React,{Component} from 'react';
-import Login from '../components/Login';
-import {bindActionCreators} from 'redux';
-import * as ThaliAppActions from '../actions/ThaliAppActions';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Login from '../components/Login';
+import * as ThaliAppActions from '../actions/ThaliAppActions';
 
 class ThaliApp extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { state, actions } = this.props;
     return (
-      <Login 
-      loggedIn={state.loggedIn}
-      {...actions}
+      <Login
+        loggedIn={state.loggedIn}
+        {...actions}
       />
     );
   }
@@ -22,9 +19,9 @@ class ThaliApp extends Component {
 
 export default connect(
   state => (
-    {state: state.login}
+    { state: state.login }
   ),
-  (dispatch) => (
-    {actions: bindActionCreators(ThaliAppActions, dispatch)}
-  )
+  dispatch => (
+    { actions: bindActionCreators(ThaliAppActions, dispatch) }
+  ),
 )(ThaliApp);

@@ -13,5 +13,5 @@ New and improved ThaliApp
 Ensure that the development server is started with `react-native start`.
 Deploy the app on a running emulator or connected Android Phone with `react-native run-android`.
 
-##Debugging
+## Debugging
 Open the console with `react-native log-android`.

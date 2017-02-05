@@ -1,30 +1,30 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-let magenta = '#E62272';
-let deviceWidth = Dimensions.get('window').width;
-let deviceHeigth = Dimensions.get('window').heigth;
-let margin = 10;
+const magenta = '#E62272';
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeigth = Dimensions.get('window').heigth;
+const margin = 10;
 
 const styles = StyleSheet.create({
-  body : {
+  body: {
     padding: 10,
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   bodyText: {
     fontFamily: 'opensans',
   },
   textInput: {
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   logo: {
     width: deviceWidth - margin,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   button: {
-    color: magenta
-  }
+    color: magenta,
+  },
 });
 
-export {styles};
+export { styles };

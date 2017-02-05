@@ -23,7 +23,7 @@
         "indent": [
             "error",
             2,
-            {"Switchcase": true}
+            {"SwitchCase": 1}
         ],
         "linebreak-style": [
             "error",
