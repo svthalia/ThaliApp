@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, TextInput, Button } from 'react-native';
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const { loggedIn, login } = this.props;
+    const { login } = this.props;
 
     return (
       <View>
@@ -23,13 +23,11 @@ export default class Login extends Component {
           secureTextEntry
         />
         <Button title="Log in" onPress={login} />
-        <Text>{loggedIn ? 'MEMES' : 'MMS'}</Text>
       </View>
     );
   }
 }
 
 Login.propTypes = {
-  loggedIn: React.PropTypes.bool.isRequired,
   login: React.PropTypes.func.isRequired,
 };
