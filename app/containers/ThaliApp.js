@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
 import * as ThaliAppActions from '../actions/ThaliAppActions';
 
-class ThaliApp extends Component {
-  render() {
-    // const { state, actions } = this.props;
-    return (
-      <Login
-        loggedIn={this.props.state.loggedIn}
-        {...this.props.actions}
-      />
-    );
-  }
-}
+const ThaliApp = (props) => {
+  const { state, actions } = props;
+  return (
+    <Login
+      loggedIn={state.loggedIn}
+      loginError={state.loginError}
+      {...actions}
+    />
+  );
+};
 
 ThaliApp.propTypes = {
   state: React.PropTypes.objectOf(React.PropTypes.oneOfType([

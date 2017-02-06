@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, Text } from 'react-native';
 
 export default class Login extends Component {
   constructor(props) {
@@ -8,21 +8,28 @@ export default class Login extends Component {
       username: '',
       password: '',
     };
+    this.login = props.login;
+  }
+
+  onPress() {
+    return this.login.bind(null, this.state.username, this.state.password);
   }
 
   render() {
-    const { login } = this.props;
-
+    const { loginError } = this.props;
     return (
       <View>
         <TextInput
           placeholder="Username"
+          onChangeText={username => this.setState({ username })}
         />
         <TextInput
           placeholder="Password"
           secureTextEntry
+          onChangeText={password => this.setState({ password })}
         />
-        <Button title="Log in" onPress={login} />
+        <Button title="Log in" onPress={this.onPress()} />
+        <Text>{ loginError ? 'Login faal' : '' }</Text>
       </View>
     );
   }
