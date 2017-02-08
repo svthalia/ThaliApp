@@ -1,34 +1,31 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
+// import { Navigator } from 'react-native';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
 import * as ThaliAppActions from '../actions/ThaliAppActions';
 
-const ThaliApp = (props) => {
-  const { state, actions } = props;
-  return (
-    <Login
-      loggedIn={state.loggedIn}
-      loginError={state.loginError}
-      {...actions}
-    />
+const ThaliApp = props => (
+  <Login {...props} />
   );
-};
 
 ThaliApp.propTypes = {
-  state: React.PropTypes.objectOf(React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.bool,
-    React.PropTypes.number,
-  ])).isRequired,
-  actions: React.PropTypes.objectOf(React.PropTypes.func).isRequired,
+  login: React.PropTypes.func.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
+  loginError: React.PropTypes.bool.isRequired,
 };
 
+const mapStateToProps = state => ({
+  loggedIn: state.login.loggedIn,
+  loginError: state.login.loginError,
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: () => dispatch(ThaliAppActions.login()),
+  enterPassword: password => dispatch(ThaliAppActions.enterPassword(password)),
+});
+
 export default connect(
-  state => (
-    { state: state.login }
-  ),
-  dispatch => (
-    { actions: bindActionCreators(ThaliAppActions, dispatch) }
-  ),
+  mapStateToProps,
+  mapDispatchToProps,
 )(ThaliApp);
