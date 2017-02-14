@@ -10,8 +10,8 @@ New and improved ThaliApp
 `yarn install`
 
 ## Starting the app
-Ensure that the development server is started with `react-native start`.
-Deploy the app on a running emulator or connected Android Phone with `react-native run-android`.
+Ensure that the development server is started with `yarn run react-native start`.
+Deploy the app on a running emulator or connected Android Phone with `yarn run react-native run-android`.
 
 ## Debugging
-Open the console with `react-native log-android`.
+Open the console with `yarn run react-native log-android`.
