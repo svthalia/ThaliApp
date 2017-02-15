@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const magenta = '#E62272';
 const deviceWidth = Dimensions.get('window').width;
-const deviceHeigth = Dimensions.get('window').heigth;
+// const deviceHeigth = Dimensions.get('window').heigth;
 const margin = 10;
 
 const styles = StyleSheet.create({
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { styles };
+export default styles;
