@@ -1,10 +1,9 @@
 image: node:latest 
 
 cache:
-    key: "$CI_BUILD_NAME"
+    untracked: true
     paths:
         - node_modules/
-        - .cache/
         - latest.tar.gz
 
 before_script:
