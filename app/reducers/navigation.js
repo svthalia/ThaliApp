@@ -1,17 +1,32 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
+  previousScenes: [],
   currentScene: 'login',
 };
 
 
 export default function navigate(state = initialState, action = {}) {
+  const { currentScene, previousScenes } = state;
   switch (action.type) {
     case types.LOGIN:
       if (action.success) {
-        return { ...state, currentScene: 'welcome' };
+        return {
+          previousScenes: [
+            ...previousScenes,
+            currentScene,
+          ],
+          currentScene: 'welcome',
+        };
       }
       return { ...state };
+    case types.BACK: {
+      const scene = previousScenes.pop();
+      return {
+        previousScenes,
+        currentScene: scene,
+      };
+    }
     default:
       return { ...state };
   }

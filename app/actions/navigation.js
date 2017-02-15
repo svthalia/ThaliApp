@@ -6,3 +6,9 @@ export function navigate(scene) {
     scene,
   };
 }
+
+export function back() {
+  return {
+    type: types.BACK,
+  };
+}

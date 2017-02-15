@@ -14,7 +14,6 @@ const mapDispatchToProps = dispatch => ({
   navigate: scene => dispatch(actions.navigate(scene)),
 });
 
-
 const ReduxNavigator = (props) => {
   const currentScene = props.currentScene;
   switch (currentScene) {
@@ -30,6 +29,5 @@ const ReduxNavigator = (props) => {
 ReduxNavigator.propTypes = {
   currentScene: React.PropTypes.string.isRequired,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReduxNavigator);
