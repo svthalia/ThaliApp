@@ -1,17 +1,6 @@
-image: node:latest 
-
-cache:
-    untracked: true
-    paths:
-        - node_modules/
-        - latest.tar.gz
+image: kkarczmarczyk/node-yarn:latest 
 
 before_script:
-    - wget -N https://yarnpkg.com/latest.tar.gz
-    - tar zxf latest.tar.gz
-    - mv dist /opt/
-    - export PATH="/opt/dist/bin:$PATH"
-    - yarn config set cache-folder .cache
     - yarn install
 
 stages:
