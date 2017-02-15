@@ -8,7 +8,9 @@
     "lint": "eslint *.js app --fix"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "collectCoverage": true,
+    "coverageReporters": ["text-summary"]
   },
   "dependencies": {
     "react": "~15.4.0-rc.4",
