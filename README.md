@@ -5,7 +5,7 @@ The new and improved ThaliApp
 
 # Installation
 ## Requirements
-* [Node](https://nodejs.org/en/) (Some package managers might ship version that are too old)
+* [Node](https://nodejs.org/en/) (Some package managers might ship versions that are too old)
 * [Yarn](https://yarnpkg.com/)
 * Android development environment set up according to [this guide](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment)
 
