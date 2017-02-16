@@ -1,6 +1,7 @@
 [![build status](https://gitlab.science.ru.nl/thalia/ThaliApp-react/badges/master/build.svg)](https://gitlab.science.ru.nl/thalia/ThaliApp-react/commits/master)
 [![coverage report](https://gitlab.science.ru.nl/thalia/ThaliApp-react/badges/master/coverage.svg)](https://gitlab.science.ru.nl/thalia/ThaliApp-react/commits/master)
-New and improved ThaliApp
+# ThaliApp
+The new and improved ThaliApp
 
 # Installation
 ## Requirements
