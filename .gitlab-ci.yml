@@ -1,18 +1,25 @@
-image: kkarczmarczyk/node-yarn:latest 
-
-before_script:
-    - yarn install
+image: kkarczmarczyk/node-yarn:latest
 
 stages:
-    - lint
+    - build
     - test
 
-eslint: 
-    stage: lint
-    script: 
-        - yarn lint
+cache:
+    untracked: true
+    key: "$CI_PROJECT_ID"
+    paths:
+        - node_modules/
+        - .yarn
+
+yarn install:
+    stage: build
+    script:
+        - yarn config set cache-folder .yarn
+        - yarn install
 
 jest:
     stage: test
     script:
+        - rm -rf .yarn
+        - yarn lint
         - yarn test
