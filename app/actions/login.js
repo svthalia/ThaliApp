@@ -1,14 +1,14 @@
 import * as types from './actionTypes';
 
-export function loginold(username, password) {
+export function loginSuccess(username) {
   return {
-    type: types.LOGIN,
-    success: password === '42',
+    type: types.LOGINSUCCESS,
   };
 }
 
 export function login(username, password) {
   return (dispatch) => {
+    dispatch(loginProgress());
     return fetch('https://thalia.nu/api/login', {
       method: 'POST',
     })
@@ -17,8 +17,29 @@ export function login(username, password) {
       .then(
         (responseJson) => {
           console.log(responseJson);
-          return dispatch(loginold(username, password));
+          if(password === '42'){
+            console.log(responseJson);
+            return dispatch(loginSuccess(username))
+          }
+          else{
+            return dispatch(loginFailure());
+          }
         })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        return dispatch(loginFailure());
+      });
+  };
+}
+
+export function loginProgress() {
+  return {
+    type: types.LOGINPROGRESS,
+  };
+}
+
+export function loginFailure(){
+  return{
+    type: types.LOGINFAILURE,
   };
 }
