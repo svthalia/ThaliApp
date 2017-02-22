@@ -14,7 +14,7 @@ class Login extends Component {
   }
 
   render() {
-    const { loginError, login } = this.props;
+    const { loginError, login, loginProgress, loggedIn } = this.props;
     return (
       <View>
         <TextInput
@@ -27,7 +27,7 @@ class Login extends Component {
           onChangeText={password => this.setState({ password })}
         />
         <Button title="Log in" onPress={() => login(this.state.username, this.state.password)} />
-        <Text>{ loginError ? 'Login faal' : '' }</Text>
+        <Text>{ loggedIn ? 'Logged in' : (loginProgress ? 'Logging in' : (loginError ? 'Loggin failed' : '')) }</Text>
       </View>
     );
   }
