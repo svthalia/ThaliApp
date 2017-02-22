@@ -10,8 +10,9 @@ const Sidebar = props =>
     style={styles.sidebar}
   >
     <Text style={styles.header}>MENU</Text>
-    <Text onPress={() => props.navigate('login')} style={styles.button} >Log in</Text>
     <Text onPress={() => props.navigate('welcome')} style={styles.button} >Welcome</Text>
+    <Text onPress={() => props.navigate('events')} style={styles.button} >Events</Text>
+    <Text onPress={() => props.navigate('authenticate')} style={styles.button} >Authenticate</Text>
   </View>
 ;
 
