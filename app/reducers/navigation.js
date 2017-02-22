@@ -27,6 +27,12 @@ export default function navigate(state = initialState, action = {}) {
         currentScene: scene,
       };
     }
+    case types.NAVIGATE: {
+      return {
+        previousScenes: [],
+        currentScene: action.scene,
+      };
+    }
     default:
       return { ...state };
   }
