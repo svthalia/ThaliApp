@@ -2,16 +2,33 @@ import * as types from './actionTypes';
 
 const apiKey = 'AiYinaeng4juw1cae1eiLe2Adei2Ahbahda3AiRu';
 
-export function loginSuccess(username) {
+export function loginSuccess(username, token) {
   return {
     type: types.LOGINSUCCESS,
+    loginState: 'loggedIn',
+    username,
+    token,
+  };
+}
+
+export function loginProgress() {
+  return {
+    type: types.LOGINPROGRESS,
+    loginState: 'progress',
+  };
+}
+
+export function loginFailure() {
+  return {
+    type: types.LOGINFAILURE,
+    loginState: 'failure',
   };
 }
 
 export function login(username, password) {
   return (dispatch) => {
     dispatch(loginProgress());
-    data = {
+    const data = {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -29,27 +46,10 @@ export function login(username, password) {
       .then(
         (responseJson) => {
           if (responseJson.status === 'ok') {
-            console.log(responseJson);
-            return dispatch(loginSuccess(username));
+            return dispatch(loginSuccess(username, responseJson.token));
           }
-
           return dispatch(loginFailure());
         })
-      .catch((error) => {
-        console.error(error);
-        return dispatch(loginFailure());
-      });
-  };
-}
-
-export function loginProgress() {
-  return {
-    type: types.LOGINPROGRESS,
-  };
-}
-
-export function loginFailure() {
-  return {
-    type: types.LOGINFAILURE,
+      .catch(() => dispatch(loginFailure()));
   };
 }

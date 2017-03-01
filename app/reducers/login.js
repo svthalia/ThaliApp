@@ -1,20 +1,19 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  loggedIn: false,
-  loginError: false,
-  loginProgress: false,
+  loginState: '',
+  token: '',
+  username: '',
 };
 
 export default function login(state = initialState, action = {}) {
   switch (action.type) {
     case types.LOGINSUCCESS:
-      return { ...state, loginProgress: false, loginError: false, loggedIn: true };
-      break;
+      return { ...state, loginState: 'success', username: action.username, token: action.token };
     case types.LOGINFAILURE:
-      return { ...state, loginProgress: false, loginError: true, loggedIn: false };
+      return { ...state, loginState: 'failure' };
     case types.LOGINPROGRESS:
-      return { ...state, loginProgress: true, logginError: false, loggedIn: false };
+      return { ...state, loginState: 'progress' };
     default:
       return { ...state };
   }
