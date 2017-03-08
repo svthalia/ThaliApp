@@ -1,7 +1,5 @@
 import * as types from './actionTypes';
 
-const apiKey = 'AiYinaeng4juw1cae1eiLe2Adei2Ahbahda3AiRu';
-
 export function loginSuccess(username, token) {
   return {
     type: types.LOGINSUCCESS,
@@ -35,17 +33,16 @@ export function login(username, password) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        apikey: apiKey,
         username,
         password,
       }),
     };
-    return fetch('http://localhost:8000/api/login', data)
+    return fetch('http://localhost:8000/api/token-auth', data)
       .then(
         response => response.json())
       .then(
         (responseJson) => {
-          if (responseJson.status === 'ok') {
+          if (responseJson.token) {
             return dispatch(loginSuccess(username, responseJson.token));
           }
           return dispatch(loginFailure());
