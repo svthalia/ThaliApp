@@ -37,7 +37,7 @@ export function login(username, password) {
         password,
       }),
     };
-    return fetch('http://localhost:8000/api/token-auth', data)
+    return fetch('http://localhost:8000/api/token-auth/', data)
       .then(
         response => response.json())
       .then(

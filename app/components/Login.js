@@ -30,7 +30,7 @@ class Login extends Component {
       <View>
         <TextInput
           placeholder="Username"
-          onChangeText={name => this.setState({ name })}
+          onChangeText={username => this.setState({ username })}
         />
         <TextInput
           placeholder="Password"
