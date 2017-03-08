@@ -12,3 +12,10 @@ export function back() {
     type: types.BACK,
   };
 }
+
+export function updateDrawer(drawerState) {
+  return {
+    type: types.OPENDRAWER,
+    drawerOpen: drawerState,
+  };
+}

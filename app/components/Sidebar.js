@@ -11,8 +11,7 @@ const Sidebar = props =>
   >
     <Text style={styles.header}>MENU</Text>
     <Text onPress={() => props.navigate('welcome')} style={styles.button} >Welcome</Text>
-    <Text onPress={() => props.navigate('events')} style={styles.button} >Events</Text>
-    <Text onPress={() => props.navigate('authenticate')} style={styles.button} >Authenticate</Text>
+    <Text onPress={() => props.navigate('agenda')} style={styles.button} >Agenda</Text>
   </View>
 ;
 

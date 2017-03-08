@@ -2,35 +2,40 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   previousScenes: [],
-  currentScene: 'login',
+  currentScene: 'welcome',
   loggedIn: false,
+  drawerOpen: false,
 };
 
 
 export default function navigate(state = initialState, action = {}) {
-  const { currentScene, previousScenes, loggedIn } = state;
+  const { currentScene, previousScenes, loggedIn, drawerOpen } = state;
   switch (action.type) {
-    case types.LOGIN:
-      if (action.success) {
+    case types.LOGINSUCCESS: {
+      return {
+        ...initialState,
+        loggedIn: true,
+      };
+    }
+    case types.BACK: {
+      if (drawerOpen) {
         return {
-          previousScenes: [
-            ...previousScenes,
-            currentScene,
-          ],
-          currentScene: 'welcome',
-          loggedIn,
+          ...state,
+          drawerOpen: false,
         };
       }
-      return state;
-    case types.BACK: {
       const scene = previousScenes.pop();
       return {
         previousScenes,
         currentScene: scene,
         loggedIn,
+        drawerOpen,
       };
     }
     case types.NAVIGATE: {
+      if (action.scene === currentScene) {
+        return state;
+      }
       return {
         previousScenes: [
           ...previousScenes,
@@ -38,6 +43,13 @@ export default function navigate(state = initialState, action = {}) {
         ],
         currentScene: action.scene,
         loggedIn,
+        drawerOpen: false,
+      };
+    }
+    case types.OPENDRAWER: {
+      return {
+        ...state,
+        drawerOpen: action.drawerOpen,
       };
     }
     default:
