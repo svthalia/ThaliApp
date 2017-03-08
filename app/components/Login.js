@@ -4,6 +4,17 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions/login';
 
+const loginResult = (status) => {
+  switch (status) {
+    case 'progress':
+      return 'Logging in';
+    case 'failure':
+      return 'Login failed';
+    default:
+      return '';
+  }
+};
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +25,7 @@ class Login extends Component {
   }
 
   render() {
-    const { loginError, login } = this.props;
+    const { loginState, login } = this.props;
     return (
       <View>
         <TextInput
@@ -27,15 +38,15 @@ class Login extends Component {
           onChangeText={password => this.setState({ password })}
         />
         <Button title="Log in" onPress={() => login(this.state.username, this.state.password)} />
-        <Text>{ loginError ? 'Login faal' : '' }</Text>
+        <Text>{loginResult(loginState)}</Text>
       </View>
     );
   }
 }
 
 Login.propTypes = {
+  loginState: React.PropTypes.string.isRequired,
   login: React.PropTypes.func.isRequired,
-  loginError: React.PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => state.login;
