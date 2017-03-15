@@ -14,7 +14,9 @@ export default function login(state = initialState, action = {}) {
       return { ...state, loginState: 'failure' };
     case types.LOGINPROGRESS:
       return { ...state, loginState: 'progress' };
+    case types.LOGOUT:
+      return { ...state, loginState: 'logout' };
     default:
-      return { ...state };
+      return state;
   }
 }
