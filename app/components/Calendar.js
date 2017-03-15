@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Agenda = () =>
+const Calendar = () =>
   <View>
     <Text>
       Algemene Ledenvergadering
@@ -15,4 +15,4 @@ const Agenda = () =>
   </View>
 ;
 
-export default Agenda;
+export default Calendar;
