@@ -12,7 +12,7 @@ const Sidebar = props =>
   >
     <Text style={styles.header}>MENU</Text>
     <Text onPress={() => props.navigate('welcome')} style={styles.button} >Welcome</Text>
-    <Text onPress={() => props.navigate('agenda')} style={styles.button} >Agenda</Text>
+    <Text onPress={() => props.navigate('eventList')} style={styles.button} >Calendar</Text>
   </View>
 ;
 
