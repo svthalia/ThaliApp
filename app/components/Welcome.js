@@ -1,10 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { connect } from 'react-redux';
+import { logout } from '../actions/login';
 
-const Welcome = () =>
+const Welcome = props =>
   <View>
     <Text>Welcome!</Text>
-  </View>
-;
+    <Button title="Uitloggen" onPress={() => props.logout()} />
+  </View>;
 
-export default Welcome;
+Welcome.propTypes = {
+  logout: React.PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
+});
+
+export default connect(() => ({}), mapDispatchToProps)(Welcome);

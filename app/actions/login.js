@@ -1,4 +1,8 @@
+import { AsyncStorage } from 'react-native';
 import * as types from './actionTypes';
+
+const USERNAMEKEY = '@MyStore:username';
+const TOKENKEY = '@MyStore:token';
 
 export function loginSuccess(username, token) {
   return {
@@ -43,10 +47,28 @@ export function login(username, password) {
       .then(
         (responseJson) => {
           if (responseJson.token) {
-            return dispatch(loginSuccess(username, responseJson.token));
+            return AsyncStorage.multiSet([[USERNAMEKEY, username], [TOKENKEY, responseJson.token]])
+              .then(
+                () => dispatch(loginSuccess(username, responseJson.token)),
+              );
           }
           return dispatch(loginFailure());
         })
       .catch(() => dispatch(loginFailure()));
+  };
+}
+
+export function initLogin(username, token) {
+  return {
+    type: types.LOGININIT,
+    username,
+    token,
+  };
+}
+
+export function logout() {
+  AsyncStorage.multiRemove([USERNAMEKEY, TOKENKEY]);
+  return {
+    type: types.LOGOUT,
   };
 }

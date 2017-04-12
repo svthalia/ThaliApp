@@ -52,6 +52,15 @@ export default function navigate(state = initialState, action = {}) {
         drawerOpen: action.drawerOpen,
       };
     }
+    case types.LOGININIT: {
+      return {
+        ...state,
+        loggedIn: true,
+      };
+    }
+    case types.LOGOUT: {
+      return initialState;
+    }
     default:
       return state;
   }

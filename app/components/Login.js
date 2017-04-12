@@ -10,6 +10,8 @@ const loginResult = (status) => {
       return 'Logging in';
     case 'failure':
       return 'Login failed';
+    case 'logout':
+      return 'Logout successful';
     default:
       return '';
   }
