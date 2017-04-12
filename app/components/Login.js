@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, TextInput, Button, Text } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import * as actions from '../actions/login';
 
@@ -47,8 +48,8 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginState: React.PropTypes.string.isRequired,
-  login: React.PropTypes.func.isRequired,
+  loginState: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => state.login;
