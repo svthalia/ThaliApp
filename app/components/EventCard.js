@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { openEvent } from '../actions/event';
+import { openEvent } from '../actions/eventCard';
 
 const Event = (event) =>
   <View>

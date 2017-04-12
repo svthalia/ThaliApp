@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions/calendar';
-import Event from './Event';
+import Event from './EventCard';
 
 const Calendar = (props) => {
   if(!props.calendarFetched) {
