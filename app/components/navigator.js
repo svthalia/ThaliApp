@@ -4,7 +4,8 @@ import Drawer from 'react-native-drawer';
 import Login from './Login';
 import Welcome from './Welcome';
 import Sidebar from './Sidebar';
-import Agenda from './Agenda';
+import Calendar from './Calendar';
+import Agenda from './Calendar';
 
 import * as actions from '../actions/navigation';
 
@@ -22,8 +23,8 @@ const sceneToComponent = (scene) => {
   switch (scene) {
     case 'welcome':
       return <Welcome />;
-    case 'agenda':
-      return <Agenda />;
+    case 'eventList':
+      return <Calendar />;
     default:
       return <Welcome />;
   }
