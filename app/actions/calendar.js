@@ -6,7 +6,7 @@ const TOKENKEY = '@MyStore:token';
 export function calendarRetrieved(eventList) {
   return {
     type: types.CALENDARRETREIVED,
-    eventList:eventList
+    eventList,
   };
 }
 
@@ -21,7 +21,7 @@ export function retrieveCalendar() {
     AsyncStorage.getItem(TOKENKEY)
       .then(
         (token) => {
-          let start = new Date().toISOString().substring(0, 10);
+          const start = new Date().toISOString().substring(0, 10);
           let end = new Date();
           end.setMonth(end.getMonth() + 6);
           end = end.toISOString().substring(0, 10);
@@ -30,22 +30,18 @@ export function retrieveCalendar() {
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
-              'Authorization': 'Token ' + token,
+              Authorization: `Token ${token}`,
             },
           };
-          return fetch('http://localhost:8000/api/events/eventlist/?start=' + start + '&end=' + end, data)
+          return fetch(`http://localhost:8000/api/events/eventlist/?start=${start}&end=${end}`, data)
             .then(
               response => response.json())
             .then(
-              (responseJson) => {
-                console.log(responseJson);
-                return dispatch(calendarRetrieved(responseJson));
-              })
-            .catch((error) => {
-              console.log(error);
+              responseJson => dispatch(calendarRetrieved(responseJson)))
+            .catch(() => {
               dispatch(calendarNotRetrieved());
-            })
-        }
+            });
+        },
       );
   };
 }

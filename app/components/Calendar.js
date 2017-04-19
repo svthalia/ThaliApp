@@ -5,7 +5,7 @@ import * as actions from '../actions/calendar';
 import EventCard from './EventCard';
 
 const Calendar = (props) => {
-  if(!props.calendarFetched) {
+  if (!props.calendarFetched) {
     props.retrieveCalendar();
     return (
       <View>
@@ -13,28 +13,28 @@ const Calendar = (props) => {
           No calendar retrieved!
         </Text>
       </View>
-    )
-  }
-  else {
-    console.log('calendar is retrieved');
-    console.log(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let events = [];
-    for (let i = 0; i < props.eventList.length; i++) {
-      console.log(props.eventList[i]);
-      events.push(<EventCard event={props.eventList[i]}/>);
-    }
-    console.log(events);
-    const dataSource = ds.cloneWithRows(events);
-    return (
-      <View>
-        <ListView
-          dataSource={dataSource}
-          renderRow={(rowData) => rowData}
-        />
-      </View>
     );
   }
+  const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+  const events = [];
+  for (let i = 0; i < props.eventList.length; i += 1) {
+    events.push(<EventCard event={props.eventList[i]} />);
+  }
+  const dataSource = ds.cloneWithRows(events);
+  return (
+    <View>
+      <ListView
+        dataSource={dataSource}
+        renderRow={rowData => rowData}
+      />
+    </View>
+  );
+};
+
+Calendar.propTypes = {
+  eventList: React.PropTypes.arrayOf(EventCard).isRequired,
+  calendarFetched: React.PropTypes.bool.isRequired,
+  retrieveCalendar: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => state.calendar;

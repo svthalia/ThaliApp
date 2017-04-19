@@ -6,7 +6,6 @@ import Login from './Login';
 import Welcome from './Welcome';
 import Sidebar from './Sidebar';
 import Calendar from './Calendar';
-import Agenda from './Calendar';
 
 import * as actions from '../actions/navigation';
 
