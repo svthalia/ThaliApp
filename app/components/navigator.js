@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
-import PropTypes from 'prop-types';
 import Login from './Login';
 import Welcome from './Welcome';
 import Sidebar from './Sidebar';
+import Event from './Event';
 import Calendar from './Calendar';
 
 import * as actions from '../actions/navigation';
@@ -23,6 +23,8 @@ const sceneToComponent = (scene) => {
   switch (scene) {
     case 'welcome':
       return <Welcome />;
+    case 'event':
+      return <Event />;
     case 'eventList':
       return <Calendar />;
     default:
@@ -53,10 +55,10 @@ const ReduxNavigator = (props) => {
 };
 
 ReduxNavigator.propTypes = {
-  currentScene: PropTypes.string.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  drawerOpen: PropTypes.bool.isRequired,
-  updateDrawer: PropTypes.func.isRequired,
+  currentScene: React.PropTypes.string.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
+  drawerOpen: React.PropTypes.bool.isRequired,
+  updateDrawer: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReduxNavigator);

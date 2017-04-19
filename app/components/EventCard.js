@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
+import * as actions from '../actions/events';
 
 const EventCard = props =>
   <View>
@@ -8,6 +9,7 @@ const EventCard = props =>
     <Text> {new Date(props.event.start).toISOString().substring(0, 10)}</Text>
     <i>{props.event.description}</i>
     <Text>-----------------------------------------</Text>
+    <Button title="Openen" onPress={() => props.loadEvent(props.event.id)} />
   </View>
 ;
 
@@ -20,6 +22,11 @@ EventCard.propTypes = {
     price: React.PropTypes.string,
     id: React.PropTypes.number,
   }).isRequired,
+  loadEvent: React.PropTypes.func.isRequired,
 };
 
-export default connect(() => ({}), () => ({}))(EventCard);
+const mapDispatchToProps = dispatch => ({
+  loadEvent: id => dispatch(actions.loadEvent(id)),
+});
+
+export default connect(() => ({}), mapDispatchToProps)(EventCard);

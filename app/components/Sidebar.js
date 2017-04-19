@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styles from '../style';
 
 import * as actions from '../actions/navigation';
@@ -17,7 +16,7 @@ const Sidebar = props =>
 ;
 
 Sidebar.propTypes = {
-  navigate: PropTypes.func.isRequired,
+  navigate: React.PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
