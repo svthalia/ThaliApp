@@ -32,7 +32,14 @@ const Calendar = (props) => {
 };
 
 Calendar.propTypes = {
-  eventList: React.PropTypes.arrayOf(EventCard).isRequired,
+  eventList: React.PropTypes.arrayOf(React.PropTypes.shape({
+    title: React.PropTypes.string,
+    description: React.PropTypes.string,
+    start: React.PropTypes.string,
+    location: React.PropTypes.string,
+    price: React.PropTypes.string,
+    id: React.PropTypes.number,
+  })).isRequired,
   calendarFetched: React.PropTypes.bool.isRequired,
   retrieveCalendar: React.PropTypes.func.isRequired,
 };

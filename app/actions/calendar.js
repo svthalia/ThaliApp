@@ -2,7 +2,6 @@ import { AsyncStorage } from 'react-native';
 import * as types from './actionTypes';
 
 const TOKENKEY = '@MyStore:token';
-
 export function calendarRetrieved(eventList) {
   return {
     type: types.CALENDARRETREIVED,
