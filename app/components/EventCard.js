@@ -1,25 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { openEvent } from '../actions/eventCard';
+import * as actions from '../actions/eventCard';
 
-const Event = (event) =>
+const EventCard = (props) =>
   <View>
-    <Text> <b>{event.title}</b> </Text>
-    <Text> {new Date(event.start).toISOString().substring(0, 10)}</Text>
-    <i>{event.description}</i>
+    <Text> onPress={() => actions.openEvent(props.event.id)} <b>{props.event.title}</b> </Text>
+    <Text> {new Date(props.event.start).toISOString().substring(0, 10)}</Text>
+    <i>{props.event.description}</i>
     <Text>-----------------------------------------</Text>
-    onPress={() => openEvent(event.id)}
   </View>
 ;
 
-Event.propTypes = {
+EventCard.propTypes = {
   openEvent: React.PropTypes.func.isRequired,
+  event: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  openEvent: () => dispatch(openEvent()),
+  openEvent: (event_id) => dispatch(actions.openEvent(event_id)),
 });
 
-export default connect(() => ({}), mapDispatchToProps)(Event);
-export default Event;
+export default connect(() => ({}), mapDispatchToProps)(EventCard);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions/calendar';
-import Event from './EventCard';
+import EventCard from './EventCard';
 
 const Calendar = (props) => {
   if(!props.calendarFetched) {
@@ -16,12 +16,15 @@ const Calendar = (props) => {
     )
   }
   else {
+    console.log('calendar is retrieved');
     console.log(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let events = [];
     for (let i = 0; i < props.eventList.length; i++) {
-      events.push(Event(props.eventList[i]));
+      console.log(props.eventList[i]);
+      events.push(<EventCard event={props.eventList[i]}/>);
     }
+    console.log(events);
     const dataSource = ds.cloneWithRows(events);
     return (
       <View>

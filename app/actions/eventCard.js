@@ -1,4 +1,6 @@
-
+import * as types from "./actionTypes";
 export function openEvent(eventId) {
-  return null;
+  console.log("opening event");
+  return {
+  };
 }
