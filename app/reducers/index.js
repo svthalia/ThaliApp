@@ -1,6 +1,6 @@
 import login from './login';
 import navigation from './navigation';
-import calendar from './calendar'
+import calendar from './calendar';
 
 export {
   login,

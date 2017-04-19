@@ -3,7 +3,7 @@ import * as types from './actionTypes';
 export function calendarRetrieved(eventList) {
   return {
     type: types.CALENDARRETREIVED,
-    eventList:eventList
+    eventList,
   };
 }
 
@@ -13,13 +13,13 @@ export function calendarNotRetrieved() {
   };
 }
 
-export function retrieveCalendar(){
-  return (dispatch)=> {
-    let start = new Date().toISOString().substring(0, 10);
+export function retrieveCalendar() {
+  return (dispatch) => {
+    const start = new Date().toISOString().substring(0, 10);
     let end = new Date();
     end.setMonth(end.getMonth() + 6);
     end = end.toISOString().substring(0, 10);
-    return fetch('http://localhost:8000/api/events?start='+start+'&end='+end)
+    return fetch(`http://localhost:8000/api/events?start=${start}&end=${end}`)
       .then(
         response => response.json())
       .then(
@@ -30,6 +30,6 @@ export function retrieveCalendar(){
       .catch((error) => {
         console.log(error);
         dispatch(calendarNotRetrieved());
-      })
-      };
-  }
+      });
+  };
+}

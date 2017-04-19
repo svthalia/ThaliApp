@@ -5,7 +5,7 @@ import * as actions from '../actions/calendar';
 import Event from './Event';
 
 const Calendar = (props) => {
-  if(!props.calendarFetched) {
+  if (!props.calendarFetched) {
     props.retrieveCalendar();
     return (
       <View>
@@ -13,25 +13,24 @@ const Calendar = (props) => {
           No calendar retrieved!
         </Text>
       </View>
-    )
-  }
-  else {
-    console.log(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let events = [];
-    for (let i = 0; i < props.eventList.length; i++) {
-      events.push(Event(props.eventList[i]));
-    }
-    const dataSource = ds.cloneWithRows(events);
-    return (
-      <View>
-        <ListView
-          dataSource={dataSource}
-          renderRow={(rowData) => rowData}
-        />
-      </View>
     );
   }
+
+  console.log(props);
+  const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+  const events = [];
+  for (let i = 0; i < props.eventList.length; i++) {
+    events.push(Event(props.eventList[i]));
+  }
+  const dataSource = ds.cloneWithRows(events);
+  return (
+    <View>
+      <ListView
+        dataSource={dataSource}
+        renderRow={rowData => rowData}
+      />
+    </View>
+  );
 };
 
 const mapStateToProps = state => state.calendar;

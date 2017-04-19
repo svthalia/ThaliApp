@@ -1,5 +1,5 @@
 import * as types from '../actions/actionTypes';
-import * as console from "react-native";
+import * as console from 'react-native';
 
 const initialState = {
   loginState: '',
