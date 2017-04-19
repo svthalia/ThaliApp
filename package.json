@@ -18,8 +18,9 @@
     ]
   },
   "dependencies": {
-    "react": "~15.4.0-rc.4",
-    "react-native": "^0.41.1",
+    "prop-types": "^15.5.8",
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.43.3",
     "react-native-drawer": "^2.3.0",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
@@ -36,10 +37,11 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-react-native": "^2.2.1",
-    "jest": "^18.1.0",
+    "jest": "^19.0.2",
     "react-native-cli": "^2.0.1",
+    "react-native-git-upgrade": "^0.2.7",
     "react-native-web": "^0.0.81",
-    "react-test-renderer": "~15.4.0-rc.4",
+    "react-test-renderer": "^15.5.4",
     "webpack": "^2.3.3"
   }
 }

@@ -4,9 +4,3 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import Index from '../app/app';
-
-it('renders correctly', () => {
-  const tree = renderer.create(
-    <Index />,
-  );
-});

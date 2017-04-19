@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { logout } from '../actions/login';
 
 const Welcome = props =>
@@ -10,7 +11,7 @@ const Welcome = props =>
   </View>;
 
 Welcome.propTypes = {
-  logout: React.PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
