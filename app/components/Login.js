@@ -51,7 +51,7 @@ Login.propTypes = {
   login: React.PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => state.login;
+const mapStateToProps = state => state.session;
 const mapDispatchToProps = dispatch => ({
   login: (username, password) => dispatch(actions.login(username, password)),
 });

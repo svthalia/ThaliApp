@@ -6,7 +6,7 @@ const initialState = {
   username: '',
 };
 
-export default function login(state = initialState, action = {}) {
+export default function session(state = initialState, action = {}) {
   switch (action.type) {
     case types.LOGINSUCCESS:
       return { ...state, loginState: 'success', username: action.username, token: action.token };

@@ -1,8 +1,5 @@
-import { AsyncStorage } from 'react-native';
 import * as types from './actionTypes';
 import { navigate } from './navigation';
-
-const TOKENKEY = '@MyStore:token';
 
 export function success(data) {
   return {
@@ -17,40 +14,31 @@ export function fail() {
   };
 }
 
-export function loadEvent(id) {
+export function loadEvent(id, token) {
   return (dispatch) => {
-    AsyncStorage.getItem(TOKENKEY)
+    const data = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    };
+    return fetch(`http://localhost:8000/api/events/data/?event_id=${id}`, data)
       .then(
-        (token) => {
-          const data = {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              Authorization: `Token ${token}`,
-            },
-          };
-          return fetch(`http://localhost:8000/api/events/data/?event_id=${id}`, data)
-            .then(
-              response => response.json(),
-            )
-            .then(
-              (response) => {
-                dispatch(success(response));
-              },
-            )
-            .catch(
-              () => {
-                dispatch(fail());
-              },
-            );
+        response => response.json(),
+      )
+      .then(
+        (response) => {
+          dispatch(success(response));
+          dispatch(navigate('event'));
         },
       )
       .catch(
         () => {
           dispatch(fail());
+          dispatch(navigate('event'));
         },
       );
-    dispatch(navigate('event'));
   };
 }

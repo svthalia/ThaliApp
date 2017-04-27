@@ -58,14 +58,6 @@ export function login(username, password) {
   };
 }
 
-export function initLogin(username, token) {
-  return {
-    type: types.LOGININIT,
-    username,
-    token,
-  };
-}
-
 export function logout() {
   AsyncStorage.multiRemove([USERNAMEKEY, TOKENKEY]);
   return {

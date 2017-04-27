@@ -6,7 +6,7 @@ import EventCard from './EventCard';
 
 const Calendar = (props) => {
   if (!props.calendarFetched) {
-    props.retrieveCalendar();
+    props.retrieveCalendar(props.token);
     return (
       <View>
         <Text>
@@ -42,10 +42,16 @@ Calendar.propTypes = {
   })).isRequired,
   calendarFetched: React.PropTypes.bool.isRequired,
   retrieveCalendar: React.PropTypes.func.isRequired,
+  token: React.PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => state.calendar;
-const mapDispatchToProps = dispatch => ({
-  retrieveCalendar: () => dispatch(actions.retrieveCalendar()),
+const mapStateToProps = state => ({
+  ...state.calendar,
+  token: state.session.token,
 });
+
+const mapDispatchToProps = dispatch => ({
+  retrieveCalendar: token => dispatch(actions.retrieveCalendar(token)),
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
