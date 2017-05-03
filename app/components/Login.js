@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Linking } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/login';
@@ -29,7 +29,7 @@ class Login extends Component {
   render() {
     const { loginState, login } = this.props;
     return (
-      <View style={{backgroundColor:'#FF00FF'}}>
+      <View style={{backgroundColor:'#E62272'}}>
         <View  style={{flex:1,
           alignItems: 'flex-start'}}>
           <View style={{marginLeft:10}}>
@@ -50,11 +50,8 @@ class Login extends Component {
             <Button color='#362b2b' style={styles.blackbutton} title="Inloggen" onPress={() => login(this.state.username, this.state.password)}/>
         </View>
         <View style={{ justifyContent:'flex-start', alignItems: 'center'}}>
-          <Text style={styles.notlogintext}>
+          <Text style={styles.forgotpass} onPress = {() => Linking.openURL('https://thalia.nu/password_reset/')}>
             Wachtwoord vergeten?
-          </Text>
-          <Text style={styles.notlogintext}>
-            Ik heb geen account
           </Text>
         </View>
         <Text>{loginResult(loginState)}</Text>
@@ -86,8 +83,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#000000',
   },
 
-  notlogintext: {
+  forgotpass: {
     color: '#362b2b',
+    marginBottom: 10,
     marginTop: 10,
   }
 });
