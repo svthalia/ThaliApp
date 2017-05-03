@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/login';
@@ -29,17 +29,34 @@ class Login extends Component {
   render() {
     const { loginState, login } = this.props;
     return (
-      <View>
-        <TextInput
-          placeholder="Username"
-          onChangeText={username => this.setState({ username })}
-        />
-        <TextInput
-          placeholder="Password"
-          secureTextEntry
-          onChangeText={password => this.setState({ password })}
-        />
-        <Button title="Log in" onPress={() => login(this.state.username, this.state.password)} />
+      <View style={{backgroundColor:'#FF00FF'}}>
+        <View  style={{flex:1,
+          alignItems: 'flex-start'}}>
+          <View style={{marginLeft:10}}>
+            <TextInput
+              style={styles.input}
+              placeholder="Gebruikersnaam"
+              onChangeText={username => this.setState({ username })}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Wachtwoord"
+              secureTextEntry
+              onChangeText={password => this.setState({ password })}
+            />
+          </View>
+      </View>
+        <View style={{ justifyContent:'flex-start', alignItems: 'center', marginTop: 50}}>
+            <Button color='#362b2b' style={styles.blackbutton} title="Inloggen" onPress={() => login(this.state.username, this.state.password)}/>
+        </View>
+        <View style={{ justifyContent:'flex-start', alignItems: 'center'}}>
+          <Text style={styles.notlogintext}>
+            Wachtwoord vergeten?
+          </Text>
+          <Text style={styles.notlogintext}>
+            Ik heb geen account
+          </Text>
+        </View>
         <Text>{loginResult(loginState)}</Text>
       </View>
     );
@@ -57,3 +74,20 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+const styles = StyleSheet.create({
+  blackbutton: {
+    flex:0.2,
+    width:300,
+  },
+  input: {
+    marginBottom:10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
+  },
+
+  notlogintext: {
+    color: '#362b2b',
+    marginTop: 10,
+  }
+});
