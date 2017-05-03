@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 import * as reducers from './reducers';
 import ReduxNavigator from './components/navigator';
-import { initLogin } from './actions/login';
+import { loginSuccess } from './actions/login';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -30,7 +30,7 @@ class Main extends Component {
           const token = values[TOKENKEY];
 
           if (username !== null && token !== null) {
-            store.dispatch(initLogin(username, token));
+            store.dispatch(loginSuccess(username, token));
           }
         });
   }

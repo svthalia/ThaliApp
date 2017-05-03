@@ -1,7 +1,11 @@
-import login from './login';
+import session from './session';
 import navigation from './navigation';
+import events from './events';
+import calendar from './calendar';
 
 export {
-  login,
+  session,
   navigation,
+  events,
+  calendar,
 };
