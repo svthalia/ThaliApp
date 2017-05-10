@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Linking } from 'react-native';
+import { View, TextInput, Text, StyleSheet, Linking, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/login';
@@ -17,6 +17,61 @@ const loginResult = (status) => {
   }
 };
 
+const colors = {
+  magenta: '#E62272',
+  buttonColor: '#362b2b',
+  white: '#FFFFFF',
+};
+
+const styles = StyleSheet.create({
+
+  loginText: {
+    color: colors.white,
+    fontWeight: 'bold',
+  },
+
+  blackbutton: {
+    marginTop: 50,
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: 275,
+    height: 65,
+    backgroundColor: colors.buttonColor,
+    justifyContent: 'center',
+  },
+  input: {
+  },
+
+  forgotpass: {
+    alignSelf: 'center',
+    color: colors.buttonColor,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+
+  loginstatus: {
+    marginTop: 10,
+    height: 20,
+    alignSelf: 'center',
+    color: colors.white,
+  },
+
+  logo: {
+    marginTop: 80,
+    marginBottom: 50,
+    height: 150,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+
+  wrapper: {
+    backgroundColor: colors.magenta,
+    flex: 1,
+  },
+});
+
+const image = require('./logo.png');
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -29,32 +84,34 @@ class Login extends Component {
   render() {
     const { loginState, login } = this.props;
     return (
-      <View style={{backgroundColor:'#E62272'}}>
-        <View  style={{flex:1,
-          alignItems: 'flex-start'}}>
-          <View style={{marginLeft:10}}>
-            <TextInput
-              style={styles.input}
-              placeholder="Gebruikersnaam"
-              onChangeText={username => this.setState({ username })}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Wachtwoord"
-              secureTextEntry
-              onChangeText={password => this.setState({ password })}
-            />
-          </View>
-      </View>
-        <View style={{ justifyContent:'flex-start', alignItems: 'center', marginTop: 50}}>
-            <Button color='#362b2b' style={styles.blackbutton} title="Inloggen" onPress={() => login(this.state.username, this.state.password)}/>
+      <View
+        style={styles.wrapper}
+      >
+        <Image style={styles.logo} source={image} />
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Gebruikersnaam"
+            onChangeText={username => this.setState({ username })}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Wachtwoord"
+            secureTextEntry
+            onChangeText={password => this.setState({ password })}
+            onSubmitEditing={() => { login(this.state.username, this.state.password); }}
+          />
         </View>
-        <View style={{ justifyContent:'flex-start', alignItems: 'center'}}>
-          <Text style={styles.forgotpass} onPress = {() => Linking.openURL('https://thalia.nu/password_reset/')}>
-            Wachtwoord vergeten?
-          </Text>
-        </View>
-        <Text>{loginResult(loginState)}</Text>
+        <TouchableOpacity
+          style={styles.blackbutton} onPress={() =>
+        login(this.state.username, this.state.password)}
+        >
+          <Text style={styles.loginText}>INLOGGEN</Text>
+        </TouchableOpacity>
+        <Text style={styles.loginstatus}>{loginResult(loginState)}</Text>
+        <Text style={styles.forgotpass} onPress={() => Linking.openURL('https://thalia.nu/password_reset/')}>
+          Wachtwoord vergeten?
+        </Text>
       </View>
     );
   }
@@ -71,21 +128,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-const styles = StyleSheet.create({
-  blackbutton: {
-    flex:0.2,
-    width:300,
-  },
-  input: {
-    marginBottom:10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#000000',
-  },
-
-  forgotpass: {
-    color: '#362b2b',
-    marginBottom: 10,
-    marginTop: 10,
-  }
-});
