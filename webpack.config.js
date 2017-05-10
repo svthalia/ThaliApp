@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: './index.web.js',
   output: {
@@ -14,6 +16,11 @@ module.exports = {
         test: /\.js$/,
         include: /node_modules\/react-native-/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.ttf$/,
+        loader: 'url-loader',
+        include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
       },
     ],
   },
