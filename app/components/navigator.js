@@ -1,8 +1,8 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, View, StatusBar, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Login from './Login';
 import Welcome from './Welcome';
 import Sidebar from './Sidebar';
@@ -10,10 +10,8 @@ import Event from './Event';
 import Calendar from './Calendar';
 
 import * as actions from '../actions/navigation';
+import styles from './style/navigator';
 import { colors } from '../style';
-
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 const sceneToComponent = (scene) => {
   switch (scene) {
@@ -41,33 +39,6 @@ const sceneToTitle = (scene) => {
   }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  statusBar: {
-    height: STATUSBAR_HEIGHT,
-    backgroundColor: colors.darkMagenta,
-  },
-  appBar: {
-    backgroundColor: colors.magenta,
-    height: APPBAR_HEIGHT,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-  title: {
-    color: colors.white,
-    fontSize: 24,
-  },
-  icon: {
-    paddingLeft: 20,
-    paddingRight: 50,
-    color: colors.white,
-  },
-});
-
 const ReduxNavigator = (props) => {
   const { currentScene, loggedIn, drawerOpen, updateDrawer } = props;
   if (loggedIn) {
@@ -82,7 +53,7 @@ const ReduxNavigator = (props) => {
         mainOverlay: {
           backgroundColor: colors.black,
           opacity: 0,
-        }
+        },
       }}
       tweenHandler={ratio => ({ mainOverlay: { opacity: ratio * 0.75 } })}
       open={drawerOpen}
@@ -98,7 +69,7 @@ const ReduxNavigator = (props) => {
           onPress={props.isFirstScene ? () => props.updateDrawer(!props.drawerOpen) : props.back}
         >
           <Icon
-            name={props.isFirstScene ? 'bars' : 'arrow-left'}
+            name={props.isFirstScene ? 'menu' : 'arrow-back'}
             onClick={props.back}
             style={styles.icon}
             size={20}
@@ -109,7 +80,13 @@ const ReduxNavigator = (props) => {
       {sceneToComponent(currentScene)}
     </Drawer>);
   }
-  return <Login />;
+  return (
+    <View>
+      <View style={styles.statusBar}>
+        <StatusBar backgroundColor={colors.darkMagenta} barStyle='light-content' />
+      </View>
+      <Login />
+    </View>);
 };
 
 ReduxNavigator.propTypes = {
@@ -125,7 +102,7 @@ const mapStateToProps = state => ({
   currentScene: state.navigation.currentScene,
   loggedIn: state.navigation.loggedIn,
   drawerOpen: state.navigation.drawerOpen,
-  isFirstScene: state.navigation.previousScenes.length == 0,
+  isFirstScene: state.navigation.previousScenes.length === 0,
 });
 
 const mapDispatchToProps = dispatch => ({

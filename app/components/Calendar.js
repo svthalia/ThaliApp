@@ -26,7 +26,7 @@ const Calendar = (props) => {
       <ListView
         dataSource={dataSource}
         renderRow={rowData => rowData}
-        enableEmptySections={true}
+        enableEmptySections
       />
     </View>
   );

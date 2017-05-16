@@ -14,6 +14,9 @@ const store = createStoreWithMiddleware(reducer);
 
 const USERNAMEKEY = '@MyStore:username';
 const TOKENKEY = '@MyStore:token';
+const DISPLAYNAMEKEY = '@MyStore:displayName';
+const PHOTOKEY = '@MyStore:photo';
+
 const pairsToObject = (obj, pair) => {
   const obj2 = { ...obj };
   obj2[pair[0]] = pair[1];
@@ -22,15 +25,17 @@ const pairsToObject = (obj, pair) => {
 
 class Main extends Component {
   componentDidMount() {
-    AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY])
+    AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY])
       .then(
         (result) => {
           const values = result.reduce(pairsToObject, {});
           const username = values[USERNAMEKEY];
           const token = values[TOKENKEY];
+          const displayName = values[DISPLAYNAMEKEY];
+          const photo = values[DISPLAYNAMEKEY];
 
           if (username !== null && token !== null) {
-            store.dispatch(loginSuccess(username, token));
+            store.dispatch(loginSuccess(username, token, displayName, photo));
           }
         });
   }
