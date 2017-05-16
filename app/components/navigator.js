@@ -62,7 +62,7 @@ const ReduxNavigator = (props) => {
       tapToClose
     >
       <View style={styles.statusBar}>
-        <StatusBar backgroundColor={colors.darkMagenta} barStyle='light-content' />
+        <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
       </View>
       <View style={styles.appBar}>
         <TouchableOpacity
@@ -83,7 +83,7 @@ const ReduxNavigator = (props) => {
   return (
     <View>
       <View style={styles.statusBar}>
-        <StatusBar backgroundColor={colors.darkMagenta} barStyle='light-content' />
+        <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
       </View>
       <Login />
     </View>);

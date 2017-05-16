@@ -33,7 +33,7 @@ export function loginFailure() {
   };
 }
 
-async function getUserInfo(token) {
+function getUserInfo(token) {
   const data = {
     method: 'GET',
     headers: {
@@ -43,16 +43,12 @@ async function getUserInfo(token) {
     },
   };
 
-  fetch('http://localhost:8000/api/members/info/', data)
+  return fetch('http://localhost:8000/api/members/info/', data)
     .then(
-      (response) => {
-        console.log(response);
-        return response.json();
-      })
+      response => response.json())
     .then(
       (responseJson) => {
         const avatar = responseJson.photo === null ? defaultAvatar : responseJson.photo;
-
         return {
           photo: avatar,
           displayName: responseJson.display_name,
@@ -77,8 +73,8 @@ export function login(user, pass) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user,
-        pass,
+        username: user,
+        password: pass,
       }),
     };
     return fetch('http://localhost:8000/api/token-auth/', data)
@@ -88,22 +84,19 @@ export function login(user, pass) {
         (responseJson) => {
           if (responseJson.token) {
             const token = responseJson.token;
-            const username = responseJson.username;
-
-            getUserInfo(token)
+            return getUserInfo(token)
               .then(
-                (userInfo) => {
-                  console.log(userInfo);
-                  AsyncStorage.multiSet([
-                    [USERNAMEKEY, username],
-                    [TOKENKEY, token],
-                    [DISPLAYNAMEKEY, userInfo.displayName],
-                    [PHOTOKEY, userInfo.photo],
-                  ]);
-
-                  dispatch(loginSuccess(username, token, userInfo.displayName, userInfo.photo));
-                },
-              );
+                  userInfo => AsyncStorage.multiSet([
+                        [USERNAMEKEY, user],
+                        [TOKENKEY, token],
+                        [DISPLAYNAMEKEY, userInfo.displayName],
+                        [PHOTOKEY, userInfo.photo],
+                  ])
+                    .then(() => dispatch(
+                          loginSuccess(
+                            user, token, userInfo.displayName, userInfo.photo,
+                            )),
+                        ));
           }
           return dispatch(loginFailure());
         })
