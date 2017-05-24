@@ -1,26 +1,103 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import styles from '../style';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { colors } from '../style';
+import styles from './style/sidebar';
 
 import * as actions from '../actions/navigation';
+import * as loginActions from '../actions/login';
 
-const Sidebar = props =>
-  <View
-    style={styles.sidebar}
-  >
-    <Text style={styles.header}>MENU</Text>
-    <Text onPress={() => props.navigate('welcome')} style={styles.button} >Welcome</Text>
-    <Text onPress={() => props.navigate('eventList')} style={styles.button} >Calendar</Text>
-  </View>
-;
+const background = require('../img/huygens.jpg');
+
+const Sidebar = (props) => {
+  const buttons = [
+    {
+      onPress: () => props.navigate('welcome'),
+      iconName: 'home',
+      text: 'Welkom',
+      style: {},
+      scene: 'welcome',
+    },
+    {
+      onPress: () => props.navigate('eventList'),
+      iconName: 'event',
+      text: 'Agenda',
+      style: {},
+      scene: 'eventList',
+    },
+    {
+      onPress: props.logout,
+      iconName: 'lock',
+      text: 'Uitloggen',
+      style: {
+        borderTopColor: colors.lightGray,
+        borderTopWidth: 1,
+      },
+      scene: 'logout',
+    },
+  ];
+
+  return (
+    <View
+      style={styles.sidebar}
+    >
+      <TouchableHighlight
+        onPress={() => props.navigate('profile')}
+        style={styles.headerButton}
+      >
+        <Image
+          source={background}
+          style={styles.headerImage}
+          resizeMode="cover"
+        >
+          <Image
+            source={{ uri: props.photo }}
+            style={styles.profileImage}
+            resizeMode="cover"
+          />
+          <Text style={styles.nameField}>{props.displayName}</Text>
+        </Image>
+      </TouchableHighlight>
+      <View style={styles.buttonList}>
+        {buttons.map(button => (
+          <Icon.Button
+            onPress={button.onPress}
+            name={button.iconName}
+            borderRadius={0}
+            backgroundColor={colors.white}
+            color={props.currentScene === button.scene ?
+                 colors.magenta : colors.textColour}
+            size={28}
+            iconStyle={styles.buttonIcon}
+            style={[styles.buttonText, button.style]}
+            key={button.scene}
+          >
+            {button.text}
+          </Icon.Button>
+        ))}
+      </View>
+    </View>
+  );
+};
 
 Sidebar.propTypes = {
+  currentScene: React.PropTypes.string.isRequired,
+  displayName: React.PropTypes.string.isRequired,
+  photo: React.PropTypes.string.isRequired,
   navigate: React.PropTypes.func.isRequired,
+  logout: React.PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+  currentScene: state.navigation.currentScene,
+  displayName: state.session.displayName,
+  photo: state.session.photo,
+});
 
 const mapDispatchToProps = dispatch => ({
   navigate: scene => dispatch(actions.navigate(scene)),
+  logout: () => dispatch(loginActions.logout()),
 });
 
-export default connect(() => ({}), mapDispatchToProps)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
