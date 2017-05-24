@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import { navigate } from './navigation';
+import { url } from '../url';
 
 export function success(data) {
   return {
@@ -24,7 +25,7 @@ export function loadEvent(id, token) {
         Authorization: `Token ${token}`,
       },
     };
-    return fetch(`http://localhost:8000/api/events/data/?event_id=${id}`, data)
+    return fetch(`${url}/api/events/data/?event_id=${id}`, data)
       .then(
         response => response.json(),
       )
