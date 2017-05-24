@@ -1,12 +1,14 @@
 import { AsyncStorage } from 'react-native';
 import * as types from './actionTypes';
+import { url } from '../url';
 
 const USERNAMEKEY = '@MyStore:username';
 const TOKENKEY = '@MyStore:token';
 const DISPLAYNAMEKEY = '@MyStore:displayName';
 const PHOTOKEY = '@MyStore:photo';
 
-const defaultAvatar = 'http://localhost:8000/static/members/images/default-avatar.jpg';
+const defaultAvatar = `${url}/static/members/images/default-avatar.jpg`;
+
 
 export function loginSuccess(username, token, displayName, photo) {
   return {
@@ -43,7 +45,7 @@ function getUserInfo(token) {
     },
   };
 
-  return fetch('http://localhost:8000/api/members/info/', data)
+  return fetch(`${url}/api/members/info/`, data)
     .then(
       response => response.json())
     .then(
@@ -77,7 +79,7 @@ export function login(user, pass) {
         password: pass,
       }),
     };
-    return fetch('http://localhost:8000/api/token-auth/', data)
+    return fetch(`${url}/api/token-auth/`, data)
       .then(
         response => response.json())
       .then(
