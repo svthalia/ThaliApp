@@ -17,14 +17,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
+    elevation: 4
   },
   title: {
     color: colors.white,
-    fontSize: 24,
+    fontSize: 20,
+    fontFamily: 'sans-serif-medium'
   },
   icon: {
     paddingLeft: 20,
-    paddingRight: 50,
+    paddingRight: 32,
     color: colors.white,
   },
 });
