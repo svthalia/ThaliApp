@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Image, TouchableHighlight } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../style';
@@ -51,6 +52,7 @@ const Sidebar = (props) => {
           style={styles.headerImage}
           resizeMode="cover"
         >
+          <LinearGradient colors={['#55000000', '#000000']} style={styles.headerGradient} />
           <Image
             source={{ uri: props.photo }}
             style={styles.profileImage}
