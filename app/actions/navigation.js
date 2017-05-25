@@ -1,9 +1,10 @@
 import * as types from './actionTypes';
 
-export function navigate(scene) {
+export function navigate(scene, newSection = false) {
   return {
     type: types.NAVIGATE,
     scene,
+    newSection,
   };
 }
 

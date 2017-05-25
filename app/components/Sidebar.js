@@ -13,14 +13,14 @@ const background = require('../img/huygens.jpg');
 const Sidebar = (props) => {
   const buttons = [
     {
-      onPress: () => props.navigate('welcome'),
+      onPress: () => props.navigate('welcome', true),
       iconName: 'home',
       text: 'Welkom',
       style: {},
       scene: 'welcome',
     },
     {
-      onPress: () => props.navigate('eventList'),
+      onPress: () => props.navigate('eventList', true),
       iconName: 'event',
       text: 'Agenda',
       style: {},
@@ -96,7 +96,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  navigate: scene => dispatch(actions.navigate(scene)),
+  navigate: (scene, newSection = false) => dispatch(actions.navigate(scene, newSection)),
   logout: () => dispatch(loginActions.logout()),
 });
 
