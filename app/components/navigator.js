@@ -43,7 +43,7 @@ const ReduxNavigator = (props) => {
   const { currentScene, loggedIn, drawerOpen, updateDrawer } = props;
   if (loggedIn) {
     return (<Drawer
-      type="displace"
+      type="overlay"
       content={<Sidebar />}
       openDrawerOffset={0.2}
       panOpenMask={0.2}
@@ -53,6 +53,7 @@ const ReduxNavigator = (props) => {
         mainOverlay: {
           backgroundColor: colors.black,
           opacity: 0,
+          elevation: 100
         },
       }}
       tweenHandler={ratio => ({ mainOverlay: { opacity: ratio * 0.75 } })}
@@ -72,7 +73,7 @@ const ReduxNavigator = (props) => {
             name={props.isFirstScene ? 'menu' : 'arrow-back'}
             onClick={props.back}
             style={styles.icon}
-            size={20}
+            size={24}
           />
         </TouchableOpacity>
         <Text style={styles.title}>{sceneToTitle(currentScene)}</Text>
