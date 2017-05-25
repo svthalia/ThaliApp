@@ -32,7 +32,7 @@ class Main extends Component {
           const username = values[USERNAMEKEY];
           const token = values[TOKENKEY];
           const displayName = values[DISPLAYNAMEKEY];
-          const photo = values[DISPLAYNAMEKEY];
+          const photo = values[PHOTOKEY];
 
           if (username !== null && token !== null) {
             store.dispatch(loginSuccess(username, token, displayName, photo));
