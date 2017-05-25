@@ -139,3 +139,11 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+gradle.projectsEvaluated {
+    installDebug.doLast {
+        println 'Running `adb reverse tcp:8000 tcp:8000`'
+        def processBuilder = new ProcessBuilder(['adb', 'reverse', 'tcp:8000', 'tcp:8000'])
+        processBuilder.start()
+    }
+}
