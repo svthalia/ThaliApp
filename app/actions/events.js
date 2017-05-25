@@ -25,7 +25,7 @@ export function loadEvent(id, token) {
         Authorization: `Token ${token}`,
       },
     };
-    return fetch(`${url}/api/events/data/?event_id=${id}`, data)
+    return fetch(`${url}/api/events/${id}/`, data)
       .then(
         response => response.json(),
       )

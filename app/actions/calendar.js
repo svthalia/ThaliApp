@@ -16,10 +16,6 @@ export function calendarNotRetrieved() {
 
 export function retrieveCalendar(token) {
   return (dispatch) => {
-    const start = new Date().toISOString().substring(0, 10);
-    let end = new Date();
-    end.setMonth(end.getMonth() + 6);
-    end = end.toISOString().substring(0, 10);
     const data = {
       method: 'GET',
       headers: {
@@ -28,13 +24,11 @@ export function retrieveCalendar(token) {
         Authorization: `Token ${token}`,
       },
     };
-    return fetch(`${url}/api/events/eventlist/?start=${start}&end=${end}`, data)
+    return fetch(`${url}/api/events/`, data)
       .then(
         response => response.json())
       .then(
         responseJson => dispatch(calendarRetrieved(responseJson)))
-      .catch(() => {
-        dispatch(calendarNotRetrieved());
-      });
+      .catch(() => dispatch(calendarNotRetrieved()));
   };
 }

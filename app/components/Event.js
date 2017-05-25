@@ -21,6 +21,7 @@ const Event = (props) => {
 
 Event.propTypes = {
   data: React.PropTypes.shape({
+    pk: React.PropTypes.number.isRequired,
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
     start: React.PropTypes.string.isRequired,
