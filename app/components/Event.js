@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
+import styles from './style/event';
+
 const Event = (props) => {
   if (props.success) {
     return (
       <View>
-        <Text><h1>{props.data.title}</h1></Text>
+        <Text style={styles.titleText}>{props.data.title}</Text>
         <Text>{props.data.description}</Text>
         <Text>Locatie: {props.data.location}</Text>
         <Text>Prijs: {props.data.price}</Text>
@@ -21,7 +23,6 @@ const Event = (props) => {
 
 Event.propTypes = {
   data: React.PropTypes.shape({
-    pk: React.PropTypes.number.isRequired,
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
     start: React.PropTypes.string.isRequired,

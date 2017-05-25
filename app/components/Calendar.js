@@ -16,16 +16,12 @@ const Calendar = (props) => {
     );
   }
   const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-  const events = [];
-  for (let i = 0; i < props.eventList.length; i += 1) {
-    events.push(<EventCard event={props.eventList[i]} />);
-  }
-  const dataSource = ds.cloneWithRows(events);
+  const dataSource = ds.cloneWithRows(props.eventList);
   return (
     <View>
       <ListView
         dataSource={dataSource}
-        renderRow={rowData => rowData}
+        renderRow={rowData => <EventCard event={rowData} />}
         enableEmptySections
       />
     </View>
@@ -39,7 +35,7 @@ Calendar.propTypes = {
     description: React.PropTypes.string,
     start: React.PropTypes.string,
     location: React.PropTypes.string,
-    price: React.PropTypes.string
+    price: React.PropTypes.string,
   })).isRequired,
   calendarFetched: React.PropTypes.bool.isRequired,
   retrieveCalendar: React.PropTypes.func.isRequired,
