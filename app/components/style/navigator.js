@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    elevation: 4
+    elevation: 4,
   },
   title: {
     color: colors.white,
     fontSize: 20,
-    fontFamily: 'sans-serif-medium'
+    fontFamily: 'sans-serif-medium',
   },
   icon: {
     paddingLeft: 20,

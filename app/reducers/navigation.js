@@ -34,7 +34,17 @@ export default function navigate(state = initialState, action = {}) {
     }
     case types.NAVIGATE: {
       if (action.scene === currentScene) {
-        return state;
+        return {
+          ...state,
+          drawerOpen: false,
+        };
+      } else if (action.newSection) {
+        return {
+          previousScenes: [],
+          currentScene: action.scene,
+          loggedIn,
+          drawerOpen: false,
+        };
       }
       return {
         previousScenes: [

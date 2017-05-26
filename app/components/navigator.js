@@ -53,7 +53,7 @@ const ReduxNavigator = (props) => {
         mainOverlay: {
           backgroundColor: colors.black,
           opacity: 0,
-          elevation: 100
+          elevation: 100,
         },
       }}
       tweenHandler={ratio => ({ mainOverlay: { opacity: ratio * 0.75 } })}
