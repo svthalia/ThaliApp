@@ -1,20 +1,31 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions/events';
 
 import styles from './style/eventCard';
 
+/**
+ * Extracts time in hh:mm format from a Date object
+ */
+const dateToTime = date => (
+  `${(`0${date.getHours()}`).slice(-2)}:${(`0${date.getMinutes()}`).slice(-2)}`
+);
+
 const EventCard = (props) => {
-  const date = new Date(props.event.start).toISOString().substring(0, 10);
+  const startTime = dateToTime(new Date(props.event.start));
+  const endTime = dateToTime(new Date(props.event.end));
+
   return (
-    <View>
-      <Text style={styles.boldText}>{props.event.title}</Text>
-      <Text>{date}</Text>
-      <Text style={styles.italicText}>{props.event.description}</Text>
-      <Text>-----------------------------------------</Text>
-      <Button title="Openen" onPress={() => props.loadEvent(props.event.pk, props.token)} />
-    </View>
+    <TouchableHighlight
+      onPress={() => props.loadEvent(props.event.pk, props.token)}
+      style={styles.button}
+    >
+      <View style={[styles.card, props.event.registered ? styles.registered : styles.unregistered]}>
+        <Text style={styles.eventTitle}>{props.event.title}</Text>
+        <Text style={styles.eventInfo}>{`${startTime} - ${endTime} | ${props.event.location}`}</Text>
+      </View>
+    </TouchableHighlight>
   );
 };
 
@@ -23,9 +34,11 @@ EventCard.propTypes = {
     title: React.PropTypes.string,
     description: React.PropTypes.string,
     start: React.PropTypes.string,
+    end: React.PropTypes.string,
     location: React.PropTypes.string,
     price: React.PropTypes.string,
     pk: React.PropTypes.number,
+    registered: React.PropTypes.bool,
   }).isRequired,
   loadEvent: React.PropTypes.func.isRequired,
   token: React.PropTypes.string.isRequired,

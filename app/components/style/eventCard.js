@@ -1,11 +1,26 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../style';
+
 const styles = StyleSheet.create({
-  italicText: {
-    fontStyle: 'italic',
+  button: {
+    margin: 10,
   },
-  boldText: {
+  card: {
+    padding: 20,
+  },
+  registered: {
+    backgroundColor: colors.magenta,
+  },
+  unregistered: {
+    backgroundColor: colors.gray,
+  },
+  eventTitle: {
     fontWeight: 'bold',
+    color: colors.white,
+  },
+  eventInfo: {
+    color: colors.white,
   },
 });
 
