@@ -2,14 +2,16 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   data: {
+    pk: -1,
     title: '',
     description: '',
     start: '',
     end: '',
-    organiser: '',
+    organiser: -1,
+    category: '',
     location: '',
-    price: '',
-    fine: '',
+    status: -1,
+    registered: false,
   },
   success: false,
 };

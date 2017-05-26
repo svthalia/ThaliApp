@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import Moment from 'moment';
+import 'moment/locale/nl';
 
 import * as reducers from './reducers';
 import ReduxNavigator from './components/navigator';
@@ -25,6 +27,7 @@ const pairsToObject = (obj, pair) => {
 
 class Main extends Component {
   componentDidMount() {
+    Moment.locale('nl');
     AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY])
       .then(
         (result) => {
