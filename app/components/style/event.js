@@ -4,6 +4,13 @@ const styles = create({
   eventView: {
     padding: 16,
   },
+  locationImage: {
+    height: 150,
+    marginLeft: -16,
+    marginRight: -16,
+    marginTop: -16,
+    marginBottom: 16,
+  },
   titleText: {
     marginBottom: 16,
     fontFamily: 'sans-serif-medium',

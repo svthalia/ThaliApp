@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import {Image, ScrollView, Text, View} from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -32,7 +32,11 @@ const Event = (props) => {
 
         text += `Aanmelddeadline: ${registrationDeadline}\n`;
         text += `Afmelddeadline: ${cancelDeadline}\n`;
-        text += `Aantal aanmeldingen: ${data.num_participants} aanmeldingen (${data.max_participants} max)\n`;
+        text += `Aantal aanmeldingen: ${data.num_participants} aanmeldingen`;
+        if (data.max_participants) {
+          text += ` (${data.max_participants} max)`;
+        }
+        text += '\n';
 
         if (data.user_registration) {
           let registrationState;
@@ -123,6 +127,7 @@ const Event = (props) => {
 
     return (
       <ScrollView contentContainerStyle={styles.eventView}>
+        <Image style={styles.locationImage} source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${props.data.map_location}&zoom=13&size=450x250&markers=${props.data.map_location}` }} />
         <Text style={styles.titleText}>{props.data.title}</Text>
         <Text style={styles.infoText}>
           {eventDesc(props.data)}
@@ -149,6 +154,7 @@ Event.propTypes = {
     end: React.PropTypes.string.isRequired,
     organiser: React.PropTypes.number.isRequired,
     location: React.PropTypes.string.isRequired,
+    map_location: React.PropTypes.string.isRequired,
     status: React.PropTypes.number.isRequired,
     registration_allowed: React.PropTypes.bool.isRequired,
     has_fields: React.PropTypes.bool.isRequired,
