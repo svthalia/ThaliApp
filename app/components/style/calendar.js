@@ -10,15 +10,16 @@ const styles = StyleSheet.create({
   },
   dateInfo: {
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flex: 1,
-    padding: 10,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   dayNumber: {
     fontSize: 28,
   },
   dayOfWeek: {
-    fontSize: 18,
+    fontSize: 16,
   },
   eventList: {
     flex: 7,
@@ -29,10 +30,12 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     backgroundColor: colors.background,
-    fontSize: 22,
-    padding: 10,
-    paddingLeft: 20,
+    fontFamily: 'sans-serif-medium',
+    fontSize: 20,
     color: colors.textColour,
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingLeft: 16,
   },
 });
 
