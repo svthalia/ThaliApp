@@ -13,6 +13,7 @@ const initialState = {
     status: -1,
     registered: false,
   },
+  registrations: [],
   success: false,
 };
 
@@ -20,6 +21,7 @@ export default function loadEvent(state = initialState, action = {}) {
   switch (action.type) {
     case types.LOADEVENTSUCCESS:
       return {
+        ...state,
         data: action.data,
         success: true,
       };
@@ -27,6 +29,16 @@ export default function loadEvent(state = initialState, action = {}) {
       return {
         ...state,
         success: false,
+      };
+    case types.LOADEVENTREGISTRATIONSSUCCESS:
+      return {
+        ...state,
+        registrations: action.data,
+      };
+    case types.LOADEVENTREGISTRATIONSFAILURE:
+      return {
+        ...state,
+        registrations: action.data,
       };
     default:
       return state;

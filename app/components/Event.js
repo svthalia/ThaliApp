@@ -1,10 +1,12 @@
 import React from 'react';
-import {Image, ScrollView, Text, View} from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
 import styles from './style/event';
+import * as actions from '../actions/events';
+import MemberView from './MemberView';
 
 const REGISTRATION_NOT_NEEDED = -1;
 const REGISTRATION_NOT_YET_OPEN = 0;
@@ -16,6 +18,8 @@ const REGISTRATION_CLOSED_CANCEL_ONLY = 4;
 
 const Event = (props) => {
   if (props.success) {
+    props.loadRegistrations(props.data.pk, props.token);
+
     const eventDesc = (data) => {
       const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
       const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
@@ -125,6 +129,49 @@ const Event = (props) => {
       return (<View />);
     };
 
+    const registrationsGrid = (registrations) => {
+      if (registrations !== undefined && registrations.length > 0) {
+        return (
+          <View>
+            <View style={styles.divider} />
+            <Text style={styles.registrationsTitle}>Aanmeldingen</Text>
+            <View style={styles.registrationsView}>
+              { props.registrations.map((item, index) => {
+                if (index % 3 === 0) {
+                  return props.registrations.slice(index, index + 3);
+                }
+                return null;
+              }).filter(item => item)
+                .map((list) => {
+                  while (list.length < 3) {
+                    list.push({});
+                  }
+
+                  return (
+                    <View style={styles.registrationsRow}>
+                      {list.map((reg, i) => {
+                        const style = i === 1 ? styles.registrationsItemMargin :
+                          styles.registrationsItem;
+                        if (reg.name) {
+                          return (
+                            <MemberView member={reg} style={style} />
+                          );
+                        }
+                        return (
+                          <View style={style} />
+                        );
+                      })}
+                    </View>
+                  );
+                })
+              }
+            </View>
+          </View>
+        );
+      }
+      return (<View />);
+    };
+
     return (
       <ScrollView contentContainerStyle={styles.eventView}>
         <Image style={styles.locationImage} source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${props.data.map_location}&zoom=13&size=450x250&markers=${props.data.map_location}` }} />
@@ -134,20 +181,22 @@ const Event = (props) => {
         </Text>
         {eventActions(props.data)}
         {eventInfo(props.data)}
-        {/* <Button color={colors.magenta} style={styles.registerButton}
-         title="Aanmelden" onPress={() => {}} />*/}
         <View style={styles.divider} />
         <Text style={styles.descText}>{props.data.description}</Text>
+        {registrationsGrid(props.registrations)}
       </ScrollView>
     );
   }
   return (
-    <Text>Kon het evenement niet laden...</Text>
+    <ScrollView contentContainerStyle={styles.eventView}>
+      <Text>Kon het evenement niet laden...</Text>
+    </ScrollView>
   );
 };
 
 Event.propTypes = {
   data: React.PropTypes.shape({
+    pk: React.PropTypes.number.isRequired,
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
     start: React.PropTypes.string.isRequired,
@@ -173,12 +222,24 @@ Event.propTypes = {
     }),
     no_registration_message: React.PropTypes.string,
   }).isRequired,
+  registrations: React.PropTypes.arrayOf(React.PropTypes.shape({
+    member: React.PropTypes.number,
+    name: React.PropTypes.string.isRequired,
+  })).isRequired,
   success: React.PropTypes.bool.isRequired,
+  token: React.PropTypes.string.isRequired,
+  loadRegistrations: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: state.events.data,
+  registrations: state.events.registrations,
   success: state.events.success,
+  token: state.session.token,
 });
 
-export default connect(mapStateToProps, () => ({}))(Event);
+const mapDispatchToProps = dispatch => ({
+  loadRegistrations: (id, token) => dispatch(actions.loadRegistrations(id, token)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Event);

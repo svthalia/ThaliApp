@@ -3,6 +3,7 @@ import { create, colors } from '../../style';
 const styles = create({
   eventView: {
     padding: 16,
+    backgroundColor: colors.backgroundColour,
   },
   locationImage: {
     height: 150,
@@ -40,6 +41,33 @@ const styles = create({
     lineHeight: 24.0,
     color: colors.black,
   },
+  registrationsTitle: {
+    fontFamily: 'sans-serif-medium',
+    fontSize: 14,
+    color: colors.darkGrey,
+    marginBottom: 16,
+  },
+  registrationsView: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+  },
+  registrationsRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  registrationsItem: {
+    flex: 1,
+  },
+  registrationsItemMargin: {
+    flex: 1,
+    marginLeft: 16,
+    marginRight: 16,
+  },
   divider: {
     marginLeft: -16,
     marginRight: -16,
@@ -47,7 +75,7 @@ const styles = create({
     marginBottom: 16,
     alignSelf: 'stretch',
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: colors.dividerGrey,
   },
   italicText: {
