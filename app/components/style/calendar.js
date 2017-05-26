@@ -1,5 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+import { TOTAL_BAR_HEIGHT } from './navigator';
 import { colors } from '../../style';
 
 const styles = StyleSheet.create({
@@ -23,14 +24,15 @@ const styles = StyleSheet.create({
     flex: 7,
   },
   sectionList: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
+    height: Dimensions.get('window').height - TOTAL_BAR_HEIGHT,
   },
   sectionHeader: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     fontSize: 22,
     padding: 10,
     paddingLeft: 20,
-    color: colors.black,
+    color: colors.textColour,
   },
 });
 

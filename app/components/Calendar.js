@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, SectionList } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions/calendar';
@@ -67,32 +67,52 @@ const renderItem = (item) => {
   );
 };
 
-const Calendar = (props) => {
-  if (!props.calendarFetched) {
-    props.retrieveCalendar(props.token);
+class Calendar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      refreshing: false,
+    };
+  }
+
+  componentDidMount() {
+    this.handleRefresh();
+  }
+
+  handleRefresh = () => {
+    this.setState({ refreshing: true });
+    this.props.retrieveCalendar(this.props.token)
+      .then(() => this.setState({ refreshing: false }));
+  };
+
+  render() {
+    if (!this.props.calendarFetched) {
+      return (
+        <View>
+          <Text>
+            No calendar retrieved!
+          </Text>
+        </View>
+      );
+    }
     return (
       <View>
-        <Text>
-          No calendar retrieved!
-        </Text>
+        <SectionList
+          style={styles.sectionList}
+          renderItem={renderItem}
+          renderSectionHeader={
+            itemHeader => <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+          }
+          sections={eventListToSections(this.props.eventList)}
+          keyExtractor={item => item.dayNumber}
+          stickySectionHeadersEnabled
+          onRefresh={this.handleRefresh}
+          refreshing={this.state.refreshing}
+        />
       </View>
     );
   }
-  return (
-    <View>
-      <SectionList
-        style={styles.sectionList}
-        renderItem={renderItem}
-        renderSectionHeader={
-          itemHeader => <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
-        }
-        sections={eventListToSections(props.eventList)}
-        keyExtractor={item => item.dayNumber}
-        stickySectionHeadersEnabled
-      />
-    </View>
-  );
-};
+}
 
 Calendar.propTypes = {
   eventList: React.PropTypes.arrayOf(React.PropTypes.shape({
