@@ -45,7 +45,7 @@ function getUserInfo(token) {
     },
   };
 
-  return fetch(`${url}/api/members/info/`, data)
+  return fetch(`${url}/api/members/me/`, data)
     .then(
       response => response.json())
     .then(
