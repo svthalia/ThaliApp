@@ -133,6 +133,12 @@ const Event = (props) => {
             <View style={styles.divider} />
             <Text style={styles.registrationsTitle}>Aanmeldingen</Text>
             <View style={styles.registrationsView}>
+              {/*
+                Create a grid for the registrations:
+                First create chunks of max 3 and map those to a View
+                Then inside that View create 3 MemberViews (if is a real registration) or
+                a placeholder View (to make sure flex space is filled)
+              */}
               { props.registrations.map((item, index) => {
                 if (index % 3 === 0) {
                   return props.registrations.slice(index, index + 3);
@@ -144,7 +150,8 @@ const Event = (props) => {
                     list.push({ member: null });
                   }
 
-                  const key = list[0].member + list[1].member + list[2].member;
+                  const key = list[0].member.toString() +
+                    list[1].member.toString() + list[2].member.toString();
                   return (
                     <View key={key} style={styles.registrationsRow}>
                       {list.map((reg, i) => {
