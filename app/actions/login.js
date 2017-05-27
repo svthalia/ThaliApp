@@ -45,6 +45,36 @@ export function logoutSuccess() {
   };
 }
 
+export function welcome(eventList) {
+  return {
+    type: types.WELCOME,
+    eventList,
+  }
+}
+
+export function retrieveShortlist(token) {
+  return dispatch => {
+    const data = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    };
+
+    return fetch(`${url}/api/events/shortlist/`, data)
+      .then(
+        response => response.json()
+      )
+      .then(
+        responseJson => dispatch(welcome(responseJson))
+      )
+      .catch(
+        () => dispatch(welcome([])),
+      );
+  }
+}
 
 function getUserInfo(token) {
   const data = {
