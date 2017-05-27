@@ -3,24 +3,36 @@ import { create, colors } from '../../style';
 const styles = create({
   eventView: {
     padding: 16,
-    backgroundColor: colors.backgroundColour,
+    backgroundColor: colors.background,
   },
   locationImage: {
     height: 150,
     marginLeft: -16,
     marginRight: -16,
     marginTop: -16,
-    marginBottom: 16,
+    marginBottom: 24,
   },
   titleText: {
     marginBottom: 16,
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'San Fransisco',
+      fontWeight: '500',
+    },
     fontSize: 20,
     lineHeight: 20.0,
     color: colors.darkGrey,
   },
   infoText: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'San Fransisco',
+      fontWeight: '500',
+    },
     fontSize: 14,
     lineHeight: 22.0,
     color: colors.darkGrey,
@@ -42,7 +54,13 @@ const styles = create({
     color: colors.black,
   },
   registrationsTitle: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'San Fransisco',
+      fontWeight: '500',
+    },
     fontSize: 14,
     color: colors.darkGrey,
     marginBottom: 16,

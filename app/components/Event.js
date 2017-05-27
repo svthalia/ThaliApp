@@ -1,11 +1,12 @@
-import React from "react";
-import {Image, ScrollView, Text, View} from "react-native";
-import {connect} from "react-redux";
-import Moment from "moment";
-import "moment/locale/nl";
+import React from 'react';
+import { Image, ScrollView, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import Moment from 'moment';
+import 'moment/locale/nl';
 
-import styles from "./style/event";
-import MemberView from "./MemberView";
+import styles from './style/event';
+import MemberView from './MemberView';
+import { colors } from '../style';
 
 const REGISTRATION_NOT_NEEDED = -1;
 const REGISTRATION_NOT_YET_OPEN = 0;
@@ -178,7 +179,7 @@ const Event = (props) => {
     };
 
     return (
-      <ScrollView contentContainerStyle={styles.eventView}>
+      <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
         <Image style={styles.locationImage} source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${props.data.map_location}&zoom=13&size=450x250&markers=${props.data.map_location}` }} />
         <Text style={styles.titleText}>{props.data.title}</Text>
         <Text style={styles.infoText}>
@@ -193,7 +194,7 @@ const Event = (props) => {
     );
   }
   return (
-    <ScrollView contentContainerStyle={styles.eventView}>
+    <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
       <Text>Kon het evenement niet laden...</Text>
     </ScrollView>
   );
