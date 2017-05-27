@@ -144,21 +144,22 @@ const Event = (props) => {
               }).filter(item => item)
                 .map((list) => {
                   while (list.length < 3) {
-                    list.push({});
+                    list.push({ member: null });
                   }
 
+                  const key = list[0].member + list[1].member + list[2].member;
                   return (
-                    <View style={styles.registrationsRow}>
+                    <View key={key} style={styles.registrationsRow}>
                       {list.map((reg, i) => {
                         const style = i === 1 ? styles.registrationsItemMargin :
                           styles.registrationsItem;
                         if (reg.name) {
                           return (
-                            <MemberView member={reg} style={style} />
+                            <MemberView key={key + i.toString()} member={reg} style={style} />
                           );
                         }
                         return (
-                          <View style={style} />
+                          <View key={key + i.toString()} style={style} />
                         );
                       })}
                     </View>
