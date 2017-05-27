@@ -13,7 +13,6 @@ const defaultAvatar = `${url}/static/members/images/default-avatar.jpg`;
 export function loginSuccess(username, token, displayName, photo) {
   return {
     type: types.LOGINSUCCESS,
-    loginState: 'loggedIn',
     username,
     token,
     displayName,
@@ -24,14 +23,18 @@ export function loginSuccess(username, token, displayName, photo) {
 export function loginProgress() {
   return {
     type: types.LOGINPROGRESS,
-    loginState: 'progress',
   };
 }
 
 export function loginFailure() {
   return {
     type: types.LOGINFAILURE,
-    loginState: 'failure',
+  };
+}
+
+export function logoutSuccess() {
+  return {
+    type: types.LOGOUT,
   };
 }
 
@@ -107,8 +110,6 @@ export function login(user, pass) {
 }
 
 export function logout() {
-  AsyncStorage.multiRemove([USERNAMEKEY, TOKENKEY]);
-  return {
-    type: types.LOGOUT,
-  };
+  return dispatch => AsyncStorage.multiRemove([USERNAMEKEY, TOKENKEY])
+      .then(dispatch(logoutSuccess()));
 }
