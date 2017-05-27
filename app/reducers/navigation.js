@@ -13,7 +13,7 @@ export default function navigate(state = initialState, action = {}) {
   switch (action.type) {
     case types.LOGINSUCCESS: {
       return {
-        ...initialState,
+        ...state,
         loggedIn: true,
       };
     }
