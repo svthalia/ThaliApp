@@ -1,12 +1,11 @@
-import React from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
-import { connect } from 'react-redux';
-import Moment from 'moment';
-import 'moment/locale/nl';
+import React from "react";
+import {Image, ScrollView, Text, View} from "react-native";
+import {connect} from "react-redux";
+import Moment from "moment";
+import "moment/locale/nl";
 
-import styles from './style/event';
-import * as actions from '../actions/events';
-import MemberView from './MemberView';
+import styles from "./style/event";
+import MemberView from "./MemberView";
 
 const REGISTRATION_NOT_NEEDED = -1;
 const REGISTRATION_NOT_YET_OPEN = 0;
@@ -18,8 +17,6 @@ const REGISTRATION_CLOSED_CANCEL_ONLY = 4;
 
 const Event = (props) => {
   if (props.success) {
-    props.loadRegistrations(props.data.pk, props.token);
-
     const eventDesc = (data) => {
       const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
       const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
@@ -228,19 +225,12 @@ Event.propTypes = {
     name: React.PropTypes.string.isRequired,
   })).isRequired,
   success: React.PropTypes.bool.isRequired,
-  token: React.PropTypes.string.isRequired,
-  loadRegistrations: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: state.events.data,
   registrations: state.events.registrations,
   success: state.events.success,
-  token: state.session.token,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadRegistrations: (id, token) => dispatch(actions.loadRegistrations(id, token)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Event);
+export default connect(mapStateToProps, () => ({}))(Event);

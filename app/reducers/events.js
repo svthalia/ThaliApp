@@ -23,22 +23,13 @@ export default function loadEvent(state = initialState, action = {}) {
       return {
         ...state,
         data: action.data,
+        registrations: action.registrations,
         success: true,
       };
     case types.LOADEVENTFAILURE:
       return {
         ...state,
         success: false,
-      };
-    case types.LOADEVENTREGISTRATIONSSUCCESS:
-      return {
-        ...state,
-        registrations: action.data,
-      };
-    case types.LOADEVENTREGISTRATIONSFAILURE:
-      return {
-        ...state,
-        registrations: action.data,
       };
     default:
       return state;

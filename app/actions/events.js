@@ -2,18 +2,41 @@ import * as types from './actionTypes';
 import { navigate } from './navigation';
 import { url } from '../url';
 
-export function success(type, data) {
+export function success(data, registrations) {
   return {
-    type,
+    type: types.LOADEVENTSUCCESS,
     data,
+    registrations,
   };
 }
 
-export function fail(type) {
+export function fail() {
   return {
-    type,
+    type: types.LOADEVENTFAILURE,
   };
 }
+
+function loadRegistrations(id, token) {
+  const data = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  };
+  return fetch(`${url}/api/events/${id}/registrations`, data)
+    .then(
+      response => response.json(),
+    )
+    .then(
+      response => response,
+    )
+    .catch(
+      () => [],
+    );
+}
+
 
 export function loadEvent(id, token) {
   return (dispatch) => {
@@ -31,41 +54,22 @@ export function loadEvent(id, token) {
       )
       .then(
         (response) => {
-          dispatch(success(types.LOADEVENTSUCCESS, response));
-          dispatch(navigate('event'));
+          if (response.status > -1) {
+            loadRegistrations(id, token)
+              .then((registrations) => {
+                dispatch(success(response, registrations));
+                dispatch(navigate('event'));
+              });
+          } else {
+            dispatch(success(response, []));
+            dispatch(navigate('event'));
+          }
         },
       )
       .catch(
         () => {
-          dispatch(fail(types.LOADEVENTFAILURE));
+          dispatch(fail());
           dispatch(navigate('event'));
-        },
-      );
-  };
-}
-
-export function loadRegistrations(id, token) {
-  return (dispatch) => {
-    const data = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`,
-      },
-    };
-    return fetch(`${url}/api/events/${id}/registrations`, data)
-      .then(
-        response => response.json(),
-      )
-      .then(
-        (response) => {
-          dispatch(success(types.LOADEVENTREGISTRATIONSSUCCESS, response));
-        },
-      )
-      .catch(
-        () => {
-          dispatch(fail(types.LOADEVENTREGISTRATIONSFAILURE));
         },
       );
   };
