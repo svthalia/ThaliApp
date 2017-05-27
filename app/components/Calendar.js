@@ -170,6 +170,7 @@ Calendar.propTypes = {
     location: React.PropTypes.string,
     price: React.PropTypes.string,
     registered: React.PropTypes.bool,
+    pizza: React.PropTypes.bool,
   })).isRequired,
   calendarFetched: React.PropTypes.bool.isRequired,
   retrieveCalendar: React.PropTypes.func.isRequired,

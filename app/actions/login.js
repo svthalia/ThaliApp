@@ -49,11 +49,11 @@ export function welcome(eventList) {
   return {
     type: types.WELCOME,
     eventList,
-  }
+  };
 }
 
 export function retrieveShortlist(token) {
-  return dispatch => {
+  return (dispatch) => {
     const data = {
       method: 'GET',
       headers: {
@@ -65,15 +65,15 @@ export function retrieveShortlist(token) {
 
     return fetch(`${url}/api/events/shortlist/`, data)
       .then(
-        response => response.json()
+        response => response.json(),
       )
       .then(
-        responseJson => dispatch(welcome(responseJson))
+        responseJson => dispatch(welcome(responseJson)),
       )
       .catch(
         () => dispatch(welcome([])),
       );
-  }
+  };
 }
 
 function getUserInfo(token) {

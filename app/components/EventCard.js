@@ -42,6 +42,7 @@ EventCard.propTypes = {
     price: React.PropTypes.string,
     pk: React.PropTypes.number,
     registered: React.PropTypes.bool,
+    pizza: React.PropTypes.bool,
   }).isRequired,
   loadEvent: React.PropTypes.func.isRequired,
   token: React.PropTypes.string.isRequired,

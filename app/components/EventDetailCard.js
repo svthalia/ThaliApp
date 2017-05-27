@@ -1,43 +1,68 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import Moment from 'moment';
+import 'moment/locale/nl';
 import * as actions from '../actions/events';
 
 import styles from './style/eventDetailCard';
 
-/**
- * Extracts time in hh:mm format from a Date object
- * TODO replace with Moment
- */
-const dateToTime = date => (
-  `${(`0${date.getHours()}`).slice(-2)}:${(`0${date.getMinutes()}`).slice(-2)}`
-);
+const getInfo = (event) => {
+  Moment.locale('nl');
+  const start = Moment(event.start);
+  const end = Moment(event.end);
 
-const EventDetailCard = (props) => {
-  const startTime = dateToTime(new Date(props.event.start));
-  const endTime = dateToTime(new Date(props.event.end));
-
+  if (start.isSame(end, 'day')) {
+    return (
+      <Text style={styles.eventInfo}>
+        {`${start.format('HH:mm')} - ${end.format('HH:mm')} | ${event.location}`}
+      </Text>
+    );
+  }
   return (
-    <View style={styles.card}>
-      <Text style={styles.eventTitle}>{props.event.title}</Text>
-      <Text style={styles.eventInfo}>{`${startTime} - ${endTime} | ${props.event.location}`}</Text>
-      <Text
-        numberOfLines={2}
-        style={styles.description}
-      >{props.event.description}</Text>
-      <View style={styles.buttonList}>
-        <TouchableOpacity
-          onPress={() => props.loadEvent(props.event.pk, props.token)}
-          style={styles.button}
-        >
-          <Text
-            style={styles.moreInfo}
-          >MEER INFO</Text>
-        </TouchableOpacity>
-      </View>
+    <View>
+      <Text style={styles.eventInfo}>
+        {`${start.format('D MMMM HH:mm')} - ${end.format('D MMMM HH:mm')}`}
+      </Text>
+      <Text style={styles.eventInfo}>{event.location}</Text>
     </View>
   );
 };
+
+const EventDetailCard = props => (
+  <View style={styles.card}>
+    <Text style={styles.eventTitle}>{props.event.title}</Text>
+    {getInfo(props.event)}
+    <Text
+      numberOfLines={2}
+      style={styles.description}
+    >{props.event.description}</Text>
+    <View style={styles.buttonList}>
+      <TouchableOpacity
+        onPress={() => props.loadEvent(props.event.pk, props.token)}
+        style={styles.button}
+      >
+        <Text style={styles.moreInfo}>MEER INFO</Text>
+      </TouchableOpacity>
+      {props.event.pizza ? (
+        <TouchableOpacity
+          onPress={() => console.log('NOT YET IMPLEMENTED')}
+          style={styles.button}
+        >
+          <Text style={styles.orderPizza}>PIZZA</Text>
+        </TouchableOpacity>
+        ) : null}
+    </View>
+    {props.event.registered === null ? null : (
+      <View
+        style={[
+          styles.indicator,
+          props.event.registered ? styles.registered : styles.unregistered]}
+      />
+      )
+    }
+  </View>
+);
 
 EventDetailCard.propTypes = {
   event: React.PropTypes.shape({
@@ -49,6 +74,7 @@ EventDetailCard.propTypes = {
     price: React.PropTypes.string,
     pk: React.PropTypes.number,
     registered: React.PropTypes.bool,
+    pizza: React.PropTypes.bool,
   }).isRequired,
   loadEvent: React.PropTypes.func.isRequired,
   token: React.PropTypes.string.isRequired,

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 24,
     color: colors.black,
-    opacity: 0.8
+    opacity: 0.8,
   },
   eventInfo: {
     fontFamily: 'sans-serif-medium',
@@ -41,12 +41,32 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.white,
+    marginRight: 28,
   },
   moreInfo: {
     fontFamily: 'sans-serif-medium',
     fontSize: 14,
     color: colors.black,
     opacity: 0.5,
+  },
+  orderPizza: {
+    fontFamily: 'sans-serif-medium',
+    fontSize: 14,
+    color: colors.darkMagenta,
+  },
+  indicator: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    height: 16,
+    width: 16,
+    borderRadius: 8,
+  },
+  registered: {
+    backgroundColor: colors.magenta,
+  },
+  unregistered: {
+    backgroundColor: colors.gray,
   },
 });
 

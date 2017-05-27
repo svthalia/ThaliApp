@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   footerText: {
     fontFamily: 'sans-serif-medium',
     fontSize: 14,
-    color: colors.magenta,
-  }
+    color: colors.darkMagenta,
+  },
 });
 
 export default styles;

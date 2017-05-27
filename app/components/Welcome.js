@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import { View, Text, Button, SectionList, TouchableOpacity } from 'react-native';
+import { View, Text, SectionList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import Moment from 'moment';
+import 'moment/locale/nl';
 import EventDetailCard from './EventDetailCard';
 
 import { retrieveShortlist } from '../actions/login';
 import { navigate } from '../actions/navigation';
 import styles from './style/welcome';
 
-// TODO add Moment support
-const eventListToSections = eventLists => {
+const eventListToSections = (eventLists) => {
+  Moment.locale('nl');
   return eventLists.map(eventList => ({
-    key: eventList[0].start,
+    key: Moment(eventList[0].start).calendar(null, {
+      sameDay: '[Vandaag]',
+      nextDay: '[Morgen]',
+      nextWeek: 'dddd D MMMM',
+      lastDay: '[Gisteren]',
+      lastWeek: 'dddd D MMMM',
+      sameElse: 'dddd D MMMM',
+    }),
     data: eventList,
   }));
 };
@@ -53,7 +62,7 @@ class Welcome extends Component {
   };
 
   render() {
-    if (this.props.eventList.length == 0) {
+    if (this.props.eventList.length === 0) {
       return (
         <View>
           <Text>
@@ -92,6 +101,7 @@ Welcome.propTypes = {
     price: React.PropTypes.string,
     pk: React.PropTypes.number,
     registered: React.PropTypes.bool,
+    pizza: React.PropTypes.bool,
   }))).isRequired,
   token: React.PropTypes.string.isRequired,
   retrieveShortlist: React.PropTypes.func.isRequired,
