@@ -1,33 +1,36 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
+import Moment from 'moment';
+import 'moment/locale/nl';
+
 import * as actions from '../actions/events';
 
 import styles from './style/eventCard';
 
-/**
- * Extracts time in hh:mm format from a Date object
- */
-const dateToTime = date => (
-  `${(`0${date.getHours()}`).slice(-2)}:${(`0${date.getMinutes()}`).slice(-2)}`
-);
-
-const EventCard = (props) => {
-  const startTime = dateToTime(new Date(props.event.start));
-  const endTime = dateToTime(new Date(props.event.end));
-
-  return (
-    <TouchableHighlight
-      onPress={() => props.loadEvent(props.event.pk, props.token)}
-      style={styles.button}
-    >
-      <View style={[styles.card, props.event.registered ? styles.registered : styles.unregistered]}>
-        <Text style={styles.eventTitle}>{props.event.title}</Text>
-        <Text style={styles.eventInfo}>{`${startTime} - ${endTime} | ${props.event.location}`}</Text>
-      </View>
-    </TouchableHighlight>
-  );
+const getEventInfo = (event) => {
+  Moment.locale('nl');
+  if (event.start === null && event.end === null) {
+    return event.location;
+  } else if (event.start === null) {
+    return `Tot ${Moment(event.end).format('HH:mm')} | ${event.location}`;
+  } else if (event.end === null) {
+    return `Vanaf ${Moment(event.start).format('HH:mm')} | ${event.location}`;
+  }
+  return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format('HH:mm')} | ${event.location}`;
 };
+
+const EventCard = props => (
+  <TouchableHighlight
+    onPress={() => props.loadEvent(props.event.pk, props.token)}
+    style={styles.button}
+  >
+    <View style={[styles.card, props.event.registered ? styles.registered : styles.unregistered]}>
+      <Text style={styles.eventTitle}>{props.event.title}</Text>
+      <Text style={styles.eventInfo}>{getEventInfo(props.event)}</Text>
+    </View>
+  </TouchableHighlight>
+);
 
 EventCard.propTypes = {
   event: React.PropTypes.shape({
