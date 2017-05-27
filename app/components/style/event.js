@@ -18,7 +18,7 @@ const styles = create({
       fontFamily: 'sans-serif-medium',
     },
     ios: {
-      fontFamily: 'San Fransisco',
+      fontFamily: 'System',
       fontWeight: '500',
     },
     fontSize: 20,
@@ -30,7 +30,7 @@ const styles = create({
       fontFamily: 'sans-serif-medium',
     },
     ios: {
-      fontFamily: 'San Fransisco',
+      fontFamily: 'System',
       fontWeight: '500',
     },
     fontSize: 14,
@@ -58,7 +58,7 @@ const styles = create({
       fontFamily: 'sans-serif-medium',
     },
     ios: {
-      fontFamily: 'San Fransisco',
+      fontFamily: 'System',
       fontWeight: '500',
     },
     fontSize: 14,

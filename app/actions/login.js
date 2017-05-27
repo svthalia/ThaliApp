@@ -75,8 +75,8 @@ export function login(user, pass) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: 'sebastiaan',
-        password: 'Cerberus1q2w3e!',
+        username: user,
+        password: pass,
       }),
     };
     return fetch(`${url}/api/token-auth/`, data)

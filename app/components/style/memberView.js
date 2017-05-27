@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     left: 6,
     bottom: 4,
     right: 6,
+    backgroundColor: colors.transparent,
   },
   image: {
     flex: 1,

@@ -25,12 +25,9 @@ function loadRegistrations(id, token) {
       Authorization: `Token ${token}`,
     },
   };
-  return fetch(`${url}/api/events/${id}/registrations`, data)
+  return fetch(`${url}/api/events/${id}/registrations/`, data)
     .then(
       response => response.json(),
-    )
-    .then(
-      response => response,
     )
     .catch(
       () => [],
