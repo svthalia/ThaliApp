@@ -148,11 +148,10 @@ const Event = (props) => {
               }).filter(item => item)
                 .map((list) => {
                   while (list.length < 3) {
-                    list.push({ member: null });
+                    list.push({ pk: null });
                   }
 
-                  const key = list[0].member.toString() +
-                    list[1].member.toString() + list[2].member.toString();
+                  const key = list[0].pk.toString().concat(list[1].pk, list[2].pk);
                   return (
                     <View key={key} style={styles.registrationsRow}>
                       {list.map((reg, i) => {
@@ -229,6 +228,7 @@ Event.propTypes = {
     no_registration_message: React.PropTypes.string,
   }).isRequired,
   registrations: React.PropTypes.arrayOf(React.PropTypes.shape({
+    pk: React.PropTypes.number.isRequired,
     member: React.PropTypes.number,
     name: React.PropTypes.string.isRequired,
   })).isRequired,
