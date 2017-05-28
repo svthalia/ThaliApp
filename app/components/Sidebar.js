@@ -70,7 +70,7 @@ const Sidebar = (props) => {
             backgroundColor={colors.white}
             color={props.currentScene === button.scene ?
                  colors.magenta : colors.textColour}
-            size={28}
+            size={24}
             iconStyle={styles.buttonIcon}
             style={[styles.buttonText, button.style]}
             key={button.scene}
