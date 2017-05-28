@@ -25,7 +25,11 @@ const styles = create({
     lineHeight: 20.0,
     color: colors.darkGrey,
   },
+  infoHolder: {
+    flexDirection: 'row',
+  },
   infoText: {
+    flex: 1,
     android: {
       fontFamily: 'sans-serif-medium',
     },
@@ -36,6 +40,22 @@ const styles = create({
     fontSize: 14,
     lineHeight: 22.0,
     color: colors.darkGrey,
+    width: '50%',
+    paddingRight: 8,
+  },
+  infoValueText: {
+    flex: 1,
+    android: {
+      fontFamily: 'sans-serif',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '300',
+    },
+    fontSize: 14,
+    lineHeight: 22.0,
+    color: colors.darkGrey,
+    width: '50%',
   },
   registrationText: {
     marginTop: 16,

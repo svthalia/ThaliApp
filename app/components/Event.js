@@ -22,23 +22,63 @@ const Event = (props) => {
       const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
       const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
 
-      let text = '';
+      const infoTexts = [];
 
-      text += `Van: ${startDate}\n`;
-      text += `Tot: ${endDate}\n`;
-      text += `Locatie: ${data.location}\n`;
-      text += `Prijs: €${data.price}\n`;
+      // let text = '';
+
+      infoTexts.push(
+        <View key="start-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="start-title">Van:</Text>
+          <Text style={styles.infoValueText} key="start-value">{startDate}</Text>
+        </View>,
+      );
+      infoTexts.push(
+        <View key="end-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="end-title">Tot:</Text>
+          <Text style={styles.infoValueText} key="end-value">{endDate}</Text>
+        </View>,
+      );
+      infoTexts.push(
+        <View key="loc-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="loc-title">Locatie:</Text>
+          <Text style={styles.infoValueText} key="loc-value">{data.location}</Text>
+        </View>,
+      );
+      infoTexts.push(
+        <View key="price-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="price-title">Prijs:</Text>
+          <Text style={styles.infoValueText} key="price-value">€{data.price}</Text>
+        </View>,
+      );
+
       if (data.status > REGISTRATION_NOT_NEEDED) {
         const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:m');
         const cancelDeadline = Moment(data.cancel_deadline).format('D MMM YYYY, HH:m');
 
-        text += `Aanmelddeadline: ${registrationDeadline}\n`;
-        text += `Afmelddeadline: ${cancelDeadline}\n`;
-        text += `Aantal aanmeldingen: ${data.num_participants} aanmeldingen`;
+        infoTexts.push(
+          <View key="registrationend-holder" style={styles.infoHolder}>
+            <Text style={styles.infoText} key="registrationend-title">Aanmelddeadline:</Text>
+            <Text style={styles.infoValueText} key="registrationend-value">{registrationDeadline}</Text>
+          </View>,
+        );
+        infoTexts.push(
+          <View key="canceldeadline-holder" style={styles.infoHolder}>
+            <Text style={styles.infoText} key="canceldeadline-title">Afmelddeadline:</Text>
+            <Text style={styles.infoValueText} key="canceldeadline-value">{cancelDeadline}</Text>
+          </View>,
+        );
+
+        let participantsText = `${data.num_participants} aanmeldingen`;
         if (data.max_participants) {
-          text += ` (${data.max_participants} max)`;
+          participantsText += ` (${data.max_participants} max)`;
         }
-        text += '\n';
+
+        infoTexts.push(
+          <View key="participants-holder" style={styles.infoHolder}>
+            <Text style={styles.infoText} key="participants-title">Aantal aanmeldingen:</Text>
+            <Text style={styles.infoValueText} key="participants-value">{participantsText}</Text>
+          </View>,
+        );
 
         if (data.user_registration) {
           let registrationState;
@@ -52,11 +92,21 @@ const Event = (props) => {
             registrationState = 'Je bent afgemeld';
           }
 
-          text += `Aanmeldstatus: ${registrationState}`;
+          infoTexts.push(
+            <View key="status-holder" style={styles.infoHolder}>
+              <Text style={styles.infoText} key="status-title">Aanmeldstatus:</Text>
+              <Text style={styles.infoValueText} key="status-value">{registrationState}</Text>
+            </View>,
+          );
         }
       }
 
-      return text;
+
+      return (
+        <View>
+          {infoTexts}
+        </View>
+      );
     };
 
     const eventInfo = (event) => {
@@ -181,9 +231,7 @@ const Event = (props) => {
       <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
         <Image style={styles.locationImage} source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${props.data.map_location}&zoom=13&size=450x250&markers=${props.data.map_location}` }} />
         <Text style={styles.titleText}>{props.data.title}</Text>
-        <Text style={styles.infoText}>
-          {eventDesc(props.data)}
-        </Text>
+        {eventDesc(props.data)}
         {eventActions(props.data)}
         {eventInfo(props.data)}
         <View style={styles.divider} />
