@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 import * as actions from '../actions/events';
+import { pizzaUrl } from '../url';
 
 import styles from './style/eventDetailCard';
 
@@ -46,7 +47,7 @@ const EventDetailCard = props => (
       </TouchableOpacity>
       {props.event.pizza ? (
         <TouchableOpacity
-          onPress={() => console.log('NOT YET IMPLEMENTED')}
+          onPress={() => Linking.openURL(pizzaUrl)}
           style={styles.button}
         >
           <Text style={styles.orderPizza}>PIZZA</Text>
