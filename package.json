@@ -24,6 +24,7 @@
     "react-native": "0.44.2",
     "react-native-drawer": "^2.3.0",
     "react-native-linear-gradient": "^2.0.0",
+    "react-native-snackbar-component": "^1.0.3",
     "react-native-vector-icons": "^4.0.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",

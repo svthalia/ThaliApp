@@ -27,8 +27,15 @@ export function loginProgress() {
 }
 
 export function loginFailure() {
-  return {
-    type: types.LOGINFAILURE,
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch({
+        type: types.RESETLOGINSTATE,
+      });
+    }, 2000);
+    return dispatch({
+      type: types.LOGINFAILURE,
+    });
   };
 }
 
@@ -37,6 +44,7 @@ export function logoutSuccess() {
     type: types.LOGOUT,
   };
 }
+
 
 function getUserInfo(token) {
   const data = {

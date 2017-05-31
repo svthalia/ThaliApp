@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, StyleSheet, Linking, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Linking, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
+import SnackBar from 'react-native-snackbar-component';
+import styles from './style/login';
+import { url } from '../url';
 
 import * as actions from '../actions/login';
 
@@ -17,59 +20,6 @@ const loginResult = (status) => {
   }
 };
 
-const colors = {
-  magenta: '#E62272',
-  buttonColor: '#362b2b',
-  white: '#FFFFFF',
-};
-
-const styles = StyleSheet.create({
-
-  loginText: {
-    color: colors.white,
-    fontWeight: 'bold',
-  },
-
-  blackbutton: {
-    marginTop: 50,
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: 275,
-    height: 65,
-    backgroundColor: colors.buttonColor,
-    justifyContent: 'center',
-  },
-  input: {
-  },
-
-  forgotpass: {
-    alignSelf: 'center',
-    color: colors.buttonColor,
-    marginBottom: 10,
-    marginTop: 10,
-  },
-
-  loginstatus: {
-    marginTop: 10,
-    height: 20,
-    alignSelf: 'center',
-    color: colors.white,
-  },
-
-  logo: {
-    marginTop: 80,
-    marginBottom: 50,
-    height: 150,
-    resizeMode: 'contain',
-    alignSelf: 'center',
-  },
-
-  wrapper: {
-    backgroundColor: colors.magenta,
-    flex: 1,
-  },
-});
-
 const image = require('./logo.png');
 
 class Login extends Component {
@@ -84,8 +34,10 @@ class Login extends Component {
   render() {
     const { loginState, login } = this.props;
     return (
-      <View
+      <KeyboardAvoidingView
         style={styles.wrapper}
+        behavior="padding"
+        modalOpen="false"
       >
         <Image style={styles.logo} source={image} />
         <View>
@@ -108,11 +60,11 @@ class Login extends Component {
         >
           <Text style={styles.loginText}>INLOGGEN</Text>
         </TouchableOpacity>
-        <Text style={styles.loginstatus}>{loginResult(loginState)}</Text>
-        <Text style={styles.forgotpass} onPress={() => Linking.openURL('https://thalia.nu/password_reset/')}>
+        <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
           Wachtwoord vergeten?
         </Text>
-      </View>
+        <SnackBar visible={loginState !== ''} textMessage={loginResult(loginState)} actionText="let's go" />
+      </KeyboardAvoidingView>
     );
   }
 }

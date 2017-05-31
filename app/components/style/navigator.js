@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     paddingRight: 32,
     color: colors.white,
   },
+
+  flex: {
+    flex: 1,
+  },
 });
 
 export default styles;

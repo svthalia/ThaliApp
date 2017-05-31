@@ -25,6 +25,9 @@ export default function session(state = initialState, action = {}) {
       return { ...state, loginState: 'progress' };
     case types.LOGOUT:
       return { ...initialState, loginState: 'logout' };
+    case types.RESETLOGINSTATE:
+      return { ...initialState, loginState: '' };
+
     default:
       return state;
   }
