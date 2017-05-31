@@ -1,22 +1,19 @@
 image: wkuipers/docker-react-native-yarn:latest
 
+before_script:
+    - yarn install
+
 stages:
+    - lint
     - build
 
-cache:
-    untracked: true
-    key: "$CI_PROJECT_ID"
-    paths:
-        - node_modules/
-        - .yarn
+eslint:
+    stage: lint
+    script:
+        - yarn run eslint *.js app
 
-install:
+build_android:
     stage: build
     script:
-        - yarn config set cache-folder .yarn
-        - yarn install
-
-lint:
-    stage: build
-    script:
-        - yarn lint
+        - cd android
+        - ./gradlew build
