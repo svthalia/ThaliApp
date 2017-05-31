@@ -125,6 +125,7 @@ const Event = (props) => {
       }
 
       if ((event.status === REGISTRATION_OPEN_NO_CANCEL || event.status === REGISTRATION_CLOSED) &&
+        event.user_registration !== null &&
         !event.user_registration.is_cancelled && event.fine > 0 &&
         event.user_registration.queue_position === null) {
         text += `Afmelden is niet meer mogelijk zonder de volledige kosten van €${event.fine} te ` +
