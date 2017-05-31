@@ -5,22 +5,42 @@ import Moment from 'moment';
 import 'moment/locale/nl';
 import EventDetailCard from './EventDetailCard';
 
-import { retrieveShortlist } from '../actions/login';
+import { retrieveShortlist } from '../actions/welcome';
 import { navigate } from '../actions/navigation';
 import styles from './style/welcome';
 
-const eventListToSections = (eventLists) => {
+const eventListToSections = (eventList) => {
   Moment.locale('nl');
-  return eventLists.map(eventList => ({
-    key: Moment(eventList[0].start).calendar(null, {
-      sameDay: '[Vandaag]',
-      nextDay: '[Morgen]',
-      nextWeek: 'dddd D MMMM',
-      lastDay: '[Gisteren]',
-      lastWeek: 'dddd D MMMM',
-      sameElse: 'dddd D MMMM',
-    }),
-    data: eventList,
+  const calendarFormat = {
+    sameDay: '[Vandaag]',
+    nextDay: '[Morgen]',
+    nextWeek: 'dddd D MMMM',
+    lastDay: '[Gisteren]',
+    lastWeek: 'dddd D MMMM',
+    sameElse: 'dddd D MMMM',
+  };
+
+  const numberOfDays = 2;
+  const eventLists = [];
+
+  let eventIndex = 0;
+
+  for (let i = 0; i < numberOfDays && eventIndex < eventList.length; i += 1) {
+    const first = eventList[eventIndex];
+    eventIndex += 1;
+    const list = [];
+    let next = first;
+    while (Moment(first.start).isSame(next.start) && eventIndex < eventList.length) {
+      list.push(next);
+      next = eventList[eventIndex];
+      eventIndex += 1;
+    }
+    eventLists.push(list);
+  }
+
+  return eventLists.map(list => ({
+    key: Moment(list[0].start).calendar(null, calendarFormat),
+    data: list,
   }));
 };
 
@@ -57,7 +77,7 @@ class Welcome extends Component {
 
   handleRefresh = () => {
     this.setState({ refreshing: true });
-    this.props.retrieveShortlist(this.props.token)
+    this.props.retrieveShortlist(this.props.token, 5)
       .then(() => this.setState({ refreshing: false }));
   };
 
@@ -92,7 +112,7 @@ class Welcome extends Component {
 }
 
 Welcome.propTypes = {
-  eventList: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.shape({
+  eventList: React.PropTypes.arrayOf(React.PropTypes.shape({
     title: React.PropTypes.string,
     description: React.PropTypes.string,
     start: React.PropTypes.string,
@@ -102,7 +122,7 @@ Welcome.propTypes = {
     pk: React.PropTypes.number,
     registered: React.PropTypes.bool,
     pizza: React.PropTypes.bool,
-  }))).isRequired,
+  })).isRequired,
   token: React.PropTypes.string.isRequired,
   retrieveShortlist: React.PropTypes.func.isRequired,
 };
@@ -113,7 +133,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  retrieveShortlist: token => dispatch(retrieveShortlist(token)),
+  retrieveShortlist: (token, amount) => dispatch(retrieveShortlist(token, amount)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
