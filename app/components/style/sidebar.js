@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonText: {
-    padding: 20,
+    padding: 16,
   },
 });
 
