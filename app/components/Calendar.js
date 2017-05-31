@@ -56,22 +56,22 @@ const eventListToSections = (eventList) => {
         title: `${eventList[i].title} (dag 1/${daySpan})`,
         end: null,
       });
-      // Add end day
-      addEventToSection(sections, end, {
-        ...eventList[i],
-        title: `${eventList[i].title} (dag ${daySpan}/${daySpan})`,
-        start: null,
-      });
 
       // Add all intermediate days
       for (let j = 2; j < daySpan; j += 1) {
-        addEventToSection(sections, start.add(j - 1, 'days'), {
+        addEventToSection(sections, start.add(1, 'days'), {
           ...eventList[i],
           start: null,
           end: null,
           title: `${eventList[i].title} (dag ${j}/${daySpan})`,
         });
       }
+      // Add end day
+      addEventToSection(sections, end, {
+        ...eventList[i],
+        title: `${eventList[i].title} (dag ${daySpan}/${daySpan})`,
+        start: null,
+      });
     }
   }
 

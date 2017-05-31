@@ -11,7 +11,6 @@ export const colors = {
   textColour: '#313131',
   darkGrey: '#373737',
   dividerGrey: 'rgba(0, 0, 0, 0.12)',
-  background: '#FAFAFA',
   transparent: 'transparent',
 };
 

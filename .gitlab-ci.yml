@@ -1,7 +1,6 @@
 image: kkarczmarczyk/node-yarn:latest
 
 stages:
-    - build
     - test
 
 cache:
@@ -12,13 +11,8 @@ cache:
         - .yarn
 
 yarn install:
-    stage: build
+    stage: test
     script:
         - yarn config set cache-folder .yarn
         - yarn install
-
-jest:
-    stage: test
-    script:
-        - rm -rf .yarn
         - yarn lint
