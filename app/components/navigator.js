@@ -82,7 +82,9 @@ const ReduxNavigator = (props) => {
     </Drawer>);
   }
   return (
-    <View>
+    <View
+      style={styles.flex}
+    >
       <View style={styles.statusBar}>
         <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
       </View>

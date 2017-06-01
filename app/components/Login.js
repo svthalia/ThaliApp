@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Text, Linking, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
+import SnackBar from 'react-native-snackbar-component';
+import styles from './style/login';
+import { url } from '../url';
 
 import * as actions from '../actions/login';
 
@@ -17,6 +20,8 @@ const loginResult = (status) => {
   }
 };
 
+const image = require('./logo.png');
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -29,19 +34,37 @@ class Login extends Component {
   render() {
     const { loginState, login } = this.props;
     return (
-      <View>
-        <TextInput
-          placeholder="Username"
-          onChangeText={username => this.setState({ username })}
-        />
-        <TextInput
-          placeholder="Password"
-          secureTextEntry
-          onChangeText={password => this.setState({ password })}
-        />
-        <Button title="Log in" onPress={() => login(this.state.username, this.state.password)} />
-        <Text>{loginResult(loginState)}</Text>
-      </View>
+      <KeyboardAvoidingView
+        style={styles.wrapper}
+        behavior="padding"
+        modalOpen="false"
+      >
+        <Image style={styles.logo} source={image} />
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Gebruikersnaam"
+            onChangeText={username => this.setState({ username })}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Wachtwoord"
+            secureTextEntry
+            onChangeText={password => this.setState({ password })}
+            onSubmitEditing={() => { login(this.state.username, this.state.password); }}
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.blackbutton} onPress={() =>
+        login(this.state.username, this.state.password)}
+        >
+          <Text style={styles.loginText}>INLOGGEN</Text>
+        </TouchableOpacity>
+        <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
+          Wachtwoord vergeten?
+        </Text>
+        <SnackBar visible={loginState !== ''} textMessage={loginResult(loginState)} actionText="let's go" />
+      </KeyboardAvoidingView>
     );
   }
 }
