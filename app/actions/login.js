@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import * as types from './actionTypes';
-import { url } from '../url';
+import { url, apiUrl } from '../url';
 
 const USERNAMEKEY = '@MyStore:username';
 const TOKENKEY = '@MyStore:token';
@@ -56,7 +56,7 @@ function getUserInfo(token) {
     },
   };
 
-  return fetch(`${url}/api/members/me/`, data)
+  return fetch(`${apiUrl}/members/me/`, data)
     .then(
       response => response.json())
     .then(
@@ -90,7 +90,7 @@ export function login(user, pass) {
         password: pass,
       }),
     };
-    return fetch(`${url}/api/token-auth/`, data)
+    return fetch(`${apiUrl}/token-auth/`, data)
       .then(
         response => response.json())
       .then(

@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import { url } from '../url';
+import { apiUrl } from '../url';
 
 export function calendarRetrieved(eventList) {
   return {
@@ -24,7 +24,7 @@ export function retrieveCalendar(token) {
         Authorization: `Token ${token}`,
       },
     };
-    return fetch(`${url}/api/events/`, data)
+    return fetch(`${apiUrl}/events/`, data)
       .then(
         response => response.json())
       .then(

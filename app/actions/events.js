@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import { navigate } from './navigation';
-import { url } from '../url';
+import { apiUrl } from '../url';
 
 export function success(data, registrations) {
   return {
@@ -25,7 +25,7 @@ function loadRegistrations(id, token) {
       Authorization: `Token ${token}`,
     },
   };
-  return fetch(`${url}/api/events/${id}/registrations/?status=registered`, data)
+  return fetch(`${apiUrl}/events/${id}/registrations/?status=registered`, data)
     .then(
       response => response.json(),
     )
@@ -45,7 +45,7 @@ export function loadEvent(id, token) {
         Authorization: `Token ${token}`,
       },
     };
-    return fetch(`${url}/api/events/${id}/`, data)
+    return fetch(`${apiUrl}/events/${id}/`, data)
       .then(
         response => response.json(),
       )
