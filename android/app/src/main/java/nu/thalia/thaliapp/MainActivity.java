@@ -1,4 +1,4 @@
-package com.thaliapp;
+package nu.thalia.thaliapp;
 
 import com.facebook.react.ReactActivity;
 
