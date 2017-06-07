@@ -32,12 +32,13 @@ const eventListToSections = (eventList) => {
     eventIndex += 1;
     const list = [];
     let next = first;
-    while (Moment(first.start).isSame(next.start) && eventIndex < eventList.length) {
+    while (Moment(first.start).isSame(next.start, 'day') && eventIndex < eventList.length) {
       list.push(next);
       next = eventList[eventIndex];
       eventIndex += 1;
     }
     eventLists.push(list);
+    eventIndex -= 1;
   }
 
   return eventLists.map(list => ({
