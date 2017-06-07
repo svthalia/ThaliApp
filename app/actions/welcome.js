@@ -1,4 +1,4 @@
-import { url } from '../url';
+import { apiUrl } from '../url';
 import * as types from './actionTypes';
 
 export function welcome(eventList) {
@@ -19,7 +19,7 @@ export function retrieveShortlist(token, amount) {
       },
     };
 
-    return fetch(`${url}/api/events/?limit=${amount}&ordering=start`, data)
+    return fetch(`${apiUrl}/events/?limit=${amount}&ordering=start`, data)
       .then(
         response => response.json(),
       )
