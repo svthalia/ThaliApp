@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View, StatusBar, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
@@ -93,12 +94,12 @@ const ReduxNavigator = (props) => {
 };
 
 ReduxNavigator.propTypes = {
-  currentScene: React.PropTypes.string.isRequired,
-  loggedIn: React.PropTypes.bool.isRequired,
-  drawerOpen: React.PropTypes.bool.isRequired,
-  isFirstScene: React.PropTypes.bool.isRequired,
-  updateDrawer: React.PropTypes.func.isRequired,
-  back: React.PropTypes.func.isRequired,
+  currentScene: PropTypes.string.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  drawerOpen: PropTypes.bool.isRequired,
+  isFirstScene: PropTypes.bool.isRequired,
+  updateDrawer: PropTypes.func.isRequired,
+  back: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Image, Text, ViewPropTypes, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -15,9 +16,9 @@ const MemberView = props => (
   );
 
 MemberView.propTypes = {
-  member: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    photo: React.PropTypes.string,
+  member: PropTypes.shape({
+    name: PropTypes.string,
+    photo: PropTypes.string,
   }).isRequired,
   style: ViewPropTypes.style,
 };

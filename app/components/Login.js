@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, TextInput, Text, Linking, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
 import SnackBar from 'react-native-snackbar-component';
@@ -70,8 +71,8 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginState: React.PropTypes.string.isRequired,
-  login: React.PropTypes.func.isRequired,
+  loginState: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => state.session;

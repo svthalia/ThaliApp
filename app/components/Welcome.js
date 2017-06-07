@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, SectionList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
@@ -54,7 +55,7 @@ const Footer = props => (
 );
 
 Footer.propTypes = {
-  navigate: React.PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 const mapDispatchToPropsFooter = dispatch => ({
@@ -112,19 +113,19 @@ class Welcome extends Component {
 }
 
 Welcome.propTypes = {
-  eventList: React.PropTypes.arrayOf(React.PropTypes.shape({
-    title: React.PropTypes.string,
-    description: React.PropTypes.string,
-    start: React.PropTypes.string,
-    end: React.PropTypes.string,
-    location: React.PropTypes.string,
-    price: React.PropTypes.string,
-    pk: React.PropTypes.number,
-    registered: React.PropTypes.bool,
-    pizza: React.PropTypes.bool,
+  eventList: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    start: PropTypes.string,
+    end: PropTypes.string,
+    location: PropTypes.string,
+    price: PropTypes.string,
+    pk: PropTypes.number,
+    registered: PropTypes.bool,
+    pizza: PropTypes.bool,
   })).isRequired,
-  token: React.PropTypes.string.isRequired,
-  retrieveShortlist: React.PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
+  retrieveShortlist: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

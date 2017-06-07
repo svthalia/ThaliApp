@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Text, View, SectionList } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
@@ -161,20 +162,20 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  eventList: React.PropTypes.arrayOf(React.PropTypes.shape({
-    pk: React.PropTypes.number,
-    title: React.PropTypes.string,
-    description: React.PropTypes.string,
-    start: React.PropTypes.string,
-    end: React.PropTypes.string,
-    location: React.PropTypes.string,
-    price: React.PropTypes.string,
-    registered: React.PropTypes.bool,
-    pizza: React.PropTypes.bool,
+  eventList: PropTypes.arrayOf(PropTypes.shape({
+    pk: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    start: PropTypes.string,
+    end: PropTypes.string,
+    location: PropTypes.string,
+    price: PropTypes.string,
+    registered: PropTypes.bool,
+    pizza: PropTypes.bool,
   })).isRequired,
-  calendarFetched: React.PropTypes.bool.isRequired,
-  retrieveCalendar: React.PropTypes.func.isRequired,
-  token: React.PropTypes.string.isRequired,
+  calendarFetched: PropTypes.bool.isRequired,
+  retrieveCalendar: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

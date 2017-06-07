@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, View, Image, TouchableHighlight } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -84,11 +85,11 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  currentScene: React.PropTypes.string.isRequired,
-  displayName: React.PropTypes.string.isRequired,
-  photo: React.PropTypes.string.isRequired,
-  navigate: React.PropTypes.func.isRequired,
-  logout: React.PropTypes.func.isRequired,
+  currentScene: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
+  navigate: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

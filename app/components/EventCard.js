@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
@@ -33,19 +34,19 @@ const EventCard = props => (
 );
 
 EventCard.propTypes = {
-  event: React.PropTypes.shape({
-    title: React.PropTypes.string,
-    description: React.PropTypes.string,
-    start: React.PropTypes.string,
-    end: React.PropTypes.string,
-    location: React.PropTypes.string,
-    price: React.PropTypes.string,
-    pk: React.PropTypes.number,
-    registered: React.PropTypes.bool,
-    pizza: React.PropTypes.bool,
+  event: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    start: PropTypes.string,
+    end: PropTypes.string,
+    location: PropTypes.string,
+    price: PropTypes.string,
+    pk: PropTypes.number,
+    registered: PropTypes.bool,
+    pizza: PropTypes.bool,
   }).isRequired,
-  loadEvent: React.PropTypes.func.isRequired,
-  token: React.PropTypes.string.isRequired,
+  loadEvent: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

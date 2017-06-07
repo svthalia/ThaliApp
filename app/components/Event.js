@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
@@ -249,39 +250,39 @@ const Event = (props) => {
 };
 
 Event.propTypes = {
-  data: React.PropTypes.shape({
-    pk: React.PropTypes.number.isRequired,
-    title: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
-    start: React.PropTypes.string.isRequired,
-    end: React.PropTypes.string.isRequired,
-    organiser: React.PropTypes.number.isRequired,
-    location: React.PropTypes.string.isRequired,
-    map_location: React.PropTypes.string.isRequired,
-    status: React.PropTypes.number.isRequired,
-    registration_allowed: React.PropTypes.bool.isRequired,
-    has_fields: React.PropTypes.bool.isRequired,
-    registration_start: React.PropTypes.string,
-    registration_end: React.PropTypes.string,
-    cancel_deadline: React.PropTypes.string,
-    max_participants: React.PropTypes.number,
-    num_participants: React.PropTypes.number,
-    price: React.PropTypes.string,
-    fine: React.PropTypes.string,
-    user_registration: React.PropTypes.shape({
-      registered_on: React.PropTypes.string,
-      queue_position: React.PropTypes.number,
-      is_cancelled: React.PropTypes.bool,
-      is_late_cancellation: React.PropTypes.bool,
+  data: PropTypes.shape({
+    pk: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    start: PropTypes.string.isRequired,
+    end: PropTypes.string.isRequired,
+    organiser: PropTypes.number.isRequired,
+    location: PropTypes.string.isRequired,
+    map_location: PropTypes.string.isRequired,
+    status: PropTypes.number.isRequired,
+    registration_allowed: PropTypes.bool.isRequired,
+    has_fields: PropTypes.bool.isRequired,
+    registration_start: PropTypes.string,
+    registration_end: PropTypes.string,
+    cancel_deadline: PropTypes.string,
+    max_participants: PropTypes.number,
+    num_participants: PropTypes.number,
+    price: PropTypes.string,
+    fine: PropTypes.string,
+    user_registration: PropTypes.shape({
+      registered_on: PropTypes.string,
+      queue_position: PropTypes.number,
+      is_cancelled: PropTypes.bool,
+      is_late_cancellation: PropTypes.bool,
     }),
-    no_registration_message: React.PropTypes.string,
+    no_registration_message: PropTypes.string,
   }).isRequired,
-  registrations: React.PropTypes.arrayOf(React.PropTypes.shape({
-    pk: React.PropTypes.number.isRequired,
-    member: React.PropTypes.number,
-    name: React.PropTypes.string.isRequired,
+  registrations: PropTypes.arrayOf(PropTypes.shape({
+    pk: PropTypes.number.isRequired,
+    member: PropTypes.number,
+    name: PropTypes.string.isRequired,
   })).isRequired,
-  success: React.PropTypes.bool.isRequired,
+  success: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

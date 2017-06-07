@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, ViewPropTypes, StyleSheet } from 'react-native';
 
 class SquareView extends Component {
@@ -44,7 +45,7 @@ class SquareView extends Component {
 }
 
 SquareView.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   style: ViewPropTypes.style,
 };
 
