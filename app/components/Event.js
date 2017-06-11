@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -17,131 +17,128 @@ const REGISTRATION_OPEN_NO_CANCEL = 2;
 const REGISTRATION_CLOSED = 3;
 const REGISTRATION_CLOSED_CANCEL_ONLY = 4;
 
-const Event = (props) => {
-  if (props.success) {
-    const eventDesc = (data) => {
-      const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
-      const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
+class Event extends Component {
+  eventDesc = (data) => {
+    const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
+    const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
 
-      const infoTexts = [];
+    const infoTexts = [];
 
-      // let text = '';
-
-      infoTexts.push(
-        <View key="start-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="start-title">Van:</Text>
-          <Text style={styles.infoValueText} key="start-value">{startDate}</Text>
-        </View>,
+    infoTexts.push(
+      <View key="start-holder" style={styles.infoHolder}>
+        <Text style={styles.infoText} key="start-title">Van:</Text>
+        <Text style={styles.infoValueText} key="start-value">{startDate}</Text>
+      </View>,
       );
-      infoTexts.push(
-        <View key="end-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="end-title">Tot:</Text>
-          <Text style={styles.infoValueText} key="end-value">{endDate}</Text>
-        </View>,
+    infoTexts.push(
+      <View key="end-holder" style={styles.infoHolder}>
+        <Text style={styles.infoText} key="end-title">Tot:</Text>
+        <Text style={styles.infoValueText} key="end-value">{endDate}</Text>
+      </View>,
       );
-      infoTexts.push(
-        <View key="loc-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="loc-title">Locatie:</Text>
-          <Text style={styles.infoValueText} key="loc-value">{data.location}</Text>
-        </View>,
+    infoTexts.push(
+      <View key="loc-holder" style={styles.infoHolder}>
+        <Text style={styles.infoText} key="loc-title">Locatie:</Text>
+        <Text style={styles.infoValueText} key="loc-value">{data.location}</Text>
+      </View>,
       );
-      infoTexts.push(
-        <View key="price-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="price-title">Prijs:</Text>
-          <Text style={styles.infoValueText} key="price-value">€{data.price}</Text>
-        </View>,
+    infoTexts.push(
+      <View key="price-holder" style={styles.infoHolder}>
+        <Text style={styles.infoText} key="price-title">Prijs:</Text>
+        <Text style={styles.infoValueText} key="price-value">€{data.price}</Text>
+      </View>,
       );
 
-      if (data.status > REGISTRATION_NOT_NEEDED) {
-        const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:m');
-        const cancelDeadline = Moment(data.cancel_deadline).format('D MMM YYYY, HH:m');
+    if (data.status > REGISTRATION_NOT_NEEDED) {
+      const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:mm');
+      const cancelDeadline = Moment(data.cancel_deadline).format('D MMM YYYY, HH:mm');
 
-        infoTexts.push(
-          <View key="registrationend-holder" style={styles.infoHolder}>
-            <Text style={styles.infoText} key="registrationend-title">Aanmelddeadline:</Text>
-            <Text style={styles.infoValueText} key="registrationend-value">{registrationDeadline}</Text>
-          </View>,
+      infoTexts.push(
+        <View key="registrationend-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="registrationend-title">Aanmelddeadline:</Text>
+          <Text style={styles.infoValueText} key="registrationend-value">{registrationDeadline}</Text>
+        </View>,
         );
-        infoTexts.push(
-          <View key="canceldeadline-holder" style={styles.infoHolder}>
-            <Text style={styles.infoText} key="canceldeadline-title">Afmelddeadline:</Text>
-            <Text style={styles.infoValueText} key="canceldeadline-value">{cancelDeadline}</Text>
-          </View>,
+      infoTexts.push(
+        <View key="canceldeadline-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="canceldeadline-title">Afmelddeadline:</Text>
+          <Text style={styles.infoValueText} key="canceldeadline-value">{cancelDeadline}</Text>
+        </View>,
         );
 
-        let participantsText = `${data.num_participants} aanmeldingen`;
-        if (data.max_participants) {
-          participantsText += ` (${data.max_participants} max)`;
+      let participantsText = `${data.num_participants} aanmeldingen`;
+      if (data.max_participants) {
+        participantsText += ` (${data.max_participants} max)`;
+      }
+
+      infoTexts.push(
+        <View key="participants-holder" style={styles.infoHolder}>
+          <Text style={styles.infoText} key="participants-title">Aantal aanmeldingen:</Text>
+          <Text style={styles.infoValueText} key="participants-value">{participantsText}</Text>
+        </View>,
+        );
+
+      if (data.user_registration) {
+        let registrationState;
+        if (data.user_registration.is_late_cancellation) {
+          registrationState = 'Je bent afgemeld na de afmelddeadline';
+        } else if (data.user_registration.queue_position === null) {
+          registrationState = 'Je bent aangemeld';
+        } else if (data.user_registration.queue_position > 0) {
+          registrationState = `Wachtlijst positie ${data.user_registration.queue_position}`;
+        } else {
+          registrationState = 'Je bent afgemeld';
         }
 
         infoTexts.push(
-          <View key="participants-holder" style={styles.infoHolder}>
-            <Text style={styles.infoText} key="participants-title">Aantal aanmeldingen:</Text>
-            <Text style={styles.infoValueText} key="participants-value">{participantsText}</Text>
+          <View key="status-holder" style={styles.infoHolder}>
+            <Text style={styles.infoText} key="status-title">Aanmeldstatus:</Text>
+            <Text style={styles.infoValueText} key="status-value">{registrationState}</Text>
           </View>,
-        );
-
-        if (data.user_registration) {
-          let registrationState;
-          if (data.user_registration.is_late_cancellation) {
-            registrationState = 'Je bent afgemeld na de afmelddeadline';
-          } else if (data.user_registration.queue_position === null) {
-            registrationState = 'Je bent aangemeld';
-          } else if (data.user_registration.queue_position > 0) {
-            registrationState = `Wachtlijst positie ${data.user_registration.queue_position}`;
-          } else {
-            registrationState = 'Je bent afgemeld';
-          }
-
-          infoTexts.push(
-            <View key="status-holder" style={styles.infoHolder}>
-              <Text style={styles.infoText} key="status-title">Aanmeldstatus:</Text>
-              <Text style={styles.infoValueText} key="status-value">{registrationState}</Text>
-            </View>,
           );
-        }
       }
+    }
 
 
-      return (
-        <View>
-          {infoTexts}
-        </View>
-      );
-    };
+    return (
+      <View>
+        {infoTexts}
+      </View>
+    );
+  };
 
-    const eventInfo = (event) => {
-      let text = '';
-      if (event.status === REGISTRATION_NOT_YET_OPEN) {
-        const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:m');
-        text = `Aanmelden opent ${registrationStart}`;
-      } else if (event.status === REGISTRATION_CLOSED ||
+  eventInfo = (event) => {
+    let text = '';
+    if (event.status === REGISTRATION_NOT_YET_OPEN) {
+      const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:m');
+      text = `Aanmelden opent ${registrationStart}`;
+    } else if (event.status === REGISTRATION_CLOSED ||
         event.status === REGISTRATION_CLOSED_CANCEL_ONLY) {
-        text = 'Aanmelden is niet meer mogelijk';
-      } else if (event.status === REGISTRATION_NOT_NEEDED) {
-        text = 'Geen aanmelding vereist';
-        if (event.no_registration_message) {
-          text = event.no_registration_message;
-        }
+      text = 'Aanmelden is niet meer mogelijk';
+    } else if (event.status === REGISTRATION_NOT_NEEDED) {
+      text = 'Geen aanmelding vereist';
+      if (event.no_registration_message) {
+        text = event.no_registration_message;
       }
+    }
 
-      if ((event.status === REGISTRATION_OPEN_NO_CANCEL || event.status === REGISTRATION_CLOSED) &&
+    if ((event.status === REGISTRATION_OPEN_NO_CANCEL || event.status === REGISTRATION_CLOSED) &&
         event.user_registration !== null &&
         !event.user_registration.is_cancelled && event.fine > 0 &&
         event.user_registration.queue_position === null) {
-        text += `Afmelden is niet meer mogelijk zonder de volledige kosten van €${event.fine} te ` +
+      text += `Afmelden is niet meer mogelijk zonder de volledige kosten van €${event.fine} te ` +
         'betalen. Let op: je kunt je hierna niet meer aanmelden.';
-      }
+    }
 
-      if (text.length > 0) {
-        return (<Text style={styles.registrationText}>{text}</Text>);
-      }
-      return (<View />);
-    };
+    if (text.length > 0) {
+      return (<Text style={styles.registrationText}>{text}</Text>);
+    }
+    return (<View />);
+  };
 
-// eslint-disable-next-line arrow-body-style
-    const eventActions = () => {
-      // Needed once registration on server implemented
+  // eslint-disable-next-line arrow-body-style
+  eventActions = () => {
+    // Needed once registration on server implemented
     // if (event.registration_allowed) {
     //   if ((event.user_registration === null || event.user_registration.is_cancelled) &&
     //     (event.status === REGISTRATION_OPEN || event.status === REGISTRATION_OPEN_NO_CANCEL)) {
@@ -176,28 +173,28 @@ const Event = (props) => {
     //   }
     // }
 
-      return (<View />);
-    };
+    return (<View />);
+  };
 
-    const registrationsGrid = (registrations) => {
-      if (registrations !== undefined && registrations.length > 0) {
-        return (
-          <View>
-            <View style={styles.divider} />
-            <Text style={styles.registrationsTitle}>Aanmeldingen</Text>
-            <View style={styles.registrationsView}>
-              {/*
+  registrationsGrid = (registrations) => {
+    if (registrations !== undefined && registrations.length > 0) {
+      return (
+        <View>
+          <View style={styles.divider} />
+          <Text style={styles.registrationsTitle}>Aanmeldingen</Text>
+          <View style={styles.registrationsView}>
+            {/*
                 Create a grid for the registrations:
                 First create chunks of max 3 and map those to a View
                 Then inside that View create 3 MemberViews (if is a real registration) or
                 a placeholder View (to make sure flex space is filled)
               */}
-              { props.registrations.map((item, index) => {
-                if (index % 3 === 0) {
-                  return props.registrations.slice(index, index + 3);
-                }
-                return null;
-              }).filter(item => item)
+            { this.props.registrations.map((item, index) => {
+              if (index % 3 === 0) {
+                return this.props.registrations.slice(index, index + 3);
+              }
+              return null;
+            }).filter(item => item)
                 .map((list) => {
                   while (list.length < 3) {
                     list.push({ pk: null });
@@ -222,32 +219,38 @@ const Event = (props) => {
                   );
                 })
               }
-            </View>
           </View>
-        );
-      }
-      return (<View />);
-    };
+        </View>
+      );
+    }
+    return (<View />);
+  };
 
+  render() {
+    if (this.props.success) {
+      return (
+        <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
+          <Image
+            style={styles.locationImage}
+            source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.props.data.map_location}&zoom=13&size=450x250&markers=${this.props.data.map_location}` }}
+          />
+          <Text style={styles.titleText}>{this.props.data.title}</Text>
+          {this.eventDesc(this.props.data)}
+          {this.eventActions(this.props.data)}
+          {this.eventInfo(this.props.data)}
+          <View style={styles.divider} />
+          <Text style={styles.descText}>{this.props.data.description}</Text>
+          {this.registrationsGrid(this.props.registrations)}
+        </ScrollView>
+      );
+    }
     return (
       <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
-        <Image style={styles.locationImage} source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${props.data.map_location}&zoom=13&size=450x250&markers=${props.data.map_location}` }} />
-        <Text style={styles.titleText}>{props.data.title}</Text>
-        {eventDesc(props.data)}
-        {eventActions(props.data)}
-        {eventInfo(props.data)}
-        <View style={styles.divider} />
-        <Text style={styles.descText}>{props.data.description}</Text>
-        {registrationsGrid(props.registrations)}
+        <Text>Kon het evenement niet laden...</Text>
       </ScrollView>
     );
   }
-  return (
-    <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
-      <Text>Kon het evenement niet laden...</Text>
-    </ScrollView>
-  );
-};
+}
 
 Event.propTypes = {
   data: PropTypes.shape({
