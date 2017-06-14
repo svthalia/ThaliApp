@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.darkMagenta,
   },
+  indicatorView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
 });
 
 export default styles;

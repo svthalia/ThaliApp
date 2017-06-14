@@ -9,7 +9,7 @@ const initialState = {
 
 
 export default function navigate(state = initialState, action = {}) {
-  const { currentScene, previousScenes, loggedIn, drawerOpen } = state;
+  const { currentScene, previousScenes, drawerOpen } = state;
   switch (action.type) {
     case types.LOGINSUCCESS: {
       return {
@@ -26,10 +26,9 @@ export default function navigate(state = initialState, action = {}) {
       }
       const scene = previousScenes.pop();
       return {
+        ...state,
         previousScenes,
         currentScene: scene,
-        loggedIn,
-        drawerOpen,
       };
     }
     case types.NAVIGATE: {
@@ -40,19 +39,19 @@ export default function navigate(state = initialState, action = {}) {
         };
       } else if (action.newSection) {
         return {
+          ...state,
           previousScenes: [],
           currentScene: action.scene,
-          loggedIn,
           drawerOpen: false,
         };
       }
       return {
+        ...state,
         previousScenes: [
           ...previousScenes,
           currentScene,
         ],
         currentScene: action.scene,
-        loggedIn,
         drawerOpen: false,
       };
     }
