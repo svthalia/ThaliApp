@@ -7,8 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../style';
 import styles from './style/sidebar';
 
-import * as actions from '../actions/navigation';
 import * as loginActions from '../actions/login';
+import { loadProfile } from '../actions/profile';
 
 const background = require('../img/huygens.jpg');
 
@@ -45,7 +45,7 @@ const Sidebar = (props) => {
       style={styles.sidebar}
     >
       <TouchableHighlight
-        onPress={() => props.navigate('profile')}
+        onPress={() => props.loadProfile(props.token)}
         style={styles.headerButton}
       >
         <Image
@@ -88,19 +88,21 @@ Sidebar.propTypes = {
   currentScene: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
-  navigate: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
+  loadProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   currentScene: state.navigation.currentScene,
   displayName: state.session.displayName,
   photo: state.session.photo,
+  token: state.session.token,
 });
 
 const mapDispatchToProps = dispatch => ({
-  navigate: (scene, newSection = false) => dispatch(actions.navigate(scene, newSection)),
   logout: () => dispatch(loginActions.logout()),
+  loadProfile: token => dispatch(loadProfile(token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

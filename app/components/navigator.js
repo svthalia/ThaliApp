@@ -9,6 +9,7 @@ import Welcome from './Welcome';
 import Sidebar from './Sidebar';
 import Event from './Event';
 import Calendar from './Calendar';
+import Profile from './Profile';
 
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
@@ -22,6 +23,8 @@ const sceneToComponent = (scene) => {
       return <Event />;
     case 'eventList':
       return <Calendar />;
+    case 'profile':
+      return <Profile />;
     default:
       return <Welcome />;
   }
@@ -78,19 +81,20 @@ const ReduxNavigator = (props) => {
       <View style={styles.statusBar}>
         <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
       </View>
-      <View style={styles.appBar}>
-        <TouchableOpacity
-          onPress={props.isFirstScene ? () => props.updateDrawer(!props.drawerOpen) : props.back}
-        >
-          <Icon
-            name={props.isFirstScene ? 'menu' : 'arrow-back'}
-            onClick={props.back}
-            style={styles.icon}
-            size={24}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>{sceneToTitle(currentScene)}</Text>
-      </View>
+      {currentScene !== 'profile' && (
+        <View style={styles.appBar}>
+          <TouchableOpacity
+            onPress={props.isFirstScene ? () => props.updateDrawer(!props.drawerOpen) : props.back}
+          >
+            <Icon
+              name={props.isFirstScene ? 'menu' : 'arrow-back'}
+              onClick={props.back}
+              style={styles.icon}
+              size={24}
+            />
+          </TouchableOpacity>
+          <Text style={styles.title}>{sceneToTitle(currentScene)}</Text>
+        </View>)}
       {sceneToComponent(currentScene)}
     </Drawer>);
   }
