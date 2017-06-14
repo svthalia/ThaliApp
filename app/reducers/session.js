@@ -26,7 +26,7 @@ export default function session(state = initialState, action = {}) {
     case types.LOGOUT:
       return { ...initialState, loginState: 'logout' };
     case types.RESETLOGINSTATE:
-      return { ...initialState, loginState: '' };
+      return { ...state, loginState: '' };
 
     default:
       return state;
