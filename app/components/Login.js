@@ -2,24 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput, Text, Linking, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
-import SnackBar from 'react-native-snackbar-component';
 import styles from './style/login';
 import { url } from '../url';
 
 import * as actions from '../actions/login';
-
-const loginResult = (status) => {
-  switch (status) {
-    case 'progress':
-      return 'Logging in';
-    case 'failure':
-      return 'Login failed';
-    case 'logout':
-      return 'Logout successful';
-    default:
-      return '';
-  }
-};
 
 const image = require('./logo.png');
 
@@ -33,7 +19,7 @@ class Login extends Component {
   }
 
   render() {
-    const { loginState, login } = this.props;
+    const { login } = this.props;
     return (
       <KeyboardAvoidingView
         style={styles.wrapper}
@@ -64,14 +50,12 @@ class Login extends Component {
         <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
           Wachtwoord vergeten?
         </Text>
-        <SnackBar visible={loginState !== ''} textMessage={loginResult(loginState)} actionText="let's go" />
       </KeyboardAvoidingView>
     );
   }
 }
 
 Login.propTypes = {
-  loginState: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired,
 };
 

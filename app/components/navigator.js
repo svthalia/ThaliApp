@@ -4,6 +4,7 @@ import { Text, View, StatusBar, TouchableOpacity, BackHandler } from 'react-nati
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import SnackBar from 'react-native-snackbar-component';
 import Login from './Login';
 import Welcome from './Welcome';
 import Sidebar from './Sidebar';
@@ -13,6 +14,19 @@ import Calendar from './Calendar';
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
 import { colors } from '../style';
+
+const loginResult = (status) => {
+  switch (status) {
+    case 'progress':
+      return 'Logging in';
+    case 'failure':
+      return 'Login failed';
+    case 'logout':
+      return 'Logout successful';
+    default:
+      return '';
+  }
+};
 
 const sceneToComponent = (scene) => {
   switch (scene) {
@@ -41,8 +55,8 @@ const sceneToTitle = (scene) => {
 };
 
 const ReduxNavigator = (props) => {
-  const { currentScene, loggedIn, drawerOpen, updateDrawer,
-    isFirstScene, back, navigateToWelcome } = props;
+  const { currentScene, loggedIn, drawerOpen, updateDrawer, loginState,
+          isFirstScene, back, navigateToWelcome } = props;
   BackHandler.addEventListener('hardwareBackPress', () => {
     if (!isFirstScene) {
       back();
@@ -92,6 +106,7 @@ const ReduxNavigator = (props) => {
         <Text style={styles.title}>{sceneToTitle(currentScene)}</Text>
       </View>
       {sceneToComponent(currentScene)}
+      <SnackBar visible={loginState === 'success'} textMessage={'Login success'} />
     </Drawer>);
   }
   return (
@@ -102,6 +117,7 @@ const ReduxNavigator = (props) => {
         <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
       </View>
       <Login />
+      <SnackBar visible={loginState !== ''} textMessage={loginResult(loginState)} />
     </View>);
 };
 
@@ -113,6 +129,7 @@ ReduxNavigator.propTypes = {
   updateDrawer: PropTypes.func.isRequired,
   back: PropTypes.func.isRequired,
   navigateToWelcome: PropTypes.func.isRequired,
+  loginState: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -120,6 +137,7 @@ const mapStateToProps = state => ({
   loggedIn: state.navigation.loggedIn,
   drawerOpen: state.navigation.drawerOpen,
   isFirstScene: state.navigation.previousScenes.length === 0,
+  loginState: state.session.loginState,
 });
 
 const mapDispatchToProps = dispatch => ({

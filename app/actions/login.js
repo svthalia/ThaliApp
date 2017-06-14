@@ -10,13 +10,26 @@ const PHOTOKEY = '@MyStore:photo';
 const defaultAvatar = `${url}/static/members/images/default-avatar.jpg`;
 
 
+export function resetLogin() {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch({
+        type: types.RESETLOGINSTATE,
+      });
+    }, 2000);
+  };
+}
+
 export function loginSuccess(username, token, displayName, photo) {
-  return {
-    type: types.LOGINSUCCESS,
-    username,
-    token,
-    displayName,
-    photo,
+  return (dispatch) => {
+    dispatch(resetLogin());
+    return dispatch({
+      type: types.LOGINSUCCESS,
+      username,
+      token,
+      displayName,
+      photo,
+    });
   };
 }
 
@@ -28,11 +41,7 @@ export function loginProgress() {
 
 export function loginFailure() {
   return (dispatch) => {
-    setTimeout(() => {
-      dispatch({
-        type: types.RESETLOGINSTATE,
-      });
-    }, 2000);
+    dispatch(resetLogin());
     return dispatch({
       type: types.LOGINFAILURE,
     });
@@ -40,8 +49,11 @@ export function loginFailure() {
 }
 
 export function logoutSuccess() {
-  return {
-    type: types.LOGOUT,
+  return (dispatch) => {
+    dispatch(resetLogin());
+    return dispatch({
+      type: types.LOGOUT,
+    });
   };
 }
 
