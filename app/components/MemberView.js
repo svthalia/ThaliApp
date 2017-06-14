@@ -9,7 +9,7 @@ import SquareView from './SquareView';
 
 const MemberView = (props) => {
   let photo = props.member.photo;
-  const regex = new RegExp(`^(${url}/media/public)/(avatars/[^\\.]+)\\.(jpg|jpeg)`);
+  const regex = new RegExp(`^(${url}/media/public)/(avatars/[^\\.]+)\\.(jpg|jpeg|png|gif)`);
   const matches = regex.exec(photo);
 
   if (matches) {
