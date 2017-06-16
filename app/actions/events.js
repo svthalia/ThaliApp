@@ -69,7 +69,7 @@ export function loadEvent(id, token) {
         },
       )
       .catch(
-        () => dispatch(fail())
+        () => dispatch(fail()),
       );
   };
 }
