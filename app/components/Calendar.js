@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, SectionList, ActivityIndicator } from 'react-native';
+import { Text, View, SectionList } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
 import * as actions from '../actions/calendar';
 import EventCard from './EventCard';
+import LoadingScreen from './LoadingScreen';
 
 import styles from './style/calendar';
-import { colors } from '../style';
 
 /* eslint no-param-reassign: ["error", { "props": false }]*/
 const addEventToSection = (sections, date, event) => {
@@ -135,18 +135,7 @@ class Calendar extends Component {
   render() {
     if (!this.props.calendarFetched) {
       this.props.retrieveCalendar(this.props.token);
-      return (
-        <View
-          style={styles.indicatorView}
-        >
-          <ActivityIndicator
-            animating
-            color={colors.magenta}
-            style={styles.indicator}
-            size="large"
-          />
-        </View>
-      );
+      return <LoadingScreen />;
     } else if (this.props.eventList.length === 0) {
       return (
         <View>

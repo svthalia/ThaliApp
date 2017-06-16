@@ -7,6 +7,7 @@ import 'moment/locale/nl';
 
 import styles from './style/event';
 import MemberView from './MemberView';
+import LoadingScreen from './LoadingScreen';
 import { colors } from '../style';
 
 const REGISTRATION_NOT_NEEDED = -1;
@@ -227,6 +228,10 @@ class Event extends Component {
   };
 
   render() {
+    if (!this.props.hasLoaded) {
+      return <LoadingScreen />;
+    }
+
     if (this.props.success) {
       return (
         <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
@@ -286,12 +291,14 @@ Event.propTypes = {
     name: PropTypes.string.isRequired,
   })).isRequired,
   success: PropTypes.bool.isRequired,
+  hasLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: state.events.data,
   registrations: state.events.registrations,
   success: state.events.success,
+  hasLoaded: state.events.hasLoaded,
 });
 
 export default connect(mapStateToProps, () => ({}))(Event);

@@ -2,6 +2,12 @@ import * as types from './actionTypes';
 import { navigate } from './navigation';
 import { apiUrl } from '../url';
 
+export function start() {
+  return {
+    type: types.LOADEVENTSTART,
+  };
+}
+
 export function success(data, registrations) {
   return {
     type: types.LOADEVENTSUCCESS,
@@ -37,6 +43,9 @@ function loadRegistrations(id, token) {
 
 export function loadEvent(id, token) {
   return (dispatch) => {
+    dispatch(start());
+    dispatch(navigate('event'));
+
     const data = {
       method: 'GET',
       headers: {
@@ -53,21 +62,14 @@ export function loadEvent(id, token) {
         (response) => {
           if (response.status > -1) {
             loadRegistrations(id, token)
-              .then((registrations) => {
-                dispatch(success(response, registrations));
-                dispatch(navigate('event'));
-              });
+              .then(registrations => dispatch(success(response, registrations)));
           } else {
             dispatch(success(response, []));
-            dispatch(navigate('event'));
           }
         },
       )
       .catch(
-        () => {
-          dispatch(fail());
-          dispatch(navigate('event'));
-        },
+        () => dispatch(fail())
       );
   };
 }

@@ -14,20 +14,28 @@ const initialState = {
     achievements: [],
   },
   success: false,
+  hasLoaded: false,
 };
 
 export default function profile(state = initialState, action = {}) {
   switch (action.type) {
+    case types.LOADPROFILESTART:
+      return {
+        ...state,
+        hasLoaded: false,
+      };
     case types.LOADPROFILESUCCESS:
       return {
         ...state,
         profile: action.profile,
         success: true,
+        hasLoaded: true,
       };
     case types.LOADPROFILEFAILURE:
       return {
         ...state,
         success: false,
+        hasLoaded: true,
       };
     default:
       return state;
