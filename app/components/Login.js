@@ -7,7 +7,7 @@ import { url } from '../url';
 
 import * as actions from '../actions/login';
 
-const image = require('./logo.png');
+const image = require('../img/logo.png');
 
 class Login extends Component {
   constructor(props) {

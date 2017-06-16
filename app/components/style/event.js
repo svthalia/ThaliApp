@@ -22,7 +22,6 @@ const styles = create({
       fontWeight: '500',
     },
     fontSize: 20,
-    lineHeight: 20.0,
     color: colors.darkGrey,
   },
   infoHolder: {
