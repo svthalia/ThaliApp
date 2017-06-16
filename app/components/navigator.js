@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, View, StatusBar, TouchableOpacity, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -41,7 +41,19 @@ const sceneToTitle = (scene) => {
 };
 
 const ReduxNavigator = (props) => {
-  const { currentScene, loggedIn, drawerOpen, updateDrawer } = props;
+  const { currentScene, loggedIn, drawerOpen, updateDrawer,
+    isFirstScene, back, navigateToWelcome } = props;
+  BackHandler.addEventListener('hardwareBackPress', () => {
+    if (!isFirstScene) {
+      back();
+      return true;
+    } else if (currentScene !== 'welcome') {
+      navigateToWelcome();
+      return true;
+    }
+    BackHandler.exitApp();
+    return true;
+  });
   if (loggedIn) {
     return (<Drawer
       type="overlay"
@@ -100,6 +112,7 @@ ReduxNavigator.propTypes = {
   isFirstScene: PropTypes.bool.isRequired,
   updateDrawer: PropTypes.func.isRequired,
   back: PropTypes.func.isRequired,
+  navigateToWelcome: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -112,6 +125,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateDrawer: isOpen => dispatch(actions.updateDrawer(isOpen)),
   back: () => dispatch(actions.back()),
+  navigateToWelcome: () => dispatch(actions.navigate('welcome', true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReduxNavigator);
