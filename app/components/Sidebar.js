@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../style';
 import styles from './style/sidebar';
 
+import * as navigationActions from '../actions/navigation';
 import * as loginActions from '../actions/login';
 import { loadProfile } from '../actions/profile';
 
@@ -91,6 +92,8 @@ Sidebar.propTypes = {
   token: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   loadProfile: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
+  navigate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -101,6 +104,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  navigate: (scene, newSection = false) => dispatch(navigationActions.navigate(scene, newSection)),
   logout: () => dispatch(loginActions.logout()),
   loadProfile: token => dispatch(loadProfile(token)),
 });
