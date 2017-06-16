@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ActivityIndicator, View, Text, SectionList, TouchableOpacity } from 'react-native';
+import { View, Text, SectionList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 import EventDetailCard from './EventDetailCard';
+import LoadingScreen from './LoadingScreen';
 
 import { retrieveShortlist } from '../actions/welcome';
 import { navigate } from '../actions/navigation';
 import styles from './style/welcome';
-import { colors } from '../style';
 
 const eventListToSections = (eventList) => {
   Moment.locale('nl');
@@ -83,18 +83,7 @@ class Welcome extends Component {
   render() {
     if (!this.props.hasLoaded) {
       this.props.retrieveShortlist(this.props.token, 5);
-      return (
-        <View
-          style={styles.indicatorView}
-        >
-          <ActivityIndicator
-            animating
-            color={colors.magenta}
-            style={styles.indicator}
-            size="large"
-          />
-        </View>
-      );
+      return <LoadingScreen />;
     } else if (this.props.eventList.length === 0) {
       return (
         <View>

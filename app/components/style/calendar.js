@@ -37,11 +37,6 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     paddingLeft: 16,
   },
-  indicatorView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
 });
 
 export default styles;

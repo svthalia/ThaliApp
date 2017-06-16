@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Moment from 'moment';
 
+import LoadingScreen from './LoadingScreen';
+
 import { back } from '../actions/navigation';
 
 import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/profile';
@@ -107,6 +109,10 @@ class Profile extends Component {
   }
 
   render() {
+    if (!this.props.hasLoaded) {
+      return <LoadingScreen />;
+    }
+
     const headerHeight = this.props.success ? this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
@@ -225,11 +231,13 @@ Profile.propTypes = {
   }).isRequired,
   success: PropTypes.bool.isRequired,
   back: PropTypes.func.isRequired,
+  hasLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,
   success: state.profile.success,
+  hasLoaded: state.profile.hasLoaded,
 });
 
 const mapDispatchToProps = dispatch => ({

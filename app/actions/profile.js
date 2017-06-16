@@ -3,6 +3,12 @@ import { navigate } from './navigation';
 
 import { apiUrl } from '../url';
 
+export function start() {
+  return {
+    type: types.LOADPROFILESTART,
+  };
+}
+
 export function success(profile) {
   return {
     type: types.LOADPROFILESUCCESS,
@@ -18,6 +24,9 @@ export function fail() {
 
 export function loadProfile(token, member = 'me') {
   return (dispatch) => {
+    dispatch(start());
+    dispatch(navigate('profile'));
+
     const data = {
       method: 'GET',
       headers: {
@@ -32,16 +41,10 @@ export function loadProfile(token, member = 'me') {
         response => response.json(),
       )
       .then(
-        (response) => {
-          dispatch(success(response));
-          dispatch(navigate('profile'));
-        },
+        response => dispatch(success(response)),
       )
       .catch(
-        () => {
-          dispatch(fail());
-          dispatch(navigate('profile'));
-        },
+        () => dispatch(fail()),
       );
   };
 }
