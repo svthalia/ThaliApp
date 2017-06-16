@@ -1,4 +1,4 @@
-package nu.thalia.thaliapp;
+package com.thaliapp;
 
 import android.app.Application;
 
