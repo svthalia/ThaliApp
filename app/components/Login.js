@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, Text, Linking, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, Text, Linking, Image, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './style/login';
 import { url } from '../url';
@@ -41,12 +41,12 @@ class Login extends Component {
             onSubmitEditing={() => { login(this.state.username, this.state.password); }}
           />
         </View>
-        <TouchableOpacity
+        <TouchableHighlight
           style={styles.blackbutton} onPress={() =>
         login(this.state.username, this.state.password)}
         >
           <Text style={styles.loginText}>INLOGGEN</Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
           Wachtwoord vergeten?
         </Text>
