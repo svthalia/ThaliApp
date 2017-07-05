@@ -13,6 +13,7 @@ import Profile from './Profile';
 import Pizza from './Pizza';
 import StandardHeader from './StandardHeader';
 import Registration from './Registration';
+import MemberList from './MemberList';
 
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
@@ -32,6 +33,8 @@ const sceneToComponent = (scene) => {
       return <Pizza />;
     case 'registration':
       return <Registration />;
+    case 'members':
+      return <MemberList />;
     default:
       return <Welcome />;
   }
@@ -72,7 +75,7 @@ const ReduxNavigator = (props) => {
       onClose={() => updateDrawer(false)}
       tapToClose
     >
-      {currentScene !== 'profile' && <StandardHeader />}
+      {currentScene !== 'profile' && currentScene !== 'members' && <StandardHeader />}
       {sceneToComponent(currentScene)}
     </Drawer>);
   }

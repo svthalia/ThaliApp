@@ -24,9 +24,9 @@ const MemberView = props => (
 
 MemberView.propTypes = {
   member: PropTypes.shape({
-    pk: PropTypes.number,
-    name: PropTypes.string,
-    photo: PropTypes.string,
+    pk: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
   }).isRequired,
   size: PropTypes.number.isRequired,
   style: ViewPropTypes.style,
