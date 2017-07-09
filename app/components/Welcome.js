@@ -29,16 +29,12 @@ const eventListToSections = (eventList) => {
 
   for (let i = 0; i < numberOfDays && eventIndex < eventList.length; i += 1) {
     const first = eventList[eventIndex];
-    eventIndex += 1;
     const list = [];
-    let next = first;
-    while (Moment(first.start).isSame(next.start, 'day') && eventIndex < eventList.length) {
-      list.push(next);
-      next = eventList[eventIndex];
+    while (eventIndex < eventList.length && Moment(first.start).isSame(eventList[eventIndex].start, 'day')) {
+      list.push(eventList[eventIndex]);
       eventIndex += 1;
     }
     eventLists.push(list);
-    eventIndex -= 1;
   }
 
   return eventLists.map(list => ({
