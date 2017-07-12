@@ -49,7 +49,7 @@ const eventListToSections = (eventList) => {
 
 const Footer = props => (
   <TouchableOpacity
-    onPress={() => props.navigate('eventList')}
+    onPress={() => props.navigate('eventList', true)}
     style={styles.footer}
   >
     <Text style={styles.footerText}>BEKIJK DE GEHELE AGENDA</Text>
@@ -61,7 +61,7 @@ Footer.propTypes = {
 };
 
 const mapDispatchToPropsFooter = dispatch => ({
-  navigate: scene => dispatch(navigate(scene)),
+  navigate: (scene, newSection) => dispatch(navigate(scene, newSection)),
 });
 
 const FooterComponent = connect(() => ({}), mapDispatchToPropsFooter)(Footer);
