@@ -71,7 +71,7 @@ const getPersonalInfo = (profile) => {
 };
 
 const getAchievements = (profile) => {
-  if (profile.achievements) {
+  if (profile.achievements.length) {
     return [
       <Text style={styles.sectionHeader} key="title">Verdiensten voor Thalia</Text>,
       <View style={styles.card} key="content">
