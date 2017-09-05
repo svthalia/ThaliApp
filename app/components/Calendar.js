@@ -11,7 +11,7 @@ import LoadingScreen from './LoadingScreen';
 
 import styles from './style/calendar';
 
-/* eslint no-param-reassign: ["error", { "props": false }]*/
+/* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
   const day = date.date();
   const month = date.month();
