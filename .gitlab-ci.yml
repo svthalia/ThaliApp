@@ -1,4 +1,4 @@
-image: wkuipers/docker-react-native-yarn:latest
+image: node:6
 
 variables:
     GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
@@ -14,15 +14,8 @@ before_script:
 
 stages:
     - lint
-    - build
 
 eslint:
     stage: lint
     script:
-        - yarn run eslint *.js app
-
-build_android:
-    stage: build
-    script:
-        - cd android
-        - ./gradlew build
+        - yarn ci-lint
