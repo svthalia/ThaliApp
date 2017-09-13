@@ -1,5 +1,4 @@
-[![build status](https://gitlab.science.ru.nl/thalia/ThaliApp-react/badges/master/build.svg)](https://gitlab.science.ru.nl/thalia/ThaliApp-react/commits/master)
-[![coverage report](https://gitlab.science.ru.nl/thalia/ThaliApp-react/badges/master/coverage.svg)](https://gitlab.science.ru.nl/thalia/ThaliApp-react/commits/master)
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=59b91aadba233f000121b9d3&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/59b91aadba233f000121b9d3/build/latest?branch=master)
 # ThaliApp
 The new and improved ThaliApp
 

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "lint": "eslint *.js app --fix"
+    "lint": "eslint *.js app --fix",
+    "ci-lint": "eslint *.js app"
   },
   "jest": {
     "preset": "react-native",
