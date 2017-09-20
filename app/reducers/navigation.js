@@ -1,4 +1,5 @@
 import * as types from '../actions/actionTypes';
+import * as loginActions from '../actions/login';
 
 const initialState = {
   previousScenes: [],
@@ -11,7 +12,7 @@ const initialState = {
 export default function navigate(state = initialState, action = {}) {
   const { currentScene, previousScenes, drawerOpen } = state;
   switch (action.type) {
-    case types.LOGINSUCCESS: {
+    case loginActions.SUCCESS: {
       return {
         ...state,
         loggedIn: true,
@@ -61,7 +62,7 @@ export default function navigate(state = initialState, action = {}) {
         drawerOpen: action.drawerOpen,
       };
     }
-    case types.LOGOUT: {
+    case loginActions.LOGOUT: {
       return initialState;
     }
     default:

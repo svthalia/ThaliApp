@@ -1,61 +1,24 @@
-import { AsyncStorage } from 'react-native';
-import * as types from './actionTypes';
-
 export const LOGIN = 'LOGIN_LOGIN';
-export const LOGINPROGRESS = 'LOGINPROGRESS';
-export const LOGINSUCCESS = 'LOGINSUCCESS';
-export const LOGINFAILURE = 'LOGINFAILURE';
-export const LOGOUT = 'LOGOUT';
+export const FETCHING = 'LOGIN_FETCHING';
+export const SUCCESS = 'LOGIN_SUCCESS';
+export const FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT = 'LOGIN_LOGOUT';
+export const RESET = 'LOGIN_RESET';
 
-const USERNAMEKEY = '@MyStore:username';
-const TOKENKEY = '@MyStore:token';
-
-
-export function resetLogin() {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch({
-        type: types.RESETLOGINSTATE,
-      });
-    }, 2000);
-  };
+export function reset() {
+  return { type: RESET };
 }
 
-export function loginSuccess(username, token, displayName, photo) {
-  return (dispatch) => {
-    dispatch(resetLogin());
-    return dispatch({
-      type: types.LOGINSUCCESS,
-      username,
-      token,
-      displayName,
-      photo,
-    });
-  };
+export function success(username, token, displayName, photo) {
+  return { type: SUCCESS, payload: { username, token, displayName, photo } };
 }
 
-export function loginProgress() {
-  return {
-    type: types.LOGINPROGRESS,
-  };
+export function fetching() {
+  return { type: FETCHING };
 }
 
-export function loginFailure() {
-  return (dispatch) => {
-    dispatch(resetLogin());
-    return dispatch({
-      type: types.LOGINFAILURE,
-    });
-  };
-}
-
-export function logoutSuccess() {
-  return (dispatch) => {
-    dispatch(resetLogin());
-    return dispatch({
-      type: types.LOGOUT,
-    });
-  };
+export function failure() {
+  return { type: FAILURE };
 }
 
 export function login(user, pass) {
@@ -63,6 +26,5 @@ export function login(user, pass) {
 }
 
 export function logout() {
-  return dispatch => AsyncStorage.multiRemove([USERNAMEKEY, TOKENKEY])
-      .then(dispatch(logoutSuccess()));
+  return { type: LOGOUT };
 }

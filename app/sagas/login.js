@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga';
 import { call, takeEvery, put } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 
@@ -13,7 +14,7 @@ const defaultAvatar = `${url}/static/members/images/default-avatar.jpg`;
 
 const login = function* login(action) {
   const { user, pass } = action.payload;
-  yield put(loginActions.loginProgress());
+  yield put(loginActions.fetching());
   let data = {
     method: 'POST',
     headers: {
@@ -48,16 +49,28 @@ const login = function* login(action) {
           [DISPLAYNAMEKEY, displayName],
           [PHOTOKEY, avatar],
     ]);
-    yield put(loginActions.loginSuccess(
+    yield put(loginActions.success(
           user, token, displayName, avatar,
       ));
+    yield delay(2000);
+    yield put(loginActions.reset());
   } catch (error) {
-    yield put(loginActions.loginFailure());
+    console.log(error);
+    yield put(loginActions.failure());
+    yield delay(2000);
+    yield put(loginActions.reset());
   }
+};
+
+const logout = function* logout() {
+  yield call(AsyncStorage.multiRemove, [USERNAMEKEY, TOKENKEY]);
+  yield delay(2000);
+  yield put(loginActions.reset());
 };
 
 const loginSaga = function* loginSaga() {
   yield takeEvery(loginActions.LOGIN, login);
+  yield takeEvery(loginActions.LOGOUT, logout);
 };
 
 export default loginSaga;
