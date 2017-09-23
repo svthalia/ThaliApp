@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 import Event from './Event';
 import Calendar from './Calendar';
 import Profile from './Profile';
+import Pizza from './Pizza';
 
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
@@ -39,6 +40,8 @@ const sceneToComponent = (scene) => {
       return <Calendar />;
     case 'profile':
       return <Profile />;
+    case 'pizza':
+      return <Pizza />;
     default:
       return <Welcome />;
   }
@@ -52,6 +55,8 @@ const sceneToTitle = (scene) => {
       return 'Evenement';
     case 'eventList':
       return 'Agenda';
+    case 'pizza':
+      return 'Pizza';
     default:
       return 'ThaliApp';
   }
