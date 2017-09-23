@@ -7,4 +7,12 @@ export const url = server;
 export const apiUrl = `${server}/api/v1`;
 export const pizzaUrl = 'https://pizza.thalia.nu';
 
-export const apiRequest = (route, data) => fetch(`${apiUrl}/${route}/`, data).then(response => response.json());
+export const apiRequest = (route, fetchOpts, params) => {
+  let query = '';
+  if (params !== null && params === Object(params)) {
+    query = `?${Object.keys(params)
+      .map(k => `${encodeURIComponent(k)} = ${encodeURIComponent(params[k])}`)
+      .join('&')}`;
+  }
+  return fetch(`${apiUrl}/${route}/${query}`, fetchOpts).then(response => response.json());
+};

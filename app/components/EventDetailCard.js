@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
-import * as actions from '../actions/events';
+import * as actions from '../actions/event';
 import { pizzaUrl } from '../url';
 
 import styles from './style/eventDetailCard';
@@ -87,7 +87,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadEvent: (pk, token) => dispatch(actions.loadEvent(pk, token)),
+  loadEvent: (pk, token) => dispatch(actions.event(pk, token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventDetailCard);

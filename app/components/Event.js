@@ -295,10 +295,10 @@ Event.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  data: state.events.data,
-  registrations: state.events.registrations,
-  success: state.events.success,
-  hasLoaded: state.events.hasLoaded,
+  data: state.event.data,
+  registrations: state.event.registrations,
+  success: state.event.success,
+  hasLoaded: state.event.hasLoaded,
 });
 
 export default connect(mapStateToProps, () => ({}))(Event);
