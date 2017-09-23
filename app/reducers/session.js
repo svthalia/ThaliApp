@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export default function session(state = initialState, action = {}) {
-  console.log(state);
   switch (action.type) {
     case loginActions.SUCCESS:
       return {

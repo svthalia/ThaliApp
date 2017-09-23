@@ -55,7 +55,6 @@ const login = function* login(action) {
     yield delay(2000);
     yield put(loginActions.reset());
   } catch (error) {
-    console.log(error);
     yield put(loginActions.failure());
     yield delay(2000);
     yield put(loginActions.reset());
