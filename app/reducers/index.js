@@ -1,6 +1,6 @@
 import session from './session';
 import navigation from './navigation';
-import events from './events';
+import event from './event';
 import calendar from './calendar';
 import welcome from './welcome';
 import profile from './profile';
@@ -8,7 +8,7 @@ import profile from './profile';
 export {
   session,
   navigation,
-  events,
+  event,
   calendar,
   welcome,
   profile,

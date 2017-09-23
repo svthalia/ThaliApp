@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
-import * as actions from '../actions/events';
+import * as eventActions from '../actions/event';
 
 import styles from './style/eventCard';
 
@@ -54,7 +54,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadEvent: (pk, token) => dispatch(actions.loadEvent(pk, token)),
+  loadEvent: (pk, token) => dispatch(eventActions.event(pk, token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventCard);

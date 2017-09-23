@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as types from '../actions/event';
 
 const initialState = {
   data: {
@@ -20,21 +20,21 @@ const initialState = {
 
 export default function loadEvent(state = initialState, action = {}) {
   switch (action.type) {
-    case types.LOADEVENTSTART: {
+    case types.FETCHING: {
       return {
         ...state,
         hasLoaded: false,
       };
     }
-    case types.LOADEVENTSUCCESS:
+    case types.SUCCESS:
       return {
         ...state,
-        data: action.data,
-        registrations: action.registrations,
+        data: action.payload.eventData,
+        registrations: action.payload.eventRegistrations,
         success: true,
         hasLoaded: true,
       };
-    case types.LOADEVENTFAILURE:
+    case types.FAILURE:
       return {
         ...state,
         success: false,
