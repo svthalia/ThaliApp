@@ -1,135 +1,30 @@
-import { AsyncStorage } from 'react-native';
-import * as types from './actionTypes';
-import { url, apiUrl } from '../url';
+export const LOGIN = 'LOGIN_LOGIN';
+export const FETCHING = 'LOGIN_FETCHING';
+export const SUCCESS = 'LOGIN_SUCCESS';
+export const FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT = 'LOGIN_LOGOUT';
+export const RESET = 'LOGIN_RESET';
 
-const USERNAMEKEY = '@MyStore:username';
-const TOKENKEY = '@MyStore:token';
-const DISPLAYNAMEKEY = '@MyStore:displayName';
-const PHOTOKEY = '@MyStore:photo';
-
-const defaultAvatar = `${url}/static/members/images/default-avatar.jpg`;
-
-
-export function resetLogin() {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch({
-        type: types.RESETLOGINSTATE,
-      });
-    }, 2000);
-  };
+export function reset() {
+  return { type: RESET };
 }
 
-export function loginSuccess(username, token, displayName, photo) {
-  return (dispatch) => {
-    dispatch(resetLogin());
-    return dispatch({
-      type: types.LOGINSUCCESS,
-      username,
-      token,
-      displayName,
-      photo,
-    });
-  };
+export function success(username, token, displayName, photo) {
+  return { type: SUCCESS, payload: { username, token, displayName, photo } };
 }
 
-export function loginProgress() {
-  return {
-    type: types.LOGINPROGRESS,
-  };
+export function fetching() {
+  return { type: FETCHING };
 }
 
-export function loginFailure() {
-  return (dispatch) => {
-    dispatch(resetLogin());
-    return dispatch({
-      type: types.LOGINFAILURE,
-    });
-  };
-}
-
-export function logoutSuccess() {
-  return (dispatch) => {
-    dispatch(resetLogin());
-    return dispatch({
-      type: types.LOGOUT,
-    });
-  };
-}
-
-
-function getUserInfo(token) {
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
-  return fetch(`${apiUrl}/members/me/`, data)
-    .then(
-      response => response.json())
-    .then(
-      (responseJson) => {
-        const avatar = responseJson.photo === null ? defaultAvatar : responseJson.photo;
-        return {
-          photo: avatar,
-          displayName: responseJson.display_name,
-        };
-      },
-    )
-    .catch(
-      () => ({
-        photo: defaultAvatar,
-        displayName: 'Naamloos',
-      }),
-    );
+export function failure() {
+  return { type: FAILURE };
 }
 
 export function login(user, pass) {
-  return (dispatch) => {
-    dispatch(loginProgress());
-    const data = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: user,
-        password: pass,
-      }),
-    };
-    return fetch(`${apiUrl}/token-auth/`, data)
-      .then(
-        response => response.json())
-      .then(
-        (responseJson) => {
-          if (responseJson.token) {
-            const token = responseJson.token;
-            return getUserInfo(token)
-              .then(
-                  userInfo => AsyncStorage.multiSet([
-                        [USERNAMEKEY, user],
-                        [TOKENKEY, token],
-                        [DISPLAYNAMEKEY, userInfo.displayName],
-                        [PHOTOKEY, userInfo.photo],
-                  ])
-                    .then(() => dispatch(
-                          loginSuccess(
-                            user, token, userInfo.displayName, userInfo.photo,
-                            )),
-                        ));
-          }
-          return dispatch(loginFailure());
-        })
-      .catch(() => dispatch(loginFailure()));
-  };
+  return { type: LOGIN, payload: { user, pass } };
 }
 
 export function logout() {
-  return dispatch => AsyncStorage.multiRemove([USERNAMEKEY, TOKENKEY])
-      .then(dispatch(logoutSuccess()));
+  return { type: LOGOUT };
 }

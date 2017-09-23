@@ -3,16 +3,20 @@ import { AsyncStorage } from 'react-native';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
 import * as reducers from './reducers';
+import sagas from './sagas';
 import ReduxNavigator from './components/navigator';
-import { loginSuccess } from './actions/login';
+import { success } from './actions/login';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const sagaMiddleware = createSagaMiddleware();
 const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+const store = createStoreWithMiddleware(reducer, applyMiddleware(thunk, sagaMiddleware));
+sagaMiddleware.run(sagas);
 
 const USERNAMEKEY = '@MyStore:username';
 const TOKENKEY = '@MyStore:token';
@@ -38,7 +42,7 @@ class Main extends Component {
           const photo = values[PHOTOKEY];
 
           if (username !== null && token !== null) {
-            store.dispatch(loginSuccess(username, token, displayName, photo));
+            store.dispatch(success(username, token, displayName, photo));
           }
         });
   }

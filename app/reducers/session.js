@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as loginActions from '../actions/login';
 
 const initialState = {
   loginState: '',
@@ -9,25 +9,25 @@ const initialState = {
 };
 
 export default function session(state = initialState, action = {}) {
+  console.log(state);
   switch (action.type) {
-    case types.LOGINSUCCESS:
+    case loginActions.SUCCESS:
       return {
         ...state,
         loginState: 'success',
-        username: action.username,
-        token: action.token,
-        displayName: action.displayName,
-        photo: action.photo,
+        username: action.payload.username,
+        token: action.payload.token,
+        displayName: action.payload.displayName,
+        photo: action.payload.photo,
       };
-    case types.LOGINFAILURE:
+    case loginActions.FAILURE:
       return { ...state, loginState: 'failure' };
-    case types.LOGINPROGRESS:
+    case loginActions.FETCHING:
       return { ...state, loginState: 'progress' };
-    case types.LOGOUT:
+    case loginActions.LOGOUT:
       return { ...initialState, loginState: 'logout' };
-    case types.RESETLOGINSTATE:
+    case loginActions.RESET:
       return { ...state, loginState: '' };
-
     default:
       return state;
   }

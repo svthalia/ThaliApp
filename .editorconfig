@@ -1,0 +1,10 @@
+# see http://editorconfig.org
+root = true
+
+[*]
+end_of_line = lf
+
+[*.{js,jsx}]
+charset = utf-8
+indent_style = space
+indent_size = 2
