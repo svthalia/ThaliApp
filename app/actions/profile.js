@@ -1,50 +1,30 @@
-import * as types from './actionTypes';
-import { navigate } from './navigation';
+export const PROFILE = 'PROFILE_PROFILE';
+export const FETCHING = 'PROFILE_FETCHING';
+export const SUCCESS = 'PROFILE_SUCCESS';
+export const FAILURE = 'PROFILE_FAILURE';
 
-import { apiUrl } from '../url';
-
-export function start() {
+export function profile(token, member = 'me') {
   return {
-    type: types.LOADPROFILESTART,
+    type: PROFILE,
+    payload: { token, member },
   };
 }
 
-export function success(profile) {
+export function fetching() {
   return {
-    type: types.LOADPROFILESUCCESS,
-    profile,
+    type: FETCHING,
   };
 }
 
-export function fail() {
+export function success(profileData) {
   return {
-    type: types.LOADPROFILEFAILURE,
+    type: SUCCESS,
+    payload: { profileData },
   };
 }
 
-export function loadProfile(token, member = 'me') {
-  return (dispatch) => {
-    dispatch(start());
-    dispatch(navigate('profile'));
-
-    const data = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`,
-      },
-    };
-
-    return fetch(`${apiUrl}/members/${member}/`, data)
-      .then(
-        response => response.json(),
-      )
-      .then(
-        response => dispatch(success(response)),
-      )
-      .catch(
-        () => dispatch(fail()),
-      );
+export function failure() {
+  return {
+    type: FAILURE,
   };
 }

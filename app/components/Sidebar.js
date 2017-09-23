@@ -9,7 +9,7 @@ import styles from './style/sidebar';
 
 import * as navigationActions from '../actions/navigation';
 import * as loginActions from '../actions/login';
-import { loadProfile } from '../actions/profile';
+import * as profileActions from '../actions/profile';
 
 const background = require('../img/huygens.jpg');
 
@@ -106,7 +106,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   navigate: (scene, newSection = false) => dispatch(navigationActions.navigate(scene, newSection)),
   logout: () => dispatch(loginActions.logout()),
-  loadProfile: token => dispatch(loadProfile(token)),
+  loadProfile: token => dispatch(profileActions.profile(token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

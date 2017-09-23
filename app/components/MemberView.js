@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { url } from '../url';
 import styles from './style/memberView';
 import SquareView from './SquareView';
-import { loadProfile } from '../actions/profile';
+import * as profileActions from '../actions/profile';
 
 const regex = new RegExp(`^(${url}/media/public)/(avatars/[^\\.]+)\\.(jpg|jpeg|png|gif)`);
 
@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProfile: (token, pk) => dispatch(loadProfile(token, pk)),
+  loadProfile: (token, pk) => dispatch(profileActions.profile(token, pk)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberView);
