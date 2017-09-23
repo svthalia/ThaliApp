@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as welcomeActions from '../actions/welcome';
 
 const initialState = {
   eventList: [],
@@ -7,9 +7,9 @@ const initialState = {
 
 export default function welcome(state = initialState, action = {}) {
   switch (action.type) {
-    case types.WELCOME:
+    case welcomeActions.SUCCESS:
       return {
-        eventList: action.eventList,
+        eventList: action.payload.eventList,
         hasLoaded: true,
       };
     default:

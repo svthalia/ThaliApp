@@ -7,7 +7,7 @@ import 'moment/locale/nl';
 import EventDetailCard from './EventDetailCard';
 import LoadingScreen from './LoadingScreen';
 
-import { retrieveShortlist } from '../actions/welcome';
+import * as welcomeActions from '../actions/welcome';
 import { navigate } from '../actions/navigation';
 import styles from './style/welcome';
 
@@ -133,7 +133,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  retrieveShortlist: (token, amount) => dispatch(retrieveShortlist(token, amount)),
+  retrieveShortlist: (token, amount) => dispatch(welcomeActions.welcome(amount, token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
