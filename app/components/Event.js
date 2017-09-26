@@ -42,7 +42,7 @@ class Event extends Component {
       </View>,
       );
 
-    if (event.registration_start !== null || event.registration_end !== null) {
+    if (data.registration_start !== null || data.registration_end !== null) {
       const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:mm');
       const cancelDeadline = Moment(data.cancel_deadline).format('D MMM YYYY, HH:mm');
 
