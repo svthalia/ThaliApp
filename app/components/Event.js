@@ -10,14 +10,6 @@ import MemberView from './MemberView';
 import LoadingScreen from './LoadingScreen';
 import { colors } from '../style';
 
-const REGISTRATION_NOT_NEEDED = -1;
-const REGISTRATION_NOT_YET_OPEN = 0;
-// eslint-disable-next-line no-unused-vars
-const REGISTRATION_OPEN = 1;
-const REGISTRATION_OPEN_NO_CANCEL = 2;
-const REGISTRATION_CLOSED = 3;
-const REGISTRATION_CLOSED_CANCEL_ONLY = 4;
-
 class Event extends Component {
   eventDesc = (data) => {
     const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
@@ -50,7 +42,7 @@ class Event extends Component {
       </View>,
       );
 
-    if (data.status > REGISTRATION_NOT_NEEDED) {
+    if (data.registration_start !== null || data.registration_end !== null) {
       const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:mm');
       const cancelDeadline = Moment(data.cancel_deadline).format('D MMM YYYY, HH:mm');
 
@@ -110,23 +102,33 @@ class Event extends Component {
 
   eventInfo = (event) => {
     let text = '';
-    if (event.status === REGISTRATION_NOT_YET_OPEN) {
-      const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:m');
-      text = `Aanmelden opent ${registrationStart}`;
-    } else if (event.status === REGISTRATION_CLOSED ||
-        event.status === REGISTRATION_CLOSED_CANCEL_ONLY) {
-      text = 'Aanmelden is niet meer mogelijk';
-    } else if (event.status === REGISTRATION_NOT_NEEDED) {
-      text = 'Geen aanmelding vereist';
+
+    const nowDate = new Date();
+    const startRegDate = new Date(event.registration_start);
+    const endRegDate = new Date(event.registration_end);
+    const cancelDeadlineDate = new Date(event.cancel_deadline);
+
+    const regRequired = event.registration_start !== null || event.registration_end !== null;
+    const regStarted = startRegDate <= nowDate;
+    const regAllowed = regRequired && endRegDate > nowDate && regStarted;
+    const afterCancelDeadline = event.cancel_deadline !== null && cancelDeadlineDate <= nowDate;
+
+    if (!regRequired) {
+      text = 'Geen aanmelding vereist.';
       if (event.no_registration_message) {
         text = event.no_registration_message;
       }
+    } else if (!regStarted) {
+      const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:m');
+      text = `Aanmelden opent ${registrationStart}.`;
+    } else if (!regAllowed) {
+      text = 'Aanmelden is niet meer mogelijk.';
     }
 
-    if ((event.status === REGISTRATION_OPEN_NO_CANCEL || event.status === REGISTRATION_CLOSED) &&
-        event.user_registration !== null &&
-        !event.user_registration.is_cancelled && event.fine > 0 &&
-        event.user_registration.queue_position === null) {
+    if (afterCancelDeadline) {
+      if (text.length > 0) {
+        text += ' ';
+      }
       text += `Afmelden is niet meer mogelijk zonder de volledige kosten van €${event.fine} te ` +
         'betalen. Let op: je kunt je hierna niet meer aanmelden.';
     }
@@ -267,7 +269,6 @@ Event.propTypes = {
     organiser: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     map_location: PropTypes.string.isRequired,
-    status: PropTypes.number.isRequired,
     registration_allowed: PropTypes.bool.isRequired,
     has_fields: PropTypes.bool.isRequired,
     registration_start: PropTypes.string,
