@@ -4,6 +4,7 @@ import { AsyncStorage } from 'react-native';
 
 import { apiRequest, url } from '../url';
 import * as loginActions from '../actions/login';
+import * as pushNotificationsActions from '../actions/pushNotifications';
 
 const USERNAMEKEY = '@MyStore:username';
 const TOKENKEY = '@MyStore:token';
@@ -52,6 +53,7 @@ const login = function* login(action) {
     yield put(loginActions.success(
           user, token, displayName, avatar,
       ));
+    yield put(pushNotificationsActions.register(token));
     yield delay(2000);
     yield put(loginActions.reset());
   } catch (error) {
@@ -64,6 +66,7 @@ const login = function* login(action) {
 const logout = function* logout() {
   yield call(AsyncStorage.multiRemove, [USERNAMEKEY, TOKENKEY]);
   yield delay(2000);
+  yield put(pushNotificationsActions.invalidate());
   yield put(loginActions.reset());
 };
 
