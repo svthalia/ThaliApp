@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as profileActions from '../actions/profile';
 
 const initialState = {
   profile: {
@@ -19,19 +19,19 @@ const initialState = {
 
 export default function profile(state = initialState, action = {}) {
   switch (action.type) {
-    case types.LOADPROFILESTART:
+    case profileActions.FETCHING:
       return {
         ...state,
         hasLoaded: false,
       };
-    case types.LOADPROFILESUCCESS:
+    case profileActions.SUCCESS:
       return {
         ...state,
-        profile: action.profile,
+        profile: action.payload.profileData,
         success: true,
         hasLoaded: true,
       };
-    case types.LOADPROFILEFAILURE:
+    case profileActions.FAILURE:
       return {
         ...state,
         success: false,
