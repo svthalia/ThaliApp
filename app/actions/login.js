@@ -9,8 +9,8 @@ export function reset() {
   return { type: RESET };
 }
 
-export function success(username, token, displayName, photo) {
-  return { type: SUCCESS, payload: { username, token, displayName, photo } };
+export function success(username, token, displayName, photo, loginState = 'success') {
+  return { type: SUCCESS, payload: { username, token, displayName, photo, loginState } };
 }
 
 export function fetching() {

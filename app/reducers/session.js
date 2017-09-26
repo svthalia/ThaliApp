@@ -13,7 +13,7 @@ export default function session(state = initialState, action = {}) {
     case loginActions.SUCCESS:
       return {
         ...state,
-        loginState: 'success',
+        loginState: action.payload.loginState,
         username: action.payload.username,
         token: action.payload.token,
         displayName: action.payload.displayName,

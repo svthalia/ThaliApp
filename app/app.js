@@ -42,8 +42,7 @@ class Main extends Component {
           const photo = values[PHOTOKEY];
 
           if (username !== null && token !== null) {
-            store.dispatch(loginActions.success(username, token, displayName, photo));
-            store.dispatch(loginActions.reset());
+            store.dispatch(loginActions.success(username, token, displayName, photo, ''));
           }
         });
   }
