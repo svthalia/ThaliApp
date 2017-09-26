@@ -5,113 +5,113 @@ import { colors } from '../../style';
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    padding: 16,
+    padding: 8,
+  },
+  eventInfo: {
+    padding: 8,
   },
   title: {
-    color: colors.textColour,
     fontFamily: 'sans-serif-medium',
+    color: colors.textColour,
     fontSize: 20,
+    marginBottom: 8,
   },
   subtitle: {
-    color: colors.textColour,
     fontFamily: 'sans-serif-medium',
-    fontSize: 16,
-    fontStyle: 'italic',
-  },
-  name: {
     color: colors.textColour,
-    fontFamily: 'sans-serif-medium',
-    fontSize: 16,
+    fontSize: 14,
   },
-  price: {
-    color: colors.textColour,
-    fontFamily: 'sans-serif-medium',
-  },
-  description: {
-    color: colors.textColour,
-    fontFamily: 'sans-serif-medium',
-    fontStyle: 'italic',
-  },
-  button: {
-    backgroundColor: colors.magenta,
-    borderRadius: 2,
+  overview: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     elevation: 2,
+    borderRadius: 2,
+    padding: 8,
+    height: 100,
   },
-  buttonText: {
+  overviewText: {
     fontFamily: 'sans-serif-medium',
     color: colors.white,
-    padding: 10,
-  },
-  pizzaCard: {
-    elevation: 2,
-    borderRadius: 2,
-  },
-  pizzaDetail: {
-    borderBottomColor: colors.lightGray,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-  },
-  currentOrder: {
-    elevation: 2,
-    borderRadius: 2,
-    padding: 16,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  currentOrderInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  paidStatus: {
-    fontFamily: 'sans-serif-medium',
-    backgroundColor: colors.lightGreen,
-    borderWidth: 1,
-    borderColor: colors.darkGreen,
-    color: colors.darkGreen,
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10,
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  notPaidStatus: {
-    fontFamily: 'sans-serif-medium',
-    backgroundColor: colors.red,
-    borderWidth: 1,
-    borderColor: colors.white,
-    color: colors.white,
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10,
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  finalOrder: {
-    flex: 1,
-    flexDirection: 'row',
-    textAlign: 'center',
-    fontFamily: 'sans-serif-medium',
-    color: colors.textColour,
-    fontSize: 40,
-  },
-  redBackground: {
-    backgroundColor: colors.red,
+    fontSize: 32,
   },
   greenBackground: {
     backgroundColor: colors.lightGreen,
   },
-  whiteText: {
+  redBackground: {
+    backgroundColor: colors.lightRed,
+  },
+  section: {
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  header: {
+    fontFamily: 'sans-serif-medium',
+    color: colors.textColour,
+    fontSize: 14,
+    paddingLeft: 10,
+    paddingTop: 6,
+    paddingBottom: 6,
+  },
+  card: {
+    elevation: 2,
+    borderRadius: 2,
+  },
+  orderStatus: {
+    fontFamily: 'sans-serif-medium',
     color: colors.white,
+    fontSize: 14,
+    padding: 16,
+    borderBottomWidth: 1,
+    borderTopRightRadius: 2,
+    borderTopLeftRadius: 2,
+    margin: 2,
   },
-  greenText: {
-    color: colors.darkGreen,
+  paidStatus: {
+    backgroundColor: colors.lightGreen,
+    borderBottomColor: colors.darkGreen,
   },
-  disabled: {
-    backgroundColor: colors.gray,
+  notPaidStatus: {
+    backgroundColor: colors.lightRed,
+    borderBottomColor: colors.darkRed,
+  },
+  pizzaContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 16,
+    paddingRight: 8,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.dividerGrey,
+  },
+  pizzaInfo: {
+    flex: 1,
+  },
+  pizzaName: {
+    fontFamily: 'sans-serif-medium',
+    color: colors.black,
+    fontSize: 14,
+  },
+  pizzaDescription: {
+    fontFamily: 'sans-serif-medium',
+    color: colors.gray,
+    fontSize: 14,
+    marginTop: 2,
+    marginBottom: 2,
+  },
+  pizzaPrice: {
+    fontFamily: 'sans-serif-medium',
+    color: colors.magenta,
+    fontSize: 14,
+  },
+  button: {
+    backgroundColor: colors.magenta,
+    padding: 8,
+    margin: 8,
+    borderRadius: 2,
+    elevation: 2,
   },
 });
 

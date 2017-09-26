@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
 import 'moment/locale/nl';
 import LoadingScreen from './LoadingScreen';
 
 import { retrievePizzaInfo, cancelOrder, orderPizza } from '../actions/pizza';
 import styles from './style/pizza';
+import { colors } from '../style';
 
 class Pizza extends Component {
   constructor(props) {
@@ -26,93 +28,98 @@ class Pizza extends Component {
     return null;
   };
 
+  getEventInfo = (title, subtitle) => (
+    <View style={styles.eventInfo}>
+      <Text style={styles.title}>Order pizza for {title}</Text>
+      <Text style={styles.subtitle}>{subtitle}</Text>
+    </View>
+  );
+
+  getOverview = (order, pizzaList) => {
+    if (order) {
+      const productInfo = this.getProductFromList(order.product, pizzaList);
+      return (
+        <View
+          style={[styles.overview, order.paid ? styles.greenBackground : styles.redBackground]}
+        >
+          <Text
+            style={styles.overviewText}
+            numberOfLines={3}
+          >{productInfo.name}</Text>
+        </View>
+      );
+    }
+    return <Text style={styles.header}>You did not place an order.</Text>;
+  };
+
   getOrder = (order, pizzaList, hasEnded) => {
     if (order) {
       const productInfo = this.getProductFromList(order.product, pizzaList);
 
-      if (hasEnded) {
-        return (
-          <View>
-            <View
-              style={[
-                styles.currentOrder,
-                order.paid ? styles.greenBackground : styles.redBackground,
-              ]}
-            >
-              <Text
-                style={order.paid ? styles.paidStatus : styles.notPaidStatus}
-              >The order has {order.paid || 'not yet '}been paid for.</Text>
-              <Text
-                style={[
-                  styles.finalOrder,
-                  order.paid ? styles.greenText : styles.whiteText,
-                ]}
-              >{productInfo.name}</Text>
-            </View>
-            <Text style={styles.subtitle}>You can no longer cancel.</Text>
-          </View>
-        );
-      }
       return (
-        <View style={styles.currentOrder}>
-          <Text
-            style={order.paid ? styles.paidStatus : styles.notPaidStatus}
-          >The order has {order.paid || 'not yet '}been paid for.</Text>
-          <View
-            style={styles.currentOrderInfo}
-          >
-            <View>
-              <Text style={styles.name}>{productInfo.name}</Text>
-              <Text style={styles.description}>{productInfo.description}</Text>
-              <Text style={styles.price}>€{productInfo.price}</Text>
-            </View>
-            <View>
-              <TouchableOpacity
-                onPress={() => this.props.cancelOrder(this.props.token)}
-                style={[styles.button, order.paid && styles.disabled]}
-                disabled={order.paid}
-              >
-                <Text style={styles.buttonText}>CANCEL</Text>
-              </TouchableOpacity>
+        <View style={styles.section}>
+          <Text style={styles.header}>Current order</Text>
+          <View style={styles.card}>
+            <Text
+              style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
+            >The order has {order.paid || 'not yet '}been paid for.</Text>
+            <View style={styles.pizzaContainer}>
+              <View style={styles.pizzaInfo}>
+                <Text style={styles.pizzaName}>{productInfo.name}</Text>
+                <Text style={styles.pizzaDescription}>{productInfo.description}</Text>
+                <Text style={styles.pizzaPrice}>€{productInfo.price}</Text>
+              </View>
+              {(!order.paid && !hasEnded) && (
+                <TouchableOpacity
+                  onPress={() => this.props.cancelOrder(this.props.token)}
+                  style={styles.button}
+                >
+                  <Icon
+                    name="delete"
+                    color={colors.white}
+                    size={18}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </View>
       );
-    } else if (hasEnded) {
-      return <Text>You did not place an order.</Text>;
     }
     return null;
   };
 
-  getPizzaList = (pizzaList, hasOrder) => [(
-    hasOrder && <Text
-      key="description"
-      style={styles.title}
-    >Changing your order</Text>
-  ), (
-    <View key="content" style={styles.pizzaCard}>
-      {pizzaList.map(pizza => (
-        <View
-          key={pizza.pk}
-          style={styles.pizzaDetail}
-        >
-          <View>
-            <Text style={styles.name}>{pizza.name}</Text>
-            <Text style={styles.description}>{pizza.description}</Text>
-            <Text style={styles.price}>€{pizza.price}</Text>
-          </View>
-          <View>
+  getPizzaList = (pizzaList, hasOrder) => (
+    <View style={styles.section}>
+      {hasOrder && (
+        <Text style={styles.header}>Changing your order</Text>
+      )}
+      <View style={styles.card}>
+        {pizzaList.map(pizza => (
+          <View
+            key={pizza.pk}
+            style={styles.pizzaContainer}
+          >
+            <View style={styles.pizzaInfo}>
+              <Text style={styles.pizzaName}>{pizza.name}</Text>
+              <Text style={styles.pizzaDescription}>{pizza.description}</Text>
+              <Text style={styles.pizzaPrice}>€{pizza.price}</Text>
+            </View>
             <TouchableOpacity
               onPress={() => this.props.orderPizza(this.props.token, pizza.pk, hasOrder)}
               style={styles.button}
             >
-              <Text style={styles.buttonText}>{hasOrder ? 'MODIFY' : 'ORDER'}</Text>
+              <Icon
+                name="edit"
+                color={colors.white}
+                size={18}
+              />
             </TouchableOpacity>
           </View>
-        </View>
-      ))}
+        ))}
+      </View>
     </View>
-  )];
+  );
 
   handleRefresh = () => {
     this.setState({ refreshing: true });
@@ -124,9 +131,6 @@ class Pizza extends Component {
     if (!this.props.hasLoaded) {
       return <LoadingScreen />;
     } else if (!this.props.success) {
-      return <Text>Something went wrong.</Text>;
-    }
-    if (!this.props.event) {
       return (
         <ScrollView
           refreshControl={
@@ -136,9 +140,28 @@ class Pizza extends Component {
             />
           }
         >
-          <Text
-            style={styles.title}
-          >There is currently no event for which you can order food.</Text>
+          <View style={styles.content}>
+            <Text
+              style={styles.title}
+            >Something went wrong while retrieving pizza info.</Text>
+          </View>
+        </ScrollView>
+      );
+    } else if (!this.props.event) {
+      return (
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.handleRefresh}
+            />
+          }
+        >
+          <View style={styles.content}>
+            <Text
+              style={styles.title}
+            >There is currently no event for which you can order food.</Text>
+          </View>
         </ScrollView>
       );
     }
@@ -169,8 +192,8 @@ class Pizza extends Component {
         }
       >
         <View style={styles.content}>
-          <Text style={styles.title}>Order pizza for {this.props.event.title}</Text>
-          <Text style={styles.subtitle}>{subtitle}</Text>
+          {this.getEventInfo(this.props.event.title, subtitle)}
+          {hasEnded && this.getOverview(this.props.order, this.props.pizzaList)}
           {this.getOrder(this.props.order, this.props.pizzaList, hasEnded)}
           {inFuture || hasEnded || (this.props.order && this.props.order.paid) ||
             this.getPizzaList(this.props.pizzaList, !!this.props.order)}
