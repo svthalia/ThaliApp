@@ -8,7 +8,13 @@ export const apiUrl = `${server}/api/v1`;
 export const pizzaUrl = 'https://pizza.thalia.nu';
 export const tokenSelector = state => state.session.token;
 
-const NO_CONTENT = 204;
+export class ServerError extends Error {
+  constructor(message, response) {
+    super(message);
+    this.name = this.constructor.name;
+    this.response = response;
+  }
+}
 
 export const apiRequest = (route, fetchOpts, params) => {
   let query = '';
@@ -17,18 +23,13 @@ export const apiRequest = (route, fetchOpts, params) => {
       .map(k => `${encodeURIComponent(k)} = ${encodeURIComponent(params[k])}`)
       .join('&')}`;
   }
-  return fetch(`${apiUrl}/${route}/${query}`, fetchOpts).then((response) => {
-    if (response.status === NO_CONTENT) {
-      return {
-        success: response.ok,
-        content: null,
-        status: response.status,
-      };
-    }
-    return response.json().then(json => ({
-      success: response.ok,
-      content: json,
-      status: response.status,
-    }));
-  });
+  return fetch(`${apiUrl}/${route}/${query}`, fetchOpts)
+    .then((response) => {
+      if (response.status >= 400 && response.status <= 500) {
+        throw new ServerError(`Invalid status code: ${response.status}`, response);
+      } else if (response.status === 204) {
+        return {};
+      }
+      return response.json();
+    });
 };

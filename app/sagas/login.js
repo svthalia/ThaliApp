@@ -29,10 +29,7 @@ const login = function* login(action) {
   };
   try {
     let response = yield call(apiRequest, 'token-auth', data);
-    const { token } = response.content;
-    if (!response.success) {
-      throw Error();
-    }
+    const { token } = response;
     data = {
       method: 'GET',
       headers: {
@@ -42,11 +39,8 @@ const login = function* login(action) {
       },
     };
     response = yield call(apiRequest, 'members/me', data);
-    if (!response.success) {
-      throw Error();
-    }
-    const displayName = response.content.display_name;
-    const avatar = response.content.photo === null ? defaultAvatar : response.content.photo;
+    const displayName = response.display_name;
+    const avatar = response.photo === null ? defaultAvatar : response.photo;
     yield call(AsyncStorage.multiSet, [
           [USERNAMEKEY, user],
           [TOKENKEY, token],

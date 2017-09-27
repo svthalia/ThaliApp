@@ -20,23 +20,13 @@ const event = function* event(action) {
   };
 
   try {
-    let response = yield call(apiRequest, `events/${pk}`, data);
-    const eventData = response.content;
-
-    if (!response.success) {
-      throw Error();
-    }
+    const eventData = yield call(apiRequest, `events/${pk}`, data);
 
     const params = {
       status: 'registered',
     };
 
-    response = yield call(apiRequest, `events/${pk}/registrations`, data, params);
-    const eventRegistrations = response.content;
-
-    if (!response.success) {
-      throw Error();
-    }
+    const eventRegistrations = yield call(apiRequest, `events/${pk}/registrations`, data, params);
 
     yield put(eventActions.success(
       eventData,

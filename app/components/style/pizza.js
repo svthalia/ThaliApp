@@ -54,8 +54,9 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
   },
   card: {
-    elevation: 2,
+    backgroundColor: colors.white,
     borderRadius: 2,
+    elevation: 2,
   },
   orderStatus: {
     fontFamily: 'sans-serif-medium',
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 2,
     borderTopLeftRadius: 2,
-    margin: 2,
   },
   paidStatus: {
     backgroundColor: colors.lightGreen,
@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingLeft: 16,
-    paddingRight: 8,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingRight: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
     borderBottomWidth: 1,
     borderBottomColor: colors.dividerGrey,
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   pizzaDescription: {
-    fontFamily: 'sans-serif-medium',
+    fontFamily: 'sans-serif-regular',
     color: colors.gray,
     fontSize: 14,
     marginTop: 2,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.magenta,
     padding: 8,
-    margin: 8,
+    marginLeft: 16,
     borderRadius: 2,
     elevation: 2,
   },
