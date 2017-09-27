@@ -1,17 +1,21 @@
-import * as types from '../actions/actionTypes';
+import * as welcomeActions from '../actions/welcome';
 
 const initialState = {
   eventList: [],
-  hasLoaded: false,
+  loading: true,
 };
 
 export default function welcome(state = initialState, action = {}) {
   switch (action.type) {
-    case types.WELCOME:
+    case welcomeActions.SUCCESS:
       return {
-        eventList: action.eventList,
-        hasLoaded: true,
+        eventList: action.payload.eventList,
+        loading: false,
       };
+    case welcomeActions.FAILURE:
+      return { ...state, loading: false };
+    case welcomeActions.REFRESH:
+      return { ...state, loading: true };
     default:
       return state;
   }

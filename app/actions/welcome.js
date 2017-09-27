@@ -1,33 +1,20 @@
-import { apiUrl } from '../url';
-import * as types from './actionTypes';
+export const REFRESH = 'WELCOME_REFRESH';
+export const SUCCESS = 'WELCOME_SUCCESS';
+export const FAILURE = 'WELCOME_FAILURE';
 
-export function welcome(eventList) {
+export function refresh() {
   return {
-    type: types.WELCOME,
-    eventList,
+    type: REFRESH,
   };
 }
 
-export function retrieveShortlist(token, amount) {
-  return (dispatch) => {
-    const data = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`,
-      },
-    };
-
-    return fetch(`${apiUrl}/events/?limit=${amount}&ordering=start`, data)
-      .then(
-        response => response.json(),
-      )
-      .then(
-        responseJson => dispatch(welcome(responseJson.results)),
-      )
-      .catch(
-        () => dispatch(welcome([])),
-      );
+export function success(eventList) {
+  return {
+    type: SUCCESS,
+    payload: { eventList },
   };
+}
+
+export function failure() {
+  return { type: FAILURE };
 }

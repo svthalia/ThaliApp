@@ -6,6 +6,7 @@ if (__DEV__) { // eslint-disable-line no-undef
 export const url = server;
 export const apiUrl = `${server}/api/v1`;
 export const pizzaUrl = 'https://pizza.thalia.nu';
+export const tokenSelector = state => state.session.token;
 
 export const apiRequest = (route, fetchOpts, params) => {
   let query = '';
