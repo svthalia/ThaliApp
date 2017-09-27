@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
-import * as actions from '../actions/calendar';
+import * as calendarActions from '../actions/calendar';
 import EventCard from './EventCard';
-import LoadingScreen from './LoadingScreen';
 
 import styles from './style/calendar';
 
@@ -115,28 +114,16 @@ const renderItem = (item) => {
 };
 
 class Calendar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: false,
-    };
-  }
-
   componentDidMount() {
     Moment.locale('nl');
   }
 
   handleRefresh = () => {
-    this.setState({ refreshing: true });
-    this.props.retrieveCalendar(this.props.token)
-      .then(() => this.setState({ refreshing: false }));
+    this.props.refresh();
   };
 
   render() {
-    if (!this.props.calendarFetched) {
-      this.props.retrieveCalendar(this.props.token);
-      return <LoadingScreen />;
-    } else if (this.props.eventList.length === 0) {
+    if (this.props.eventList.length === 0 && !this.props.loading) {
       return (
         <View>
           <Text>
@@ -157,7 +144,7 @@ class Calendar extends Component {
           keyExtractor={item => item.dayNumber}
           stickySectionHeadersEnabled
           onRefresh={this.handleRefresh}
-          refreshing={this.state.refreshing}
+          refreshing={this.props.loading}
         />
       </View>
     );
@@ -176,18 +163,17 @@ Calendar.propTypes = {
     registered: PropTypes.bool,
     pizza: PropTypes.bool,
   })).isRequired,
-  calendarFetched: PropTypes.bool.isRequired,
-  retrieveCalendar: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  refresh: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  ...state.calendar,
-  token: state.session.token,
+  eventList: state.calendar.eventList,
+  loading: state.calendar.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  retrieveCalendar: token => dispatch(actions.retrieveCalendar(token)),
+  refresh: () => dispatch(calendarActions.refresh()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

@@ -4,6 +4,7 @@ import loginSaga from './login';
 import eventSaga from './event';
 import profileSaga from './profile';
 import welcomeSaga from './welcome';
+import calendarSaga from './calendar';
 
 const sagas = function* sagas() {
   yield all([
@@ -11,6 +12,7 @@ const sagas = function* sagas() {
     fork(eventSaga),
     fork(profileSaga),
     fork(welcomeSaga),
+    fork(calendarSaga),
   ]);
 };
 
