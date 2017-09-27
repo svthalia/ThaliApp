@@ -2,7 +2,7 @@ import * as welcomeActions from '../actions/welcome';
 
 const initialState = {
   eventList: [],
-  hasLoaded: false,
+  loading: true,
 };
 
 export default function welcome(state = initialState, action = {}) {
@@ -10,8 +10,12 @@ export default function welcome(state = initialState, action = {}) {
     case welcomeActions.SUCCESS:
       return {
         eventList: action.payload.eventList,
-        hasLoaded: true,
+        loading: false,
       };
+    case welcomeActions.FAILURE:
+      return { ...state, loading: false };
+    case welcomeActions.REFRESH:
+      return { ...state, loading: true };
     default:
       return state;
   }

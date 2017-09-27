@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 import EventDetailCard from './EventDetailCard';
-import LoadingScreen from './LoadingScreen';
 
 import * as welcomeActions from '../actions/welcome';
 import { navigate } from '../actions/navigation';
@@ -63,24 +62,12 @@ const mapDispatchToPropsFooter = dispatch => ({
 const FooterComponent = connect(() => ({}), mapDispatchToPropsFooter)(Footer);
 
 class Welcome extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: false,
-    };
-  }
-
   handleRefresh = () => {
-    this.setState({ refreshing: true });
-    this.props.retrieveShortlist(this.props.token, 5)
-      .then(() => this.setState({ refreshing: false }));
+    this.props.refresh();
   };
 
   render() {
-    if (!this.props.hasLoaded) {
-      this.props.retrieveShortlist(this.props.token, 5);
-      return <LoadingScreen />;
-    } else if (this.props.eventList.length === 0) {
+    if (this.props.eventList.length === 0) {
       return (
         <View>
           <Text>
@@ -101,7 +88,7 @@ class Welcome extends Component {
           keyExtractor={event => event.pk}
           stickySectionHeadersEnabled
           onRefresh={this.handleRefresh}
-          refreshing={this.state.refreshing}
+          refreshing={this.props.loading}
           ListFooterComponent={FooterComponent}
         />
       </View>
@@ -121,19 +108,17 @@ Welcome.propTypes = {
     registered: PropTypes.bool,
     pizza: PropTypes.bool,
   })).isRequired,
-  token: PropTypes.string.isRequired,
-  hasLoaded: PropTypes.bool.isRequired,
-  retrieveShortlist: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   eventList: state.welcome.eventList,
-  token: state.session.token,
-  hasLoaded: state.welcome.hasLoaded,
+  loading: state.welcome.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  retrieveShortlist: (token, amount) => dispatch(welcomeActions.welcome(amount, token)),
+  refresh: () => dispatch(welcomeActions.refresh()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

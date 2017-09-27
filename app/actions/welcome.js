@@ -1,11 +1,10 @@
-export const WELCOME = 'WELCOME_WELCOME';
+export const REFRESH = 'WELCOME_REFRESH';
 export const SUCCESS = 'WELCOME_SUCCESS';
 export const FAILURE = 'WELCOME_FAILURE';
 
-export function welcome(amount, token) {
+export function refresh() {
   return {
-    type: WELCOME,
-    payload: { amount, token },
+    type: REFRESH,
   };
 }
 

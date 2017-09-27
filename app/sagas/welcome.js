@@ -1,11 +1,11 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { apiRequest } from '../url';
+import { apiRequest, tokenSelector } from '../url';
 import * as welcomeActions from '../actions/welcome';
+import * as loginActions from '../actions/login';
 
-const welcome = function* welcome(action) {
-  const { token, amount } = action.payload;
-
+const welcome = function* welcome() {
+  const token = yield select(tokenSelector);
   const data = {
     method: 'GET',
     headers: {
@@ -16,7 +16,7 @@ const welcome = function* welcome(action) {
   };
 
   const params = {
-    limit: amount,
+    limit: 5,
     ordering: 'start',
   };
 
@@ -29,7 +29,7 @@ const welcome = function* welcome(action) {
 };
 
 const welcomeSaga = function* eventSaga() {
-  yield takeEvery(welcomeActions.WELCOME, welcome);
+  yield takeEvery([loginActions.SUCCESS, welcomeActions.REFRESH], welcome);
 };
 
 export default welcomeSaga;
