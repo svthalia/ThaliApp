@@ -1,16 +1,21 @@
-import * as types from '../actions/actionTypes';
+import * as calendarActions from '../actions/calendar';
 
 const initialState = {
   eventList: [],
-  calendarFetched: false,
+  loading: true,
 };
 
 export default function calendar(state = initialState, action = {}) {
   switch (action.type) {
-    case types.CALENDARRETREIVED:
-      return { ...state, eventList: action.eventList, calendarFetched: true };
-    case types.CALENDARERROR:
-      return { ...state, calendarFetched: true };
+    case calendarActions.SUCCESS:
+      return {
+        eventList: action.payload.eventList,
+        loading: false,
+      };
+    case calendarActions.FAILURE:
+      return { ...state, loading: false };
+    case calendarActions.REFRESH:
+      return { ...state, loading: true };
     default:
       return { ...state };
   }

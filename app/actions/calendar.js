@@ -1,34 +1,20 @@
-import * as types from './actionTypes';
-import { apiUrl } from '../url';
+export const REFRESH = 'CALENDAR_REFRESH';
+export const SUCCESS = 'CALENDAR_SUCCESS';
+export const FAILURE = 'CALENDAR_FAILURE';
 
-export function calendarRetrieved(eventList) {
+export function refresh() {
   return {
-    type: types.CALENDARRETREIVED,
-    eventList,
+    type: REFRESH,
   };
 }
 
-export function calendarNotRetrieved() {
+export function success(eventList) {
   return {
-    type: types.CALENDARERROR,
+    type: SUCCESS,
+    payload: { eventList },
   };
 }
 
-export function retrieveCalendar(token) {
-  return (dispatch) => {
-    const data = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`,
-      },
-    };
-    return fetch(`${apiUrl}/events/`, data)
-      .then(
-        response => response.json())
-      .then(
-        responseJson => dispatch(calendarRetrieved(responseJson)))
-      .catch(() => dispatch(calendarNotRetrieved()));
-  };
+export function failure() {
+  return { type: FAILURE };
 }
