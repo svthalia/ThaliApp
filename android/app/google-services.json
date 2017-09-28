@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "488731759938",
+    "firebase_url": "https://thalia-493a0.firebaseio.com",
+    "project_id": "thalia-493a0",
+    "storage_bucket": "thalia-493a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488731759938:android:ce90d9e7effcbbfb",
+        "android_client_info": {
+          "package_name": "com.thaliapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488731759938-k103fp2m146qhfsf7s3to9bm43qhcous.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApn30VsmPqjs4N5_kR68tpXzBWSyOxuoM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488731759938:android:e73d72886d6d4f94",
+        "android_client_info": {
+          "package_name": "com.thaliapp.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488731759938-k103fp2m146qhfsf7s3to9bm43qhcous.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApn30VsmPqjs4N5_kR68tpXzBWSyOxuoM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

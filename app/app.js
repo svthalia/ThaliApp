@@ -4,6 +4,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
+import FCM, { FCMEvent } from 'react-native-fcm';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
@@ -11,6 +12,7 @@ import * as reducers from './reducers';
 import sagas from './sagas';
 import ReduxNavigator from './components/navigator';
 import * as loginActions from './actions/login';
+import { register } from './actions/pushNotifications';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const sagaMiddleware = createSagaMiddleware();
@@ -29,6 +31,20 @@ const pairsToObject = (obj, pair) => {
   return obj2;
 };
 
+FCM.on(FCMEvent.Notification, async (notif) => {
+  if (notif.fcm) {
+    FCM.presentLocalNotification({
+      title: notif.fcm.title,
+      body: notif.fcm.body,
+      color: notif.fcm.color,
+      icon: notif.fcm.icon === null ? 'ic_notification' : notif.fcm.icon,
+      action: notif.fcm.action,
+      tag: notif.fcm.tag,
+      show_in_foreground: true,
+    });
+  }
+});
+
 class Main extends Component {
   componentDidMount() {
     Moment.locale('nl');
@@ -43,6 +59,7 @@ class Main extends Component {
 
           if (username !== null && token !== null) {
             store.dispatch(loginActions.success(username, token, displayName, photo, ''));
+            store.dispatch(register(token));
           }
         });
   }
