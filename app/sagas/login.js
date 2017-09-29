@@ -30,9 +30,6 @@ const login = function* login(action) {
   try {
     let response = yield call(apiRequest, 'token-auth', data);
     const { token } = response;
-    if (!token) {
-      throw Error();
-    }
     data = {
       method: 'GET',
       headers: {

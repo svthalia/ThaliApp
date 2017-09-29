@@ -27,6 +27,7 @@ const event = function* event(action) {
     };
 
     const eventRegistrations = yield call(apiRequest, `events/${pk}/registrations`, data, params);
+
     yield put(eventActions.success(
       eventData,
       eventRegistrations,

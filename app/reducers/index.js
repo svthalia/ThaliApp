@@ -4,6 +4,7 @@ import event from './event';
 import calendar from './calendar';
 import welcome from './welcome';
 import profile from './profile';
+import pizza from './pizza';
 
 export {
   session,
@@ -12,4 +13,5 @@ export {
   calendar,
   welcome,
   profile,
+  pizza,
 };

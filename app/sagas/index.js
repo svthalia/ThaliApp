@@ -6,6 +6,7 @@ import profileSaga from './profile';
 import welcomeSaga from './welcome';
 import calendarSaga from './calendar';
 import pushNotificationsSaga from './pushNotifications';
+import pizzaSaga from './pizza';
 
 const sagas = function* sagas() {
   yield all([
@@ -15,6 +16,7 @@ const sagas = function* sagas() {
     fork(welcomeSaga),
     fork(calendarSaga),
     fork(pushNotificationsSaga),
+    fork(pizzaSaga),
   ]);
 };
 

@@ -12,6 +12,10 @@ export const colors = {
   darkGrey: '#373737',
   dividerGrey: 'rgba(0, 0, 0, 0.12)',
   transparent: 'transparent',
+  lightGreen: '#8fcc74',
+  darkGreen: '#81b968',
+  lightRed: '#e05c50',
+  darkRed: '#d15348',
 };
 
 export function create(styles) {

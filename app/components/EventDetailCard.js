@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
+
 import * as actions from '../actions/event';
-import { pizzaUrl } from '../url';
+import { retrievePizzaInfo } from '../actions/pizza';
 
 import styles from './style/eventDetailCard';
 
@@ -48,7 +49,7 @@ const EventDetailCard = props => (
       </TouchableOpacity>
       {props.event.pizza ? (
         <TouchableOpacity
-          onPress={() => Linking.openURL(pizzaUrl)}
+          onPress={() => props.retrievePizzaInfo(props.token)}
           style={styles.button}
         >
           <Text style={styles.orderPizza}>PIZZA</Text>
@@ -80,6 +81,7 @@ EventDetailCard.propTypes = {
   }).isRequired,
   loadEvent: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
+  retrievePizzaInfo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -88,6 +90,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadEvent: (pk, token) => dispatch(actions.event(pk, token)),
+  retrievePizzaInfo: token => dispatch(retrievePizzaInfo(token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventDetailCard);

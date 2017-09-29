@@ -28,7 +28,11 @@ const register = function* register(action) {
     }),
   };
 
-  yield call(apiRequest, 'devices', data);
+  try {
+    yield call(apiRequest, 'devices', data);
+  } catch (err) {
+    // eat error, om nom nom
+  }
 };
 
 const invalidate = function* invalidate() {
