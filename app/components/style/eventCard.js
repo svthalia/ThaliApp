@@ -13,21 +13,28 @@ const styles = StyleSheet.create({
   card: {
     padding: 16,
     borderRadius: 2,
+    backgroundColor: colors.gray,
   },
   registered: {
     backgroundColor: colors.magenta,
   },
-  unregistered: {
-    backgroundColor: colors.gray,
+  partner: {
+    backgroundColor: colors.black,
   },
   eventTitle: {
     fontFamily: 'sans-serif-medium',
     color: colors.white,
   },
+  partnerEventTitle: {
+    color: colors.magenta,
+  },
   eventInfo: {
     fontFamily: 'sans-serif-medium',
     color: colors.white,
     opacity: 0.8,
+  },
+  partnerEventInfo: {
+    color: colors.magenta,
   },
 });
 

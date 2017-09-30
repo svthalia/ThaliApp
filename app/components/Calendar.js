@@ -162,6 +162,8 @@ Calendar.propTypes = {
     price: PropTypes.string,
     registered: PropTypes.bool,
     pizza: PropTypes.bool,
+    partner: PropTypes.bool,
+    url: PropTypes.string,
   })).isRequired,
   loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
