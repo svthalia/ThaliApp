@@ -17,7 +17,18 @@ const calendar = function* calendar() {
 
   try {
     const events = yield call(apiRequest, 'events', data);
-    yield put(calendarActions.success(events));
+    let partnerEvents = [];
+    try {
+      partnerEvents = yield call(apiRequest, 'partners/events', data);
+      partnerEvents = partnerEvents.map(event => ({
+        ...event,
+        pk: -event.pk,
+        partner: true,
+      }));
+    } catch (error) {
+      // Swallow the error
+    }
+    yield put(calendarActions.success(events.concat(partnerEvents)));
   } catch (error) {
     yield put(calendarActions.failure());
   }

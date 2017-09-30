@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -23,12 +23,22 @@ const getEventInfo = (event) => {
 
 const EventCard = props => (
   <TouchableHighlight
-    onPress={() => props.loadEvent(props.event.pk, props.token)}
+    onPress={() => props.loadEvent(props.event, props.token)}
     style={styles.button}
   >
-    <View style={[styles.card, props.event.registered ? styles.registered : styles.unregistered]}>
-      <Text style={styles.eventTitle}>{props.event.title}</Text>
-      <Text style={styles.eventInfo}>{getEventInfo(props.event)}</Text>
+    <View
+      style={[
+        styles.card,
+        props.event.registered ? styles.registered : null,
+        props.event.partner ? styles.partner : null,
+      ]}
+    >
+      <Text style={[styles.eventTitle, props.event.partner ? styles.partnerEventTitle : null]}>
+        {props.event.title}
+      </Text>
+      <Text style={[styles.eventInfo, props.event.partner ? styles.partnerEventInfo : null]}>
+        {getEventInfo(props.event)}
+      </Text>
     </View>
   </TouchableHighlight>
 );
@@ -44,6 +54,8 @@ EventCard.propTypes = {
     pk: PropTypes.number,
     registered: PropTypes.bool,
     pizza: PropTypes.bool,
+    partner: PropTypes.bool,
+    url: PropTypes.string,
   }).isRequired,
   loadEvent: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
@@ -54,7 +66,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadEvent: (pk, token) => dispatch(eventActions.event(pk, token)),
+  loadEvent: (event, token) => {
+    if (event.partner) {
+      Linking.openURL(event.url);
+    } else {
+      dispatch(eventActions.event(event.pk, token));
+    }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventCard);
