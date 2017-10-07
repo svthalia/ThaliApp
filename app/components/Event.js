@@ -8,6 +8,7 @@ import 'moment/locale/nl';
 import styles from './style/event';
 import MemberView from './MemberView';
 import LoadingScreen from './LoadingScreen';
+import ErrorScreen from './ErrorScreen';
 import { colors } from '../style';
 
 class Event extends Component {
@@ -252,9 +253,7 @@ class Event extends Component {
       );
     }
     return (
-      <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
-        <Text>Kon het evenement niet laden...</Text>
-      </ScrollView>
+      <ErrorScreen message="Could not load the event..." />
     );
   }
 }
