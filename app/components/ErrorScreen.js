@@ -6,7 +6,7 @@ import styles from './style/errorScreen';
 
 const smiley = require('../img/smiley.png');
 
-const ErrorScreen = (props) => (
+const ErrorScreen = props => (
   <View
     style={styles.content}
   >
