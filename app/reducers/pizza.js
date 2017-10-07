@@ -2,6 +2,7 @@ import * as pizzaActions from '../actions/pizza';
 
 const initialState = {
   success: false,
+  loading: false,
   hasLoaded: false,
   event: null,
   order: null,
@@ -13,6 +14,7 @@ export default function pizza(state = initialState, action = {}) {
     case pizzaActions.SUCCESS:
       return {
         success: true,
+        loading: false,
         hasLoaded: true,
         event: action.payload.event,
         order: action.payload.order,
@@ -22,12 +24,13 @@ export default function pizza(state = initialState, action = {}) {
       return {
         ...state,
         success: false,
+        loading: false,
         hasLoaded: true,
       };
     case pizzaActions.FETCHING:
       return {
         ...state,
-        hasLoaded: false,
+        loading: true,
       };
     case pizzaActions.CANCEL_SUCCESS:
       return {
