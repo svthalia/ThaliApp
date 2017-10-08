@@ -50,7 +50,7 @@ const login = function* login(action) {
     yield put(loginActions.success(
           user, token, displayName, avatar,
       ));
-    yield put(pushNotificationsActions.register(token));
+    yield put(pushNotificationsActions.register());
     yield delay(2000);
     yield put(loginActions.reset());
   } catch (error) {

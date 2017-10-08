@@ -45,6 +45,10 @@ FCM.on(FCMEvent.Notification, async (notif) => {
   }
 });
 
+FCM.on(FCMEvent.RefreshToken, async () => {
+  store.dispatch(register());
+});
+
 class Main extends Component {
   componentDidMount() {
     Moment.locale('nl');
@@ -59,7 +63,7 @@ class Main extends Component {
 
           if (username !== null && token !== null) {
             store.dispatch(loginActions.success(username, token, displayName, photo, ''));
-            store.dispatch(register(token));
+            store.dispatch(register());
           }
         });
   }

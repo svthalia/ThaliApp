@@ -1,17 +1,17 @@
-import { call, takeEvery } from 'redux-saga/effects';
+import { call, takeEvery, select } from 'redux-saga/effects';
 import { Platform } from 'react-native';
 import FCM from 'react-native-fcm';
 
-import { apiRequest } from '../url';
+import { apiRequest, tokenSelector } from '../url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 
-const register = function* register(action) {
-  const { token } = action.payload;
+const register = function* register() {
+  const token = yield select(tokenSelector);
   let pushToken;
   if (Platform.OS === 'ios') {
+    yield call(FCM.requestPermissions);
     pushToken = yield call(FCM.getFCMToken);
   } else {
-    yield call(FCM.requestPermissions);
     pushToken = yield call(FCM.getFCMToken);
   }
 
