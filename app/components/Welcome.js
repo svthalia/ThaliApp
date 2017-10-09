@@ -70,9 +70,9 @@ class Welcome extends Component {
   };
 
   render() {
-    if (!this.props.hasLoaded) {
+    if (this.props.status === 'initial') {
       return <LoadingScreen />;
-    } else if (!this.props.success) {
+    } else if (this.props.status === 'failure') {
       return (
         <ScrollView
           contentContainerStyle={styles.content}
@@ -135,15 +135,13 @@ Welcome.propTypes = {
   })).isRequired,
   refresh: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
-  hasLoaded: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   eventList: state.welcome.eventList,
   loading: state.welcome.loading,
-  success: state.welcome.success,
-  hasLoaded: state.welcome.hasLoaded,
+  status: state.welcome.status,
 });
 
 const mapDispatchToProps = dispatch => ({

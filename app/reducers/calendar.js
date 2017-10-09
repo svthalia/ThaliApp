@@ -3,8 +3,7 @@ import * as calendarActions from '../actions/calendar';
 const initialState = {
   eventList: [],
   loading: true,
-  success: true,
-  hasLoaded: false,
+  status: 'initial',
 };
 
 export default function calendar(state = initialState, action = {}) {
@@ -13,15 +12,13 @@ export default function calendar(state = initialState, action = {}) {
       return {
         eventList: action.payload.eventList,
         loading: false,
-        success: true,
-        hasLoaded: true,
+        status: 'success',
       };
     case calendarActions.FAILURE:
       return {
         ...state,
         loading: false,
-        success: false,
-        hasLoaded: true,
+        status: 'failure',
       };
     case calendarActions.REFRESH:
       return { ...state, loading: true };

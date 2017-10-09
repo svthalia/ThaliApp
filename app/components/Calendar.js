@@ -125,9 +125,9 @@ class Calendar extends Component {
   };
 
   render() {
-    if (!this.props.hasLoaded) {
+    if (this.props.status === 'initial') {
       return <LoadingScreen />;
-    } else if (!this.props.success) {
+    } else if (this.props.status === 'failure') {
       return (
         <ScrollView
           contentContainerStyle={styles.content}
@@ -190,16 +190,14 @@ Calendar.propTypes = {
     url: PropTypes.string,
   })).isRequired,
   loading: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
-  success: PropTypes.bool.isRequired,
-  hasLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   eventList: state.calendar.eventList,
   loading: state.calendar.loading,
-  success: state.calendar.success,
-  hasLoaded: state.calendar.hasLoaded,
+  status: state.calendar.status,
 });
 
 const mapDispatchToProps = dispatch => ({
