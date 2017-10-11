@@ -9,7 +9,7 @@ import styles from './style/memberView';
 import SquareView from './SquareView';
 import * as profileActions from '../actions/profile';
 
-const regex = new RegExp(`^(${url}/media/public)/(avatars/[^\\.]+)\\.(jpg|jpeg|png|gif)`);
+const regex = new RegExp(`^(${url}/media/public)/(avatars/[^\\.]+)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$`);
 
 const MemberView = (props) => {
   let photo = props.member.photo;
