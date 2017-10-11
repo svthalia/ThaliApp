@@ -104,7 +104,7 @@ class Pizza extends Component {
               style={styles.button}
             >
               <Icon
-                name="edit"
+                name="add-shopping-cart"
                 color={colors.white}
                 size={18}
               />
