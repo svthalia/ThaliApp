@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { apiRequest, tokenSelector } from '../url';
-import * as types from '../actions/actionTypes';
+import * as navigationActions from '../actions/navigation';
 import * as calendarActions from '../actions/calendar';
 
 const calendar = function* calendar() {
@@ -37,7 +37,7 @@ const calendar = function* calendar() {
 const calendarSaga = function* eventSaga() {
   yield takeEvery([
     calendarActions.REFRESH,
-    action => action.type === types.NAVIGATE && action.scene === 'eventList',
+    action => action.type === navigationActions.NAVIGATE && action.payload.scene === 'eventList',
   ], calendar);
 };
 

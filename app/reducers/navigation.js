@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import * as navigationActions from '../actions/navigation';
 import * as loginActions from '../actions/login';
 
 const initialState = {
@@ -18,7 +18,7 @@ export default function navigate(state = initialState, action = {}) {
         loggedIn: true,
       };
     }
-    case types.BACK: {
+    case navigationActions.BACK: {
       if (drawerOpen) {
         return {
           ...state,
@@ -32,17 +32,17 @@ export default function navigate(state = initialState, action = {}) {
         currentScene: scene,
       };
     }
-    case types.NAVIGATE: {
-      if (action.scene === currentScene) {
+    case navigationActions.NAVIGATE: {
+      if (action.payload.scene === currentScene) {
         return {
           ...state,
           drawerOpen: false,
         };
-      } else if (action.newSection) {
+      } else if (action.payload.newSection) {
         return {
           ...state,
           previousScenes: [],
-          currentScene: action.scene,
+          currentScene: action.payload.scene,
           drawerOpen: false,
         };
       }
@@ -52,14 +52,14 @@ export default function navigate(state = initialState, action = {}) {
           ...previousScenes,
           currentScene,
         ],
-        currentScene: action.scene,
+        currentScene: action.payload.scene,
         drawerOpen: false,
       };
     }
-    case types.OPENDRAWER: {
+    case navigationActions.OPENDRAWER: {
       return {
         ...state,
-        drawerOpen: action.drawerOpen,
+        drawerOpen: action.payload.drawerOpen,
       };
     }
     case loginActions.LOGOUT: {
