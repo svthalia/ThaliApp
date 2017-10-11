@@ -1,7 +1,0 @@
-export const NAVIGATE = 'NAVIGATE';
-export const BACK = 'BACK';
-export const OPENDRAWER = 'OPENDRAWER';
-export const CALENDARRETREIVED = 'CALENDARRETREIVED';
-export const CALENDARERROR = 'CALENDARERROR';
-export const RESETLOGINSTATE = 'RESETLOGINSTATE';
-export const WELCOME = 'WELCOME';

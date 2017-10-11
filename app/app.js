@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import FCM, { FCMEvent } from 'react-native-fcm';
 import Moment from 'moment';
@@ -14,10 +13,9 @@ import ReduxNavigator from './components/navigator';
 import * as loginActions from './actions/login';
 import { register } from './actions/pushNotifications';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const sagaMiddleware = createSagaMiddleware();
 const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer, applyMiddleware(thunk, sagaMiddleware));
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(sagas);
 
 const USERNAMEKEY = '@MyStore:username';
