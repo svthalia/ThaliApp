@@ -3,6 +3,7 @@ import * as welcomeActions from '../actions/welcome';
 const initialState = {
   eventList: [],
   loading: true,
+  status: 'initial',
 };
 
 export default function welcome(state = initialState, action = {}) {
@@ -11,9 +12,14 @@ export default function welcome(state = initialState, action = {}) {
       return {
         eventList: action.payload.eventList,
         loading: false,
+        status: 'success',
       };
     case welcomeActions.FAILURE:
-      return { ...state, loading: false };
+      return {
+        ...state,
+        loading: false,
+        status: 'failure',
+      };
     case welcomeActions.REFRESH:
       return { ...state, loading: true };
     default:

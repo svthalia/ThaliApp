@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Moment from 'moment';
 
 import LoadingScreen from './LoadingScreen';
+import ErrorScreen from './ErrorScreen';
 
 import { back } from '../actions/navigation';
 
@@ -108,11 +109,7 @@ class Profile extends Component {
     this.scrollY = new Animated.Value(0);
   }
 
-  render() {
-    if (!this.props.hasLoaded) {
-      return <LoadingScreen />;
-    }
-
+  getAppbar = () => {
     const headerHeight = this.props.success ? this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
@@ -148,6 +145,52 @@ class Profile extends Component {
     }) : (HEADER_MIN_HEIGHT - 24) / 2;
 
     return (
+      <Animated.View style={[styles.header, { height: headerHeight }]}>
+        <Animated.Image
+          style={[
+            styles.backgroundImage,
+            {
+              opacity: imageOpacity,
+              transform: [{ translateY: imageTranslate }],
+            },
+          ]}
+          source={{ uri: this.props.profile.photo }}
+        >
+          <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
+        </Animated.Image>
+        <Animated.View style={styles.appBar}>
+          <TouchableOpacity
+            onPress={this.props.back}
+          >
+            <Icon
+              name="arrow-back"
+              style={styles.icon}
+              size={24}
+            />
+          </TouchableOpacity>
+          <Animated.Text
+            style={[styles.title, {
+              left: textPosLeft,
+              bottom: textPosBottom,
+              fontSize: textSize,
+            }]}
+          >{this.props.success ? this.props.profile.display_name : 'Profiel'}</Animated.Text>
+        </Animated.View>
+      </Animated.View>
+    );
+  };
+
+  render() {
+    if (!this.props.hasLoaded) {
+      return (
+        <View style={styles.container}>
+          <LoadingScreen />
+          {this.getAppbar()}
+        </View>
+      );
+    }
+
+    return (
       <View style={styles.container}>
         {
           this.props.success ? (
@@ -164,44 +207,11 @@ class Profile extends Component {
             </ScrollView>
             ) : (
               <View style={styles.container}>
-                <Text style={styles.errorText}>
-                  Ophalen profiel mislukt.
-                </Text>
+                <ErrorScreen message="Sorry! We couldn't load any data." />
               </View>
             )
         }
-        <Animated.View style={[styles.header, { height: headerHeight }]}>
-          <Animated.Image
-            style={[
-              styles.backgroundImage,
-              {
-                opacity: imageOpacity,
-                transform: [{ translateY: imageTranslate }],
-              },
-            ]}
-            source={{ uri: this.props.profile.photo }}
-          >
-            <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
-          </Animated.Image>
-          <Animated.View style={styles.appBar}>
-            <TouchableOpacity
-              onPress={this.props.back}
-            >
-              <Icon
-                name="arrow-back"
-                style={styles.icon}
-                size={24}
-              />
-            </TouchableOpacity>
-            <Animated.Text
-              style={[styles.title, {
-                left: textPosLeft,
-                bottom: textPosBottom,
-                fontSize: textSize,
-              }]}
-            >{this.props.success ? this.props.profile.display_name : 'Profiel'}</Animated.Text>
-          </Animated.View>
-        </Animated.View>
+        {this.getAppbar()}
       </View>
     );
   }

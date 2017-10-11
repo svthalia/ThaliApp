@@ -4,6 +4,10 @@ import { TOTAL_BAR_HEIGHT } from './navigator';
 import { colors } from '../../style';
 
 const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   sectionList: {
     backgroundColor: colors.background,
     height: Dimensions.get('window').height - TOTAL_BAR_HEIGHT,

@@ -6,19 +6,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
 import 'moment/locale/nl';
 import LoadingScreen from './LoadingScreen';
+import ErrorScreen from './ErrorScreen';
 
 import { retrievePizzaInfo, cancelOrder, orderPizza } from '../actions/pizza';
 import styles from './style/pizza';
 import { colors } from '../style';
 
 class Pizza extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: false,
-    };
-  }
-
   getProductFromList = (pk, pizzaList) => {
     for (let i = 0; i < pizzaList.length; i += 1) {
       if (pizzaList[i].pk === pk) {
@@ -122,9 +116,7 @@ class Pizza extends Component {
   );
 
   handleRefresh = () => {
-    this.setState({ refreshing: true });
     this.props.retrievePizzaInfo(this.props.token);
-    this.setState({ refreshing: false });
   };
 
   render() {
@@ -135,16 +127,13 @@ class Pizza extends Component {
         <ScrollView
           refreshControl={
             <RefreshControl
-              refreshing={this.state.refreshing}
+              refreshing={this.props.loading}
               onRefresh={this.handleRefresh}
             />
           }
+          contentContainerStyle={styles.content}
         >
-          <View style={styles.content}>
-            <Text
-              style={styles.title}
-            >Something went wrong while retrieving pizza info.</Text>
-          </View>
+          <ErrorScreen message="Sorry! We couldn't load any data." />
         </ScrollView>
       );
     } else if (!this.props.event) {
@@ -152,16 +141,15 @@ class Pizza extends Component {
         <ScrollView
           refreshControl={
             <RefreshControl
-              refreshing={this.state.refreshing}
+              refreshing={this.props.loading}
               onRefresh={this.handleRefresh}
             />
           }
+          contentContainerStyle={styles.content}
         >
-          <View style={styles.content}>
-            <Text
-              style={styles.title}
-            >There is currently no event for which you can order food.</Text>
-          </View>
+          <Text
+            style={styles.title}
+          >There is currently no event for which you can order food.</Text>
         </ScrollView>
       );
     }
@@ -186,7 +174,7 @@ class Pizza extends Component {
       <ScrollView
         refreshControl={
           <RefreshControl
-            refreshing={this.state.refreshing}
+            refreshing={this.props.loading}
             onRefresh={this.handleRefresh}
           />
         }
@@ -205,6 +193,7 @@ class Pizza extends Component {
 
 Pizza.propTypes = {
   success: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
   event: PropTypes.shape({
     start: PropTypes.string.isRequired,
@@ -239,7 +228,8 @@ Pizza.defaultProps = {
 
 const mapStateToProps = state => ({
   success: state.pizza.success,
-  hasLoaded: state.pizza.success,
+  loading: state.pizza.loading,
+  hasLoaded: state.pizza.hasLoaded,
   event: state.pizza.event,
   order: state.pizza.order,
   pizzaList: state.pizza.pizzaList,

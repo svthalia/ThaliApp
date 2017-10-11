@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, SectionList } from 'react-native';
+import { Text, View, SectionList, ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
 import * as calendarActions from '../actions/calendar';
 import EventCard from './EventCard';
+import LoadingScreen from './LoadingScreen';
+import ErrorScreen from './ErrorScreen';
 
 import styles from './style/calendar';
 
@@ -123,17 +125,39 @@ class Calendar extends Component {
   };
 
   render() {
-    if (this.props.eventList.length === 0 && !this.props.loading) {
+    if (this.props.status === 'initial') {
+      return <LoadingScreen />;
+    } else if (this.props.status === 'failure') {
       return (
-        <View>
-          <Text>
-            No events found!
-          </Text>
-        </View>
+        <ScrollView
+          contentContainerStyle={styles.content}
+          refreshControl={(
+            <RefreshControl
+              onRefresh={this.handleRefresh}
+              refreshing={this.props.loading}
+            />
+          )}
+        >
+          <ErrorScreen message="Sorry! We couldn't load any data." />
+        </ScrollView>
+      );
+    } else if (this.props.eventList.length === 0) {
+      return (
+        <ScrollView
+          contentContainerStyle={styles.content}
+          refreshControl={(
+            <RefreshControl
+              onRefresh={this.handleRefresh}
+              refreshing={this.props.loading}
+            />
+          )}
+        >
+          <ErrorScreen message="No events found!" />
+        </ScrollView>
       );
     }
     return (
-      <View>
+      <View style={styles.content}>
         <SectionList
           style={styles.sectionList}
           renderItem={renderItem}
@@ -166,12 +190,14 @@ Calendar.propTypes = {
     url: PropTypes.string,
   })).isRequired,
   loading: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   eventList: state.calendar.eventList,
   loading: state.calendar.loading,
+  status: state.calendar.status,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -4,6 +4,10 @@ import { TOTAL_BAR_HEIGHT } from './navigator';
 import { colors } from '../../style';
 
 const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   day: {
     flex: 1,
     flexDirection: 'row',

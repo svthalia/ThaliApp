@@ -1,10 +1,12 @@
 import * as profileActions from '../actions/profile';
 
+import { defaultProfileImage } from '../url';
+
 const initialState = {
   profile: {
     pk: -1,
     display_name: '',
-    photo: '',
+    photo: defaultProfileImage,
     profile_description: '',
     birthday: '',
     starting_year: -1,

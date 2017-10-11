@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, SectionList, TouchableOpacity } from 'react-native';
+import { View, Text, SectionList, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
+
 import EventDetailCard from './EventDetailCard';
+import LoadingScreen from './LoadingScreen';
+import ErrorScreen from './ErrorScreen';
 
 import * as welcomeActions from '../actions/welcome';
 import { navigate } from '../actions/navigation';
@@ -67,17 +70,39 @@ class Welcome extends Component {
   };
 
   render() {
-    if (this.props.eventList.length === 0) {
+    if (this.props.status === 'initial') {
+      return <LoadingScreen />;
+    } else if (this.props.status === 'failure') {
       return (
-        <View>
-          <Text>
-            No events found!
-          </Text>
-        </View>
+        <ScrollView
+          contentContainerStyle={styles.content}
+          refreshControl={(
+            <RefreshControl
+              onRefresh={this.handleRefresh}
+              refreshing={this.props.loading}
+            />
+          )}
+        >
+          <ErrorScreen message="Sorry! We couldn't load any data." />
+        </ScrollView>
+      );
+    } else if (this.props.eventList.length === 0) {
+      return (
+        <ScrollView
+          contentContainerStyle={styles.content}
+          refreshControl={(
+            <RefreshControl
+              onRefresh={this.handleRefresh}
+              refreshing={this.props.loading}
+            />
+          )}
+        >
+          <ErrorScreen message="No events found!" />
+        </ScrollView>
       );
     }
     return (
-      <View>
+      <View style={styles.content}>
         <SectionList
           style={styles.sectionList}
           renderItem={item => <EventDetailCard event={item.item} />}
@@ -110,11 +135,13 @@ Welcome.propTypes = {
   })).isRequired,
   refresh: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   eventList: state.welcome.eventList,
   loading: state.welcome.loading,
+  status: state.welcome.status,
 });
 
 const mapDispatchToProps = dispatch => ({
