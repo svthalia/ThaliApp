@@ -3956,7 +3956,7 @@ prompt@^0.2.14:
     utile "0.2.x"
     winston "0.8.x"
 
-prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -4077,9 +4077,11 @@ react-native-linear-gradient@^2.0.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-snackbar-component@^1.0.3:
+"react-native-snackbar-component@https://github.com/WKuipers/React-Native-SnackBar-Component.git":
   version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-native-snackbar-component/-/react-native-snackbar-component-1.0.7.tgz#3298629df424e7c90190d4d4f64dde421d857933"
+  resolved "https://github.com/WKuipers/React-Native-SnackBar-Component.git#29b56cf855a16b8722ba06fbbe08db3eb2726f3c"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-vector-icons@^4.0.1:
   version "4.4.2"
@@ -4089,9 +4091,9 @@ react-native-vector-icons@^4.0.1:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native@0.49.2:
-  version "0.49.2"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.49.2.tgz#d40503cee172ad4c74f91a9115a1b11c54c21888"
+react-native@0.49.3:
+  version "0.49.3"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.49.3.tgz#0ca459ee49f9c59e8326b2ced9e34c59333a2f26"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
