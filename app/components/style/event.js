@@ -14,36 +14,40 @@ const styles = create({
   },
   titleText: {
     marginBottom: 16,
+    fontSize: 20,
+    color: colors.darkGrey,
     android: {
       fontFamily: 'sans-serif-medium',
     },
     ios: {
       fontFamily: 'System',
-      fontWeight: '500',
+      fontWeight: '600',
     },
-    fontSize: 20,
-    color: colors.darkGrey,
   },
   infoHolder: {
     flexDirection: 'row',
   },
   infoText: {
     flex: 1,
-    android: {
-      fontFamily: 'sans-serif-medium',
-    },
-    ios: {
-      fontFamily: 'System',
-      fontWeight: '500',
-    },
     fontSize: 14,
     lineHeight: 22.0,
     color: colors.darkGrey,
     width: '50%',
     paddingRight: 8,
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
   },
   infoValueText: {
     flex: 1,
+    fontSize: 14,
+    lineHeight: 22.0,
+    color: colors.darkGrey,
+    width: '50%',
     android: {
       fontFamily: 'sans-serif',
     },
@@ -51,10 +55,6 @@ const styles = create({
       fontFamily: 'System',
       fontWeight: '300',
     },
-    fontSize: 14,
-    lineHeight: 22.0,
-    color: colors.darkGrey,
-    width: '50%',
   },
   registrationText: {
     marginTop: 16,
@@ -78,7 +78,7 @@ const styles = create({
     },
     ios: {
       fontFamily: 'System',
-      fontWeight: '500',
+      fontWeight: '600',
     },
     fontSize: 14,
     color: colors.darkGrey,

@@ -113,6 +113,7 @@ const ReduxNavigator = (props) => {
             />
           </TouchableOpacity>
           <Text style={styles.title}>{sceneToTitle(currentScene)}</Text>
+          <View style={styles.rightView} />
         </View>)}
       {sceneToComponent(currentScene)}
       <SnackBar visible={loginState === 'success'} textMessage={'Login success'} />

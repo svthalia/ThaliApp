@@ -1,9 +1,9 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 
 import { TOTAL_BAR_HEIGHT } from './navigator';
-import { colors } from '../../style';
+import { colors, create } from '../../style';
 
-const styles = StyleSheet.create({
+const styles = create({
   content: {
     flex: 1,
     backgroundColor: colors.background,
@@ -16,7 +16,13 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     backgroundColor: colors.background,
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 16,
     color: colors.textColour,
     padding: 16,
@@ -28,7 +34,13 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   footerText: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     color: colors.darkMagenta,
   },

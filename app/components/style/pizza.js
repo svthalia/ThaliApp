@@ -1,8 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { colors, create } from '../../style';
 
-import { colors } from '../../style';
-
-const styles = StyleSheet.create({
+const styles = create({
   content: {
     flex: 1,
     padding: 8,
@@ -11,7 +9,13 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   title: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.textColour,
     fontSize: 20,
     marginBottom: 8,
@@ -31,7 +35,13 @@ const styles = StyleSheet.create({
     height: 100,
   },
   overviewText: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.white,
     fontSize: 32,
   },
@@ -46,7 +56,13 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   header: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.textColour,
     fontSize: 14,
     paddingLeft: 10,
@@ -59,7 +75,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   orderStatus: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.white,
     fontSize: 14,
     padding: 16,
@@ -90,19 +112,37 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pizzaName: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.black,
     fontSize: 14,
   },
   pizzaDescription: {
-    fontFamily: 'sans-serif-regular',
+    android: {
+      fontFamily: 'sans-serif-regular',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '300',
+    },
     color: colors.gray,
     fontSize: 14,
     marginTop: 2,
     marginBottom: 2,
   },
   pizzaPrice: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.magenta,
     fontSize: 14,
   },

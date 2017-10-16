@@ -31,11 +31,13 @@ class Login extends Component {
           <TextInput
             style={styles.input}
             placeholder="Gebruikersnaam"
+            autoCapitalize="none"
             onChangeText={username => this.setState({ username })}
           />
           <TextInput
             style={styles.input}
             placeholder="Wachtwoord"
+            autoCapitalize="none"
             secureTextEntry
             onChangeText={password => this.setState({ password })}
             onSubmitEditing={() => { login(this.state.username, this.state.password); }}

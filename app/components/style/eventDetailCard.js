@@ -1,34 +1,59 @@
-import { StyleSheet } from 'react-native';
+import { colors, create } from '../../style';
 
-import { colors } from '../../style';
-
-const styles = StyleSheet.create({
+const styles = create({
   card: {
     backgroundColor: colors.white,
-    borderRadius: 2,
+    borderRadius: 4,
     elevation: 2,
     padding: 16,
     marginTop: 5,
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
+    ios: {
+      borderRadius: 4,
+      borderColor: colors.lightGray,
+      borderStyle: 'solid',
+      borderWidth: 0.5,
+    },
+    android: {
+      borderRadius: 2,
+    },
   },
   eventTitle: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     lineHeight: 24,
     color: colors.black,
     opacity: 0.8,
   },
   eventInfo: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     lineHeight: 24,
     color: colors.black,
     opacity: 0.5,
   },
   description: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     lineHeight: 24,
     color: colors.black,
@@ -44,13 +69,25 @@ const styles = StyleSheet.create({
     marginRight: 28,
   },
   moreInfo: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     color: colors.black,
     opacity: 0.5,
   },
   orderPizza: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     color: colors.darkMagenta,
   },

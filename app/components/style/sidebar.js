@@ -1,8 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { colors, create } from '../../style';
 
-import { colors } from '../../style';
-
-const styles = StyleSheet.create({
+const styles = create({
   sidebar: {
     backgroundColor: colors.white,
     flex: 1,
@@ -33,7 +31,13 @@ const styles = StyleSheet.create({
   },
   nameField: {
     color: colors.white,
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
   },
   buttonList: {

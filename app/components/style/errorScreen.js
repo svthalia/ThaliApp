@@ -1,8 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { colors, create } from '../../style';
 
-import { colors } from '../../style';
-
-const styles = StyleSheet.create({
+const styles = create({
   content: {
     flex: 1,
     alignItems: 'center',
@@ -15,7 +13,13 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   text: {
-    fontFamily: 'sans-serif-regular',
+    android: {
+      fontFamily: 'sans-serif-regular',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '500',
+    },
     fontSize: 18,
     color: colors.textColour,
     textAlign: 'center',
