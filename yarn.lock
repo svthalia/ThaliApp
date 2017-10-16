@@ -4035,9 +4035,9 @@ react-native-drawer@^2.3.0:
     prop-types "^15.5.8"
     tween-functions "^1.0.1"
 
-react-native-fcm@^9.6.2:
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/react-native-fcm/-/react-native-fcm-9.6.2.tgz#df1b9b04809289eca062e399fe1b177a11267be9"
+react-native-fcm@^10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-fcm/-/react-native-fcm-10.0.2.tgz#4220e8297f2907c8c434fb1daa35ae50bd175a4a"
 
 react-native-git-upgrade@^0.2.7:
   version "0.2.7"
