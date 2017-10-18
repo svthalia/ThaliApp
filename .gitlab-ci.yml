@@ -13,9 +13,14 @@ before_script:
     - yarn install
 
 stages:
-    - lint
+    - validate
 
 eslint:
-    stage: lint
+    stage: validate
     script:
         - yarn ci-lint
+
+jest:
+    stage: validate
+    script:
+        - yarn jest

@@ -10,8 +10,11 @@
   "jest": {
     "preset": "react-native",
     "collectCoverage": true,
+    "collectCoverageFrom": [
+      "app/**/*.js"
+    ],
     "coverageReporters": [
-      "text-summary"
+      "text", "text-summary"
     ],
     "modulePaths": [
       ".yarn/"
