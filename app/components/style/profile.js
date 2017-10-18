@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
     color: colors.gray,
     fontFamily: 'sans-serif-medium',
   },
+  url: {
+    textDecorationLine: 'underline',
+  },
   sectionHeader: {
     backgroundColor: colors.background,
     fontFamily: 'sans-serif-medium',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, Text, View, Animated, TouchableOpacity } from 'react-native';
+import { Linking, ScrollView, Text, View, Animated, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -62,7 +62,12 @@ const getPersonalInfo = (profile) => {
         {profileData.map((item, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
             <Text style={styles.description}>{item.title}</Text>
-            <Text style={styles.data}>{item.value}</Text>
+            <Text
+              style={item.title === 'Website' ? [styles.data, styles.url] : styles.data}
+              onPress={item.title === 'Website' ? () => Linking.openURL(`${item.value}`) : null}
+            >
+              {item.value}
+            </Text>
           </View>
         ))}
       </View>,
