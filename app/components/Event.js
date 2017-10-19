@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View, RefreshControl, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -10,6 +10,9 @@ import MemberView from './MemberView';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
 import { colors } from '../style';
+
+import * as eventActions from '../actions/event';
+import * as registrationActions from '../actions/registration';
 
 class Event extends Component {
   eventDesc = (data) => {
@@ -76,6 +79,8 @@ class Event extends Component {
         let registrationState;
         if (data.user_registration.is_late_cancellation) {
           registrationState = 'Je bent afgemeld na de afmelddeadline';
+        } else if (data.user_registration.is_cancelled) {
+          registrationState = 'Je bent afgemeld';
         } else if (data.user_registration.queue_position === null) {
           registrationState = 'Je bent aangemeld';
         } else if (data.user_registration.queue_position > 0) {
@@ -141,41 +146,58 @@ class Event extends Component {
   };
 
   // eslint-disable-next-line arrow-body-style
-  eventActions = () => {
+  eventActions = (event) => {
+    const nowDate = new Date();
+    const startRegDate = new Date(event.registration_start);
+    const endRegDate = new Date(event.registration_end);
+
+    const regRequired = event.registration_start !== null || event.registration_end !== null;
+    const regStarted = startRegDate <= nowDate;
+    const regAllowed = regRequired && endRegDate > nowDate &&
+                       regStarted && event.registration_allowed;
+
     // Needed once registration on server implemented
-    // if (event.registration_allowed) {
-    //   if ((event.user_registration === null || event.user_registration.is_cancelled) &&
-    //     (event.status === REGISTRATION_OPEN || event.status === REGISTRATION_OPEN_NO_CANCEL)) {
-    //     const text = event.max_participants < event.num_participants ?
-    //                  'Aanmelden' : 'Zet me op de wachtlijst';
-    //     return (
-    //       <View style={styles.registrationActions}>
-    //         <Button color={colors.magenta} title={text} onPress={() => {}} />
-    //       </View>
-    //     );
-    //   } else if (event.user_registration && !event.user_registration.is_cancelled &&
-    //     event.status !== REGISTRATION_NOT_NEEDED && event.status !== REGISTRATION_NOT_YET_OPEN) {
-    //     if ((event.status === REGISTRATION_OPEN || event.status === REGISTRATION_OPEN_NO_CANCEL)
-    //       && event.user_registration && !event.user_registration.is_cancelled
-    //       && event.has_fields) {
-    //       return (
-    //         <View style={styles.registrationActions}>
-    //           <Button
-    //             color={colors.magenta} title="Aanmelding bijwerken" onPress={() => {}}
-    //           />
-    //           <View style={styles.secondButtonMargin}>
-    //             <Button color={colors.magenta} title="Afmelden" onPress={() => {}} />
-    //           </View>
-    //         </View>
-    //       );
-    //     }
-    //     return (
-    //       <View style={styles.registrationActions}>
-    //         <Button color={colors.magenta} title="Afmelden" onPress={() => {}} />
-    //       </View>
-    //     );
-    //   }
-    // }
+    if (regAllowed) {
+      if (event.user_registration === null || event.user_registration.is_cancelled) {
+        const text = event.max_participants && event.max_participants > event.num_participants ?
+                     'Aanmelden' : 'Zet me op de wachtlijst';
+        return (
+          <View style={styles.registrationActions}>
+            <Button
+              color={colors.magenta}
+              title={text}
+              onPress={() => this.props.register(event.pk)}
+            />
+          </View>
+        );
+      } else if (event.user_registration && !event.user_registration.is_cancelled &&
+                 regRequired && regStarted) {
+        if (regStarted && event.user_registration && !event.user_registration.is_cancelled &&
+            event.has_fields) {
+          return (
+            <View style={styles.registrationActions}>
+              <Button
+                color={colors.magenta}
+                title="Aanmelding bijwerken"
+                onPress={() => this.props.fields(event.user_registration.pk)}
+              />
+              <View style={styles.secondButtonMargin}>
+                <Button
+                  color={colors.magenta}
+                  title="Afmelden"
+                  onPress={() => this.props.cancel(event.user_registration.pk)}
+                />
+              </View>
+            </View>
+          );
+        }
+        return (
+          <View style={styles.registrationActions}>
+            <Button color={colors.magenta} title="Afmelden" onPress={() => this.props.cancel(event.user_registration.pk)} />
+          </View>
+        );
+      }
+    }
 
     return (<View />);
   };
@@ -230,14 +252,27 @@ class Event extends Component {
     return (<View />);
   };
 
+  handleRefresh = () => {
+    this.props.refresh(this.props.data.pk);
+  };
+
   render() {
-    if (!this.props.hasLoaded) {
+    if (this.props.status === 'initial') {
       return <LoadingScreen />;
     }
 
-    if (this.props.success) {
+    if (this.props.status === 'success') {
       return (
-        <ScrollView backgroundColor={colors.background} contentContainerStyle={styles.eventView}>
+        <ScrollView
+          backgroundColor={colors.background}
+          contentContainerStyle={styles.eventView}
+          refreshControl={(
+            <RefreshControl
+              refreshing={this.props.loading}
+              onRefresh={this.handleRefresh}
+            />
+          )}
+        >
           <Image
             style={styles.locationImage}
             source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.props.data.map_location}&zoom=13&size=450x250&markers=${this.props.data.map_location}` }}
@@ -253,7 +288,18 @@ class Event extends Component {
       );
     }
     return (
-      <ErrorScreen message="Could not load the event..." />
+      <ScrollView
+        backgroundColor={colors.background}
+        contentContainerStyle={styles.flex}
+        refreshControl={(
+          <RefreshControl
+            refreshing={this.props.loading}
+            onRefresh={this.handleRefresh}
+          />
+        )}
+      >
+        <ErrorScreen message="Could not load the event..." />
+      </ScrollView>
     );
   }
 }
@@ -278,6 +324,7 @@ Event.propTypes = {
     price: PropTypes.string,
     fine: PropTypes.string,
     user_registration: PropTypes.shape({
+      pk: PropTypes.number,
       registered_on: PropTypes.string,
       queue_position: PropTypes.number,
       is_cancelled: PropTypes.bool,
@@ -290,15 +337,26 @@ Event.propTypes = {
     member: PropTypes.number,
     name: PropTypes.string.isRequired,
   })).isRequired,
-  success: PropTypes.bool.isRequired,
-  hasLoaded: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  refresh: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
+  fields: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: state.event.data,
   registrations: state.event.registrations,
-  success: state.event.success,
-  hasLoaded: state.event.hasLoaded,
+  status: state.event.status,
+  loading: state.event.loading,
 });
 
-export default connect(mapStateToProps, () => ({}))(Event);
+const mapDispatchToProps = dispatch => ({
+  refresh: pk => dispatch(eventActions.event(pk)),
+  register: event => dispatch(registrationActions.register(event)),
+  cancel: registration => dispatch(registrationActions.cancel(registration)),
+  fields: registration => dispatch(registrationActions.retrieveFields(registration)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Event);

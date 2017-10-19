@@ -1,0 +1,127 @@
+import { call, put, select, takeEvery } from 'redux-saga/effects';
+
+import { apiRequest, tokenSelector } from '../url';
+
+import * as eventActions from '../actions/event';
+import * as navigationActions from '../actions/navigation';
+import * as registrationActions from '../actions/registration';
+
+
+const eventSelector = state => state.event.data.pk;
+
+
+const register = function* register(action) {
+  const { event } = action.payload;
+  const token = yield select(tokenSelector);
+
+  yield put(eventActions.fetching());
+
+  const data = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  };
+
+  try {
+    const registration = yield call(apiRequest, `events/${event}/registrations`, data);
+
+    yield put(eventActions.event(event));
+    if (registration.fields) {
+      yield put(registrationActions.retrieveFields(registration.pk));
+    }
+  } catch (error) {
+    yield put(eventActions.failure());
+  }
+};
+
+const update = function* update(action) {
+  const { registration, fields } = action.payload;
+  const token = yield select(tokenSelector);
+
+  yield put(eventActions.fetching());
+  yield put(navigationActions.back());
+
+  const body = {};
+
+  Object.keys(fields).forEach((key) => {
+    body[`fields[${key}]`] = fields[key];
+  });
+
+  const data = {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+    body: JSON.stringify(body),
+  };
+
+  try {
+    yield call(apiRequest, `registrations/${registration}`, data);
+    yield put(eventActions.done());
+  } catch (error) {
+    yield put(eventActions.failure());
+  }
+};
+
+const cancel = function* cancel(action) {
+  const { registration } = action.payload;
+  const token = yield select(tokenSelector);
+
+  yield put(eventActions.fetching());
+
+  const data = {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  };
+
+  try {
+    yield call(apiRequest, `registrations/${registration}`, data);
+  } catch (error) {
+    // Swallow error for now
+  }
+  const event = yield select(eventSelector);
+  yield put(eventActions.event(event));
+};
+
+const fields = function* fields(action) {
+  const { registration } = action.payload;
+  const token = yield select(tokenSelector);
+
+  yield put(eventActions.fetching());
+
+  const data = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  };
+
+  try {
+    const response = yield call(apiRequest, `registrations/${registration}`, data);
+    yield put(registrationActions.showFields(registration, response.fields));
+    yield put(navigationActions.navigate('registration'));
+    yield put(eventActions.done());
+  } catch (error) {
+    yield put(eventActions.failure());
+  }
+};
+
+const registrationSaga = function* registrationSaga() {
+  yield takeEvery(registrationActions.REGISTER, register);
+  yield takeEvery(registrationActions.UPDATE, update);
+  yield takeEvery(registrationActions.CANCEL, cancel);
+  yield takeEvery(registrationActions.FIELDS, fields);
+};
+
+export default registrationSaga;
