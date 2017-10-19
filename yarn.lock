@@ -4079,7 +4079,7 @@ react-native-linear-gradient@^2.0.0:
 
 "react-native-snackbar-component@https://github.com/WKuipers/React-Native-SnackBar-Component.git":
   version "1.0.7"
-  resolved "https://github.com/WKuipers/React-Native-SnackBar-Component.git#29b56cf855a16b8722ba06fbbe08db3eb2726f3c"
+  resolved "https://github.com/WKuipers/React-Native-SnackBar-Component.git#8115a040f411b6ef57b22373bb407bc00c291c8f"
   dependencies:
     prop-types "^15.6.0"
 
