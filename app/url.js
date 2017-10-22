@@ -21,7 +21,7 @@ export const apiRequest = (route, fetchOpts, params) => {
   let query = '';
   if (params !== null && params === Object(params)) {
     query = `?${Object.keys(params)
-      .map(k => `${encodeURIComponent(k)} = ${encodeURIComponent(params[k])}`)
+      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
       .join('&')}`;
   }
   return fetch(`${apiUrl}/${route}/${query}`, fetchOpts)
