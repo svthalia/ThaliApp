@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
-import 'moment/locale/nl';
 
 import * as actions from '../actions/event';
 import { retrievePizzaInfo } from '../actions/pizza';
@@ -12,7 +11,6 @@ import styles from './style/eventDetailCard';
 import { colors } from '../style';
 
 const getInfo = (event) => {
-  Moment.locale('nl');
   const start = Moment(event.start);
   const end = Moment(event.end);
 

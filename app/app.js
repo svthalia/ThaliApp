@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { AsyncStorage, Linking, Platform } from 'react-native';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import FCM, { FCMEvent } from 'react-native-fcm';
+import locale from 'react-native-locale-detector';
 import Moment from 'moment';
 import 'moment/locale/nl';
-import { I18nextProvider } from 'react-i18next';
 
 import * as reducers from './reducers';
 
@@ -52,8 +53,16 @@ FCM.on(FCMEvent.RefreshToken, async () => {
 });
 
 class Main extends Component {
+  constructor() {
+    super();
+    if (locale.startsWith('nl')) {
+      Moment.locale(locale);
+    } else {
+      Moment.locale('en');
+    }
+  }
+
   componentDidMount() {
-    Moment.locale('nl');
     AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY])
       .then(
         (result) => {

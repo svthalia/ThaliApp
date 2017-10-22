@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Text, View, SectionList, ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
-import 'moment/locale/nl';
 
 import * as calendarActions from '../actions/calendar';
 import EventCard from './EventCard';
@@ -118,10 +117,6 @@ const renderItem = (item) => {
 };
 
 class Calendar extends Component {
-  componentDidMount() {
-    Moment.locale('nl');
-  }
-
   handleRefresh = () => {
     this.props.refresh();
   };

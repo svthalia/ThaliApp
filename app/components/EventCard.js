@@ -10,7 +10,6 @@ import * as eventActions from '../actions/event';
 import styles from './style/eventCard';
 
 const getEventInfo = (event) => {
-  Moment.locale('nl');
   if (event.start === null && event.end === null) {
     return event.location;
   } else if (event.start === null) {

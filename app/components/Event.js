@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, Button, TouchableHighlight, Platform, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
-import 'moment/locale/nl';
 
 import styles, { memberSize } from './style/event';
 import MemberView from './MemberView';
