@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
+import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import styles from './style/errorScreen';
@@ -15,12 +16,13 @@ const ErrorScreen = props => (
       style={styles.image}
     />
     <Text style={styles.text}>{props.message}</Text>
-    <Text style={styles.text}>Try again later.</Text>
+    <Text style={styles.text}>{props.t('Try again later.')}</Text>
   </View>
 );
 
 ErrorScreen.propTypes = {
   message: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default ErrorScreen;
+export default translate('errorScreen')(ErrorScreen);

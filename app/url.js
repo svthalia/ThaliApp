@@ -1,4 +1,4 @@
-import locale from 'react-native-locale-detector'
+import locale from 'react-native-locale-detector';
 
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
@@ -22,6 +22,9 @@ export class ServerError extends Error {
 
 export const apiRequest = (route, fetchOpts, params) => {
   const requestOptions = fetchOpts;
+  if (!requestOptions.headers) {
+    requestOptions.headers = {};
+  }
   requestOptions.headers['Accept-Language'] = locale;
 
   let query = '';

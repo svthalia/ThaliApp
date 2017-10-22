@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, SectionList, ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Moment from 'moment';
+import locale from 'react-native-locale-detector';
 
 import * as calendarActions from '../actions/calendar';
 import EventCard from './EventCard';
@@ -28,7 +30,7 @@ const addEventToSection = (sections, date, event) => {
   if (!(day in sections[sectionKey].data)) {
     sections[sectionKey].data[day] = {
       dayNumber: day,
-      dayOfWeek: date.format('dd'),
+      dayOfWeek: locale.startsWith('nl') ? date.format('dd') : date.format('ddd'),
       events: [],
     };
   }
@@ -41,7 +43,7 @@ const addEventToSection = (sections, date, event) => {
  * Any event that spans multiple days will be split into separate events.
  * The list of sections is sorted at the end.
  */
-const eventListToSections = (eventList) => {
+const eventListToSections = (eventList, t) => {
   const sections = {};
   for (let i = 0; i < eventList.length; i += 1) {
     const start = Moment(eventList[i].start);
@@ -57,7 +59,7 @@ const eventListToSections = (eventList) => {
       // Add start day
       addEventToSection(sections, start, {
         ...eventList[i],
-        title: `${eventList[i].title} (dag 1/${daySpan})`,
+        title: `${eventList[i].title} (${t('day')} 1/${daySpan})`,
         end: null,
       });
 
@@ -67,13 +69,13 @@ const eventListToSections = (eventList) => {
           ...eventList[i],
           start: null,
           end: null,
-          title: `${eventList[i].title} (dag ${j}/${daySpan})`,
+          title: `${eventList[i].title} (${t('day')} ${j}/${daySpan})`,
         });
       }
       // Add end day
       addEventToSection(sections, end, {
         ...eventList[i],
-        title: `${eventList[i].title} (dag ${daySpan}/${daySpan})`,
+        title: `${eventList[i].title} (${t('day')} ${daySpan}/${daySpan})`,
         start: null,
       });
     }
@@ -135,7 +137,7 @@ class Calendar extends Component {
             />
           )}
         >
-          <ErrorScreen message="Sorry! We couldn't load any data." />
+          <ErrorScreen message={this.props.t('Sorry, we couldn\'t load any data.')} />
         </ScrollView>
       );
     } else if (this.props.eventList.length === 0) {
@@ -149,7 +151,7 @@ class Calendar extends Component {
             />
           )}
         >
-          <ErrorScreen message="No events found!" />
+          <ErrorScreen message={this.props.t('No events found!')} />
         </ScrollView>
       );
     }
@@ -161,7 +163,7 @@ class Calendar extends Component {
           renderSectionHeader={
             itemHeader => <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
           }
-          sections={eventListToSections(this.props.eventList)}
+          sections={eventListToSections(this.props.eventList, this.props.t)}
           keyExtractor={item => item.dayNumber}
           stickySectionHeadersEnabled
           onRefresh={this.handleRefresh}
@@ -189,6 +191,7 @@ Calendar.propTypes = {
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -201,4 +204,4 @@ const mapDispatchToProps = dispatch => ({
   refresh: () => dispatch(calendarActions.refresh()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('calendar')(Calendar));

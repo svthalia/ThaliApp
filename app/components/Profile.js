@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Moment from 'moment';
@@ -16,8 +17,8 @@ import { back } from '../actions/navigation';
 import { STATUSBAR_HEIGHT } from './style/standardHeader';
 import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/profile';
 
-const getDescription = profile => ([
-  <Text style={[styles.sectionHeader, styles.marginTop]} key="title">{`Over ${profile.display_name}`}</Text>,
+const getDescription = (profile, t) => ([
+  <Text style={[styles.sectionHeader, styles.marginTop]} key="title">{`${t('About')} ${profile.display_name}`}</Text>,
   <View style={styles.card} key="content">
     <Text
       style={[
@@ -25,26 +26,26 @@ const getDescription = profile => ([
         styles.item,
         styles.profileText,
         !profile.profile_description && styles.italics]}
-    >{profile.profile_description || 'Dit lid heeft nog geen beschrijving geschreven'}</Text>
+    >{profile.profile_description || t('This member has not written a description yet.')}</Text>
   </View>,
 ]);
 
-const getPersonalInfo = (profile) => {
+const getPersonalInfo = (profile, t) => {
   const profileInfo = {
     starting_year: {
-      title: 'Cohort',
+      title: t('Cohort'),
       display: x => x,
     },
     programme: {
-      title: 'Studie',
-      display: x => (x === 'computingscience' ? 'Computing science' : 'Information sciences'),
+      title: t('Study programme'),
+      display: x => (x === 'computingscience' ? t('Computing science') : t('Information sciences')),
     },
     website: {
-      title: 'Website',
+      title: t('Website'),
       display: x => x,
     },
     birthday: {
-      title: 'Verjaardag',
+      title: t('Birthday'),
       display: x => Moment(x).format('D MMMM YYYY'),
     },
   };
@@ -61,7 +62,7 @@ const getPersonalInfo = (profile) => {
 
   if (profileData) {
     return [
-      <Text style={styles.sectionHeader} key="title">Persoonlijke gegevens</Text>,
+      <Text style={styles.sectionHeader} key="title">{t('Personal information')}</Text>,
       <View style={styles.card} key="content">
         {profileData.map((item, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
@@ -80,10 +81,10 @@ const getPersonalInfo = (profile) => {
   return <View />;
 };
 
-const getAchievements = (profile) => {
+const getAchievements = (profile, t) => {
   if (profile.achievements.length) {
     return [
-      <Text style={styles.sectionHeader} key="title">Verdiensten voor Thalia</Text>,
+      <Text style={styles.sectionHeader} key="title">{t('Achievements for Thalia')}</Text>,
       <View style={styles.card} key="content">
         {profile.achievements.map((achievement, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={achievement.name}>
@@ -97,7 +98,7 @@ const getAchievements = (profile) => {
               if (period.role) {
                 text = `${period.role}: `;
               } else if (period.chair) {
-                text = 'Voorzitter: ';
+                text = `${t('Chair')}: `;
               }
               text += `${start} - ${end}`;
 
@@ -233,7 +234,7 @@ class Profile extends Component {
       return (
         <View style={styles.container}>
           <StandardHeader />
-          <ErrorScreen message="Sorry! We couldn't load any data." />
+          <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
         </View>
       );
     }
@@ -294,6 +295,7 @@ Profile.propTypes = {
   success: PropTypes.bool.isRequired,
   back: PropTypes.func.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -306,4 +308,4 @@ const mapDispatchToProps = dispatch => ({
   back: () => dispatch(back()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('profile')(Profile));

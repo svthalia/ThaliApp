@@ -11,6 +11,7 @@ import {
   Keyboard,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import styles from './style/login';
 import { url } from '../url';
 
@@ -29,7 +30,7 @@ class Login extends Component {
   }
 
   render() {
-    const { login } = this.props;
+    const { login, t } = this.props;
     return (
       <KeyboardAvoidingView
         style={styles.rootWrapper}
@@ -43,13 +44,13 @@ class Login extends Component {
           <View>
             <TextInput
               style={styles.input}
-              placeholder="Gebruikersnaam"
+              placeholder={t('Username')}
               autoCapitalize="none"
               onChangeText={username => this.setState({ username })}
             />
             <TextInput
               style={styles.input}
-              placeholder="Wachtwoord"
+              placeholder={t('Password')}
               autoCapitalize="none"
               secureTextEntry
               onChangeText={password => this.setState({ password })}
@@ -62,10 +63,10 @@ class Login extends Component {
             style={styles.blackbutton} onPress={() =>
             login(this.state.username, this.state.password)}
           >
-            <Text style={styles.loginText}>INLOGGEN</Text>
+            <Text style={styles.loginText}>{t('LOGIN')}</Text>
           </TouchableHighlight>
           <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
-            Wachtwoord vergeten?
+            {t('Forgot password?')}
           </Text>
         </DismissKeyboardView>
       </KeyboardAvoidingView>
@@ -75,6 +76,7 @@ class Login extends Component {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => state.session;
@@ -85,4 +87,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(translate(['login'])(Login));

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Alert, Text, View, Image, TouchableHighlight, ImageBackground } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../style';
 import styles from './style/sidebar';
@@ -14,10 +15,10 @@ import * as profileActions from '../actions/profile';
 const background = require('../img/huygens.jpg');
 
 const logoutPrompt = logout => () => Alert.alert(
-  'Log out?',
-  'Are you sure you want to log out?',
-  [{ text: 'Cancel' },
-    { text: 'Log out', onPress: logout },
+  this.props.t('Log out?'),
+  this.props.t('Are you sure you want to log out?'),
+  [{ text: this.props.t('No') },
+    { text: this.props.t('Yes'), onPress: logout },
   ],
 );
 
@@ -26,21 +27,21 @@ const Sidebar = (props) => {
     {
       onPress: () => props.navigate('welcome', true),
       iconName: 'home',
-      text: 'Welkom',
+      text: props.t('Welcome'),
       style: {},
       scene: 'welcome',
     },
     {
       onPress: () => props.navigate('eventList', true),
       iconName: 'event',
-      text: 'Agenda',
+      text: props.t('Calendar'),
       style: {},
       scene: 'eventList',
     },
     {
       onPress: logoutPrompt(props.logout),
       iconName: 'lock',
-      text: 'Uitloggen',
+      text: props.t('Logout'),
       style: {
         borderTopColor: colors.lightGray,
         borderTopWidth: 1,
@@ -102,6 +103,7 @@ Sidebar.propTypes = {
   loadProfile: PropTypes.func.isRequired,
   // eslint-disable-next-line react/no-unused-prop-types
   navigate: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -117,4 +119,4 @@ const mapDispatchToProps = dispatch => ({
   loadProfile: token => dispatch(profileActions.profile(token)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('sidebar')(Sidebar));

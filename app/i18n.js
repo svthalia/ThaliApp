@@ -9,7 +9,7 @@ i18n
   .init({
     nsSeparator: false,
     keySeparator: false,
-    fallbackLng: 'nl',
+    fallbackLng: false,
     resources: locales,
     interpolation: {
       escapeValue: false, // not needed for react!!
