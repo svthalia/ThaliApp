@@ -6,8 +6,11 @@ import createSagaMiddleware from 'redux-saga';
 import FCM, { FCMEvent } from 'react-native-fcm';
 import Moment from 'moment';
 import 'moment/locale/nl';
+import { I18nextProvider } from 'react-i18next';
 
 import * as reducers from './reducers';
+
+import i18n from './i18n';
 import sagas from './sagas';
 import ReduxNavigator from './components/navigator';
 import * as loginActions from './actions/login';
@@ -91,9 +94,11 @@ class Main extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <ReduxNavigator />
-      </Provider>
+      <I18nextProvider i18n={i18n}>
+        <Provider store={store}>
+          <ReduxNavigator />
+        </Provider>
+      </I18nextProvider>
     );
   }
 }

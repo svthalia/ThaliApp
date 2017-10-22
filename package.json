@@ -12,7 +12,8 @@
     "lint:ci": "eslint *.js app",
     "test": "jest",
     "test:watch": "jest --watch",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "locales:collect": "node collect-locales.js"
   },
   "jest": {
     "preset": "react-native",
@@ -29,6 +30,8 @@
     ]
   },
   "dependencies": {
+    "i18next": "^10.0.3",
+    "i18next-react-native-language-detector": "^1.0.2",
     "moment": "^2.18.1",
     "prop-types": "^15.5.8",
     "react": "16.2.0",
@@ -37,6 +40,8 @@
     "react-native-fcm": "^10.0.2",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-snackbar": "^0.4.3",
+    "react-i18next": "^6.0.6",
+    "react-native-locale-detector": "^1.0.1",
     "react-native-vector-icons": "^4.0.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
@@ -53,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-react-native": "^2.2.1",
+    "i18next-scanner": "^2.0.0",
     "jest": "^19.0.2",
     "react-native-cli": "^2.0.1",
     "react-native-git-upgrade": "^0.2.7",
