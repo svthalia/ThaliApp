@@ -22,7 +22,7 @@ const welcome = function* welcome() {
 
   try {
     const response = yield call(apiRequest, 'events', data, params);
-    yield put(welcomeActions.success(response));
+    yield put(welcomeActions.success(response.results));
   } catch (error) {
     yield put(welcomeActions.failure());
   }
