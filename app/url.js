@@ -1,3 +1,5 @@
+import locale from 'react-native-locale-detector'
+
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
@@ -19,13 +21,17 @@ export class ServerError extends Error {
 }
 
 export const apiRequest = (route, fetchOpts, params) => {
+  const requestOptions = fetchOpts;
+  requestOptions.headers['Accept-Language'] = locale;
+
   let query = '';
   if (params !== null && params === Object(params)) {
     query = `?${Object.keys(params)
       .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
       .join('&')}`;
   }
-  return fetch(`${apiUrl}/${route}/${query}`, fetchOpts)
+
+  return fetch(`${apiUrl}/${route}/${query}`, requestOptions)
     .then((response) => {
       if (response.status >= 400 && response.status <= 500) {
         throw new ServerError(`Invalid status code: ${response.status}`, response);
