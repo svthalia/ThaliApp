@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Linking, ScrollView, Text, View, Animated, TouchableOpacity } from 'react-native';
+import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -112,6 +112,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.scrollY = new Animated.Value(0);
+    this.textHeight = Platform.OS === 'android' ? 27 : 22;
   }
 
   getAppbar = () => {
@@ -133,21 +134,39 @@ class Profile extends Component {
 
     const textSize = this.props.success ? this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [30, 30, 20],
+      outputRange: [30, 30, Platform.OS === 'android' ? 20 : 18],
       extrapolate: 'clamp',
     }) : 20;
 
     const textPosLeft = this.props.success ? this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [20, 20, 60],
+      outputRange: [20, 20, Platform.OS === 'android' ? 76 : 20],
       extrapolate: 'clamp',
     }) : 60;
 
     const textPosBottom = this.props.success ? this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [20, 20, (HEADER_MIN_HEIGHT - 24) / 2],
+      outputRange: [20, 20, (HEADER_MIN_HEIGHT - this.textHeight) / 2],
       extrapolate: 'clamp',
     }) : (HEADER_MIN_HEIGHT - 24) / 2;
+
+    let textStyle = {
+      fontSize: textSize,
+    };
+    if (Platform.OS === 'android') {
+      textStyle = {
+        ...textStyle,
+        left: textPosLeft,
+        bottom: textPosBottom,
+      };
+    } else {
+      textStyle = {
+        ...textStyle,
+        bottom: textPosBottom,
+        width: '100%',
+        textAlign: 'center',
+      };
+    }
 
     return (
       <Animated.View style={[styles.header, { height: headerHeight }]}>
@@ -174,11 +193,7 @@ class Profile extends Component {
             />
           </TouchableOpacity>
           <Animated.Text
-            style={[styles.title, {
-              left: textPosLeft,
-              bottom: textPosBottom,
-              fontSize: textSize,
-            }]}
+            style={[styles.title, textStyle]}
           >{this.props.success ? this.props.profile.display_name : 'Profiel'}</Animated.Text>
         </Animated.View>
       </Animated.View>

@@ -1,8 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { colors, create } from '../../style';
 
-import { colors } from '../../style';
-
-const styles = StyleSheet.create({
+const styles = create({
   loginText: {
     color: colors.white,
     fontWeight: 'bold',
@@ -23,12 +21,26 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 48,
+    ios: {
+      backgroundColor: colors.white,
+      borderRadius: 4,
+      padding: 8,
+      marginBottom: 8,
+      marginLeft: 16,
+      marginRight: 16,
+    },
   },
   forgotpass: {
     alignSelf: 'center',
     color: colors.darkGrey,
     marginBottom: 10,
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     height: 25,
   },

@@ -1,9 +1,9 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 
 import { TOTAL_BAR_HEIGHT } from './navigator';
-import { colors } from '../../style';
+import { colors, create } from '../../style';
 
-const styles = StyleSheet.create({
+const styles = create({
   content: {
     flex: 1,
     backgroundColor: colors.background,
@@ -33,6 +33,13 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height - TOTAL_BAR_HEIGHT,
   },
   sectionHeader: {
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     backgroundColor: colors.background,
     fontFamily: 'sans-serif-medium',
     fontSize: 20,

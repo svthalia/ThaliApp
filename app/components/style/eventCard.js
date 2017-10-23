@@ -1,8 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { colors, create } from '../../style';
 
-import { colors } from '../../style';
-
-const styles = StyleSheet.create({
+const styles = create({
   button: {
     marginTop: 8,
     marginBottom: 8,
@@ -22,14 +20,26 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
   },
   eventTitle: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.white,
   },
   partnerEventTitle: {
     color: colors.magenta,
   },
   eventInfo: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.white,
     opacity: 0.8,
   },
