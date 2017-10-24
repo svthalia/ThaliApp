@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image, TouchableHighlight } from 'react-native';
+import { Text, View, Image, TouchableHighlight, ImageBackground } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -49,7 +49,7 @@ const Sidebar = (props) => {
         onPress={() => props.loadProfile(props.token)}
         style={styles.headerButton}
       >
-        <Image
+        <ImageBackground
           source={background}
           style={styles.headerImage}
           resizeMode="cover"
@@ -61,7 +61,7 @@ const Sidebar = (props) => {
             resizeMode="cover"
           />
           <Text style={styles.nameField}>{props.displayName}</Text>
-        </Image>
+        </ImageBackground>
       </TouchableHighlight>
       <View style={styles.buttonList}>
         {buttons.map(button => (
