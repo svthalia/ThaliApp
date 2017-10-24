@@ -11,8 +11,10 @@ const styles = create({
   sectionList: {
     backgroundColor: colors.background,
     height: Dimensions.get('window').height - TOTAL_BAR_HEIGHT,
-    paddingTop: 11,
-    paddingBottom: 11,
+    android: {
+      paddingTop: 11,
+      paddingBottom: 11,
+    },
   },
   sectionHeader: {
     backgroundColor: colors.background,
