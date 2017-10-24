@@ -150,12 +150,14 @@ class Profile extends Component {
 
     const textPosBottom = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [20, 20, (HEADER_MIN_HEIGHT - this.textHeight - STATUSBAR_HEIGHT) / 2],
+      outputRange: [16, 16, (HEADER_MIN_HEIGHT - this.textHeight - STATUSBAR_HEIGHT) / 2],
       extrapolate: 'clamp',
     });
 
     let textStyle = {
       fontSize: textSize,
+    };
+    let appBarBorderStyle = {
     };
     if (Platform.OS === 'android') {
       textStyle = {
@@ -169,6 +171,16 @@ class Profile extends Component {
         bottom: textPosBottom,
         width: '100%',
         textAlign: 'center',
+      };
+
+      const appBarBorder = this.props.success ? this.scrollY.interpolate({
+        inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+        outputRange: [0, 0, 1],
+        extrapolate: 'clamp',
+      }) : (HEADER_MIN_HEIGHT - 24) / 2;
+
+      appBarBorderStyle = {
+        borderBottomWidth: appBarBorder,
       };
     }
 
@@ -186,7 +198,7 @@ class Profile extends Component {
         >
           <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
         </Animated.Image>
-        <Animated.View style={styles.appBar}>
+        <Animated.View style={[styles.appBar, appBarBorderStyle]}>
           <TouchableOpacity
             onPress={this.props.back}
           >
