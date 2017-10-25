@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Text, ViewPropTypes, StyleSheet, TouchableHighlight } from 'react-native';
+import { ImageBackground, Text, ViewPropTypes, StyleSheet, TouchableHighlight } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 
@@ -25,10 +25,10 @@ const MemberView = (props) => {
         style={styles.image}
         onPress={() => props.loadProfile(props.token, props.member.member)}
       >
-        <Image style={styles.image} source={{ uri: photo }}>
+        <ImageBackground style={styles.image} source={{ uri: photo }}>
           <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
           <Text style={styles.nameText}>{props.member.name}</Text>
-        </Image>
+        </ImageBackground>
       </TouchableHighlight>
     </SquareView>
   );
