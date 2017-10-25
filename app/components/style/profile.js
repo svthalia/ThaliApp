@@ -27,14 +27,13 @@ const styles = create({
       borderRadius: 2,
     },
   },
-  item: {
-    padding: 16,
+  profileText: {
     ios: {
       borderRadius: 4,
     },
-    android: {
-      borderRadius: 2,
-    },
+  },
+  item: {
+    padding: 16,
   },
   borderTop: {
     borderTopColor: colors.dividerGrey,

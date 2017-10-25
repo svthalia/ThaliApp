@@ -20,6 +20,7 @@ const getDescription = profile => ([
       style={[
         styles.data,
         styles.item,
+        styles.profileText,
         !profile.profile_description && styles.italics]}
     >{profile.profile_description || 'Dit lid heeft nog geen beschrijving geschreven'}</Text>
   </View>,
