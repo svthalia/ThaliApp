@@ -159,8 +159,8 @@ class Event extends Component {
     // Needed once registration on server implemented
     if (regAllowed) {
       if (event.user_registration === null || event.user_registration.is_cancelled) {
-        const text = event.max_participants && event.max_participants > event.num_participants ?
-                     'Aanmelden' : 'Zet me op de wachtlijst';
+        const text = event.max_participants && event.max_participants <= event.num_participants ?
+                     'Zet me op de wachtlijst' : 'Aanmelden';
         return (
           <View style={styles.registrationActions}>
             <Button

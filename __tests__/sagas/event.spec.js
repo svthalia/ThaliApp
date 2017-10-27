@@ -1,8 +1,9 @@
+import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import { apiRequest } from '../../app/url';
+import { apiRequest, tokenSelector } from '../../app/url';
 import eventSaga from '../../app/sagas/event';
 
 import * as eventActions from '../../app/actions/event';
@@ -14,6 +15,7 @@ describe('event api call', () => {
 
   it('should start fetching', () => expectSaga(eventSaga)
       .provide([
+        [select(tokenSelector), 'token'],
         [matchers.call.fn(apiRequest), []],
       ])
       .dispatch(eventActions.event(1))
@@ -22,6 +24,7 @@ describe('event api call', () => {
 
   it('should navigate to the event scene', () => expectSaga(eventSaga)
     .provide([
+      [select(tokenSelector), 'token'],
       [matchers.call.fn(apiRequest), []],
     ])
     .dispatch(eventActions.event(1))
@@ -30,18 +33,20 @@ describe('event api call', () => {
 
   it('should put an error when the api request fails', () => expectSaga(eventSaga)
     .provide([
+      [select(tokenSelector), 'token'],
       [matchers.call.fn(apiRequest), throwError(error)],
     ])
-    .dispatch(eventActions.event(1, 'token'))
+    .dispatch(eventActions.event(1))
     .put(eventActions.failure())
     .silentRun());
 
   it('should put the result data when the request succeeds', () => expectSaga(eventSaga)
     .provide([
+      [select(tokenSelector), 'token'],
       [matchers.call.like({ fn: apiRequest, args: ['events/1'] }), 'eventData'],
       [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }), 'regData'],
     ])
-    .dispatch(eventActions.event(1, 'token'))
+    .dispatch(eventActions.event(1))
     .put(eventActions.success('eventData', 'regData'))
     .silentRun());
 });
