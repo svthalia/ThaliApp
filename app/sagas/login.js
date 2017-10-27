@@ -1,6 +1,6 @@
-import { delay } from 'redux-saga';
 import { call, takeEvery, put } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
+import Snackbar from 'react-native-snackbar';
 
 import { apiRequest, url } from '../url';
 import * as loginActions from '../actions/login';
@@ -15,7 +15,9 @@ const defaultAvatar = `${url}/static/members/images/default-avatar.jpg`;
 
 const login = function* login(action) {
   const { user, pass } = action.payload;
-  yield put(loginActions.fetching());
+
+  Snackbar.show({ title: 'Logging in', duration: Snackbar.LENGTH_INDEFINITE });
+
   let data = {
     method: 'POST',
     headers: {
@@ -51,20 +53,18 @@ const login = function* login(action) {
           user, token, displayName, avatar,
       ));
     yield put(pushNotificationsActions.register());
-    yield delay(2000);
-    yield put(loginActions.reset());
+    Snackbar.dismiss();
+    Snackbar.show({ title: 'Login successful' });
   } catch (error) {
-    yield put(loginActions.failure());
-    yield delay(2000);
-    yield put(loginActions.reset());
+    Snackbar.dismiss();
+    Snackbar.show({ title: 'Login failed' });
   }
 };
 
 const logout = function* logout() {
   yield call(AsyncStorage.multiRemove, [USERNAMEKEY, TOKENKEY]);
-  yield delay(2000);
   yield put(pushNotificationsActions.invalidate());
-  yield put(loginActions.reset());
+  Snackbar.show({ title: 'Logout successful' });
 };
 
 const loginSaga = function* loginSaga() {

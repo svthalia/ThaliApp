@@ -14,7 +14,8 @@
       "app/**/*.js"
     ],
     "coverageReporters": [
-      "text", "text-summary"
+      "text",
+      "text-summary"
     ],
     "modulePaths": [
       ".yarn/"
@@ -28,7 +29,7 @@
     "react-native-drawer": "^2.3.0",
     "react-native-fcm": "^10.0.2",
     "react-native-linear-gradient": "^2.0.0",
-    "react-native-snackbar-component": "https://github.com/WKuipers/React-Native-SnackBar-Component.git",
+    "react-native-snackbar": "^0.4.3",
     "react-native-vector-icons": "^4.0.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",

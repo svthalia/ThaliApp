@@ -1,7 +1,6 @@
 import * as loginActions from '../actions/login';
 
 const initialState = {
-  loginState: '',
   token: '',
   username: '',
   displayName: '',
@@ -13,20 +12,13 @@ export default function session(state = initialState, action = {}) {
     case loginActions.SUCCESS:
       return {
         ...state,
-        loginState: action.payload.loginState,
         username: action.payload.username,
         token: action.payload.token,
         displayName: action.payload.displayName,
         photo: action.payload.photo,
       };
-    case loginActions.FAILURE:
-      return { ...state, loginState: 'failure' };
-    case loginActions.FETCHING:
-      return { ...state, loginState: 'progress' };
     case loginActions.LOGOUT:
-      return { ...initialState, loginState: 'logout' };
-    case loginActions.RESET:
-      return { ...state, loginState: '' };
+      return initialState;
     default:
       return state;
   }
