@@ -1,8 +1,8 @@
 import { colors, create } from '../../style';
-import { APPBAR_HEIGHT } from './navigator';
+import { TOTAL_BAR_HEIGHT, STATUSBAR_HEIGHT } from './standardHeader';
 
-export const HEADER_MIN_HEIGHT = APPBAR_HEIGHT;
-export const HEADER_MAX_HEIGHT = 200;
+export const HEADER_MIN_HEIGHT = TOTAL_BAR_HEIGHT;
+export const HEADER_MAX_HEIGHT = 200 + STATUSBAR_HEIGHT;
 export const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 const styles = create({
@@ -115,7 +115,7 @@ const styles = create({
   },
   icon: {
     fontSize: 24,
-    marginTop: (HEADER_MIN_HEIGHT - 24) / 2,
+    marginTop: ((HEADER_MIN_HEIGHT - 24) + STATUSBAR_HEIGHT) / 2,
     color: colors.white,
     android: {
       marginLeft: 16,

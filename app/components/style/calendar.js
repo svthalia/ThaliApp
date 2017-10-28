@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 
-import { TOTAL_BAR_HEIGHT } from './navigator';
+import { TOTAL_BAR_HEIGHT } from './standardHeader';
 import { colors, create } from '../../style';
 
 const styles = create({

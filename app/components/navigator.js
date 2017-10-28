@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StatusBar, TouchableOpacity, BackHandler } from 'react-native';
+import { View, StatusBar, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import SnackBar from 'react-native-snackbar-component';
 import Login from './Login';
 import Welcome from './Welcome';
@@ -12,6 +11,7 @@ import Event from './Event';
 import Calendar from './Calendar';
 import Profile from './Profile';
 import Pizza from './Pizza';
+import StandardHeader from './StandardHeader';
 
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
@@ -44,21 +44,6 @@ const sceneToComponent = (scene) => {
       return <Pizza />;
     default:
       return <Welcome />;
-  }
-};
-
-const sceneToTitle = (scene) => {
-  switch (scene) {
-    case 'welcome':
-      return 'Welkom';
-    case 'event':
-      return 'Evenement';
-    case 'eventList':
-      return 'Agenda';
-    case 'pizza':
-      return 'Pizza';
-    default:
-      return 'ThaliApp';
   }
 };
 
@@ -97,24 +82,7 @@ const ReduxNavigator = (props) => {
       onClose={() => updateDrawer(false)}
       tapToClose
     >
-      <View style={styles.statusBar}>
-        <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
-      </View>
-      {currentScene !== 'profile' && (
-        <View style={styles.appBar}>
-          <TouchableOpacity
-            onPress={props.isFirstScene ? () => props.updateDrawer(!props.drawerOpen) : props.back}
-          >
-            <Icon
-              name={props.isFirstScene ? 'menu' : 'arrow-back'}
-              onClick={props.back}
-              style={styles.icon}
-              size={24}
-            />
-          </TouchableOpacity>
-          <Text style={styles.title}>{sceneToTitle(currentScene)}</Text>
-          <View style={styles.rightView} />
-        </View>)}
+      {currentScene !== 'profile' && <StandardHeader />}
       {sceneToComponent(currentScene)}
       <SnackBar visible={loginState === 'success'} textMessage={'Login success'} />
     </Drawer>);
@@ -124,7 +92,12 @@ const ReduxNavigator = (props) => {
       style={styles.flex}
     >
       <View style={styles.statusBar}>
-        <StatusBar backgroundColor={colors.darkMagenta} barStyle="light-content" />
+        <StatusBar
+          backgroundColor={colors.statusBar}
+          barStyle="light-content"
+          translucent
+          animated
+        />
       </View>
       <Login />
       <SnackBar visible={loginState !== ''} textMessage={loginResult(loginState)} />

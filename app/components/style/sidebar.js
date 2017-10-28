@@ -1,5 +1,7 @@
 import { colors, create } from '../../style';
 
+import { STATUSBAR_HEIGHT } from './standardHeader';
+
 const styles = create({
   sidebar: {
     backgroundColor: colors.white,
@@ -7,11 +9,12 @@ const styles = create({
     alignItems: 'stretch',
   },
   headerButton: {
-    height: 148,
+    height: 148 + STATUSBAR_HEIGHT,
   },
   headerImage: {
     width: null,
-    height: 148,
+    height: 148 + STATUSBAR_HEIGHT,
+    paddingTop: 16 + STATUSBAR_HEIGHT,
     padding: 16,
     flexDirection: 'column',
     justifyContent: 'space-between',
