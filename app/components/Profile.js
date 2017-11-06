@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform } from 'react-native';
+import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Moment from 'moment';
 
+import StandardHeader from './StandardHeader';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
 
+import { colors } from '../style';
 import { back } from '../actions/navigation';
 
+import { STATUSBAR_HEIGHT } from './style/standardHeader';
 import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/profile';
 
 const getDescription = profile => ([
@@ -117,39 +120,39 @@ class Profile extends Component {
   }
 
   getAppbar = () => {
-    const headerHeight = this.props.success ? this.scrollY.interpolate({
+    const headerHeight = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
       extrapolate: 'clamp',
-    }) : HEADER_MIN_HEIGHT;
-    const imageOpacity = this.props.success ? this.scrollY.interpolate({
+    });
+    const imageOpacity = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
       outputRange: [1, 1, 0],
       extrapolate: 'clamp',
-    }) : 0;
+    });
     const imageTranslate = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [0, -50],
       extrapolate: 'clamp',
     });
 
-    const textSize = this.props.success ? this.scrollY.interpolate({
+    const textSize = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
       outputRange: [30, 30, Platform.OS === 'android' ? 20 : 18],
       extrapolate: 'clamp',
-    }) : 20;
+    });
 
-    const textPosLeft = this.props.success ? this.scrollY.interpolate({
+    const textPosLeft = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
       outputRange: [20, 20, Platform.OS === 'android' ? 76 : 20],
       extrapolate: 'clamp',
-    }) : 60;
+    });
 
-    const textPosBottom = this.props.success ? this.scrollY.interpolate({
+    const textPosBottom = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [20, 20, (HEADER_MIN_HEIGHT - this.textHeight) / 2],
+      outputRange: [20, 20, (HEADER_MIN_HEIGHT - this.textHeight - STATUSBAR_HEIGHT) / 2],
       extrapolate: 'clamp',
-    }) : (HEADER_MIN_HEIGHT - 24) / 2;
+    });
 
     let textStyle = {
       fontSize: textSize,
@@ -195,7 +198,7 @@ class Profile extends Component {
           </TouchableOpacity>
           <Animated.Text
             style={[styles.title, textStyle]}
-          >{this.props.success ? this.props.profile.display_name : 'Profiel'}</Animated.Text>
+          >{this.props.profile.display_name}</Animated.Text>
         </Animated.View>
       </Animated.View>
     );
@@ -205,33 +208,38 @@ class Profile extends Component {
     if (!this.props.hasLoaded) {
       return (
         <View style={styles.container}>
+          <StandardHeader />
           <LoadingScreen />
-          {this.getAppbar()}
+        </View>
+      );
+    } else if (!this.props.success) {
+      return (
+        <View style={styles.container}>
+          <StandardHeader />
+          <ErrorScreen message="Sorry! We couldn't load any data." />
         </View>
       );
     }
 
     return (
       <View style={styles.container}>
-        {
-          this.props.success ? (
-            <ScrollView
-              style={styles.container}
-              scrollEventThrottle={16}
-              onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollY } } }])}
-            >
-              <View style={styles.content}>
-                {getDescription(this.props.profile)}
-                {getPersonalInfo(this.props.profile)}
-                {getAchievements(this.props.profile)}
-              </View>
-            </ScrollView>
-            ) : (
-              <View style={styles.container}>
-                <ErrorScreen message="Sorry! We couldn't load any data." />
-              </View>
-            )
-        }
+        <StatusBar
+          backgroundColor={colors.statusBar}
+          barStyle="light-content"
+          translucent
+          animated
+        />
+        <ScrollView
+          style={styles.container}
+          scrollEventThrottle={16}
+          onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollY } } }])}
+        >
+          <View style={styles.content}>
+            {getDescription(this.props.profile)}
+            {getPersonalInfo(this.props.profile)}
+            {getAchievements(this.props.profile)}
+          </View>
+        </ScrollView>
         {this.getAppbar()}
       </View>
     );
