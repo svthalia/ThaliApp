@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView, Text, View, RefreshControl, Button } from 'react-native';
+import { Alert, Image, ScrollView, Text, View, RefreshControl, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -15,6 +15,15 @@ import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
 
 class Event extends Component {
+  cancelPrompt = pk => Alert.alert(
+    'Cancel registration?',
+    'Are you sure you want to cancel your registration?',
+    [
+      { text: 'Dismiss' },
+      { text: 'Cancel registration', onPress: () => this.props.cancel(pk) },
+    ],
+  );
+
   eventDesc = (data) => {
     const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
     const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
@@ -145,7 +154,6 @@ class Event extends Component {
     return (<View />);
   };
 
-  // eslint-disable-next-line arrow-body-style
   eventActions = (event) => {
     const nowDate = new Date();
     const startRegDate = new Date(event.registration_start);
@@ -185,7 +193,7 @@ class Event extends Component {
                 <Button
                   color={colors.magenta}
                   title="Afmelden"
-                  onPress={() => this.props.cancel(event.user_registration.pk)}
+                  onPress={() => this.cancelPrompt(event.user_registration.pk)}
                 />
               </View>
             </View>
@@ -193,7 +201,7 @@ class Event extends Component {
         }
         return (
           <View style={styles.registrationActions}>
-            <Button color={colors.magenta} title="Afmelden" onPress={() => this.props.cancel(event.user_registration.pk)} />
+            <Button color={colors.magenta} title="Afmelden" onPress={() => this.cancelPrompt(event.user_registration.pk)} />
           </View>
         );
       }

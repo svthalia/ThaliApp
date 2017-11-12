@@ -81,7 +81,7 @@ const ReduxNavigator = (props) => {
     >
       <View style={styles.statusBar}>
         <StatusBar
-          backgroundColor={colors.statusBar}
+          backgroundColor={colors.semiTransparent}
           barStyle="light-content"
           translucent
           animated

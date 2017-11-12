@@ -12,7 +12,6 @@ const LoadingScreen = () => (
     <ActivityIndicator
       animating
       color={colors.magenta}
-      style={styles.indicator}
       size="large"
     />
   </View>

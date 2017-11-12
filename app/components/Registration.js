@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Switch, TextInput, Text, Button } from 'react-native';
+import { ActivityIndicator, Modal, View, ScrollView, Switch, TextInput, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './style/registration';
 import { colors } from '../style';
+
+import ErrorScreen from './ErrorScreen';
 
 import * as registrationActions from '../actions/registration';
 
@@ -26,23 +28,31 @@ class Registration extends Component {
     }
   }
 
-  isFieldValid = (key) => {
+  getFieldValidity = (key) => {
     const field = this.props.fields[key];
     const value = this.state[key];
     if (field.required) {
-      if (field.type === 'integer' && (value === '' || value === null || !value.match(/^\d+$/))) {
-        return false;
+      if (field.type === 'integer' && (value === '' || value === null || !value.match(/^-?\d+$/))) {
+        return {
+          isValid: false,
+          reason: 'This field is required and must be an integer.',
+        };
       } else if (field.type === 'text' && (value === '' || value === null)) {
-        return false;
+        return {
+          isValid: false,
+          reason: 'This field is required.',
+        };
       }
     }
-    return true;
+    return {
+      isValid: true,
+    };
   };
 
   isFormValid = () => {
     const keys = Object.keys(this.props.fields);
     for (let i = 0; i < keys.length; i += 1) {
-      if (!this.isFieldValid(keys[i])) {
+      if (!this.getFieldValidity(keys[i]).isValid) {
         return false;
       }
     }
@@ -56,12 +66,33 @@ class Registration extends Component {
   };
 
   render() {
+    if (this.props.status === 'failure') {
+      return <ErrorScreen message="Sorry! We couldn't load any data." />;
+    }
+
     const keys = Object.keys(this.props.fields);
 
     return (
-      <ScrollView style={styles.content}>
+      <ScrollView
+        style={styles.content}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Modal
+          visible={this.props.status === 'loading'}
+          transparent
+          onRequestClose={() => ({})}
+        >
+          <View style={styles.overlay}>
+            <ActivityIndicator
+              animating
+              color={colors.magenta}
+              size="large"
+            />
+          </View>
+        </Modal>
         {keys.map((key) => {
           const field = this.props.fields[key];
+          const validity = this.getFieldValidity(key);
           if (field.type === 'boolean') {
             return (
               <View key={key} style={styles.booleanContainer}>
@@ -83,10 +114,11 @@ class Registration extends Component {
                   onChangeText={value => this.updateField(key, value)}
                   keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
                   style={styles.field}
-                  underlineColorAndroid={this.isFieldValid(key) ? colors.lightGray :
+                  underlineColorAndroid={validity.isValid ? colors.lightGray :
                                          colors.lightRed}
                   placeholder={field.description}
                 />
+                {validity.isValid || <Text style={styles.invalid}>{validity.reason}</Text>}
               </View>
             );
           }
@@ -108,12 +140,14 @@ class Registration extends Component {
 Registration.propTypes = {
   registration: PropTypes.number.isRequired,
   fields: PropTypes.object.isRequired,  // eslint-disable-line react/forbid-prop-types
+  status: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   registration: state.registration.registration,
   fields: state.registration.fields,
+  status: state.registration.status,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -11,7 +11,7 @@ export const colors = {
   textColour: '#313131',
   darkGrey: '#373737',
   dividerGrey: 'rgba(0, 0, 0, 0.12)',
-  statusBar: 'rgba(0, 0, 0, 0.20)',
+  semiTransparent: 'rgba(0, 0, 0, 0.20)',
   transparent: 'transparent',
   lightGreen: '#8fcc74',
   darkGreen: '#81b968',

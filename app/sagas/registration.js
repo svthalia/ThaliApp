@@ -1,4 +1,6 @@
+import { delay } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import Snackbar from 'react-native-snackbar';
 
 import { apiRequest, tokenSelector } from '../url';
 
@@ -32,6 +34,7 @@ const register = function* register(action) {
     if (registration.fields) {
       yield put(registrationActions.retrieveFields(registration.pk));
     }
+    Snackbar.show({ title: 'Registration successful!' });
   } catch (error) {
     yield put(eventActions.failure());
   }
@@ -41,8 +44,7 @@ const update = function* update(action) {
   const { registration, fields } = action.payload;
   const token = yield select(tokenSelector);
 
-  yield put(eventActions.fetching());
-  yield put(navigationActions.back());
+  yield put(registrationActions.loading());
 
   const body = {};
 
@@ -62,9 +64,12 @@ const update = function* update(action) {
 
   try {
     yield call(apiRequest, `registrations/${registration}`, data);
-    yield put(eventActions.done());
+    yield put(navigationActions.back());
+    yield put(registrationActions.success());
+    yield delay(50);
+    Snackbar.show({ title: 'Successfully updated registration' });
   } catch (error) {
-    yield put(eventActions.failure());
+    yield put(registrationActions.failure());
   }
 };
 
@@ -85,6 +90,7 @@ const cancel = function* cancel(action) {
 
   try {
     yield call(apiRequest, `registrations/${registration}`, data);
+    Snackbar.show({ title: 'Successfully cancelled registration' });
   } catch (error) {
     // Swallow error for now
   }

@@ -2,6 +2,9 @@ export const REGISTER = 'REGISTRATION_REGISTER';
 export const UPDATE = 'REGISTRATION_UPDATE';
 export const CANCEL = 'REGISTRATION_CANCEL';
 export const FIELDS = 'REGISTRATION_FIELDS';
+export const LOADING = 'REGISTRATION_FETCHING';
+export const FAILURE = 'REGISTRATION_FAILURE';
+export const SUCCESS = 'REGISTRATION_SUCCESS';
 export const SHOW_FIELDS = 'REGISTRATION_SHOW_FIELDS';
 
 export function register(event) {
@@ -18,6 +21,18 @@ export function cancel(registration) {
 
 export function retrieveFields(registration) {
   return { type: FIELDS, payload: { registration } };
+}
+
+export function loading() {
+  return { type: LOADING };
+}
+
+export function failure() {
+  return { type: FAILURE };
+}
+
+export function success() {
+  return { type: SUCCESS };
 }
 
 export function showFields(registration, fields) {

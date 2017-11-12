@@ -1,11 +1,19 @@
 import { StyleSheet } from 'react-native';
 
+import { APPBAR_HEIGHT } from './standardHeader';
 import { colors } from '../../style';
 
 const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: APPBAR_HEIGHT,
+    backgroundColor: colors.semiTransparent,
   },
   fieldContainer: {
     borderTopWidth: 1,
@@ -24,6 +32,12 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-medium',
     fontSize: 14,
     color: colors.textColour,
+  },
+  invalid: {
+    fontFamily: 'sans-serif-medium',
+    fontSize: 12,
+    color: colors.lightRed,
+    marginLeft: 4,
   },
   buttonView: {
     margin: 16,
