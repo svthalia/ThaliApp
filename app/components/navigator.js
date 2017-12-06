@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { View, StatusBar, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
-import SnackBar from 'react-native-snackbar-component';
 import Login from './Login';
 import Welcome from './Welcome';
 import Sidebar from './Sidebar';
@@ -16,19 +15,6 @@ import StandardHeader from './StandardHeader';
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
 import { colors } from '../style';
-
-const loginResult = (status) => {
-  switch (status) {
-    case 'progress':
-      return 'Logging in';
-    case 'failure':
-      return 'Login failed';
-    case 'logout':
-      return 'Logout successful';
-    default:
-      return '';
-  }
-};
 
 const sceneToComponent = (scene) => {
   switch (scene) {
@@ -48,7 +34,7 @@ const sceneToComponent = (scene) => {
 };
 
 const ReduxNavigator = (props) => {
-  const { currentScene, loggedIn, drawerOpen, updateDrawer, loginState,
+  const { currentScene, loggedIn, drawerOpen, updateDrawer,
           isFirstScene, back, navigateToWelcome } = props;
   BackHandler.addEventListener('hardwareBackPress', () => {
     if (!isFirstScene) {
@@ -84,7 +70,6 @@ const ReduxNavigator = (props) => {
     >
       {currentScene !== 'profile' && <StandardHeader />}
       {sceneToComponent(currentScene)}
-      <SnackBar visible={loginState === 'success'} textMessage={'Login success'} />
     </Drawer>);
   }
   return (
@@ -100,7 +85,6 @@ const ReduxNavigator = (props) => {
         />
       </View>
       <Login />
-      <SnackBar visible={loginState !== ''} textMessage={loginResult(loginState)} />
     </View>);
 };
 
@@ -112,7 +96,6 @@ ReduxNavigator.propTypes = {
   updateDrawer: PropTypes.func.isRequired,
   back: PropTypes.func.isRequired,
   navigateToWelcome: PropTypes.func.isRequired,
-  loginState: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -120,7 +103,6 @@ const mapStateToProps = state => ({
   loggedIn: state.navigation.loggedIn,
   drawerOpen: state.navigation.drawerOpen,
   isFirstScene: state.navigation.previousScenes.length === 0,
-  loginState: state.session.loginState,
 });
 
 const mapDispatchToProps = dispatch => ({
