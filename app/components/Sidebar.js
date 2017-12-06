@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image, TouchableHighlight, ImageBackground } from 'react-native';
+import { Alert, Text, View, Image, TouchableHighlight, ImageBackground } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -12,6 +12,14 @@ import * as loginActions from '../actions/login';
 import * as profileActions from '../actions/profile';
 
 const background = require('../img/huygens.jpg');
+
+const logoutPrompt = logout => () => Alert.alert(
+  'Log out?',
+  'Are you sure you want to log out?',
+  [{ text: 'Cancel' },
+    { text: 'Log out', onPress: logout },
+  ],
+);
 
 const Sidebar = (props) => {
   const buttons = [
@@ -30,7 +38,7 @@ const Sidebar = (props) => {
       scene: 'eventList',
     },
     {
-      onPress: props.logout,
+      onPress: logoutPrompt(props.logout),
       iconName: 'lock',
       text: 'Uitloggen',
       style: {
