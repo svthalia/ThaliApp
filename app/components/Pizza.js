@@ -100,7 +100,10 @@ class Pizza extends Component {
               <Text style={styles.pizzaPrice}>€{pizza.price}</Text>
             </View>
             <TouchableOpacity
-              onPress={() => this.props.orderPizza(this.props.token, pizza.pk, hasOrder)}
+              onPress={() => {
+                this.props.orderPizza(this.props.token, pizza.pk, hasOrder);
+                this.pizzaScroll.scrollTo({ x: 0, y: 0, animated: true });
+              }}
               style={styles.button}
             >
               <Icon
@@ -178,6 +181,7 @@ class Pizza extends Component {
             onRefresh={this.handleRefresh}
           />
         }
+        ref={(ref) => { this.pizzaScroll = ref; }}
       >
         <View style={styles.content}>
           {this.getEventInfo(this.props.event.title, subtitle)}
