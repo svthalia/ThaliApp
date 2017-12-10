@@ -18,7 +18,7 @@ stages:
 eslint:
     stage: validate
     script:
-        - yarn ci-lint
+        - yarn lint:ci
 
 jest:
     stage: validate

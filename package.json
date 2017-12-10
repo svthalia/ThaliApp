@@ -3,9 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "react-native start",
+    "start:ios": "react-native run-ios",
+    "start:android": "react-native run-android",
+    "log:ios": "react-native log-ios",
+    "log:android": "react-native log-android",
     "lint": "eslint *.js app --fix",
-    "ci-lint": "eslint *.js app"
+    "lint:ci": "eslint *.js app",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "jest": {
     "preset": "react-native",
