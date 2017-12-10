@@ -150,7 +150,7 @@ const styles = create({
     bottom: 0,
     left: 0,
     right: 0,
-    opacity: 0.3,
+    opacity: 0.5,
   },
   errorText: {
     marginTop: HEADER_MIN_HEIGHT,
