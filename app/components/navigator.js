@@ -11,6 +11,7 @@ import Calendar from './Calendar';
 import Profile from './Profile';
 import Pizza from './Pizza';
 import StandardHeader from './StandardHeader';
+import Registration from './Registration';
 
 import * as actions from '../actions/navigation';
 import styles from './style/navigator';
@@ -28,6 +29,8 @@ const sceneToComponent = (scene) => {
       return <Profile />;
     case 'pizza':
       return <Pizza />;
+    case 'registration':
+      return <Registration />;
     default:
       return <Welcome />;
   }
@@ -78,7 +81,7 @@ const ReduxNavigator = (props) => {
     >
       <View style={styles.statusBar}>
         <StatusBar
-          backgroundColor={colors.statusBar}
+          backgroundColor={colors.semiTransparent}
           barStyle="light-content"
           translucent
           animated

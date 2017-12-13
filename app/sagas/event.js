@@ -1,11 +1,12 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 
-import { apiRequest } from '../url';
+import { apiRequest, tokenSelector } from '../url';
 import * as eventActions from '../actions/event';
 import * as navActions from '../actions/navigation';
 
 const event = function* event(action) {
-  const { pk, token } = action.payload;
+  const { pk } = action.payload;
+  const token = yield select(tokenSelector);
 
   yield put(eventActions.fetching());
   yield put(navActions.navigate('event'));

@@ -118,6 +118,9 @@ const styles = create({
   italicText: {
     fontStyle: 'italic',
   },
+  flex: {
+    flex: 1,
+  },
 });
 
 export default styles;

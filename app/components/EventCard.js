@@ -23,7 +23,7 @@ const getEventInfo = (event) => {
 
 const EventCard = props => (
   <TouchableHighlight
-    onPress={() => props.loadEvent(props.event, props.token)}
+    onPress={() => props.loadEvent(props.event)}
     style={styles.button}
   >
     <View
@@ -58,21 +58,16 @@ EventCard.propTypes = {
     url: PropTypes.string,
   }).isRequired,
   loadEvent: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
-  token: state.session.token,
-});
-
 const mapDispatchToProps = dispatch => ({
-  loadEvent: (event, token) => {
+  loadEvent: (event) => {
     if (event.partner) {
       Linking.openURL(event.url);
     } else {
-      dispatch(eventActions.event(event.pk, token));
+      dispatch(eventActions.event(event.pk));
     }
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventCard);
+export default connect(() => ({}), mapDispatchToProps)(EventCard);

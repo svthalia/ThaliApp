@@ -236,7 +236,7 @@ class Profile extends Component {
     return (
       <View style={styles.container}>
         <StatusBar
-          backgroundColor={colors.statusBar}
+          backgroundColor={colors.semiTransparent}
           barStyle="light-content"
           translucent
           animated

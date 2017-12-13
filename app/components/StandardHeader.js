@@ -21,6 +21,8 @@ const sceneToTitle = (scene) => {
       return 'Pizza';
     case 'profile':
       return 'Profiel';
+    case 'registration':
+      return 'Registratie';
     default:
       return 'ThaliApp';
   }
@@ -30,7 +32,7 @@ const StandardHeader = props => (
   <View>
     <View style={styles.statusBar}>
       <StatusBar
-        backgroundColor={colors.statusBar}
+        backgroundColor={colors.semiTransparent}
         translucent
         animated
         barStyle="light-content"
