@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar } from 'react-native';
+import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -186,7 +186,7 @@ class Profile extends Component {
 
     return (
       <Animated.View style={[styles.header, { height: headerHeight }]}>
-        <Animated.Image
+        <Animated.View
           style={[
             styles.backgroundImage,
             {
@@ -194,10 +194,15 @@ class Profile extends Component {
               transform: [{ translateY: imageTranslate }],
             },
           ]}
-          source={{ uri: this.props.profile.photo }}
         >
-          <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
-        </Animated.Image>
+          <ImageBackground
+            source={{ uri: this.props.profile.photo }}
+            style={styles.backgroundImage}
+            resizeMode="cover"
+          >
+            <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
+          </ImageBackground>
+        </Animated.View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
           <TouchableOpacity
             onPress={this.props.back}

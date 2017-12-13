@@ -142,7 +142,6 @@ const styles = create({
     right: 0,
     width: null,
     height: HEADER_MAX_HEIGHT,
-    resizeMode: 'cover',
   },
   overlayGradient: {
     position: 'absolute',
