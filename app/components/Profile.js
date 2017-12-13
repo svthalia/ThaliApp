@@ -186,18 +186,19 @@ class Profile extends Component {
 
     return (
       <Animated.View style={[styles.header, { height: headerHeight }]}>
-        <Animated.Image
-          style={[
-            styles.backgroundImage,
-            {
-              opacity: imageOpacity,
-              transform: [{ translateY: imageTranslate }],
-            },
-          ]}
-          source={{ uri: this.props.profile.photo }}
-        >
+        <View>
+          <Animated.Image
+            style={[
+              styles.backgroundImage,
+              {
+                opacity: imageOpacity,
+                transform: [{ translateY: imageTranslate }],
+              },
+            ]}
+            source={{ uri: this.props.profile.photo }}
+          />
           <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
-        </Animated.Image>
+        </View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
           <TouchableOpacity
             onPress={this.props.back}
