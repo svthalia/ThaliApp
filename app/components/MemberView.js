@@ -20,7 +20,7 @@ const MemberView = (props) => {
   }
 
   return (
-    <SquareView style={props.style}>
+    <SquareView style={props.style} size={props.size} >
       <TouchableHighlight
         style={styles.image}
         onPress={() => props.loadProfile(props.token, props.member.member)}
@@ -40,6 +40,7 @@ MemberView.propTypes = {
     photo: PropTypes.string,
     member: PropTypes.number,
   }).isRequired,
+  size: PropTypes.number.isRequired,
   style: ViewPropTypes.style,
   token: PropTypes.string.isRequired,
   loadProfile: PropTypes.func.isRequired,

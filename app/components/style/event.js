@@ -1,4 +1,8 @@
+import { Dimensions } from 'react-native';
 import { create, colors } from '../../style';
+
+const windowWidth = Dimensions.get('window').width;
+export const memberSize = (windowWidth - 64) / 3;
 
 const styles = create({
   eventView: {
@@ -84,27 +88,6 @@ const styles = create({
     color: colors.darkGrey,
     marginBottom: 16,
   },
-  registrationsView: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'space-between',
-  },
-  registrationsRow: {
-    flex: 1,
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-  registrationsItem: {
-    flex: 1,
-  },
-  registrationsItemMargin: {
-    flex: 1,
-    marginLeft: 16,
-    marginRight: 16,
-  },
   divider: {
     marginLeft: -16,
     marginRight: -16,
@@ -120,6 +103,10 @@ const styles = create({
   },
   flex: {
     flex: 1,
+  },
+  memberView: {
+    marginBottom: 16,
+    marginRight: 16,
   },
 });
 

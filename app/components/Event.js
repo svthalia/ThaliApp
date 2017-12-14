@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Image, ScrollView, Text, View, RefreshControl, Button } from 'react-native';
+import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
-import styles from './style/event';
+import styles, { memberSize } from './style/event';
 import MemberView from './MemberView';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
@@ -216,44 +216,23 @@ class Event extends Component {
         <View>
           <View style={styles.divider} />
           <Text style={styles.registrationsTitle}>Aanmeldingen</Text>
-          <View style={styles.registrationsView}>
-            {/*
-                Create a grid for the registrations:
-                First create chunks of max 3 and map those to a View
-                Then inside that View create 3 MemberViews (if is a real registration) or
-                a placeholder View (to make sure flex space is filled)
-              */}
-            { this.props.registrations.map((item, index) => {
-              if (index % 3 === 0) {
-                return this.props.registrations.slice(index, index + 3);
-              }
-              return null;
-            }).filter(item => item)
-                .map((list) => {
-                  while (list.length < 3) {
-                    list.push({ pk: null });
-                  }
-
-                  const key = list[0].pk.toString().concat(list[1].pk, list[2].pk);
-                  return (
-                    <View key={key} style={styles.registrationsRow}>
-                      {list.map((reg, i) => {
-                        const style = i === 1 ? styles.registrationsItemMargin :
-                          styles.registrationsItem;
-                        if (reg.name) {
-                          return (
-                            <MemberView key={key + i.toString()} member={reg} style={style} />
-                          );
-                        }
-                        return (
-                          <View key={key + i.toString()} style={style} />
-                        );
-                      })}
-                    </View>
-                  );
-                })
-              }
-          </View>
+          <FlatList
+            numColumns={3}
+            data={this.props.registrations}
+            renderItem={item => (
+              <MemberView
+                key={item.item.pk}
+                member={{
+                  pk: item.item.member,
+                  photo: item.item.photo,
+                  name: item.item.name,
+                }}
+                style={styles.memberView}
+                size={memberSize}
+              />
+            )}
+            keyExtractor={item => item.pk}
+          />
         </View>
       );
     }
