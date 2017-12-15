@@ -16,23 +16,25 @@ import styles from './style/calendar';
 const addEventToSection = (sections, date, event) => {
   const day = date.date();
   const month = date.month();
+  const year = date.year();
+  const sectionKey = (year * 100) + month;
 
-  if (!(month in sections)) {
-    sections[month] = {
+  if (!(sectionKey in sections)) {
+    sections[sectionKey] = {
       key: date.format('MMMM'),
       data: {},
     };
   }
 
-  if (!(day in sections[month].data)) {
-    sections[month].data[day] = {
+  if (!(day in sections[sectionKey].data)) {
+    sections[sectionKey].data[day] = {
       dayNumber: day,
       dayOfWeek: date.format('dd'),
       events: [],
     };
   }
 
-  sections[month].data[day].events.push(event);
+  sections[sectionKey].data[day].events.push(event);
 };
 
 /**
