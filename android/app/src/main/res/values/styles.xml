@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/magenta</item>
         <item name="colorControlActivated">@color/gray</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
 </resources>

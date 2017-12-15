@@ -104,7 +104,7 @@ android {
 
     defaultConfig {
         applicationId "com.thaliapp"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 4
         versionName "2.1.1"
