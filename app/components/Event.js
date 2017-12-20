@@ -15,14 +15,22 @@ import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
 
 class Event extends Component {
-  cancelPrompt = pk => Alert.alert(
-    'Cancel registration?',
-    'Are you sure you want to cancel your registration?',
-    [
-      { text: 'Dismiss' },
-      { text: 'Cancel registration', onPress: () => this.props.cancel(pk) },
-    ],
-  );
+  cancelPrompt = (pk) => {
+    const cancelDeadlineDate = new Date(this.props.data.cancel_deadline);
+    let message = 'Are you sure you want to cancel your registration?';
+    if (this.props.data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
+      message = 'The deadline has passed, are you sure you want to cancel your registration and'
+      + ` pay the full costs of €${this.props.data.fine}? You will not be able to undo this!`;
+    }
+    return Alert.alert(
+      'Cancel registration?',
+      message,
+      [
+        { text: 'Dismiss' },
+        { text: 'Cancel registration', onPress: () => this.props.cancel(pk) },
+      ],
+    );
+  };
 
   eventDesc = (data) => {
     const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
