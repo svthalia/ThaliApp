@@ -33,38 +33,42 @@ const getInfo = (event) => {
 };
 
 const EventDetailCard = props => (
-  <View style={styles.card}>
-    <Text style={styles.eventTitle}>{props.event.title}</Text>
-    {getInfo(props.event)}
-    <Text
-      numberOfLines={2}
-      style={styles.description}
-    >{props.event.description}</Text>
-    <View style={styles.buttonList}>
-      <TouchableOpacity
-        onPress={() => props.loadEvent(props.event.pk, props.token)}
-        style={styles.button}
-      >
-        <Text style={styles.moreInfo}>MEER INFO</Text>
-      </TouchableOpacity>
-      {props.event.pizza ? (
+  <TouchableOpacity
+    onPress={() => props.loadEvent(props.event.pk, props.token)}
+  >
+    <View style={styles.card}>
+      <Text style={styles.eventTitle}>{props.event.title}</Text>
+      {getInfo(props.event)}
+        <Text
+          numberOfLines={2}
+          style={styles.description}
+        >{props.event.description}</Text>
+      <View style={styles.buttonList}>
         <TouchableOpacity
-          onPress={() => props.retrievePizzaInfo(props.token)}
+          onPress={() => props.loadEvent(props.event.pk, props.token)}
           style={styles.button}
         >
-          <Text style={styles.orderPizza}>PIZZA</Text>
+          <Text style={styles.moreInfo}>MEER INFO</Text>
         </TouchableOpacity>
-        ) : null}
+        {props.event.pizza ? (
+          <TouchableOpacity
+            onPress={() => props.retrievePizzaInfo(props.token)}
+            style={styles.button}
+          >
+            <Text style={styles.orderPizza}>PIZZA</Text>
+          </TouchableOpacity>
+          ) : null}
+      </View>
+      {props.event.registered === null ? null : (
+        <View
+          style={[
+            styles.indicator,
+            props.event.registered ? styles.registered : styles.unregistered]}
+        />
+        )
+      }
     </View>
-    {props.event.registered === null ? null : (
-      <View
-        style={[
-          styles.indicator,
-          props.event.registered ? styles.registered : styles.unregistered]}
-      />
-      )
-    }
-  </View>
+  </TouchableOpacity>
 );
 
 EventDetailCard.propTypes = {
