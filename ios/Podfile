@@ -6,7 +6,8 @@ target 'ThaliApp' do
   # use_frameworks!
 
   # Pods for ThaliApp
-  pod 'FirebaseMessaging', '~> 2.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 
   target 'ThaliAppTests' do
     inherit! :search_paths
