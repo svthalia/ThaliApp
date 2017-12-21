@@ -4,6 +4,7 @@ const styles = create({
   content: {
     flex: 1,
     padding: 8,
+    backgroundColor: colors.background,
   },
   eventInfo: {
     padding: 8,
@@ -21,7 +22,13 @@ const styles = create({
     marginBottom: 8,
   },
   subtitle: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     color: colors.textColour,
     fontSize: 14,
   },
@@ -30,9 +37,17 @@ const styles = create({
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 2,
-    borderRadius: 2,
     padding: 8,
     height: 100,
+    android: {
+      borderRadius: 2,
+    },
+    ios: {
+      borderRadius: 4,
+      borderColor: colors.lightGray,
+      borderStyle: 'solid',
+      borderWidth: 0.5,
+    },
   },
   overviewText: {
     android: {
@@ -47,9 +62,11 @@ const styles = create({
   },
   greenBackground: {
     backgroundColor: colors.lightGreen,
+    borderColor: colors.darkGreen,
   },
   redBackground: {
     backgroundColor: colors.lightRed,
+    borderColor: colors.darkRed,
   },
   section: {
     marginTop: 8,
@@ -71,10 +88,18 @@ const styles = create({
   },
   card: {
     backgroundColor: colors.white,
-    borderRadius: 2,
     elevation: 2,
+    android: {
+      borderRadius: 2,
+    },
+    ios: {
+      borderRadius: 4,
+      borderColor: colors.lightGray,
+      borderStyle: 'solid',
+      borderWidth: 0.5,
+    },
   },
-  orderStatus: {
+  orderStatusText: {
     android: {
       fontFamily: 'sans-serif-medium',
     },
@@ -84,10 +109,18 @@ const styles = create({
     },
     color: colors.white,
     fontSize: 14,
+  },
+  orderStatus: {
+    android: {
+      borderTopRightRadius: 2,
+      borderTopLeftRadius: 2,
+    },
+    ios: {
+      borderTopRightRadius: 4,
+      borderTopLeftRadius: 4,
+    },
     padding: 16,
     borderBottomWidth: 1,
-    borderTopRightRadius: 2,
-    borderTopLeftRadius: 2,
   },
   paidStatus: {
     backgroundColor: colors.lightGreen,
@@ -105,8 +138,18 @@ const styles = create({
     paddingRight: 16,
     paddingTop: 8,
     paddingBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.dividerGrey,
+    android: {
+      borderBottomWidth: 1,
+      borderBottomColor: colors.dividerGrey,
+    },
+  },
+  orderedPizzaContainer: {
+    paddingTop: 16,
+    paddingBottom: 16,
+  },
+  pizzaList: {
+    paddingTop: 8,
+    paddingBottom: 8,
   },
   pizzaInfo: {
     flex: 1,
