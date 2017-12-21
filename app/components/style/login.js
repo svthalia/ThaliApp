@@ -59,10 +59,13 @@ const styles = create({
     resizeMode: 'contain',
     alignSelf: 'center',
   },
-  wrapper: {
+  rootWrapper: {
+    flex: 1,
     paddingLeft: 16,
     paddingRight: 16,
     backgroundColor: colors.magenta,
+  },
+  wrapper: {
     flex: 1,
     justifyContent: 'center',
   },
