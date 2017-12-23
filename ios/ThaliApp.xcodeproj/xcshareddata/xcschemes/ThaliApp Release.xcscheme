@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D2A28121D9B038B00D4039D"
+               BlueprintIdentifier = "83CBBA2D1A601D0E00E9B192"
                BuildableName = "libReact.a"
-               BlueprintName = "React-tvOS"
+               BlueprintName = "React"
                ReferencedContainer = "container:../node_modules/react-native/React/React.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "ThaliApp-tvOS.app"
-               BlueprintName = "ThaliApp-tvOS"
+               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+               BuildableName = "ThaliApp.app"
+               BlueprintName = "ThaliApp"
                ReferencedContainer = "container:ThaliApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "ThaliApp-tvOSTests.xctest"
-               BlueprintName = "ThaliApp-tvOSTests"
+               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
+               BuildableName = "ThaliAppTests.xctest"
+               BlueprintName = "ThaliAppTests"
                ReferencedContainer = "container:ThaliApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -54,25 +54,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "ThaliApp-tvOSTests.xctest"
-               BlueprintName = "ThaliApp-tvOSTests"
-               ReferencedContainer = "container:ThaliApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ThaliApp-tvOS.app"
-            BlueprintName = "ThaliApp-tvOS"
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "ThaliApp.app"
+            BlueprintName = "ThaliApp"
             ReferencedContainer = "container:ThaliApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -80,9 +71,10 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -93,9 +85,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ThaliApp-tvOS.app"
-            BlueprintName = "ThaliApp-tvOS"
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "ThaliApp.app"
+            BlueprintName = "ThaliApp"
             ReferencedContainer = "container:ThaliApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -112,9 +104,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ThaliApp-tvOS.app"
-            BlueprintName = "ThaliApp-tvOS"
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "ThaliApp.app"
+            BlueprintName = "ThaliApp"
             ReferencedContainer = "container:ThaliApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
