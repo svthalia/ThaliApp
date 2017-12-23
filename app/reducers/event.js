@@ -24,7 +24,7 @@ export default function loadEvent(state = initialState, action = {}) {
   switch (action.type) {
     case eventActions.FETCHING: {
       return {
-        ...state,
+        ...initialState,
         loading: true,
       };
     }
