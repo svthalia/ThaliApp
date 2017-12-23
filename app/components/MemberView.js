@@ -23,7 +23,7 @@ const MemberView = (props) => {
     <SquareView style={props.style} size={props.size} >
       <TouchableHighlight
         style={styles.image}
-        onPress={() => props.loadProfile(props.token, props.member.member)}
+        onPress={() => props.loadProfile(props.token, props.member.pk)}
       >
         <ImageBackground style={styles.image} source={{ uri: photo }}>
           <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
@@ -36,9 +36,9 @@ const MemberView = (props) => {
 
 MemberView.propTypes = {
   member: PropTypes.shape({
+    pk: PropTypes.number,
     name: PropTypes.string,
     photo: PropTypes.string,
-    member: PropTypes.number,
   }).isRequired,
   size: PropTypes.number.isRequired,
   style: ViewPropTypes.style,
