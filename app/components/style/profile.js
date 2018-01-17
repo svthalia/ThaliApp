@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.white,
     position: 'absolute',
+    width: '100%',
     android: {
       fontFamily: 'sans-serif-medium',
     },
