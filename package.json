@@ -31,8 +31,8 @@
   "dependencies": {
     "moment": "^2.18.1",
     "prop-types": "^15.5.8",
-    "react": "16.0.0",
-    "react-native": "0.51.0",
+    "react": "16.2.0",
+    "react-native": "0.52.0",
     "react-native-drawer": "^2.3.0",
     "react-native-fcm": "^10.0.2",
     "react-native-linear-gradient": "^2.0.0",
