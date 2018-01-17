@@ -9,12 +9,14 @@ const styles = create({
     padding: 16,
     backgroundColor: colors.background,
   },
-  locationImage: {
-    height: 150,
+  locationImageWrapper: {
     marginLeft: -16,
     marginRight: -16,
     marginTop: -16,
     marginBottom: 24,
+  },
+  locationImage: {
+    height: 150,
   },
   titleText: {
     marginBottom: 16,

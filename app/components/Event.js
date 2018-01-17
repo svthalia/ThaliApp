@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, Button } from 'react-native';
+import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, Button, TouchableHighlight, Platform, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -268,10 +268,15 @@ class Event extends Component {
             />
           )}
         >
-          <Image
-            style={styles.locationImage}
-            source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.props.data.map_location}&zoom=13&size=450x250&markers=${this.props.data.map_location}` }}
-          />
+          <TouchableHighlight
+            onPress={() => this.props.openMaps(this.props.data.map_location)}
+            style={styles.locationImageWrapper}
+          >
+            <Image
+              style={styles.locationImage}
+              source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.props.data.map_location}&zoom=13&size=450x250&markers=${this.props.data.map_location}` }}
+            />
+          </TouchableHighlight>
           <Text style={styles.titleText}>{this.props.data.title}</Text>
           {this.eventDesc(this.props.data)}
           {this.eventActions(this.props.data)}
@@ -338,6 +343,7 @@ Event.propTypes = {
   register: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
   fields: PropTypes.func.isRequired,
+  openMaps: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -352,6 +358,7 @@ const mapDispatchToProps = dispatch => ({
   register: event => dispatch(registrationActions.register(event)),
   cancel: registration => dispatch(registrationActions.cancel(registration)),
   fields: registration => dispatch(registrationActions.retrieveFields(registration)),
+  openMaps: location => Linking.openURL(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);
