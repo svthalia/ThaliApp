@@ -54,10 +54,14 @@ class Pizza extends Component {
         <View style={styles.section}>
           <Text style={styles.header}>Current order</Text>
           <View style={styles.card}>
-            <Text
+            <View
               style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
-            >The order has {order.paid || 'not yet '}been paid for.</Text>
-            <View style={styles.pizzaContainer}>
+            >
+              <Text style={styles.orderStatusText}>
+                The order has {order.paid || 'not yet '}been paid for.
+              </Text>
+            </View>
+            <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
               <View style={styles.pizzaInfo}>
                 <Text style={styles.pizzaName}>{productInfo.name}</Text>
                 <Text style={styles.pizzaDescription}>{productInfo.description}</Text>
@@ -88,7 +92,7 @@ class Pizza extends Component {
       {hasOrder && (
         <Text style={styles.header}>Changing your order</Text>
       )}
-      <View style={styles.card}>
+      <View style={[styles.card, styles.pizzaList]}>
         {pizzaList.map(pizza => (
           <View
             key={pizza.pk}
