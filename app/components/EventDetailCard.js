@@ -49,7 +49,7 @@ const EventDetailCard = props => (
       </TouchableOpacity>
       {props.event.pizza ? (
         <TouchableOpacity
-          onPress={() => props.retrievePizzaInfo(props.token)}
+          onPress={() => props.retrievePizzaInfo()}
           style={styles.button}
         >
           <Text style={styles.orderPizza}>PIZZA</Text>
@@ -90,7 +90,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadEvent: (pk, token) => dispatch(actions.event(pk, token)),
-  retrievePizzaInfo: token => dispatch(retrievePizzaInfo(token)),
+  retrievePizzaInfo: () => dispatch(retrievePizzaInfo()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventDetailCard);

@@ -1,13 +1,13 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { apiRequest } from '../url';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { apiRequest, tokenSelector } from '../url';
 
 import * as pizzaActions from '../actions/pizza';
 import * as navigationActions from '../actions/navigation';
 
 const NOT_FOUND = 404;
 
-const retrievePizzaInfo = function* retrievePizzaInfo(action) {
-  const { token } = action.payload;
+const retrievePizzaInfo = function* retrievePizzaInfo() {
+  const token = yield select(tokenSelector);
 
   yield put(pizzaActions.fetching());
   yield put(navigationActions.navigate('pizza'));
@@ -43,8 +43,8 @@ const retrievePizzaInfo = function* retrievePizzaInfo(action) {
   }
 };
 
-const cancel = function* cancel(action) {
-  const { token } = action.payload;
+const cancel = function* cancel() {
+  const token = yield select(tokenSelector);
   const data = {
     method: 'DELETE',
     headers: {
@@ -63,7 +63,8 @@ const cancel = function* cancel(action) {
 };
 
 const order = function* order(action) {
-  const { token, pk, hasOrder } = action.payload;
+  const { pk, hasOrder } = action.payload;
+  const token = yield select(tokenSelector);
   const data = {
     method: hasOrder ? 'PUT' : 'POST',
     headers: {
