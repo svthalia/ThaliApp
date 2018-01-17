@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Linking, Platform } from 'react-native';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
@@ -11,6 +11,7 @@ import * as reducers from './reducers';
 import sagas from './sagas';
 import ReduxNavigator from './components/navigator';
 import * as loginActions from './actions/login';
+import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -64,7 +65,27 @@ class Main extends Component {
             store.dispatch(register());
           }
         });
+
+    this.addDeepLinkingHandler();
   }
+
+  componentWillUnmount() {
+    Linking.removeEventListener('url', this.handleOpenURL);
+  }
+
+  addDeepLinkingHandler = () => {
+    if (Platform.OS === 'android') {
+      Linking.getInitialURL().then((url) => {
+        store.dispatch(deepLinkingActions.deepLink(url));
+      });
+    } else {
+      Linking.addEventListener('url', this.handleOpenURL);
+    }
+  };
+
+  handleOpenURL = (event) => {
+    store.dispatch(deepLinkingActions.deepLink(event.url));
+  };
 
   render() {
     return (

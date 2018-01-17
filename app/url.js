@@ -8,6 +8,7 @@ export const apiUrl = `${server}/api/v1`;
 export const pizzaUrl = 'https://pizza.thalia.nu';
 export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
 export const tokenSelector = state => state.session.token;
+export const loggedInSelector = state => state.navigation.loggedIn;
 
 export class ServerError extends Error {
   constructor(message, response) {
