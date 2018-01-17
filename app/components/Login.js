@@ -45,7 +45,7 @@ class Login extends Component {
         </View>
         <TouchableHighlight
           style={styles.blackbutton} onPress={() =>
-        login(this.state.username, this.state.password)}
+        login(this.state.username.toLowerCase(), this.state.password)}
         >
           <Text style={styles.loginText}>INLOGGEN</Text>
         </TouchableHighlight>
