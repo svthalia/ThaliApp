@@ -33,7 +33,10 @@ const getInfo = (event) => {
 };
 
 const EventDetailCard = props => (
-  <View style={styles.card}>
+  <TouchableOpacity
+    onPress={() => props.loadEvent(props.event.pk, props.token)}
+    style={styles.card}
+  >
     <Text style={styles.eventTitle}>{props.event.title}</Text>
     {getInfo(props.event)}
     <Text
@@ -41,12 +44,6 @@ const EventDetailCard = props => (
       style={styles.description}
     >{props.event.description}</Text>
     <View style={styles.buttonList}>
-      <TouchableOpacity
-        onPress={() => props.loadEvent(props.event.pk, props.token)}
-        style={styles.button}
-      >
-        <Text style={styles.moreInfo}>MEER INFO</Text>
-      </TouchableOpacity>
       {props.event.pizza ? (
         <TouchableOpacity
           onPress={() => props.retrievePizzaInfo(props.token)}
@@ -64,7 +61,7 @@ const EventDetailCard = props => (
       />
       )
     }
-  </View>
+  </TouchableOpacity>
 );
 
 EventDetailCard.propTypes = {
