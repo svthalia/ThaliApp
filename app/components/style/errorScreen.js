@@ -10,7 +10,8 @@ const styles = create({
   image: {
     width: 200,
     height: 200,
-    marginBottom: 30,
+    marginBottom: 32,
+    resizeMode: 'contain',
   },
   text: {
     android: {
@@ -20,8 +21,8 @@ const styles = create({
       fontFamily: 'System',
       fontWeight: '500',
     },
-    fontSize: 18,
-    color: colors.textColour,
+    fontSize: 16,
+    color: colors.gray,
     textAlign: 'center',
   },
 });

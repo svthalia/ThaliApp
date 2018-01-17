@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import styles from './style/errorScreen';
 
-const smiley = require('../img/smiley.png');
+const cloud = require('../img/sad_cloud.png');
 
 const ErrorScreen = props => (
   <View
     style={styles.content}
   >
     <Image
-      source={smiley}
+      source={cloud}
       style={styles.image}
     />
     <Text style={styles.text}>{props.message}</Text>
