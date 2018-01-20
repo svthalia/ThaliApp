@@ -4,6 +4,7 @@ export const colors = {
   magenta: '#E62272',
   darkMagenta: '#C2185B',
   white: '#FFFFFF',
+  pressedWhite: '#F2F2F2',
   background: '#FAFAFA',
   black: '#000000',
   lightGray: '#BBBBBB',
