@@ -69,7 +69,7 @@ class Pizza extends Component {
               </View>
               {(!order.paid && !hasEnded) && (
                 <TouchableOpacity
-                  onPress={() => this.props.cancelOrder(this.props.token)}
+                  onPress={() => this.props.cancelOrder()}
                   style={styles.button}
                 >
                   <Icon
@@ -105,7 +105,7 @@ class Pizza extends Component {
             </View>
             <TouchableOpacity
               onPress={() => {
-                this.props.orderPizza(this.props.token, pizza.pk, hasOrder);
+                this.props.orderPizza(pizza.pk, hasOrder);
                 this.pizzaScroll.scrollTo({ x: 0, y: 0, animated: true });
               }}
               style={styles.button}
@@ -123,7 +123,7 @@ class Pizza extends Component {
   );
 
   handleRefresh = () => {
-    this.props.retrievePizzaInfo(this.props.token);
+    this.props.retrievePizzaInfo();
   };
 
   render() {
@@ -223,7 +223,6 @@ Pizza.propTypes = {
     price: PropTypes.string.isRequired,
     available: PropTypes.bool.isRequired,
   })).isRequired,
-  token: PropTypes.string.isRequired,
   retrievePizzaInfo: PropTypes.func.isRequired,
   cancelOrder: PropTypes.func.isRequired,
   orderPizza: PropTypes.func.isRequired,
@@ -241,13 +240,12 @@ const mapStateToProps = state => ({
   event: state.pizza.event,
   order: state.pizza.order,
   pizzaList: state.pizza.pizzaList,
-  token: state.session.token,
 });
 
 const mapDispatchToProps = dispatch => ({
-  retrievePizzaInfo: token => dispatch(retrievePizzaInfo(token)),
-  cancelOrder: token => dispatch(cancelOrder(token)),
-  orderPizza: (token, pk, hasOrder) => dispatch(orderPizza(token, pk, hasOrder)),
+  retrievePizzaInfo: () => dispatch(retrievePizzaInfo()),
+  cancelOrder: () => dispatch(cancelOrder()),
+  orderPizza: (pk, hasOrder) => dispatch(orderPizza(pk, hasOrder)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pizza);

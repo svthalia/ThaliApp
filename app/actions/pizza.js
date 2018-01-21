@@ -7,10 +7,9 @@ export const CANCEL_SUCCESS = 'PIZZA_CANCEL_SUCCESS';
 export const ORDER = 'PIZZA_ORDER';
 export const ORDER_SUCCESS = 'PIZZA_ORDER_SUCCESS';
 
-export function retrievePizzaInfo(token) {
+export function retrievePizzaInfo() {
   return {
     type: PIZZA,
-    payload: { token },
   };
 }
 
@@ -33,10 +32,9 @@ export function failure() {
   };
 }
 
-export function cancelOrder(token) {
+export function cancelOrder() {
   return {
     type: CANCEL,
-    payload: { token },
   };
 }
 
@@ -46,10 +44,10 @@ export function cancelSuccess() {
   };
 }
 
-export function orderPizza(token, pk, hasOrder) {
+export function orderPizza(pk, hasOrder) {
   return {
     type: ORDER,
-    payload: { token, pk, hasOrder },
+    payload: { pk, hasOrder },
   };
 }
 
