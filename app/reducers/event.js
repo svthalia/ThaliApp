@@ -13,6 +13,7 @@ const initialState = {
     map_location: '',
     registration_allowed: false,
     has_fields: false,
+    is_pizza_event: false,
   },
   registrations: [],
   status: 'initial',
