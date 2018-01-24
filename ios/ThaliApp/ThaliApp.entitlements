@@ -7,6 +7,9 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>webcredentials:thalia.nu</string>
+		<string>applinks:*.thalia.nu</string>
+		<string>webcredentials:*.thalia.nu</string>
+		<string>applinks:thalia.nu</string>
 	</array>
 </dict>
 </plist>
