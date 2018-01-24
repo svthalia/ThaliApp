@@ -47,7 +47,7 @@ const EventDetailCard = props => (
         style={styles.description}
       >{props.event.description}</Text>
       <View style={styles.buttonList}>
-        <Text style={styles.moreInfo}>MEER INFO</Text>
+        <Text style={[styles.moreInfo, styles.button]}>MEER INFO</Text>
         {props.event.pizza ? (
           <TouchableOpacity
             onPress={() => props.retrievePizzaInfo(props.token)}
