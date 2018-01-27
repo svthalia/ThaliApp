@@ -13,6 +13,7 @@ import { colors } from '../style';
 
 import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
+import * as pizzaActions from '../actions/pizza';
 
 class Event extends Component {
   cancelPrompt = (pk) => {
@@ -115,6 +116,18 @@ class Event extends Component {
       }
     }
 
+    if (data.is_pizza_event) {
+      infoTexts.push(
+        <View key="pizza-holder" style={styles.pizzaHolder}>
+          <Text style={styles.pizzaText} key="pizza-title">Pizza:</Text>
+          <Button
+            color={colors.magenta}
+            title="Bestel"
+            onPress={this.props.retrievePizzaInfo}
+          />
+        </View>,
+      );
+    }
 
     return (
       <View>
@@ -331,6 +344,7 @@ Event.propTypes = {
       is_late_cancellation: PropTypes.bool,
     }),
     no_registration_message: PropTypes.string,
+    is_pizza_event: PropTypes.bool.isRequired,
   }).isRequired,
   registrations: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number.isRequired,
@@ -344,6 +358,7 @@ Event.propTypes = {
   cancel: PropTypes.func.isRequired,
   fields: PropTypes.func.isRequired,
   openMaps: PropTypes.func.isRequired,
+  retrievePizzaInfo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -359,6 +374,7 @@ const mapDispatchToProps = dispatch => ({
   cancel: registration => dispatch(registrationActions.cancel(registration)),
   fields: registration => dispatch(registrationActions.retrieveFields(registration)),
   openMaps: location => Linking.openURL(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
+  retrievePizzaInfo: () => dispatch(pizzaActions.retrievePizzaInfo()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

@@ -62,6 +62,28 @@ const styles = create({
       fontWeight: '300',
     },
   },
+  pizzaHolder: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  pizzaText: {
+    fontSize: 14,
+    lineHeight: 22.0,
+    color: colors.darkGrey,
+    width: '50%',
+    paddingRight: 8,
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
+  },
+  pizzaButton: {
+    flex: 1,
+  },
   registrationText: {
     marginTop: 16,
   },
