@@ -3,7 +3,7 @@ import * as registrationActions from '../actions/registration';
 const initialState = {
   registration: 0,
   fields: {},
-  status: 'success',
+  status: 'loading',
 };
 
 
@@ -32,6 +32,11 @@ export default function navigate(state = initialState, action = {}) {
       return {
         ...state,
         status: 'failure',
+      };
+    }
+    case registrationActions.FIELDS: {
+      return {
+        ...initialState,
       };
     }
     default:
