@@ -76,6 +76,7 @@ const update = function* update(action) {
 const cancel = function* cancel(action) {
   const { registration } = action.payload;
   const token = yield select(tokenSelector);
+  const event = yield select(eventSelector);
 
   yield put(eventActions.fetching());
 
@@ -94,7 +95,7 @@ const cancel = function* cancel(action) {
   } catch (error) {
     // Swallow error for now
   }
-  const event = yield select(eventSelector);
+
   yield put(eventActions.event(event));
 };
 
