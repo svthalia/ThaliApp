@@ -65,7 +65,6 @@ const styles = create({
     marginTop: 28,
   },
   button: {
-    backgroundColor: colors.white,
     marginRight: 28,
   },
   moreInfo: {
