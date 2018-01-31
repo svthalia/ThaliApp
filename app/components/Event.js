@@ -245,7 +245,7 @@ class Event extends Component {
                 key={item.item.pk}
                 member={{
                   pk: item.item.member,
-                  photo: item.item.avatar.small,
+                  photo: item.item.avatar.medium,
                   name: item.item.name,
                 }}
                 style={styles.memberView}
