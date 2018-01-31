@@ -7,6 +7,12 @@ const initialState = {
     pk: -1,
     display_name: '',
     photo: defaultProfileImage,
+    avatar: {
+      full: defaultProfileImage,
+      large: defaultProfileImage,
+      medium: defaultProfileImage,
+      small: defaultProfileImage,
+    },
     profile_description: '',
     birthday: '',
     starting_year: -1,

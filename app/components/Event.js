@@ -245,7 +245,7 @@ class Event extends Component {
                 key={item.item.pk}
                 member={{
                   pk: item.item.member,
-                  photo: item.item.photo,
+                  photo: item.item.avatar.small,
                   name: item.item.name,
                 }}
                 style={styles.memberView}
@@ -350,6 +350,12 @@ Event.propTypes = {
     pk: PropTypes.number.isRequired,
     member: PropTypes.number,
     name: PropTypes.string.isRequired,
+    avatar: PropTypes.shape({
+      full: PropTypes.string.isRequired,
+      large: PropTypes.string.isRequired,
+      medium: PropTypes.string.isRequired,
+      small: PropTypes.string.isRequired,
+    }).isRequired,
   })).isRequired,
   status: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,

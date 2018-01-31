@@ -196,7 +196,7 @@ class Profile extends Component {
           ]}
         >
           <ImageBackground
-            source={{ uri: this.props.profile.photo }}
+            source={{ uri: this.props.profile.avatar.full }}
             style={styles.backgroundImage}
             resizeMode="cover"
           >
@@ -268,6 +268,12 @@ Profile.propTypes = {
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
+    avatar: PropTypes.shape({
+      full: PropTypes.string.isRequired,
+      large: PropTypes.string.isRequired,
+      medium: PropTypes.string.isRequired,
+      small: PropTypes.string.isRequired,
+    }).isRequired,
     profile_description: PropTypes.string,
     birthday: PropTypes.string,
     starting_year: PropTypes.number,
