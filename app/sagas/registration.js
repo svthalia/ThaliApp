@@ -103,7 +103,8 @@ const fields = function* fields(action) {
   const { registration } = action.payload;
   const token = yield select(tokenSelector);
 
-  yield put(eventActions.fetching());
+  yield put(registrationActions.loading());
+  yield put(navigationActions.navigate('registration'));
 
   const data = {
     method: 'GET',
@@ -117,7 +118,6 @@ const fields = function* fields(action) {
   try {
     const response = yield call(apiRequest, `registrations/${registration}`, data);
     yield put(registrationActions.showFields(registration, response.fields));
-    yield put(navigationActions.navigate('registration'));
     yield put(eventActions.done());
   } catch (error) {
     yield put(eventActions.failure());
