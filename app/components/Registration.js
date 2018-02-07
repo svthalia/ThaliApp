@@ -124,14 +124,14 @@ class Registration extends Component {
           }
           return <View />;
         })}
-        <View style={styles.buttonView}>
+        {this.props.status !== 'loading' && <View style={styles.buttonView}>
           <Button
             title="Aanpassen"
             color={colors.magenta}
             onPress={() => this.props.update(this.props.registration, this.state)}
             disabled={!this.isFormValid()}
           />
-        </View>
+        </View>}
       </ScrollView>
     );
   }
