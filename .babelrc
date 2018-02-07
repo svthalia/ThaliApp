@@ -1,4 +1,8 @@
 {
-  "presets": ["react-native"],
-  "plugins": ["transform-object-rest-spread", "transform-regenerator"]
+  env: {
+    test: {
+      "presets": ["react-native"],
+      "plugins": ["transform-object-rest-spread", "transform-regenerator"]
+    }
+   }
 }
