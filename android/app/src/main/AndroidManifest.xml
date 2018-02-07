@@ -32,7 +32,7 @@
                 <data android:scheme="https" />
                 <data android:host="thalia.nu" />
                 <data android:path="/pizzas/" />
-                <data android:pathPrefix="/events/" />
+                <data android:pathPattern="/events/.*/" />
             </intent-filter>
         </activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
