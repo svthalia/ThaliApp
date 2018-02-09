@@ -6,10 +6,10 @@ import { apiRequest } from '../url';
 import * as loginActions from '../actions/login';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 
-const USERNAMEKEY = '@MyStore:username';
-const TOKENKEY = '@MyStore:token';
-const DISPLAYNAMEKEY = '@MyStore:displayName';
-const PHOTOKEY = '@MyStore:photo';
+export const USERNAMEKEY = '@MyStore:username';
+export const TOKENKEY = '@MyStore:token';
+export const DISPLAYNAMEKEY = '@MyStore:displayName';
+export const PHOTOKEY = '@MyStore:photo';
 
 const login = function* login(action) {
   const { user, pass } = action.payload;
