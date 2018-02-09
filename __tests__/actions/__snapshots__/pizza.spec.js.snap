@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pizza actions should create an action for a successful cancel the pizza order 1`] = `
+Object {
+  "type": "PIZZA_CANCEL_SUCCESS",
+}
+`;
+
+exports[`pizza actions should create an action for a successful pizza order creation 1`] = `
+Object {
+  "payload": Object {
+    "order": "order",
+  },
+  "type": "PIZZA_ORDER_SUCCESS",
+}
+`;
+
+exports[`pizza actions should create an action for a successful pizza retrieval 1`] = `
+Object {
+  "payload": Object {
+    "event": "event",
+    "order": "order",
+    "pizzaList": "pizzaList",
+  },
+  "type": "PIZZA_SUCCESS",
+}
+`;
+
+exports[`pizza actions should create an action to announce the pizza failure 1`] = `
+Object {
+  "type": "PIZZA_FAILURE",
+}
+`;
+
+exports[`pizza actions should create an action to announce the pizza fetching 1`] = `
+Object {
+  "type": "PIZZA_FETCHING",
+}
+`;
+
+exports[`pizza actions should create an action to cancel the pizza order 1`] = `
+Object {
+  "type": "PIZZA_CANCEL",
+}
+`;
+
+exports[`pizza actions should create an action to create the pizza order 1`] = `
+Object {
+  "payload": Object {
+    "hasOrder": true,
+    "pk": 1,
+  },
+  "type": "PIZZA_ORDER",
+}
+`;
+
+exports[`pizza actions should create an action to create the pizza order 2`] = `
+Object {
+  "payload": Object {
+    "hasOrder": false,
+    "pk": 2,
+  },
+  "type": "PIZZA_ORDER",
+}
+`;
+
+exports[`pizza actions should create an action to load the pizza list 1`] = `
+Object {
+  "type": "PIZZA_PIZZALIST",
+}
+`;

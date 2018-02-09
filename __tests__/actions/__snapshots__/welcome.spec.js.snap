@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`welcome actions should create an action to announce a failed load 1`] = `
+Object {
+  "type": "WELCOME_FAILURE",
+}
+`;
+
+exports[`welcome actions should create an action to announce a successful load 1`] = `
+Object {
+  "payload": Object {
+    "eventList": "eventList",
+  },
+  "type": "WELCOME_SUCCESS",
+}
+`;
+
+exports[`welcome actions should create an action to refresh the view 1`] = `
+Object {
+  "type": "WELCOME_REFRESH",
+}
+`;
