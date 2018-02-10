@@ -3,17 +3,32 @@ image: node:6
 variables:
     GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
 
-cache:
-    key: $CI_PROJECT_NAME
-    paths:
-        - .gradle/wrapper/
-        - .gradle/caches/
-
-before_script:
-    - yarn install
-
 stages:
-    - validate
+  - dependencies
+  - validate
+
+cache:
+    key: $CI_JOB_NAME
+    paths:
+      - .gradle/wrapper/
+      - .gradle/caches/
+
+dependencies:
+    stage: dependencies
+    cache:
+        key: $CI_JOB_NAME
+        paths:
+            - $ARTIFACTS_PATH
+            - $TOOL_CACHE_PATH
+    artifacts:
+        expire_in: 1 hour
+        paths:
+            - $ARTIFACTS_PATH
+    script:
+        - yarn install --lockfile-only
+    variables:
+        TOOL_CACHE_PATH: /usr/local/share/.cache/yarn/v1
+        ARTIFACTS_PATH: node_modules
 
 eslint:
     stage: validate
