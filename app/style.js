@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet as ReactStyleSheet, Platform } from 'react-native';
 
 export const colors = {
   magenta: '#E62272',
@@ -20,38 +20,16 @@ export const colors = {
   darkRed: '#d15348',
 };
 
-export function create(styles) {
-  const platformStyles = {};
-  Object.keys(styles).forEach((name) => {
-// eslint-disable-next-line prefer-const
-    let { ios, android, ...style } = { ...styles[name] };
-    if (ios && Platform.OS === 'ios') {
-      style = { ...style, ...ios };
-    }
-    if (android && Platform.OS === 'android') {
-      style = { ...style, ...android };
-    }
-
-    if (name === 'ios' && Platform.OS === 'ios') {
-      Object.keys(style).forEach((styleName) => {
-        if (platformStyles[styleName]) {
-          platformStyles[styleName] = { ...platformStyles[styleName], ...style[styleName] };
-        }
-      });
-    }
-
-    if (name === 'android' && Platform.OS === 'android') {
-      Object.keys(style).forEach((styleName) => {
-        if (platformStyles[styleName]) {
-          platformStyles[styleName] = { ...platformStyles[styleName], ...style[styleName] };
-        }
-      });
-    }
-
-    if (name !== 'ios' && name !== 'android') {
+export class StyleSheet {
+  static create(styles) {
+    const platformStyles = {};
+    Object.keys(styles).forEach((name) => {
+      // eslint-disable-next-line prefer-const
+      let { ios, android, ...style } = { ...styles[name] };
+      style = { ...style, ...Platform.select({ android, ios }) };
       platformStyles[name] = style;
-    }
-  });
+    });
 
-  return StyleSheet.create(platformStyles);
+    return ReactStyleSheet.create(platformStyles);
+  }
 }

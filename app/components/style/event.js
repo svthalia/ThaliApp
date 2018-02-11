@@ -1,10 +1,10 @@
 import { Dimensions } from 'react-native';
-import { create, colors } from '../../style';
+import { StyleSheet, colors } from '../../style';
 
 const windowWidth = Dimensions.get('window').width;
 export const memberSize = (windowWidth - 64) / 3;
 
-const styles = create({
+const styles = StyleSheet.create({
   eventView: {
     padding: 16,
     backgroundColor: colors.background,

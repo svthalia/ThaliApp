@@ -1,11 +1,11 @@
-import { colors, create } from '../../style';
+import { colors, StyleSheet } from '../../style';
 import { TOTAL_BAR_HEIGHT, STATUSBAR_HEIGHT } from './standardHeader';
 
 export const HEADER_MIN_HEIGHT = TOTAL_BAR_HEIGHT;
 export const HEADER_MAX_HEIGHT = 200 + STATUSBAR_HEIGHT;
 export const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
-const styles = create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     flex: 1,

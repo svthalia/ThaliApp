@@ -1,6 +1,6 @@
-import { colors, create } from '../../style';
+import { colors, StyleSheet } from '../../style';
 
-const styles = create({
+const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 8,
