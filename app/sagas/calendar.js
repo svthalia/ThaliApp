@@ -15,6 +15,8 @@ const calendar = function* calendar() {
     },
   };
 
+  yield put(calendarActions.fetching());
+
   try {
     const events = yield call(apiRequest, 'events', data);
     let partnerEvents = [];

@@ -9,7 +9,7 @@ import * as navigationActions from '../actions/navigation';
 import * as registrationActions from '../actions/registration';
 
 
-const eventSelector = state => state.event.data.pk;
+export const eventSelector = state => state.event.data.pk;
 
 
 const register = function* register(action) {

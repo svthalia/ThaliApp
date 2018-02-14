@@ -7,7 +7,7 @@ import * as loginActions from '../actions/login';
 import * as eventActions from '../actions/event';
 import * as navigationActions from '../actions/navigation';
 
-const parseURL = (url) => {
+export const parseURL = (url) => {
   const matches = new RegExp(`^${siteURL}(/[^?]+)(?:\\?(.+))?`).exec(url);
 
   if (!matches) {

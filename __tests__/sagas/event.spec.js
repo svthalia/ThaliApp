@@ -9,8 +9,12 @@ import eventSaga from '../../app/sagas/event';
 import * as eventActions from '../../app/actions/event';
 import * as navActions from '../../app/actions/navigation';
 
+jest.mock('../../app/url', () => ({
+  apiRequest: jest.fn(() => {}),
+  tokenSelector: () => 'token',
+}));
 
-describe('event api call', () => {
+describe('event saga', () => {
   const error = new Error('error');
 
   it('should start fetching', () => expectSaga(eventSaga)
@@ -49,4 +53,29 @@ describe('event api call', () => {
     .dispatch(eventActions.event(1))
     .put(eventActions.success('eventData', 'regData'))
     .silentRun());
+
+  it('should do two GET requests', () => expectSaga(eventSaga)
+    .provide([
+      [select(tokenSelector), 'usertoken'],
+    ])
+    .dispatch(eventActions.event(1))
+    .silentRun()
+    .then(() => {
+      expect(apiRequest).toBeCalledWith('events/1', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Token usertoken',
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      });
+      expect(apiRequest).toBeCalledWith('events/1/registrations', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Token usertoken',
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      }, { status: 'registered' });
+    }));
 });
