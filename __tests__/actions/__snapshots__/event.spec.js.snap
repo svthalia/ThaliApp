@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`event actions should create an action to load an event 1`] = `
+Object {
+  "payload": Object {
+    "pk": 1,
+  },
+  "type": "EVENT_EVENT",
+}
+`;
+
+exports[`event actions should create an action to notify of a completed fetch of an event 1`] = `
+Object {
+  "type": "EVENT_DONE",
+}
+`;
+
+exports[`event actions should create an action to notify of a failure fetching an event 1`] = `
+Object {
+  "type": "EVENT_FAILURE",
+}
+`;
+
+exports[`event actions should create an action to notify of a success fetch of an event 1`] = `
+Object {
+  "payload": Object {
+    "eventData": "eventData",
+    "eventRegistrations": "eventReg",
+  },
+  "type": "EVENT_SUCCESS",
+}
+`;
+
+exports[`event actions should create an action to notify of that an event is fetching 1`] = `
+Object {
+  "type": "EVENT_FETCHING",
+}
+`;

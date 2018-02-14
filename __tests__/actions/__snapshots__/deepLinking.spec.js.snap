@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deeplinking actions should create an action to notify of a new deeplink 1`] = `
+Object {
+  "payload": Object {
+    "url": "http://example.org",
+  },
+  "type": "DEEPLINKING_DEEPLINK",
+}
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`push notifications actions should create an action to invalidate the push token 1`] = `
+Object {
+  "type": "PUSH_NOTIFICATIONS_INVALIDATE",
+}
+`;
+
+exports[`push notifications actions should create an action to register the push token 1`] = `
+Object {
+  "type": "PUSH_NOTIFICATIONS_REGISTER",
+}
+`;

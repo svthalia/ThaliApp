@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calendar actions should create an action to notify of a failure fetching the calendar 1`] = `
+Object {
+  "type": "CALENDAR_FAILURE",
+}
+`;
+
+exports[`calendar actions should create an action to notify of a success fetch for the calendar 1`] = `
+Object {
+  "payload": Object {
+    "eventList": Array [
+      Object {
+        "pk": 1,
+      },
+    ],
+  },
+  "type": "CALENDAR_SUCCESS",
+}
+`;
+
+exports[`calendar actions should create an action to refresh the calendar 1`] = `
+Object {
+  "type": "CALENDAR_REFRESH",
+}
+`;

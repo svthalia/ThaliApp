@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`registration actions should create an action to cancel the event registration 1`] = `
+Object {
+  "payload": Object {
+    "registration": "registration",
+  },
+  "type": "REGISTRATION_CANCEL",
+}
+`;
+
+exports[`registration actions should create an action to retrieve the event fields 1`] = `
+Object {
+  "payload": Object {
+    "registration": "registration",
+  },
+  "type": "REGISTRATION_FIELDS",
+}
+`;
+
+exports[`registration actions should create an action to show a failure 1`] = `
+Object {
+  "type": "REGISTRATION_FAILURE",
+}
+`;
+
+exports[`registration actions should create an action to show loading 1`] = `
+Object {
+  "type": "REGISTRATION_FETCHING",
+}
+`;
+
+exports[`registration actions should create an action to show success 1`] = `
+Object {
+  "type": "REGISTRATION_SUCCESS",
+}
+`;
+
+exports[`registration actions should create an action to show the event fields 1`] = `
+Object {
+  "payload": Object {
+    "fields": "fields",
+    "registration": "registration",
+  },
+  "type": "REGISTRATION_SHOW_FIELDS",
+}
+`;
+
+exports[`registration actions should create an action to start the event registration 1`] = `
+Object {
+  "payload": Object {
+    "event": "event",
+  },
+  "type": "REGISTRATION_REGISTER",
+}
+`;
+
+exports[`registration actions should create an action to update the event registration 1`] = `
+Object {
+  "payload": Object {
+    "fields": "fields",
+    "registration": "registration",
+  },
+  "type": "REGISTRATION_UPDATE",
+}
+`;
