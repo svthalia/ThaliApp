@@ -1,8 +1,8 @@
-import { colors, create } from '../../style';
+import { colors, StyleSheet } from '../../style';
 
 import { STATUSBAR_HEIGHT } from './standardHeader';
 
-const styles = create({
+const styles = StyleSheet.create({
   sidebar: {
     backgroundColor: colors.white,
     flex: 1,
