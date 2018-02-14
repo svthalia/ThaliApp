@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calendar reducer initially should not be fetched 1`] = `
+Object {
+  "eventList": Array [],
+  "loading": true,
+  "status": "initial",
+}
+`;
