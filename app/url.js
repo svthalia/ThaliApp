@@ -1,11 +1,11 @@
 let server = 'https://thalia.nu';
+/* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
   server = 'http://localhost:8000';
 }
 
 export const url = server;
 export const apiUrl = `${server}/api/v1`;
-export const pizzaUrl = 'https://pizza.thalia.nu';
 export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
 export const tokenSelector = state => state.session.token;
 export const loggedInSelector = state => state.navigation.loggedIn;
