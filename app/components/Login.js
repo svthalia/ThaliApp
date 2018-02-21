@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View,
-  TextInput,
-  Text,
-  Linking,
   Image,
-  TouchableHighlight,
-  KeyboardAvoidingView,
   Keyboard,
+  KeyboardAvoidingView,
+  Linking,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -17,6 +16,8 @@ import { url } from '../url';
 
 import * as actions from '../actions/login';
 import DismissKeyboardView from './DismissKeyboardView';
+import Button from './Button';
+import { colors } from '../style';
 
 const image = require('../img/logo.png');
 
@@ -59,12 +60,15 @@ class Login extends Component {
               }}
             />
           </View>
-          <TouchableHighlight
-            style={styles.blackbutton} onPress={() =>
-            login(this.state.username, this.state.password)}
-          >
-            <Text style={styles.loginText}>{t('LOGIN')}</Text>
-          </TouchableHighlight>
+          <Button
+            title={t('LOGIN')}
+            onPress={() =>
+              login(this.state.username, this.state.password)}
+            color={colors.darkGrey}
+            style={styles.loginButton}
+            textStyle={styles.loginButtonText}
+            underlayColor={colors.white}
+          />
           <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
             {t('Forgot password?')}
           </Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Modal, View, ScrollView, Switch, TextInput, Text, Button } from 'react-native';
+import { ActivityIndicator, Modal, View, ScrollView, Switch, TextInput, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -10,6 +10,7 @@ import { colors } from '../style';
 import ErrorScreen from './ErrorScreen';
 
 import * as registrationActions from '../actions/registration';
+import Button from './Button';
 
 class Registration extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Registration extends Component {
 
   getFieldValidity = (key) => {
     const field = this.props.fields[key];
-    const value = this.state[key];
+    const value = this.state[key] ? this.state[key] : field.value;
     if (field.required) {
       if (field.type === 'integer' && (value === '' || value === null || !value.match(/^-?\d+$/))) {
         return {
@@ -131,6 +132,7 @@ class Registration extends Component {
             color={colors.magenta}
             onPress={() => this.props.update(this.props.registration, this.state)}
             disabled={!this.isFormValid()}
+            style={styles.submitButton}
           />
         </View>}
       </ScrollView>

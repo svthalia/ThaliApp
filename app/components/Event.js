@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, Button, TouchableHighlight, Platform, Linking } from 'react-native';
+import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, TouchableHighlight, Platform, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
@@ -14,6 +14,7 @@ import { colors } from '../style';
 import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
 import * as pizzaActions from '../actions/pizza';
+import Button from './Button';
 
 class Event extends Component {
   cancelPrompt = (pk) => {
@@ -208,13 +209,11 @@ class Event extends Component {
           return (
             <View style={styles.registrationActions}>
               <Button
-                color={colors.magenta}
                 title={this.props.t('Update registration')}
                 onPress={() => this.props.fields(event.user_registration.pk)}
               />
               <View style={styles.secondButtonMargin}>
                 <Button
-                  color={colors.magenta}
                   title={this.props.t('Cancel registration')}
                   onPress={() => this.cancelPrompt(event.user_registration.pk)}
                 />
@@ -224,7 +223,7 @@ class Event extends Component {
         }
         return (
           <View style={styles.registrationActions}>
-            <Button color={colors.magenta} title={this.props.t('Cancel registration')} onPress={() => this.cancelPrompt(event.user_registration.pk)} />
+            <Button title={this.props.t('Cancel registration')} onPress={() => this.cancelPrompt(event.user_registration.pk)} />
           </View>
         );
       }
