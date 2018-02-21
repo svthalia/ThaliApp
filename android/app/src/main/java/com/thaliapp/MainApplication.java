@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
+import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -26,8 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
+            new MainReactPackage(),
             new SnackbarPackage(),
+            new ReactNativeI18n(),
             new FIRMessagingPackage(),
             new LinearGradientPackage(),
             new VectorIconsPackage()

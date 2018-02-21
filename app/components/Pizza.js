@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
-import 'moment/locale/nl';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
 
@@ -24,7 +24,7 @@ class Pizza extends Component {
 
   getEventInfo = (title, subtitle) => (
     <View style={styles.eventInfo}>
-      <Text style={styles.title}>Order pizza for {title}</Text>
+      <Text style={styles.title}>{this.props.t('Order pizza for {{title}}', { title })}</Text>
       <Text style={styles.subtitle}>{subtitle}</Text>
     </View>
   );
@@ -43,7 +43,7 @@ class Pizza extends Component {
         </View>
       );
     }
-    return <Text style={styles.header}>You did not place an order.</Text>;
+    return <Text style={styles.header}>{this.props.t('You did not place an order.')}</Text>;
   };
 
   getOrder = (order, pizzaList, hasEnded) => {
@@ -58,7 +58,8 @@ class Pizza extends Component {
               style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
             >
               <Text style={styles.orderStatusText}>
-                The order has {order.paid || 'not yet '}been paid for.
+                {order.paid && this.props.t('The order has been paid for.')}
+                {!order.paid && this.props.t('The order has not yet been paid for.')}
               </Text>
             </View>
             <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
@@ -90,7 +91,7 @@ class Pizza extends Component {
   getPizzaList = (pizzaList, hasOrder) => (
     <View style={styles.section}>
       {hasOrder && (
-        <Text style={styles.header}>Changing your order</Text>
+        <Text style={styles.header}>{this.props.t('Changing your order')}</Text>
       )}
       <View style={[styles.card, styles.pizzaList]}>
         {pizzaList.map(pizza => (
@@ -140,7 +141,7 @@ class Pizza extends Component {
           }
           contentContainerStyle={styles.content}
         >
-          <ErrorScreen message="Sorry! We couldn't load any data." />
+          <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
         </ScrollView>
       );
     } else if (!this.props.event) {
@@ -156,7 +157,7 @@ class Pizza extends Component {
         >
           <Text
             style={styles.title}
-          >There is currently no event for which you can order food.</Text>
+          >{this.props.t('There is currently no event for which you can order food.')}</Text>
         </ScrollView>
       );
     }
@@ -170,11 +171,11 @@ class Pizza extends Component {
 
     let subtitle;
     if (inFuture) {
-      subtitle = `It will be possible to order from ${start.format('HH:mm')}`;
+      subtitle = this.props.t(`It will be possible to order from ${start.format('HH:mm')}`);
     } else if (hasEnded) {
-      subtitle = `It was possible to order until ${end.format('HH:mm')}`;
+      subtitle = this.props.t(`It was possible to order until ${end.format('HH:mm')}`);
     } else {
-      subtitle = `You can order until ${end.format('HH:mm')}`;
+      subtitle = this.props.t(`You can order until ${end.format('HH:mm')}`);
     }
 
     return (
@@ -226,6 +227,7 @@ Pizza.propTypes = {
   retrievePizzaInfo: PropTypes.func.isRequired,
   cancelOrder: PropTypes.func.isRequired,
   orderPizza: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 Pizza.defaultProps = {
@@ -248,4 +250,4 @@ const mapDispatchToProps = dispatch => ({
   orderPizza: (pk, hasOrder) => dispatch(orderPizza(pk, hasOrder)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pizza);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('pizza')(Pizza));

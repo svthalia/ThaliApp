@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, SectionList, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Moment from 'moment';
-import 'moment/locale/nl';
 
 import EventDetailCard from './EventDetailCard';
 import LoadingScreen from './LoadingScreen';
@@ -13,13 +13,12 @@ import * as welcomeActions from '../actions/welcome';
 import { navigate } from '../actions/navigation';
 import styles from './style/welcome';
 
-const eventListToSections = (eventList) => {
-  Moment.locale('nl');
+const eventListToSections = (eventList, t) => {
   const calendarFormat = {
-    sameDay: '[Vandaag]',
-    nextDay: '[Morgen]',
+    sameDay: `[${t('Today')}]`,
+    nextDay: `[${t('Tomorrow')}]`,
     nextWeek: 'dddd D MMMM',
-    lastDay: '[Gisteren]',
+    lastDay: `[${t('Yesterday')}]`,
     lastWeek: 'dddd D MMMM',
     sameElse: 'dddd D MMMM',
   };
@@ -50,19 +49,20 @@ const Footer = props => (
     onPress={() => props.navigate('eventList', true)}
     style={styles.footer}
   >
-    <Text style={styles.footerText}>BEKIJK DE GEHELE AGENDA</Text>
+    <Text style={styles.footerText}>{props.t('SHOW THE ENTIRE AGENDA')}</Text>
   </TouchableOpacity>
 );
 
 Footer.propTypes = {
   navigate: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapDispatchToPropsFooter = dispatch => ({
   navigate: (scene, newSection) => dispatch(navigate(scene, newSection)),
 });
 
-const FooterComponent = connect(() => ({}), mapDispatchToPropsFooter)(Footer);
+const FooterComponent = connect(() => ({}), mapDispatchToPropsFooter)(translate('welcome')(Footer));
 
 class Welcome extends Component {
   handleRefresh = () => {
@@ -83,7 +83,7 @@ class Welcome extends Component {
             />
           )}
         >
-          <ErrorScreen message="Sorry! We couldn't load any data." />
+          <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
         </ScrollView>
       );
     } else if (this.props.eventList.length === 0) {
@@ -97,7 +97,7 @@ class Welcome extends Component {
             />
           )}
         >
-          <ErrorScreen message="No events found!" />
+          <ErrorScreen message={this.props.t('No events found!')} />
         </ScrollView>
       );
     }
@@ -109,7 +109,7 @@ class Welcome extends Component {
           renderSectionHeader={
             itemHeader => <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
           }
-          sections={eventListToSections(this.props.eventList)}
+          sections={eventListToSections(this.props.eventList, this.props.t)}
           keyExtractor={event => event.pk}
           stickySectionHeadersEnabled
           onRefresh={this.handleRefresh}
@@ -136,6 +136,7 @@ Welcome.propTypes = {
   refresh: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -148,4 +149,4 @@ const mapDispatchToProps = dispatch => ({
   refresh: () => dispatch(welcomeActions.refresh()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('welcome')(Welcome));

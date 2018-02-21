@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Modal, View, ScrollView, Switch, TextInput, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import styles from './style/registration';
@@ -35,12 +36,12 @@ class Registration extends Component {
       if (field.type === 'integer' && (value === '' || value === null || !value.match(/^-?\d+$/))) {
         return {
           isValid: false,
-          reason: 'This field is required and must be an integer.',
+          reason: this.props.t('This field is required and must be an integer.'),
         };
       } else if (field.type === 'text' && (value === '' || value === null)) {
         return {
           isValid: false,
-          reason: 'This field is required.',
+          reason: this.props.t('This field is required.'),
         };
       }
     }
@@ -67,7 +68,7 @@ class Registration extends Component {
 
   render() {
     if (this.props.status === 'failure') {
-      return <ErrorScreen message="Sorry! We couldn't load any data." />;
+      return <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />;
     }
 
     const keys = Object.keys(this.props.fields);
@@ -126,7 +127,7 @@ class Registration extends Component {
         })}
         {this.props.status !== 'loading' && <View style={styles.buttonView}>
           <Button
-            title="Aanpassen"
+            title={this.props.t('Save')}
             color={colors.magenta}
             onPress={() => this.props.update(this.props.registration, this.state)}
             disabled={!this.isFormValid()}
@@ -142,6 +143,7 @@ Registration.propTypes = {
   fields: PropTypes.object.isRequired,  // eslint-disable-line react/forbid-prop-types
   status: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -154,4 +156,4 @@ const mapDispatchToProps = dispatch => ({
   update: (registration, fields) => dispatch(registrationActions.update(registration, fields)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('registration')(Registration));

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StatusBar, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Drawer from 'react-native-drawer';
 import Login from './Login';
 import Welcome from './Welcome';
@@ -114,4 +115,4 @@ const mapDispatchToProps = dispatch => ({
   navigateToWelcome: () => dispatch(actions.navigate('welcome', true)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxNavigator);
+export default connect(mapStateToProps, mapDispatchToProps)(translate('navigator')(ReduxNavigator));

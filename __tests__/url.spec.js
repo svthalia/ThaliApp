@@ -6,6 +6,8 @@ import {
 global.fetch = jest.fn().mockReturnValue(
   Promise.resolve({ status: 200, json: () => 'responseJson' }));
 
+jest.mock('react-native-locale-detector', () => 'en');
+
 describe('url helper', () => {
   beforeEach(() => {
   });
@@ -23,27 +25,38 @@ describe('url helper', () => {
 
   it('should do a fetch request', () => {
     expect.assertions(2);
-    return apiRequest('route', 'fetchOpts', null)
+    return apiRequest('route', {}, null)
       .then((response) => {
-        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`, 'fetchOpts');
+        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
+          { headers: { 'Accept-Language': 'en' } });
         expect(response).toEqual('responseJson');
       });
   });
 
   it('should do a fetch request with params', () => {
     expect.assertions(1);
-    return apiRequest('route', 'fetchOpts', {
+    return apiRequest('route', {}, {
       params: 'value',
     }).then(() => {
-      expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`, 'fetchOpts');
+      expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`,
+        { headers: { 'Accept-Language': 'en' } });
+    });
+  });
+
+  it('should do a fetch request with headers', () => {
+    expect.assertions(1);
+    return apiRequest('route', { headers: { Authorization: 'Token abc' } }, null).then(() => {
+      expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
+        { headers: { 'Accept-Language': 'en', Authorization: 'Token abc' } });
     });
   });
 
   it('should generate the url parameters', () => {
     expect.assertions(2);
-    return apiRequest('route', 'fetchOpts', null)
+    return apiRequest('route', {}, null)
       .then((response) => {
-        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`, 'fetchOpts');
+        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
+          { headers: { 'Accept-Language': 'en' } });
         expect(response).toEqual('responseJson');
       });
   });
@@ -52,7 +65,7 @@ describe('url helper', () => {
     expect.assertions(1);
     const response = { status: 404, json: () => 'responseJson' };
     global.fetch.mockReturnValue(Promise.resolve(response));
-    return apiRequest('route', 'fetchOpts', null)
+    return apiRequest('route', {}, null)
       .catch(e => expect(e).toEqual(new ServerError('Invalid status code: 404', response)));
   });
 
@@ -60,7 +73,7 @@ describe('url helper', () => {
     expect.assertions(1);
     const response = { status: 204, json: () => 'responseJson' };
     global.fetch.mockReturnValue(Promise.resolve(response));
-    return apiRequest('route', 'fetchOpts', null)
+    return apiRequest('route', {}, null)
       .then(res => expect(res).toEqual({}));
   });
 });

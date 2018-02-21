@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StatusBar, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -9,20 +10,20 @@ import styles from './style/standardHeader';
 
 import * as actions from '../actions/navigation';
 
-const sceneToTitle = (scene) => {
+const sceneToTitle = (scene, t) => {
   switch (scene) {
     case 'welcome':
-      return 'Welkom';
+      return t('Welcome');
     case 'event':
-      return 'Evenement';
+      return t('Event');
     case 'eventList':
-      return 'Agenda';
+      return t('Calendar');
     case 'pizza':
-      return 'Pizza';
+      return t('Pizza');
     case 'profile':
-      return 'Profiel';
+      return t('Profile');
     case 'registration':
-      return 'Registratie';
+      return t('Registration');
     default:
       return 'ThaliApp';
   }
@@ -48,7 +49,7 @@ const StandardHeader = props => (
           size={24}
         />
       </TouchableOpacity>
-      <Text style={styles.title}>{sceneToTitle(props.currentScene)}</Text>
+      <Text style={styles.title}>{sceneToTitle(props.currentScene, props.t)}</Text>
       <View style={styles.rightView} />
     </View>
   </View>
@@ -60,6 +61,7 @@ StandardHeader.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   back: PropTypes.func.isRequired,
   updateDrawer: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -73,4 +75,6 @@ const mapDispatchToProps = dispatch => ({
   updateDrawer: isOpen => dispatch(actions.updateDrawer(isOpen)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(StandardHeader);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)(translate('standardHeader')(StandardHeader));

@@ -145,6 +145,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-locale-detector')
     compile project(':react-native-snackbar')
     compile project(':react-native-fcm')
     compile project(':react-native-linear-gradient')
