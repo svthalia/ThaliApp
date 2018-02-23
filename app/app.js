@@ -11,9 +11,9 @@ import 'moment/locale/nl';
 
 import * as reducers from './reducers';
 
-import i18n from './i18n';
+import i18n from './utils/i18n';
 import sagas from './sagas';
-import ReduxNavigator from './components/navigator';
+import ReduxNavigator from './ui/components/navigator/ReduxNavigator';
 import * as loginActions from './actions/login';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';

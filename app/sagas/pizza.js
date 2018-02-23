@@ -1,5 +1,5 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
-import { apiRequest, tokenSelector } from '../url';
+import { apiRequest, tokenSelector } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
 import * as navigationActions from '../actions/navigation';

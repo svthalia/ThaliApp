@@ -2,12 +2,12 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
-import { apiRequest, tokenSelector } from '../../app/url';
+import { apiRequest, tokenSelector } from '../../app/utils/url';
 import pizzaSaga from '../../app/sagas/pizza';
 import * as pizzaActions from '../../app/actions/pizza';
 import * as navigationActions from '../../app/actions/navigation';
 
-jest.mock('../../app/url', () => ({
+jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
   tokenSelector: () => 'token',
 }));

@@ -2,7 +2,7 @@ import { call, takeEvery, put } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
-import { apiRequest } from '../url';
+import { apiRequest } from '../utils/url';
 import * as loginActions from '../actions/login';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 

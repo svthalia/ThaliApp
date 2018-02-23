@@ -1,4 +1,4 @@
-import { defaultProfileImage } from '../url';
+import { defaultProfileImage } from '../utils/url';
 
 import * as loginActions from '../actions/login';
 
