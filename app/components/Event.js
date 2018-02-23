@@ -4,6 +4,7 @@ import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, Button,
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
+import HTML from 'react-native-render-html';
 
 import styles, { memberSize } from './style/event';
 import MemberView from './MemberView';
@@ -271,6 +272,16 @@ class Event extends Component {
       return <LoadingScreen />;
     }
 
+    const fontStyles = {
+      fontSize: 14,
+      lineHeight: 24.0,
+      color: colors.black,
+    };
+
+    const linkStyles = {
+      color: colors.magenta,
+    };
+
     if (this.props.status === 'success') {
       return (
         <ScrollView
@@ -297,7 +308,14 @@ class Event extends Component {
           {this.eventActions(this.props.data)}
           {this.eventInfo(this.props.data)}
           <View style={styles.divider} />
-          <Text style={styles.descText}>{this.props.data.description}</Text>
+          <HTML
+            html={this.props.data.description}
+            onLinkPress={(event, href) => Linking.openURL(href)}
+            baseFontStyle={fontStyles}
+            tagsStyles={{
+              a: linkStyles,
+            }}
+          />
           {this.registrationsGrid(this.props.registrations, this.props.t)}
         </ScrollView>
       );
