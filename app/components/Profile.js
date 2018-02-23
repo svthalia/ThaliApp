@@ -253,9 +253,9 @@ class Profile extends Component {
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollY } } }])}
         >
           <View style={styles.content}>
-            {getDescription(this.props.profile)}
-            {getPersonalInfo(this.props.profile)}
-            {getAchievements(this.props.profile)}
+            {getDescription(this.props.profile, this.props.t)}
+            {getPersonalInfo(this.props.profile, this.props.t)}
+            {getAchievements(this.props.profile, this.props.t)}
           </View>
         </ScrollView>
         {this.getAppbar()}
