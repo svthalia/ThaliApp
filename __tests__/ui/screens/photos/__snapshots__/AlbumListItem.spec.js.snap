@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlbumListItem component renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {},
+      Object {
+        "height": 20,
+        "width": 20,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "http://test.local/small.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "height": undefined,
+              "width": undefined,
+            },
+            undefined,
+          ]
+        }
+      />
+      <BVLinearGradient
+        colors={
+          Array [
+            5570560,
+            4278190080,
+          ]
+        }
+        endPoint={undefined}
+        locations={null}
+        startPoint={undefined}
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0.6,
+            "position": "absolute",
+            "right": 0,
+            "top": "50%",
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "bottom": 4,
+            "left": 6,
+            "position": "absolute",
+            "right": 6,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "color": "#FFFFFF",
+              "fontSize": 12,
+            }
+          }
+        >
+          Title
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "color": "#FFFFFF",
+              "fontSize": 10,
+            }
+          }
+        >
+          01-01-17
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

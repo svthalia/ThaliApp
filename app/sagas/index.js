@@ -12,6 +12,7 @@ import registrationSaga from './registration';
 import deepLinkingSaga from './deepLinking';
 import membersSaga from './members';
 import settingsSaga from './settings';
+import photosSaga from './photos';
 
 const sagas = function* sagas() {
   yield all([
@@ -23,6 +24,7 @@ const sagas = function* sagas() {
     fork(calendarSaga),
     fork(pushNotificationsSaga),
     fork(pizzaSaga),
+    fork(photosSaga),
     fork(registrationSaga),
     fork(deepLinkingSaga),
     fork(membersSaga),

@@ -58,6 +58,7 @@
     "react-native-drawer": "^2.3.0",
     "react-native-firebase": "5.0.0-rc0",
     "react-native-linear-gradient": "^2.4.0",
+    "react-native-image-gallery": "^2.1.5",
     "react-native-locale-detector": "^1.0.1",
     "react-native-render-html": "^3.10.0",
     "react-native-sentry": "^0.39.0",

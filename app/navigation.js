@@ -12,6 +12,8 @@ import Event from './ui/screens/events/EventScreenContainer';
 import Calendar from './ui/screens/events/CalendarScreenContainer';
 import Profile from './ui/screens/profile/ProfileScreenContainer';
 import Pizza from './ui/screens/pizza/PizzaScreenContainer';
+import Photos from './ui/screens/photos/AlbumsOverviewScreenContainer';
+import PhotoAlbum from './ui/screens/photos/AlbumDetailScreenContainer';
 import Registration from './ui/screens/events/RegistrationScreenContainer';
 import MemberList from './ui/screens/memberList/MemberListScreenContainer';
 import SplashScreen from './ui/screens/splash/SplashScreen';
@@ -22,6 +24,7 @@ const MainNavigator = createDrawerNavigator({
   Welcome,
   Calendar,
   MemberList,
+  Photos,
   Settings,
 }, {
   contentComponent: Sidebar,
@@ -32,6 +35,7 @@ const SignedInNavigator = createStackNavigator({
   Event,
   Profile,
   Pizza,
+  PhotoAlbum,
   Registration,
 }, {
   headerMode: 'none',

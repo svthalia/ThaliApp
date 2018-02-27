@@ -43,6 +43,13 @@ const Sidebar = (props) => {
       routeName: 'MemberList',
     },
     {
+      onPress: () => props.openPhotos(),
+      iconName: 'photo',
+      text: props.t('Photos'),
+      style: {},
+      routeName: 'Photos',
+    },
+    {
       onPress: () => props.openSettings(),
       iconName: 'settings',
       text: props.t('Settings'),
@@ -117,6 +124,7 @@ Sidebar.propTypes = {
   openWelcome: PropTypes.func.isRequired,
   openSettings: PropTypes.func.isRequired,
   openMemberList: PropTypes.func.isRequired,
+  openPhotos: PropTypes.func.isRequired,
 };
 
 export default translate('components/sidebar/Sidebar')(Sidebar);
