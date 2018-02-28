@@ -14,11 +14,11 @@ import * as profileActions from '../actions/profile';
 
 const background = require('../img/huygens.jpg');
 
-const logoutPrompt = logout => () => Alert.alert(
-  this.props.t('Log out?'),
-  this.props.t('Are you sure you want to log out?'),
-  [{ text: this.props.t('No') },
-    { text: this.props.t('Yes'), onPress: logout },
+const logoutPrompt = props => () => Alert.alert(
+  props.t('Log out?'),
+  props.t('Are you sure you want to log out?'),
+  [{ text: props.t('No') },
+    { text: props.t('Yes'), onPress: props.logout },
   ],
 );
 
@@ -39,7 +39,7 @@ const Sidebar = (props) => {
       scene: 'eventList',
     },
     {
-      onPress: logoutPrompt(props.logout),
+      onPress: logoutPrompt(props),
       iconName: 'lock',
       text: props.t('Logout'),
       style: {
@@ -99,6 +99,7 @@ Sidebar.propTypes = {
   displayName: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
   logout: PropTypes.func.isRequired,
   loadProfile: PropTypes.func.isRequired,
   // eslint-disable-next-line react/no-unused-prop-types
