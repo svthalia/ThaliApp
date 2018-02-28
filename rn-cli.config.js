@@ -1,7 +1,8 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const blacklist = require('metro/src/blacklist');
 
 module.exports = {
   getBlacklistRE() {
-    return blacklist([/react-native\/local-cli\/core\/__fixtures__.*/])
+    return blacklist([/react-native\/local-cli\/core\/__fixtures__.*/]);
   },
-}
+};
