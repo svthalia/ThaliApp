@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 16,
   },
+  rootWrapper: {
+    flex: 1,
+  },
 });
 
 export default styles;

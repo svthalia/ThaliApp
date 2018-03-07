@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Modal, View, ScrollView, Switch, TextInput, Text } from 'react-native';
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Modal,
+  ScrollView,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -75,67 +84,72 @@ class Registration extends Component {
     const keys = Object.keys(this.props.fields);
 
     return (
-      <ScrollView
-        style={styles.content}
-        keyboardShouldPersistTaps="handled"
+      <KeyboardAvoidingView
+        style={styles.rootWrapper}
+        behavior="padding"
+        modalOpen="false"
       >
-        <Modal
-          visible={this.props.status === 'loading'}
-          transparent
-          onRequestClose={() => ({})}
+        <ScrollView
+          style={styles.content}
+          keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.overlay}>
-            <ActivityIndicator
-              animating
+          <Modal
+            visible={this.props.status === 'loading'}
+            transparent
+            onRequestClose={() => ({})}
+          >
+            <View style={styles.overlay}>
+              <ActivityIndicator
+                animating
+                color={colors.magenta}
+                size="large"
+              />
+            </View>
+          </Modal>
+          {keys.map((key) => {
+            const field = this.props.fields[key];
+            const validity = this.getFieldValidity(key);
+            if (field.type === 'boolean') {
+              return (
+                <View key={key} style={styles.booleanContainer}>
+                  <Text style={styles.field}>{field.label}</Text>
+                  <Switch
+                    value={this.state[key]}
+                    onValueChange={value => this.updateField(key, value)}
+                    thumbTintColor={this.state[key] ? colors.darkMagenta : colors.lightGray}
+                    onTintColor={colors.magenta}
+                  />
+                </View>
+              );
+            } else if (field.type === 'integer' || field.type === 'text') {
+              return (
+                <View key={key} style={styles.fieldContainer}>
+                  <Text style={styles.field}>{field.label}</Text>
+                  <TextInput
+                    value={this.state[key]}
+                    onChangeText={value => this.updateField(key, value)}
+                    keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
+                    style={styles.field}
+                    underlineColorAndroid={validity.isValid ? colors.lightGray :
+                      colors.lightRed}
+                    placeholder={field.description}
+                  />
+                  {validity.isValid || <Text style={styles.invalid}>{validity.reason}</Text>}
+                </View>
+              );
+            }
+            return <View />;
+          })}
+          {this.props.status !== 'loading' && <View style={styles.buttonView}>
+            <Button
+              title={this.props.t('Save')}
               color={colors.magenta}
-              size="large"
+              onPress={() => this.props.update(this.props.registration, this.state)}
+              disabled={!this.isFormValid()}
             />
-          </View>
-        </Modal>
-        {keys.map((key) => {
-          const field = this.props.fields[key];
-          const validity = this.getFieldValidity(key);
-          if (field.type === 'boolean') {
-            return (
-              <View key={key} style={styles.booleanContainer}>
-                <Text style={styles.field}>{field.label}</Text>
-                <Switch
-                  value={this.state[key]}
-                  onValueChange={value => this.updateField(key, value)}
-                  thumbTintColor={this.state[key] ? colors.darkMagenta : colors.lightGray}
-                  onTintColor={colors.magenta}
-                />
-              </View>
-            );
-          } else if (field.type === 'integer' || field.type === 'text') {
-            return (
-              <View key={key} style={styles.fieldContainer}>
-                <Text style={styles.field}>{field.label}</Text>
-                <TextInput
-                  value={this.state[key]}
-                  onChangeText={value => this.updateField(key, value)}
-                  keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
-                  style={styles.field}
-                  underlineColorAndroid={validity.isValid ? colors.lightGray :
-                                         colors.lightRed}
-                  placeholder={field.description}
-                />
-                {validity.isValid || <Text style={styles.invalid}>{validity.reason}</Text>}
-              </View>
-            );
-          }
-          return <View />;
-        })}
-        {this.props.status !== 'loading' && <View style={styles.buttonView}>
-          <Button
-            title={this.props.t('Save')}
-            color={colors.magenta}
-            onPress={() => this.props.update(this.props.registration, this.state)}
-            disabled={!this.isFormValid()}
-            style={styles.submitButton}
-          />
-        </View>}
-      </ScrollView>
+          </View>}
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -158,4 +172,5 @@ const mapDispatchToProps = dispatch => ({
   update: (registration, fields) => dispatch(registrationActions.update(registration, fields)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('registration')(Registration));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  translate('registration')(Registration));
