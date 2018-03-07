@@ -4,6 +4,7 @@ const eventNL = require('./nl/event.json');
 const eventCardNL = require('./nl/eventCard.json');
 const eventDetailCardNL = require('./nl/eventDetailCard.json');
 const loginNL = require('./nl/login.json');
+const memberListNL = require('./nl/memberList.json');
 const pizzaNL = require('./nl/pizza.json');
 const profileNL = require('./nl/profile.json');
 const registrationNL = require('./nl/registration.json');
@@ -19,6 +20,7 @@ export default {
     eventCard: eventCardNL,
     eventDetailCard: eventDetailCardNL,
     login: loginNL,
+    memberList: memberListNL,
     pizza: pizzaNL,
     profile: profileNL,
     registration: registrationNL,

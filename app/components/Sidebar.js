@@ -39,6 +39,13 @@ const Sidebar = (props) => {
       scene: 'eventList',
     },
     {
+      onPress: () => props.navigate('members', true),
+      iconName: 'people',
+      text: props.t('Member List'),
+      style: {},
+      scene: 'members',
+    },
+    {
       onPress: logoutPrompt(props),
       iconName: 'lock',
       text: props.t('Logout'),

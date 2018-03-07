@@ -6,6 +6,7 @@ import welcome from './welcome';
 import profile from './profile';
 import pizza from './pizza';
 import registration from './registration';
+import members from './members';
 
 export {
   session,
@@ -16,4 +17,5 @@ export {
   profile,
   pizza,
   registration,
+  members,
 };
