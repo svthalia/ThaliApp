@@ -1,23 +1,14 @@
 import { colors, StyleSheet } from '../../style';
 
 const styles = StyleSheet.create({
-  loginText: {
-    color: colors.white,
-    fontWeight: 'bold',
-  },
-  blackbutton: {
-    marginTop: 40,
+  loginButton: {
+    marginTop: 32,
     marginBottom: 16,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 38,
-    paddingRight: 38,
-    borderRadius: 2,
-    elevation: 2,
+    width: 120,
     alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.darkGrey,
-    justifyContent: 'center',
+  },
+  loginButtonText: {
+    fontWeight: 'bold',
   },
   input: {
     height: 48,

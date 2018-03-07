@@ -191,10 +191,16 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.magenta,
-    padding: 8,
     marginLeft: 16,
-    borderRadius: 2,
-    elevation: 2,
+    android: {
+      padding: 8,
+      elevation: 2,
+      borderRadius: 2,
+    },
+    ios: {
+      padding: 12,
+      borderRadius: 100,
+    },
   },
 });
 

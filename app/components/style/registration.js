@@ -1,7 +1,5 @@
-import { StyleSheet } from 'react-native';
-
 import { APPBAR_HEIGHT } from './standardHeader';
-import { colors } from '../../style';
+import { colors, StyleSheet } from '../../style';
 
 const styles = StyleSheet.create({
   content: {
@@ -29,18 +27,35 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   field: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 14,
     color: colors.textColour,
   },
   invalid: {
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 12,
     color: colors.lightRed,
     marginLeft: 4,
   },
   buttonView: {
     margin: 16,
+    marginBottom: 32,
+  },
+  submitButton: {
+    paddingTop: 16,
+    paddingBottom: 16,
   },
 });
 

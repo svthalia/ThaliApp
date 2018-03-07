@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { RefreshControl, ScrollView, Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -8,7 +8,7 @@ import Moment from 'moment';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
 
-import { retrievePizzaInfo, cancelOrder, orderPizza } from '../actions/pizza';
+import { cancelOrder, orderPizza, retrievePizzaInfo } from '../actions/pizza';
 import styles from './style/pizza';
 import { colors } from '../style';
 
@@ -69,16 +69,17 @@ class Pizza extends Component {
                 <Text style={styles.pizzaPrice}>€{productInfo.price}</Text>
               </View>
               {(!order.paid && !hasEnded) && (
-                <TouchableOpacity
+                <TouchableHighlight
                   onPress={() => this.props.cancelOrder()}
                   style={styles.button}
+                  underlayColor={colors.darkMagenta}
                 >
                   <Icon
                     name="delete"
                     color={colors.white}
                     size={18}
                   />
-                </TouchableOpacity>
+                </TouchableHighlight>
               )}
             </View>
           </View>
@@ -104,19 +105,20 @@ class Pizza extends Component {
               <Text style={styles.pizzaDescription}>{pizza.description}</Text>
               <Text style={styles.pizzaPrice}>€{pizza.price}</Text>
             </View>
-            <TouchableOpacity
+            <TouchableHighlight
               onPress={() => {
                 this.props.orderPizza(pizza.pk, hasOrder);
                 this.pizzaScroll.scrollTo({ x: 0, y: 0, animated: true });
               }}
               style={styles.button}
+              underlayColor={colors.darkMagenta}
             >
               <Icon
                 name="add-shopping-cart"
                 color={colors.white}
                 size={18}
               />
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
         ))}
       </View>
