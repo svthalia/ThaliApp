@@ -157,6 +157,7 @@ class Profile extends Component {
 
     let textStyle = {
       fontSize: textSize,
+      bottom: textPosBottom,
     };
     let appBarBorderStyle = {
     };
@@ -164,13 +165,10 @@ class Profile extends Component {
       textStyle = {
         ...textStyle,
         left: textPosLeft,
-        bottom: textPosBottom,
       };
     } else {
       textStyle = {
         ...textStyle,
-        bottom: textPosBottom,
-        width: '100%',
         textAlign: 'center',
       };
 
