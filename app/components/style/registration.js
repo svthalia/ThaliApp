@@ -1,4 +1,4 @@
-import { APPBAR_HEIGHT } from './standardHeader';
+import { APPBAR_HEIGHT, TOTAL_BAR_HEIGHT } from './standardHeader';
 import { colors, StyleSheet } from '../../style';
 
 const styles = StyleSheet.create({
@@ -10,8 +10,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: APPBAR_HEIGHT,
     backgroundColor: colors.semiTransparent,
+    android: {
+      marginTop: APPBAR_HEIGHT,
+    },
+    ios: {
+      marginTop: TOTAL_BAR_HEIGHT,
+    },
   },
   fieldContainer: {
     borderTopWidth: 1,
