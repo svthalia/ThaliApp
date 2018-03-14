@@ -33,11 +33,20 @@ const styles = StyleSheet.create({
   },
   button: {
     color: colors.magenta,
-    fontFamily: 'sans-serif-medium',
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
     fontSize: 18,
   },
   disabled: {
     color: colors.darkGrey,
+  },
+  keyboardView: {
+    flex: 1,
   },
 });
 
