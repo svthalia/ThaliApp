@@ -11,6 +11,7 @@ import SearchBar from './SearchHeader';
 import * as memberActions from '../actions/members';
 
 import styles, { memberSize } from './style/memberList';
+import DismissKeyboardView from './DismissKeyboardView';
 
 class MemberList extends Component {
 
@@ -45,57 +46,44 @@ class MemberList extends Component {
       />
     );
 
+    let content = (<FlatList
+      style={styles.flatList}
+      contentContainerStyle={styles.container}
+      onRefresh={this.handleRefresh}
+      refreshing={this.props.loading}
+      onEndReachedThreshold={0.5}
+      onEndReached={this.handleEndReached}
+      data={this.props.memberList}
+      renderItem={item => (
+        <MemberView
+          key={item.item.pk}
+          member={{
+            pk: item.item.pk,
+            photo: item.item.avatar.medium,
+            name: item.item.display_name,
+          }}
+          style={styles.memberView}
+          size={memberSize}
+        />
+      )}
+      keyExtractor={item => item.pk}
+      numColumns={3}
+    />);
+
     if (this.props.status === 'initial') {
-      return (
-        <View style={styles.wrapper}>
-          {header}
-          <LoadingScreen />
-        </View>
-      );
+      content = (<LoadingScreen />);
     } else if (this.props.status === 'failure') {
-      return (
-        <View style={styles.wrapper}>
-          {header}
-          <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
-        </View>
-      );
+      content = (<ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />);
     } else if (this.props.memberList.length === 0) {
-      return (
-        <View style={styles.wrapper}>
-          {header}
-          <ErrorScreen message={this.props.t('Couldn\'t find any members...')} />
-        </View>
-      );
+      content = (<ErrorScreen message={this.props.t('Couldn\'t find any members...')} />);
     }
 
     return (
       <View style={styles.wrapper}>
         {header}
-        <View>
-          <FlatList
-            style={styles.flatList}
-            contentContainerStyle={styles.container}
-            onRefresh={this.handleRefresh}
-            refreshing={this.props.loading}
-            onEndReachedThreshold={0.5}
-            onEndReached={this.handleEndReached}
-            data={this.props.memberList}
-            renderItem={item => (
-              <MemberView
-                key={item.item.pk}
-                member={{
-                  pk: item.item.pk,
-                  photo: item.item.avatar.medium,
-                  name: item.item.display_name,
-                }}
-                style={styles.memberView}
-                size={memberSize}
-              />
-            )}
-            keyExtractor={item => item.pk}
-            numColumns={3}
-          />
-        </View>
+        <DismissKeyboardView contentStyle={styles.keyboardView}>
+          {content}
+        </DismissKeyboardView>
       </View>
     );
   }

@@ -18,17 +18,37 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.white,
-    fontSize: 20,
-    fontFamily: 'sans-serif-medium',
     flex: 1,
+    android: {
+      fontSize: 20,
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontSize: 18,
+      fontFamily: 'System',
+      fontWeight: '600',
+      textAlign: 'center',
+    },
   },
   leftIcon: {
-    paddingLeft: 20,
-    paddingRight: 32,
+    android: {
+      paddingLeft: 20,
+      paddingRight: 32,
+    },
+    ios: {
+      paddingLeft: 10,
+      paddingRight: 16,
+    },
   },
   rightIcon: {
-    paddingLeft: 32,
-    paddingRight: 20,
+    android: {
+      paddingLeft: 32,
+      paddingRight: 20,
+    },
+    ios: {
+      paddingLeft: 16,
+      paddingRight: 10,
+    },
   },
   white: {
     color: colors.white,
@@ -41,9 +61,14 @@ const styles = StyleSheet.create({
   },
   input: {
     color: colors.textColour,
-    fontSize: 20,
     flex: 1,
     paddingLeft: 0,
+    android: {
+      fontSize: 20,
+    },
+    ios: {
+      fontSize: 18,
+    },
   },
   animationView: {
     backgroundColor: colors.white,

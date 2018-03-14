@@ -131,7 +131,7 @@ class SearchBar extends Component {
           backgroundColor={colors.semiTransparent}
           translucent
           animated
-          barStyle="light-content"
+          barStyle={this.state.isSearching ? 'dark-content' : 'light-content'}
         />
         <View style={styles.appBar}>
           {this.state.isAnimating && <Animated.View

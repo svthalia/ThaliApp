@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       fontFamily: 'System',
       fontWeight: '600',
+      textAlign: 'center',
     },
   },
   icon: {
