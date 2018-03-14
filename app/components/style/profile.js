@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
       fontFamily: 'sans-serif-medium',
     },
     ios: {
+      left: 8,
       fontFamily: 'System',
       fontWeight: '600',
     },
