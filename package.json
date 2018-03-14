@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start --config=../../../../rn-cli.config.js",
+    "start": "react-native start",
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "log:ios": "react-native log-ios",
