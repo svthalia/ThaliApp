@@ -56,7 +56,7 @@ class Main extends Component {
   constructor() {
     super();
     if (locale.startsWith('nl')) {
-      Moment.locale(locale);
+      Moment.locale('nl');
     } else {
       Moment.locale('en');
     }
