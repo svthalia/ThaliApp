@@ -7,10 +7,22 @@ import * as pushNotificationsActions from '../actions/pushNotifications';
 
 const register = function* register() {
   const token = yield select(tokenSelector);
+
+  if (token === undefined) {
+    // There is no token, thus do nothing
+    return;
+  }
+
   let pushToken;
   if (Platform.OS === 'ios') {
-    yield call(FCM.requestPermissions);
-    pushToken = yield call(FCM.getFCMToken);
+    try {
+      // this throws an error when the permissions are denied
+      yield call(FCM.requestPermissions);
+      pushToken = yield call(FCM.getFCMToken);
+    } catch (err) {
+      // return and do nothing since we have no token
+      return;
+    }
   } else {
     pushToken = yield call(FCM.getFCMToken);
   }
