@@ -1,4 +1,4 @@
-image: thalia/android-react-native:latest
+image: node:8-alpine
 
 variables:
     GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
@@ -53,10 +53,16 @@ jest:
 #             - .gradle/caches/
 
 build android:
+    image: thalia/android-react-native:latest
     stage: build
+    cache:
+      key: gradle cache
+      paths:
+          - $CI_PROJECT_DIR/.gradle/wrapper/
+          - $CI_PROJECT_DIR/.gradle/caches/
     script:
         - cd $CI_PROJECT_DIR/android/
-        - gradle --no-daemon ":app:assemble"
+        - ./gradlew --no-daemon ":app:assemble"
     artifacts:
         paths:
             - $CI_PROJECT_DIR/android/app/build/outputs/apk/app-debug.apk
