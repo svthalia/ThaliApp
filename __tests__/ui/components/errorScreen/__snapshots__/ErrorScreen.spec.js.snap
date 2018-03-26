@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorScreen component renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FAFAFA",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../app/assets/img/sad_cloud.png",
+      }
+    }
+    style={
+      Object {
+        "height": 200,
+        "marginBottom": 32,
+        "resizeMode": "contain",
+        "width": 200,
+      }
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#616161",
+        "fontFamily": "System",
+        "fontSize": 16,
+        "fontWeight": "500",
+        "textAlign": "center",
+      }
+    }
+  >
+    Lorem ipsum
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#616161",
+        "fontFamily": "System",
+        "fontSize": 16,
+        "fontWeight": "500",
+        "textAlign": "center",
+      }
+    }
+  >
+    Try again later.
+  </Text>
+</View>
+`;

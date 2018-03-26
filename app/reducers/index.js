@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import session from './session';
 import navigation from './navigation';
 import event from './event';
@@ -8,7 +9,7 @@ import pizza from './pizza';
 import registration from './registration';
 import members from './members';
 
-export {
+export default combineReducers({
   session,
   navigation,
   event,
@@ -18,4 +19,4 @@ export {
   pizza,
   registration,
   members,
-};
+});
