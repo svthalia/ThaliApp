@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StandardHeader component renders correctly 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#E62272",
+        "height": 20,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#E62272",
+        "borderBottomColor": "#C2185B",
+        "borderBottomWidth": 1,
+        "borderStyle": "solid",
+        "flexDirection": "row",
+        "height": 44,
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 24,
+            },
+            Object {
+              "color": "#FFFFFF",
+              "paddingLeft": 10,
+              "paddingRight": 16,
+            },
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#FFFFFF",
+          "fontFamily": "System",
+          "fontSize": 18,
+          "fontWeight": "600",
+          "textAlign": "center",
+        }
+      }
+    >
+      ThaliApp
+    </Text>
+    <View
+      style={
+        Object {
+          "height": 0,
+          "width": 50,
+        }
+      }
+    />
+  </View>
+</View>
+`;

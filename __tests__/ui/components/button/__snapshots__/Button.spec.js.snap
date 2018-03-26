@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component renders correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 100,
+      },
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "borderRadius": 100,
+          "padding": 10,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+        },
+        Object {
+          "backgroundColor": "#E62272",
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 14,
+            "justifyContent": "center",
+            "textAlign": "center",
+          },
+          Object {},
+        ]
+      }
+    >
+      title
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button component renders disabled correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 100,
+      },
+      Object {
+        "opacity": 0.8,
+      },
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "borderRadius": 100,
+          "padding": 10,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+        },
+        Object {
+          "backgroundColor": "#E62272",
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 14,
+            "justifyContent": "center",
+            "textAlign": "center",
+          },
+          Object {},
+        ]
+      }
+    >
+      title
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button component renders title correctly on Android 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 100,
+      },
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "borderRadius": 100,
+          "padding": 10,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+        },
+        Object {
+          "backgroundColor": "#E62272",
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 14,
+            "justifyContent": "center",
+            "textAlign": "center",
+          },
+          Object {},
+        ]
+      }
+    >
+      TITLE
+    </Text>
+  </View>
+</View>
+`;

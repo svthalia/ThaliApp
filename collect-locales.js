@@ -2,8 +2,28 @@
 const Parser = require('i18next-scanner').Parser;
 const fs = require('fs');
 const path = require('path');
+const execFileSync = require('child_process').execFileSync;
 
-const componentsPath = 'app/components';
+function mkDirByPathSync(targetDir, { isRelativeToScript = false } = {}) {
+  const sep = path.sep;
+  const initDir = path.isAbsolute(targetDir) ? sep : '';
+  const baseDir = isRelativeToScript ? __dirname : '.';
+
+  targetDir.split(sep).reduce((parentDir, childDir) => {
+    const curDir = path.resolve(baseDir, parentDir, childDir);
+    try {
+      fs.mkdirSync(curDir);
+    } catch (err) {
+      if (err.code !== 'EEXIST') {
+        throw err;
+      }
+    }
+
+    return curDir;
+  }, initDir);
+}
+
+const componentsPath = 'app/ui';
 const options = {
   nsSeparator: false,
   keySeparator: false,
@@ -15,8 +35,8 @@ const options = {
   defaultNs: 'test',
   removeUnusedKeys: true,
   resource: {
-    loadPath: 'app/locales/{{lng}}/{{ns}}.json',
-    savePath: 'app/locales/{{lng}}/{{ns}}.json',
+    loadPath: 'app/assets/locales/{{lng}}/{{ns}}.json',
+    savePath: 'app/assets/locales/{{lng}}/{{ns}}.json',
   },
 };
 
@@ -25,13 +45,15 @@ options.lngs.forEach((lang) => {
   indexFiles[lang] = [];
 });
 
-const components = fs.readdirSync(componentsPath).filter(f =>
-  fs.statSync(path.join(componentsPath, f)).isFile());
+const components = execFileSync('find', [componentsPath]).toString('utf8')
+  .split('\n')
+  .filter(p => p.indexOf('/style') < 0 && p.length > 0)
+  .filter(p => fs.statSync(p).isFile());
 
 components.forEach((f) => {
   options.defaultNs = f.substr(0, 1).toLowerCase() + f.substr(1, f.length - 4);
   const parser = new Parser(options);
-  const content = fs.readFileSync(path.join(componentsPath, f), 'utf-8');
+  const content = fs.readFileSync(path.join(f), 'utf-8');
 
   parser.parseFuncFromString(content);
   parser.parseTransFromString(content);
@@ -46,7 +68,7 @@ components.forEach((f) => {
         const str = JSON.stringify(obj, null, 2);
         const dir = path.dirname(resPath);
         if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir);
+          mkDirByPathSync(dir);
         }
         fs.writeFileSync(resPath, `${str}\n`);
         indexFiles[lng].push(ns);
@@ -57,13 +79,14 @@ components.forEach((f) => {
   });
 });
 
-const indexStream = fs.createWriteStream('app/locales/index.js');
+const indexStream = fs.createWriteStream('app/assets/locales/index.js');
 indexStream.once('open', () => {
+  indexStream.write('const files = {};\n');
   Object.keys(indexFiles).forEach((lang) => {
     const files = indexFiles[lang];
     const langName = lang.toUpperCase();
     files.forEach((fileName) => {
-      indexStream.write(`const ${fileName}${langName} = require('./${lang}/${fileName}.json');\n`);
+      indexStream.write(`files['${fileName}${langName}'] = require('./${lang}/${fileName}.json');\n`);
     });
   });
   indexStream.write('\n');
@@ -73,7 +96,8 @@ indexStream.once('open', () => {
     const files = indexFiles[lang];
     const langName = lang.toUpperCase();
     files.forEach((fileName) => {
-      indexStream.write(`    ${fileName}: ${fileName}${langName},\n`);
+      const ns = fileName.substring(7);
+      indexStream.write(`    '${ns}': files['${fileName}${langName}'],\n`);
     });
     indexStream.write('  },\n');
   });

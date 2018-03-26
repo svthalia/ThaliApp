@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage, Linking, Platform } from 'react-native';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
@@ -9,18 +9,17 @@ import locale from 'react-native-locale-detector';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
-import * as reducers from './reducers';
+import reducers from './reducers';
 
-import i18n from './i18n';
+import i18n from './utils/i18n';
 import sagas from './sagas';
-import ReduxNavigator from './components/navigator';
+import ReduxNavigator from './ui/components/navigator/ReduxNavigator';
 import * as loginActions from './actions/login';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
 
 const sagaMiddleware = createSagaMiddleware();
-const reducer = combineReducers(reducers);
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(sagas);
 
 const USERNAMEKEY = '@MyStore:username';

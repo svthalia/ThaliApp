@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReduxNavigator component renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#E62272",
+        "height": 20,
+      }
+    }
+  />
+  <View
+    enabled={true}
+    keyboardVerticalOffset={0}
+    modalOpen="false"
+    onLayout={[Function]}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#E62272",
+          "flex": 1,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+        },
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={false}
+      hitSlop={undefined}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+      testID={undefined}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../app/assets/img/logo.png",
+          }
+        }
+        style={
+          Object {
+            "alignSelf": "center",
+            "height": 108,
+            "marginBottom": 48,
+            "resizeMode": "contain",
+            "width": 260,
+          }
+        }
+      />
+      <View>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          onChangeText={[Function]}
+          placeholder="Username"
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 4,
+              "height": 48,
+              "marginBottom": 8,
+              "marginLeft": 16,
+              "marginRight": 16,
+              "padding": 8,
+            }
+          }
+        />
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          placeholder="Password"
+          secureTextEntry={true}
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 4,
+              "height": 48,
+              "marginBottom": 8,
+              "marginLeft": 16,
+              "marginRight": 16,
+              "padding": 8,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "marginBottom": 16,
+              "marginTop": 32,
+              "width": 120,
+            },
+            Object {
+              "borderRadius": 100,
+            },
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "borderRadius": 100,
+                "padding": 10,
+                "paddingLeft": 12,
+                "paddingRight": 12,
+              },
+              Object {
+                "backgroundColor": "#373737",
+              },
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 14,
+                  "justifyContent": "center",
+                  "textAlign": "center",
+                },
+                Object {
+                  "fontWeight": "bold",
+                },
+              ]
+            }
+          >
+            LOGIN
+          </Text>
+        </View>
+      </View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        onPress={[Function]}
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "#373737",
+            "fontFamily": "System",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "height": 25,
+            "marginBottom": 10,
+          }
+        }
+      >
+        Forgot password?
+      </Text>
+    </View>
+  </View>
+</View>
+`;

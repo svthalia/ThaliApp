@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SquareView component renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {},
+      Object {
+        "height": 20,
+        "width": 20,
+      },
+    ]
+  }
+>
+  <View />
+</View>
+`;

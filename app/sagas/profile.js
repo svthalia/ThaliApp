@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { apiRequest } from '../url';
+import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
 import * as navActions from '../actions/navigation';
 

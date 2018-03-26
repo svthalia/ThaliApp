@@ -3,7 +3,7 @@ import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import deepLinkingSaga, { parseURL } from '../../app/sagas/deepLinking';
 import * as deepLinkingActions from '../../app/actions/deepLinking';
-import { url as siteURL, apiRequest, loggedInSelector } from '../../app/url';
+import { url as siteURL, apiRequest, loggedInSelector } from '../../app/utils/url';
 import * as navigationActions from '../../app/actions/navigation';
 import * as eventActions from '../../app/actions/event';
 import * as loginActions from '../../app/actions/login';

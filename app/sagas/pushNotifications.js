@@ -2,7 +2,7 @@ import { call, takeEvery, select } from 'redux-saga/effects';
 import { Platform } from 'react-native';
 import FCM from 'react-native-fcm';
 
-import { apiRequest, tokenSelector } from '../url';
+import { apiRequest, tokenSelector } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 
 const register = function* register() {

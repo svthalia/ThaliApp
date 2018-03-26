@@ -4,10 +4,10 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { Platform } from 'react-native';
 import FCM from 'react-native-fcm';
 import pushNotificationsSaga from '../../app/sagas/pushNotifications';
-import { apiRequest, tokenSelector } from '../../app/url';
+import { apiRequest, tokenSelector } from '../../app/utils/url';
 import * as pushActions from '../../app/actions/pushNotifications';
 
-jest.mock('../../app/url', () => ({
+jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(),
   tokenSelector: () => 'token',
 }));

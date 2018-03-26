@@ -1,5 +1,5 @@
 import { put, take, takeEvery, select } from 'redux-saga/effects';
-import { url as siteURL, loggedInSelector } from '../url';
+import { url as siteURL, loggedInSelector } from '../utils/url';
 
 import * as deepLinkingActions from '../actions/deepLinking';
 import * as pizzaActions from '../actions/pizza';

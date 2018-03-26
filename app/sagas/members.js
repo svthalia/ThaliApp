@@ -1,10 +1,10 @@
 import { Dimensions } from 'react-native';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { TOTAL_BAR_HEIGHT } from '../components/style/standardHeader';
-import { memberSize } from '../components/style/memberList';
+import { TOTAL_BAR_HEIGHT } from '../ui/components/standardHeader/style/StandardHeader';
+import { memberSize } from '../ui/screens/memberList/style/MemberList';
 
-import { apiRequest, tokenSelector } from '../url';
+import { apiRequest, tokenSelector } from '../utils/url';
 import * as memberActions from '../actions/members';
 
 const members = function* members(action) {
