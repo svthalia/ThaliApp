@@ -92,7 +92,7 @@ const getAchievements = (profile, t) => {
             {achievement.periods && achievement.periods.map((period) => {
               let start = Moment(period.since);
               start = start.isSame(Moment([1970, 1, 1]), 'day') ? '?' : start.format('D MMMM YYYY');
-              const end = period.until ? Moment(period.until).format('D MMMM YYYY') : 'heden';
+              const end = period.until ? Moment(period.until).format('D MMMM YYYY') : t('today');
 
               let text = '';
               if (period.role) {
