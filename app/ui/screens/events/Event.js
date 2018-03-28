@@ -156,7 +156,7 @@ class Event extends Component {
         text = event.no_registration_message;
       }
     } else if (!regStarted) {
-      const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:m');
+      const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:mm');
       text = this.props.t('Registration will open {{start}}', { start: registrationStart });
     } else if (!regAllowed) {
       text = this.props.t('Registration is not possible anymore.');
