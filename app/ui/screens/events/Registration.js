@@ -25,19 +25,25 @@ class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentWillReceiveProps = (props) => {
+    const update = {};
 
     const keys = Object.keys(props.fields);
     for (let i = 0; i < keys.length; i += 1) {
       const field = props.fields[keys[i]];
       if (field.type === 'boolean') {
-        this.state[keys[i]] = Boolean(field.value);
+        update[keys[i]] = Boolean(field.value);
       } else if (field.type === 'integer' || field.type === 'text') {
-        this.state[keys[i]] = field.value === null ? '' : String(field.value);
+        update[keys[i]] = field.value === null ? '' : String(field.value);
       } else {
-        this.state[keys[i]] = field.value;
+        update[keys[i]] = field.value;
       }
     }
-  }
+
+    this.setState(update);
+  };
 
   getFieldValidity = (key) => {
     const field = this.props.fields[key];
