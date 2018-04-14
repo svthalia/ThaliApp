@@ -24,6 +24,9 @@ const welcome = function* welcome() {
     const response = yield call(apiRequest, 'events', data, params);
     yield put(welcomeActions.success(response.results));
   } catch (error) {
+    if (error.name === 'TokenInvalidError') {
+      yield put(loginActions.tokenInvalid());
+    }
     yield put(welcomeActions.failure());
   }
 };

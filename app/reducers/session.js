@@ -23,6 +23,7 @@ export default function session(state = initialState, action = {}) {
         displayName: action.payload.displayName,
         photo: action.payload.photo,
       };
+    case loginActions.TOKEN_INVALID:
     case loginActions.LOGOUT:
       return initialState;
     default:
