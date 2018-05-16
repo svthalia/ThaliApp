@@ -1,6 +1,7 @@
 export const LOGIN = 'LOGIN_LOGIN';
 export const SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGIN_LOGOUT';
+export const TOKEN_INVALID = 'LOGIN_TOKEN_INVALID';
 export const PROFILE = 'LOGIN_PROFILE';
 export const PROFILE_SUCCESS = 'LOGIN_PROFILE_SUCCESS';
 
@@ -14,6 +15,10 @@ export function login(user, pass) {
 
 export function logout() {
   return { type: LOGOUT };
+}
+
+export function tokenInvalid() {
+  return { type: TOKEN_INVALID };
 }
 
 export function profile(token) {

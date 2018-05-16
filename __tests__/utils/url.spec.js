@@ -1,10 +1,21 @@
 import {
-  url, apiUrl, defaultProfileImage,
-  tokenSelector, loggedInSelector, apiRequest, ServerError,
+  apiRequest,
+  apiUrl,
+  defaultProfileImage,
+  loggedInSelector,
+  ServerError,
+  tokenSelector,
+  url,
 } from '../../app/utils/url';
 
+const fetchPromiseResult = {
+  status: 200,
+  json: () => Promise.resolve('responseJson'),
+  clone: global.fetch,
+};
 global.fetch = jest.fn().mockReturnValue(
-  Promise.resolve({ status: 200, json: () => 'responseJson' }));
+  Promise.resolve(fetchPromiseResult));
+fetchPromiseResult.clone = global.fetch;
 
 jest.mock('react-native-locale-detector', () => 'en');
 
@@ -63,7 +74,11 @@ describe('url helper', () => {
 
   it('should throw a server error', () => {
     expect.assertions(1);
-    const response = { status: 404, json: () => 'responseJson' };
+    const response = {
+      status: 404,
+      json: () => Promise.resolve('responseJson'),
+      clone: () => ({ status: 404 }),
+    };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
       .catch(e => expect(e).toEqual(new ServerError('Invalid status code: 404', response)));
@@ -71,7 +86,11 @@ describe('url helper', () => {
 
   it('should return an empty response on status 204', () => {
     expect.assertions(1);
-    const response = { status: 204, json: () => 'responseJson' };
+    const response = {
+      status: 204,
+      json: () => Promise.resolve('responseJson'),
+      clone: () => ({ status: 204 }),
+    };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
       .then(res => expect(res).toEqual({}));

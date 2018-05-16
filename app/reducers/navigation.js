@@ -62,6 +62,7 @@ export default function navigate(state = initialState, action = {}) {
         drawerOpen: action.payload.drawerOpen,
       };
     }
+    case loginActions.TOKEN_INVALID:
     case loginActions.LOGOUT: {
       return initialState;
     }
