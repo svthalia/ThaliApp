@@ -26,5 +26,8 @@
   "Update registration": "Aanmelding bijwerken",
   "Cancel registration": "Afmelden",
   "Registrations": "Aanmeldingen",
-  "Could not load the event...": "Kan het evenement niet laden..."
+  "Could not load the event...": "Kan het evenement niet laden...",
+  "By registering, you confirm that you have read the": "Door te registreren, bevestig je dat je de",
+  "terms and conditions": "voorwaarden",
+  ", that you understand them and that you agree to be bound by them.": "hebt gelezen, dat je ze begrijpt en dat je accepteert eraan gebonden te zijn."
 }

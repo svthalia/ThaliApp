@@ -93,6 +93,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginTop: 16,
   },
+  termsUrl: {
+    color: Colors.magenta,
+  },
   secondButtonMargin: {
     marginLeft: 16,
   },
