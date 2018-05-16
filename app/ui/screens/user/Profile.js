@@ -91,7 +91,7 @@ const getAchievements = (profile, t) => {
             <Text style={styles.description}>{achievement.name}</Text>
             {achievement.periods && achievement.periods.map((period) => {
               let start = Moment(period.since);
-              start = start.isSame(Moment([1970, 1, 1]), 'day') ? '?' : start.format('D MMMM YYYY');
+              start = start.isSame(Moment([1970, 1, 1]), 'year') ? '?' : start.format('D MMMM YYYY');
               const end = period.until ? Moment(period.until).format('D MMMM YYYY') : t('today');
 
               let text = '';
