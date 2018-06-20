@@ -12,6 +12,8 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import Colors from '../../style/Colors';
 
+import { termsAndConditionsUrl } from '../../../utils/url';
+
 import * as eventActions from '../../../actions/event';
 import * as registrationActions from '../../../actions/registration';
 import * as pizzaActions from '../../../actions/pizza';
@@ -189,18 +191,27 @@ class Event extends Component {
     const regAllowed = regRequired && endRegDate > nowDate &&
                        regStarted && event.registration_allowed;
 
-    // Needed once registration on server implemented
     if (regAllowed) {
       if (event.user_registration === null || event.user_registration.is_cancelled) {
         const text = event.max_participants && event.max_participants <= event.num_participants ?
           this.props.t('Put me on the waiting list') : this.props.t('Register');
         return (
-          <View style={styles.registrationActions}>
-            <Button
-              color={Colors.magenta}
-              title={text}
-              onPress={() => this.props.register(event.pk)}
-            />
+          <View>
+            <Text style={styles.registrationText}>
+              {this.props.t('By registering, you confirm that you have read the')}
+              <Text
+                style={styles.termsUrl}
+                onPress={() => Linking.openURL(termsAndConditionsUrl)}
+              > {this.props.t('terms and conditions')} </Text>
+              {this.props.t(', that you understand them and that you agree to be bound by them.')}
+            </Text>
+            <View style={styles.registrationActions}>
+              <Button
+                color={Colors.magenta}
+                title={text}
+                onPress={() => this.props.register(event.pk)}
+              />
+            </View>
           </View>
         );
       } else if (event.user_registration && !event.user_registration.is_cancelled &&
