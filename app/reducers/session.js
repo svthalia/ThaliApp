@@ -1,4 +1,4 @@
-import { defaultProfileImage } from '../url';
+import { defaultProfileImage } from '../utils/url';
 
 import * as loginActions from '../actions/login';
 
@@ -23,6 +23,7 @@ export default function session(state = initialState, action = {}) {
         displayName: action.payload.displayName,
         photo: action.payload.photo,
       };
+    case loginActions.TOKEN_INVALID:
     case loginActions.LOGOUT:
       return initialState;
     default:

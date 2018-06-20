@@ -6,6 +6,7 @@
     "start": "react-native start",
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
+    "start:android-dev": "react-native run-android --appId com.thaliapp.dev",
     "log:ios": "react-native log-ios",
     "log:android": "react-native log-android",
     "lint": "eslint *.js app --fix",
@@ -27,7 +28,10 @@
     ],
     "modulePaths": [
       ".yarn/"
-    ]
+    ],
+    "moduleNameMapper": {
+      "react-i18next": "<rootDir>/__mocks__/react-i18next-mock.js"
+    }
   },
   "dependencies": {
     "i18next": "^10.4.1",
@@ -63,7 +67,8 @@
     "jest": "^19.0.2",
     "react-native-cli": "^2.0.1",
     "react-native-git-upgrade": "^0.2.7",
-    "react-test-renderer": "^15.5.4",
+    "react-test-renderer": "^16.3.0-alpha.1",
+    "redux-mock-store": "^1.5.1",
     "redux-saga-test-plan": "^3.2.0"
   }
 }

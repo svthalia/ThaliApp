@@ -1,6 +1,6 @@
 import * as profileActions from '../actions/profile';
 
-import { defaultProfileImage } from '../url';
+import { defaultProfileImage } from '../utils/url';
 
 const initialState = {
   profile: {

@@ -2,7 +2,7 @@ import { call, takeEvery, put } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
-import { apiRequest } from '../url';
+import { apiRequest } from '../utils/url';
 import * as loginActions from '../actions/login';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 
@@ -52,6 +52,11 @@ const logout = function* logout() {
   Snackbar.show({ title: 'Logout successful' });
 };
 
+const tokenInvalid = function* tokenInvalid() {
+  yield call(AsyncStorage.clear);
+  yield put(pushNotificationsActions.invalidate());
+};
+
 const profile = function* profile(action) {
   const { token } = action.payload;
 
@@ -81,6 +86,7 @@ const loginSaga = function* loginSaga() {
   yield takeEvery(loginActions.LOGIN, login);
   yield takeEvery(loginActions.LOGOUT, logout);
   yield takeEvery(loginActions.PROFILE, profile);
+  yield takeEvery(loginActions.TOKEN_INVALID, tokenInvalid);
 };
 
 export default loginSaga;

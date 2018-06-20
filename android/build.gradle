@@ -24,5 +24,13 @@ allprojects {
         maven {
             url "https://maven.google.com" // Google's Maven repository
         }
+        configurations.all {
+            resolutionStrategy {
+                // Fixes https://github.com/evollu/react-native-fcm/issues/857#issuecomment-375243825
+                force 'com.google.firebase:firebase-messaging:11.4.0'
+                force 'com.google.firebase:firebase-core:11.4.0'
+                force 'com.google.android.gms:play-services-gcm:11.4.0'
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ import Snackbar from 'react-native-snackbar';
 import { AsyncStorage } from 'react-native';
 
 import loginSaga, { DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY } from '../../app/sagas/login';
-import { apiRequest } from '../../app/url';
+import { apiRequest } from '../../app/utils/url';
 import * as loginActions from '../../app/actions/login';
 import * as pushNotificationsActions from '../../app/actions/pushNotifications';
 
@@ -22,7 +22,7 @@ jest.mock('react-native', () => ({
   },
 }));
 
-jest.mock('../../app/url', () => ({
+jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
   tokenSelector: () => 'token',
 }));
