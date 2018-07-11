@@ -8,6 +8,7 @@ import profile from './profile';
 import pizza from './pizza';
 import registration from './registration';
 import members from './members';
+import settings from './settings';
 
 export default combineReducers({
   session,
@@ -19,4 +20,5 @@ export default combineReducers({
   pizza,
   registration,
   members,
+  settings,
 });

@@ -48,6 +48,13 @@ const Sidebar = (props) => {
       scene: 'members',
     },
     {
+      onPress: () => props.navigate('settings', true),
+      iconName: 'settings',
+      text: props.t('Settings'),
+      style: {},
+      scene: 'settings',
+    },
+    {
       onPress: logoutPrompt(props),
       iconName: 'lock',
       text: props.t('Logout'),

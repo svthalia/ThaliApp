@@ -8,6 +8,17 @@ Object {
 
 exports[`push notifications actions should create an action to register the push token 1`] = `
 Object {
+  "categories": null,
+  "type": "PUSH_NOTIFICATIONS_REGISTER",
+}
+`;
+
+exports[`push notifications actions should create an action to register the push tokens and update push categories 1`] = `
+Object {
+  "categories": Array [
+    "category1",
+    "category2",
+  ],
   "type": "PUSH_NOTIFICATIONS_REGISTER",
 }
 `;
