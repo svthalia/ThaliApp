@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -39,8 +40,8 @@
 		2D1FCA53D8DB5ADD28A3D2F3 /* libPods-ThaliApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 419A54DF78ED5BAF6B5C40B7 /* libPods-ThaliApp.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* ThaliAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ThaliAppTests.m */; };
 		307D8943B1734FD58BC954BD /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F808FC5B0C6A43748E179BF6 /* Entypo.ttf */; };
-		3103539470FB1FA6DC7AFCA9 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28109E09731D9E1C9150FFC /* BuddyBuildSDK.framework */; };
 		31DB89BD6ABB7E6C0D4D89C8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D663FC8A08D100CAC7FAD4C5 /* AssetsLibrary.framework */; };
+		325E07382108B21800195242 /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321550702108B1DC005FCAF5 /* libRNSentry.a */; };
 		32D3E4CE1ED98F33004F54F8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D3E4871ED98796004F54F8 /* libBVLinearGradient.a */; };
 		32D3E4CF1ED98F37004F54F8 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D3E4A51ED98796004F54F8 /* libRNVectorIcons.a */; };
 		32F7BA8C1FEADDF60071BF57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F7BA8B1FEADDF60071BF57 /* GoogleService-Info.plist */; };
@@ -49,6 +50,7 @@
 		55F8857C1B5F455D81EBEF10 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF381FFBF70744E6865413C2 /* SimpleLineIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		86282F35D99D42658946ABCB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 80528B2CE70648EEBDEA60A8 /* libz.tbd */; };
 		8E0DDF1C5CDB01FC245CCF36 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E212E90F67B915933C4735 /* CoreTelephony.framework */; };
 		8FE220E4161B43D0AF59C4AB /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AF00CDF61D94356B607ED10 /* EvilIcons.ttf */; };
 		A21E44FD484CB5F7DC5B119D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099E370E94C3C98C0D230EF1 /* QuartzCore.framework */; };
@@ -135,6 +137,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "ThaliApp-tvOS";
+		};
+		3215506F2108B1DC005FCAF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3215503F2108B1DB005FCAF5 /* RNSentry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSentry;
 		};
 		3235464C1FEBF67100283B3E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -427,6 +436,9 @@
 		2A30344F7F0A4E50A76BDA3F /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ThaliApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThaliApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ThaliApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ThaliApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32154FFE2108B164005FCAF5 /* libSentry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSentry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		321550002108B164005FCAF5 /* libSentryReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSentryReactNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3215503F2108B1DB005FCAF5 /* RNSentry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		32F7BA8A1FEADB6E0071BF57 /* ThaliApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ThaliApp.entitlements; path = ThaliApp/ThaliApp.entitlements; sourceTree = "<group>"; };
 		32F7BA8B1FEADDF60071BF57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3AF00CDF61D94356B607ED10 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -437,6 +449,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		75C9EFCD7D423E299C5EF1A9 /* Pods-ThaliAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThaliAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThaliAppTests/Pods-ThaliAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		80528B2CE70648EEBDEA60A8 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		887D168E428BA8BC8B4BEF89 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		8AB867AF03AC45AEB3C80BFA /* RNSnackbar.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSnackbar.xcodeproj; path = "../node_modules/react-native-snackbar/ios/RNSnackbar.xcodeproj"; sourceTree = "<group>"; };
@@ -474,6 +487,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				325E07382108B21800195242 /* libRNSentry.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -492,7 +506,6 @@
 				150EE563EF1D49189E5DE953 /* libRNFIRMessaging.a in Frameworks */,
 				2D1FCA53D8DB5ADD28A3D2F3 /* libPods-ThaliApp.a in Frameworks */,
 				E133E6C3EC124B32873102B8 /* libRNSnackbar.a in Frameworks */,
-				3103539470FB1FA6DC7AFCA9 /* BuddyBuildSDK.framework in Frameworks */,
 				31DB89BD6ABB7E6C0D4D89C8 /* AssetsLibrary.framework in Frameworks */,
 				3A593770638B4F798E132119 /* CoreText.framework in Frameworks */,
 				8E0DDF1C5CDB01FC245CCF36 /* CoreTelephony.framework in Frameworks */,
@@ -501,7 +514,7 @@
 				D9076E5B3D6E539979F86BE7 /* AVFoundation.framework in Frameworks */,
 				A64C779AE827706A1A3A8C53 /* CoreMedia.framework in Frameworks */,
 				E9012CD6A7C0147AFA3AE7C9 /* CoreVideo.framework in Frameworks */,
-				2EEA998D004342DD928F8C45 /* libRNI18n.a in Frameworks */,
+				86282F35D99D42658946ABCB /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +662,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		321550402108B1DB005FCAF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				321550702108B1DC005FCAF5 /* libRNSentry.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		323546221FEBF67100283B3E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +754,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3215503F2108B1DB005FCAF5 /* RNSentry.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -794,6 +816,8 @@
 		98173993876B9C90C5E6E4F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				32154FFE2108B164005FCAF5 /* libSentry.a */,
+				321550002108B164005FCAF5 /* libSentryReactNative.a */,
 				419A54DF78ED5BAF6B5C40B7 /* libPods-ThaliApp.a */,
 				910BDD5E550B32CBCAA9EB32 /* libPods-ThaliAppTests.a */,
 				A28109E09731D9E1C9150FFC /* BuddyBuildSDK.framework */,
@@ -805,6 +829,7 @@
 				29771CE9CB62632CCA73722B /* AVFoundation.framework */,
 				887D168E428BA8BC8B4BEF89 /* CoreMedia.framework */,
 				9BEFAC4FDFA23ABFAA6C038A /* CoreVideo.framework */,
+				80528B2CE70648EEBDEA60A8 /* libz.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -847,8 +872,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				F5B3F91167CECD971511F1E5 /* [CP] Embed Pods Frameworks */,
-				8F97D326ECA2C6D43E82071B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -869,8 +892,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				B27F63D0FD096105A9DEAE51 /* [CP] Embed Pods Frameworks */,
-				D10050A48F4A421A818808FD /* [CP] Copy Pods Resources */,
+				B0CFDE3C808B48778705D4A2 /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -1030,6 +1052,10 @@
 					ProjectRef = 0E27F218F14040B7AFFA10E0 /* RNI18n.xcodeproj */;
 				},
 				{
+					ProductGroup = 321550402108B1DB005FCAF5 /* Products */;
+					ProjectRef = 3215503F2108B1DB005FCAF5 /* RNSentry.xcodeproj */;
+				},
+				{
 					ProductGroup = 328DFE731FEAAF8100807230 /* Products */;
 					ProjectRef = 8AB867AF03AC45AEB3C80BFA /* RNSnackbar.xcodeproj */;
 				},
@@ -1103,6 +1129,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321550702108B1DC005FCAF5 /* libRNSentry.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSentry.a;
+			remoteRef = 3215506F2108B1DC005FCAF5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3235464D1FEBF67100283B3E /* libRNI18n.a */ = {
@@ -1481,7 +1514,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1495,7 +1528,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
 		2FBE7E9FD472A9063885A9CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1533,65 +1566,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F97D326ECA2C6D43E82071B /* [CP] Copy Pods Resources */ = {
+		B0CFDE3C808B48778705D4A2 /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "Upload Debug Symbols to Sentry";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThaliAppTests/Pods-ThaliAppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B27F63D0FD096105A9DEAE51 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThaliApp/Pods-ThaliApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D10050A48F4A421A818808FD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThaliApp/Pods-ThaliApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F5B3F91167CECD971511F1E5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThaliAppTests/Pods-ThaliAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
 		};
 /* End PBXShellScriptBuildPhase section */
 

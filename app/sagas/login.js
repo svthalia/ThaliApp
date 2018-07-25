@@ -1,6 +1,7 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest } from '../utils/url';
 import * as loginActions from '../actions/login';
@@ -78,15 +79,22 @@ const profile = function* profile(action) {
     ]);
     yield put(loginActions.profileSuccess(userProfile.display_name, userProfile.avatar.medium));
   } catch (error) {
+    Sentry.captureException(error);
     // Swallow error
   }
 };
+
+function* success({ payload }) {
+  const { username } = payload;
+  yield call(Sentry.setUserContext, { username });
+}
 
 const loginSaga = function* loginSaga() {
   yield takeEvery(loginActions.LOGIN, login);
   yield takeEvery(loginActions.LOGOUT, logout);
   yield takeEvery(loginActions.PROFILE, profile);
   yield takeEvery(loginActions.TOKEN_INVALID, tokenInvalid);
+  yield takeEvery(loginActions.SUCCESS, success);
 };
 
 export default loginSaga;

@@ -1,6 +1,5 @@
-import {
-  call, put, takeEvery, select,
-} from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as eventActions from '../actions/event';
@@ -36,6 +35,7 @@ const event = function* event(action) {
       eventRegistrations,
     ));
   } catch (error) {
+    Sentry.captureException(error);
     yield put(eventActions.failure());
   }
 };

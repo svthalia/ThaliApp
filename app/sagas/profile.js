@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
@@ -23,6 +24,7 @@ const profile = function* profile(action) {
     const profileData = yield call(apiRequest, `members/${member}`, data);
     yield put(profileActions.success(profileData));
   } catch (error) {
+    Sentry.captureException(error);
     yield put(profileActions.failure());
   }
 };

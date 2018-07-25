@@ -1,6 +1,5 @@
-import {
-  call, put, takeEvery, select,
-} from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
@@ -33,6 +32,7 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
       if (error.response !== null && error.response.status === NOT_FOUND) {
         yield put(pizzaActions.success(event, null, pizzaList));
       } else {
+        Sentry.captureException(error);
         yield put(pizzaActions.failure());
       }
     }
@@ -40,6 +40,7 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
     if (error.response !== null && error.response.status === NOT_FOUND) {
       yield put(pizzaActions.success(null, null, []));
     } else {
+      Sentry.captureException(error);
       yield put(pizzaActions.failure());
     }
   }
@@ -60,6 +61,7 @@ const cancel = function* cancel() {
     yield call(apiRequest, 'pizzas/orders/me', data);
     yield put(pizzaActions.cancelSuccess());
   } catch (error) {
+    Sentry.captureException(error);
     yield put(pizzaActions.failure());
   }
 };
@@ -84,6 +86,7 @@ const order = function* order(action) {
     const orderData = yield call(apiRequest, route, data);
     yield put(pizzaActions.orderSuccess(orderData));
   } catch (error) {
+    Sentry.captureException(error);
     yield put(pizzaActions.failure());
   }
 };

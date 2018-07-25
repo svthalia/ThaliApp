@@ -3,6 +3,7 @@ import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
 import Snackbar from 'react-native-snackbar';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 
@@ -38,6 +39,7 @@ const register = function* register(action) {
     }
     Snackbar.show({ title: 'Registration successful!' });
   } catch (error) {
+    Sentry.captureException(error);
     yield put(eventActions.failure());
   }
 };
@@ -71,6 +73,7 @@ const update = function* update(action) {
     yield delay(50);
     Snackbar.show({ title: 'Successfully updated registration' });
   } catch (error) {
+    Sentry.captureException(error);
     yield put(registrationActions.failure());
   }
 };
@@ -95,6 +98,7 @@ const cancel = function* cancel(action) {
     yield call(apiRequest, `registrations/${registration}`, data);
     Snackbar.show({ title: 'Successfully cancelled registration' });
   } catch (error) {
+    Sentry.captureException(error);
     // Swallow error for now
   }
 
@@ -122,6 +126,7 @@ const fields = function* fields(action) {
     yield put(registrationActions.showFields(registration, response.fields));
     yield put(eventActions.done());
   } catch (error) {
+    Sentry.captureException(error);
     yield put(eventActions.failure());
   }
 };

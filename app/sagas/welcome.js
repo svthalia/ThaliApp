@@ -1,6 +1,5 @@
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as welcomeActions from '../actions/welcome';
@@ -29,6 +28,7 @@ const welcome = function* welcome() {
     if (error.name === 'TokenInvalidError') {
       yield put(loginActions.tokenInvalid());
     }
+    Sentry.captureException(error);
     yield put(welcomeActions.failure());
   }
 };
