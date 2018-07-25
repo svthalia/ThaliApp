@@ -1,4 +1,4 @@
 {
-  "presets": ["react-native", "react-native-dotenv"],
+  "presets": ["react-native", "module:react-native-dotenv"],
   "plugins": ["@babel/plugin-proposal-object-rest-spread", "@babel/transform-regenerator"]
 }

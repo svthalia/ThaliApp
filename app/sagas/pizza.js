@@ -1,4 +1,6 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects';
+import {
+  call, put, takeEvery, select,
+} from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 

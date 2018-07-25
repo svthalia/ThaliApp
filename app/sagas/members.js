@@ -1,5 +1,7 @@
 import { Dimensions } from 'react-native';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import {
+  call, put, select, takeEvery,
+} from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 
 import { TOTAL_BAR_HEIGHT } from '../ui/components/standardHeader/style/StandardHeader';
