@@ -61,6 +61,8 @@ build android:
           - $CI_PROJECT_DIR/.gradle/wrapper/
           - $CI_PROJECT_DIR/.gradle/caches/
     script:
+        - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
+        - echo $PROD_ENV | base64 -d > .env
         - cd $CI_PROJECT_DIR/android/
         - ./gradlew --no-daemon ":app:assemble"
     artifacts:
