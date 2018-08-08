@@ -14,25 +14,20 @@ import styles, { memberSize } from './style/MemberList';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 
 class MemberList extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: false,
-    };
-  }
-
   componentDidMount = () => {
-    this.props.loadMembers(this.props.searchKey);
+    const { searchKey } = this.props;
+    this.props.loadMembers(searchKey);
   };
 
   handleRefresh = () => {
-    this.props.loadMembers(this.props.searchKey);
+    const { searchKey } = this.props;
+    this.props.loadMembers(searchKey);
   };
 
   handleEndReached = () => {
-    if (this.props.more !== null) {
-      this.props.loadMoreMembers(this.props.more);
+    const { more, loadMoreMembers } = this.props;
+    if (more !== null) {
+      loadMoreMembers(more);
     }
   };
 
@@ -46,29 +41,31 @@ class MemberList extends Component {
       />
     );
 
-    let content = (<FlatList
-      style={styles.flatList}
-      contentContainerStyle={styles.container}
-      onRefresh={this.handleRefresh}
-      refreshing={this.props.loading}
-      onEndReachedThreshold={0.5}
-      onEndReached={this.handleEndReached}
-      data={this.props.memberList}
-      renderItem={item => (
-        <MemberView
-          key={item.item.pk}
-          member={{
-            pk: item.item.pk,
-            photo: item.item.avatar.medium,
-            name: item.item.display_name,
-          }}
-          style={styles.memberView}
-          size={memberSize}
-        />
-      )}
-      keyExtractor={item => item.pk}
-      numColumns={3}
-    />);
+    let content = (
+      <FlatList
+        style={styles.flatList}
+        contentContainerStyle={styles.container}
+        onRefresh={this.handleRefresh}
+        refreshing={this.props.loading}
+        onEndReachedThreshold={0.5}
+        onEndReached={this.handleEndReached}
+        data={this.props.memberList}
+        renderItem={item => (
+          <MemberView
+            key={item.item.pk}
+            member={{
+              pk: item.item.pk,
+              photo: item.item.avatar.medium,
+              name: item.item.display_name,
+            }}
+            style={styles.memberView}
+            size={memberSize}
+          />
+        )}
+        keyExtractor={item => item.pk}
+        numColumns={3}
+      />
+    );
 
     if (this.props.status === 'initial') {
       content = (<LoadingScreen />);

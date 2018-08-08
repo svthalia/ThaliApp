@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, StatusBar, TouchableOpacity, Text } from 'react-native';
+import {
+  View, StatusBar, TouchableOpacity, Text,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -49,7 +51,9 @@ const StandardHeader = props => (
           size={24}
         />
       </TouchableOpacity>
-      <Text style={styles.title}>{sceneToTitle(props.currentScene, props.t)}</Text>
+      <Text style={styles.title}>
+        {sceneToTitle(props.currentScene, props.t)}
+      </Text>
       <View style={styles.rightView} />
     </View>
   </View>
@@ -77,4 +81,5 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)(translate('components/standardHeader/StandardHeader')(StandardHeader));
+  mapDispatchToProps,
+)(translate('components/standardHeader/StandardHeader')(StandardHeader));

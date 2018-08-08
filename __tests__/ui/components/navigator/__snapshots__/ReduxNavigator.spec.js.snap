@@ -17,8 +17,6 @@ exports[`ReduxNavigator component renders correctly 1`] = `
     }
   />
   <View
-    enabled={true}
-    keyboardVerticalOffset={0}
     modalOpen="false"
     onLayout={[Function]}
     style={
@@ -36,13 +34,7 @@ exports[`ReduxNavigator component renders correctly 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={false}
-      hitSlop={undefined}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -55,7 +47,6 @@ exports[`ReduxNavigator component renders correctly 1`] = `
           "justifyContent": "center",
         }
       }
-      testID={undefined}
     >
       <Image
         source={
@@ -90,6 +81,7 @@ exports[`ReduxNavigator component renders correctly 1`] = `
               "padding": 8,
             }
           }
+          underlineColorAndroid="#313131"
         />
         <TextInput
           allowFontScaling={true}
@@ -109,18 +101,12 @@ exports[`ReduxNavigator component renders correctly 1`] = `
               "padding": 8,
             }
           }
+          underlineColorAndroid="#313131"
         />
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -140,8 +126,6 @@ exports[`ReduxNavigator component renders correctly 1`] = `
             },
           ]
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <View
           style={
@@ -159,9 +143,6 @@ exports[`ReduxNavigator component renders correctly 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -181,9 +162,6 @@ exports[`ReduxNavigator component renders correctly 1`] = `
         </View>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         onPress={[Function]}
         style={
           Object {

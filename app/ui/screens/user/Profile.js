@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar, ImageBackground } from 'react-native';
+import {
+  Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar, ImageBackground,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,7 +20,9 @@ import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/Standard
 import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/Profile';
 
 const getDescription = (profile, t) => ([
-  <Text style={[styles.sectionHeader, styles.marginTop]} key="title">{`${t('About')} ${profile.display_name}`}</Text>,
+  <Text style={[styles.sectionHeader, styles.marginTop]} key="title">
+    {`${t('About')} ${profile.display_name}`}
+  </Text>,
   <View style={styles.card} key="content">
     <Text
       style={[
@@ -26,7 +30,9 @@ const getDescription = (profile, t) => ([
         styles.item,
         styles.profileText,
         !profile.profile_description && styles.italics]}
-    >{profile.profile_description || t('This member has not written a description yet.')}</Text>
+    >
+      {profile.profile_description || t('This member has not written a description yet.')}
+    </Text>
   </View>,
 ]);
 
@@ -62,11 +68,15 @@ const getPersonalInfo = (profile, t) => {
 
   if (profileData) {
     return [
-      <Text style={styles.sectionHeader} key="title">{t('Personal information')}</Text>,
+      <Text style={styles.sectionHeader} key="title">
+        {t('Personal information')}
+      </Text>,
       <View style={styles.card} key="content">
         {profileData.map((item, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
-            <Text style={styles.description}>{item.title}</Text>
+            <Text style={styles.description}>
+              {item.title}
+            </Text>
             <Text
               style={item.title === 'Website' ? [styles.data, styles.url] : styles.data}
               onPress={item.title === 'Website' ? () => Linking.openURL(`${item.value}`) : null}
@@ -84,11 +94,15 @@ const getPersonalInfo = (profile, t) => {
 const getAchievements = (profile, t) => {
   if (profile.achievements.length) {
     return [
-      <Text style={styles.sectionHeader} key="title">{t('Achievements for Thalia')}</Text>,
+      <Text style={styles.sectionHeader} key="title">
+        {t('Achievements for Thalia')}
+      </Text>,
       <View style={styles.card} key="content">
         {profile.achievements.map((achievement, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={achievement.name}>
-            <Text style={styles.description}>{achievement.name}</Text>
+            <Text style={styles.description}>
+              {achievement.name}
+            </Text>
             {achievement.periods && achievement.periods.map((period) => {
               let start = Moment(period.since);
               start = start.isSame(Moment([1970, 1, 1]), 'year') ? '?' : start.format('D MMMM YYYY');
@@ -102,7 +116,11 @@ const getAchievements = (profile, t) => {
               }
               text += `${start} - ${end}`;
 
-              return <Text style={styles.data} key={period.since}>{text}</Text>;
+              return (
+                <Text style={styles.data} key={period.since}>
+                  {text}
+                </Text>
+              );
             })}
           </View>
         ))}
@@ -113,7 +131,6 @@ const getAchievements = (profile, t) => {
 };
 
 class Profile extends Component {
-
   constructor(props) {
     super(props);
     this.scrollY = new Animated.Value(0);
@@ -214,7 +231,9 @@ class Profile extends Component {
           </TouchableOpacity>
           <Animated.Text
             style={[styles.title, textStyle]}
-          >{this.props.profile.display_name}</Animated.Text>
+          >
+            {this.props.profile.display_name}
+          </Animated.Text>
         </Animated.View>
       </Animated.View>
     );
@@ -228,7 +247,7 @@ class Profile extends Component {
           <LoadingScreen />
         </View>
       );
-    } else if (!this.props.success) {
+    } if (!this.props.success) {
       return (
         <View style={styles.container}>
           <StandardHeader />

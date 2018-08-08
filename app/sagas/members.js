@@ -1,5 +1,7 @@
 import { Dimensions } from 'react-native';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import {
+  call, put, select, takeEvery,
+} from 'redux-saga/effects';
 
 import { TOTAL_BAR_HEIGHT } from '../ui/components/standardHeader/style/StandardHeader';
 import { memberSize } from '../ui/screens/memberList/style/MemberList';

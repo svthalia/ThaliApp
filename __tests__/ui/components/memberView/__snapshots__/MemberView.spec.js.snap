@@ -13,15 +13,8 @@ exports[`MemberView component renders correctly 1`] = `
   }
 >
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -33,8 +26,6 @@ exports[`MemberView component renders correctly 1`] = `
         "flex": 1,
       }
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       style={
@@ -73,9 +64,7 @@ exports[`MemberView component renders correctly 1`] = `
             4278190080,
           ]
         }
-        endPoint={undefined}
         locations={null}
-        startPoint={undefined}
         style={
           Object {
             "bottom": 0,
@@ -88,9 +77,6 @@ exports[`MemberView component renders correctly 1`] = `
         }
       />
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "backgroundColor": "transparent",

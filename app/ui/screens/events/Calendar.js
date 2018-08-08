@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, SectionList, ScrollView, RefreshControl } from 'react-native';
+import {
+  Text, View, SectionList, ScrollView, RefreshControl,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
@@ -86,14 +88,13 @@ const eventListToSections = (eventList, t) => {
       sections[month].data[day].events.sort((a, b) => {
         if (a.start == null && b.start == null) {
           return 0;
-        } else if (a.start == null) {
+        } if (a.start == null) {
           return -1;
-        } else if (b.start == null) {
+        } if (b.start == null) {
           return 1;
         }
         return Moment(a.start).diff(Moment(b.start));
-      },
-      );
+      });
       return sections[month].data[day];
     });
     return sections[month];
@@ -104,12 +105,16 @@ const renderItem = (item) => {
   const { dayNumber, dayOfWeek, events } = item.item;
 
   return (
-    <View style={styles.day} >
-      <View style={styles.dateInfo} >
-        <Text style={styles.dayNumber} >{dayNumber}</Text>
-        <Text style={styles.dayOfWeek}>{dayOfWeek}</Text>
+    <View style={styles.day}>
+      <View style={styles.dateInfo}>
+        <Text style={styles.dayNumber}>
+          {dayNumber}
+        </Text>
+        <Text style={styles.dayOfWeek}>
+          {dayOfWeek}
+        </Text>
       </View>
-      <View style={styles.eventList} >
+      <View style={styles.eventList}>
         {events.map(
           event => <EventCard event={event} key={`${event.pk}:${event.title}`} />,
         )}
@@ -126,7 +131,7 @@ class Calendar extends Component {
   render() {
     if (this.props.status === 'initial') {
       return <LoadingScreen />;
-    } else if (this.props.status === 'failure') {
+    } if (this.props.status === 'failure') {
       return (
         <ScrollView
           contentContainerStyle={styles.content}
@@ -140,7 +145,7 @@ class Calendar extends Component {
           <ErrorScreen message={this.props.t('Sorry, we couldn\'t load any data.')} />
         </ScrollView>
       );
-    } else if (this.props.eventList.length === 0) {
+    } if (this.props.eventList.length === 0) {
       return (
         <ScrollView
           contentContainerStyle={styles.content}
@@ -161,7 +166,11 @@ class Calendar extends Component {
           style={styles.sectionList}
           renderItem={renderItem}
           renderSectionHeader={
-            itemHeader => <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+            itemHeader => (
+              <Text style={styles.sectionHeader}>
+                {itemHeader.section.key}
+              </Text>
+            )
           }
           sections={eventListToSections(this.props.eventList, this.props.t)}
           keyExtractor={item => item.dayNumber}

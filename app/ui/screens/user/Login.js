@@ -47,11 +47,13 @@ class Login extends Component {
               style={styles.input}
               placeholder={t('Username')}
               autoCapitalize="none"
+              underlineColorAndroid={Colors.textColour}
               onChangeText={username => this.setState({ username })}
             />
             <TextInput
               style={styles.input}
               placeholder={t('Password')}
+              underlineColorAndroid={Colors.textColour}
               autoCapitalize="none"
               secureTextEntry
               onChangeText={password => this.setState({ password })}
@@ -62,8 +64,7 @@ class Login extends Component {
           </View>
           <Button
             title={t('LOGIN')}
-            onPress={() =>
-              login(this.state.username, this.state.password)}
+            onPress={() => login(this.state.username, this.state.password)}
             color={Colors.darkGrey}
             style={styles.loginButton}
             textStyle={styles.loginButtonText}

@@ -38,7 +38,7 @@ export default function navigate(state = initialState, action = {}) {
           ...state,
           drawerOpen: false,
         };
-      } else if (action.payload.newSection) {
+      } if (action.payload.newSection) {
         return {
           ...state,
           previousScenes: [],

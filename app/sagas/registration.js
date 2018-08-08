@@ -1,5 +1,7 @@
 import { delay } from 'redux-saga';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import {
+  call, put, select, takeEvery,
+} from 'redux-saga/effects';
 import Snackbar from 'react-native-snackbar';
 
 import { apiRequest, tokenSelector } from '../utils/url';

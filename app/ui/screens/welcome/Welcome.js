@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, SectionList, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import {
+  View, Text, SectionList, TouchableOpacity, ScrollView, RefreshControl,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
@@ -49,7 +51,9 @@ const Footer = props => (
     onPress={() => props.navigate('eventList', true)}
     style={styles.footer}
   >
-    <Text style={styles.footerText}>{props.t('SHOW THE ENTIRE AGENDA')}</Text>
+    <Text style={styles.footerText}>
+      {props.t('SHOW THE ENTIRE AGENDA')}
+    </Text>
   </TouchableOpacity>
 );
 
@@ -72,7 +76,7 @@ class Welcome extends Component {
   render() {
     if (this.props.status === 'initial') {
       return <LoadingScreen />;
-    } else if (this.props.status === 'failure') {
+    } if (this.props.status === 'failure') {
       return (
         <ScrollView
           contentContainerStyle={styles.content}
@@ -86,7 +90,7 @@ class Welcome extends Component {
           <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
         </ScrollView>
       );
-    } else if (this.props.eventList.length === 0) {
+    } if (this.props.eventList.length === 0) {
       return (
         <ScrollView
           contentContainerStyle={styles.content}
@@ -107,7 +111,11 @@ class Welcome extends Component {
           style={styles.sectionList}
           renderItem={item => <EventDetailCard event={item.item} />}
           renderSectionHeader={
-            itemHeader => <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+            itemHeader => (
+              <Text style={styles.sectionHeader}>
+                {itemHeader.section.key}
+              </Text>
+            )
           }
           sections={eventListToSections(this.props.eventList, this.props.t)}
           keyExtractor={event => event.pk}

@@ -77,7 +77,8 @@ class Main extends Component {
             store.dispatch(loginActions.profile(token));
             store.dispatch(register());
           }
-        });
+        },
+      );
 
     this.addDeepLinkingHandler();
   }

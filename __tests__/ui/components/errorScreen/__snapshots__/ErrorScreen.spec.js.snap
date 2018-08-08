@@ -27,9 +27,6 @@ exports[`ErrorScreen component renders correctly 1`] = `
     }
   />
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#616161",
@@ -43,9 +40,6 @@ exports[`ErrorScreen component renders correctly 1`] = `
     Lorem ipsum
   </Text>
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#616161",

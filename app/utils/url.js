@@ -35,8 +35,8 @@ const detectInvalidToken = (response) => {
   return response.json().then((json) => {
     if (response.status === 403) {
       const contentLang = response.headers.get('content-language');
-      if ((contentLang === 'en' && json.detail === 'Invalid token.') ||
-        (contentLang === 'nl' && json.detail === 'Ongeldige token.')) {
+      if ((contentLang === 'en' && json.detail === 'Invalid token.')
+        || (contentLang === 'nl' && json.detail === 'Ongeldige token.')) {
         throw new TokenInvalidError(responseCopy);
       }
     }

@@ -32,8 +32,8 @@ const login = function* login(action) {
     const { token } = response;
 
     yield call(AsyncStorage.multiSet, [
-          [USERNAMEKEY, user],
-          [TOKENKEY, token],
+      [USERNAMEKEY, user],
+      [TOKENKEY, token],
     ]);
     yield put(loginActions.success(user, token));
     yield put(loginActions.profile(token));

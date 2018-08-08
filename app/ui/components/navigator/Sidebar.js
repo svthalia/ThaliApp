@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Text, View, Image, TouchableHighlight, ImageBackground } from 'react-native';
+import {
+  Alert, Text, View, Image, TouchableHighlight, ImageBackground,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -76,7 +78,9 @@ const Sidebar = (props) => {
             style={styles.profileImage}
             resizeMode="cover"
           />
-          <Text style={styles.nameField}>{props.displayName}</Text>
+          <Text style={styles.nameField}>
+            {props.displayName}
+          </Text>
         </ImageBackground>
       </TouchableHighlight>
       <View style={styles.buttonList}>
@@ -86,8 +90,8 @@ const Sidebar = (props) => {
             name={button.iconName}
             borderRadius={0}
             backgroundColor={Colors.white}
-            color={props.currentScene === button.scene ?
-                 Colors.magenta : Colors.textColour}
+            color={props.currentScene === button.scene
+              ? Colors.magenta : Colors.textColour}
             size={24}
             iconStyle={styles.buttonIcon}
             style={[styles.buttonText, button.style]}

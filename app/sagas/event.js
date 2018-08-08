@@ -1,4 +1,6 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects';
+import {
+  call, put, takeEvery, select,
+} from 'redux-saga/effects';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as eventActions from '../actions/event';

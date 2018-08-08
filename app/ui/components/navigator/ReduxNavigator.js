@@ -42,13 +42,15 @@ const sceneToComponent = (scene) => {
 };
 
 const ReduxNavigator = (props) => {
-  const { currentScene, loggedIn, drawerOpen, updateDrawer,
-          isFirstScene, back, navigateToWelcome } = props;
+  const {
+    currentScene, loggedIn, drawerOpen, updateDrawer,
+    isFirstScene, back, navigateToWelcome,
+  } = props;
   BackHandler.addEventListener('hardwareBackPress', () => {
     if (!isFirstScene) {
       back();
       return true;
-    } else if (currentScene !== 'welcome') {
+    } if (currentScene !== 'welcome') {
       navigateToWelcome();
       return true;
     }
@@ -56,29 +58,31 @@ const ReduxNavigator = (props) => {
     return true;
   });
   if (loggedIn) {
-    return (<Drawer
-      type="overlay"
-      content={<Sidebar />}
-      openDrawerOffset={0.2}
-      panOpenMask={0.2}
-      panCloseMask={0.2}
-      panThreshold={0.3}
-      styles={{
-        mainOverlay: {
-          backgroundColor: Colors.black,
-          opacity: 0,
-          elevation: 100,
-        },
-      }}
-      tweenHandler={ratio => ({ mainOverlay: { opacity: ratio * 0.75 } })}
-      open={drawerOpen}
-      onOpen={() => updateDrawer(true)}
-      onClose={() => updateDrawer(false)}
-      tapToClose
-    >
-      {currentScene !== 'profile' && currentScene !== 'members' && <StandardHeader />}
-      {sceneToComponent(currentScene)}
-    </Drawer>);
+    return (
+      <Drawer
+        type="overlay"
+        content={<Sidebar />}
+        openDrawerOffset={0.2}
+        panOpenMask={0.2}
+        panCloseMask={0.2}
+        panThreshold={0.3}
+        styles={{
+          mainOverlay: {
+            backgroundColor: Colors.black,
+            opacity: 0,
+            elevation: 100,
+          },
+        }}
+        tweenHandler={ratio => ({ mainOverlay: { opacity: ratio * 0.75 } })}
+        open={drawerOpen}
+        onOpen={() => updateDrawer(true)}
+        onClose={() => updateDrawer(false)}
+        tapToClose
+      >
+        {currentScene !== 'profile' && currentScene !== 'members' && <StandardHeader />}
+        {sceneToComponent(currentScene)}
+      </Drawer>
+    );
   }
   return (
     <View
