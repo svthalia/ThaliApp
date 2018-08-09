@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StatusBar, Animated, Easing, BackHandler, TouchableOpacity, TextInput, Text, Platform, View } from 'react-native';
+import {
+  StatusBar, Animated, Easing, BackHandler, TouchableOpacity, TextInput, Text, Platform, View,
+} from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -21,7 +23,8 @@ class SearchBar extends Component {
     };
 
     BackHandler.addEventListener('hardwareBackPress', () => {
-      if (this.state.isSearching) {
+      const { isSearching } = this.state;
+      if (isSearching) {
         this.updateSearch(false);
         return true;
       }
@@ -29,34 +32,45 @@ class SearchBar extends Component {
     });
   }
 
-  getLeftIcon = () => (
-    <TouchableOpacity
-      onPress={this.state.isSearching ? () => this.updateSearch(false) : this.props.openDrawer}
-    >
-      <Icon
-        name={this.state.isSearching ? 'arrow-back' : 'menu'}
-        style={[styles.leftIcon, this.state.isSearching ? styles.magenta : styles.white]}
-        size={24}
-      />
-    </TouchableOpacity>
-  );
+  getLeftIcon = () => {
+    const { openDrawer } = this.props;
+    const { isSearching } = this.state;
+    return (
+      <TouchableOpacity
+        onPress={isSearching ? () => this.updateSearch(false) : openDrawer}
+      >
+        <Icon
+          name={isSearching ? 'arrow-back' : 'menu'}
+          style={[styles.leftIcon, isSearching ? styles.magenta : styles.white]}
+          size={24}
+        />
+      </TouchableOpacity>
+    );
+  };
 
-  getCenter = () => (
-    this.state.isSearching ? (
+  getCenter = () => {
+    const { title, searchText } = this.props;
+    const { searchKey, isSearching } = this.state;
+    return (isSearching ? (
       <TextInput
         style={styles.input}
         selectionColor={Colors.magenta}
         placeholderTextColor={Colors.lightGray}
         underlineColorAndroid={Colors.transparent}
-        placeholder={this.props.searchText}
+        placeholder={searchText}
         onChangeText={this.updateSearchKey}
-        value={this.state.searchKey}
+        value={searchKey}
       />
-      ) : <Text style={styles.title}>{this.props.title}</Text>
-  );
+    ) : (
+      <Text style={styles.title}>
+        {title}
+      </Text>
+    ));
+  };
 
   getRightIcon = () => {
-    if (!this.state.isSearching) {
+    const { searchKey, isSearching } = this.state;
+    if (!isSearching) {
       return (
         <TouchableOpacity
           onPress={() => this.updateSearch(true)}
@@ -68,7 +82,7 @@ class SearchBar extends Component {
           />
         </TouchableOpacity>
       );
-    } else if (this.state.searchKey) {
+    } if (searchKey) {
       return (
         <TouchableOpacity
           onPress={() => this.updateSearchKey('')}
@@ -89,11 +103,13 @@ class SearchBar extends Component {
       isSearching,
     });
 
+    const { scaleValue } = this.state;
+
     if (isSearching) {
       this.setState({
         isAnimating: true,
       });
-      Animated.timing(this.state.scaleValue, {
+      Animated.timing(scaleValue, {
         toValue: 1,
         duration: 325,
         easing: Easing.easeIn,
@@ -101,7 +117,7 @@ class SearchBar extends Component {
       }).start();
     } else {
       this.updateSearchKey('');
-      Animated.timing(this.state.scaleValue, {
+      Animated.timing(scaleValue, {
         toValue: 0.01,
         duration: 325,
         easing: Easing.easeOut,
@@ -125,19 +141,22 @@ class SearchBar extends Component {
   };
 
   render() {
+    const { isAnimating, isSearching, scaleValue } = this.state;
     return (
       <View>
         <StatusBar
           backgroundColor={Colors.semiTransparent}
           translucent
           animated
-          barStyle={this.state.isSearching ? 'dark-content' : 'light-content'}
+          barStyle={isSearching ? 'dark-content' : 'light-content'}
         />
         <View style={styles.appBar}>
-          {this.state.isAnimating && <Animated.View
-            style={[
-              styles.animationView, { transform: [{ scale: this.state.scaleValue }] }]}
-          />}
+          {isAnimating && (
+            <Animated.View
+              style={[
+                styles.animationView, { transform: [{ scale: scaleValue }] }]}
+            />
+          )}
           {this.getLeftIcon()}
           {this.getCenter()}
           {this.getRightIcon()}

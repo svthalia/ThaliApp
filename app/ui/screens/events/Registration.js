@@ -54,7 +54,7 @@ class Registration extends Component {
           isValid: false,
           reason: this.props.t('This field is required and must be an integer.'),
         };
-      } else if (field.type === 'text' && (value === '' || value === null)) {
+      } if (field.type === 'text' && (value === '' || value === null)) {
         return {
           isValid: false,
           reason: this.props.t('This field is required.'),
@@ -118,7 +118,9 @@ class Registration extends Component {
             if (field.type === 'boolean') {
               return (
                 <View key={key} style={styles.booleanContainer}>
-                  <Text style={styles.field}>{field.label}</Text>
+                  <Text style={styles.field}>
+                    {field.label}
+                  </Text>
                   <Switch
                     value={this.state[key]}
                     onValueChange={value => this.updateField(key, value)}
@@ -127,33 +129,41 @@ class Registration extends Component {
                   />
                 </View>
               );
-            } else if (field.type === 'integer' || field.type === 'text') {
+            } if (field.type === 'integer' || field.type === 'text') {
               return (
                 <View key={key} style={styles.fieldContainer}>
-                  <Text style={styles.field}>{field.label}</Text>
+                  <Text style={styles.field}>
+                    {field.label}
+                  </Text>
                   <TextInput
                     value={this.state[key]}
                     onChangeText={value => this.updateField(key, value)}
                     keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
                     style={styles.field}
-                    underlineColorAndroid={validity.isValid ? Colors.lightGray :
-                      Colors.lightRed}
+                    underlineColorAndroid={validity.isValid ? Colors.lightGray
+                      : Colors.lightRed}
                     placeholder={field.description}
                   />
-                  {validity.isValid || <Text style={styles.invalid}>{validity.reason}</Text>}
+                  {validity.isValid || (
+                    <Text style={styles.invalid}>
+                      {validity.reason}
+                    </Text>
+                  )}
                 </View>
               );
             }
             return <View />;
           })}
-          {this.props.status !== 'loading' && <View style={styles.buttonView}>
-            <Button
-              title={this.props.t('Save')}
-              color={Colors.magenta}
-              onPress={() => this.props.update(this.props.registration, this.state)}
-              disabled={!this.isFormValid()}
-            />
-          </View>}
+          {this.props.status !== 'loading' && (
+            <View style={styles.buttonView}>
+              <Button
+                title={this.props.t('Save')}
+                color={Colors.magenta}
+                onPress={() => this.props.update(this.props.registration, this.state)}
+                disabled={!this.isFormValid()}
+              />
+            </View>
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -162,7 +172,7 @@ class Registration extends Component {
 
 Registration.propTypes = {
   registration: PropTypes.number.isRequired,
-  fields: PropTypes.object.isRequired,  // eslint-disable-line react/forbid-prop-types
+  fields: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   status: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,

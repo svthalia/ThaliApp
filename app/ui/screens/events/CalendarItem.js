@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableHighlight, Linking } from 'react-native';
+import {
+  View, Text, TouchableHighlight, Linking,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
@@ -12,9 +14,9 @@ import styles from './style/CalendarItem';
 const getEventInfo = (event, t) => {
   if (event.start === null && event.end === null) {
     return event.location;
-  } else if (event.start === null) {
+  } if (event.start === null) {
     return `${t('Until')} ${Moment(event.end).format('HH:mm')} | ${event.location}`;
-  } else if (event.end === null) {
+  } if (event.end === null) {
     return `${t('From')} ${Moment(event.start).format('HH:mm')} | ${event.location}`;
   }
   return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format('HH:mm')} | ${event.location}`;

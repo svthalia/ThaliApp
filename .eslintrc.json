@@ -42,6 +42,8 @@
         "react-native/split-platform-components": 2,
         "react-native/no-inline-styles": 2,
         "react-native/no-color-literals": 2,
+        "react/destructuring-assignment": 0,
+        "prefer-destructuring": 0,
         "react/jsx-filename-extension": 0,
         "react/prefer-stateless-function": 1,
         "import/prefer-default-export": 1

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Keyboard, TouchableWithoutFeedback, StyleSheet, ViewPropTypes } from 'react-native';
+import {
+  View, Keyboard, TouchableWithoutFeedback, StyleSheet, ViewPropTypes,
+} from 'react-native';
 
 const DismissKeyboardView = props => (
   <TouchableWithoutFeedback

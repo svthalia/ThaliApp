@@ -15,8 +15,12 @@ const ErrorScreen = props => (
       source={cloud}
       style={styles.image}
     />
-    <Text style={styles.text}>{props.message}</Text>
-    <Text style={styles.text}>{props.t('Try again later.')}</Text>
+    <Text style={styles.text}>
+      {props.message}
+    </Text>
+    <Text style={styles.text}>
+      {props.t('Try again later.')}
+    </Text>
   </View>
 );
 

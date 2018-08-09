@@ -11,15 +11,8 @@ exports[`Sidebar component renders correctly 1`] = `
   }
 >
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -31,8 +24,6 @@ exports[`Sidebar component renders correctly 1`] = `
         "height": 168,
       }
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       style={
@@ -77,9 +68,7 @@ exports[`Sidebar component renders correctly 1`] = `
             4278190080,
           ]
         }
-        endPoint={undefined}
         locations={null}
-        startPoint={undefined}
         style={
           Object {
             "bottom": 0,
@@ -107,9 +96,6 @@ exports[`Sidebar component renders correctly 1`] = `
         }
       />
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#FFFFFF",
@@ -131,15 +117,8 @@ exports[`Sidebar component renders correctly 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -157,8 +136,6 @@ exports[`Sidebar component renders correctly 1`] = `
           },
         ]
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <View
         style={
@@ -183,9 +160,7 @@ exports[`Sidebar component renders correctly 1`] = `
         }
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           onPress={[Function]}
           style={
             Array [
@@ -214,9 +189,6 @@ exports[`Sidebar component renders correctly 1`] = `
           
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -234,15 +206,8 @@ exports[`Sidebar component renders correctly 1`] = `
       </View>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -260,8 +225,6 @@ exports[`Sidebar component renders correctly 1`] = `
           },
         ]
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <View
         style={
@@ -286,9 +249,7 @@ exports[`Sidebar component renders correctly 1`] = `
         }
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           onPress={[Function]}
           style={
             Array [
@@ -317,9 +278,6 @@ exports[`Sidebar component renders correctly 1`] = `
           
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -337,15 +295,8 @@ exports[`Sidebar component renders correctly 1`] = `
       </View>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -363,8 +314,6 @@ exports[`Sidebar component renders correctly 1`] = `
           },
         ]
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <View
         style={
@@ -389,9 +338,7 @@ exports[`Sidebar component renders correctly 1`] = `
         }
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           onPress={[Function]}
           style={
             Array [
@@ -420,9 +367,6 @@ exports[`Sidebar component renders correctly 1`] = `
           
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -440,15 +384,8 @@ exports[`Sidebar component renders correctly 1`] = `
       </View>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -466,8 +403,6 @@ exports[`Sidebar component renders correctly 1`] = `
           },
         ]
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <View
         style={
@@ -495,9 +430,7 @@ exports[`Sidebar component renders correctly 1`] = `
         }
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           onPress={[Function]}
           style={
             Array [
@@ -526,9 +459,6 @@ exports[`Sidebar component renders correctly 1`] = `
           
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Alert, Image, ScrollView, Text, View, RefreshControl, TouchableHighlight, Platform, Linking } from 'react-native';
+import {
+  FlatList, Alert, Image, ScrollView, Text,
+  View, RefreshControl, TouchableHighlight, Platform, Linking,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
@@ -24,10 +27,12 @@ class Event extends Component {
     const cancelDeadlineDate = new Date(this.props.data.cancel_deadline);
     let message = this.props.t('Are you sure you want to cancel your registration?');
     if (this.props.data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
-      message = this.props.t('The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!', { fine: this.props.data.fine });
+      message = this.props.t('The deadline has passed, are you sure you want to cancel your '
+        + 'registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
+      { fine: this.props.data.fine });
     }
     return Alert.alert(
-  this.props.t('Cancel registration?'),
+      this.props.t('Cancel registration?'),
       message,
       [
         { text: this.props.t('No') },
@@ -44,28 +49,49 @@ class Event extends Component {
 
     infoTexts.push(
       <View key="start-holder" style={styles.infoHolder}>
-        <Text style={styles.infoText} key="start-title">{this.props.t('From')}:</Text>
-        <Text style={styles.infoValueText} key="start-value">{startDate}</Text>
+        <Text style={styles.infoText} key="start-title">
+          {this.props.t('From')}
+:
+        </Text>
+        <Text style={styles.infoValueText} key="start-value">
+          {startDate}
+        </Text>
       </View>,
-      );
+    );
     infoTexts.push(
       <View key="end-holder" style={styles.infoHolder}>
-        <Text style={styles.infoText} key="end-title">{this.props.t('Until')}:</Text>
-        <Text style={styles.infoValueText} key="end-value">{endDate}</Text>
+        <Text style={styles.infoText} key="end-title">
+          {this.props.t('Until')}
+:
+        </Text>
+        <Text style={styles.infoValueText} key="end-value">
+          {endDate}
+        </Text>
       </View>,
-      );
+    );
     infoTexts.push(
       <View key="loc-holder" style={styles.infoHolder}>
-        <Text style={styles.infoText} key="loc-title">{this.props.t('Location')}:</Text>
-        <Text style={styles.infoValueText} key="loc-value">{data.location}</Text>
+        <Text style={styles.infoText} key="loc-title">
+          {this.props.t('Location')}
+:
+        </Text>
+        <Text style={styles.infoValueText} key="loc-value">
+          {data.location}
+        </Text>
       </View>,
-      );
+    );
     infoTexts.push(
       <View key="price-holder" style={styles.infoHolder}>
-        <Text style={styles.infoText} key="price-title">{this.props.t('Price')}:</Text>
-        <Text style={styles.infoValueText} key="price-value">€{data.price}</Text>
+        <Text style={styles.infoText} key="price-title">
+          {this.props.t('Price')}
+:
+        </Text>
+        <Text style={styles.infoValueText} key="price-value">
+€
+          {data.price}
+        </Text>
       </View>,
-      );
+    );
 
     if (data.registration_start !== null || data.registration_end !== null) {
       const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:mm');
@@ -73,16 +99,26 @@ class Event extends Component {
 
       infoTexts.push(
         <View key="registrationend-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="registrationend-title">{this.props.t('Registration deadline')}:</Text>
-          <Text style={styles.infoValueText} key="registrationend-value">{registrationDeadline}</Text>
+          <Text style={styles.infoText} key="registrationend-title">
+            {this.props.t('Registration deadline')}
+:
+          </Text>
+          <Text style={styles.infoValueText} key="registrationend-value">
+            {registrationDeadline}
+          </Text>
         </View>,
-        );
+      );
       infoTexts.push(
         <View key="canceldeadline-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="canceldeadline-title">{this.props.t('Cancellation deadline')}:</Text>
-          <Text style={styles.infoValueText} key="canceldeadline-value">{cancelDeadline}</Text>
+          <Text style={styles.infoText} key="canceldeadline-title">
+            {this.props.t('Cancellation deadline')}
+:
+          </Text>
+          <Text style={styles.infoValueText} key="canceldeadline-value">
+            {cancelDeadline}
+          </Text>
         </View>,
-        );
+      );
 
       let participantsText = `${data.num_participants} ${this.props.t('registrations')}`;
       if (data.max_participants) {
@@ -91,10 +127,15 @@ class Event extends Component {
 
       infoTexts.push(
         <View key="participants-holder" style={styles.infoHolder}>
-          <Text style={styles.infoText} key="participants-title">{this.props.t('Number of registrations')}:</Text>
-          <Text style={styles.infoValueText} key="participants-value">{participantsText}</Text>
+          <Text style={styles.infoText} key="participants-title">
+            {this.props.t('Number of registrations')}
+:
+          </Text>
+          <Text style={styles.infoValueText} key="participants-value">
+            {participantsText}
+          </Text>
         </View>,
-        );
+      );
 
       if (data.user_registration) {
         let registrationState;
@@ -112,17 +153,24 @@ class Event extends Component {
 
         infoTexts.push(
           <View key="status-holder" style={styles.infoHolder}>
-            <Text style={styles.infoText} key="status-title">{this.props.t('Registration status')}:</Text>
-            <Text style={styles.infoValueText} key="status-value">{registrationState}</Text>
+            <Text style={styles.infoText} key="status-title">
+              {this.props.t('Registration status')}
+:
+            </Text>
+            <Text style={styles.infoValueText} key="status-value">
+              {registrationState}
+            </Text>
           </View>,
-          );
+        );
       }
     }
 
     if (data.is_pizza_event) {
       infoTexts.push(
         <View key="pizza-holder" style={styles.pizzaHolder}>
-          <Text style={styles.pizzaText} key="pizza-title">Pizza:</Text>
+          <Text style={styles.pizzaText} key="pizza-title">
+Pizza:
+          </Text>
           <Button
             color={Colors.magenta}
             title="Bestel"
@@ -169,14 +217,18 @@ class Event extends Component {
         text += ' ';
       }
       text += this.props.t(
-        'Cancellation isn\'t possible anymore without having to pay the full ' +
-        'costs of €{{fine}}. Also note that you will be unable to re-register.',
+        'Cancellation isn\'t possible anymore without having to pay the full '
+        + 'costs of €{{fine}}. Also note that you will be unable to re-register.',
         { fine: event.fine },
       );
     }
 
     if (text.length > 0) {
-      return (<Text style={styles.registrationText}>{text}</Text>);
+      return (
+        <Text style={styles.registrationText}>
+          {text}
+        </Text>
+      );
     }
     return (<View />);
   };
@@ -188,13 +240,13 @@ class Event extends Component {
 
     const regRequired = event.registration_start !== null || event.registration_end !== null;
     const regStarted = startRegDate <= nowDate;
-    const regAllowed = regRequired && endRegDate > nowDate &&
-                       regStarted && event.registration_allowed;
+    const regAllowed = regRequired && endRegDate > nowDate
+                       && regStarted && event.registration_allowed;
 
     if (regAllowed) {
       if (event.user_registration === null || event.user_registration.is_cancelled) {
-        const text = event.max_participants && event.max_participants <= event.num_participants ?
-          this.props.t('Put me on the waiting list') : this.props.t('Register');
+        const text = event.max_participants && event.max_participants <= event.num_participants
+          ? this.props.t('Put me on the waiting list') : this.props.t('Register');
         return (
           <View>
             <Text style={styles.registrationText}>
@@ -202,7 +254,12 @@ class Event extends Component {
               <Text
                 style={styles.termsUrl}
                 onPress={() => Linking.openURL(termsAndConditionsUrl)}
-              > {this.props.t('terms and conditions')} </Text>
+              >
+                {' '}
+                {this.props.t('terms and conditions')}
+                {' '}
+
+              </Text>
               {this.props.t(', that you understand them and that you agree to be bound by them.')}
             </Text>
             <View style={styles.registrationActions}>
@@ -214,10 +271,10 @@ class Event extends Component {
             </View>
           </View>
         );
-      } else if (event.user_registration && !event.user_registration.is_cancelled &&
-                 regRequired && regStarted) {
-        if (regStarted && event.user_registration && !event.user_registration.is_cancelled &&
-            event.has_fields) {
+      } if (event.user_registration && !event.user_registration.is_cancelled
+                 && regRequired && regStarted) {
+        if (regStarted && event.user_registration && !event.user_registration.is_cancelled
+            && event.has_fields) {
           return (
             <View style={styles.registrationActions}>
               <Button
@@ -249,7 +306,9 @@ class Event extends Component {
       return (
         <View>
           <View style={styles.divider} />
-          <Text style={styles.registrationsTitle}>{this.props.t('Registrations')}</Text>
+          <Text style={styles.registrationsTitle}>
+            {this.props.t('Registrations')}
+          </Text>
           <FlatList
             numColumns={3}
             data={this.props.registrations}
@@ -313,7 +372,9 @@ class Event extends Component {
               source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.props.data.map_location}&zoom=13&size=450x250&markers=${this.props.data.map_location}` }}
             />
           </TouchableHighlight>
-          <Text style={styles.titleText}>{this.props.data.title}</Text>
+          <Text style={styles.titleText}>
+            {this.props.data.title}
+          </Text>
           {this.eventDesc(this.props.data)}
           {this.eventActions(this.props.data)}
           {this.eventInfo(this.props.data)}
