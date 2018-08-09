@@ -26,6 +26,7 @@ const USERNAMEKEY = '@MyStore:username';
 const TOKENKEY = '@MyStore:token';
 const DISPLAYNAMEKEY = '@MyStore:displayName';
 const PHOTOKEY = '@MyStore:photo';
+const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 
 const pairsToObject = (obj, pair) => {
   const obj2 = { ...obj };
@@ -62,7 +63,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY])
+    AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY])
       .then(
         (result) => {
           const values = result.reduce(pairsToObject, {});
@@ -70,12 +71,13 @@ class Main extends Component {
           const token = values[TOKENKEY];
           const displayName = values[DISPLAYNAMEKEY];
           const photo = values[PHOTOKEY];
+          const pushCategories = JSON.parse(values[PUSHCATEGORYKEY]);
 
           if (username !== null && token !== null) {
             store.dispatch(loginActions.success(username, token));
             store.dispatch(loginActions.profileSuccess(displayName, photo));
             store.dispatch(loginActions.profile(token));
-            store.dispatch(register());
+            store.dispatch(register(pushCategories));
           }
         },
       );

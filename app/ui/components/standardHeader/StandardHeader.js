@@ -26,6 +26,10 @@ const sceneToTitle = (scene, t) => {
       return t('Profile');
     case 'registration':
       return t('Registration');
+    case 'settings':
+      return t('Settings');
+    case 'pushNotificationsSettings':
+      return t('Notifications');
     default:
       return 'ThaliApp';
   }

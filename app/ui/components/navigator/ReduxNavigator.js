@@ -15,6 +15,7 @@ import Pizza from '../../screens/pizza/Pizza';
 import StandardHeader from '../standardHeader/StandardHeader';
 import Registration from '../../screens/events/Registration';
 import MemberList from '../../screens/memberList/MemberList';
+import Settings from '../../screens/settings/Settings';
 
 import * as actions from '../../../actions/navigation';
 import styles from './style/ReduxNavigator';
@@ -36,6 +37,8 @@ const sceneToComponent = (scene) => {
       return <Registration />;
     case 'members':
       return <MemberList />;
+    case 'settings':
+      return <Settings />;
     default:
       return <Welcome />;
   }

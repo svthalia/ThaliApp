@@ -1,4 +1,5 @@
 const files = {};
+files['app/ui/screens/settings/NotificationsSectionNL'] = require('./nl/app/ui/screens/settings/NotificationsSection.json');
 files['app/ui/screens/user/ProfileNL'] = require('./nl/app/ui/screens/user/Profile.json');
 files['app/ui/screens/user/LoginNL'] = require('./nl/app/ui/screens/user/Login.json');
 files['app/ui/screens/welcome/WelcomeNL'] = require('./nl/app/ui/screens/welcome/Welcome.json');
@@ -15,6 +16,7 @@ files['app/ui/components/errorScreen/ErrorScreenNL'] = require('./nl/app/ui/comp
 
 export default {
   nl: {
+    'screens/settings/NotificationsSection': files['app/ui/screens/settings/NotificationsSectionNL'],
     'screens/user/Profile': files['app/ui/screens/user/ProfileNL'],
     'screens/user/Login': files['app/ui/screens/user/LoginNL'],
     'screens/welcome/Welcome': files['app/ui/screens/welcome/WelcomeNL'],

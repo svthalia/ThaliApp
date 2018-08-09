@@ -6,8 +6,9 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 
-const register = function* register() {
+const register = function* register(action) {
   const token = yield select(tokenSelector);
+  const { categories } = action;
 
   if (token === undefined) {
     // There is no token, thus do nothing
@@ -28,6 +29,15 @@ const register = function* register() {
     pushToken = yield call(FCM.getFCMToken);
   }
 
+  const body = {
+    registration_id: pushToken,
+    type: Platform.OS,
+  };
+
+  if (categories !== null) {
+    body.receive_category = categories;
+  }
+
   const data = {
     method: 'POST',
     headers: {
@@ -35,10 +45,7 @@ const register = function* register() {
       'Content-Type': 'application/json',
       Authorization: `Token ${token}`,
     },
-    body: JSON.stringify({
-      registration_id: pushToken,
-      type: Platform.OS,
-    }),
+    body: JSON.stringify(body),
   };
 
   try {

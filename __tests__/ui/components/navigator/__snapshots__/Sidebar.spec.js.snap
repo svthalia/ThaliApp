@@ -421,6 +421,95 @@ exports[`Sidebar component renders correctly 1`] = `
               Object {
                 "padding": 16,
               },
+              Object {},
+            ],
+          ]
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          onPress={[Function]}
+          style={
+            Array [
+              Object {
+                "color": "#313131",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "marginRight": 10,
+                },
+                Object {
+                  "marginRight": 30,
+                  "textAlign": "center",
+                  "width": 28,
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "fontWeight": "600",
+              },
+              Object {
+                "color": "#313131",
+              },
+            ]
+          }
+        >
+          Settings
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 0,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "padding": 8,
+            },
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 0,
+            },
+            Array [
+              Object {
+                "padding": 16,
+              },
               Object {
                 "borderTopColor": "#BBBBBB",
                 "borderTopWidth": 1,
