@@ -1,26 +1,30 @@
-// Group setting sections together to prepare for more submenus to be added.
-export const pushNotificationsSettingsActions = {
-  RETRIEVE: 'SETTINGS_PUSH_NOTIFICATIONS',
-  LOADING: 'SETTINGS_PUSH_NOTIFICATIONS_LOADING',
+// Actions are grouped based on the settings sections
+
+export const settingsActions = {
+  INIT_START: 'SETTINGS_INIT_START',
+  INIT_COMPLETE: 'SETTINGS_INIT_COMPLETE',
+  initStart: () => ({
+    type: settingsActions.INIT_START,
+  }),
+  initComplete: () => ({
+    type: settingsActions.INIT_COMPLETE,
+  }),
+};
+
+export const notificationsSettingsActions = {
   SUCCESS: 'SETTINGS_PUSH_NOTIFICATIONS_SUCCESS',
   FAILURE: 'SETTINGS_PUSH_NOTIFICATIONS_FAILURE',
   SAVE_CATEGORIES: 'SETTINGS_PUSH_NOTIFICATIONS_SAVE_CATEGORIES',
 
-  retrieve: () => ({
-    type: pushNotificationsSettingsActions.RETRIEVE,
-  }),
-  loading: () => ({
-    type: pushNotificationsSettingsActions.LOADING,
-  }),
   success: categoryList => ({
-    type: pushNotificationsSettingsActions.SUCCESS,
+    type: notificationsSettingsActions.SUCCESS,
     categoryList,
   }),
   failure: () => ({
-    type: pushNotificationsSettingsActions.FAILURE,
+    type: notificationsSettingsActions.FAILURE,
   }),
   saveCategories: categories => ({
-    type: pushNotificationsSettingsActions.SAVE_CATEGORIES,
+    type: notificationsSettingsActions.SAVE_CATEGORIES,
     categories,
   }),
 };

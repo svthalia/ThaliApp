@@ -1,44 +1,27 @@
-import { pushNotificationsSettingsActions } from '../actions/settings';
+import pushNotifications, { initialState as initialPushNotificationsState } from './settings/pushNotifications';
+import { settingsActions } from '../actions/settings';
 
 const initialState = {
-  pushNotifications: {
-    categoryList: [],
-    status: 'loading',
-  },
+  pushNotifications: initialPushNotificationsState,
+  loading: true,
 };
 
-export default function settings(state = initialState, action = {}) {
+export default function calendar(state = initialState, action = {}) {
   switch (action.type) {
-    case pushNotificationsSettingsActions.LOADING: {
+    case settingsActions.INIT_START:
       return {
         ...state,
-        pushNotifications: {
-          ...state.pushNotifications,
-          status: 'loading',
-        },
+        loading: true,
       };
-    }
-    case pushNotificationsSettingsActions.SUCCESS: {
+    case settingsActions.INIT_COMPLETE:
       return {
         ...state,
-        pushNotifications: {
-          ...state.pushNotifications,
-          categoryList: action.categoryList,
-          status: 'success',
-        },
+        loading: false,
       };
-    }
-    case pushNotificationsSettingsActions.FAILURE: {
+    default:
       return {
         ...state,
-        pushNotifications: {
-          ...state.pushNotifications,
-          status: 'failure',
-        },
+        pushNotifications: pushNotifications(state.pushNotifications, action),
       };
-    }
-    default: {
-      return state;
-    }
   }
 }

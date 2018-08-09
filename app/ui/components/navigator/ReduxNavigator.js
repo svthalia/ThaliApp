@@ -16,7 +16,6 @@ import StandardHeader from '../standardHeader/StandardHeader';
 import Registration from '../../screens/events/Registration';
 import MemberList from '../../screens/memberList/MemberList';
 import Settings from '../../screens/settings/Settings';
-import PushNotifications from '../../screens/settings/PushNotifications';
 
 import * as actions from '../../../actions/navigation';
 import styles from './style/ReduxNavigator';
@@ -40,8 +39,6 @@ const sceneToComponent = (scene) => {
       return <MemberList />;
     case 'settings':
       return <Settings />;
-    case 'pushNotificationsSettings':
-      return <PushNotifications />;
     default:
       return <Welcome />;
   }

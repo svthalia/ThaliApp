@@ -6,13 +6,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
-  setting: {
+  categoryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 16,
     alignItems: 'center',
-    borderBottomColor: Colors.lightGray,
-    borderBottomWidth: 1,
+    padding: 16,
+  },
+  borderTop: {
+    borderTopColor: Colors.dividerGrey,
+    borderTopWidth: 1,
   },
   label: {
     color: Colors.textColour,
@@ -24,8 +26,8 @@ const styles = StyleSheet.create({
       fontWeight: '600',
     },
   },
-  requiredFields: {
-    alignSelf: 'flex-end',
+  emptyText: {
+    padding: 16,
   },
 });
 

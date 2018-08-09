@@ -1,10 +1,13 @@
 import { AsyncStorage } from 'react-native';
-import { takeEvery, select, call, put } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
+import {
+  all, call, put, select, takeEvery,
+} from 'redux-saga/effects';
 
-import { pushNotificationsSettingsActions } from '../actions/settings';
-import * as navigationActions from '../actions/navigation';
+import { notificationsSettingsActions, settingsActions } from '../actions/settings';
 
 import { apiRequest, tokenSelector } from '../utils/url';
+import * as pushNotifactionsActions from '../actions/pushNotifications';
 
 const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 
@@ -19,9 +22,6 @@ function* pushNotifications() {
       Authorization: `Token ${token}`,
     },
   };
-
-  yield put(pushNotificationsSettingsActions.loading());
-  yield put(navigationActions.navigate('pushNotificationsSettings'));
 
   try {
     const categoryList = yield call(apiRequest, 'devices/categories', data);
@@ -38,9 +38,10 @@ function* pushNotifications() {
       }
     }
 
-    yield put(pushNotificationsSettingsActions.success(categoryList));
+    yield put(notificationsSettingsActions.success(categoryList));
   } catch (error) {
-    yield put(pushNotificationsSettingsActions.failure());
+    Sentry.captureException(error);
+    yield put(notificationsSettingsActions.failure());
   }
 }
 
@@ -49,14 +50,22 @@ function* saveCategories(action) {
 
   try {
     yield call(AsyncStorage.setItem, PUSHCATEGORYKEY, JSON.stringify(categories));
+    yield put(pushNotifactionsActions.register(categories));
   } catch (error) {
-    // Swallow error
+    Sentry.captureException(error);
   }
 }
 
+function* init() {
+  yield all([
+    pushNotifications(),
+  ]);
+  yield put(settingsActions.initComplete());
+}
+
 function* settingsSaga() {
-  yield takeEvery(pushNotificationsSettingsActions.RETRIEVE, pushNotifications);
-  yield takeEvery(pushNotificationsSettingsActions.SAVE_CATEGORIES, saveCategories);
+  yield takeEvery(settingsActions.INIT_START, init);
+  yield takeEvery(notificationsSettingsActions.SAVE_CATEGORIES, saveCategories);
 }
 
 export default settingsSaga;

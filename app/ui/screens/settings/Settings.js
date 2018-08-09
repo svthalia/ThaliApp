@@ -1,32 +1,51 @@
 import React from 'react';
-import { View, TouchableHighlight, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
-
-import Colors from '../../style/Colors';
 import styles from './style/Settings';
 
-import { pushNotificationsSettingsActions } from '../../../actions/settings';
+import { settingsActions } from '../../../actions/settings';
+import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
+import NotificationsSection from './NotificationsSection';
 
-const Settings = props => (
-  <View style={styles.container}>
-    <TouchableHighlight
-      onPress={props.pushNotifications}
-      underlayColor={Colors.pressedWhite}
-    >
-      <Text style={styles.menuItem}>{props.t('Notifications')}</Text>
-    </TouchableHighlight>
-  </View>
-);
+
+class Settings extends React.Component {
+  componentDidMount() {
+    this.props.init();
+  }
+
+  render() {
+    const { loading } = this.props;
+
+    if (loading) {
+      return <LoadingScreen />;
+    }
+
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          style={styles.container}
+        >
+          <View style={styles.content}>
+            <NotificationsSection />
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
 
 Settings.propTypes = {
-  t: PropTypes.func.isRequired,
-  pushNotifications: PropTypes.func.isRequired,
+  init: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  pushNotifications: () => dispatch(pushNotificationsSettingsActions.retrieve()),
+const mapStateToProps = state => ({
+  loading: state.settings.loading,
 });
 
-export default connect(() => ({}), mapDispatchToProps)(translate('screens/settings/Settings')(Settings));
+const mapDispatchToProps = dispatch => ({
+  init: () => dispatch(settingsActions.initStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
