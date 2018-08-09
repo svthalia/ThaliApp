@@ -3,6 +3,7 @@ package com.thaliapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.sentry.RNSentryPackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.evollu.react.fcm.FIRMessagingPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNSentryPackage(),
             new SnackbarPackage(),
             new ReactNativeI18n(),
             new FIRMessagingPackage(),

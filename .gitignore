@@ -60,3 +60,5 @@ buck-out/
 *.jsbundle
 
 bundle.js
+sentry.properties
+.env

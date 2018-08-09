@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
 
 import { TOTAL_BAR_HEIGHT } from '../ui/components/standardHeader/style/StandardHeader';
 import { memberSize } from '../ui/screens/memberList/style/MemberList';
@@ -38,6 +39,7 @@ const members = function* members(action) {
     const response = yield call(apiRequest, 'members', data, params);
     yield put(memberActions.success(response.results, response.next, keywords));
   } catch (error) {
+    Sentry.captureException(error);
     yield put(memberActions.failure());
   }
 };
@@ -61,6 +63,7 @@ const more = function* more(action) {
     const responseJson = yield fetch(url, data).then(response => response.json());
     yield put(memberActions.moreSuccess(responseJson.results, responseJson.next));
   } catch (error) {
+    Sentry.captureException(error);
     yield put(memberActions.moreSuccess([], null));
   }
 };

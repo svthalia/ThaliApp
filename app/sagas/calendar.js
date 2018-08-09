@@ -1,6 +1,7 @@
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as navigationActions from '../actions/navigation';
@@ -30,10 +31,11 @@ const calendar = function* calendar() {
         partner: true,
       }));
     } catch (error) {
-      // Swallow the error
+      Sentry.captureException(error);
     }
     yield put(calendarActions.success(events.concat(partnerEvents)));
   } catch (error) {
+    Sentry.captureException(error);
     yield put(calendarActions.failure());
   }
 };

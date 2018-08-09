@@ -1,6 +1,7 @@
 import { call, takeEvery, select } from 'redux-saga/effects';
 import { Platform } from 'react-native';
 import FCM from 'react-native-fcm';
+import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
@@ -43,6 +44,7 @@ const register = function* register() {
   try {
     yield call(apiRequest, 'devices', data);
   } catch (err) {
+    Sentry.captureException(err);
     // eat error, om nom nom
   }
 };

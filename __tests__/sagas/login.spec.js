@@ -3,6 +3,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import Snackbar from 'react-native-snackbar';
 import { AsyncStorage } from 'react-native';
+import { Sentry } from 'react-native-sentry';
 
 import loginSaga, { DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY } from '../../app/sagas/login';
 import { apiRequest } from '../../app/utils/url';
@@ -27,6 +28,13 @@ jest.mock('../../app/utils/url', () => ({
   tokenSelector: () => 'token',
 }));
 
+jest.mock('react-native-sentry', () => ({
+  Sentry: {
+    setUserContext: () => {},
+    captureException: () => {},
+  },
+}));
+
 describe('login saga', () => {
   const error = new Error('error');
 
@@ -42,6 +50,7 @@ describe('login saga', () => {
     it('should put the result data when the request succeeds', () => expectSaga(loginSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
+        [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
       .put(loginActions.success('username', 'abc123'))
       .put(loginActions.profile('abc123'))
@@ -51,6 +60,7 @@ describe('login saga', () => {
     it('should show a snackbar when the request succeeds', () => expectSaga(loginSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
+        [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
       .dispatch(loginActions.login('username', 'password'))
       .silentRun()
@@ -64,6 +74,7 @@ describe('login saga', () => {
       expectSaga(loginSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
+        [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
       .dispatch(loginActions.login('username', 'password'))
       .silentRun()
