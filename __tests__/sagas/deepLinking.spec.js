@@ -6,7 +6,7 @@ import * as deepLinkingActions from '../../app/actions/deepLinking';
 import { url as siteURL, apiRequest, loggedInSelector } from '../../app/utils/url';
 import * as navigationActions from '../../app/actions/navigation';
 import * as eventActions from '../../app/actions/event';
-import * as loginActions from '../../app/actions/login';
+import * as loginActions from '../../app/actions/session';
 import * as pizzaActions from '../../app/actions/pizza';
 import { EVENT_LIST_SCENE } from '../../app/ui/components/navigator/scenes';
 

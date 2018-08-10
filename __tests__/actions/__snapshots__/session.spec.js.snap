@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`session actions should create an action for a successful login 1`] = `
+Object {
+  "payload": Object {
+    "token": "token",
+    "username": "username",
+  },
+  "type": "SESSION_SUCCESS",
+}
+`;
+
+exports[`session actions should create an action for a successful user profile load 1`] = `
+Object {
+  "payload": Object {
+    "displayName": "displayName",
+    "photo": "photo",
+  },
+  "type": "SESSION_PROFILE_SUCCESS",
+}
+`;
+
+exports[`session actions should create an action to init the session 1`] = `
+Object {
+  "type": "SESSION_INIT",
+}
+`;
+
+exports[`session actions should create an action to load the user profile 1`] = `
+Object {
+  "payload": Object {
+    "token": "token",
+  },
+  "type": "SESSION_PROFILE",
+}
+`;
+
+exports[`session actions should create an action to log the user in 1`] = `
+Object {
+  "payload": Object {
+    "pass": "password",
+    "user": "username",
+  },
+  "type": "SESSION_LOGIN",
+}
+`;
+
+exports[`session actions should create an action to log the user out 1`] = `
+Object {
+  "type": "SESSION_LOGOUT",
+}
+`;
+
+exports[`session actions should create an action to notify invalid token 1`] = `
+Object {
+  "type": "SESSION_TOKEN_INVALID",
+}
+`;

@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/Sidebar';
 
 import * as navigationActions from '../../../actions/navigation';
-import * as loginActions from '../../../actions/login';
+import * as loginActions from '../../../actions/session';
 import * as profileActions from '../../../actions/profile';
 import Colors from '../../style/Colors';
 import {

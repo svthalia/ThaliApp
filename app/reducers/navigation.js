@@ -1,9 +1,10 @@
 import * as navigationActions from '../actions/navigation';
-import * as loginActions from '../actions/login';
+import * as sessionActions from '../actions/session';
+import { LOGIN_SCENE, SPLASH_SCENE } from '../ui/components/navigator/scenes';
 
 const initialState = {
   previousScenes: [],
-  currentScene: 'welcome',
+  currentScene: SPLASH_SCENE,
   loggedIn: false,
   drawerOpen: false,
 };
@@ -12,7 +13,7 @@ const initialState = {
 export default function navigate(state = initialState, action = {}) {
   const { currentScene, previousScenes, drawerOpen } = state;
   switch (action.type) {
-    case loginActions.SUCCESS: {
+    case sessionActions.SUCCESS: {
       return {
         ...state,
         loggedIn: true,
@@ -62,9 +63,12 @@ export default function navigate(state = initialState, action = {}) {
         drawerOpen: action.payload.drawerOpen,
       };
     }
-    case loginActions.TOKEN_INVALID:
-    case loginActions.LOGOUT: {
-      return initialState;
+    case sessionActions.TOKEN_INVALID:
+    case sessionActions.LOGOUT: {
+      return {
+        ...initialState,
+        currentScene: LOGIN_SCENE,
+      };
     }
     default:
       return state;

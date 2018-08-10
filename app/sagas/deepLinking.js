@@ -5,7 +5,7 @@ import { url as siteURL, loggedInSelector } from '../utils/url';
 
 import * as deepLinkingActions from '../actions/deepLinking';
 import * as pizzaActions from '../actions/pizza';
-import * as loginActions from '../actions/login';
+import * as loginActions from '../actions/session';
 import * as eventActions from '../actions/event';
 import * as navigationActions from '../actions/navigation';
 

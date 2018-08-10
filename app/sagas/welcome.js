@@ -5,7 +5,7 @@ import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as welcomeActions from '../actions/welcome';
-import * as loginActions from '../actions/login';
+import * as loginActions from '../actions/session';
 
 const welcome = function* welcome() {
   const token = yield select(tokenSelector);

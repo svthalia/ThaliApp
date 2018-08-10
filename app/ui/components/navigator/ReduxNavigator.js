@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, StatusBar, BackHandler } from 'react-native';
+import { BackHandler, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Drawer from 'react-native-drawer';
-import Login from '../../screens/user/Login';
 import Welcome from '../../screens/welcome/Welcome';
 import Sidebar from './Sidebar';
 
@@ -16,23 +15,31 @@ import StandardHeader from '../standardHeader/StandardHeader';
 import Registration from '../../screens/events/Registration';
 import MemberList from '../../screens/memberList/MemberList';
 import Settings from '../../screens/settings/Settings';
+import SplashScreen from '../../screens/splash/SplashScreen';
 
 import * as actions from '../../../actions/navigation';
 import styles from './style/ReduxNavigator';
 import Colors from '../../style/Colors';
 import {
-  WELCOME_SCENE,
   EVENT_LIST_SCENE,
   EVENT_SCENE,
-  PROFILE_SCENE,
-  PIZZA_SCENE,
-  REGISTRATION_SCENE,
   MEMBERS_SCENE,
+  PIZZA_SCENE,
+  PROFILE_SCENE,
+  REGISTRATION_SCENE,
   SETTINGS_SCENE,
+  SPLASH_SCENE,
+  WELCOME_SCENE,
+  LOGIN_SCENE,
 } from './scenes';
+import Login from '../../screens/user/Login';
 
 const sceneToComponent = (scene) => {
   switch (scene) {
+    case SPLASH_SCENE:
+      return <SplashScreen />;
+    case LOGIN_SCENE:
+      return <Login />;
     case WELCOME_SCENE:
       return <Welcome />;
     case EVENT_SCENE:
@@ -109,7 +116,7 @@ const ReduxNavigator = (props) => {
           animated
         />
       </View>
-      <Login />
+      {sceneToComponent(currentScene)}
     </View>);
 };
 
