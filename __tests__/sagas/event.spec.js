@@ -8,6 +8,7 @@ import eventSaga from '../../app/sagas/event';
 
 import * as eventActions from '../../app/actions/event';
 import * as navActions from '../../app/actions/navigation';
+import { EVENT_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
@@ -18,13 +19,13 @@ describe('event saga', () => {
   const error = new Error('error');
 
   it('should start fetching', () => expectSaga(eventSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), []],
-      ])
-      .dispatch(eventActions.event(1))
-      .put(eventActions.fetching())
-      .silentRun());
+    .provide([
+      [select(tokenSelector), 'token'],
+      [matchers.call.fn(apiRequest), []],
+    ])
+    .dispatch(eventActions.event(1))
+    .put(eventActions.fetching())
+    .silentRun());
 
   it('should navigate to the event scene', () => expectSaga(eventSaga)
     .provide([
@@ -32,7 +33,7 @@ describe('event saga', () => {
       [matchers.call.fn(apiRequest), []],
     ])
     .dispatch(eventActions.event(1))
-    .put(navActions.navigate('event'))
+    .put(navActions.navigate(EVENT_SCENE))
     .silentRun());
 
   it('should put an error when the api request fails', () => expectSaga(eventSaga)

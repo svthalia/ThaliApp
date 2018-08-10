@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Alert, Text, View, Image, TouchableHighlight, ImageBackground,
+  Alert, Image, ImageBackground, Text, TouchableHighlight, View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -13,6 +13,9 @@ import * as navigationActions from '../../../actions/navigation';
 import * as loginActions from '../../../actions/login';
 import * as profileActions from '../../../actions/profile';
 import Colors from '../../style/Colors';
+import {
+  EVENT_LIST_SCENE, MEMBERS_SCENE, SETTINGS_SCENE, WELCOME_SCENE,
+} from './scenes';
 
 const background = require('../../../assets/img/huygens.jpg');
 
@@ -27,32 +30,32 @@ const logoutPrompt = props => () => Alert.alert(
 const Sidebar = (props) => {
   const buttons = [
     {
-      onPress: () => props.navigate('welcome', true),
+      onPress: () => props.navigate(WELCOME_SCENE, true),
       iconName: 'home',
       text: props.t('Welcome'),
       style: {},
-      scene: 'welcome',
+      scene: WELCOME_SCENE,
     },
     {
-      onPress: () => props.navigate('eventList', true),
+      onPress: () => props.navigate(EVENT_LIST_SCENE, true),
       iconName: 'event',
       text: props.t('Calendar'),
       style: {},
-      scene: 'eventList',
+      scene: EVENT_LIST_SCENE,
     },
     {
-      onPress: () => props.navigate('members', true),
+      onPress: () => props.navigate(MEMBERS_SCENE, true),
       iconName: 'people',
       text: props.t('Member List'),
       style: {},
-      scene: 'members',
+      scene: MEMBERS_SCENE,
     },
     {
-      onPress: () => props.navigate('settings', true),
+      onPress: () => props.navigate(SETTINGS_SCENE, true),
       iconName: 'settings',
       text: props.t('Settings'),
       style: {},
-      scene: 'settings',
+      scene: SETTINGS_SCENE,
     },
     {
       onPress: logoutPrompt(props),

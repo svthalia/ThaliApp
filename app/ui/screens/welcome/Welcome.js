@@ -14,6 +14,7 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import * as welcomeActions from '../../../actions/welcome';
 import { navigate } from '../../../actions/navigation';
 import styles from './style/Welcome';
+import { EVENT_LIST_SCENE } from '../../components/navigator/scenes';
 
 const eventListToSections = (eventList, t) => {
   const calendarFormat = {
@@ -48,7 +49,7 @@ const eventListToSections = (eventList, t) => {
 
 const Footer = props => (
   <TouchableOpacity
-    onPress={() => props.navigate('eventList', true)}
+    onPress={() => props.navigate(EVENT_LIST_SCENE, true)}
     style={styles.footer}
   >
     <Text style={styles.footerText}>

@@ -10,6 +10,7 @@ import { apiRequest, tokenSelector } from '../utils/url';
 import * as eventActions from '../actions/event';
 import * as navigationActions from '../actions/navigation';
 import * as registrationActions from '../actions/registration';
+import { REGISTRATION_SCENE } from '../ui/components/navigator/scenes';
 
 
 export const eventSelector = state => state.event.data.pk;
@@ -110,7 +111,7 @@ const fields = function* fields(action) {
   const token = yield select(tokenSelector);
 
   yield put(registrationActions.loading());
-  yield put(navigationActions.navigate('registration'));
+  yield put(navigationActions.navigate(REGISTRATION_SCENE));
 
   const data = {
     method: 'GET',

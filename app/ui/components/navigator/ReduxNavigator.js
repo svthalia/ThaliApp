@@ -20,24 +20,34 @@ import Settings from '../../screens/settings/Settings';
 import * as actions from '../../../actions/navigation';
 import styles from './style/ReduxNavigator';
 import Colors from '../../style/Colors';
+import {
+  WELCOME_SCENE,
+  EVENT_LIST_SCENE,
+  EVENT_SCENE,
+  PROFILE_SCENE,
+  PIZZA_SCENE,
+  REGISTRATION_SCENE,
+  MEMBERS_SCENE,
+  SETTINGS_SCENE,
+} from './scenes';
 
 const sceneToComponent = (scene) => {
   switch (scene) {
-    case 'welcome':
+    case WELCOME_SCENE:
       return <Welcome />;
-    case 'event':
+    case EVENT_SCENE:
       return <Event />;
-    case 'eventList':
+    case EVENT_LIST_SCENE:
       return <Calendar />;
-    case 'profile':
+    case PROFILE_SCENE:
       return <Profile />;
-    case 'pizza':
+    case PIZZA_SCENE:
       return <Pizza />;
-    case 'registration':
+    case REGISTRATION_SCENE:
       return <Registration />;
-    case 'members':
+    case MEMBERS_SCENE:
       return <MemberList />;
-    case 'settings':
+    case SETTINGS_SCENE:
       return <Settings />;
     default:
       return <Welcome />;
@@ -123,7 +133,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateDrawer: isOpen => dispatch(actions.updateDrawer(isOpen)),
   back: () => dispatch(actions.back()),
-  navigateToWelcome: () => dispatch(actions.navigate('welcome', true)),
+  navigateToWelcome: () => dispatch(actions.navigate(WELCOME_SCENE, true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(translate('components/navigator/ReduxNavigator')(ReduxNavigator));

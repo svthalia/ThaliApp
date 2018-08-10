@@ -6,6 +6,7 @@ import profileSaga from '../../app/sagas/profile';
 import { apiRequest, tokenSelector } from '../../app/utils/url';
 import * as profileActions from '../../app/actions/profile';
 import * as navActions from '../../app/actions/navigation';
+import { PROFILE_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
@@ -22,7 +23,7 @@ describe('profile saga', () => {
     ])
     .dispatch(profileActions.profile('token', 1))
     .put(profileActions.fetching())
-    .put(navActions.navigate('profile'))
+    .put(navActions.navigate(PROFILE_SCENE))
     .silentRun());
 
   it('should put success when the request succeeds', () => expectSaga(profileSaga)
