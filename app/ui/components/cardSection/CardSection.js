@@ -7,9 +7,11 @@ import styles from './style/CardSection';
 
 const CardSection = props => (
   <View style={[styles.section, props.style]}>
-    <Text style={styles.sectionHeader}>
-      {props.sectionHeader}
-    </Text>
+    {props.sectionHeader !== null && (
+      <Text style={styles.sectionHeader}>
+        {props.sectionHeader}
+      </Text>
+    )}
     <View style={[styles.card, props.contentStyle]}>
       {props.children}
     </View>
