@@ -8,8 +8,7 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
-import { navigate } from '../actions/navigation';
-import { LOGIN_SCENE, WELCOME_SCENE } from '../ui/components/navigator/scenes';
+import NavigationService from '../navigation';
 
 export const USERNAMEKEY = '@MyStore:username';
 export const TOKENKEY = '@MyStore:token';
@@ -44,7 +43,7 @@ function* init() {
       yield put(sessionActions.fetchUserInfo());
       yield put(pushNotificationsActions.register(pushCategories));
     } else {
-      yield put(navigate(LOGIN_SCENE, true));
+      yield call(NavigationService.navigate, 'Auth');
     }
   } catch (e) {
     Sentry.captureException(e);
@@ -95,7 +94,7 @@ function* signOut() {
 
 function* signedIn({ payload }) {
   const { username } = payload;
-  yield put(navigate(WELCOME_SCENE, true));
+  yield call(NavigationService.navigate, 'SignedIn');
   yield call(Sentry.setUserContext, { username });
 }
 

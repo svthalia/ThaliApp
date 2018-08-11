@@ -13,10 +13,10 @@ import reducers from './reducers';
 
 import i18n from './utils/i18n';
 import sagas from './sagas';
-import ReduxNavigator from './ui/components/navigator/ReduxNavigator';
 import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
+import NavigationService from './navigation';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
@@ -77,7 +77,11 @@ class Main extends Component {
     return (
       <I18nextProvider i18n={i18n}>
         <Provider store={store}>
-          <ReduxNavigator />
+          <NavigationService.AppNavigator
+            ref={(navigatorRef) => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}
+          />
         </Provider>
       </I18nextProvider>
     );
