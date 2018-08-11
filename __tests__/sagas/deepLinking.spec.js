@@ -31,7 +31,7 @@ describe('calendar saga', () => {
       [matchers.call.fn(apiRequest), []],
     ])
     .dispatch(deepLinkingActions.deepLink(`${siteURL}/events/1/`))
-    .dispatch(loginActions.success('', ''))
+    .dispatch(loginActions.signedIn('', ''))
     .put(eventActions.event('1'))
     .silentRun());
 

@@ -13,7 +13,7 @@ const initialState = {
 export default function navigate(state = initialState, action = {}) {
   const { currentScene, previousScenes, drawerOpen } = state;
   switch (action.type) {
-    case sessionActions.SUCCESS: {
+    case sessionActions.SIGNED_IN: {
       return {
         ...state,
         loggedIn: true,
@@ -64,7 +64,7 @@ export default function navigate(state = initialState, action = {}) {
       };
     }
     case sessionActions.TOKEN_INVALID:
-    case sessionActions.LOGOUT: {
+    case sessionActions.SIGN_OUT: {
       return {
         ...initialState,
         currentScene: LOGIN_SCENE,

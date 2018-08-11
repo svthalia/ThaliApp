@@ -3,12 +3,12 @@ import * as actions from '../../app/actions/session';
 describe('session actions', () => {
   it('should expose the session actions', () => {
     expect(actions.INIT).toEqual('SESSION_INIT');
-    expect(actions.SUCCESS).toEqual('SESSION_SUCCESS');
-    expect(actions.LOGIN).toEqual('SESSION_LOGIN');
+    expect(actions.SIGNED_IN).toEqual('SESSION_SUCCESS');
+    expect(actions.SIGN_IN).toEqual('SESSION_LOGIN');
     expect(actions.TOKEN_INVALID).toEqual('SESSION_TOKEN_INVALID');
-    expect(actions.LOGOUT).toEqual('SESSION_LOGOUT');
-    expect(actions.PROFILE).toEqual('SESSION_PROFILE');
-    expect(actions.PROFILE_SUCCESS).toEqual('SESSION_PROFILE_SUCCESS');
+    expect(actions.SIGN_OUT).toEqual('SESSION_LOGOUT');
+    expect(actions.FETCH_USER_INFO).toEqual('SESSION_PROFILE');
+    expect(actions.SET_USER_INFO).toEqual('SESSION_PROFILE_SUCCESS');
   });
 
   it('should create an action to init the session', () => {
@@ -20,15 +20,15 @@ describe('session actions', () => {
   });
 
   it('should create an action to log the user in', () => {
-    expect(actions.login('username', 'password')).toMatchSnapshot();
+    expect(actions.signIn('username', 'password')).toMatchSnapshot();
   });
 
   it('should create an action for a successful login', () => {
-    expect(actions.success('username', 'token')).toMatchSnapshot();
+    expect(actions.signedIn('username', 'token')).toMatchSnapshot();
   });
 
   it('should create an action to log the user out', () => {
-    expect(actions.logout()).toMatchSnapshot();
+    expect(actions.signOut()).toMatchSnapshot();
   });
 
   it('should create an action to load the user profile', () => {
@@ -36,6 +36,6 @@ describe('session actions', () => {
   });
 
   it('should create an action for a successful user profile load', () => {
-    expect(actions.profileSuccess('displayName', 'photo')).toMatchSnapshot();
+    expect(actions.userInfoSuccess('displayName', 'photo')).toMatchSnapshot();
   });
 });

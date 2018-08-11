@@ -65,7 +65,7 @@ const Sidebar = (props) => {
         borderTopColor: Colors.lightGray,
         borderTopWidth: 1,
       },
-      scene: 'logout',
+      scene: 'signOut',
     },
   ];
 
@@ -137,7 +137,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   navigate: (scene, newSection = false) => dispatch(navigationActions.navigate(scene, newSection)),
-  logout: () => dispatch(loginActions.logout()),
+  logout: () => dispatch(loginActions.signOut()),
   loadProfile: token => dispatch(profileActions.profile(token)),
 });
 

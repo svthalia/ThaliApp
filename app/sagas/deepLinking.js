@@ -44,7 +44,7 @@ const deepLink = function* deepLink(action) {
 
   const loggedIn = yield select(loggedInSelector);
   if (!loggedIn) {
-    yield take(loginActions.SUCCESS);
+    yield take(loginActions.SIGNED_IN);
   }
 
   const patterns = [

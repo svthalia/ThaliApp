@@ -88,7 +88,7 @@ const mapStateToProps = state => state.session;
 const mapDispatchToProps = dispatch => ({
   login: (username, password) => {
     Keyboard.dismiss();
-    dispatch(actions.login(username, password));
+    dispatch(actions.signIn(username, password));
   },
 });
 

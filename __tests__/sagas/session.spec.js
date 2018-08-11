@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native';
 import { Sentry } from 'react-native-sentry';
 
 import sessionSaga, {
-  DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY
+  DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY,
 } from '../../app/sagas/session';
 import { apiRequest } from '../../app/utils/url';
 import * as sessionActions from '../../app/actions/session';
@@ -42,7 +42,7 @@ describe('session saga', () => {
 
   describe('logging in', () => {
     it('should show a snackbar on start', () => expectSaga(sessionSaga)
-      .dispatch(sessionActions.login('username', 'password'))
+      .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
@@ -55,9 +55,9 @@ describe('session saga', () => {
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
-      .put(sessionActions.success('username', 'abc123'))
+      .put(sessionActions.signedIn('username', 'abc123'))
       .put(sessionActions.profile('abc123'))
-      .dispatch(sessionActions.login('username', 'password'))
+      .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun());
 
     it('should show a snackbar when the request succeeds', () => expectSaga(sessionSaga)
@@ -65,7 +65,7 @@ describe('session saga', () => {
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
-      .dispatch(sessionActions.login('username', 'password'))
+      .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.dismiss).toBeCalled();
@@ -79,7 +79,7 @@ describe('session saga', () => {
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
-      .dispatch(sessionActions.login('username', 'password'))
+      .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiSet).toBeCalledWith([
@@ -92,7 +92,7 @@ describe('session saga', () => {
       .provide([
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
-      .dispatch(sessionActions.login('username', 'password'))
+      .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.dismiss).toBeCalled();
@@ -102,7 +102,7 @@ describe('session saga', () => {
       }));
 
     it('should do a POST request', () => expectSaga(sessionSaga)
-      .dispatch(sessionActions.login('username', 'password'))
+      .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
         expect(apiRequest).toBeCalledWith('token-auth', {
@@ -118,7 +118,7 @@ describe('session saga', () => {
 
   describe('logging out', () => {
     it('should remove the token from the AsyncStorage', () => expectSaga(sessionSaga)
-      .dispatch(sessionActions.logout())
+      .dispatch(sessionActions.signOut())
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiRemove).toBeCalledWith([USERNAMEKEY, TOKENKEY]);
@@ -126,11 +126,11 @@ describe('session saga', () => {
 
     it('should put a push notification invalidation action', () => expectSaga(sessionSaga)
       .put(pushNotificationsActions.invalidate())
-      .dispatch(sessionActions.logout())
+      .dispatch(sessionActions.signOut())
       .silentRun());
 
     it('should remove the token from the AsyncStorage', () => expectSaga(sessionSaga)
-      .dispatch(sessionActions.logout())
+      .dispatch(sessionActions.signOut())
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
@@ -149,7 +149,7 @@ describe('session saga', () => {
           },
         }],
       ])
-      .put(sessionActions.profileSuccess('Johnny Test', 'http://example.org/photo.png'))
+      .put(sessionActions.userInfoSuccess('Johnny Test', 'http://example.org/photo.png'))
       .dispatch(sessionActions.profile('abc123'))
       .silentRun());
 

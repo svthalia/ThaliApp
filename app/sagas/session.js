@@ -1,9 +1,11 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  call, put, takeEvery, select,
+} from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest } from '../utils/url';
+import { apiRequest, tokenSelector } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import { navigate } from '../actions/navigation';
@@ -37,9 +39,9 @@ function* init() {
     const pushCategories = JSON.parse(values[PUSHCATEGORYKEY]);
 
     if (username !== null && token !== null) {
-      yield put(sessionActions.success(username, token));
-      yield put(sessionActions.profileSuccess(displayName, photo));
-      yield put(sessionActions.profile(token));
+      yield put(sessionActions.signedIn(username, token));
+      yield put(sessionActions.setUserInfo(displayName, photo));
+      yield put(sessionActions.fetchUserInfo());
       yield put(pushNotificationsActions.register(pushCategories));
     } else {
       yield put(navigate(LOGIN_SCENE, true));
@@ -49,7 +51,7 @@ function* init() {
   }
 }
 
-function* login(action) {
+function* signIn(action) {
   const { user, pass } = action.payload;
 
   Snackbar.show({ title: 'Logging in', duration: Snackbar.LENGTH_INDEFINITE });
@@ -73,30 +75,32 @@ function* login(action) {
       [USERNAMEKEY, user],
       [TOKENKEY, token],
     ]);
-    yield put(sessionActions.success(user, token));
-    yield put(sessionActions.profile(token));
+    yield put(sessionActions.signedIn(user, token));
+    yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
     Snackbar.dismiss();
     Snackbar.show({ title: 'Login successful' });
-  } catch (error) {
+  } catch (e) {
+    Sentry.captureException(e);
     Snackbar.dismiss();
     Snackbar.show({ title: 'Login failed' });
   }
 }
 
-function* logout() {
-  yield call(AsyncStorage.multiRemove, [USERNAMEKEY, TOKENKEY]);
+function* signOut() {
+  yield call(AsyncStorage.clear);
   yield put(pushNotificationsActions.invalidate());
   Snackbar.show({ title: 'Logout successful' });
 }
 
-function* tokenInvalid() {
-  yield call(AsyncStorage.clear);
-  yield put(pushNotificationsActions.invalidate());
+function* signedIn({ payload }) {
+  const { username } = payload;
+  yield put(navigate(WELCOME_SCENE, true));
+  yield call(Sentry.setUserContext, { username });
 }
 
-function* profile(action) {
-  const { token } = action.payload;
+function* userInfo() {
+  const token = yield select(tokenSelector);
 
   const data = {
     method: 'GET',
@@ -114,25 +118,24 @@ function* profile(action) {
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);
-    yield put(sessionActions.profileSuccess(userProfile.display_name, userProfile.avatar.medium));
+    yield put(sessionActions.setUserInfo(userProfile.display_name, userProfile.avatar.medium));
   } catch (error) {
     Sentry.captureException(error);
   }
 }
 
-function* success({ payload }) {
-  const { username } = payload;
-  yield put(navigate(WELCOME_SCENE, true));
-  yield call(Sentry.setUserContext, { username });
+function* tokenInvalid() {
+  yield call(AsyncStorage.clear);
+  yield put(pushNotificationsActions.invalidate());
 }
 
 const sessionSaga = function* sessionSaga() {
   yield takeEvery(sessionActions.INIT, init);
-  yield takeEvery(sessionActions.LOGIN, login);
-  yield takeEvery(sessionActions.LOGOUT, logout);
-  yield takeEvery(sessionActions.PROFILE, profile);
+  yield takeEvery(sessionActions.SIGN_IN, signIn);
+  yield takeEvery(sessionActions.SIGN_OUT, signOut);
+  yield takeEvery(sessionActions.SIGNED_IN, signedIn);
+  yield takeEvery(sessionActions.FETCH_USER_INFO, userInfo);
   yield takeEvery(sessionActions.TOKEN_INVALID, tokenInvalid);
-  yield takeEvery(sessionActions.SUCCESS, success);
 };
 
 export default sessionSaga;
