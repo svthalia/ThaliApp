@@ -5,7 +5,7 @@ import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as welcomeActions from '../actions/welcome';
-import * as loginActions from '../actions/session';
+import * as sessionActions from '../actions/session';
 
 const welcome = function* welcome() {
   const token = yield select(tokenSelector);
@@ -28,7 +28,7 @@ const welcome = function* welcome() {
     yield put(welcomeActions.success(response.results));
   } catch (error) {
     if (error.name === 'TokenInvalidError') {
-      yield put(loginActions.tokenInvalid());
+      yield put(sessionActions.tokenInvalid());
     }
     Sentry.captureException(error);
     yield put(welcomeActions.failure());
@@ -36,7 +36,7 @@ const welcome = function* welcome() {
 };
 
 const welcomeSaga = function* eventSaga() {
-  yield takeEvery([loginActions.SUCCESS, welcomeActions.REFRESH], welcome);
+  yield takeEvery([sessionActions.SIGNED_IN, welcomeActions.REFRESH], welcome);
 };
 
 export default welcomeSaga;

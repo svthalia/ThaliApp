@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  FlatList, Alert, Image, ScrollView, Text,
-  View, RefreshControl, TouchableHighlight, Platform, Linking,
+  Alert,
+  FlatList,
+  Image,
+  Linking,
+  Platform,
+  RefreshControl,
+  ScrollView,
+  Text,
+  TouchableHighlight,
+  View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -21,27 +29,31 @@ import * as eventActions from '../../../actions/event';
 import * as registrationActions from '../../../actions/registration';
 import * as pizzaActions from '../../../actions/pizza';
 import Button from '../../components/button/Button';
+import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 class Event extends Component {
   cancelPrompt = (pk) => {
-    const cancelDeadlineDate = new Date(this.props.data.cancel_deadline);
-    let message = this.props.t('Are you sure you want to cancel your registration?');
-    if (this.props.data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
-      message = this.props.t('The deadline has passed, are you sure you want to cancel your '
+    const { data, t, cancel } = this.props;
+    const cancelDeadlineDate = new Date(data.cancel_deadline);
+    let message = t('Are you sure you want to cancel your registration?');
+    if (data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
+      message = t('The deadline has passed, are you sure you want to cancel your '
         + 'registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
-      { fine: this.props.data.fine });
+      { fine: data.fine });
     }
     return Alert.alert(
-      this.props.t('Cancel registration?'),
+      t('Cancel registration?'),
       message,
       [
-        { text: this.props.t('No') },
-        { text: this.props.t('Yes'), onPress: () => this.props.cancel(pk) },
+        { text: t('No') },
+        { text: t('Yes'), onPress: () => cancel(pk) },
       ],
     );
   };
 
-  eventDesc = (data) => {
+  eventDesc = () => {
+    const { t, data } = this.props;
+
     const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
     const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
 
@@ -50,7 +62,7 @@ class Event extends Component {
     infoTexts.push(
       <View key="start-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="start-title">
-          {this.props.t('From')}
+          {t('From')}
 :
         </Text>
         <Text style={styles.infoValueText} key="start-value">
@@ -61,7 +73,7 @@ class Event extends Component {
     infoTexts.push(
       <View key="end-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="end-title">
-          {this.props.t('Until')}
+          {t('Until')}
 :
         </Text>
         <Text style={styles.infoValueText} key="end-value">
@@ -72,7 +84,7 @@ class Event extends Component {
     infoTexts.push(
       <View key="loc-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="loc-title">
-          {this.props.t('Location')}
+          {t('Location')}
 :
         </Text>
         <Text style={styles.infoValueText} key="loc-value">
@@ -83,7 +95,7 @@ class Event extends Component {
     infoTexts.push(
       <View key="price-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="price-title">
-          {this.props.t('Price')}
+          {t('Price')}
 :
         </Text>
         <Text style={styles.infoValueText} key="price-value">
@@ -100,7 +112,7 @@ class Event extends Component {
       infoTexts.push(
         <View key="registrationend-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="registrationend-title">
-            {this.props.t('Registration deadline')}
+            {t('Registration deadline')}
 :
           </Text>
           <Text style={styles.infoValueText} key="registrationend-value">
@@ -111,7 +123,7 @@ class Event extends Component {
       infoTexts.push(
         <View key="canceldeadline-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="canceldeadline-title">
-            {this.props.t('Cancellation deadline')}
+            {t('Cancellation deadline')}
 :
           </Text>
           <Text style={styles.infoValueText} key="canceldeadline-value">
@@ -120,15 +132,15 @@ class Event extends Component {
         </View>,
       );
 
-      let participantsText = `${data.num_participants} ${this.props.t('registrations')}`;
+      let participantsText = `${data.num_participants} ${t('registrations')}`;
       if (data.max_participants) {
-        participantsText += ` (${data.max_participants} ${this.props.t('max')})`;
+        participantsText += ` (${data.max_participants} ${t('max')})`;
       }
 
       infoTexts.push(
         <View key="participants-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="participants-title">
-            {this.props.t('Number of registrations')}
+            {t('Number of registrations')}
 :
           </Text>
           <Text style={styles.infoValueText} key="participants-value">
@@ -140,21 +152,21 @@ class Event extends Component {
       if (data.user_registration) {
         let registrationState;
         if (data.user_registration.is_late_cancellation) {
-          registrationState = this.props.t('Your registration is cancelled after the cancellation deadline');
+          registrationState = t('Your registration is cancelled after the cancellation deadline');
         } else if (data.user_registration.is_cancelled) {
-          registrationState = this.props.t('Your registration is cancelled');
+          registrationState = t('Your registration is cancelled');
         } else if (data.user_registration.queue_position === null) {
-          registrationState = this.props.t('You are registered');
+          registrationState = t('You are registered');
         } else if (data.user_registration.queue_position > 0) {
-          registrationState = this.props.t('Queue position {{pos}}', { pos: data.user_registration.queue_position });
+          registrationState = t('Queue position {{pos}}', { pos: data.user_registration.queue_position });
         } else {
-          registrationState = this.props.t('Your registration is cancelled');
+          registrationState = t('Your registration is cancelled');
         }
 
         infoTexts.push(
           <View key="status-holder" style={styles.infoHolder}>
             <Text style={styles.infoText} key="status-title">
-              {this.props.t('Registration status')}
+              {t('Registration status')}
 :
             </Text>
             <Text style={styles.infoValueText} key="status-value">
@@ -187,39 +199,40 @@ Pizza:
     );
   };
 
-  eventInfo = (event) => {
+  eventInfo = () => {
+    const { data, t } = this.props;
     let text = '';
 
     const nowDate = new Date();
-    const startRegDate = new Date(event.registration_start);
-    const endRegDate = new Date(event.registration_end);
-    const cancelDeadlineDate = new Date(event.cancel_deadline);
+    const startRegDate = new Date(data.registration_start);
+    const endRegDate = new Date(data.registration_end);
+    const cancelDeadlineDate = new Date(data.cancel_deadline);
 
-    const regRequired = event.registration_start !== null || event.registration_end !== null;
+    const regRequired = data.registration_start !== null || data.registration_end !== null;
     const regStarted = startRegDate <= nowDate;
     const regAllowed = regRequired && endRegDate > nowDate && regStarted;
-    const afterCancelDeadline = event.cancel_deadline !== null && cancelDeadlineDate <= nowDate;
+    const afterCancelDeadline = data.cancel_deadline !== null && cancelDeadlineDate <= nowDate;
 
     if (!regRequired) {
-      text = this.props.t('No registration required.');
-      if (event.no_registration_message) {
-        text = event.no_registration_message;
+      text = t('No registration required.');
+      if (data.no_registration_message) {
+        text = data.no_registration_message;
       }
     } else if (!regStarted) {
-      const registrationStart = Moment(event.registration_start).format('D MMM YYYY, HH:mm');
-      text = this.props.t('Registration will open {{start}}', { start: registrationStart });
+      const registrationStart = Moment(data.registration_start).format('D MMM YYYY, HH:mm');
+      text = t('Registration will open {{start}}', { start: registrationStart });
     } else if (!regAllowed) {
-      text = this.props.t('Registration is not possible anymore.');
+      text = t('Registration is not possible anymore.');
     }
 
     if (afterCancelDeadline) {
       if (text.length > 0) {
         text += ' ';
       }
-      text += this.props.t(
+      text += t(
         'Cancellation isn\'t possible anymore without having to pay the full '
         + 'costs of €{{fine}}. Also note that you will be unable to re-register.',
-        { fine: event.fine },
+        { fine: data.fine },
       );
     }
 
@@ -233,58 +246,61 @@ Pizza:
     return (<View />);
   };
 
-  eventActions = (event) => {
+  eventActions = () => {
+    const {
+      data, register, t,
+    } = this.props;
     const nowDate = new Date();
-    const startRegDate = new Date(event.registration_start);
-    const endRegDate = new Date(event.registration_end);
+    const startRegDate = new Date(data.registration_start);
+    const endRegDate = new Date(data.registration_end);
 
-    const regRequired = event.registration_start !== null || event.registration_end !== null;
+    const regRequired = data.registration_start !== null || data.registration_end !== null;
     const regStarted = startRegDate <= nowDate;
     const regAllowed = regRequired && endRegDate > nowDate
-                       && regStarted && event.registration_allowed;
+                       && regStarted && data.registration_allowed;
 
     if (regAllowed) {
-      if (event.user_registration === null || event.user_registration.is_cancelled) {
-        const text = event.max_participants && event.max_participants <= event.num_participants
-          ? this.props.t('Put me on the waiting list') : this.props.t('Register');
+      if (data.user_registration === null || data.user_registration.is_cancelled) {
+        const text = data.max_participants && data.max_participants <= data.num_participants
+          ? t('Put me on the waiting list') : t('Register');
         return (
           <View>
             <Text style={styles.registrationText}>
-              {this.props.t('By registering, you confirm that you have read the')}
+              {t('By registering, you confirm that you have read the')}
               <Text
                 style={styles.termsUrl}
                 onPress={() => Linking.openURL(termsAndConditionsUrl)}
               >
                 {' '}
-                {this.props.t('terms and conditions')}
+                {t('terms and conditions')}
                 {' '}
 
               </Text>
-              {this.props.t(', that you understand them and that you agree to be bound by them.')}
+              {t(', that you understand them and that you agree to be bound by them.')}
             </Text>
             <View style={styles.registrationActions}>
               <Button
                 color={Colors.magenta}
                 title={text}
-                onPress={() => this.props.register(event.pk)}
+                onPress={() => register(data.pk)}
               />
             </View>
           </View>
         );
-      } if (event.user_registration && !event.user_registration.is_cancelled
+      } if (data.user_registration && !data.user_registration.is_cancelled
                  && regRequired && regStarted) {
-        if (regStarted && event.user_registration && !event.user_registration.is_cancelled
-            && event.has_fields) {
+        if (regStarted && data.user_registration && !data.user_registration.is_cancelled
+            && data.has_fields) {
           return (
             <View style={styles.registrationActions}>
               <Button
-                title={this.props.t('Update registration')}
-                onPress={() => this.props.fields(event.user_registration.pk)}
+                onPress={() => this.props.fields(data.user_registration.pk)}
+                title={t('Update registration')}
               />
               <View style={styles.secondButtonMargin}>
                 <Button
-                  title={this.props.t('Cancel registration')}
-                  onPress={() => this.cancelPrompt(event.user_registration.pk)}
+                  title={t('Cancel registration')}
+                  onPress={() => this.cancelPrompt(data.user_registration.pk)}
                 />
               </View>
             </View>
@@ -292,7 +308,7 @@ Pizza:
         }
         return (
           <View style={styles.registrationActions}>
-            <Button title={this.props.t('Cancel registration')} onPress={() => this.cancelPrompt(event.user_registration.pk)} />
+            <Button title={t('Cancel registration')} onPress={() => this.cancelPrompt(data.user_registration.pk)} />
           </View>
         );
       }
@@ -301,17 +317,18 @@ Pizza:
     return (<View />);
   };
 
-  registrationsGrid = (registrations) => {
+  registrationsGrid = () => {
+    const { registrations, t } = this.props;
     if (registrations !== undefined && registrations.length > 0) {
       return (
         <View>
           <View style={styles.divider} />
           <Text style={styles.registrationsTitle}>
-            {this.props.t('Registrations')}
+            {t('Registrations')}
           </Text>
           <FlatList
             numColumns={3}
-            data={this.props.registrations}
+            data={registrations}
             renderItem={item => (
               <MemberView
                 key={item.item.pk}
@@ -333,11 +350,15 @@ Pizza:
   };
 
   handleRefresh = () => {
-    this.props.refresh(this.props.data.pk);
+    const { refresh, data } = this.props;
+    refresh(data.pk);
   };
 
   render() {
-    if (this.props.status === 'initial') {
+    const {
+      status, loading, openMaps, data, t,
+    } = this.props;
+    if (status === 'initial') {
       return <LoadingScreen />;
     }
 
@@ -351,43 +372,43 @@ Pizza:
       color: Colors.magenta,
     };
 
-    if (this.props.status === 'success') {
+    if (status === 'success') {
       return (
         <ScrollView
           backgroundColor={Colors.background}
           contentContainerStyle={styles.eventView}
           refreshControl={(
             <RefreshControl
-              refreshing={this.props.loading}
+              refreshing={loading}
               onRefresh={this.handleRefresh}
             />
           )}
         >
           <TouchableHighlight
-            onPress={() => this.props.openMaps(this.props.data.map_location)}
+            onPress={() => openMaps(data.map_location)}
             style={styles.locationImageWrapper}
           >
             <Image
               style={styles.locationImage}
-              source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.props.data.map_location}&zoom=13&size=450x250&markers=${this.props.data.map_location}` }}
+              source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${data.map_location}&zoom=13&size=450x250&markers=${data.map_location}` }}
             />
           </TouchableHighlight>
           <Text style={styles.titleText}>
-            {this.props.data.title}
+            {data.title}
           </Text>
-          {this.eventDesc(this.props.data)}
-          {this.eventActions(this.props.data)}
-          {this.eventInfo(this.props.data)}
+          {this.eventDesc()}
+          {this.eventActions()}
+          {this.eventInfo()}
           <View style={styles.divider} />
           <HTML
-            html={this.props.data.description}
+            html={data.description}
             onLinkPress={(event, href) => Linking.openURL(href)}
             baseFontStyle={fontStyles}
             tagsStyles={{
               a: linkStyles,
             }}
           />
-          {this.registrationsGrid(this.props.registrations, this.props.t)}
+          {this.registrationsGrid()}
         </ScrollView>
       );
     }
@@ -397,12 +418,12 @@ Pizza:
         contentContainerStyle={styles.flex}
         refreshControl={(
           <RefreshControl
-            refreshing={this.props.loading}
+            refreshing={loading}
             onRefresh={this.handleRefresh}
           />
         )}
       >
-        <ErrorScreen message={this.props.t('Could not load the event...')} />
+        <ErrorScreen message={t('Could not load the event...')} />
       </ScrollView>
     );
   }
@@ -475,4 +496,4 @@ const mapDispatchToProps = dispatch => ({
   retrievePizzaInfo: () => dispatch(pizzaActions.retrievePizzaInfo()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Event')(Event));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Event')(withStandardHeader(Event)));

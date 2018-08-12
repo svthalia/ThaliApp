@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar, ImageBackground,
+  Animated,
+  ImageBackground,
+  Linking,
+  Platform,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -14,10 +22,13 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
 import Colors from '../../style/Colors';
-import { back } from '../../../actions/navigation';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
-import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/Profile';
+import styles, {
+  HEADER_MAX_HEIGHT,
+  HEADER_MIN_HEIGHT,
+  HEADER_SCROLL_DISTANCE,
+} from './style/Profile';
 import CardSection from '../../components/cardSection/CardSection';
 
 const getDescription = (profile, t) => (
@@ -217,7 +228,7 @@ class Profile extends Component {
         </Animated.View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
           <TouchableOpacity
-            onPress={this.props.back}
+            onPress={this.props.navigation.goBack}
           >
             <Icon
               name="arrow-back"
@@ -306,9 +317,9 @@ Profile.propTypes = {
     })).isRequired,
   }).isRequired,
   success: PropTypes.bool.isRequired,
-  back: PropTypes.func.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = state => ({
@@ -317,8 +328,4 @@ const mapStateToProps = state => ({
   hasLoaded: state.profile.hasLoaded,
 });
 
-const mapDispatchToProps = dispatch => ({
-  back: () => dispatch(back()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/user/Profile')(Profile));
+export default connect(mapStateToProps, () => ({}))(translate('screens/user/Profile')(Profile));

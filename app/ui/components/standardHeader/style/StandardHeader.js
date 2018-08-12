@@ -9,6 +9,9 @@ export const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 export const TOTAL_BAR_HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
 
 const styles = StyleSheet.create({
+  rootWrapper: {
+    flex: 1,
+  },
   statusBar: {
     height: STATUSBAR_HEIGHT,
     backgroundColor: Colors.magenta,

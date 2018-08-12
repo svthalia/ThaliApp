@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import {
-  StatusBar, Animated, Easing, BackHandler, TouchableOpacity, TextInput, Text, Platform, View,
+  Animated,
+  BackHandler,
+  Easing,
+  Platform,
+  StatusBar,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { updateDrawer } from '../../../actions/navigation';
 
 import styles from './style/SearchHeader';
 import Colors from '../../style/Colors';
@@ -33,11 +40,11 @@ class SearchBar extends Component {
   }
 
   getLeftIcon = () => {
-    const { openDrawer } = this.props;
+    const { navigation } = this.props;
     const { isSearching } = this.state;
     return (
       <TouchableOpacity
-        onPress={isSearching ? () => this.updateSearch(false) : openDrawer}
+        onPress={() => (isSearching ? this.updateSearch(false) : navigation.openDrawer())}
       >
         <Icon
           name={isSearching ? 'arrow-back' : 'menu'}
@@ -169,13 +176,9 @@ class SearchBar extends Component {
 SearchBar.propTypes = {
   title: PropTypes.string.isRequired,
   searchText: PropTypes.string.isRequired,
-  openDrawer: PropTypes.func.isRequired,
   search: PropTypes.func.isRequired,
   searchKey: PropTypes.string.isRequired,
+  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const mapHeaderDispatchToProps = dispatch => ({
-  openDrawer: () => dispatch(updateDrawer(true)),
-});
-
-export default connect(() => ({}), mapHeaderDispatchToProps)(SearchBar);
+export default withNavigation(SearchBar);

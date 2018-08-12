@@ -26,8 +26,8 @@ export function tokenInvalid() {
   return { type: TOKEN_INVALID };
 }
 
-export function fetchUserInfo(token) {
-  return { type: FETCH_USER_INFO, payload: { token } };
+export function fetchUserInfo() {
+  return { type: FETCH_USER_INFO };
 }
 
 export function setUserInfo(displayName, photo) {

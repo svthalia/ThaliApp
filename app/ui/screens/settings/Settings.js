@@ -7,6 +7,7 @@ import styles from './style/Settings';
 import { settingsActions } from '../../../actions/settings';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import NotificationsSection from './NotificationsSection';
+import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 
 class Settings extends React.Component {
@@ -48,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
   init: () => dispatch(settingsActions.initStart()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(withStandardHeader(Settings, true));

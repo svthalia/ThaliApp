@@ -14,6 +14,7 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
 import styles from './style/Calendar';
+import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
@@ -124,6 +125,10 @@ const renderItem = (item) => {
 };
 
 class Calendar extends Component {
+  componentDidMount() {
+    this.props.refresh();
+  }
+
   handleRefresh = () => {
     this.props.refresh();
   };
@@ -213,4 +218,4 @@ const mapDispatchToProps = dispatch => ({
   refresh: () => dispatch(calendarActions.refresh()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Calendar')(Calendar));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Calendar')(withStandardHeader(Calendar, true)));

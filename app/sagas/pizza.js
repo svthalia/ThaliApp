@@ -1,12 +1,11 @@
 import {
-  call, put, takeEvery, select,
+  call, put, select, takeEvery,
 } from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
-import * as navigationActions from '../actions/navigation';
-import { PIZZA_SCENE } from '../ui/components/navigator/scenes';
+import NavigationService from '../navigation';
 
 const NOT_FOUND = 404;
 
@@ -14,7 +13,7 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
   const token = yield select(tokenSelector);
 
   yield put(pizzaActions.fetching());
-  yield put(navigationActions.navigate(PIZZA_SCENE));
+  yield call(NavigationService.navigate, 'Pizza');
 
   const data = {
     method: 'GET',

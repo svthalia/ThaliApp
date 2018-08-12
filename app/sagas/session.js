@@ -126,6 +126,7 @@ function* userInfo() {
 function* tokenInvalid() {
   yield call(AsyncStorage.clear);
   yield put(pushNotificationsActions.invalidate());
+  yield call(NavigationService.navigate, 'Auth');
 }
 
 const sessionSaga = function* sessionSaga() {

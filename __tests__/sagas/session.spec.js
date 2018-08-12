@@ -12,6 +12,7 @@ import { apiRequest } from '../../app/utils/url';
 import * as sessionActions from '../../app/actions/session';
 import * as pushNotificationsActions from '../../app/actions/pushNotifications';
 
+
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
   show: jest.fn(),
@@ -22,12 +23,17 @@ jest.mock('react-native', () => ({
   AsyncStorage: {
     multiSet: jest.fn(),
     multiRemove: jest.fn(),
+    clear: jest.fn(),
   },
 }));
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
-  tokenSelector: () => 'token',
+  tokenSelector: () => 'abc123',
+}));
+
+jest.mock('../../app/navigation', () => ({
+  navigate: jest.fn(),
 }));
 
 jest.mock('react-native-sentry', () => ({
@@ -56,7 +62,7 @@ describe('session saga', () => {
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
       .put(sessionActions.signedIn('username', 'abc123'))
-      .put(sessionActions.profile('abc123'))
+      .put(sessionActions.fetchUserInfo())
       .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun());
 
@@ -121,7 +127,7 @@ describe('session saga', () => {
       .dispatch(sessionActions.signOut())
       .silentRun()
       .then(() => {
-        expect(AsyncStorage.multiRemove).toBeCalledWith([USERNAMEKEY, TOKENKEY]);
+        expect(AsyncStorage.clear).toBeCalled();
       }));
 
     it('should put a push notification invalidation action', () => expectSaga(sessionSaga)
@@ -149,8 +155,8 @@ describe('session saga', () => {
           },
         }],
       ])
-      .put(sessionActions.userInfoSuccess('Johnny Test', 'http://example.org/photo.png'))
-      .dispatch(sessionActions.profile('abc123'))
+      .put(sessionActions.setUserInfo('Johnny Test', 'http://example.org/photo.png'))
+      .dispatch(sessionActions.fetchUserInfo())
       .silentRun());
 
     it('should save the token in the AsyncStorage when the request succeeds', () => expectSaga(sessionSaga)
@@ -162,7 +168,7 @@ describe('session saga', () => {
           },
         }],
       ])
-      .dispatch(sessionActions.profile('abc123'))
+      .dispatch(sessionActions.fetchUserInfo())
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiSet).toBeCalledWith([
@@ -175,11 +181,11 @@ describe('session saga', () => {
       .provide([
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
-      .dispatch(sessionActions.profile('token'))
+      .dispatch(sessionActions.fetchUserInfo())
       .silentRun());
 
     it('should do a GET request', () => expectSaga(sessionSaga)
-      .dispatch(sessionActions.profile('abc123'))
+      .dispatch(sessionActions.fetchUserInfo())
       .silentRun()
       .then(() => {
         expect(apiRequest).toBeCalledWith('members/me', {

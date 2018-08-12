@@ -1,8 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
-import Sidebar from '../../../../app/ui/components/navigator/Sidebar';
+import Sidebar from '../../../../app/ui/components/sidebar/Sidebar';
 import reducer from '../../../../app/reducers';
+
+const mockNavigation = {
+  navigate: jest.fn(),
+};
 
 describe('Sidebar component', () => {
   const mockStore = configureStore(reducer);
@@ -20,7 +24,7 @@ describe('Sidebar component', () => {
 
   it('renders correctly', () => {
     const tree = renderer
-      .create(<Sidebar store={store} />)
+      .create(<Sidebar store={store} navigation={mockNavigation} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

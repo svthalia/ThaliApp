@@ -67,5 +67,6 @@ build android:
         - ./gradlew --no-daemon ":app:assemble"
     artifacts:
         paths:
-            - $CI_PROJECT_DIR/android/app/build/outputs/apk/app-debug.apk
-            - $CI_PROJECT_DIR/android/app/build/outputs/apk/app-release.apk
+            - $CI_PROJECT_DIR/android/app/build/outputs/apk/debug/app-debug.apk
+            - $CI_PROJECT_DIR/android/app/build/outputs/apk/release/app-release-unsigned.apk
+            - $CI_PROJECT_DIR/android/app/build/outputs/apk/release/app-release.apk

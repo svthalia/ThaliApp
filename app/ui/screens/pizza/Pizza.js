@@ -13,6 +13,7 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import { retrievePizzaInfo, cancelOrder, orderPizza } from '../../../actions/pizza';
 import styles from './style/Pizza';
 import Colors from '../../style/Colors';
+import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 import CardSection from '../../components/cardSection/CardSection';
 
 class Pizza extends Component {
@@ -25,18 +26,24 @@ class Pizza extends Component {
     return null;
   };
 
-  getEventInfo = (title, subtitle) => (
-    <View style={styles.eventInfo}>
-      <Text style={styles.eventTitle}>
-        {this.props.t('Order pizza for {{title}}', { title })}
-      </Text>
-      <Text style={styles.eventSubtitle}>
-        {subtitle}
-      </Text>
-    </View>
-  );
+  getEventInfo = (subtitle) => {
+    const { t, event } = this.props;
 
-  getOverview = (order, pizzaList) => {
+    return (
+      <View style={styles.eventInfo}>
+        <Text style={styles.eventTitle}>
+          {t('Order pizza for {{title}}', { title: event.title })}
+        </Text>
+        <Text style={styles.eventSubtitle}>
+          {subtitle}
+        </Text>
+      </View>
+    );
+  };
+
+  getOverview = () => {
+    const { order, pizzaList, t } = this.props;
+
     if (order) {
       const productInfo = this.getProductFromList(order.product, pizzaList);
       return (
@@ -57,23 +64,27 @@ class Pizza extends Component {
     }
     return (
       <Text style={styles.overviewNoOrder}>
-        {this.props.t('You did not place an order.')}
+        {t('You did not place an order.')}
       </Text>
     );
   };
 
-  getOrder = (order, pizzaList, hasEnded) => {
+  getOrder = (hasEnded) => {
+    const {
+      t, cancelPizza, order, pizzaList,
+    } = this.props;
+
     if (order) {
       const productInfo = this.getProductFromList(order.product, pizzaList);
 
       return (
-        <CardSection sectionHeader={this.props.t('Current order')}>
+        <CardSection sectionHeader={t('Current order')}>
           <View
             style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
           >
             <Text style={styles.orderStatusText}>
-              {order.paid && this.props.t('The order has been paid for.')}
-              {!order.paid && this.props.t('The order has not yet been paid for.')}
+              {order.paid && t('The order has been paid for.')}
+              {!order.paid && t('The order has not yet been paid for.')}
             </Text>
           </View>
           <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
@@ -91,7 +102,7 @@ class Pizza extends Component {
             </View>
             {(!order.paid && !hasEnded) && (
               <TouchableHighlight
-                onPress={() => this.props.cancelOrder()}
+                onPress={() => cancelPizza()}
                 style={styles.button}
                 underlayColor={Colors.darkMagenta}
               >
@@ -148,18 +159,23 @@ class Pizza extends Component {
   );
 
   handleRefresh = () => {
-    this.props.retrievePizzaInfo();
+    const { loadPizzas } = this.props;
+    loadPizzas();
   };
 
   render() {
-    if (!this.props.hasLoaded) {
+    const {
+      hasLoaded, success, event, loading, t, pizzaList, order,
+    } = this.props;
+
+    if (!hasLoaded) {
       return <LoadingScreen />;
-    } if (!this.props.success) {
+    } if (!success) {
       return (
         <ScrollView
           refreshControl={(
             <RefreshControl
-              refreshing={this.props.loading}
+              refreshing={loading}
               onRefresh={this.handleRefresh}
             />
           )}
@@ -168,12 +184,12 @@ class Pizza extends Component {
           <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
         </ScrollView>
       );
-    } if (!this.props.event) {
+    } if (!event) {
       return (
         <ScrollView
           refreshControl={(
             <RefreshControl
-              refreshing={this.props.loading}
+              refreshing={loading}
               onRefresh={this.handleRefresh}
             />
           )}
@@ -182,14 +198,14 @@ class Pizza extends Component {
           <Text
             style={styles.title}
           >
-            {this.props.t('There is currently no event for which you can order food.')}
+            {t('There is currently no event for which you can order food.')}
           </Text>
         </ScrollView>
       );
     }
 
-    const start = Moment(this.props.event.start);
-    const end = Moment(this.props.event.end);
+    const start = Moment(event.start);
+    const end = Moment(event.end);
     const now = Moment();
 
     const inFuture = start.diff(now, 'm') > 0;
@@ -197,29 +213,29 @@ class Pizza extends Component {
 
     let subtitle;
     if (inFuture) {
-      subtitle = this.props.t(`It will be possible to order from ${start.format('HH:mm')}`);
+      subtitle = t(`It will be possible to order from ${start.format('HH:mm')}`);
     } else if (hasEnded) {
-      subtitle = this.props.t(`It was possible to order until ${end.format('HH:mm')}`);
+      subtitle = t(`It was possible to order until ${end.format('HH:mm')}`);
     } else {
-      subtitle = this.props.t(`You can order until ${end.format('HH:mm')}`);
+      subtitle = t(`You can order until ${end.format('HH:mm')}`);
     }
 
     return (
       <ScrollView
         refreshControl={(
           <RefreshControl
-            refreshing={this.props.loading}
+            refreshing={loading}
             onRefresh={this.handleRefresh}
           />
         )}
         ref={(ref) => { this.pizzaScroll = ref; }}
       >
         <View style={styles.content}>
-          {this.getEventInfo(this.props.event.title, subtitle)}
-          {hasEnded && this.getOverview(this.props.order, this.props.pizzaList)}
-          {this.getOrder(this.props.order, this.props.pizzaList, hasEnded)}
-          {inFuture || hasEnded || (this.props.order && this.props.order.paid)
-            || this.getPizzaList(this.props.pizzaList, !!this.props.order)}
+          {this.getEventInfo(subtitle)}
+          {hasEnded && this.getOverview()}
+          {this.getOrder(hasEnded)}
+          {inFuture || hasEnded || (order && order.paid)
+            || this.getPizzaList(pizzaList, !!order)}
         </View>
       </ScrollView>
     );
@@ -250,8 +266,8 @@ Pizza.propTypes = {
     price: PropTypes.string.isRequired,
     available: PropTypes.bool.isRequired,
   })).isRequired,
-  retrievePizzaInfo: PropTypes.func.isRequired,
-  cancelOrder: PropTypes.func.isRequired,
+  loadPizzas: PropTypes.func.isRequired,
+  cancelPizza: PropTypes.func.isRequired,
   orderPizza: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
@@ -271,9 +287,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  retrievePizzaInfo: () => dispatch(retrievePizzaInfo()),
-  cancelOrder: () => dispatch(cancelOrder()),
+  loadPizzas: () => dispatch(retrievePizzaInfo()),
+  cancelPizza: () => dispatch(cancelOrder()),
   orderPizza: (pk, hasOrder) => dispatch(orderPizza(pk, hasOrder)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/pizza/Pizza')(Pizza));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/pizza/Pizza')(withStandardHeader(Pizza)));

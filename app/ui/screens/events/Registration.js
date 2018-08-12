@@ -20,6 +20,7 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
 import * as registrationActions from '../../../actions/registration';
 import Button from '../../components/button/Button';
+import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 class Registration extends Component {
   constructor(props) {
@@ -188,4 +189,4 @@ const mapDispatchToProps = dispatch => ({
   update: (registration, fields) => dispatch(registrationActions.update(registration, fields)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Registration')(Registration));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Registration')(withStandardHeader(Registration)));

@@ -11,7 +11,7 @@ files['app/ui/screens/events/RegistrationNL'] = require('./nl/app/ui/screens/eve
 files['app/ui/screens/events/CalendarNL'] = require('./nl/app/ui/screens/events/Calendar.json');
 files['app/ui/screens/pizza/PizzaNL'] = require('./nl/app/ui/screens/pizza/Pizza.json');
 files['app/ui/components/standardHeader/StandardHeaderNL'] = require('./nl/app/ui/components/standardHeader/StandardHeader.json');
-files['app/ui/components/navigator/SidebarNL'] = require('./nl/app/ui/components/navigator/Sidebar.json');
+files['app/ui/components/sidebar/SidebarNL'] = require('./nl/app/ui/components/sidebar/Sidebar.json');
 files['app/ui/components/errorScreen/ErrorScreenNL'] = require('./nl/app/ui/components/errorScreen/ErrorScreen.json');
 
 export default {
@@ -28,7 +28,7 @@ export default {
     'screens/events/Calendar': files['app/ui/screens/events/CalendarNL'],
     'screens/pizza/Pizza': files['app/ui/screens/pizza/PizzaNL'],
     'components/standardHeader/StandardHeader': files['app/ui/components/standardHeader/StandardHeaderNL'],
-    'components/navigator/Sidebar': files['app/ui/components/navigator/SidebarNL'],
+    'components/sidebar/Sidebar': files['app/ui/components/sidebar/SidebarNL'],
     'components/errorScreen/ErrorScreen': files['app/ui/components/errorScreen/ErrorScreenNL'],
   },
 };

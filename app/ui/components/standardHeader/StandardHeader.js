@@ -1,35 +1,31 @@
 import React from 'react';
 import {
-  View, StatusBar, TouchableOpacity, Text,
+  StatusBar, Text, TouchableOpacity, View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { withNavigation } from 'react-navigation';
 import Colors from '../../style/Colors';
 import styles from './style/StandardHeader';
 
-import * as actions from '../../../actions/navigation';
-
-const sceneToTitle = (scene, t) => {
-  switch (scene) {
-    case 'welcome':
+const sceneToTitle = (routeName, t) => {
+  switch (routeName) {
+    case 'Welcome':
       return t('Welcome');
-    case 'event':
+    case 'Event':
       return t('Event');
-    case 'eventList':
+    case 'Calendar':
       return t('Calendar');
-    case 'pizza':
+    case 'Pizza':
       return t('Pizza');
-    case 'profile':
+    case 'Profile':
       return t('Profile');
-    case 'registration':
+    case 'Registration':
       return t('Registration');
-    case 'settings':
+    case 'Settings':
       return t('Settings');
-    case 'pushNotificationsSettings':
-      return t('Notifications');
     default:
       return 'ThaliApp';
   }
@@ -47,16 +43,16 @@ const StandardHeader = props => (
     </View>
     <View style={styles.appBar}>
       <TouchableOpacity
-        onPress={props.isFirstScene ? () => props.updateDrawer(!props.drawerOpen) : props.back}
+        onPress={() => (props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack())}
       >
         <Icon
-          name={props.isFirstScene ? 'menu' : 'arrow-back'}
+          name={props.menu ? 'menu' : 'arrow-back'}
           style={styles.icon}
           size={24}
         />
       </TouchableOpacity>
       <Text style={styles.title}>
-        {sceneToTitle(props.currentScene, props.t)}
+        {sceneToTitle(props.navigation.state.routeName, props.t)}
       </Text>
       <View style={styles.rightView} />
     </View>
@@ -64,26 +60,25 @@ const StandardHeader = props => (
 );
 
 StandardHeader.propTypes = {
-  isFirstScene: PropTypes.bool.isRequired,
-  currentScene: PropTypes.string.isRequired,
-  drawerOpen: PropTypes.bool.isRequired,
-  back: PropTypes.func.isRequired,
-  updateDrawer: PropTypes.func.isRequired,
+  menu: PropTypes.bool,
   t: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const mapStateToProps = state => ({
-  isFirstScene: state.navigation.previousScenes.length === 0,
-  currentScene: state.navigation.currentScene,
-  drawerOpen: state.navigation.drawerOpen,
-});
+StandardHeader.defaultProps = {
+  menu: false,
+};
 
-const mapDispatchToProps = dispatch => ({
-  back: () => dispatch(actions.back()),
-  updateDrawer: isOpen => dispatch(actions.updateDrawer(isOpen)),
-});
+const StandardHeaderContainer = withNavigation(translate('components/standardHeader/StandardHeader')(StandardHeader));
+export default StandardHeaderContainer;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(translate('components/standardHeader/StandardHeader')(StandardHeader));
+export function withStandardHeader(Component, menu) {
+  return props => (
+    <View style={styles.rootWrapper}>
+      <StandardHeaderContainer menu={menu} />
+      <Component
+        {...props}
+      />
+    </View>
+  );
+}
