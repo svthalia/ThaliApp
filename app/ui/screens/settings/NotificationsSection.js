@@ -18,8 +18,8 @@ class NotificationsSection extends Component {
     this.state = {};
   }
 
-  static getDerivedStateFromProps = (props) => {
-    if (props.status !== 'success') {
+  static getDerivedStateFromProps = (props, state) => {
+    if (props.status !== 'success' || Object.keys(state).length > 0) {
       return null;
     }
 
