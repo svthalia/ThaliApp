@@ -8,7 +8,6 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
-import NavigationService from '../navigation';
 
 export const USERNAMEKEY = '@MyStore:username';
 export const TOKENKEY = '@MyStore:token';
@@ -43,7 +42,7 @@ function* init() {
       yield put(sessionActions.fetchUserInfo());
       yield put(pushNotificationsActions.register(pushCategories));
     } else {
-      yield call(NavigationService.navigate, 'Auth');
+      yield put(sessionActions.tokenInvalid());
     }
   } catch (e) {
     Sentry.captureException(e);
@@ -86,15 +85,18 @@ function* signIn(action) {
   }
 }
 
-function* signOut() {
+function* clearUserInfo() {
   yield call(AsyncStorage.clear);
   yield put(pushNotificationsActions.invalidate());
+}
+
+function* signOut() {
+  yield call(clearUserInfo);
   Snackbar.show({ title: 'Logout successful' });
 }
 
 function* signedIn({ payload }) {
   const { username } = payload;
-  yield call(NavigationService.navigate, 'SignedIn');
   yield call(Sentry.setUserContext, { username });
 }
 
@@ -123,19 +125,13 @@ function* userInfo() {
   }
 }
 
-function* tokenInvalid() {
-  yield call(AsyncStorage.clear);
-  yield put(pushNotificationsActions.invalidate());
-  yield call(NavigationService.navigate, 'Auth');
-}
-
 const sessionSaga = function* sessionSaga() {
   yield takeEvery(sessionActions.INIT, init);
   yield takeEvery(sessionActions.SIGN_IN, signIn);
   yield takeEvery(sessionActions.SIGN_OUT, signOut);
   yield takeEvery(sessionActions.SIGNED_IN, signedIn);
   yield takeEvery(sessionActions.FETCH_USER_INFO, userInfo);
-  yield takeEvery(sessionActions.TOKEN_INVALID, tokenInvalid);
+  yield takeEvery(sessionActions.TOKEN_INVALID, clearUserInfo);
 };
 
 export default sessionSaga;

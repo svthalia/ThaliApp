@@ -5,7 +5,6 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
-import NavigationService from '../navigation';
 
 const NOT_FOUND = 404;
 
@@ -13,7 +12,6 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
   const token = yield select(tokenSelector);
 
   yield put(pizzaActions.fetching());
-  yield call(NavigationService.navigate, 'Pizza');
 
   const data = {
     method: 'GET',

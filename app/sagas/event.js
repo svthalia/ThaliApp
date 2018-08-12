@@ -1,18 +1,16 @@
 import {
-  call, put, takeEvery, select,
+  call, put, select, takeEvery,
 } from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as eventActions from '../actions/event';
-import NavigationService from '../navigation';
 
 const event = function* event(action) {
   const { pk } = action.payload;
   const token = yield select(tokenSelector);
 
   yield put(eventActions.fetching());
-  yield call(NavigationService.navigate, 'Event');
 
   const data = {
     method: 'GET',
