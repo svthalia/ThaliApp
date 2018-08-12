@@ -24,7 +24,7 @@ describe('Sidebar component', () => {
 
   it('renders correctly', () => {
     const tree = renderer
-      .create(<Sidebar store={store} navigation={mockNavigation} />)
+      .create(<Sidebar store={store} navigation={mockNavigation} activeItemKey="unknown" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

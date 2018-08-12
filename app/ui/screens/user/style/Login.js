@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  activityIndicator: {
+    marginTop: 24,
+  },
 });
 
 export default styles;

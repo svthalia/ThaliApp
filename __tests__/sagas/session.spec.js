@@ -47,15 +47,6 @@ describe('session saga', () => {
   const error = new Error('error');
 
   describe('logging in', () => {
-    it('should show a snackbar on start', () => expectSaga(sessionSaga)
-      .dispatch(sessionActions.signIn('username', 'password'))
-      .silentRun()
-      .then(() => {
-        expect(Snackbar.show).toBeCalledWith(
-          { title: 'Logging in', duration: Snackbar.LENGTH_INDEFINITE },
-        );
-      }));
-
     it('should put the result data when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
@@ -74,7 +65,6 @@ describe('session saga', () => {
       .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
-        expect(Snackbar.dismiss).toBeCalled();
         expect(Snackbar.show).toBeCalledWith(
           { title: 'Login successful' },
         );
@@ -94,6 +84,14 @@ describe('session saga', () => {
         ]);
       }));
 
+    it('should put token invalid when the request fails', () => expectSaga(sessionSaga)
+      .provide([
+        [matchers.call.fn(apiRequest), throwError(error)],
+      ])
+      .put(sessionActions.tokenInvalid())
+      .dispatch(sessionActions.signIn('username', 'password'))
+      .silentRun());
+
     it('should show a snackbar when the request fails', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.fn(apiRequest), throwError(error)],
@@ -101,7 +99,6 @@ describe('session saga', () => {
       .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
-        expect(Snackbar.dismiss).toBeCalled();
         expect(Snackbar.show).toBeCalledWith(
           { title: 'Login failed' },
         );

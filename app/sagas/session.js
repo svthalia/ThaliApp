@@ -1,6 +1,7 @@
 import {
   call, put, takeEvery, select,
 } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
@@ -52,8 +53,6 @@ function* init() {
 function* signIn(action) {
   const { user, pass } = action.payload;
 
-  Snackbar.show({ title: 'Logging in', duration: Snackbar.LENGTH_INDEFINITE });
-
   const data = {
     method: 'POST',
     headers: {
@@ -65,6 +64,9 @@ function* signIn(action) {
       password: pass,
     }),
   };
+
+  const currentTimestamp = Date.now();
+
   try {
     const response = yield call(apiRequest, 'token-auth', data);
     const { token } = response;
@@ -76,11 +78,16 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    Snackbar.dismiss();
     Snackbar.show({ title: 'Login successful' });
   } catch (e) {
+    // Delay failure to make sure animation is finished
+    const now = Date.now();
+    if (now - currentTimestamp < 150) {
+      yield call(delay, now - currentTimestamp);
+    }
+
+    yield put(sessionActions.tokenInvalid());
     Sentry.captureException(e);
-    Snackbar.dismiss();
     Snackbar.show({ title: 'Login failed' });
   }
 }
