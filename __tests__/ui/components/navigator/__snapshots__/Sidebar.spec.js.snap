@@ -165,7 +165,7 @@ exports[`Sidebar component renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#313131",
+                "color": "#E62272",
                 "fontSize": 24,
               },
               Array [
@@ -196,7 +196,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontWeight": "600",
               },
               Object {
-                "color": "#313131",
+                "color": "#E62272",
               },
             ]
           }

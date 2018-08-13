@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import {
   Text, TouchableHighlight, TouchableOpacity, View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
-
-import * as actions from '../../../actions/event';
-import { retrievePizzaInfo } from '../../../actions/pizza';
 
 import styles from './style/EventDetailCard';
 import Colors from '../../style/Colors';
@@ -100,9 +96,4 @@ EventDetailCard.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  loadEvent: pk => dispatch(actions.event(pk)),
-  retrievePizzaInfo: () => dispatch(retrievePizzaInfo()),
-});
-
-export default connect(() => ({}), mapDispatchToProps)(translate(['screens/welcome/EventDetailCard'])(EventDetailCard));
+export default translate(['screens/welcome/EventDetailCard'])(EventDetailCard);

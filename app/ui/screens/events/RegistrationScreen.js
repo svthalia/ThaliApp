@@ -9,20 +9,17 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-import styles from './style/Registration';
+import styles from './style/RegistrationScreen';
 import Colors from '../../style/Colors';
 
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-
-import * as registrationActions from '../../../actions/registration';
 import Button from '../../components/button/Button';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
-class Registration extends Component {
+class RegistrationScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -171,7 +168,7 @@ class Registration extends Component {
   }
 }
 
-Registration.propTypes = {
+RegistrationScreen.propTypes = {
   registration: PropTypes.number.isRequired,
   fields: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   status: PropTypes.string.isRequired,
@@ -179,14 +176,4 @@ Registration.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  registration: state.registration.registration,
-  fields: state.registration.fields,
-  status: state.registration.status,
-});
-
-const mapDispatchToProps = dispatch => ({
-  update: (registration, fields) => dispatch(registrationActions.update(registration, fields)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Registration')(withStandardHeader(Registration)));
+export default translate('screens/events/Registration')(withStandardHeader(RegistrationScreen));

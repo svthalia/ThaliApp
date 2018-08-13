@@ -11,11 +11,9 @@ import {
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
-import EventDetailCard from './EventDetailCard';
+import EventDetailCard from './EventDetailCardContainer';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-
-import * as welcomeActions from '../../../actions/welcome';
 import styles from './style/Welcome';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 import * as calendarActions from '../../../actions/calendar';
@@ -73,7 +71,7 @@ const mapDispatchToFooterProps = dispatch => ({
 
 const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(translate('screens/welcome/Welcome')(Footer));
 
-class Welcome extends Component {
+class WelcomeScreen extends Component {
   handleRefresh = () => {
     const { refresh } = this.props;
     refresh();
@@ -144,7 +142,7 @@ class Welcome extends Component {
   }
 }
 
-Welcome.propTypes = {
+WelcomeScreen.propTypes = {
   eventList: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -162,14 +160,4 @@ Welcome.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  eventList: state.welcome.eventList,
-  loading: state.welcome.loading,
-  status: state.welcome.status,
-});
-
-const mapDispatchToProps = dispatch => ({
-  refresh: () => dispatch(welcomeActions.refresh()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/welcome/Welcome')(withStandardHeader(Welcome, true)));
+export default translate('screens/welcome/Welcome')(withStandardHeader(WelcomeScreen, true));

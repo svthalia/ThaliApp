@@ -3,22 +3,18 @@ import PropTypes from 'prop-types';
 import {
   ActivityIndicator,
   Image,
-  Keyboard,
   KeyboardAvoidingView,
+  LayoutAnimation,
   Linking,
   Text,
   TextInput,
   View,
-  LayoutAnimation,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { url } from '../../../utils/url';
-
-import * as actions from '../../../actions/session';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 import Button from '../../components/button/Button';
-import styles from './style/Login';
+import styles from './style/LoginScreen';
 import Colors from '../../style/Colors';
 import { STATUS_SIGNING_IN } from '../../../reducers/session';
 
@@ -31,7 +27,7 @@ const configureNextAnimation = () => {
 };
 
 
-class Login extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -112,18 +108,10 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+LoginScreen.propTypes = {
   login: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => state.session;
-const mapDispatchToProps = dispatch => ({
-  login: (username, password) => {
-    Keyboard.dismiss();
-    dispatch(actions.signIn(username, password));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate(['screens/user/Login'])(Login));
+export default translate(['screens/user/Login'])(LoginScreen);

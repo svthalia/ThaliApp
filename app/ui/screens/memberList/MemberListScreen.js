@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
-import { connect } from 'react-redux';
+import { FlatList, View } from 'react-native';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-import MemberView from '../../components/memberView/MemberView';
+import MemberView from '../../components/memberView/MemberViewContainer';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import SearchBar from './SearchHeader';
-import * as memberActions from '../../../actions/members';
+import SearchHeader from './SearchHeaderContainer';
 
 import styles, { memberSize } from './style/MemberList';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 
-class MemberList extends Component {
+class MemberListScreen extends Component {
   componentDidMount = () => {
     const { searchKey } = this.props;
     this.props.loadMembers(searchKey);
@@ -33,7 +31,7 @@ class MemberList extends Component {
 
   render() {
     const header = (
-      <SearchBar
+      <SearchHeader
         title={this.props.t('Member List')}
         searchText={this.props.t('Find a member')}
         search={key => this.props.loadMembers(key)}
@@ -86,11 +84,11 @@ class MemberList extends Component {
   }
 }
 
-MemberList.defaultProps = {
+MemberListScreen.defaultProps = {
   more: null,
 };
 
-MemberList.propTypes = {
+MemberListScreen.propTypes = {
   memberList: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
@@ -105,17 +103,4 @@ MemberList.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  memberList: state.members.memberList,
-  status: state.members.status,
-  loading: state.members.loading,
-  more: state.members.more,
-  searchKey: state.members.searchKey,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadMembers: (keywords = null) => dispatch(memberActions.members(keywords)),
-  loadMoreMembers: url => dispatch(memberActions.more(url)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/memberList/MemberList')(MemberList));
+export default translate('screens/memberList/MemberList')(MemberListScreen);

@@ -6,17 +6,17 @@ import {
   DrawerActions,
 } from 'react-navigation';
 
-import Login from './ui/screens/user/Login';
-import Welcome from './ui/screens/welcome/Welcome';
-import Event from './ui/screens/events/Event';
-import Calendar from './ui/screens/events/Calendar';
-import Profile from './ui/screens/user/Profile';
-import Pizza from './ui/screens/pizza/Pizza';
-import Registration from './ui/screens/events/Registration';
-import MemberList from './ui/screens/memberList/MemberList';
+import Login from './ui/screens/login/LoginScreenContainer';
+import Welcome from './ui/screens/welcome/WelcomeScreenContainer';
+import Event from './ui/screens/events/EventScreenContainer';
+import Calendar from './ui/screens/events/CalendarScreenContainer';
+import Profile from './ui/screens/profile/ProfileScreenContainer';
+import Pizza from './ui/screens/pizza/PizzaScreenContainer';
+import Registration from './ui/screens/events/RegistrationScreenContainer';
+import MemberList from './ui/screens/memberList/MemberListScreenContainer';
 import SplashScreen from './ui/screens/splash/SplashScreen';
-import Settings from './ui/screens/settings/Settings';
-import Sidebar from './ui/components/sidebar/Sidebar';
+import Settings from './ui/screens/settings/SettingsScreenContainer';
+import Sidebar from './ui/components/sidebar/SidebarContainer';
 
 const MainNavigator = createDrawerNavigator({
   Welcome,

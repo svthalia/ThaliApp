@@ -4,16 +4,9 @@ import {
   Alert, Image, ImageBackground, Text, TouchableHighlight, View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/Sidebar';
-import * as loginActions from '../../../actions/session';
-import * as profileActions from '../../../actions/profile';
-import * as calendarActions from '../../../actions/calendar';
-import * as membersActions from '../../../actions/members';
-import * as welcomeActions from '../../../actions/welcome';
-import { settingsActions } from '../../../actions/settings';
 import Colors from '../../style/Colors';
 
 const background = require('../../../assets/img/huygens.jpg');
@@ -126,18 +119,4 @@ Sidebar.propTypes = {
   openMemberList: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  displayName: state.session.displayName,
-  photo: state.session.photo,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadProfile: () => dispatch(profileActions.profile()),
-  openCalendar: () => dispatch(calendarActions.open()),
-  openMemberList: () => dispatch(membersActions.members()),
-  openWelcome: () => dispatch(welcomeActions.open()),
-  openSettings: () => dispatch(settingsActions.open()),
-  signOut: () => dispatch(loginActions.signOut()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('components/sidebar/Sidebar')(Sidebar));
+export default translate('components/sidebar/Sidebar')(Sidebar);

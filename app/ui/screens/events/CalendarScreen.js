@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text, View, SectionList, ScrollView, RefreshControl,
+  RefreshControl, ScrollView, SectionList, Text, View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
 import locale from 'react-native-locale-detector';
-
-import * as calendarActions from '../../../actions/calendar';
 import EventCard from './CalendarItem';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
-import styles from './style/Calendar';
+import styles from './style/CalendarScreen';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -124,7 +121,7 @@ const renderItem = (item) => {
   );
 };
 
-class Calendar extends Component {
+class CalendarScreen extends Component {
   componentDidMount() {
     this.props.refresh();
   }
@@ -188,7 +185,7 @@ class Calendar extends Component {
   }
 }
 
-Calendar.propTypes = {
+CalendarScreen.propTypes = {
   eventList: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number,
     title: PropTypes.string,
@@ -208,14 +205,4 @@ Calendar.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  eventList: state.calendar.eventList,
-  loading: state.calendar.loading,
-  status: state.calendar.status,
-});
-
-const mapDispatchToProps = dispatch => ({
-  refresh: () => dispatch(calendarActions.refresh()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Calendar')(withStandardHeader(Calendar, true)));
+export default translate('screens/events/Calendar')(withStandardHeader(CalendarScreen, true));

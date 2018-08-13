@@ -5,33 +5,27 @@ import {
   FlatList,
   Image,
   Linking,
-  Platform,
   RefreshControl,
   ScrollView,
   Text,
   TouchableHighlight,
   View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
 import HTML from 'react-native-render-html';
 
-import styles, { memberSize } from './style/Event';
-import MemberView from '../../components/memberView/MemberView';
+import styles, { memberSize } from './style/EventScreen';
+import MemberView from '../../components/memberView/MemberViewContainer';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import Colors from '../../style/Colors';
 
 import { termsAndConditionsUrl } from '../../../utils/url';
-
-import * as eventActions from '../../../actions/event';
-import * as registrationActions from '../../../actions/registration';
-import * as pizzaActions from '../../../actions/pizza';
 import Button from '../../components/button/Button';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
-class Event extends Component {
+class EventScreen extends Component {
   cancelPrompt = (pk) => {
     const { data, t, cancel } = this.props;
     const cancelDeadlineDate = new Date(data.cancel_deadline);
@@ -429,7 +423,7 @@ Pizza:
   }
 }
 
-Event.propTypes = {
+EventScreen.propTypes = {
   data: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -480,20 +474,4 @@ Event.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  data: state.event.data,
-  registrations: state.event.registrations,
-  status: state.event.status,
-  loading: state.event.loading,
-});
-
-const mapDispatchToProps = dispatch => ({
-  refresh: pk => dispatch(eventActions.event(pk)),
-  register: event => dispatch(registrationActions.register(event)),
-  cancel: registration => dispatch(registrationActions.cancel(registration)),
-  fields: registration => dispatch(registrationActions.retrieveFields(registration)),
-  openMaps: location => Linking.openURL(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
-  retrievePizzaInfo: () => dispatch(pizzaActions.retrievePizzaInfo()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/events/Event')(withStandardHeader(Event)));
+export default translate('screens/events/Event')(withStandardHeader(EventScreen));

@@ -11,15 +11,13 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './style/SearchHeader';
 import Colors from '../../style/Colors';
-import * as navigationActions from '../../../actions/navigation';
 
-class SearchBar extends Component {
+class SearchHeader extends Component {
   constructor(props) {
     super(props);
 
@@ -174,7 +172,7 @@ class SearchBar extends Component {
   }
 }
 
-SearchBar.propTypes = {
+SearchHeader.propTypes = {
   title: PropTypes.string.isRequired,
   searchText: PropTypes.string.isRequired,
   search: PropTypes.func.isRequired,
@@ -182,8 +180,4 @@ SearchBar.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  toggleDrawer: () => dispatch(navigationActions.toggleDrawer()),
-});
-
-export default connect(() => ({}), mapDispatchToProps)(SearchBar);
+export default SearchHeader;

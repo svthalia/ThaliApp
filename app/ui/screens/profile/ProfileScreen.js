@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -20,8 +19,6 @@ import Moment from 'moment';
 import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-
-import * as navigationActions from '../../../actions/navigation';
 
 import Colors from '../../style/Colors';
 
@@ -139,7 +136,7 @@ const getAchievements = (profile, t) => {
   return <View />;
 };
 
-class Profile extends Component {
+class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.scrollY = new Animated.Value(0);
@@ -290,7 +287,7 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+ProfileScreen.propTypes = {
   profile: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
@@ -324,14 +321,4 @@ Profile.propTypes = {
   goBack: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile.profile,
-  success: state.profile.success,
-  hasLoaded: state.profile.hasLoaded,
-});
-
-const mapDispatchToProps = dispatch => ({
-  goBack: () => dispatch(navigationActions.goBack()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/user/Profile')(Profile));
+export default translate('screens/user/Profile')(ProfileScreen);

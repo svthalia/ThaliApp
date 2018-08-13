@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 import {
   RefreshControl, ScrollView, Text, TouchableHighlight, View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-
-import { retrievePizzaInfo, cancelOrder, orderPizza } from '../../../actions/pizza';
-import styles from './style/Pizza';
+import styles from './style/PizzaScreen';
 import Colors from '../../style/Colors';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 import CardSection from '../../components/cardSection/CardSection';
 
-class Pizza extends Component {
+class PizzaScreen extends Component {
   getProductFromList = (pk, pizzaList) => {
     for (let i = 0; i < pizzaList.length; i += 1) {
       if (pizzaList[i].pk === pk) {
@@ -242,7 +239,7 @@ class Pizza extends Component {
   }
 }
 
-Pizza.propTypes = {
+PizzaScreen.propTypes = {
   success: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
@@ -272,24 +269,9 @@ Pizza.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-Pizza.defaultProps = {
+PizzaScreen.defaultProps = {
   event: null,
   order: null,
 };
 
-const mapStateToProps = state => ({
-  success: state.pizza.success,
-  loading: state.pizza.loading,
-  hasLoaded: state.pizza.hasLoaded,
-  event: state.pizza.event,
-  order: state.pizza.order,
-  pizzaList: state.pizza.pizzaList,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadPizzas: () => dispatch(retrievePizzaInfo()),
-  cancelPizza: () => dispatch(cancelOrder()),
-  orderPizza: (pk, hasOrder) => dispatch(orderPizza(pk, hasOrder)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/pizza/Pizza')(withStandardHeader(Pizza)));
+export default translate('screens/pizza/Pizza')(withStandardHeader(PizzaScreen));

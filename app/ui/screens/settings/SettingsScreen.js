@@ -1,16 +1,13 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './style/Settings';
-
-import { settingsActions } from '../../../actions/settings';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
-import NotificationsSection from './NotificationsSection';
+import NotificationsSection from './NotificationsSectionContainer';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 
-class Settings extends React.Component {
+class SettingsScreen extends React.Component {
   componentDidMount() {
     this.props.init();
   }
@@ -36,17 +33,9 @@ class Settings extends React.Component {
   }
 }
 
-Settings.propTypes = {
+SettingsScreen.propTypes = {
   init: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  loading: state.settings.loading,
-});
-
-const mapDispatchToProps = dispatch => ({
-  init: () => dispatch(settingsActions.initStart()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStandardHeader(Settings, true));
+export default withStandardHeader(SettingsScreen, true);

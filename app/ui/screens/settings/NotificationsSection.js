@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Text, View } from 'react-native';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 
 import styles from './style/NotificationsSection';
 import Colors from '../../style/Colors';
-
-import { notificationsSettingsActions } from '../../../actions/settings';
 import CardSection from '../../components/cardSection/CardSection';
 
 const GENERAL_KEY = 'general';
@@ -95,13 +92,4 @@ NotificationsSection.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  categoryList: state.settings.pushNotifications.categoryList,
-  status: state.settings.pushNotifications.status,
-});
-
-const mapDispatchToProps = dispatch => ({
-  saveCategories: catList => dispatch(notificationsSettingsActions.saveCategories(catList)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/settings/PushNotifications')(NotificationsSection));
+export default translate('screens/settings/PushNotifications')(NotificationsSection);
