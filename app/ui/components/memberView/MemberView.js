@@ -49,7 +49,7 @@ MemberView.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadProfile: (token, pk) => dispatch(profileActions.profile(pk)),
+  loadProfile: pk => dispatch(profileActions.profile(pk)),
 });
 
 export default connect(() => ({}), mapDispatchToProps)(MemberView);
