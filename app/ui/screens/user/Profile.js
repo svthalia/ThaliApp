@@ -21,6 +21,8 @@ import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
+import * as navigationActions from '../../../actions/navigation';
+
 import Colors from '../../style/Colors';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
@@ -228,7 +230,7 @@ class Profile extends Component {
         </Animated.View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
           <TouchableOpacity
-            onPress={this.props.navigation.goBack}
+            onPress={this.props.goBack}
           >
             <Icon
               name="arrow-back"
@@ -319,7 +321,7 @@ Profile.propTypes = {
   success: PropTypes.bool.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  goBack: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -328,4 +330,8 @@ const mapStateToProps = state => ({
   hasLoaded: state.profile.hasLoaded,
 });
 
-export default connect(mapStateToProps, () => ({}))(translate('screens/user/Profile')(Profile));
+const mapDispatchToProps = dispatch => ({
+  goBack: () => dispatch(navigationActions.goBack()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/user/Profile')(Profile));

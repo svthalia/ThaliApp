@@ -11,7 +11,6 @@ import {
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
-import { withNavigation } from 'react-navigation';
 import EventDetailCard from './EventDetailCard';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -19,6 +18,7 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import * as welcomeActions from '../../../actions/welcome';
 import styles from './style/Welcome';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
+import * as calendarActions from '../../../actions/calendar';
 
 const eventListToSections = (eventList, t) => {
   const calendarFormat = {
@@ -53,7 +53,7 @@ const eventListToSections = (eventList, t) => {
 
 const Footer = props => (
   <TouchableOpacity
-    onPress={() => props.navigation.navigate('Calendar')}
+    onPress={props.openCalendar}
     style={styles.footer}
   >
     <Text style={styles.footerText}>
@@ -63,11 +63,15 @@ const Footer = props => (
 );
 
 Footer.propTypes = {
-  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  openCalendar: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 
-const FooterComponent = withNavigation(translate('screens/welcome/Welcome')(Footer));
+const mapDispatchToFooterProps = dispatch => ({
+  openCalendar: () => dispatch(calendarActions.open()),
+});
+
+const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(translate('screens/welcome/Welcome')(Footer));
 
 class Welcome extends Component {
   handleRefresh = () => {

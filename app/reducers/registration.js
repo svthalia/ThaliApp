@@ -7,7 +7,7 @@ const initialState = {
 };
 
 
-export default function navigate(state = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case registrationActions.SHOW_FIELDS: {
       return {

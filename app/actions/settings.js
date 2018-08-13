@@ -1,8 +1,12 @@
 // Actions are grouped based on the settings sections
 
 export const settingsActions = {
+  OPEN: 'SETTINGS_OPEN',
   INIT_START: 'SETTINGS_INIT_START',
   INIT_COMPLETE: 'SETTINGS_INIT_COMPLETE',
+  open: () => ({
+    type: settingsActions.OPEN,
+  }),
   initStart: () => ({
     type: settingsActions.INIT_START,
   }),

@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   createSwitchNavigator,
   NavigationActions,
+  DrawerActions,
 } from 'react-navigation';
 
 import Login from './ui/screens/user/Login';
@@ -63,9 +64,16 @@ function goBack() {
   );
 }
 
+function toggleDrawer() {
+  navigator.dispatch(
+    DrawerActions.toggleDrawer(),
+  );
+}
+
 export default {
   AppNavigator,
   navigate,
   goBack,
+  toggleDrawer,
   setTopLevelNavigator,
 };

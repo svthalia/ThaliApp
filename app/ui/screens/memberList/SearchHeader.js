@@ -11,12 +11,13 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './style/SearchHeader';
 import Colors from '../../style/Colors';
+import * as navigationActions from '../../../actions/navigation';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -40,11 +41,11 @@ class SearchBar extends Component {
   }
 
   getLeftIcon = () => {
-    const { navigation } = this.props;
+    const { toggleDrawer } = this.props;
     const { isSearching } = this.state;
     return (
       <TouchableOpacity
-        onPress={() => (isSearching ? this.updateSearch(false) : navigation.openDrawer())}
+        onPress={() => (isSearching ? this.updateSearch(false) : toggleDrawer())}
       >
         <Icon
           name={isSearching ? 'arrow-back' : 'menu'}
@@ -178,7 +179,11 @@ SearchBar.propTypes = {
   searchText: PropTypes.string.isRequired,
   search: PropTypes.func.isRequired,
   searchKey: PropTypes.string.isRequired,
-  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  toggleDrawer: PropTypes.func.isRequired,
 };
 
-export default withNavigation(SearchBar);
+const mapDispatchToProps = dispatch => ({
+  toggleDrawer: () => dispatch(navigationActions.toggleDrawer()),
+});
+
+export default connect(() => ({}), mapDispatchToProps)(SearchBar);

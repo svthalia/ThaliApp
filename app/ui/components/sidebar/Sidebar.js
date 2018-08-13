@@ -9,8 +9,12 @@ import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/Sidebar';
 import * as loginActions from '../../../actions/session';
-import Colors from '../../style/Colors';
 import * as profileActions from '../../../actions/profile';
+import * as calendarActions from '../../../actions/calendar';
+import * as membersActions from '../../../actions/members';
+import * as welcomeActions from '../../../actions/welcome';
+import { settingsActions } from '../../../actions/settings';
+import Colors from '../../style/Colors';
 
 const background = require('../../../assets/img/huygens.jpg');
 
@@ -25,28 +29,28 @@ const logoutPrompt = props => () => Alert.alert(
 const Sidebar = (props) => {
   const buttons = [
     {
-      onPress: () => props.navigation.navigate('Welcome'),
+      onPress: () => props.openWelcome(),
       iconName: 'home',
       text: props.t('Welcome'),
       style: {},
       routeName: 'Welcome',
     },
     {
-      onPress: () => props.navigation.navigate('Calendar'),
+      onPress: () => props.openCalendar(),
       iconName: 'event',
       text: props.t('Calendar'),
       style: {},
       routeName: 'Calendar',
     },
     {
-      onPress: () => props.navigation.navigate('MemberList'),
+      onPress: () => props.openMemberList(),
       iconName: 'people',
       text: props.t('Member List'),
       style: {},
       routeName: 'MemberList',
     },
     {
-      onPress: () => props.navigation.navigate('Settings'),
+      onPress: () => props.openSettings(),
       iconName: 'settings',
       text: props.t('Settings'),
       style: {},
@@ -116,7 +120,10 @@ Sidebar.propTypes = {
   photo: PropTypes.string.isRequired,
   loadProfile: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  openCalendar: PropTypes.func.isRequired,
+  openWelcome: PropTypes.func.isRequired,
+  openSettings: PropTypes.func.isRequired,
+  openMemberList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -126,6 +133,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadProfile: () => dispatch(profileActions.profile()),
+  openCalendar: () => dispatch(calendarActions.open()),
+  openMemberList: () => dispatch(membersActions.members()),
+  openWelcome: () => dispatch(welcomeActions.open()),
+  openSettings: () => dispatch(settingsActions.open()),
   signOut: () => dispatch(loginActions.signOut()),
 });
 
