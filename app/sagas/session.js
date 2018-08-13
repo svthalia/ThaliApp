@@ -22,13 +22,11 @@ const pairsToObject = (obj, pair) => {
   return obj2;
 };
 
-const getStoredItems = () => AsyncStorage.multiGet([
-  USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
-]);
-
 function* init() {
   try {
-    const result = yield call(getStoredItems);
+    const result = yield call([AsyncStorage, 'multiGet'], [
+      USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
+    ]);
     const values = result.reduce(pairsToObject, {});
 
     const username = values[USERNAMEKEY];

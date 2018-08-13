@@ -1,12 +1,13 @@
 import { call, takeEvery, select } from 'redux-saga/effects';
 import { Platform } from 'react-native';
-import FCM from 'react-native-fcm';
+import firebase from 'react-native-firebase';
 import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 
 const register = function* register(action) {
+  const messaging = firebase.messaging();
   const token = yield select(tokenSelector);
   const { categories } = action;
 
@@ -15,18 +16,20 @@ const register = function* register(action) {
     return;
   }
 
+  const hasPermission = yield call([messaging, 'hasPermission']);
+
   let pushToken;
-  if (Platform.OS === 'ios') {
+  if (Platform.OS === 'ios' && !hasPermission) {
     try {
       // this throws an error when the permissions are denied
-      yield call(FCM.requestPermissions);
-      pushToken = yield call(FCM.getFCMToken);
+      yield call([messaging, 'requestPermission']);
+      pushToken = yield call([messaging, 'getToken']);
     } catch (err) {
       // return and do nothing since we have no token
       return;
     }
   } else {
-    pushToken = yield call(FCM.getFCMToken);
+    pushToken = yield call([messaging, 'getToken']);
   }
 
   const body = {
@@ -57,7 +60,7 @@ const register = function* register(action) {
 };
 
 const invalidate = function* invalidate() {
-  yield call(FCM.deleteInstanceId);
+  yield call([firebase.iid(), 'delete']);
 };
 
 const pushNotificationsSaga = function* pushNotificationsSaga() {

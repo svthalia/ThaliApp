@@ -3,10 +3,14 @@ package com.thaliapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+import io.invertase.firebase.instanceid.RNFirebaseInstanceIdPackage;
 import io.sentry.RNSentryPackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
-import com.evollu.react.fcm.FIRMessagingPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,12 +31,15 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
+      return Arrays.asList(
             new MainReactPackage(),
             new RNSentryPackage(),
             new SnackbarPackage(),
             new ReactNativeI18n(),
-            new FIRMessagingPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage(),
+            new RNFirebaseInstanceIdPackage(),
             new LinearGradientPackage(),
             new VectorIconsPackage()
       );

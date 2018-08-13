@@ -2,7 +2,6 @@ import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { Platform } from 'react-native';
-import FCM from 'react-native-fcm';
 import pushNotificationsSaga from '../../app/sagas/pushNotifications';
 import { apiRequest, tokenSelector } from '../../app/utils/url';
 import * as pushActions from '../../app/actions/pushNotifications';
@@ -12,22 +11,31 @@ jest.mock('../../app/utils/url', () => ({
   tokenSelector: () => 'token',
 }));
 
-jest.mock('react-native-fcm', () => ({
-  getFCMToken: jest.fn(),
-  requestPermissions: jest.fn(),
-  deleteInstanceId: jest.fn(),
+const mockIid = {
+  delete: jest.fn(),
+};
+
+const mockMessaging = {
+  hasPermission: jest.fn(),
+  getToken: jest.fn(),
+  requestPermission: jest.fn(),
+};
+
+jest.mock('react-native-firebase', () => ({
+  iid: () => mockIid,
+  messaging: () => mockMessaging,
 }));
 
 describe('pushNotifications saga', () => {
   beforeAll(() => {
-    FCM.getFCMToken.mockReturnValue('token');
+    mockMessaging.getToken.mockReturnValue('token');
   });
 
   describe('register', () => {
     beforeEach(() => {
       Platform.OS = 'ios';
-      FCM.requestPermissions.mockReset();
-      FCM.getFCMToken.mockReset();
+      mockMessaging.requestPermission.mockReset();
+      mockMessaging.getToken.mockReset();
       apiRequest.mockReset();
     });
 
@@ -38,7 +46,7 @@ describe('pushNotifications saga', () => {
       .dispatch(pushActions.register())
       .silentRun()
       .then(() => {
-        expect(FCM.requestPermissions).toBeCalled();
+        expect(mockMessaging.requestPermission).toBeCalled();
       }));
 
     it('should not request permissions when platform is Android', () => {
@@ -50,31 +58,29 @@ describe('pushNotifications saga', () => {
         .dispatch(pushActions.register())
         .silentRun()
         .then(() => {
-          expect(FCM.requestPermissions).not.toBeCalled();
+          expect(mockMessaging.requestPermission).not.toBeCalled();
         });
     });
 
-    it('should post a token to the server', () => {
-      return expectSaga(pushNotificationsSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [matchers.call.like({ fn: apiRequest, args: ['events'] }), { results: 'data' }],
-        ])
-        .dispatch(pushActions.register())
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith('devices',
-            {
-              body: '{"type":"ios"}',
-              headers: {
-                Accept: 'application/json',
-                Authorization: 'Token token',
-                'Content-Type': 'application/json',
-              },
-              method: 'POST',
-            });
-        });
-    });
+    it('should post a token to the server', () => expectSaga(pushNotificationsSaga)
+      .provide([
+        [select(tokenSelector), 'token'],
+        [matchers.call.like({ fn: apiRequest, args: ['events'] }), { results: 'data' }],
+      ])
+      .dispatch(pushActions.register())
+      .silentRun()
+      .then(() => {
+        expect(apiRequest).toBeCalledWith('devices',
+          {
+            body: '{"type":"ios"}',
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Token token',
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          });
+      }));
   });
 
   describe('invalidate', () => {
@@ -82,7 +88,7 @@ describe('pushNotifications saga', () => {
       .dispatch(pushActions.invalidate())
       .silentRun()
       .then(() => {
-        expect(FCM.deleteInstanceId).toBeCalled();
+        expect(mockIid.delete).toBeCalled();
       }));
   });
 });
