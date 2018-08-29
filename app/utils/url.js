@@ -32,16 +32,19 @@ export class TokenInvalidError extends Error {
 const detectInvalidToken = (response) => {
   const responseCopy = response.clone();
 
-  return response.json().then((json) => {
-    if (response.status === 403) {
-      const contentLang = response.headers.get('content-language');
-      if ((contentLang === 'en' && json.detail === 'Invalid token.')
-        || (contentLang === 'nl' && json.detail === 'Ongeldige token.')) {
-        throw new TokenInvalidError(responseCopy);
+  if (response.status === 403) {
+    return response.json().then((json) => {
+      if (response.status === 403) {
+        const contentLang = response.headers.get('content-language');
+        if ((contentLang === 'en' && json.detail === 'Invalid token.')
+          || (contentLang === 'nl' && json.detail === 'Ongeldige token.')) {
+          throw new TokenInvalidError(responseCopy);
+        }
       }
-    }
-    return responseCopy;
-  });
+      return responseCopy;
+    });
+  }
+  return Promise.resolve(responseCopy);
 };
 
 export const apiRequest = (route, fetchOpts, params) => {
