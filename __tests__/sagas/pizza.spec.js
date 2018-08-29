@@ -5,12 +5,14 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { apiRequest, tokenSelector } from '../../app/utils/url';
 import pizzaSaga from '../../app/sagas/pizza';
 import * as pizzaActions from '../../app/actions/pizza';
-import * as navigationActions from '../../app/actions/navigation';
-import { PIZZA_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
   tokenSelector: () => 'token',
+}));
+
+jest.mock('../../app/navigation', () => ({
+  navigate: jest.fn(),
 }));
 
 describe('pizza saga', () => {
@@ -22,16 +24,6 @@ describe('pizza saga', () => {
   });
 
   describe('retrieve pizza info', () => {
-    it('should start fetching and navigate on retrieve action', () => expectSaga(pizzaSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), []],
-      ])
-      .dispatch(pizzaActions.retrievePizzaInfo())
-      .put(pizzaActions.fetching())
-      .put(navigationActions.navigate(PIZZA_SCENE))
-      .silentRun());
-
     describe('failures', () => {
       beforeAll(() => {
         error.response = null;

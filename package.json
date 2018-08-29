@@ -33,6 +33,9 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/jest/preprocessor.js"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ],
     "moduleNameMapper": {
       "react-i18next": "<rootDir>/__mocks__/react-i18next-mock.js"
     }
@@ -51,9 +54,10 @@
     "react-native-linear-gradient": "^2.4.0",
     "react-native-locale-detector": "^1.0.1",
     "react-native-render-html": "^3.10.0",
-    "react-native-sentry": "^0.38.2",
+    "react-native-sentry": "^0.39.0",
     "react-native-snackbar": "^0.4.7",
     "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.9.3",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0"

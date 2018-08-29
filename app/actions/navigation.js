@@ -1,22 +1,14 @@
-export const NAVIGATE = 'NAVIGATE_NAVIGATE';
 export const BACK = 'NAVIGATE_BACK';
-export const OPENDRAWER = 'NAVIGATE_OPENDRAWER';
+export const TOGGLE_DRAWER = 'NAVIGATE_TOGGLE_DRAWER';
 
-export function navigate(scene, newSection = false) {
-  return {
-    type: NAVIGATE,
-    payload: { scene, newSection },
-  };
-}
-
-export function back() {
+export function goBack() {
   return {
     type: BACK,
   };
 }
 
-export function updateDrawer(drawerState) {
+export function toggleDrawer() {
   return {
-    type: OPENDRAWER, payload: { drawerOpen: drawerState },
+    type: TOGGLE_DRAWER,
   };
 }

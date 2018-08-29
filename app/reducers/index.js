@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import session from './session';
-import navigation from './navigation';
 import event from './event';
 import calendar from './calendar';
 import welcome from './welcome';
@@ -12,7 +11,6 @@ import settings from './settings';
 
 export default combineReducers({
   session,
-  navigation,
   event,
   calendar,
   welcome,

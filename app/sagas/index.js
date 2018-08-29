@@ -1,6 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
 
 import sessionSaga from './session';
+import navigationSaga from './navigation';
 import eventSaga from './event';
 import profileSaga from './profile';
 import welcomeSaga from './welcome';
@@ -15,6 +16,7 @@ import settingsSaga from './settings';
 const sagas = function* sagas() {
   yield all([
     fork(sessionSaga),
+    fork(navigationSaga),
     fork(eventSaga),
     fork(profileSaga),
     fork(welcomeSaga),

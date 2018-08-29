@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Linking, Platform } from 'react-native';
+import { Linking, Platform, NativeModules } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
@@ -13,10 +13,17 @@ import reducers from './reducers';
 
 import i18n from './utils/i18n';
 import sagas from './sagas';
-import ReduxNavigator from './ui/components/navigator/ReduxNavigator';
 import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
+import NavigationService from './navigation';
+
+const { UIManager } = NativeModules;
+
+/* istanbul ignore next */
+// eslint-disable-next-line no-unused-expressions
+UIManager.setLayoutAnimationEnabledExperimental
+&& UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
@@ -77,7 +84,11 @@ class Main extends Component {
     return (
       <I18nextProvider i18n={i18n}>
         <Provider store={store}>
-          <ReduxNavigator />
+          <NavigationService.AppNavigator
+            ref={(navigatorRef) => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}
+          />
         </Provider>
       </I18nextProvider>
     );

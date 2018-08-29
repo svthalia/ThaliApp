@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Text, TouchableOpacity, TouchableHighlight,
+  Text, TouchableHighlight, TouchableOpacity, View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
-
-import * as actions from '../../../actions/event';
-import { retrievePizzaInfo } from '../../../actions/pizza';
 
 import styles from './style/EventDetailCard';
 import Colors from '../../style/Colors';
@@ -41,7 +37,7 @@ const EventDetailCard = (props) => {
 
   return (
     <TouchableHighlight
-      onPress={() => props.loadEvent(props.event.pk, props.token)}
+      onPress={() => props.loadEvent(props.event.pk)}
       style={styles.card}
       underlayColor={Colors.pressedWhite}
     >
@@ -62,7 +58,7 @@ const EventDetailCard = (props) => {
           </Text>
           {props.event.pizza ? (
             <TouchableOpacity
-              onPress={() => props.retrievePizzaInfo(props.token)}
+              onPress={() => props.retrievePizzaInfo()}
               style={styles.button}
             >
               <Text style={styles.orderPizza}>
@@ -96,18 +92,8 @@ EventDetailCard.propTypes = {
     pizza: PropTypes.bool,
   }).isRequired,
   loadEvent: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
   retrievePizzaInfo: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  token: state.session.token,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadEvent: (pk, token) => dispatch(actions.event(pk, token)),
-  retrievePizzaInfo: () => dispatch(retrievePizzaInfo()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate(['screens/welcome/EventDetailCard'])(EventDetailCard));
+export default translate(['screens/welcome/EventDetailCard'])(EventDetailCard);

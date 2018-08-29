@@ -6,17 +6,13 @@ Object {
     "token": "token",
     "username": "username",
   },
-  "type": "SESSION_SUCCESS",
+  "type": "SESSION_SIGNED_IN",
 }
 `;
 
-exports[`session actions should create an action for a successful user profile load 1`] = `
+exports[`session actions should create an action to fetch user info 1`] = `
 Object {
-  "payload": Object {
-    "displayName": "displayName",
-    "photo": "photo",
-  },
-  "type": "SESSION_PROFILE_SUCCESS",
+  "type": "SESSION_FETCH_USER_INFO",
 }
 `;
 
@@ -26,33 +22,34 @@ Object {
 }
 `;
 
-exports[`session actions should create an action to load the user profile 1`] = `
-Object {
-  "payload": Object {
-    "token": "token",
-  },
-  "type": "SESSION_PROFILE",
-}
-`;
-
 exports[`session actions should create an action to log the user in 1`] = `
 Object {
   "payload": Object {
     "pass": "password",
     "user": "username",
   },
-  "type": "SESSION_LOGIN",
+  "type": "SESSION_SIGN_IN",
 }
 `;
 
 exports[`session actions should create an action to log the user out 1`] = `
 Object {
-  "type": "SESSION_LOGOUT",
+  "type": "SESSION_SIGN_OUT",
 }
 `;
 
 exports[`session actions should create an action to notify invalid token 1`] = `
 Object {
   "type": "SESSION_TOKEN_INVALID",
+}
+`;
+
+exports[`session actions should create an action to set user info 1`] = `
+Object {
+  "payload": Object {
+    "displayName": "displayName",
+    "photo": "photo",
+  },
+  "type": "SESSION_SET_USER_INFO",
 }
 `;

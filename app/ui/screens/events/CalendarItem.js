@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View, Text, TouchableHighlight, Linking,
-} from 'react-native';
-import { connect } from 'react-redux';
+import { Text, TouchableHighlight, View } from 'react-native';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
-
-import * as eventActions from '../../../actions/event';
 
 import styles from './style/CalendarItem';
 
@@ -22,7 +17,7 @@ const getEventInfo = (event, t) => {
   return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format('HH:mm')} | ${event.location}`;
 };
 
-const EventCard = props => (
+const CalendarItem = props => (
   <TouchableHighlight
     onPress={() => props.loadEvent(props.event)}
     style={styles.button}
@@ -44,7 +39,7 @@ const EventCard = props => (
   </TouchableHighlight>
 );
 
-EventCard.propTypes = {
+CalendarItem.propTypes = {
   event: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -62,14 +57,4 @@ EventCard.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  loadEvent: (event) => {
-    if (event.partner) {
-      Linking.openURL(event.url);
-    } else {
-      dispatch(eventActions.event(event.pk));
-    }
-  },
-});
-
-export default connect(() => ({}), mapDispatchToProps)(translate('screen/events/CalendarItem')(EventCard));
+export default translate('screen/events/CalendarItem')(CalendarItem);

@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Linking, ScrollView, Text, View, Animated, TouchableOpacity, Platform, StatusBar, ImageBackground,
+  Animated,
+  ImageBackground,
+  Linking,
+  Platform,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -14,10 +21,13 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
 import Colors from '../../style/Colors';
-import { back } from '../../../actions/navigation';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
-import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/Profile';
+import styles, {
+  HEADER_MAX_HEIGHT,
+  HEADER_MIN_HEIGHT,
+  HEADER_SCROLL_DISTANCE,
+} from './style/Profile';
 import CardSection from '../../components/cardSection/CardSection';
 
 const getDescription = (profile, t) => (
@@ -126,7 +136,7 @@ const getAchievements = (profile, t) => {
   return <View />;
 };
 
-class Profile extends Component {
+class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.scrollY = new Animated.Value(0);
@@ -217,7 +227,7 @@ class Profile extends Component {
         </Animated.View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
           <TouchableOpacity
-            onPress={this.props.back}
+            onPress={this.props.goBack}
           >
             <Icon
               name="arrow-back"
@@ -277,7 +287,7 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+ProfileScreen.propTypes = {
   profile: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
@@ -306,19 +316,9 @@ Profile.propTypes = {
     })).isRequired,
   }).isRequired,
   success: PropTypes.bool.isRequired,
-  back: PropTypes.func.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile.profile,
-  success: state.profile.success,
-  hasLoaded: state.profile.hasLoaded,
-});
-
-const mapDispatchToProps = dispatch => ({
-  back: () => dispatch(back()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('screens/user/Profile')(Profile));
+export default translate('screens/user/Profile')(ProfileScreen);

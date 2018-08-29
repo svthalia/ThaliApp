@@ -3,10 +3,10 @@ export const FETCHING = 'PROFILE_FETCHING';
 export const SUCCESS = 'PROFILE_SUCCESS';
 export const FAILURE = 'PROFILE_FAILURE';
 
-export function profile(token, member = 'me') {
+export function profile(member = 'me') {
   return {
     type: PROFILE,
-    payload: { token, member },
+    payload: { member },
   };
 }
 

@@ -4,6 +4,10 @@ import configureStore from 'redux-mock-store'
 import MemberView from '../../../../app/ui/components/memberView/MemberView';
 import reducer from '../../../../app/reducers/index';
 
+jest.mock('react-navigation', () => ({
+  withNavigation: component => component,
+}));
+
 describe('MemberView component', () => {
   const mockStore = configureStore(reducer);
   const initialState = {

@@ -4,7 +4,6 @@ import {
 import { Sentry } from 'react-native-sentry';
 
 import { apiRequest, tokenSelector } from '../utils/url';
-import * as navigationActions from '../actions/navigation';
 import * as calendarActions from '../actions/calendar';
 
 const calendar = function* calendar() {
@@ -41,10 +40,7 @@ const calendar = function* calendar() {
 };
 
 const calendarSaga = function* eventSaga() {
-  yield takeEvery([
-    calendarActions.REFRESH,
-    action => action.type === navigationActions.NAVIGATE && action.payload.scene === 'eventList',
-  ], calendar);
+  yield takeEvery(calendarActions.REFRESH, calendar);
 };
 
 export default calendarSaga;

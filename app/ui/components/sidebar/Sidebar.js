@@ -4,18 +4,10 @@ import {
   Alert, Image, ImageBackground, Text, TouchableHighlight, View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/Sidebar';
-
-import * as navigationActions from '../../../actions/navigation';
-import * as loginActions from '../../../actions/session';
-import * as profileActions from '../../../actions/profile';
 import Colors from '../../style/Colors';
-import {
-  EVENT_LIST_SCENE, MEMBERS_SCENE, SETTINGS_SCENE, WELCOME_SCENE,
-} from './scenes';
 
 const background = require('../../../assets/img/huygens.jpg');
 
@@ -23,39 +15,39 @@ const logoutPrompt = props => () => Alert.alert(
   props.t('Log out?'),
   props.t('Are you sure you want to log out?'),
   [{ text: props.t('No') },
-    { text: props.t('Yes'), onPress: props.logout },
+    { text: props.t('Yes'), onPress: props.signOut },
   ],
 );
 
 const Sidebar = (props) => {
   const buttons = [
     {
-      onPress: () => props.navigate(WELCOME_SCENE, true),
+      onPress: () => props.openWelcome(),
       iconName: 'home',
       text: props.t('Welcome'),
       style: {},
-      scene: WELCOME_SCENE,
+      routeName: 'Welcome',
     },
     {
-      onPress: () => props.navigate(EVENT_LIST_SCENE, true),
+      onPress: () => props.openCalendar(),
       iconName: 'event',
       text: props.t('Calendar'),
       style: {},
-      scene: EVENT_LIST_SCENE,
+      routeName: 'Calendar',
     },
     {
-      onPress: () => props.navigate(MEMBERS_SCENE, true),
+      onPress: () => props.openMemberList(),
       iconName: 'people',
       text: props.t('Member List'),
       style: {},
-      scene: MEMBERS_SCENE,
+      routeName: 'MemberList',
     },
     {
-      onPress: () => props.navigate(SETTINGS_SCENE, true),
+      onPress: () => props.openSettings(),
       iconName: 'settings',
       text: props.t('Settings'),
       style: {},
-      scene: SETTINGS_SCENE,
+      routeName: 'Settings',
     },
     {
       onPress: logoutPrompt(props),
@@ -65,7 +57,7 @@ const Sidebar = (props) => {
         borderTopColor: Colors.lightGray,
         borderTopWidth: 1,
       },
-      scene: 'logout',
+      routeName: 'signOut',
     },
   ];
 
@@ -74,7 +66,7 @@ const Sidebar = (props) => {
       style={styles.sidebar}
     >
       <TouchableHighlight
-        onPress={() => props.loadProfile(props.token)}
+        onPress={() => props.loadProfile()}
         style={styles.headerButton}
       >
         <ImageBackground
@@ -100,12 +92,12 @@ const Sidebar = (props) => {
             name={button.iconName}
             borderRadius={0}
             backgroundColor={Colors.white}
-            color={props.currentScene === button.scene
+            color={props.activeItemKey === button.routeName
               ? Colors.magenta : Colors.textColour}
             size={24}
             iconStyle={styles.buttonIcon}
             style={[styles.buttonText, button.style]}
-            key={button.scene}
+            key={button.routeName}
           >
             {button.text}
           </Icon.Button>
@@ -116,29 +108,15 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  currentScene: PropTypes.string.isRequired,
+  activeItemKey: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/no-unused-prop-types
-  logout: PropTypes.func.isRequired,
   loadProfile: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/no-unused-prop-types
-  navigate: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  openCalendar: PropTypes.func.isRequired,
+  openWelcome: PropTypes.func.isRequired,
+  openSettings: PropTypes.func.isRequired,
+  openMemberList: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  currentScene: state.navigation.currentScene,
-  displayName: state.session.displayName,
-  photo: state.session.photo,
-  token: state.session.token,
-});
-
-const mapDispatchToProps = dispatch => ({
-  navigate: (scene, newSection = false) => dispatch(navigationActions.navigate(scene, newSection)),
-  logout: () => dispatch(loginActions.logout()),
-  loadProfile: token => dispatch(profileActions.profile(token)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(translate('components/navigator/Sidebar')(Sidebar));
+export default translate('components/sidebar/Sidebar')(Sidebar);

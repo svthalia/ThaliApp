@@ -1,8 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import configureStore from 'redux-mock-store';
 import StandardHeader from '../../../../app/ui/components/standardHeader/StandardHeader';
 import reducer from '../../../../app/reducers';
-import configureStore from 'redux-mock-store';
+
+jest.mock('react-navigation', () => ({
+  withNavigation: component => component,
+}));
+
+const mockNavigation = {
+  state: 'mock',
+};
 
 describe('StandardHeader component', () => {
   const mockStore = configureStore(reducer);
@@ -23,7 +31,7 @@ describe('StandardHeader component', () => {
 
   it('renders correctly', () => {
     const tree = renderer
-      .create(<StandardHeader store={store} />)
+      .create(<StandardHeader store={store} navigation={mockNavigation} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

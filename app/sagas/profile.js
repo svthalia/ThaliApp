@@ -1,16 +1,16 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  call, put, select, takeEvery,
+} from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest } from '../utils/url';
+import { apiRequest, tokenSelector } from '../utils/url';
 import * as profileActions from '../actions/profile';
-import * as navActions from '../actions/navigation';
-import { PROFILE_SCENE } from '../ui/components/navigator/scenes';
 
 const profile = function* profile(action) {
-  const { token, member } = action.payload;
+  const { member } = action.payload;
+  const token = yield select(tokenSelector);
 
   yield put(profileActions.fetching());
-  yield put(navActions.navigate(PROFILE_SCENE));
 
   const data = {
     method: 'GET',

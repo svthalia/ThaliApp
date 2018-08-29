@@ -8,9 +8,7 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 
 import * as eventActions from '../actions/event';
-import * as navigationActions from '../actions/navigation';
 import * as registrationActions from '../actions/registration';
-import { REGISTRATION_SCENE } from '../ui/components/navigator/scenes';
 
 
 export const eventSelector = state => state.event.data.pk;
@@ -69,7 +67,6 @@ const update = function* update(action) {
 
   try {
     yield call(apiRequest, `registrations/${registration}`, data);
-    yield put(navigationActions.back());
     yield put(registrationActions.success());
     yield delay(50);
     Snackbar.show({ title: 'Successfully updated registration' });
@@ -100,7 +97,6 @@ const cancel = function* cancel(action) {
     Snackbar.show({ title: 'Successfully cancelled registration' });
   } catch (error) {
     Sentry.captureException(error);
-    // Swallow error for now
   }
 
   yield put(eventActions.event(event));
@@ -111,7 +107,6 @@ const fields = function* fields(action) {
   const token = yield select(tokenSelector);
 
   yield put(registrationActions.loading());
-  yield put(navigationActions.navigate(REGISTRATION_SCENE));
 
   const data = {
     method: 'GET',

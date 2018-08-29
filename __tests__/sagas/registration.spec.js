@@ -7,13 +7,16 @@ import * as registrationActions from '../../app/actions/registration';
 import registrationSaga, { eventSelector } from '../../app/sagas/registration';
 import { apiRequest, tokenSelector } from '../../app/utils/url';
 import * as eventActions from '../../app/actions/event';
-import * as navigationActions from '../../app/actions/navigation';
-import { REGISTRATION_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
   show: jest.fn(),
   dismiss: jest.fn(),
+}));
+
+jest.mock('../../app/navigation', () => ({
+  navigate: jest.fn(),
+  goBack: jest.fn(),
 }));
 
 jest.mock('../../app/utils/url', () => ({
@@ -66,16 +69,6 @@ describe('registration saga', () => {
         );
       }));
 
-    it('should put a retrieve fields action when they are available', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }),
-          { fields: {}, pk: 2 }],
-      ])
-      .dispatch(registrationActions.register(1))
-      .put(registrationActions.retrieveFields(2))
-      .silentRun());
-
     it('should show a failure action when the request fails', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
@@ -120,15 +113,6 @@ describe('registration saga', () => {
       ])
       .dispatch(registrationActions.update(1, {}))
       .put(registrationActions.success())
-      .silentRun());
-
-    it('should navigate back on success', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
-      ])
-      .dispatch(registrationActions.update(1, {}))
-      .put(navigationActions.back())
       .silentRun());
 
     it('should show a snackbar on success', () => expectSaga(registrationSaga)
@@ -251,11 +235,6 @@ describe('registration saga', () => {
     it('should put a loading action', () => expectSaga(registrationSaga)
       .dispatch(registrationActions.retrieveFields(1))
       .put(registrationActions.loading())
-      .silentRun());
-
-    it('should navigate to the registration screen', () => expectSaga(registrationSaga)
-      .dispatch(registrationActions.retrieveFields(1))
-      .put(navigationActions.navigate(REGISTRATION_SCENE))
       .silentRun());
 
     it('should put showFields action when the request succeeds', () => expectSaga(registrationSaga)

@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  ImageBackground, Text, ViewPropTypes, StyleSheet, TouchableHighlight,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  ViewPropTypes,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { connect } from 'react-redux';
 
 import styles from './style/MemberView';
 import SquareView from './SquareView';
-import * as profileActions from '../../../actions/profile';
 
 const MemberView = props => (
   <SquareView style={props.style} size={props.size}>
     <TouchableHighlight
       style={styles.image}
-      onPress={() => props.loadProfile(props.token, props.member.pk)}
+      onPress={() => props.loadProfile(props.member.pk)}
     >
       <ImageBackground style={styles.image} source={{ uri: props.member.photo }}>
         <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
@@ -34,7 +36,6 @@ MemberView.propTypes = {
   }).isRequired,
   size: PropTypes.number.isRequired,
   style: ViewPropTypes.style,
-  token: PropTypes.string.isRequired,
   loadProfile: PropTypes.func.isRequired,
 };
 
@@ -45,12 +46,4 @@ MemberView.defaultProps = {
   style: defaultStyles,
 };
 
-const mapStateToProps = state => ({
-  token: state.session.token,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadProfile: (token, pk) => dispatch(profileActions.profile(token, pk)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MemberView);
+export default MemberView;

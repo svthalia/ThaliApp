@@ -24,8 +24,7 @@ Object {
 exports[`navigation actions should create an action to load a profile 1`] = `
 Object {
   "payload": Object {
-    "member": "me",
-    "token": "token",
+    "member": "token",
   },
   "type": "PROFILE_PROFILE",
 }
@@ -34,8 +33,7 @@ Object {
 exports[`navigation actions should create an action to load a profile 2`] = `
 Object {
   "payload": Object {
-    "member": 1,
-    "token": "abc123",
+    "member": "abc123",
   },
   "type": "PROFILE_PROFILE",
 }

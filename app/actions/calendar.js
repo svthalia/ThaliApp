@@ -1,7 +1,14 @@
+export const OPEN = 'CALENDAR_OPEN';
 export const REFRESH = 'CALENDAR_REFRESH';
 export const SUCCESS = 'CALENDAR_SUCCESS';
 export const FAILURE = 'CALENDAR_FAILURE';
 export const FETCHING = 'CALENDAR_FETCHING';
+
+export function open() {
+  return {
+    type: OPEN,
+  };
+}
 
 export function refresh() {
   return {

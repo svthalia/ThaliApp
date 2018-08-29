@@ -5,12 +5,14 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import profileSaga from '../../app/sagas/profile';
 import { apiRequest, tokenSelector } from '../../app/utils/url';
 import * as profileActions from '../../app/actions/profile';
-import * as navActions from '../../app/actions/navigation';
-import { PROFILE_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
   tokenSelector: () => 'token',
+}));
+
+jest.mock('../../app/navigation', () => ({
+  navigate: jest.fn(),
 }));
 
 describe('profile saga', () => {
@@ -21,9 +23,8 @@ describe('profile saga', () => {
       [select(tokenSelector), 'token'],
       [matchers.call.fn(apiRequest), []],
     ])
-    .dispatch(profileActions.profile('token', 1))
+    .dispatch(profileActions.profile(1))
     .put(profileActions.fetching())
-    .put(navActions.navigate(PROFILE_SCENE))
     .silentRun());
 
   it('should put success when the request succeeds', () => expectSaga(profileSaga)
@@ -31,7 +32,7 @@ describe('profile saga', () => {
       [select(tokenSelector), 'token'],
       [matchers.call.like({ fn: apiRequest, args: ['members/1'] }), 'data'],
     ])
-    .dispatch(profileActions.profile('token', 1))
+    .dispatch(profileActions.profile(1))
     .put(profileActions.success('data'))
     .silentRun());
 
@@ -40,7 +41,7 @@ describe('profile saga', () => {
       [select(tokenSelector), 'token'],
       [matchers.call.like({ fn: apiRequest, args: ['members/1'] }), throwError(error)],
     ])
-    .dispatch(profileActions.profile('token', 1))
+    .dispatch(profileActions.profile(1))
     .put(profileActions.failure())
     .silentRun());
 
@@ -48,7 +49,7 @@ describe('profile saga', () => {
     .provide([
       [select(tokenSelector), 'token'],
     ])
-    .dispatch(profileActions.profile('token', 1))
+    .dispatch(profileActions.profile(1))
     .silentRun()
     .then(() => {
       expect(apiRequest).toBeCalledWith('members/1', {
