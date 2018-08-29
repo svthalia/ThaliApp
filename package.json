@@ -7,6 +7,7 @@
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
     "start:android-dev": "react-native run-android --appId com.thaliapp.dev",
+    "menu:android": "adb shell input keyevent 82",
     "log:ios": "react-native log-ios",
     "log:android": "react-native log-android",
     "lint": "eslint *.js app --fix",
