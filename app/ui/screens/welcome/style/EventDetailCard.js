@@ -99,6 +99,9 @@ const styles = StyleSheet.create({
     width: 16,
     borderRadius: 8,
   },
+  indicatorMargin: {
+    marginRight: 32,
+  },
   registered: {
     backgroundColor: Colors.magenta,
   },
