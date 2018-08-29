@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   ImageBackground,
@@ -12,7 +11,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './style/MemberView';
 import SquareView from './SquareView';
-import * as profileActions from '../../../actions/profile';
 
 const MemberView = props => (
   <SquareView style={props.style} size={props.size}>
@@ -48,8 +46,4 @@ MemberView.defaultProps = {
   style: defaultStyles,
 };
 
-const mapDispatchToProps = dispatch => ({
-  loadProfile: pk => dispatch(profileActions.profile(pk)),
-});
-
-export default connect(() => ({}), mapDispatchToProps)(MemberView);
+export default MemberView;
