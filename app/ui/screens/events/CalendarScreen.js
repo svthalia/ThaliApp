@@ -6,7 +6,7 @@ import {
 import { translate } from 'react-i18next';
 import Moment from 'moment';
 import locale from 'react-native-locale-detector';
-import EventCard from './CalendarItem';
+import CalendarItem from './CalendarItemContainer';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
@@ -114,7 +114,7 @@ const renderItem = (item) => {
       </View>
       <View style={styles.eventList}>
         {events.map(
-          event => <EventCard event={event} key={`${event.pk}:${event.title}`} />,
+          event => <CalendarItem event={event} key={`${event.pk}:${event.title}`} />,
         )}
       </View>
     </View>
