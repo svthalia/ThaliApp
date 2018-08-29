@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
       marginRight: 16,
     },
   },
-  forgotpass: {
+  linkText: {
     alignSelf: 'center',
     color: Colors.darkGrey,
-    marginBottom: 10,
+    marginTop: 10,
     android: {
       fontFamily: 'sans-serif-medium',
     },
