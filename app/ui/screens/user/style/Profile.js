@@ -53,6 +53,15 @@ const styles = StyleSheet.create({
   italics: {
     fontStyle: 'italic',
   },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: Colors.magenta,
+    overflow: 'hidden',
+    elevation: 4,
+  },
   appBar: {
     backgroundColor: Colors.transparent,
     flex: 1,
