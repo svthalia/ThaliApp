@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   eventInfo: {
     padding: 8,
   },
-  title: {
+  eventTitle: {
     android: {
       fontFamily: 'sans-serif-medium',
     },
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 8,
   },
-  subtitle: {
+  eventSubtitle: {
     android: {
       fontFamily: 'sans-serif-medium',
     },
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     color: Colors.textColour,
     fontSize: 14,
   },
-  overview: {
+  overviewContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -69,11 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightRed,
     borderColor: Colors.darkRed,
   },
-  section: {
-    marginTop: 8,
-    marginBottom: 8,
-  },
-  header: {
+  overviewNoOrder: {
     android: {
       fontFamily: 'sans-serif-medium',
     },
@@ -83,22 +79,9 @@ const styles = StyleSheet.create({
     },
     color: Colors.textColour,
     fontSize: 14,
-    paddingLeft: 10,
+    paddingLeft: 8,
     paddingTop: 6,
     paddingBottom: 6,
-  },
-  card: {
-    backgroundColor: Colors.white,
-    elevation: 2,
-    android: {
-      borderRadius: 2,
-    },
-    ios: {
-      borderRadius: 4,
-      borderColor: Colors.lightGray,
-      borderStyle: 'solid',
-      borderWidth: 0.5,
-    },
   },
   orderStatusText: {
     android: {
@@ -139,10 +122,10 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingTop: 8,
     paddingBottom: 8,
-    android: {
-      borderBottomWidth: 1,
-      borderBottomColor: Colors.dividerGrey,
-    },
+  },
+  borderTop: {
+    borderTopWidth: 1,
+    borderTopColor: Colors.dividerGrey,
   },
   orderedPizzaContainer: {
     paddingTop: 16,

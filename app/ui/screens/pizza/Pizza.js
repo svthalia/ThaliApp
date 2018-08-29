@@ -13,6 +13,7 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import { retrievePizzaInfo, cancelOrder, orderPizza } from '../../../actions/pizza';
 import styles from './style/Pizza';
 import Colors from '../../style/Colors';
+import CardSection from '../../components/cardSection/CardSection';
 
 class Pizza extends Component {
   getProductFromList = (pk, pizzaList) => {
@@ -26,10 +27,10 @@ class Pizza extends Component {
 
   getEventInfo = (title, subtitle) => (
     <View style={styles.eventInfo}>
-      <Text style={styles.title}>
+      <Text style={styles.eventTitle}>
         {this.props.t('Order pizza for {{title}}', { title })}
       </Text>
-      <Text style={styles.subtitle}>
+      <Text style={styles.eventSubtitle}>
         {subtitle}
       </Text>
     </View>
@@ -40,7 +41,10 @@ class Pizza extends Component {
       const productInfo = this.getProductFromList(order.product, pizzaList);
       return (
         <View
-          style={[styles.overview, order.paid ? styles.greenBackground : styles.redBackground]}
+          style={[
+            styles.overviewContainer,
+            order.paid ? styles.greenBackground : styles.redBackground,
+          ]}
         >
           <Text
             style={styles.overviewText}
@@ -52,7 +56,7 @@ class Pizza extends Component {
       );
     }
     return (
-      <Text style={styles.header}>
+      <Text style={styles.overviewNoOrder}>
         {this.props.t('You did not place an order.')}
       </Text>
     );
@@ -63,96 +67,84 @@ class Pizza extends Component {
       const productInfo = this.getProductFromList(order.product, pizzaList);
 
       return (
-        <View style={styles.section}>
-          <Text style={styles.header}>
-Current order
-          </Text>
-          <View style={styles.card}>
-            <View
-              style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
-            >
-              <Text style={styles.orderStatusText}>
-                {order.paid && this.props.t('The order has been paid for.')}
-                {!order.paid && this.props.t('The order has not yet been paid for.')}
+        <CardSection sectionHeader={this.props.t('Current order')}>
+          <View
+            style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
+          >
+            <Text style={styles.orderStatusText}>
+              {order.paid && this.props.t('The order has been paid for.')}
+              {!order.paid && this.props.t('The order has not yet been paid for.')}
+            </Text>
+          </View>
+          <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
+            <View style={styles.pizzaInfo}>
+              <Text style={styles.pizzaName}>
+                {productInfo.name}
+              </Text>
+              <Text style={styles.pizzaDescription}>
+                {productInfo.description}
+              </Text>
+              <Text style={styles.pizzaPrice}>
+                €
+                {productInfo.price}
               </Text>
             </View>
-            <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
-              <View style={styles.pizzaInfo}>
-                <Text style={styles.pizzaName}>
-                  {productInfo.name}
-                </Text>
-                <Text style={styles.pizzaDescription}>
-                  {productInfo.description}
-                </Text>
-                <Text style={styles.pizzaPrice}>
-€
-                  {productInfo.price}
-                </Text>
-              </View>
-              {(!order.paid && !hasEnded) && (
-                <TouchableHighlight
-                  onPress={() => this.props.cancelOrder()}
-                  style={styles.button}
-                  underlayColor={Colors.darkMagenta}
-                >
-                  <Icon
-                    name="delete"
-                    color={Colors.white}
-                    size={18}
-                  />
-                </TouchableHighlight>
-              )}
-            </View>
+            {(!order.paid && !hasEnded) && (
+              <TouchableHighlight
+                onPress={() => this.props.cancelOrder()}
+                style={styles.button}
+                underlayColor={Colors.darkMagenta}
+              >
+                <Icon
+                  name="delete"
+                  color={Colors.white}
+                  size={18}
+                />
+              </TouchableHighlight>
+            )}
           </View>
-        </View>
+        </CardSection>
       );
     }
     return null;
   };
 
   getPizzaList = (pizzaList, hasOrder) => (
-    <View style={styles.section}>
-      {hasOrder && (
-        <Text style={styles.header}>
-          {this.props.t('Changing your order')}
-        </Text>
-      )}
-      <View style={[styles.card, styles.pizzaList]}>
-        {pizzaList.map(pizza => (
-          <View
-            key={pizza.pk}
-            style={styles.pizzaContainer}
-          >
-            <View style={styles.pizzaInfo}>
-              <Text style={styles.pizzaName}>
-                {pizza.name}
-              </Text>
-              <Text style={styles.pizzaDescription}>
-                {pizza.description}
-              </Text>
-              <Text style={styles.pizzaPrice}>
-€
-                {pizza.price}
-              </Text>
-            </View>
-            <TouchableHighlight
-              onPress={() => {
-                this.props.orderPizza(pizza.pk, hasOrder);
-                this.pizzaScroll.scrollTo({ x: 0, y: 0, animated: true });
-              }}
-              style={styles.button}
-              underlayColor={Colors.darkMagenta}
-            >
-              <Icon
-                name="add-shopping-cart"
-                color={Colors.white}
-                size={18}
-              />
-            </TouchableHighlight>
+    <CardSection sectionHeader={hasOrder ? this.props.t('Changing your order') : null} contentStyle={styles.pizzaList}>
+      {pizzaList.map((pizza, i) => (
+        <View
+          key={pizza.pk}
+          style={i === 0 ? styles.pizzaContainer : [styles.borderTop, styles.pizzaContainer]}
+        >
+          <View style={styles.pizzaInfo}>
+            <Text style={styles.pizzaName}>
+              {pizza.name}
+            </Text>
+            <Text style={styles.pizzaDescription}>
+              {pizza.description}
+            </Text>
+            <Text style={styles.pizzaPrice}>
+              €
+              {pizza.price}
+            </Text>
           </View>
-        ))}
-      </View>
-    </View>
+          <TouchableHighlight
+            onPress={() => {
+              this.props.orderPizza(pizza.pk, hasOrder);
+              this.pizzaScroll.scrollTo({ x: 0, y: 0, animated: true });
+            }}
+            style={styles.button}
+            underlayColor={Colors.darkMagenta}
+          >
+            <Icon
+              name="add-shopping-cart"
+              color={Colors.white}
+              size={18}
+            />
+          </TouchableHighlight>
+        </View>
+      ))}
+    </CardSection>
   );
 
   handleRefresh = () => {
