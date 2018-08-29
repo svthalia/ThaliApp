@@ -176,6 +176,7 @@ class PizzaScreen extends Component {
               onRefresh={this.handleRefresh}
             />
           )}
+          style={styles.scrollView}
           contentContainerStyle={styles.content}
         >
           <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
@@ -190,6 +191,7 @@ class PizzaScreen extends Component {
               onRefresh={this.handleRefresh}
             />
           )}
+          style={styles.scrollView}
           contentContainerStyle={styles.content}
         >
           <Text
@@ -226,6 +228,7 @@ class PizzaScreen extends Component {
           />
         )}
         ref={(ref) => { this.pizzaScroll = ref; }}
+        style={styles.scrollView}
       >
         <View style={styles.content}>
           {this.getEventInfo(subtitle)}

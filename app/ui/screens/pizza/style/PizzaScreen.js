@@ -2,6 +2,10 @@ import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
   content: {
     flex: 1,
     padding: 8,
