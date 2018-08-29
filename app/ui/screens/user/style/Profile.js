@@ -11,23 +11,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     flex: 1,
   },
-  card: {
-    backgroundColor: Colors.white,
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 10,
-    marginBottom: 10,
-    ios: {
-      borderRadius: 4,
-      borderColor: Colors.lightGray,
-      borderStyle: 'solid',
-      borderWidth: 0.5,
-    },
-    android: {
-      elevation: 2,
-      borderRadius: 2,
-    },
-  },
   profileText: {
     ios: {
       borderRadius: 4,
@@ -67,22 +50,6 @@ const styles = StyleSheet.create({
   url: {
     textDecorationLine: 'underline',
   },
-  sectionHeader: {
-    backgroundColor: Colors.background,
-    fontSize: 14,
-    color: Colors.textColour,
-    marginLeft: 18,
-    android: {
-      fontFamily: 'sans-serif-medium',
-    },
-    ios: {
-      fontFamily: 'System',
-      fontWeight: '600',
-    },
-  },
-  marginTop: {
-    marginTop: 10,
-  },
   italics: {
     fontStyle: 'italic',
   },
@@ -113,6 +80,8 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: HEADER_MAX_HEIGHT,
+    padding: 8,
+    paddingTop: 0,
   },
   icon: {
     fontSize: 24,

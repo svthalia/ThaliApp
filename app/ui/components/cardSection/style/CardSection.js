@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: Colors.white,
-    elevation: 2,
     android: {
+      elevation: 2,
       borderRadius: 2,
     },
     ios: {

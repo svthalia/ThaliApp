@@ -18,12 +18,12 @@ import { back } from '../../../actions/navigation';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
 import styles, { HEADER_MIN_HEIGHT, HEADER_MAX_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/Profile';
+import CardSection from '../../components/cardSection/CardSection';
 
-const getDescription = (profile, t) => ([
-  <Text style={[styles.sectionHeader, styles.marginTop]} key="title">
-    {`${t('About')} ${profile.display_name}`}
-  </Text>,
-  <View style={styles.card} key="content">
+const getDescription = (profile, t) => (
+  <CardSection
+    sectionHeader={`${t('About')} ${profile.display_name}`}
+  >
     <Text
       style={[
         styles.data,
@@ -33,8 +33,8 @@ const getDescription = (profile, t) => ([
     >
       {profile.profile_description || t('This member has not written a description yet.')}
     </Text>
-  </View>,
-]);
+  </CardSection>
+);
 
 const getPersonalInfo = (profile, t) => {
   const profileInfo = {
@@ -67,11 +67,8 @@ const getPersonalInfo = (profile, t) => {
   }).filter(n => n);
 
   if (profileData) {
-    return [
-      <Text style={styles.sectionHeader} key="title">
-        {t('Personal information')}
-      </Text>,
-      <View style={styles.card} key="content">
+    return (
+      <CardSection sectionHeader={t('Personal information')}>
         {profileData.map((item, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
             <Text style={styles.description}>
@@ -85,19 +82,18 @@ const getPersonalInfo = (profile, t) => {
             </Text>
           </View>
         ))}
-      </View>,
-    ];
+      </CardSection>
+    );
   }
   return <View />;
 };
 
 const getAchievements = (profile, t) => {
   if (profile.achievements.length) {
-    return [
-      <Text style={styles.sectionHeader} key="title">
-        {t('Achievements for Thalia')}
-      </Text>,
-      <View style={styles.card} key="content">
+    return (
+      <CardSection
+        sectionHeader={t('Achievements for Thalia')}
+      >
         {profile.achievements.map((achievement, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={achievement.name}>
             <Text style={styles.description}>
@@ -124,8 +120,8 @@ const getAchievements = (profile, t) => {
             })}
           </View>
         ))}
-      </View>,
-    ];
+      </CardSection>
+    );
   }
   return <View />;
 };
