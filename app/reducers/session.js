@@ -1,6 +1,6 @@
 import { defaultProfileImage } from '../utils/url';
 
-import * as loginActions from '../actions/login';
+import * as sessionActions from '../actions/session';
 
 const initialState = {
   token: '',
@@ -11,20 +11,20 @@ const initialState = {
 
 export default function session(state = initialState, action = {}) {
   switch (action.type) {
-    case loginActions.SUCCESS:
+    case sessionActions.SUCCESS:
       return {
         ...state,
         username: action.payload.username,
         token: action.payload.token,
       };
-    case loginActions.PROFILE_SUCCESS:
+    case sessionActions.PROFILE_SUCCESS:
       return {
         ...state,
         displayName: action.payload.displayName,
         photo: action.payload.photo,
       };
-    case loginActions.TOKEN_INVALID:
-    case loginActions.LOGOUT:
+    case sessionActions.TOKEN_INVALID:
+    case sessionActions.LOGOUT:
       return initialState;
     default:
       return state;

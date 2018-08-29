@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { url } from '../../../utils/url';
 
-import * as actions from '../../../actions/login';
+import * as actions from '../../../actions/session';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 import Button from '../../components/button/Button';
 import styles from './style/Login';

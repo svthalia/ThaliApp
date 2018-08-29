@@ -8,6 +8,7 @@ import registrationSaga, { eventSelector } from '../../app/sagas/registration';
 import { apiRequest, tokenSelector } from '../../app/utils/url';
 import * as eventActions from '../../app/actions/event';
 import * as navigationActions from '../../app/actions/navigation';
+import { REGISTRATION_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
@@ -61,19 +62,19 @@ describe('registration saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Registration successful!' });
+          { title: 'Registration successful!' },
+        );
       }));
 
-    it('should put a retrieve fields action when they are available', () =>
-      expectSaga(registrationSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }),
-            { fields: {}, pk: 2 }],
-        ])
-        .dispatch(registrationActions.register(1))
-        .put(registrationActions.retrieveFields(2))
-        .silentRun());
+    it('should put a retrieve fields action when they are available', () => expectSaga(registrationSaga)
+      .provide([
+        [select(tokenSelector), 'token'],
+        [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }),
+          { fields: {}, pk: 2 }],
+      ])
+      .dispatch(registrationActions.register(1))
+      .put(registrationActions.retrieveFields(2))
+      .silentRun());
 
     it('should show a failure action when the request fails', () => expectSaga(registrationSaga)
       .provide([
@@ -139,7 +140,8 @@ describe('registration saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Successfully updated registration' });
+          { title: 'Successfully updated registration' },
+        );
       }));
 
     it('should put failure action when the request fails', () => expectSaga(registrationSaga)
@@ -152,22 +154,22 @@ describe('registration saga', () => {
       .silentRun());
 
     it('should do a PUT request with fields', () => expectSaga(registrationSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-        ])
-        .dispatch(registrationActions.update(2, { key: 'value' }))
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith('registrations/2', {
-            body: '{"fields[key]":"value"}',
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token token',
-              'Content-Type': 'application/json',
-            },
-            method: 'PUT',
-          });
-        }));
+      .provide([
+        [select(tokenSelector), 'token'],
+      ])
+      .dispatch(registrationActions.update(2, { key: 'value' }))
+      .silentRun()
+      .then(() => {
+        expect(apiRequest).toBeCalledWith('registrations/2', {
+          body: '{"fields[key]":"value"}',
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Token token',
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT',
+        });
+      }));
   });
 
   describe('cancelling', () => {
@@ -191,7 +193,8 @@ describe('registration saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Successfully cancelled registration' });
+          { title: 'Successfully cancelled registration' },
+        );
       }));
 
     it('should put event action when the request succeeds', () => expectSaga(registrationSaga)
@@ -252,7 +255,7 @@ describe('registration saga', () => {
 
     it('should navigate to the registration screen', () => expectSaga(registrationSaga)
       .dispatch(registrationActions.retrieveFields(1))
-      .put(navigationActions.navigate('registration'))
+      .put(navigationActions.navigate(REGISTRATION_SCENE))
       .silentRun());
 
     it('should put showFields action when the request succeeds', () => expectSaga(registrationSaga)

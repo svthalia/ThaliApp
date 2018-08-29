@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Linking, Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
@@ -14,25 +14,13 @@ import reducers from './reducers';
 import i18n from './utils/i18n';
 import sagas from './sagas';
 import ReduxNavigator from './ui/components/navigator/ReduxNavigator';
-import * as loginActions from './actions/login';
+import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(sagas);
-
-const USERNAMEKEY = '@MyStore:username';
-const TOKENKEY = '@MyStore:token';
-const DISPLAYNAMEKEY = '@MyStore:displayName';
-const PHOTOKEY = '@MyStore:photo';
-const PUSHCATEGORYKEY = '@MyStore:pushCategories';
-
-const pairsToObject = (obj, pair) => {
-  const obj2 = { ...obj };
-  obj2[pair[0]] = pair[1];
-  return obj2;
-};
 
 FCM.on(FCMEvent.Notification, async (notif) => {
   if (notif.fcm) {
@@ -63,25 +51,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.multiGet([USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY])
-      .then(
-        (result) => {
-          const values = result.reduce(pairsToObject, {});
-          const username = values[USERNAMEKEY];
-          const token = values[TOKENKEY];
-          const displayName = values[DISPLAYNAMEKEY];
-          const photo = values[PHOTOKEY];
-          const pushCategories = JSON.parse(values[PUSHCATEGORYKEY]);
-
-          if (username !== null && token !== null) {
-            store.dispatch(loginActions.success(username, token));
-            store.dispatch(loginActions.profileSuccess(displayName, photo));
-            store.dispatch(loginActions.profile(token));
-            store.dispatch(register(pushCategories));
-          }
-        },
-      );
-
+    store.dispatch(sessionActions.init());
     this.addDeepLinkingHandler();
   }
 

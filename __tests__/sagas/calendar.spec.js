@@ -8,6 +8,7 @@ import calendarSaga from '../../app/sagas/calendar';
 
 import * as calendarActions from '../../app/actions/calendar';
 import * as navActions from '../../app/actions/navigation';
+import { EVENT_LIST_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
@@ -31,7 +32,7 @@ describe('calendar saga', () => {
       [select(tokenSelector), 'token'],
       [matchers.call.fn(apiRequest), []],
     ])
-    .dispatch(navActions.navigate('eventList'))
+    .dispatch(navActions.navigate(EVENT_LIST_SCENE))
     .put(calendarActions.fetching())
     .silentRun());
 

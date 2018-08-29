@@ -4,12 +4,13 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
 import * as navActions from '../actions/navigation';
+import { PROFILE_SCENE } from '../ui/components/navigator/scenes';
 
 const profile = function* profile(action) {
   const { token, member } = action.payload;
 
   yield put(profileActions.fetching());
-  yield put(navActions.navigate('profile'));
+  yield put(navActions.navigate(PROFILE_SCENE));
 
   const data = {
     method: 'GET',

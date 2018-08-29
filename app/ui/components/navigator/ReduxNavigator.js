@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, StatusBar, BackHandler } from 'react-native';
+import { BackHandler, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Drawer from 'react-native-drawer';
-import Login from '../../screens/user/Login';
 import Welcome from '../../screens/welcome/Welcome';
 import Sidebar from './Sidebar';
 
@@ -16,28 +15,46 @@ import StandardHeader from '../standardHeader/StandardHeader';
 import Registration from '../../screens/events/Registration';
 import MemberList from '../../screens/memberList/MemberList';
 import Settings from '../../screens/settings/Settings';
+import SplashScreen from '../../screens/splash/SplashScreen';
 
 import * as actions from '../../../actions/navigation';
 import styles from './style/ReduxNavigator';
 import Colors from '../../style/Colors';
+import {
+  EVENT_LIST_SCENE,
+  EVENT_SCENE,
+  MEMBERS_SCENE,
+  PIZZA_SCENE,
+  PROFILE_SCENE,
+  REGISTRATION_SCENE,
+  SETTINGS_SCENE,
+  SPLASH_SCENE,
+  WELCOME_SCENE,
+  LOGIN_SCENE,
+} from './scenes';
+import Login from '../../screens/user/Login';
 
 const sceneToComponent = (scene) => {
   switch (scene) {
-    case 'welcome':
+    case SPLASH_SCENE:
+      return <SplashScreen />;
+    case LOGIN_SCENE:
+      return <Login />;
+    case WELCOME_SCENE:
       return <Welcome />;
-    case 'event':
+    case EVENT_SCENE:
       return <Event />;
-    case 'eventList':
+    case EVENT_LIST_SCENE:
       return <Calendar />;
-    case 'profile':
+    case PROFILE_SCENE:
       return <Profile />;
-    case 'pizza':
+    case PIZZA_SCENE:
       return <Pizza />;
-    case 'registration':
+    case REGISTRATION_SCENE:
       return <Registration />;
-    case 'members':
+    case MEMBERS_SCENE:
       return <MemberList />;
-    case 'settings':
+    case SETTINGS_SCENE:
       return <Settings />;
     default:
       return <Welcome />;
@@ -99,7 +116,7 @@ const ReduxNavigator = (props) => {
           animated
         />
       </View>
-      <Login />
+      {sceneToComponent(currentScene)}
     </View>);
 };
 
@@ -123,7 +140,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateDrawer: isOpen => dispatch(actions.updateDrawer(isOpen)),
   back: () => dispatch(actions.back()),
-  navigateToWelcome: () => dispatch(actions.navigate('welcome', true)),
+  navigateToWelcome: () => dispatch(actions.navigate(WELCOME_SCENE, true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(translate('components/navigator/ReduxNavigator')(ReduxNavigator));

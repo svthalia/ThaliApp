@@ -5,9 +5,11 @@ import Snackbar from 'react-native-snackbar';
 import { AsyncStorage } from 'react-native';
 import { Sentry } from 'react-native-sentry';
 
-import loginSaga, { DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY } from '../../app/sagas/login';
+import sessionSaga, {
+  DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY
+} from '../../app/sagas/session';
 import { apiRequest } from '../../app/utils/url';
-import * as loginActions from '../../app/actions/login';
+import * as sessionActions from '../../app/actions/session';
 import * as pushNotificationsActions from '../../app/actions/pushNotifications';
 
 jest.mock('react-native-snackbar', () => ({
@@ -35,48 +37,49 @@ jest.mock('react-native-sentry', () => ({
   },
 }));
 
-describe('login saga', () => {
+describe('session saga', () => {
   const error = new Error('error');
 
   describe('logging in', () => {
-    it('should show a snackbar on start', () => expectSaga(loginSaga)
-      .dispatch(loginActions.login('username', 'password'))
+    it('should show a snackbar on start', () => expectSaga(sessionSaga)
+      .dispatch(sessionActions.login('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Logging in', duration: Snackbar.LENGTH_INDEFINITE });
+          { title: 'Logging in', duration: Snackbar.LENGTH_INDEFINITE },
+        );
       }));
 
-    it('should put the result data when the request succeeds', () => expectSaga(loginSaga)
+    it('should put the result data when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
-      .put(loginActions.success('username', 'abc123'))
-      .put(loginActions.profile('abc123'))
-      .dispatch(loginActions.login('username', 'password'))
+      .put(sessionActions.success('username', 'abc123'))
+      .put(sessionActions.profile('abc123'))
+      .dispatch(sessionActions.login('username', 'password'))
       .silentRun());
 
-    it('should show a snackbar when the request succeeds', () => expectSaga(loginSaga)
+    it('should show a snackbar when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
-      .dispatch(loginActions.login('username', 'password'))
+      .dispatch(sessionActions.login('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.dismiss).toBeCalled();
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Login successful' });
+          { title: 'Login successful' },
+        );
       }));
 
-    it('should save the token in the AsyncStorage when the request succeeds', () =>
-      expectSaga(loginSaga)
+    it('should save the token in the AsyncStorage when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
         [matchers.call.like({ fn: Sentry.setUserContext }), {}],
       ])
-      .dispatch(loginActions.login('username', 'password'))
+      .dispatch(sessionActions.login('username', 'password'))
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiSet).toBeCalledWith([
@@ -85,20 +88,21 @@ describe('login saga', () => {
         ]);
       }));
 
-    it('should show a snackbar when the request fails', () => expectSaga(loginSaga)
+    it('should show a snackbar when the request fails', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
-      .dispatch(loginActions.login('username', 'password'))
+      .dispatch(sessionActions.login('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.dismiss).toBeCalled();
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Login failed' });
+          { title: 'Login failed' },
+        );
       }));
 
-    it('should do a POST request', () => expectSaga(loginSaga)
-      .dispatch(loginActions.login('username', 'password'))
+    it('should do a POST request', () => expectSaga(sessionSaga)
+      .dispatch(sessionActions.login('username', 'password'))
       .silentRun()
       .then(() => {
         expect(apiRequest).toBeCalledWith('token-auth', {
@@ -113,29 +117,30 @@ describe('login saga', () => {
   });
 
   describe('logging out', () => {
-    it('should remove the token from the AsyncStorage', () => expectSaga(loginSaga)
-      .dispatch(loginActions.logout())
+    it('should remove the token from the AsyncStorage', () => expectSaga(sessionSaga)
+      .dispatch(sessionActions.logout())
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiRemove).toBeCalledWith([USERNAMEKEY, TOKENKEY]);
       }));
 
-    it('should put a push notification invalidation action', () => expectSaga(loginSaga)
+    it('should put a push notification invalidation action', () => expectSaga(sessionSaga)
       .put(pushNotificationsActions.invalidate())
-      .dispatch(loginActions.logout())
+      .dispatch(sessionActions.logout())
       .silentRun());
 
-    it('should remove the token from the AsyncStorage', () => expectSaga(loginSaga)
-      .dispatch(loginActions.logout())
+    it('should remove the token from the AsyncStorage', () => expectSaga(sessionSaga)
+      .dispatch(sessionActions.logout())
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Logout successful' });
+          { title: 'Logout successful' },
+        );
       }));
   });
 
   describe('getting profile', () => {
-    it('should put the result data when the request succeeds', () => expectSaga(loginSaga)
+    it('should put the result data when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['members/me'] }), {
           display_name: 'Johnny Test',
@@ -144,11 +149,11 @@ describe('login saga', () => {
           },
         }],
       ])
-      .put(loginActions.profileSuccess('Johnny Test', 'http://example.org/photo.png'))
-      .dispatch(loginActions.profile('abc123'))
+      .put(sessionActions.profileSuccess('Johnny Test', 'http://example.org/photo.png'))
+      .dispatch(sessionActions.profile('abc123'))
       .silentRun());
 
-    it('should save the token in the AsyncStorage when the request succeeds', () => expectSaga(loginSaga)
+    it('should save the token in the AsyncStorage when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['members/me'] }), {
           display_name: 'Johnny Test',
@@ -157,7 +162,7 @@ describe('login saga', () => {
           },
         }],
       ])
-      .dispatch(loginActions.profile('abc123'))
+      .dispatch(sessionActions.profile('abc123'))
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiSet).toBeCalledWith([
@@ -166,15 +171,15 @@ describe('login saga', () => {
         ]);
       }));
 
-    it('should not care about errors', () => expectSaga(loginSaga)
+    it('should not care about errors', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
-      .dispatch(loginActions.profile('token'))
+      .dispatch(sessionActions.profile('token'))
       .silentRun());
 
-    it('should do a GET request', () => expectSaga(loginSaga)
-      .dispatch(loginActions.profile('abc123'))
+    it('should do a GET request', () => expectSaga(sessionSaga)
+      .dispatch(sessionActions.profile('abc123'))
       .silentRun()
       .then(() => {
         expect(apiRequest).toBeCalledWith('members/me', {

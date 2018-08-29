@@ -1,9 +1,10 @@
-export const LOGIN = 'LOGIN_LOGIN';
-export const SUCCESS = 'LOGIN_SUCCESS';
-export const LOGOUT = 'LOGIN_LOGOUT';
-export const TOKEN_INVALID = 'LOGIN_TOKEN_INVALID';
-export const PROFILE = 'LOGIN_PROFILE';
-export const PROFILE_SUCCESS = 'LOGIN_PROFILE_SUCCESS';
+export const LOGIN = 'SESSION_LOGIN';
+export const INIT = 'SESSION_INIT';
+export const SUCCESS = 'SESSION_SUCCESS';
+export const LOGOUT = 'SESSION_LOGOUT';
+export const TOKEN_INVALID = 'SESSION_TOKEN_INVALID';
+export const PROFILE = 'SESSION_PROFILE';
+export const PROFILE_SUCCESS = 'SESSION_PROFILE_SUCCESS';
 
 export function success(username, token) {
   return { type: SUCCESS, payload: { username, token } };
@@ -11,6 +12,10 @@ export function success(username, token) {
 
 export function login(user, pass) {
   return { type: LOGIN, payload: { user, pass } };
+}
+
+export function init() {
+  return { type: INIT };
 }
 
 export function logout() {

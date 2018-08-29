@@ -6,13 +6,14 @@ import { Sentry } from 'react-native-sentry';
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as eventActions from '../actions/event';
 import * as navActions from '../actions/navigation';
+import { EVENT_SCENE } from '../ui/components/navigator/scenes';
 
 const event = function* event(action) {
   const { pk } = action.payload;
   const token = yield select(tokenSelector);
 
   yield put(eventActions.fetching());
-  yield put(navActions.navigate('event'));
+  yield put(navActions.navigate(EVENT_SCENE));
 
   const data = {
     method: 'GET',

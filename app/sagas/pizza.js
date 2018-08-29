@@ -6,6 +6,7 @@ import { apiRequest, tokenSelector } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
 import * as navigationActions from '../actions/navigation';
+import { PIZZA_SCENE } from '../ui/components/navigator/scenes';
 
 const NOT_FOUND = 404;
 
@@ -13,7 +14,7 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
   const token = yield select(tokenSelector);
 
   yield put(pizzaActions.fetching());
-  yield put(navigationActions.navigate('pizza'));
+  yield put(navigationActions.navigate(PIZZA_SCENE));
 
   const data = {
     method: 'GET',

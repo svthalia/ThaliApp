@@ -6,6 +6,7 @@ import { apiRequest, tokenSelector } from '../../app/utils/url';
 import pizzaSaga from '../../app/sagas/pizza';
 import * as pizzaActions from '../../app/actions/pizza';
 import * as navigationActions from '../../app/actions/navigation';
+import { PIZZA_SCENE } from '../../app/ui/components/navigator/scenes';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
@@ -28,7 +29,7 @@ describe('pizza saga', () => {
       ])
       .dispatch(pizzaActions.retrievePizzaInfo())
       .put(pizzaActions.fetching())
-      .put(navigationActions.navigate('pizza'))
+      .put(navigationActions.navigate(PIZZA_SCENE))
       .silentRun());
 
     describe('failures', () => {
