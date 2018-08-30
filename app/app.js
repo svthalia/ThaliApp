@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Linking, Platform, NativeModules } from 'react-native';
+import {
+  Linking, Platform, NativeModules, Alert,
+} from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
-import FCM, { FCMEvent } from 'react-native-fcm';
+import firebase from 'react-native-firebase';
 import locale from 'react-native-locale-detector';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -29,24 +31,6 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(sagas);
 
-FCM.on(FCMEvent.Notification, async (notif) => {
-  if (notif.fcm) {
-    FCM.presentLocalNotification({
-      title: notif.fcm.title,
-      body: notif.fcm.body,
-      color: notif.fcm.color,
-      icon: notif.fcm.icon === null ? 'ic_notification' : notif.fcm.icon,
-      action: notif.fcm.action,
-      tag: notif.fcm.tag,
-      show_in_foreground: true,
-    });
-  }
-});
-
-FCM.on(FCMEvent.RefreshToken, async () => {
-  store.dispatch(register());
-});
-
 class Main extends Component {
   constructor() {
     super();
@@ -60,9 +44,19 @@ class Main extends Component {
   componentDidMount() {
     store.dispatch(sessionActions.init());
     this.addDeepLinkingHandler();
+    this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(() => {
+      store.dispatch(register());
+    });
+    this.notificationListener = firebase.notifications().onNotification((notification) => {
+      Alert.alert(notification.title, notification.body, [
+        { text: 'OK' },
+      ]);
+    });
   }
 
   componentWillUnmount() {
+    this.notificationListener();
+    this.onTokenRefreshListener();
     Linking.removeEventListener('url', this.handleOpenURL);
   }
 
