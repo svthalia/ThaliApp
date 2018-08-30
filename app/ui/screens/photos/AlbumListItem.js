@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Moment from 'moment/moment';
-import PhotoView from './PhotoView';
+import PhotoListItem from './PhotoListItem';
 import styles from './style/AlbumListItem';
 import SquareView from '../../components/memberView/SquareView';
 
@@ -52,7 +52,7 @@ AlbumListItem.propTypes = {
     shareable: PropTypes.bool.isRequired,
     accessible: PropTypes.bool.isRequired,
     hidden: PropTypes.bool.isRequired,
-    cover: PropTypes.shape(PhotoView.propTypes.photo),
+    cover: PropTypes.shape(PhotoListItem.propTypes.photo),
   }).isRequired,
   openAlbum: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,

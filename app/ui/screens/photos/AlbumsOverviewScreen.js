@@ -5,7 +5,7 @@ import { STATUS_FAILURE, STATUS_INITIAL } from '../../../reducers/photos';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import AlbumListItem from './AlbumListItem';
-import styles from './style/AlbumsOverview';
+import styles from './style/AlbumsOverviewScreen';
 import AlbumListItemContainer from './AlbumListItemContainer';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 

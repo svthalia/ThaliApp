@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PhotoView from '../../../../app/ui/screens/photos/PhotoView';
+import PhotoListItem from '../../../../app/ui/screens/photos/PhotoListItem';
 
 describe('PhotoView component', () => {
   const photo = {
@@ -17,7 +17,7 @@ describe('PhotoView component', () => {
 
   it('renders correctly', () => {
     const tree = renderer
-      .create(<PhotoView onPress={() => {}} photo={photo} size={20} token="token" />)
+      .create(<PhotoListItem onPress={() => {}} photo={photo} size={20} token="token" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

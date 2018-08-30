@@ -39,7 +39,4 @@ export default StyleSheet.create({
     marginRight: 8,
     marginBottom: 8,
   },
-  gallery: {
-    flex: 1,
-  },
 });

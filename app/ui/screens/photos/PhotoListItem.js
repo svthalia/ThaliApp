@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, TouchableHighlight, ViewPropTypes } from 'react-native';
 import SquareView from '../../components/memberView/SquareView';
-import styles from './style/PhotoView';
+import styles from './style/PhotoListItem';
 
-const PhotoView = props => (
+const PhotoListItem = props => (
   <TouchableHighlight
     style={styles.touchable}
     onPress={() => props.onPress()}
@@ -17,13 +17,20 @@ const PhotoView = props => (
             Authorization: `Token ${props.token}`,
           },
         }}
-        style={[styles.image, { width: props.size, height: props.size }]}
+        style={[
+          styles.image,
+          {
+            width: props.size,
+            height: props.size,
+            transform: [{ rotate: `${props.photo.rotation}deg` }],
+          },
+        ]}
       />
     </SquareView>
   </TouchableHighlight>
 );
 
-PhotoView.propTypes = {
+PhotoListItem.propTypes = {
   size: PropTypes.number.isRequired,
   style: ViewPropTypes.style,
   photo: PropTypes.shape({
@@ -43,8 +50,8 @@ PhotoView.propTypes = {
   onPress: PropTypes.func.isRequired,
 };
 
-PhotoView.defaultProps = {
+PhotoListItem.defaultProps = {
   style: {},
 };
 
-export default PhotoView;
+export default PhotoListItem;
