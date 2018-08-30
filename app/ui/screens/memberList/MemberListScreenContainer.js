@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadMembers: (keywords = null) => dispatch(memberActions.members(keywords)),
+  loadMembers: (keywords = '') => dispatch(memberActions.members(keywords)),
   loadMoreMembers: url => dispatch(memberActions.more(url)),
 });
 
