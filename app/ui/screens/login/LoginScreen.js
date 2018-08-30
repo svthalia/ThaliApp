@@ -74,8 +74,11 @@ class LoginScreen extends Component {
           textStyle={styles.loginButtonText}
           underlayColor={Colors.white}
         />
-        <Text style={styles.forgotpass} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
+        <Text style={styles.linkText} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
           {t('Forgot password?')}
+        </Text>
+        <Text style={styles.linkText} onPress={() => Linking.openURL(`${url}/registration/`)}>
+          {t('Become a member')}
         </Text>
       </View>
     );
