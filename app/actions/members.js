@@ -5,7 +5,7 @@ export const FAILURE = 'MEMBERS_FAILURE';
 export const MORE = 'MEMBERS_MORE';
 export const MORE_SUCCESS = 'MEMBERS_MORE_SUCCESS';
 
-export function members(keywords = null) {
+export function members(keywords = '') {
   return {
     type: MEMBERS,
     payload: { keywords },
