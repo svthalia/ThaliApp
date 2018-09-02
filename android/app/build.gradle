@@ -108,8 +108,8 @@ android {
         applicationId "com.thaliapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 423
-        versionName "2.3.2"
+        versionCode 425
+        versionName "2.4.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
