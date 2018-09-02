@@ -54,18 +54,22 @@ const StandardHeader = props => (
       <Text style={styles.title}>
         {sceneToTitle(props.navigation.state.routeName, props.t)}
       </Text>
-      <View style={styles.rightView} />
+      <View style={styles.rightView}>
+        {props.rightView}
+      </View>
     </View>
   </View>
 );
 
 StandardHeader.propTypes = {
   menu: PropTypes.bool,
+  rightView: PropTypes.element,
   t: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 StandardHeader.defaultProps = {
+  rightView: null,
   menu: false,
 };
 

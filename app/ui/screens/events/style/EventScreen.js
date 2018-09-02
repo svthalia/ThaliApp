@@ -6,6 +6,9 @@ const windowWidth = Dimensions.get('window').width;
 export const memberSize = (windowWidth - 64) / 3;
 
 const styles = StyleSheet.create({
+  rootWrapper: {
+    flex: 1,
+  },
   eventView: {
     padding: 16,
     backgroundColor: Colors.background,
@@ -103,6 +106,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 24.0,
     color: Colors.black,
+  },
+  shareIcon: {
+    android: {
+      paddingLeft: 32,
+      paddingRight: 20,
+    },
+    ios: {
+      paddingLeft: 16,
+      paddingRight: 10,
+    },
+    color: Colors.white,
   },
   registrationsTitle: {
     android: {

@@ -9,21 +9,24 @@ import {
   ScrollView,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
 import HTML from 'react-native-render-html';
+import Share from 'react-native-share';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles, { memberSize } from './style/EventScreen';
 import MemberView from '../../components/memberView/MemberViewContainer';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import Colors from '../../style/Colors';
 
-import { termsAndConditionsUrl } from '../../../utils/url';
+import { termsAndConditionsUrl, url as serverUrl } from '../../../utils/url';
 import Button from '../../components/button/Button';
-import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
+import StandardHeader from '../../components/standardHeader/StandardHeader';
 
 class EventScreen extends Component {
   cancelPrompt = (pk) => {
@@ -352,8 +355,29 @@ Pizza:
     const {
       status, loading, openMaps, data, t,
     } = this.props;
+
+    const shareButton = (
+      <TouchableOpacity
+        onPress={() => Share.open({
+          message: this.props.data.title,
+          url: `${serverUrl}/events/${this.props.data.pk}/`,
+        })}
+      >
+        <Icon
+          name="share"
+          style={styles.shareIcon}
+          size={24}
+        />
+      </TouchableOpacity>
+    );
+
     if (status === 'initial') {
-      return <LoadingScreen />;
+      return (
+        <View style={styles.rootWrapper}>
+          <StandardHeader />
+          <LoadingScreen />
+        </View>
+      );
     }
 
     const fontStyles = {
@@ -368,9 +392,53 @@ Pizza:
 
     if (status === 'success') {
       return (
+        <View style={styles.rootWrapper}>
+          <StandardHeader rightView={shareButton} />
+          <ScrollView
+            backgroundColor={Colors.background}
+            contentContainerStyle={styles.eventView}
+            refreshControl={(
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={this.handleRefresh}
+              />
+            )}
+          >
+            <TouchableHighlight
+              onPress={() => openMaps(data.map_location)}
+              style={styles.locationImageWrapper}
+            >
+              <Image
+                style={styles.locationImage}
+                source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${data.map_location}&zoom=13&size=450x250&markers=${data.map_location}` }}
+              />
+            </TouchableHighlight>
+            <Text style={styles.titleText}>
+              {data.title}
+            </Text>
+            {this.eventDesc()}
+            {this.eventActions()}
+            {this.eventInfo()}
+            <View style={styles.divider} />
+            <HTML
+              html={data.description}
+              onLinkPress={(event, href) => Linking.openURL(href)}
+              baseFontStyle={fontStyles}
+              tagsStyles={{
+                a: linkStyles,
+              }}
+            />
+            {this.registrationsGrid()}
+          </ScrollView>
+        </View>
+      );
+    }
+    return (
+      <View style={styles.rootWrapper}>
+        <StandardHeader />
         <ScrollView
           backgroundColor={Colors.background}
-          contentContainerStyle={styles.eventView}
+          contentContainerStyle={styles.flex}
           refreshControl={(
             <RefreshControl
               refreshing={loading}
@@ -378,47 +446,9 @@ Pizza:
             />
           )}
         >
-          <TouchableHighlight
-            onPress={() => openMaps(data.map_location)}
-            style={styles.locationImageWrapper}
-          >
-            <Image
-              style={styles.locationImage}
-              source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${data.map_location}&zoom=13&size=450x250&markers=${data.map_location}` }}
-            />
-          </TouchableHighlight>
-          <Text style={styles.titleText}>
-            {data.title}
-          </Text>
-          {this.eventDesc()}
-          {this.eventActions()}
-          {this.eventInfo()}
-          <View style={styles.divider} />
-          <HTML
-            html={data.description}
-            onLinkPress={(event, href) => Linking.openURL(href)}
-            baseFontStyle={fontStyles}
-            tagsStyles={{
-              a: linkStyles,
-            }}
-          />
-          {this.registrationsGrid()}
+          <ErrorScreen message={t('Could not load the event...')} />
         </ScrollView>
-      );
-    }
-    return (
-      <ScrollView
-        backgroundColor={Colors.background}
-        contentContainerStyle={styles.flex}
-        refreshControl={(
-          <RefreshControl
-            refreshing={loading}
-            onRefresh={this.handleRefresh}
-          />
-        )}
-      >
-        <ErrorScreen message={t('Could not load the event...')} />
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -474,4 +504,4 @@ EventScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/Event')(withStandardHeader(EventScreen));
+export default translate('screens/events/Event')(EventScreen);
