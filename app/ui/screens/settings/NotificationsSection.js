@@ -68,6 +68,7 @@ class NotificationsSection extends Component {
             thumbTintColor={this.state[category.key]
               ? Colors.darkMagenta : Colors.gray}
             disabled={category.key === GENERAL_KEY}
+            style={styles.settingsSwitch}
           />
         </View>
       ));

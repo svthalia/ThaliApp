@@ -40,6 +40,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* ThaliAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ThaliAppTests.m */; };
 		307D8943B1734FD58BC954BD /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F808FC5B0C6A43748E179BF6 /* Entypo.ttf */; };
 		31DB89BD6ABB7E6C0D4D89C8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D663FC8A08D100CAC7FAD4C5 /* AssetsLibrary.framework */; };
+		3231E953213C0CDE004AADDF /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3235464D1FEBF67100283B3E /* libRNI18n.a */; };
 		325E07382108B21800195242 /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321550702108B1DC005FCAF5 /* libRNSentry.a */; };
 		32D3E4CE1ED98F33004F54F8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D3E4871ED98796004F54F8 /* libBVLinearGradient.a */; };
 		32D3E4CF1ED98F37004F54F8 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D3E4A51ED98796004F54F8 /* libRNVectorIcons.a */; };
@@ -487,6 +488,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3231E953213C0CDE004AADDF /* libRNI18n.a in Frameworks */,
 				325E07382108B21800195242 /* libRNSentry.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
