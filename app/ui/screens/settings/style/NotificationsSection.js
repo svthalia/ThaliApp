@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 16,
+    ios: {
+      paddingTop: 12,
+      paddingBottom: 12,
+    },
   },
   borderTop: {
     borderTopColor: Colors.dividerGrey,
@@ -28,6 +32,11 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     padding: 16,
+  },
+  settingsSwitch: {
+    ios: {
+      transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }],
+    },
   },
 });
 
