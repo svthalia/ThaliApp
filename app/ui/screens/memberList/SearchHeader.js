@@ -66,6 +66,7 @@ class SearchHeader extends Component {
         placeholder={searchText}
         onChangeText={this.updateSearchKey}
         value={searchKey}
+        autoFocus
       />
     ) : (
       <Text style={styles.title}>
