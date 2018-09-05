@@ -79,7 +79,6 @@ exports[`StandardHeader component renders correctly 1`] = `
     <View
       style={
         Object {
-          "height": 0,
           "width": 50,
         }
       }

@@ -65,7 +65,10 @@ const styles = StyleSheet.create({
   rightView: {
     ios: {
       width: 24 + 16 + 10,
-      height: 0,
+    },
+    android: {
+      position: 'absolute',
+      right: 0,
     },
   },
 });

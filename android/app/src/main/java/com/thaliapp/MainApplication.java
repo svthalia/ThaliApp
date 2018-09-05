@@ -3,6 +3,8 @@ package com.thaliapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import cl.json.ShareApplication;
+import cl.json.RNSharePackage;
 
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
@@ -21,7 +23,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ShareApplication, ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -33,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
             new MainReactPackage(),
+            new RNSharePackage(),
             new RNSentryPackage(),
             new SnackbarPackage(),
             new ReactNativeI18n(),
@@ -54,6 +57,11 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
+  }
+
+  @Override
+  public String getFileProviderAuthority() {
+    return "com.thaliapp.provider";
   }
 
   @Override
