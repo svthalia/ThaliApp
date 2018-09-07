@@ -3,8 +3,9 @@ import {
 } from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
+import { tokenSelector } from '../selectors/session';
 
 const profile = function* profile(action) {
   const { member } = action.payload;

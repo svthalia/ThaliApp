@@ -1,7 +1,8 @@
 import {
   put, take, takeEvery, select,
 } from 'redux-saga/effects';
-import { url as siteURL, loggedInSelector } from '../utils/url';
+import { url as siteURL } from '../utils/url';
+import { loggedInSelector } from '../selectors/session';
 
 import * as deepLinkingActions from '../actions/deepLinking';
 import * as pizzaActions from '../actions/pizza';

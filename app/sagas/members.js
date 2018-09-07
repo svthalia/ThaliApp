@@ -7,8 +7,9 @@ import { Sentry } from 'react-native-sentry';
 import { TOTAL_BAR_HEIGHT } from '../ui/components/standardHeader/style/StandardHeader';
 import { memberSize } from '../ui/screens/memberList/style/MemberList';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as memberActions from '../actions/members';
+import { tokenSelector } from '../selectors/session';
 
 const members = function* members(action) {
   const { keywords } = action.payload;

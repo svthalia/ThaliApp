@@ -3,18 +3,22 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import { apiRequest, tokenSelector } from '../../app/utils/url';
+import { apiRequest } from '../../app/utils/url';
 import eventSaga from '../../app/sagas/event';
 
 import * as eventActions from '../../app/actions/event';
+import { tokenSelector } from '../../app/selectors/session';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
-  tokenSelector: () => 'token',
 }));
 
 jest.mock('../../app/navigation', () => ({
   navigate: jest.fn(),
+}));
+
+jest.mock('../../app/selectors/session', () => ({
+  tokenSelector: () => 'token',
 }));
 
 describe('event saga', () => {

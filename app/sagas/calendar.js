@@ -3,8 +3,9 @@ import {
 } from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as calendarActions from '../actions/calendar';
+import { tokenSelector } from '../selectors/session';
 
 const calendar = function* calendar() {
   const token = yield select(tokenSelector);

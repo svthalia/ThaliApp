@@ -2,9 +2,10 @@ import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
+import { tokenSelector } from '../selectors/session';
 
 const NOT_FOUND = 404;
 

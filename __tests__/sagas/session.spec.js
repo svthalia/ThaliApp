@@ -29,6 +29,9 @@ jest.mock('react-native', () => ({
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
+}));
+
+jest.mock('../../app/selectors/session', () => ({
   tokenSelector: () => 'abc123',
 }));
 

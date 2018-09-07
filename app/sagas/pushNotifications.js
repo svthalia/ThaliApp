@@ -3,8 +3,9 @@ import { Platform } from 'react-native';
 import firebase from 'react-native-firebase';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
+import { tokenSelector } from '../selectors/session';
 
 const register = function* register(action) {
   const messaging = firebase.messaging();

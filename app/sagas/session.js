@@ -6,9 +6,10 @@ import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
+import { tokenSelector } from '../selectors/session';
 
 export const USERNAMEKEY = '@MyStore:username';
 export const TOKENKEY = '@MyStore:token';
