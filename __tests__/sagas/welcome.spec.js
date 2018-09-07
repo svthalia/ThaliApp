@@ -3,11 +3,15 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import welcomeSaga from '../../app/sagas/welcome';
-import { apiRequest, tokenSelector } from '../../app/utils/url';
+import { apiRequest } from '../../app/utils/url';
 import * as welcomeActions from '../../app/actions/welcome';
+import { tokenSelector } from '../../app/selectors/session';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
+}));
+
+jest.mock('../../app/selectors/session', () => ({
   tokenSelector: () => 'token',
 }));
 

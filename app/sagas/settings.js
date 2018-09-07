@@ -6,8 +6,9 @@ import {
 
 import { notificationsSettingsActions, settingsActions } from '../actions/settings';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as pushNotifactionsActions from '../actions/pushNotifications';
+import { tokenSelector } from '../selectors/session';
 
 const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 

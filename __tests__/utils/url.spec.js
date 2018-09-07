@@ -2,9 +2,7 @@ import {
   apiRequest,
   apiUrl,
   defaultProfileImage,
-  loggedInSelector,
   ServerError,
-  tokenSelector,
   url,
 } from '../../app/utils/url';
 
@@ -27,11 +25,6 @@ describe('url helper', () => {
     expect(url).toEqual('http://localhost:8000');
     expect(apiUrl).toEqual('http://localhost:8000/api/v1');
     expect(defaultProfileImage).toEqual('http://localhost:8000/static/members/images/default-avatar.jpg');
-  });
-
-  it('should expose the selectors', () => {
-    expect(tokenSelector({ session: { token: 'abc123' } })).toEqual('abc123');
-    expect(loggedInSelector({ navigation: { loggedIn: true } })).toEqual(true);
   });
 
   it('should do a fetch request', () => {

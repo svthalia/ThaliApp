@@ -3,8 +3,9 @@ import {
 } from 'redux-saga/effects';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 import * as eventActions from '../actions/event';
+import { tokenSelector } from '../selectors/session';
 
 const event = function* event(action) {
   const { pk } = action.payload;

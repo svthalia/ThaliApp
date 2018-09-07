@@ -5,10 +5,11 @@ import {
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
 
-import { apiRequest, tokenSelector } from '../utils/url';
+import { apiRequest } from '../utils/url';
 
 import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
+import { tokenSelector } from '../selectors/session';
 
 
 export const eventSelector = state => state.event.data.pk;
