@@ -50,7 +50,12 @@ export const apiRequest = (route, fetchOpts, params) => {
   if (!requestOptions.headers) {
     requestOptions.headers = {};
   }
-  requestOptions.headers['Accept-Language'] = locale;
+
+  if (locale.includes('en') || locale.includes('nl')) {
+    requestOptions.headers['Accept-Language'] = locale;
+  } else {
+    requestOptions.headers['Accept-Language'] = 'en';
+  }
 
   let query = '';
   if (params !== null && params === Object(params)) {
