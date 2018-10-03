@@ -410,7 +410,7 @@ Pizza:
             >
               <Image
                 style={styles.locationImage}
-                source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${data.map_location}&zoom=13&size=450x250&markers=${data.map_location}` }}
+                source={{ uri: data.google_maps_url }}
               />
             </TouchableHighlight>
             <Text style={styles.titleText}>
@@ -481,6 +481,7 @@ EventScreen.propTypes = {
     }),
     no_registration_message: PropTypes.string,
     is_pizza_event: PropTypes.bool.isRequired,
+    google_maps_url: PropTypes.string.isRequired,
   }).isRequired,
   registrations: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number.isRequired,
