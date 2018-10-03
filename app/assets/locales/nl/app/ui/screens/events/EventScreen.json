@@ -30,5 +30,6 @@
   "Update registration": "Aanmelding bijwerken",
   "Cancel registration": "Afmelden",
   "Registrations": "Aanmeldingen",
-  "Could not load the event...": "Kan het evenement niet laden..."
+  "Could not load the event...": "Kan het evenement niet laden...",
+  "Registration is not allowed anymore, as you cancelled your registration after the deadline.": "Aanmelden is niet meer toegestaan omdat je bent afgemeld na de afmelddeadline."
 }

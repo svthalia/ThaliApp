@@ -209,6 +209,8 @@ Pizza:
     const regStarted = startRegDate <= nowDate;
     const regAllowed = regRequired && endRegDate > nowDate && regStarted;
     const afterCancelDeadline = data.cancel_deadline !== null && cancelDeadlineDate <= nowDate;
+    const isLateCancellation = data.user_registration
+                               && data.user_registration.is_late_cancellation;
 
     if (!regRequired) {
       text = t('No registration required.');
@@ -220,9 +222,11 @@ Pizza:
       text = t('Registration will open {{start}}', { start: registrationStart });
     } else if (!regAllowed) {
       text = t('Registration is not possible anymore.');
+    } else if (isLateCancellation) {
+      text = t('Registration is not allowed anymore, as you cancelled your registration after the deadline.');
     }
 
-    if (afterCancelDeadline) {
+    if (afterCancelDeadline && !isLateCancellation) {
       if (text.length > 0) {
         text += ' ';
       }
@@ -253,8 +257,12 @@ Pizza:
 
     const regRequired = data.registration_start !== null || data.registration_end !== null;
     const regStarted = startRegDate <= nowDate;
+    const isLateCancellation = data.user_registration
+                               && data.user_registration.is_late_cancellation;
+
     const regAllowed = regRequired && endRegDate > nowDate
-                       && regStarted && data.registration_allowed;
+                       && regStarted && data.registration_allowed
+                       && !isLateCancellation;
 
     if (regAllowed) {
       if (data.user_registration === null || data.user_registration.is_cancelled) {
