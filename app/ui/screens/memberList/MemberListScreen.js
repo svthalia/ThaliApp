@@ -103,4 +103,4 @@ MemberListScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/memberList/MemberList')(MemberListScreen);
+export default translate('screens/memberList/MemberListScreen')(MemberListScreen);

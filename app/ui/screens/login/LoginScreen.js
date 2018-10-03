@@ -117,4 +117,4 @@ LoginScreen.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-export default translate(['screens/user/Login'])(LoginScreen);
+export default translate(['screens/user/LoginScreen'])(LoginScreen);

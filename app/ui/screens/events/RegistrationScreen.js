@@ -176,4 +176,4 @@ RegistrationScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/Registration')(withStandardHeader(RegistrationScreen));
+export default translate('screens/events/RegistrationScreen')(withStandardHeader(RegistrationScreen));

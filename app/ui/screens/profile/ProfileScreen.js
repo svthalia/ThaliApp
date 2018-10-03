@@ -321,4 +321,4 @@ ProfileScreen.propTypes = {
   goBack: PropTypes.func.isRequired,
 };
 
-export default translate('screens/user/Profile')(ProfileScreen);
+export default translate('screens/profile/ProfileScreen')(ProfileScreen);
