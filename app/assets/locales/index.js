@@ -13,6 +13,7 @@ files['app/ui/screens/events/EventScreenNL'] = require('./nl/app/ui/screens/even
 files['app/ui/components/standardHeader/StandardHeaderNL'] = require('./nl/app/ui/components/standardHeader/StandardHeader.json');
 files['app/ui/components/errorScreen/ErrorScreenNL'] = require('./nl/app/ui/components/errorScreen/ErrorScreen.json');
 files['app/ui/components/sidebar/SidebarNL'] = require('./nl/app/ui/components/sidebar/Sidebar.json');
+files['app/AppNL'] = require('./nl/app.json');
 
 export default {
   nl: {
@@ -30,5 +31,6 @@ export default {
     'components/standardHeader/StandardHeader': files['app/ui/components/standardHeader/StandardHeaderNL'],
     'components/errorScreen/ErrorScreen': files['app/ui/components/errorScreen/ErrorScreenNL'],
     'components/sidebar/Sidebar': files['app/ui/components/sidebar/SidebarNL'],
+    'app/App': files['app/AppNL'],
   },
 };

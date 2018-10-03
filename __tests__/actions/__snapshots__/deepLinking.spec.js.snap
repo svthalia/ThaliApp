@@ -1,8 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`deeplinking actions should create an action to notify of a new deeplink 1`] = `
+exports[`deeplinking actions should create an action to notify of a new deeplink that should leave the app 1`] = `
 Object {
   "payload": Object {
+    "stayInApp": false,
+    "url": "http://example.org",
+  },
+  "type": "DEEPLINKING_DEEPLINK",
+}
+`;
+
+exports[`deeplinking actions should create an action to notify of a new deeplink that should stay in the app 1`] = `
+Object {
+  "payload": Object {
+    "stayInApp": true,
     "url": "http://example.org",
   },
   "type": "DEEPLINKING_DEEPLINK",

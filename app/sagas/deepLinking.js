@@ -1,3 +1,4 @@
+import { Linking } from 'react-native';
 import {
   put, take, takeEvery, select,
 } from 'redux-saga/effects';
@@ -35,7 +36,7 @@ export const parseURL = (url) => {
 
 
 const deepLink = function* deepLink(action) {
-  const { url } = action.payload;
+  const { url, stayInApp } = action.payload;
 
   if (!url) {
     return;
@@ -73,6 +74,10 @@ const deepLink = function* deepLink(action) {
       yield put(pattern.action(...matches.slice(1), ...pattern.args));
       return;
     }
+  }
+
+  if (!stayInApp) {
+    Linking.openURL(url);
   }
 };
 

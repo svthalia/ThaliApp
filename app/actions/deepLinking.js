@@ -1,8 +1,8 @@
 export const DEEPLINK = 'DEEPLINKING_DEEPLINK';
 
-export function deepLink(url) {
+export function deepLink(url, stayInApp = true) {
   return {
     type: DEEPLINK,
-    payload: { url },
+    payload: { url, stayInApp },
   };
 }
