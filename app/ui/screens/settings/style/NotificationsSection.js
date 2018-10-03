@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     borderTopColor: Colors.dividerGrey,
     borderTopWidth: 1,
   },
+  textContainer: {
+    flex: 8,
+  },
   label: {
     color: Colors.textColour,
     android: {
@@ -30,6 +33,17 @@ const styles = StyleSheet.create({
       fontWeight: '600',
     },
   },
+  description: {
+    color: Colors.gray,
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
+    fontSize: 12,
+  },
   emptyText: {
     padding: 16,
   },
@@ -37,6 +51,7 @@ const styles = StyleSheet.create({
     ios: {
       transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }],
     },
+    flex: 2,
   },
 });
 

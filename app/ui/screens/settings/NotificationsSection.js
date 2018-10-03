@@ -54,13 +54,22 @@ class NotificationsSection extends Component {
           style={[styles.categoryContainer, i !== 0 && styles.borderTop]}
           key={category.key}
         >
-          <Text
-            style={styles.label}
+          <View
+            style={styles.textContainer}
           >
-            {category.name}
-            {' '}
-            {category.key === GENERAL_KEY && this.props.t('(required)')}
-          </Text>
+            <Text
+              style={styles.label}
+            >
+              {category.name}
+              {' '}
+              {category.key === GENERAL_KEY && this.props.t('(required)')}
+            </Text>
+            <Text
+              style={styles.description}
+            >
+              {category.description}
+            </Text>
+          </View>
           <Switch
             value={this.state[category.key]}
             onValueChange={value => this.updateField(category.key, value)}
@@ -86,6 +95,7 @@ NotificationsSection.propTypes = {
   categoryList: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     enabled: PropTypes.bool.isRequired,
   })).isRequired,
   status: PropTypes.string.isRequired,
