@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`base settings actions should create an action to notify the settings screen has finished loading 1`] = `
+Object {
+  "type": "SETTINGS_INIT_COMPLETE",
+}
+`;
+
+exports[`base settings actions should create an action to notify the settings screen is loading 1`] = `
+Object {
+  "type": "SETTINGS_INIT_START",
+}
+`;
+
+exports[`base settings actions should create an action to open the settings screen 1`] = `
+Object {
+  "type": "SETTINGS_OPEN",
+}
+`;
+
+exports[`notifications settings actions should create an action to notify of a failure fetching the notifications settings 1`] = `
+Object {
+  "type": "SETTINGS_PUSH_NOTIFICATIONS_FAILURE",
+}
+`;
+
+exports[`notifications settings actions should create an action to notify the notifications settings were fetched successfully 1`] = `
+Object {
+  "categoryList": Array [
+    Object {
+      "key": "general",
+      "name": "General",
+    },
+  ],
+  "type": "SETTINGS_PUSH_NOTIFICATIONS_SUCCESS",
+}
+`;
+
+exports[`notifications settings actions should create an action to save the push notifications category preferences 1`] = `
+Object {
+  "categories": Array [
+    "general",
+  ],
+  "type": "SETTINGS_PUSH_NOTIFICATIONS_SAVE_CATEGORIES",
+}
+`;

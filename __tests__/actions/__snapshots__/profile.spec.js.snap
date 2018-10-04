@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`navigation actions should create an action for a failed profile load 1`] = `
+exports[`profile actions should create an action for a failed profile load 1`] = `
 Object {
   "type": "PROFILE_FAILURE",
 }
 `;
 
-exports[`navigation actions should create an action for a successful profile load 1`] = `
+exports[`profile actions should create an action for a successful profile load 1`] = `
 Object {
   "payload": Object {
     "profileData": "profile",
@@ -15,25 +15,25 @@ Object {
 }
 `;
 
-exports[`navigation actions should create an action for profile fetch 1`] = `
+exports[`profile actions should create an action for profile fetch 1`] = `
 Object {
   "type": "PROFILE_FETCHING",
 }
 `;
 
-exports[`navigation actions should create an action to load a profile 1`] = `
+exports[`profile actions should create an action to load a profile 1`] = `
 Object {
   "payload": Object {
-    "member": "token",
+    "member": 1,
   },
   "type": "PROFILE_PROFILE",
 }
 `;
 
-exports[`navigation actions should create an action to load a profile 2`] = `
+exports[`profile actions should create an action to load the user's own profile as default 1`] = `
 Object {
   "payload": Object {
-    "member": "abc123",
+    "member": "me",
   },
   "type": "PROFILE_PROFILE",
 }

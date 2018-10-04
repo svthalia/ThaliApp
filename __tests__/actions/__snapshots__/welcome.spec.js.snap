@@ -15,6 +15,12 @@ Object {
 }
 `;
 
+exports[`welcome actions should create an action to open the welcome screen 1`] = `
+Object {
+  "type": "WELCOME_OPEN",
+}
+`;
+
 exports[`welcome actions should create an action to refresh the view 1`] = `
 Object {
   "type": "WELCOME_REFRESH",

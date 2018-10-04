@@ -2,9 +2,14 @@ import * as actions from '../../app/actions/welcome';
 
 describe('welcome actions', () => {
   it('should expose the welcome actions', () => {
+    expect(actions.OPEN).toEqual('WELCOME_OPEN');
     expect(actions.REFRESH).toEqual('WELCOME_REFRESH');
     expect(actions.SUCCESS).toEqual('WELCOME_SUCCESS');
     expect(actions.FAILURE).toEqual('WELCOME_FAILURE');
+  });
+
+  it('should create an action to open the welcome screen', () => {
+    expect(actions.open()).toMatchSnapshot();
   });
 
   it('should create an action to refresh the view', () => {

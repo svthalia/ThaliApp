@@ -19,6 +19,18 @@ Object {
 }
 `;
 
+exports[`calendar actions should create an action to notify the calendar is being fetched 1`] = `
+Object {
+  "type": "CALENDAR_FETCHING",
+}
+`;
+
+exports[`calendar actions should create an action to notify the calendar was opened 1`] = `
+Object {
+  "type": "CALENDAR_OPEN",
+}
+`;
+
 exports[`calendar actions should create an action to refresh the calendar 1`] = `
 Object {
   "type": "CALENDAR_REFRESH",

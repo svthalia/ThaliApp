@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`member actions should create an action to notify additional members should be retrieved 1`] = `
+Object {
+  "payload": Object {
+    "url": "nextUrl",
+  },
+  "type": "MEMBERS_MORE",
+}
+`;
+
+exports[`member actions should create an action to notify of a failure fetching the member list 1`] = `
+Object {
+  "type": "MEMBERS_FAILURE",
+}
+`;
+
+exports[`member actions should create an action to notify the additional members were fetched successfully 1`] = `
+Object {
+  "payload": Object {
+    "memberList": Array [
+      "John Doe",
+      "Jane Doe",
+    ],
+    "next": "nextUrl",
+  },
+  "type": "MEMBERS_MORE_SUCCESS",
+}
+`;
+
+exports[`member actions should create an action to notify the member list is being fetched 1`] = `
+Object {
+  "type": "MEMBERS_FETCHING",
+}
+`;
+
+exports[`member actions should create an action to notify the member list should be fetched unfiltered 1`] = `
+Object {
+  "payload": Object {
+    "keywords": "",
+  },
+  "type": "MEMBERS_MEMBERS",
+}
+`;
+
+exports[`member actions should create an action to notify the member list should be fetched, filtered by certain keywords 1`] = `
+Object {
+  "payload": Object {
+    "keywords": "John Doe",
+  },
+  "type": "MEMBERS_MEMBERS",
+}
+`;
+
+exports[`member actions should create an action to notify the member list was fetched successfully 1`] = `
+Object {
+  "payload": Object {
+    "memberList": Array [
+      "John Doe",
+      "Jane Doe",
+    ],
+    "next": "nextUrl",
+    "searchKey": "John Doe",
+  },
+  "type": "MEMBERS_MEMBERS_SUCCESS",
+}
+`;
