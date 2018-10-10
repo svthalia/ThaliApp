@@ -93,4 +93,4 @@ NotificationsSection.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/settings/PushNotifications')(NotificationsSection);
+export default translate('screens/settings/NotificationsSection')(NotificationsSection);

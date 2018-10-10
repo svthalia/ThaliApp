@@ -205,4 +205,4 @@ CalendarScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/Calendar')(withStandardHeader(CalendarScreen, true));
+export default translate('screens/events/CalendarScreen')(withStandardHeader(CalendarScreen, true));

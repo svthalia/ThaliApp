@@ -21,13 +21,14 @@
   "No registration required.": "Aanmelden niet vereist.",
   "Registration will open {{start}}": "Aanmelden opent {{start}}",
   "Registration is not possible anymore.": "Aanmelden is niet meer mogelijk.",
+  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
   "Put me on the waiting list": "Zet me op de wachtlijst",
   "Register": "Aanmelden",
+  "By registering, you confirm that you have read the": "Door te registreren, bevestig je dat je de",
+  "terms and conditions": "voorwaarden",
+  ", that you understand them and that you agree to be bound by them.": "hebt gelezen, dat je ze begrijpt en dat je accepteert eraan gebonden te zijn.",
   "Update registration": "Aanmelding bijwerken",
   "Cancel registration": "Afmelden",
   "Registrations": "Aanmeldingen",
-  "Could not load the event...": "Kan het evenement niet laden...",
-  "By registering, you confirm that you have read the": "Door te registreren, bevestig je dat je de",
-  "terms and conditions": "voorwaarden",
-  ", that you understand them and that you agree to be bound by them.": "hebt gelezen, dat je ze begrijpt en dat je accepteert eraan gebonden te zijn."
+  "Could not load the event...": "Kan het evenement niet laden..."
 }
