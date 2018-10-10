@@ -58,6 +58,7 @@ Object {
       "Queue position {{pos}}": "Wachtlijst positie {{pos}}",
       "Register": "Aanmelden",
       "Registration deadline": "Registratiedeadline",
+      "Registration is not allowed anymore, as you cancelled your registration after the deadline.": "Aanmelden is niet meer toegestaan omdat je bent afgemeld na de afmelddeadline.",
       "Registration is not possible anymore.": "Aanmelden is niet meer mogelijk.",
       "Registration status": "Aanmeldstatus",
       "Registration will open {{start}}": "Aanmelden opent {{start}}",
