@@ -14,6 +14,7 @@ const initialState = {
     registration_allowed: false,
     has_fields: false,
     is_pizza_event: false,
+    google_maps_url: '',
   },
   registrations: [],
   status: 'initial',
