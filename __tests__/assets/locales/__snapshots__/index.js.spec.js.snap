@@ -3,6 +3,10 @@
 exports[`translations should expose the translations 1`] = `
 Object {
   "nl": Object {
+    "app/App": Object {
+      "Dismiss": "Sluiten",
+      "Open": "Openen",
+    },
     "components/errorScreen/ErrorScreen": Object {
       "Try again later.": "Probeer het later opnieuw.",
     },

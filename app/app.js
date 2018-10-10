@@ -4,12 +4,13 @@ import {
 } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { I18nextProvider } from 'react-i18next';
+import { I18nextProvider, translate } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import firebase from 'react-native-firebase';
 import locale from 'react-native-locale-detector';
 import Moment from 'moment';
 import 'moment/locale/nl';
+import PropTypes from 'prop-types';
 
 import reducers from './reducers';
 
@@ -48,14 +49,35 @@ class Main extends Component {
       store.dispatch(register());
     });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
-      Alert.alert(notification.title, notification.body, [
-        { text: 'OK' },
-      ]);
+      let buttons;
+      if (notification.data.url) {
+        buttons = [
+          { text: this.props.t('Dismiss') },
+          {
+            text: this.props.t('Open'),
+            onPress: () => store.dispatch(
+              deepLinkingActions.deepLink(notification.data.url, false),
+            ),
+          },
+        ];
+      } else {
+        buttons = [
+          { text: 'OK' },
+        ];
+      }
+
+      Alert.alert(notification.title, notification.body, buttons);
     });
+
+    this.notificationOpenedListener = firebase.notifications()
+      .onNotificationOpened(this.handleOpenNotification);
+
+    firebase.notifications().getInitialNotification().then(this.handleOpenNotification);
   }
 
   componentWillUnmount() {
     this.notificationListener();
+    this.notificationOpenedListener();
     this.onTokenRefreshListener();
     Linking.removeEventListener('url', this.handleOpenURL);
   }
@@ -74,6 +96,15 @@ class Main extends Component {
     store.dispatch(deepLinkingActions.deepLink(event.url));
   };
 
+  handleOpenNotification = (notificationOpen) => {
+    if (notificationOpen) {
+      const notification = notificationOpen.notification;
+      if (notification.data.url) {
+        store.dispatch(deepLinkingActions.deepLink(notification.data.url, false));
+      }
+    }
+  };
+
   render() {
     return (
       <I18nextProvider i18n={i18n}>
@@ -89,4 +120,8 @@ class Main extends Component {
   }
 }
 
-export default Main;
+Main.propTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+export default translate('app/App')(Main);
