@@ -1,7 +1,7 @@
 import * as actions from '../../app/actions/profile';
 
-describe('navigation actions', () => {
-  it('should expose the navigation actions', () => {
+describe('profile actions', () => {
+  it('should expose the profile actions', () => {
     expect(actions.PROFILE).toEqual('PROFILE_PROFILE');
     expect(actions.FETCHING).toEqual('PROFILE_FETCHING');
     expect(actions.SUCCESS).toEqual('PROFILE_SUCCESS');
@@ -9,8 +9,11 @@ describe('navigation actions', () => {
   });
 
   it('should create an action to load a profile', () => {
-    expect(actions.profile('token')).toMatchSnapshot();
-    expect(actions.profile('abc123', 1)).toMatchSnapshot();
+    expect(actions.profile(1)).toMatchSnapshot();
+  });
+
+  it('should create an action to load the user\'s own profile as default', () => {
+    expect(actions.profile()).toMatchSnapshot();
   });
 
   it('should create an action for profile fetch', () => {

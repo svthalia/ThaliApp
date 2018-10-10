@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`navigation actions should create an action to notify the app drawer should be toggled 1`] = `
+Object {
+  "type": "NAVIGATE_TOGGLE_DRAWER",
+}
+`;
+
+exports[`navigation actions should create an action to notify the app should navigate back 1`] = `
+Object {
+  "type": "NAVIGATE_BACK",
+}
+`;
