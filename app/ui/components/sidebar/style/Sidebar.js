@@ -51,8 +51,20 @@ const styles = StyleSheet.create({
     width: 28,
     textAlign: 'center',
   },
-  buttonText: {
+  button: {
     padding: 16,
+  },
+  buttonText: {
+    fontSize: 14,
+    color: Colors.textColour,
+    android: {
+      fontFamily: 'sans-serif-medium',
+      fontWeight: '400',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
   },
 });
 
