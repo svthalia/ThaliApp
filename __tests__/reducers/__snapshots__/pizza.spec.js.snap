@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pizza reducer initially should return the initial state 1`] = `
+Object {
+  "event": null,
+  "hasLoaded": false,
+  "loading": false,
+  "order": null,
+  "pizzaList": Array [],
+  "success": false,
+}
+`;

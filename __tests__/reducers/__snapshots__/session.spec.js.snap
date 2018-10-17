@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`session reducer initially should return the initial state 1`] = `
+Object {
+  "displayName": "",
+  "photo": "http://localhost:8000/static/members/images/default-avatar.jpg",
+  "status": "SIGNED_OUT",
+  "token": "",
+  "username": "",
+}
+`;

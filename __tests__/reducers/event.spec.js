@@ -1,7 +1,7 @@
-import reducer from '../../app/reducers/calendar';
-import * as actions from '../../app/actions/calendar';
+import reducer from '../../app/reducers/event';
+import * as actions from '../../app/actions/event';
 
-describe('calendar reducer', () => {
+describe('events reducer', () => {
   const emptyState = {};
 
   describe('initially', () => {
@@ -15,7 +15,7 @@ describe('calendar reducer', () => {
   describe('is refreshing', () => {
     const state = reducer(
       emptyState,
-      actions.refresh(),
+      actions.fetching(),
     );
 
     it('should be loading', () => {
@@ -26,15 +26,19 @@ describe('calendar reducer', () => {
   describe('is successful', () => {
     const state = reducer(
       emptyState,
-      actions.success([{ pk: 1 }]),
+      actions.success({ pk: 1 }, [{ pk: 2 }]),
     );
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
     });
 
-    it('should have events', () => {
-      expect(state).toHaveProperty('eventList', [{ pk: 1 }]);
+    it('should have event info', () => {
+      expect(state).toHaveProperty('data', { pk: 1 });
+    });
+
+    it('should have registrations info', () => {
+      expect(state).toHaveProperty('registrations', [{ pk: 2 }]);
     });
 
     it('should have status success', () => {
@@ -54,6 +58,17 @@ describe('calendar reducer', () => {
 
     it('should have status failure', () => {
       expect(state).toHaveProperty('status', 'failure');
+    });
+  });
+
+  describe('is done', () => {
+    const state = reducer(
+      emptyState,
+      actions.done(),
+    );
+
+    it('should not be loading', () => {
+      expect(state).toHaveProperty('loading', false);
     });
   });
 });

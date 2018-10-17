@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`settings reducer initially should return the initial state 1`] = `
+Object {
+  "loading": true,
+  "pushNotifications": Object {
+    "categoryList": Array [],
+    "status": "loading",
+  },
+}
+`;
+
+exports[`settings reducer push notifications initially should return the inital state 1`] = `
+Object {
+  "categoryList": Array [],
+  "status": "loading",
+}
+`;

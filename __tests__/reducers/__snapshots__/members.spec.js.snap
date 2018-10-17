@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`members reducer initially should return the initial state 1`] = `
+Object {
+  "loading": false,
+  "memberList": Array [],
+  "more": null,
+  "searchKey": "",
+  "status": "initial",
+}
+`;

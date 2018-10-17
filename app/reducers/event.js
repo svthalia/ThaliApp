@@ -19,7 +19,6 @@ const initialState = {
   registrations: [],
   status: 'initial',
   loading: false,
-  showFields: false,
 };
 
 export default function loadEvent(state = initialState, action = {}) {
@@ -37,14 +36,12 @@ export default function loadEvent(state = initialState, action = {}) {
         registrations: action.payload.eventRegistrations,
         status: 'success',
         loading: false,
-        showFields: false,
       };
     case eventActions.FAILURE:
       return {
         ...state,
         status: 'failure',
         loading: false,
-        showFields: false,
       };
     case eventActions.DONE:
       return {

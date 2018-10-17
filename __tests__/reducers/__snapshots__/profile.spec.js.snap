@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`profile reducer initially should return the initial state 1`] = `
+Object {
+  "hasLoaded": false,
+  "profile": Object {
+    "achievements": Array [],
+    "avatar": Object {
+      "full": "http://localhost:8000/static/members/images/default-avatar.jpg",
+      "large": "http://localhost:8000/static/members/images/default-avatar.jpg",
+      "medium": "http://localhost:8000/static/members/images/default-avatar.jpg",
+      "small": "http://localhost:8000/static/members/images/default-avatar.jpg",
+    },
+    "birthday": "",
+    "display_name": "",
+    "membership_type": "",
+    "photo": "http://localhost:8000/static/members/images/default-avatar.jpg",
+    "pk": -1,
+    "profile_description": "",
+    "programme": "",
+    "starting_year": -1,
+    "website": "",
+  },
+  "success": false,
+}
+`;
