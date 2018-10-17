@@ -96,10 +96,16 @@ const Sidebar = (props) => {
               ? Colors.magenta : Colors.textColour}
             size={24}
             iconStyle={styles.buttonIcon}
-            style={[styles.buttonText, button.style]}
+            style={[styles.button, button.style]}
             key={button.routeName}
           >
-            {button.text}
+            <Text style={[styles.buttonText, {
+              color: props.activeItemKey === button.routeName
+                ? Colors.magenta : Colors.textColour,
+            }]}
+            >
+              {button.text}
+            </Text>
           </Icon.Button>
         ))}
       </View>

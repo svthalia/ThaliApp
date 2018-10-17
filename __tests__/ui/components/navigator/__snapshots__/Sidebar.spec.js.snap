@@ -192,7 +192,9 @@ exports[`Sidebar component renders correctly 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
+                "color": "#313131",
+                "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "600",
               },
               Object {
@@ -281,7 +283,9 @@ exports[`Sidebar component renders correctly 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
+                "color": "#313131",
+                "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "600",
               },
               Object {
@@ -370,7 +374,9 @@ exports[`Sidebar component renders correctly 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
+                "color": "#313131",
+                "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "600",
               },
               Object {
@@ -459,7 +465,9 @@ exports[`Sidebar component renders correctly 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
+                "color": "#313131",
+                "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "600",
               },
               Object {
@@ -551,7 +559,9 @@ exports[`Sidebar component renders correctly 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
+                "color": "#313131",
+                "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "600",
               },
               Object {
