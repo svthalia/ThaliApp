@@ -1,9 +1,12 @@
+import * as reactNativeLocaleDetector from 'react-native-locale-detector';
+
 import {
   apiRequest,
   apiUrl,
   defaultProfileImage,
+  termsAndConditionsUrl,
   ServerError,
-  url,
+  TokenInvalidError,
 } from '../../app/utils/url';
 
 const fetchPromiseResult = {
@@ -12,19 +15,25 @@ const fetchPromiseResult = {
   clone: global.fetch,
 };
 global.fetch = jest.fn().mockReturnValue(
-  Promise.resolve(fetchPromiseResult));
+  Promise.resolve(fetchPromiseResult),
+);
 fetchPromiseResult.clone = global.fetch;
 
-jest.mock('react-native-locale-detector', () => 'en');
+jest.mock('react-native-locale-detector', () => ({
+  __esModule: true,
+  default: 'nl',
+}));
 
 describe('url helper', () => {
   beforeEach(() => {
   });
 
   it('should expose the constants', () => {
+    const { url } = require('../../app/utils/url');
     expect(url).toEqual('http://localhost:8000');
     expect(apiUrl).toEqual('http://localhost:8000/api/v1');
     expect(defaultProfileImage).toEqual('http://localhost:8000/static/members/images/default-avatar.jpg');
+    expect(termsAndConditionsUrl).toEqual('http://localhost:8000/event-registration-terms/');
   });
 
   it('should do a fetch request', () => {
@@ -32,7 +41,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+          { headers: { 'Accept-Language': 'nl' } });
         expect(response).toEqual('responseJson');
       });
   });
@@ -43,7 +52,7 @@ describe('url helper', () => {
       params: 'value',
     }).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`,
-        { headers: { 'Accept-Language': 'en' } });
+        { headers: { 'Accept-Language': 'nl' } });
     });
   });
 
@@ -51,7 +60,7 @@ describe('url helper', () => {
     expect.assertions(1);
     return apiRequest('route', { headers: { Authorization: 'Token abc' } }, null).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-        { headers: { 'Accept-Language': 'en', Authorization: 'Token abc' } });
+        { headers: { 'Accept-Language': 'nl', Authorization: 'Token abc' } });
     });
   });
 
@@ -60,7 +69,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+          { headers: { 'Accept-Language': 'nl' } });
         expect(response).toEqual('responseJson');
       });
   });
@@ -87,5 +96,61 @@ describe('url helper', () => {
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
       .then(res => expect(res).toEqual({}));
+  });
+
+  it('should detect an invalid token in English', () => {
+    expect.assertions(1);
+    const response = {
+      status: 403,
+      headers: { get: key => (key === 'content-language' ? 'en' : 'nl') },
+      json: () => Promise.resolve({ detail: 'Invalid token.' }),
+      clone: () => 'responseCopy',
+    };
+    global.fetch.mockReturnValue(Promise.resolve(response));
+    return apiRequest('route', {}, null)
+      .catch(e => expect(e).toEqual(new TokenInvalidError('responseCopy')));
+  });
+
+  it('should detect an invalid token in Dutch', () => {
+    expect.assertions(1);
+    const response = {
+      status: 403,
+      headers: { get: key => (key === 'content-language' ? 'nl' : 'en') },
+      json: () => Promise.resolve({ detail: 'Ongeldige token.' }),
+      clone: () => 'responseCopy',
+    };
+    global.fetch.mockReturnValue(Promise.resolve(response));
+    return apiRequest('route', {}, null)
+      .catch(e => expect(e).toEqual(new TokenInvalidError('responseCopy')));
+  });
+
+  it('should not falsely claim the token is incorrect', () => {
+    expect.assertions(1);
+    const response = {
+      status: 403,
+      headers: { get: key => (key === 'content-language' ? 'en' : 'nl') },
+      json: () => Promise.resolve({ detail: 'Not authorized.' }),
+      clone: () => ({ json: () => 'jsonResult' }),
+    };
+    global.fetch.mockReturnValue(Promise.resolve(response));
+    return apiRequest('route', {}, null)
+      .then(res => expect(res).toEqual('jsonResult'));
+  });
+
+  it('should default to an English locales', () => {
+    reactNativeLocaleDetector.default = 'fr';
+    expect.assertions(1);
+    return apiRequest('route', {}, null)
+      .then(() => {
+        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
+          { headers: { 'Accept-Language': 'en' } });
+      });
+  });
+
+  it('should use the correct url when in production mode', () => {
+    jest.resetModules();
+    global.__DEV__ = false;
+    const { url } = require('../../app/utils/url');
+    expect(url).toEqual('https://thalia.nu');
   });
 });
