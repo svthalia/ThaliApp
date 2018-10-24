@@ -5,14 +5,11 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import welcomeSaga from '../../app/sagas/welcome';
 import { apiRequest } from '../../app/utils/url';
 import * as welcomeActions from '../../app/actions/welcome';
+import * as sessionActions from '../../app/actions/session';
 import { tokenSelector } from '../../app/selectors/session';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
-}));
-
-jest.mock('../../app/selectors/session', () => ({
-  tokenSelector: () => 'token',
 }));
 
 describe('welcome saga', () => {
@@ -52,4 +49,17 @@ describe('welcome saga', () => {
         method: 'GET',
       }, { limit: 5, ordering: 'start' });
     }));
+
+  it('should handle an invalid token correctly', () => {
+    jest.resetModules();
+    const { TokenInvalidError } = require.requireActual('../../app/utils/url');
+    expectSaga(welcomeSaga)
+      .provide([
+        [select(tokenSelector), 'token'],
+        [matchers.call.like({ fn: apiRequest, args: ['events'] }), throwError(new TokenInvalidError('responseCopy'))],
+      ])
+      .dispatch(welcomeActions.refresh())
+      .put(sessionActions.tokenInvalid())
+      .silentRun();
+  });
 });

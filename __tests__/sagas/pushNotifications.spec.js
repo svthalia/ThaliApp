@@ -1,6 +1,5 @@
 import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
-import * as matchers from 'redux-saga-test-plan/matchers';
 import { Platform } from 'react-native';
 import pushNotificationsSaga from '../../app/sagas/pushNotifications';
 import { apiRequest } from '../../app/utils/url';
@@ -9,10 +8,6 @@ import { tokenSelector } from '../../app/selectors/session';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(),
-}));
-
-jest.mock('../../app/selectors/session', () => ({
-  tokenSelector: () => 'token',
 }));
 
 const mockIid = {
@@ -43,6 +38,17 @@ describe('pushNotifications saga', () => {
       apiRequest.mockReset();
     });
 
+    it('should do nothing without a token', () => expectSaga(pushNotificationsSaga)
+      .provide([
+        [select(tokenSelector), undefined],
+      ])
+      .dispatch(pushActions.register())
+      .silentRun()
+      .then(({ effects }) => {
+        expect(effects.call).toBeUndefined();
+        expect(effects.put).toBeUndefined();
+      }));
+
     it('should request permissions when platform is iOS', () => expectSaga(pushNotificationsSaga)
       .provide([
         [select(tokenSelector), 'token'],
@@ -69,7 +75,6 @@ describe('pushNotifications saga', () => {
     it('should post a token to the server', () => expectSaga(pushNotificationsSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['events'] }), { results: 'data' }],
       ])
       .dispatch(pushActions.register())
       .silentRun()
@@ -77,6 +82,25 @@ describe('pushNotifications saga', () => {
         expect(apiRequest).toBeCalledWith('devices',
           {
             body: '{"type":"ios"}',
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Token token',
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          });
+      }));
+
+    it('should post the correct categories to the server', () => expectSaga(pushNotificationsSaga)
+      .provide([
+        [select(tokenSelector), 'token'],
+      ])
+      .dispatch(pushActions.register(['general', 'events']))
+      .silentRun()
+      .then(() => {
+        expect(apiRequest).toBeCalledWith('devices',
+          {
+            body: '{"type":"ios","receive_category":["general","events"]}',
             headers: {
               Accept: 'application/json',
               Authorization: 'Token token',

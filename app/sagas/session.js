@@ -131,13 +131,13 @@ function* userInfo() {
   }
 }
 
-const sessionSaga = function* sessionSaga() {
+function* sessionSaga() {
   yield takeEvery(sessionActions.INIT, init);
   yield takeEvery(sessionActions.SIGN_IN, signIn);
   yield takeEvery(sessionActions.SIGN_OUT, signOut);
   yield takeEvery(sessionActions.SIGNED_IN, signedIn);
   yield takeEvery(sessionActions.FETCH_USER_INFO, userInfo);
   yield takeEvery(sessionActions.TOKEN_INVALID, clearUserInfo);
-};
+}
 
 export default sessionSaga;

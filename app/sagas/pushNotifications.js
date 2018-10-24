@@ -7,7 +7,7 @@ import { apiRequest } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import { tokenSelector } from '../selectors/session';
 
-const register = function* register(action) {
+function* register(action) {
   const messaging = firebase.messaging();
   const token = yield select(tokenSelector);
   const { categories } = action;
@@ -58,15 +58,15 @@ const register = function* register(action) {
     Sentry.captureException(err);
     // eat error, om nom nom
   }
-};
+}
 
-const invalidate = function* invalidate() {
+function* invalidate() {
   yield call([firebase.iid(), 'delete']);
-};
+}
 
-const pushNotificationsSaga = function* pushNotificationsSaga() {
+function* pushNotificationsSaga() {
   yield takeEvery(pushNotificationsActions.REGISTER, register);
   yield takeEvery(pushNotificationsActions.INVALIDATE, invalidate);
-};
+}
 
 export default pushNotificationsSaga;

@@ -24,10 +24,6 @@ jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
 }));
 
-jest.mock('../../app/selectors/session', () => ({
-  tokenSelector: () => 'token',
-}));
-
 describe('event selector', () => {
   it('should select the event pk', () => {
     expect(eventSelector({ event: { data: { pk: 2 } } })).toEqual(2);
@@ -236,7 +232,19 @@ describe('registration saga', () => {
   });
 
   describe('fields', () => {
+    it('should retrieve the fields after a successful registration', () => expectSaga(registrationSaga)
+      .provide([
+        [select(tokenSelector), 'token'],
+        [matchers.call.fn(apiRequest), { pk: 1, fields: 'fields' }],
+      ])
+      .dispatch(registrationActions.register(2))
+      .put(registrationActions.retrieveFields(1))
+      .silentRun());
+
     it('should put a loading action', () => expectSaga(registrationSaga)
+      .provide([
+        [select(tokenSelector), 'token'],
+      ])
       .dispatch(registrationActions.retrieveFields(1))
       .put(registrationActions.loading())
       .silentRun());
