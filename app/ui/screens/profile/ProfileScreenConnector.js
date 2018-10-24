@@ -6,6 +6,7 @@ const mapStateToProps = state => ({
   profile: state.profile.profile,
   success: state.profile.success,
   hasLoaded: state.profile.hasLoaded,
+  pk: state.session.pk,
 });
 
 const mapDispatchToProps = {

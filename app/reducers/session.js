@@ -11,6 +11,7 @@ const initialState = {
   token: '',
   username: '',
   displayName: '',
+  pk: -1,
   photo: defaultProfileImage,
 };
 
@@ -33,6 +34,7 @@ export default function session(state = initialState, action = {}) {
         ...state,
         displayName: action.payload.displayName,
         photo: action.payload.photo,
+        pk: action.payload.pk,
       };
     case sessionActions.TOKEN_INVALID:
     case sessionActions.SIGN_OUT:

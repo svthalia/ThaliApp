@@ -24,6 +24,7 @@ const initialState = {
   },
   success: false,
   hasLoaded: false,
+  updating: false,
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -45,6 +46,23 @@ export default function profile(state = initialState, action = {}) {
         ...state,
         success: false,
         hasLoaded: true,
+      };
+    case profileActions.UPDATING:
+      return {
+        ...state,
+        updating: true,
+      };
+    case profileActions.UPDATE_SUCCESS:
+      return {
+        ...state,
+        updating: false,
+        success: true,
+      };
+    case profileActions.UPDATE_FAIL:
+      return {
+        ...state,
+        updating: false,
+        success: true,
       };
     default:
       return state;

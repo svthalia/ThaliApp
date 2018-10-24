@@ -128,7 +128,7 @@ function* userInfo() {
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);
-    yield put(sessionActions.setUserInfo(userProfile.display_name, userProfile.avatar.medium));
+    yield put(sessionActions.setUserInfo(userProfile.display_name, userProfile.avatar.medium, userProfile.pk));
   } catch (error) {
     Sentry.captureException(error);
   }
