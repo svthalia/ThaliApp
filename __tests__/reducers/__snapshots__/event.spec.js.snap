@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`events reducer initially should not be fetched 1`] = `
+Object {
+  "data": Object {
+    "category": "",
+    "description": "",
+    "end": "",
+    "google_maps_url": "",
+    "has_fields": false,
+    "is_pizza_event": false,
+    "location": "",
+    "map_location": "",
+    "organiser": -1,
+    "pk": -1,
+    "registration_allowed": false,
+    "start": "",
+    "title": "",
+  },
+  "loading": false,
+  "registrations": Array [],
+  "status": "initial",
+}
+`;

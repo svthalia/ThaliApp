@@ -1,14 +1,48 @@
-import reducer from '../../app/reducers/calendar';
-import * as actions from '../../app/actions/calendar';
+import reducer from '../../app/reducers/welcome';
+import * as actions from '../../app/actions/welcome';
 
-describe('calendar reducer', () => {
+describe('welcome reducer', () => {
   const emptyState = {};
 
   describe('initially', () => {
     const initialState = reducer();
 
-    it('should not be fetched', () => {
+    it('should return the initial state', () => {
       expect(initialState).toMatchSnapshot();
+    });
+  });
+
+  describe('is successful', () => {
+    const state = reducer(
+      emptyState,
+      actions.success([{ pk: 1 }]),
+    );
+
+    it('should be successful', () => {
+      expect(state).toHaveProperty('status', 'success');
+    });
+
+    it('should not be loading', () => {
+      expect(state).toHaveProperty('loading', false);
+    });
+
+    it('should contain the event list', () => {
+      expect(state).toHaveProperty('eventList', [{ pk: 1 }]);
+    });
+  });
+
+  describe('is failure', () => {
+    const state = reducer(
+      emptyState,
+      actions.failure(),
+    );
+
+    it('should be failure', () => {
+      expect(state).toHaveProperty('status', 'failure');
+    });
+
+    it('should not be loading', () => {
+      expect(state).toHaveProperty('loading', false);
     });
   });
 
@@ -20,40 +54,6 @@ describe('calendar reducer', () => {
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
-    });
-  });
-
-  describe('is successful', () => {
-    const state = reducer(
-      emptyState,
-      actions.success([{ pk: 1 }]),
-    );
-
-    it('should not be loading', () => {
-      expect(state).toHaveProperty('loading', false);
-    });
-
-    it('should have events', () => {
-      expect(state).toHaveProperty('eventList', [{ pk: 1 }]);
-    });
-
-    it('should have status success', () => {
-      expect(state).toHaveProperty('status', 'success');
-    });
-  });
-
-  describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
-
-    it('should not be loading', () => {
-      expect(state).toHaveProperty('loading', false);
-    });
-
-    it('should have status failure', () => {
-      expect(state).toHaveProperty('status', 'failure');
     });
   });
 });
