@@ -25,12 +25,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   booleanContainer: {
-    borderTopWidth: 1,
-    borderTopColor: Colors.dividerGrey,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
   },
   field: {
     android: {

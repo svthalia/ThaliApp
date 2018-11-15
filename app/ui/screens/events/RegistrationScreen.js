@@ -45,14 +45,21 @@ class RegistrationScreen extends Component {
 
   getFieldValidity = (key) => {
     const field = this.props.fields[key];
-    const value = this.state[key] ? this.state[key] : field.value;
+    const value = this.state[key];
     if (field.required) {
       if (field.type === 'integer' && (value === '' || value === null || !value.match(/^-?\d+$/))) {
         return {
           isValid: false,
           reason: this.props.t('This field is required and must be an integer.'),
         };
-      } if (field.type === 'text' && (value === '' || value === null)) {
+      }
+      if (field.type === 'text' && (value === '' || value === null)) {
+        return {
+          isValid: false,
+          reason: this.props.t('This field is required.'),
+        };
+      }
+      if (field.type === 'boolean' && !value) {
         return {
           isValid: false,
           reason: this.props.t('This field is required.'),
@@ -115,16 +122,23 @@ class RegistrationScreen extends Component {
             const validity = this.getFieldValidity(key);
             if (field.type === 'boolean') {
               return (
-                <View key={key} style={styles.booleanContainer}>
-                  <Text style={styles.field}>
-                    {field.label}
-                  </Text>
-                  <Switch
-                    value={this.state[key]}
-                    onValueChange={value => this.updateField(key, value)}
-                    thumbTintColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
-                    onTintColor={Colors.magenta}
-                  />
+                <View key={key} style={styles.fieldContainer}>
+                  <View style={styles.booleanContainer}>
+                    <Text style={styles.field}>
+                      {field.label}
+                    </Text>
+                    <Switch
+                      value={this.state[key]}
+                      onValueChange={value => this.updateField(key, value)}
+                      thumbTintColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
+                      onTintColor={Colors.magenta}
+                    />
+                  </View>
+                  {validity.isValid || (
+                    <Text style={styles.invalid}>
+                      {validity.reason}
+                    </Text>
+                  )}
                 </View>
               );
             } if (field.type === 'integer' || field.type === 'text') {
