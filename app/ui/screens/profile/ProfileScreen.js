@@ -98,13 +98,13 @@ const getPersonalInfo = (profile, t) => {
   return <View />;
 };
 
-const getAchievements = (profile, t) => {
-  if (profile.achievements.length) {
+const getMemberships = (memberships, sectionHeader, t) => {
+  if (memberships.length) {
     return (
       <CardSection
-        sectionHeader={t('Achievements for Thalia')}
+        sectionHeader={sectionHeader}
       >
-        {profile.achievements.map((achievement, i) => (
+        {memberships.map((achievement, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={achievement.name}>
             <Text style={styles.description}>
               {achievement.name}
@@ -278,7 +278,8 @@ class ProfileScreen extends Component {
           <View style={styles.content}>
             {getDescription(this.props.profile, this.props.t)}
             {getPersonalInfo(this.props.profile, this.props.t)}
-            {getAchievements(this.props.profile, this.props.t)}
+            {getMemberships(this.props.profile.achievements, this.props.t('Achievements for Thalia'), this.props.t)}
+            {getMemberships(this.props.profile.societies, this.props.t('Societies'), this.props.t)}
           </View>
         </ScrollView>
         {this.getAppbar()}
@@ -291,7 +292,6 @@ ProfileScreen.propTypes = {
   profile: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
     avatar: PropTypes.shape({
       full: PropTypes.string.isRequired,
       large: PropTypes.string.isRequired,
@@ -305,6 +305,16 @@ ProfileScreen.propTypes = {
     website: PropTypes.string,
     membership_type: PropTypes.string,
     achievements: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      earliest: PropTypes.string,
+      periods: PropTypes.arrayOf(PropTypes.shape({
+        chair: PropTypes.bool.isRequired,
+        until: PropTypes.string,
+        since: PropTypes.string.isRequired,
+        role: PropTypes.string,
+      })),
+    })).isRequired,
+    societies: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
       earliest: PropTypes.string,
       periods: PropTypes.arrayOf(PropTypes.shape({

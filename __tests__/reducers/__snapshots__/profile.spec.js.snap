@@ -18,6 +18,7 @@ Object {
     "pk": -1,
     "profile_description": "",
     "programme": "",
+    "societies": Array [],
     "starting_year": -1,
     "website": "",
   },
