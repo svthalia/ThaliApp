@@ -20,6 +20,7 @@ const initialState = {
     website: '',
     membership_type: '',
     achievements: [],
+    societies: [],
   },
   success: false,
   hasLoaded: false,
