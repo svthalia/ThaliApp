@@ -92,7 +92,12 @@ MemberListScreen.propTypes = {
   memberList: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
+    avatar: PropTypes.shape({
+      full: PropTypes.string.isRequired,
+      large: PropTypes.string.isRequired,
+      medium: PropTypes.string.isRequired,
+      small: PropTypes.string.isRequired,
+    }).isRequired,
   })).isRequired,
   status: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,

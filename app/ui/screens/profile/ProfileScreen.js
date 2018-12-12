@@ -292,7 +292,6 @@ ProfileScreen.propTypes = {
   profile: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
     avatar: PropTypes.shape({
       full: PropTypes.string.isRequired,
       large: PropTypes.string.isRequired,
