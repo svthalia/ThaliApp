@@ -57,7 +57,7 @@ const update = function* update(action) {
   });
 
   const data = {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

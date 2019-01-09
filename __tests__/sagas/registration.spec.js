@@ -137,7 +137,7 @@ describe('registration saga', () => {
       .put(registrationActions.failure())
       .silentRun());
 
-    it('should do a PUT request with fields', () => expectSaga(registrationSaga)
+    it('should do a PATCH request with fields', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
       ])
@@ -151,7 +151,7 @@ describe('registration saga', () => {
             Authorization: 'Token token',
             'Content-Type': 'application/json',
           },
-          method: 'PUT',
+          method: 'PATCH',
         });
       }));
   });
