@@ -3,6 +3,17 @@
 exports[`event actions should create an action to load an event 1`] = `
 Object {
   "payload": Object {
+    "navigateToEventScreen": true,
+    "pk": 1,
+  },
+  "type": "EVENT_EVENT",
+}
+`;
+
+exports[`event actions should create an action to load an event without opening the event screen 1`] = `
+Object {
+  "payload": Object {
+    "navigateToEventScreen": false,
     "pk": 1,
   },
   "type": "EVENT_EVENT",
@@ -34,5 +45,28 @@ Object {
 exports[`event actions should create an action to notify of that an event is fetching 1`] = `
 Object {
   "type": "EVENT_FETCHING",
+}
+`;
+
+exports[`event actions should create an action to open the admin screen of the event 1`] = `
+Object {
+  "type": "EVENT_ADMIN",
+}
+`;
+
+exports[`event actions should create an action to open the event screen 1`] = `
+Object {
+  "type": "EVENT_OPEN",
+}
+`;
+
+exports[`event actions should create an action to update a registration 1`] = `
+Object {
+  "payload": Object {
+    "payment": "no_payment",
+    "pk": 1,
+    "present": true,
+  },
+  "type": "EVENT_UPDATE_REGISTRATION",
 }
 `;

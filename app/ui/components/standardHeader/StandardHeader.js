@@ -26,6 +26,8 @@ const sceneToTitle = (routeName, t) => {
       return t('Registration');
     case 'Settings':
       return t('Settings');
+    case 'EventAdmin':
+      return t('Registrations');
     default:
       return 'ThaliApp';
   }

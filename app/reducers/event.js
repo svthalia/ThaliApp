@@ -15,6 +15,7 @@ const initialState = {
     has_fields: false,
     is_pizza_event: false,
     google_maps_url: '',
+    is_admin: false,
   },
   registrations: [],
   status: 'initial',
@@ -23,9 +24,12 @@ const initialState = {
 
 export default function loadEvent(state = initialState, action = {}) {
   switch (action.type) {
+    case eventActions.OPEN: {
+      return initialState;
+    }
     case eventActions.FETCHING: {
       return {
-        ...initialState,
+        ...state,
         loading: true,
       };
     }

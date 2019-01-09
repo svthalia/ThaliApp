@@ -63,13 +63,8 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   rightView: {
-    ios: {
-      width: 24 + 16 + 10,
-    },
-    android: {
-      position: 'absolute',
-      right: 0,
-    },
+    position: 'absolute',
+    right: 0,
   },
 });
 

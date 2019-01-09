@@ -361,7 +361,7 @@ Pizza:
 
   render() {
     const {
-      status, loading, openMaps, data, t,
+      status, loading, openMaps, data, t, openAdmin,
     } = this.props;
 
     const shareButton = (
@@ -377,6 +377,28 @@ Pizza:
           size={24}
         />
       </TouchableOpacity>
+    );
+
+    const adminButton = (
+      <TouchableOpacity
+        onPress={() => openAdmin(data.pk)}
+      >
+        <Icon
+          name="settings"
+          style={styles.adminIcon}
+          size={24}
+        />
+      </TouchableOpacity>
+    );
+
+    const hasAdminView = data.is_admin
+      && (data.registration_start !== null || data.registration_end !== null);
+
+    const rightView = (
+      <View style={styles.rightView}>
+        {shareButton}
+        {hasAdminView && adminButton}
+      </View>
     );
 
     if (status === 'initial') {
@@ -401,7 +423,7 @@ Pizza:
     if (status === 'success') {
       return (
         <View style={styles.rootWrapper}>
-          <StandardHeader rightView={shareButton} />
+          <StandardHeader rightView={rightView} />
           <ScrollView
             backgroundColor={Colors.background}
             contentContainerStyle={styles.eventView}
@@ -490,6 +512,7 @@ EventScreen.propTypes = {
     no_registration_message: PropTypes.string,
     is_pizza_event: PropTypes.bool.isRequired,
     google_maps_url: PropTypes.string.isRequired,
+    is_admin: PropTypes.bool.isRequired,
   }).isRequired,
   registrations: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number.isRequired,
@@ -510,6 +533,7 @@ EventScreen.propTypes = {
   fields: PropTypes.func.isRequired,
   openMaps: PropTypes.func.isRequired,
   retrievePizzaInfo: PropTypes.func.isRequired,
+  openAdmin: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 

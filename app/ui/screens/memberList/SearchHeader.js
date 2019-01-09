@@ -39,14 +39,14 @@ class SearchHeader extends Component {
   }
 
   getLeftIcon = () => {
-    const { toggleDrawer } = this.props;
+    const { leftIcon, leftIconAction } = this.props;
     const { isSearching } = this.state;
     return (
       <TouchableOpacity
-        onPress={() => (isSearching ? this.updateSearch(false) : toggleDrawer())}
+        onPress={() => (isSearching ? this.updateSearch(false) : leftIconAction())}
       >
         <Icon
-          name={isSearching ? 'arrow-back' : 'menu'}
+          name={isSearching ? 'arrow-back' : leftIcon}
           style={[styles.leftIcon, isSearching ? styles.magenta : styles.white]}
           size={24}
         />
@@ -173,12 +173,17 @@ class SearchHeader extends Component {
   }
 }
 
+SearchHeader.defaultProps = {
+  leftIcon: 'menu',
+};
+
 SearchHeader.propTypes = {
   title: PropTypes.string.isRequired,
   searchText: PropTypes.string.isRequired,
   search: PropTypes.func.isRequired,
   searchKey: PropTypes.string.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
+  leftIcon: PropTypes.string,
+  leftIconAction: PropTypes.func.isRequired,
 };
 
 export default SearchHeader;
