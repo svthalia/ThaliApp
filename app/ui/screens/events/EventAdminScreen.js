@@ -46,6 +46,38 @@ class EventAdminScreen extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (!this.registrationsAreEqual(this.props.registrations, prevProps.registrations)) {
+      const registrations = {};
+      for (let i = 0; i < this.props.registrations.length; i += 1) {
+        const {
+          pk, name, present, payment,
+        } = this.props.registrations[i];
+
+        registrations[pk] = {
+          name, present, payment,
+        };
+      }
+
+      this.setState({ registrations }); // eslint-disable-line react/no-did-update-set-state
+    }
+  }
+
+  registrationsAreEqual = (a, b) => {
+    if (a.length !== b.length) {
+      return false;
+    }
+    a.sort((x, y) => x.pk - y.pk);
+    b.sort((x, y) => x.pk - y.pk);
+
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i].payment !== b[i].payment || a[i].present !== b[i].present) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   applyFilter = (keys) => {
     let result = keys.filter(this.containsSearchKey);
     if (this.state.filterType === 'payment') {
