@@ -108,6 +108,14 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   shareIcon: {
+    color: Colors.white,
+  },
+  adminIcon: {
+    marginLeft: 16,
+    color: Colors.white,
+  },
+  rightView: {
+    flexDirection: 'row',
     android: {
       paddingLeft: 32,
       paddingRight: 20,
@@ -116,7 +124,6 @@ const styles = StyleSheet.create({
       paddingLeft: 16,
       paddingRight: 10,
     },
-    color: Colors.white,
   },
   registrationsTitle: {
     android: {

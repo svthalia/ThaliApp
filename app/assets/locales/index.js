@@ -8,6 +8,7 @@ files['app/ui/screens/pizza/PizzaScreenNL'] = require('./nl/app/ui/screens/pizza
 files['app/ui/screens/settings/NotificationsSectionNL'] = require('./nl/app/ui/screens/settings/NotificationsSection.json');
 files['app/ui/screens/events/CalendarScreenNL'] = require('./nl/app/ui/screens/events/CalendarScreen.json');
 files['app/ui/screens/events/RegistrationScreenNL'] = require('./nl/app/ui/screens/events/RegistrationScreen.json');
+files['app/ui/screens/events/EventAdminScreenNL'] = require('./nl/app/ui/screens/events/EventAdminScreen.json');
 files['app/ui/screens/events/CalendarItemNL'] = require('./nl/app/ui/screens/events/CalendarItem.json');
 files['app/ui/screens/events/EventScreenNL'] = require('./nl/app/ui/screens/events/EventScreen.json');
 files['app/ui/components/standardHeader/StandardHeaderNL'] = require('./nl/app/ui/components/standardHeader/StandardHeader.json');
@@ -26,6 +27,7 @@ export default {
     'screens/settings/NotificationsSection': files['app/ui/screens/settings/NotificationsSectionNL'],
     'screens/events/CalendarScreen': files['app/ui/screens/events/CalendarScreenNL'],
     'screens/events/RegistrationScreen': files['app/ui/screens/events/RegistrationScreenNL'],
+    'screens/events/EventAdminScreen': files['app/ui/screens/events/EventAdminScreenNL'],
     'screens/events/CalendarItem': files['app/ui/screens/events/CalendarItemNL'],
     'screens/events/EventScreen': files['app/ui/screens/events/EventScreenNL'],
     'components/standardHeader/StandardHeader': files['app/ui/components/standardHeader/StandardHeaderNL'],

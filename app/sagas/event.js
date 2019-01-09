@@ -7,11 +7,15 @@ import { apiRequest } from '../utils/url';
 import * as eventActions from '../actions/event';
 import { tokenSelector } from '../selectors/session';
 
-const event = function* event(action) {
-  const { pk } = action.payload;
+function* event(action) {
+  const { pk, navigateToEventScreen } = action.payload;
   const token = yield select(tokenSelector);
 
   yield put(eventActions.fetching());
+
+  if (navigateToEventScreen) {
+    yield put(eventActions.open());
+  }
 
   const data = {
     method: 'GET',
@@ -39,10 +43,40 @@ const event = function* event(action) {
     Sentry.captureException(error);
     yield put(eventActions.failure());
   }
-};
+}
 
-const eventSaga = function* eventSaga() {
+function* updateRegistration(action) {
+  const { pk, present, payment } = action.payload;
+  const token = yield select(tokenSelector);
+
+  yield put(eventActions.fetching());
+
+  const data = {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+    body: JSON.stringify({
+      present,
+      payment,
+    }),
+  };
+
+  try {
+    yield call(apiRequest, `registrations/${pk}`, data);
+
+    yield put(eventActions.done());
+  } catch (error) {
+    Sentry.captureException(error);
+    yield put(eventActions.failure());
+  }
+}
+
+function* eventSaga() {
   yield takeEvery(eventActions.EVENT, event);
-};
+  yield takeEvery(eventActions.UPDATE_REGISTRATION, updateRegistration);
+}
 
 export default eventSaga;

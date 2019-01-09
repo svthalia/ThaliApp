@@ -8,6 +8,7 @@ Object {
     "end": "",
     "google_maps_url": "",
     "has_fields": false,
+    "is_admin": false,
     "is_pizza_event": false,
     "location": "",
     "map_location": "",

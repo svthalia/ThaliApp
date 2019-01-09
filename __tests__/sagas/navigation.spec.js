@@ -80,10 +80,17 @@ describe('navigation saga', () => {
       }));
 
     it('should open the event screen', () => expectSaga(navigationSaga)
-      .dispatch(eventActions.event(1))
+      .dispatch(eventActions.open())
       .silentRun()
       .then(() => {
         expect(NavigationService.navigate).toBeCalledWith('Event');
+      }));
+
+    it('should open the event admin screen', () => expectSaga(navigationSaga)
+      .dispatch(eventActions.admin())
+      .silentRun()
+      .then(() => {
+        expect(NavigationService.navigate).toBeCalledWith('EventAdmin');
       }));
 
     it('should open the profile screen', () => expectSaga(navigationSaga)

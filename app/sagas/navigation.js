@@ -30,7 +30,8 @@ const routerSaga = function* eventSaga() {
   yield takeEvery(settingsActions.OPEN, navigate, 'Settings');
   yield takeEvery(calendarActions.OPEN, navigate, 'Calendar');
   yield takeEvery(membersActions.MEMBERS, navigate, 'MemberList');
-  yield takeEvery(eventActions.EVENT, navigate, 'Event');
+  yield takeEvery(eventActions.OPEN, navigate, 'Event');
+  yield takeEvery(eventActions.ADMIN, navigate, 'EventAdmin');
   yield takeEvery(profileActions.PROFILE, navigate, 'Profile');
   yield takeEvery(registrationActions.FIELDS, navigate, 'Registration');
   yield takeEvery(registrationActions.SUCCESS, back);

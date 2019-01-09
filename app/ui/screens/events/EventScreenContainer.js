@@ -19,6 +19,7 @@ const mapDispatchToProps = dispatch => ({
   fields: registration => dispatch(registrationActions.retrieveFields(registration)),
   openMaps: location => Linking.openURL(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
   retrievePizzaInfo: () => dispatch(pizzaActions.retrievePizzaInfo()),
+  openAdmin: () => (dispatch(eventActions.admin())),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);

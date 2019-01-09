@@ -3,10 +3,9 @@ import * as actions from '../../app/actions/event';
 
 describe('events reducer', () => {
   const emptyState = {};
+  const initialState = reducer();
 
   describe('initially', () => {
-    const initialState = reducer();
-
     it('should not be fetched', () => {
       expect(initialState).toMatchSnapshot();
     });
@@ -20,6 +19,14 @@ describe('events reducer', () => {
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
+    });
+  });
+
+  describe('is opened', () => {
+    const state = reducer(emptyState, actions.open());
+
+    it('should reset', () => {
+      expect(state).toEqual(initialState);
     });
   });
 

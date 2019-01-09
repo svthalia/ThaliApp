@@ -16,6 +16,7 @@ import Registration from './ui/screens/events/RegistrationScreenContainer';
 import MemberList from './ui/screens/memberList/MemberListScreenContainer';
 import SplashScreen from './ui/screens/splash/SplashScreen';
 import Settings from './ui/screens/settings/SettingsScreenContainer';
+import EventAdmin from './ui/screens/events/EventAdminScreenContainer';
 import Sidebar from './ui/components/sidebar/SidebarContainer';
 
 const MainNavigator = createDrawerNavigator({
@@ -33,6 +34,7 @@ const SignedInNavigator = createStackNavigator({
   Profile,
   Pizza,
   Registration,
+  EventAdmin,
 }, {
   headerMode: 'none',
 });
