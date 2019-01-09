@@ -42,7 +42,7 @@ jest.mock('../../app/navigation', () => ({
 jest.mock('react-native-sentry', () => ({
   Sentry: {
     setUserContext: () => {},
-    captureException: () => {},
+    captureException: jest.fn(),
   },
 }));
 
@@ -177,12 +177,15 @@ describe('session saga', () => {
         ]);
       }));
 
-    it('should not care about errors', () => expectSaga(sessionSaga)
+    it('should log any errors', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
       .dispatch(sessionActions.fetchUserInfo())
-      .silentRun());
+      .silentRun()
+      .then(() => {
+        expect(Sentry.captureException).toBeCalled();
+      }));
 
     it('should do a GET request', () => expectSaga(sessionSaga)
       .dispatch(sessionActions.fetchUserInfo())
