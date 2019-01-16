@@ -3,12 +3,12 @@
   "Filtering on presence": "Filteren op aanwezigheid",
   "Filtering on payment": "Filteren op betaling",
   "Present": "Aanwezig",
-  "Not paid": "Niet betaald",
-  "Cash": "Cash",
-  "Card": "Pin",
   "No registrations found...": "Geen inschrijvingen gevonden...",
   "Registrations": "Inschrijvingen",
   "Find a member": "Zoek een lid",
   "No registrations found with this filter.": "Geen inschrijvingen gevonden met dit filter.",
-  "Could not load the event...": "Kon het evenement niet laden..."
+  "Could not load the event...": "Kon het evenement niet laden...",
+  "NOT PAID": "NIET BETAALD",
+  "CASH": "CONTANT",
+  "CARD": "PIN"
 }
