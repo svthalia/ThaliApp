@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 8,
+    padding: 16,
   },
   text: {
     color: Colors.textColour,
@@ -49,9 +49,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     margin: 2,
-    padding: 8,
-    backgroundColor: Colors.gray,
-    borderRadius: 4,
+    borderRadius: 2,
     overflow: 'hidden',
     android: {
       elevation: 2,
@@ -62,6 +60,11 @@ const styles = StyleSheet.create({
       borderWidth: 0.5,
     },
   },
+  card: {
+    padding: 8,
+    backgroundColor: Colors.gray,
+    alignItems: 'center',
+  },
   buttonText: {
     color: Colors.white,
     fontSize: 12,
@@ -70,15 +73,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.magenta,
   },
   filterButton: {
-    width: 56,
-    height: 56,
     position: 'absolute',
     bottom: 16,
     right: 16,
     borderRadius: 28,
-    backgroundColor: Colors.magenta,
-    justifyContent: 'center',
-    alignItems: 'center',
+    overflow: 'hidden',
+    backgroundColor: Colors.gray,
     android: {
       elevation: 4,
     },
@@ -87,6 +87,13 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 0.5,
     },
+  },
+  filterButtonWrapper: {
+    width: 56,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.magenta,
   },
   noResultsMessage: {
     fontSize: 18,

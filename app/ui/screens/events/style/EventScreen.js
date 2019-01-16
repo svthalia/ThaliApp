@@ -92,15 +92,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   registrationActions: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
     marginTop: 16,
   },
   termsUrl: {
     color: Colors.magenta,
   },
   secondButtonMargin: {
-    marginLeft: 16,
+    marginTop: 16,
   },
   descText: {
     fontSize: 14,
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   adminIcon: {
-    marginLeft: 16,
+    marginLeft: 24,
     color: Colors.white,
   },
   rightView: {

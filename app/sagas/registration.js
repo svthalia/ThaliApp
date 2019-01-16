@@ -33,7 +33,7 @@ const register = function* register(action) {
   try {
     const registration = yield call(apiRequest, `events/${event}/registrations`, data);
 
-    yield put(eventActions.event(event));
+    yield put(eventActions.event(event, false));
     if (registration.fields) {
       yield put(registrationActions.retrieveFields(registration.pk));
     }
@@ -100,7 +100,7 @@ const cancel = function* cancel(action) {
     Sentry.captureException(error);
   }
 
-  yield put(eventActions.event(event));
+  yield put(eventActions.event(event, false));
 };
 
 const fields = function* fields(action) {

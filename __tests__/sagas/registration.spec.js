@@ -53,7 +53,7 @@ describe('registration saga', () => {
         [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }), { }],
       ])
       .dispatch(registrationActions.register(1))
-      .put(eventActions.event(1))
+      .put(eventActions.event(1, false))
       .silentRun());
 
     it('should show a snackbar when the request succeeds', () => expectSaga(registrationSaga)
@@ -188,7 +188,7 @@ describe('registration saga', () => {
         [matchers.call.fn(apiRequest), {}],
       ])
       .dispatch(registrationActions.cancel(1))
-      .put(eventActions.event(1))
+      .put(eventActions.event(1, false))
       .silentRun());
 
     it('should put event action when the request fails', () => expectSaga(registrationSaga)

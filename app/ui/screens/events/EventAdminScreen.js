@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, Text, Switch, RefreshControl, ScrollView, FlatList, TouchableOpacity,
+  View, Text, Switch, RefreshControl, ScrollView, FlatList, TouchableHighlight,
 } from 'react-native';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -13,7 +13,7 @@ import Colors from '../../style/Colors';
 import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import SearchHeader from '../memberList/SearchHeaderContainer';
+import SearchHeader from '../../components/searchHeader/SearchHeaderContainer';
 
 const PAYMENT_TYPES = {
   NONE: 'no_payment',
@@ -161,36 +161,39 @@ class EventAdminScreen extends Component {
             />
           </View>
           <View style={styles.paymentContainer}>
-            <TouchableOpacity
+            <TouchableHighlight
               key={`${item}_${PAYMENT_TYPES.NONE}`}
               onPress={() => this.updateValue(item, present, PAYMENT_TYPES.NONE)}
-              style={[styles.button, payment === PAYMENT_TYPES.NONE && styles.selected]}
-              underlayColor={Colors.gray}
+              style={styles.button}
             >
-              <Text style={[styles.text, styles.buttonText]}>
-                {t('Not paid')}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              <View style={[styles.card, payment === PAYMENT_TYPES.NONE && styles.selected]}>
+                <Text style={[styles.text, styles.buttonText]}>
+                  {t('NOT PAID')}
+                </Text>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight
               key={`${item}_${PAYMENT_TYPES.CASH}`}
               onPress={() => this.updateValue(item, present, PAYMENT_TYPES.CASH)}
-              style={[styles.button, payment === PAYMENT_TYPES.CASH && styles.selected]}
-              underlayColor={Colors.gray}
+              style={styles.button}
             >
-              <Text style={[styles.text, styles.buttonText]}>
-                {t('Cash')}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              <View style={[styles.card, payment === PAYMENT_TYPES.CASH && styles.selected]}>
+                <Text style={[styles.text, styles.buttonText]}>
+                  {t('CASH')}
+                </Text>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight
               key={`${item}_${PAYMENT_TYPES.CARD}`}
               onPress={() => this.updateValue(item, present, PAYMENT_TYPES.CARD)}
-              style={[styles.button, payment === PAYMENT_TYPES.CARD && styles.selected]}
-              underlayColor={Colors.gray}
+              style={styles.button}
             >
-              <Text style={[styles.text, styles.buttonText]}>
-                {t('Card')}
-              </Text>
-            </TouchableOpacity>
+              <View style={[styles.card, payment === PAYMENT_TYPES.CARD && styles.selected]}>
+                <Text style={[styles.text, styles.buttonText]}>
+                  {t('CARD')}
+                </Text>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
       </View>
@@ -244,16 +247,18 @@ class EventAdminScreen extends Component {
       );
 
       const filterButton = (
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={this.updateFilter}
           style={styles.filterButton}
         >
-          <Icon
-            name="filter-list"
-            size={32}
-            color={Colors.white}
-          />
-        </TouchableOpacity>
+          <View style={styles.filterButtonWrapper}>
+            <Icon
+              name="filter-list"
+              size={32}
+              color={Colors.white}
+            />
+          </View>
+        </TouchableHighlight>
       );
 
       if (keys.length === 0) {
