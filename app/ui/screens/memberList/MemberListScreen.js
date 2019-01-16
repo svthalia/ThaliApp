@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import MemberView from '../../components/memberView/MemberViewContainer';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import SearchHeader from './SearchHeaderContainer';
+import SearchHeader from '../../components/searchHeader/SearchHeaderContainer';
 
 import styles, { memberSize } from './style/MemberList';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
