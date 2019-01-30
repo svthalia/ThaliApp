@@ -60,6 +60,10 @@ build android:
       paths:
           - $CI_PROJECT_DIR/.gradle/wrapper/
           - $CI_PROJECT_DIR/.gradle/caches/
+    before_script:
+        - set +o pipefail
+        - yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
+        - set -o pipefail
     script:
         - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
         - echo $PROD_ENV | base64 -d > .env
