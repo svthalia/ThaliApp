@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
+  Linking,
   Modal,
   ScrollView,
   Switch,
@@ -11,6 +12,7 @@ import {
 } from 'react-native';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
+import HTML from 'react-native-render-html';
 
 import styles from './style/RegistrationScreen';
 import Colors from '../../style/Colors';
@@ -94,6 +96,10 @@ class RegistrationScreen extends Component {
 
     const keys = Object.keys(this.props.fields);
 
+    const linkStyles = {
+      color: Colors.magenta,
+    };
+
     return (
       <KeyboardAvoidingView
         style={styles.rootWrapper}
@@ -134,6 +140,14 @@ class RegistrationScreen extends Component {
                       onTintColor={Colors.magenta}
                     />
                   </View>
+                  <HTML
+                    html={field.description}
+                    onLinkPress={(event, href) => Linking.openURL(href)}
+                    baseFontStyle={styles.description}
+                    tagsStyles={{
+                      a: linkStyles,
+                    }}
+                  />
                   {validity.isValid || (
                     <Text style={styles.invalid}>
                       {validity.reason}
@@ -147,6 +161,14 @@ class RegistrationScreen extends Component {
                   <Text style={styles.field}>
                     {field.label}
                   </Text>
+                  <HTML
+                    html={field.description}
+                    onLinkPress={(event, href) => Linking.openURL(href)}
+                    baseFontStyle={styles.description}
+                    tagsStyles={{
+                      a: linkStyles,
+                    }}
+                  />
                   <TextInput
                     value={this.state[key]}
                     onChangeText={value => this.updateField(key, value)}
@@ -154,7 +176,6 @@ class RegistrationScreen extends Component {
                     style={styles.field}
                     underlineColorAndroid={validity.isValid ? Colors.lightGray
                       : Colors.lightRed}
-                    placeholder={field.description}
                   />
                   {validity.isValid || (
                     <Text style={styles.invalid}>
