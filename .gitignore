@@ -61,4 +61,4 @@ buck-out/
 
 bundle.js
 sentry.properties
-.env
+.env*
