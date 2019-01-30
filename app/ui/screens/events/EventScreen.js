@@ -48,6 +48,34 @@ class EventScreen extends Component {
     );
   };
 
+  eventProperties = () => {
+    const { data } = this.props;
+
+    const nowDate = new Date();
+    const startRegDate = new Date(data.registration_start);
+    const endRegDate = new Date(data.registration_end);
+    const cancelDeadlineDate = new Date(data.cancel_deadline);
+
+    const registrationRequired = data.registration_start !== null || data.registration_end !== null;
+    const registrationStarted = startRegDate <= nowDate;
+    const isLateCancellation = data.user_registration
+      && data.user_registration.is_late_cancellation;
+
+    const registrationAllowed = registrationRequired && endRegDate > nowDate
+      && registrationStarted && data.registration_allowed
+      && !isLateCancellation;
+
+    const afterCancelDeadline = data.cancel_deadline !== null && cancelDeadlineDate <= nowDate;
+
+    return {
+      registrationRequired,
+      registrationStarted,
+      isLateCancellation,
+      registrationAllowed,
+      afterCancelDeadline,
+    };
+  };
+
   eventDesc = () => {
     const { t, data } = this.props;
 
@@ -102,7 +130,8 @@ class EventScreen extends Component {
       </View>,
     );
 
-    if (data.registration_start !== null || data.registration_end !== null) {
+    const { registrationRequired } = this.eventProperties();
+    if (registrationRequired) {
       const registrationDeadline = Moment(data.registration_end).format('D MMM YYYY, HH:mm');
       const cancelDeadline = Moment(data.cancel_deadline).format('D MMM YYYY, HH:mm');
 
@@ -178,7 +207,7 @@ class EventScreen extends Component {
       infoTexts.push(
         <View key="pizza-holder" style={styles.pizzaHolder}>
           <Text style={styles.pizzaText} key="pizza-title">
-Pizza:
+            Pizza:
           </Text>
           <Button
             color={Colors.magenta}
@@ -200,27 +229,23 @@ Pizza:
     const { data, t } = this.props;
     let text = '';
 
-    const nowDate = new Date();
-    const startRegDate = new Date(data.registration_start);
-    const endRegDate = new Date(data.registration_end);
-    const cancelDeadlineDate = new Date(data.cancel_deadline);
+    const {
+      registrationRequired,
+      registrationStarted,
+      registrationAllowed,
+      isLateCancellation,
+      afterCancelDeadline,
+    } = this.eventProperties();
 
-    const regRequired = data.registration_start !== null || data.registration_end !== null;
-    const regStarted = startRegDate <= nowDate;
-    const regAllowed = regRequired && endRegDate > nowDate && regStarted;
-    const afterCancelDeadline = data.cancel_deadline !== null && cancelDeadlineDate <= nowDate;
-    const isLateCancellation = data.user_registration
-                               && data.user_registration.is_late_cancellation;
-
-    if (!regRequired) {
+    if (!registrationRequired) {
       text = t('No registration required.');
       if (data.no_registration_message) {
         text = data.no_registration_message;
       }
-    } else if (!regStarted) {
+    } else if (!registrationStarted) {
       const registrationStart = Moment(data.registration_start).format('D MMM YYYY, HH:mm');
       text = t('Registration will open {{start}}', { start: registrationStart });
-    } else if (!regAllowed) {
+    } else if (!registrationAllowed) {
       text = t('Registration is not possible anymore.');
     } else if (isLateCancellation) {
       text = t('Registration is not allowed anymore, as you cancelled your registration after the deadline.');
@@ -251,20 +276,14 @@ Pizza:
     const {
       data, register, t,
     } = this.props;
-    const nowDate = new Date();
-    const startRegDate = new Date(data.registration_start);
-    const endRegDate = new Date(data.registration_end);
 
-    const regRequired = data.registration_start !== null || data.registration_end !== null;
-    const regStarted = startRegDate <= nowDate;
-    const isLateCancellation = data.user_registration
-                               && data.user_registration.is_late_cancellation;
+    const {
+      registrationRequired,
+      registrationStarted,
+      registrationAllowed,
+    } = this.eventProperties();
 
-    const regAllowed = regRequired && endRegDate > nowDate
-                       && regStarted && data.registration_allowed
-                       && !isLateCancellation;
-
-    if (regAllowed) {
+    if (registrationAllowed) {
       if (data.user_registration === null || data.user_registration.is_cancelled) {
         const text = data.max_participants && data.max_participants <= data.num_participants
           ? t('Put me on the waiting list') : t('Register');
@@ -293,8 +312,8 @@ Pizza:
           </View>
         );
       } if (data.user_registration && !data.user_registration.is_cancelled
-                 && regRequired && regStarted) {
-        if (regStarted && data.user_registration && !data.user_registration.is_cancelled
+                 && registrationRequired && registrationStarted) {
+        if (registrationStarted && data.user_registration && !data.user_registration.is_cancelled
             && data.has_fields) {
           return (
             <View style={styles.registrationActions}>
