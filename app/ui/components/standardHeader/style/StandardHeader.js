@@ -23,19 +23,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.magenta,
     height: APPBAR_HEIGHT,
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'wrap',
     android: {
       height: APPBAR_HEIGHT,
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      flexWrap: 'wrap',
       elevation: 4,
     },
     ios: {
       borderStyle: 'solid',
       borderBottomColor: Colors.darkMagenta,
       borderBottomWidth: 1,
-      justifyContent: 'space-between',
-      alignItems: 'center',
     },
   },
   title: {
@@ -45,11 +43,18 @@ const styles = StyleSheet.create({
       fontFamily: 'sans-serif-medium',
     },
     ios: {
+      position: 'absolute',
+      left: 40,
+      right: 40,
+      zIndex: 0,
+      textAlign: 'center',
       fontSize: 18,
       fontFamily: 'System',
       fontWeight: '600',
-      textAlign: 'center',
     },
+  },
+  iconButton: {
+    zIndex: 2,
   },
   icon: {
     android: {

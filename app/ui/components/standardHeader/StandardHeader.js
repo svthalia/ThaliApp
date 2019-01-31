@@ -45,6 +45,7 @@ const StandardHeader = props => (
     </View>
     <View style={styles.appBar}>
       <TouchableOpacity
+        style={styles.iconButton}
         onPress={() => (props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack())}
       >
         <Icon
