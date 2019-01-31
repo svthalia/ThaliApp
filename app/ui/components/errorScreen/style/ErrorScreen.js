@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
       fontWeight: '500',
     },
     fontSize: 16,
-    color: Colors.gray,
+    color: Colors.grey,
     textAlign: 'center',
   },
 });

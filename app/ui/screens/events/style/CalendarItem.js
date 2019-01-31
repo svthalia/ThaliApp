@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   card: {
     padding: 16,
     borderRadius: 2,
-    backgroundColor: Colors.gray,
+    backgroundColor: Colors.grey,
   },
   registered: {
     backgroundColor: Colors.magenta,

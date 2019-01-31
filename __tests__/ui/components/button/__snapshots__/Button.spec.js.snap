@@ -28,6 +28,7 @@ exports[`Button component renders correctly 1`] = `
           "paddingLeft": 12,
           "paddingRight": 12,
         },
+        Object {},
         Object {
           "backgroundColor": "#E62272",
         },
@@ -84,6 +85,7 @@ exports[`Button component renders disabled correctly 1`] = `
           "paddingLeft": 12,
           "paddingRight": 12,
         },
+        Object {},
         Object {
           "backgroundColor": "#E62272",
         },
@@ -137,6 +139,7 @@ exports[`Button component renders title correctly on Android 1`] = `
           "paddingLeft": 12,
           "paddingRight": 12,
         },
+        Object {},
         Object {
           "backgroundColor": "#E62272",
         },

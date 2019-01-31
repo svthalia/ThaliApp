@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.magenta,
   },
   unregistered: {
-    backgroundColor: Colors.gray,
+    backgroundColor: Colors.grey,
   },
 });
 

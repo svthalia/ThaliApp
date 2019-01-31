@@ -46,28 +46,20 @@ const styles = StyleSheet.create({
   paymentContainer: {
     flex: 1,
   },
-  button: {
-    flex: 1,
-    margin: 2,
-    borderRadius: 2,
-    overflow: 'hidden',
-    android: {
-      elevation: 2,
-    },
-    ios: {
-      borderColor: Colors.lightGray,
-      borderStyle: 'solid',
-      borderWidth: 0.5,
-    },
-  },
-  card: {
-    padding: 8,
-    backgroundColor: Colors.gray,
-    alignItems: 'center',
-  },
   buttonText: {
     color: Colors.white,
     fontSize: 12,
+  },
+  buttonTextContainer: {
+    padding: 8,
+    ios: {
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
+  },
+  buttonMargin: {
+    marginTop: 4,
+    marginBottom: 4,
   },
   selected: {
     backgroundColor: Colors.magenta,
@@ -78,7 +70,7 @@ const styles = StyleSheet.create({
     right: 16,
     borderRadius: 28,
     overflow: 'hidden',
-    backgroundColor: Colors.gray,
+    backgroundColor: Colors.grey,
     android: {
       elevation: 4,
     },
