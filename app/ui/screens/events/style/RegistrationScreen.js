@@ -39,6 +39,18 @@ const styles = StyleSheet.create({
     },
     fontSize: 14,
     color: Colors.textColour,
+    marginBottom: 8,
+  },
+  description: {
+    android: {
+      fontFamily: 'sans-serif-medium',
+    },
+    ios: {
+      fontFamily: 'System',
+      fontWeight: '600',
+    },
+    fontSize: 12,
+    color: Colors.gray,
   },
   invalid: {
     android: {
