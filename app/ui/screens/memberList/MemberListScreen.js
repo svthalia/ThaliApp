@@ -29,12 +29,19 @@ class MemberListScreen extends Component {
     }
   };
 
+  search = (searchKey) => {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      this.props.loadMembers(searchKey);
+    }, 500);
+  };
+
   render() {
     const header = (
       <SearchHeader
         title={this.props.t('Member List')}
         searchText={this.props.t('Find a member')}
-        search={key => this.props.loadMembers(key)}
+        search={this.search}
         searchKey={this.props.searchKey}
       />
     );
