@@ -140,10 +140,7 @@ class SearchHeader extends Component {
   updateSearchKey = (searchKey) => {
     if (this.state.searchKey !== searchKey) {
       this.setState({ searchKey });
-      clearTimeout(this.searchTimeout);
-      this.searchTimeout = setTimeout(() => {
-        this.props.search(searchKey);
-      }, 500);
+      this.props.search(searchKey);
     }
   };
 
