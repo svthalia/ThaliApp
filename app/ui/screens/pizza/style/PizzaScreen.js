@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
       fontFamily: 'System',
       fontWeight: '300',
     },
-    color: Colors.gray,
+    color: Colors.grey,
     fontSize: 14,
     marginTop: 2,
     marginBottom: 2,

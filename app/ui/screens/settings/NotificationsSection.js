@@ -75,7 +75,7 @@ class NotificationsSection extends Component {
             onValueChange={value => this.updateField(category.key, value)}
             onTintColor={Colors.magenta}
             thumbTintColor={this.state[category.key]
-              ? Colors.darkMagenta : Colors.gray}
+              ? Colors.darkMagenta : Colors.grey}
             disabled={category.key === GENERAL_KEY}
             style={styles.settingsSwitch}
           />

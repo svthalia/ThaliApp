@@ -14,6 +14,7 @@ import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import SearchHeader from '../../components/searchHeader/SearchHeaderContainer';
+import Button from '../../components/button/Button';
 
 const PAYMENT_TYPES = {
   NONE: 'no_payment',
@@ -157,43 +158,35 @@ class EventAdminScreen extends Component {
               value={present}
               onValueChange={value => this.updateValue(item, value, payment)}
               onTintColor={Colors.magenta}
-              thumbTintColor={present ? Colors.darkMagenta : Colors.gray}
+              thumbTintColor={present ? Colors.darkMagenta : Colors.grey}
             />
           </View>
           <View style={styles.paymentContainer}>
-            <TouchableHighlight
+            <Button
               key={`${item}_${PAYMENT_TYPES.NONE}`}
               onPress={() => this.updateValue(item, present, PAYMENT_TYPES.NONE)}
-              style={styles.button}
-            >
-              <View style={[styles.card, payment === PAYMENT_TYPES.NONE && styles.selected]}>
-                <Text style={[styles.text, styles.buttonText]}>
-                  {t('NOT PAID')}
-                </Text>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight
+              title={t('NOT PAID')}
+              color={payment === PAYMENT_TYPES.NONE ? Colors.magenta : Colors.grey}
+              textStyle={styles.buttonText}
+              containerStyle={styles.buttonTextContainer}
+            />
+            <Button
               key={`${item}_${PAYMENT_TYPES.CASH}`}
               onPress={() => this.updateValue(item, present, PAYMENT_TYPES.CASH)}
-              style={styles.button}
-            >
-              <View style={[styles.card, payment === PAYMENT_TYPES.CASH && styles.selected]}>
-                <Text style={[styles.text, styles.buttonText]}>
-                  {t('CASH')}
-                </Text>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight
+              title={t('CASH')}
+              style={styles.buttonMargin}
+              color={payment === PAYMENT_TYPES.CASH ? Colors.magenta : Colors.grey}
+              textStyle={styles.buttonText}
+              containerStyle={styles.buttonTextContainer}
+            />
+            <Button
               key={`${item}_${PAYMENT_TYPES.CARD}`}
               onPress={() => this.updateValue(item, present, PAYMENT_TYPES.CARD)}
-              style={styles.button}
-            >
-              <View style={[styles.card, payment === PAYMENT_TYPES.CARD && styles.selected]}>
-                <Text style={[styles.text, styles.buttonText]}>
-                  {t('CARD')}
-                </Text>
-              </View>
-            </TouchableHighlight>
+              title={t('CARD')}
+              color={payment === PAYMENT_TYPES.CARD ? Colors.magenta : Colors.grey}
+              textStyle={styles.buttonText}
+              containerStyle={styles.buttonTextContainer}
+            />
           </View>
         </View>
       </View>

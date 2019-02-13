@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     },
   },
   description: {
-    color: Colors.gray,
+    color: Colors.grey,
     android: {
       fontFamily: 'sans-serif-medium',
     },

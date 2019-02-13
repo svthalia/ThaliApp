@@ -21,7 +21,7 @@ const Button = (props) => {
       underlayColor={props.underlayColor}
     >
       <View
-        style={[styles.container, { backgroundColor: props.color }]}
+        style={[styles.container, props.containerStyle, { backgroundColor: props.color }]}
       >
         <Text style={[styles.text, props.textStyle]}>
           {title}
@@ -36,6 +36,7 @@ Button.propTypes = {
   color: PropTypes.string,
   disabled: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
+  containerStyle: Text.propTypes.style,
   // eslint-disable-next-line react/no-typos
   textStyle: Text.propTypes.style,
   title: PropTypes.string.isRequired,
@@ -45,6 +46,7 @@ Button.propTypes = {
 Button.defaultProps = {
   color: Colors.magenta,
   disabled: false,
+  containerStyle: {},
   textStyle: {},
   underlayColor: Colors.white,
 };

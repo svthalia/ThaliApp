@@ -6,7 +6,7 @@ export default {
   background: '#FAFAFA',
   black: '#000000',
   lightGray: '#BBBBBB',
-  gray: '#616161',
+  grey: '#616161',
   textColour: '#313131',
   darkGrey: '#373737',
   dividerGrey: 'rgba(0, 0, 0, 0.12)',
