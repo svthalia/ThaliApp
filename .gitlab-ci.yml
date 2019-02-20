@@ -1,4 +1,4 @@
-image: node:8-alpine
+image: mhart/alpine-node:10
 
 variables:
     GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
@@ -10,6 +10,7 @@ stages:
 eslint:
     stage: validate
     before_script:
+        - apk update && apk add git
         - yarn install
     script:
         - yarn lint:ci
@@ -17,6 +18,7 @@ eslint:
 jest:
     stage: validate
     before_script:
+        - apk update && apk add git
         - yarn install
     script:
         - yarn jest
@@ -50,6 +52,7 @@ build android:
         - set +o pipefail
         - yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
         - set -o pipefail
+        - apk update && apk add git
         - yarn install
     script:
         - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
