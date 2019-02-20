@@ -4,34 +4,20 @@ variables:
     GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
 
 stages:
-  - dependencies
   - validate
   - build
 
-yarn dependencies:
-    stage: dependencies
-    cache:
-        key: $CI_JOB_NAME
-        paths:
-            - $ARTIFACTS_PATH
-            - $TOOL_CACHE_PATH
-    artifacts:
-        expire_in: 1 hour
-        paths:
-            - $ARTIFACTS_PATH
-    script:
-        - yarn install --lockfile-only
-    variables:
-        TOOL_CACHE_PATH: /usr/local/share/.cache/yarn/v1
-        ARTIFACTS_PATH: node_modules
-
 eslint:
     stage: validate
+    before_script:
+        - yarn install
     script:
         - yarn lint:ci
 
 jest:
     stage: validate
+    before_script:
+        - yarn install
     script:
         - yarn jest
 
@@ -64,6 +50,7 @@ build android:
         - set +o pipefail
         - yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
         - set -o pipefail
+        - yarn install
     script:
         - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
         - echo $PROD_ENV | base64 -d > .env
