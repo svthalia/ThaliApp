@@ -28,6 +28,7 @@ exports[`MemberView component renders correctly 1`] = `
     }
   >
     <View
+      accessibilityIgnoresInvertColors={true}
       style={
         Object {
           "flex": 1,
@@ -64,7 +65,19 @@ exports[`MemberView component renders correctly 1`] = `
             4278190080,
           ]
         }
+        endPoint={
+          Object {
+            "x": 0.5,
+            "y": 1,
+          }
+        }
         locations={null}
+        startPoint={
+          Object {
+            "x": 0.5,
+            "y": 0,
+          }
+        }
         style={
           Object {
             "bottom": 0,

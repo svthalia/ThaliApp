@@ -59,6 +59,7 @@ exports[`StandardHeader component renders correctly on Android 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -153,6 +154,7 @@ exports[`StandardHeader component renders correctly on iOS 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >

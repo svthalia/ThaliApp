@@ -26,6 +26,7 @@ exports[`Sidebar component renders correctly 1`] = `
     }
   >
     <View
+      accessibilityIgnoresInvertColors={true}
       style={
         Object {
           "flexDirection": "column",
@@ -68,7 +69,19 @@ exports[`Sidebar component renders correctly 1`] = `
             4278190080,
           ]
         }
+        endPoint={
+          Object {
+            "x": 0.5,
+            "y": 1,
+          }
+        }
         locations={null}
+        startPoint={
+          Object {
+            "x": 0.5,
+            "y": 0,
+          }
+        }
         style={
           Object {
             "bottom": 0,
@@ -161,7 +174,6 @@ exports[`Sidebar component renders correctly 1`] = `
       >
         <Text
           allowFontScaling={false}
-          onPress={[Function]}
           style={
             Array [
               Object {
@@ -183,6 +195,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -252,7 +265,6 @@ exports[`Sidebar component renders correctly 1`] = `
       >
         <Text
           allowFontScaling={false}
-          onPress={[Function]}
           style={
             Array [
               Object {
@@ -274,6 +286,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -343,7 +356,6 @@ exports[`Sidebar component renders correctly 1`] = `
       >
         <Text
           allowFontScaling={false}
-          onPress={[Function]}
           style={
             Array [
               Object {
@@ -365,6 +377,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -434,7 +447,6 @@ exports[`Sidebar component renders correctly 1`] = `
       >
         <Text
           allowFontScaling={false}
-          onPress={[Function]}
           style={
             Array [
               Object {
@@ -456,6 +468,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -528,7 +541,6 @@ exports[`Sidebar component renders correctly 1`] = `
       >
         <Text
           allowFontScaling={false}
-          onPress={[Function]}
           style={
             Array [
               Object {
@@ -550,6 +562,7 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >

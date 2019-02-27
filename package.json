@@ -40,7 +40,7 @@
       "^.+\\.js$": "<rootDir>/jest/preprocessor.js"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!react-native|react-navigation/)"
+      "node_modules/(?!react-native|react-navigation|i18next-react-native-language-detector|react-navigation-drawer/)"
     ],
     "moduleNameMapper": {
       "react-i18next": "<rootDir>/__mocks__/react-i18next-mock.js"
