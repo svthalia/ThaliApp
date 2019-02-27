@@ -1829,7 +1829,7 @@ babel-preset-es2015-node@^6.1.1:
     babel-plugin-transform-es2015-unicode-regex "6.x"
     semver "5.x"
 
-babel-preset-fbjs@^3.0.0, babel-preset-fbjs@^3.0.1:
+babel-preset-fbjs@^3.0.0, babel-preset-fbjs@^3.0.1, babel-preset-fbjs@^3.1.2:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/babel-preset-fbjs/-/babel-preset-fbjs-3.2.0.tgz#c0e6347d3e0379ed84b3c2434d3467567aa05297"
   integrity sha512-5Jo+JeWiVz2wHUUyAlvb/sSYnXNig9r+HqGAOSfh5Fzxp7SnAaR/tEGRJ1ZX7C77kfk82658w6R5Z+uPATTD9g==
@@ -5420,6 +5420,13 @@ metro-babel-register@^0.49.1:
     core-js "^2.2.2"
     escape-string-regexp "^1.0.5"
 
+metro-babel-transformer@0.52.0:
+  version "0.52.0"
+  resolved "https://registry.yarnpkg.com/metro-babel-transformer/-/metro-babel-transformer-0.52.0.tgz#9aec370b77d0246155869e7ab51880f70dfa859e"
+  integrity sha512-1dHTbDd73YM5MhA4CqdHOnPCRMc0fQh+jMx1aH/JTjUVfARj8d4qNAbdS2KZBTAHlwtUMChANXGpRMzEL31O0w==
+  dependencies:
+    "@babel/core" "^7.0.0"
+
 metro-babel7-plugin-react-transform@0.49.2:
   version "0.49.2"
   resolved "https://registry.yarnpkg.com/metro-babel7-plugin-react-transform/-/metro-babel7-plugin-react-transform-0.49.2.tgz#d4c43faa6f2b91cc1b244a36a5d708ae8d39dbb2"
@@ -5518,7 +5525,7 @@ metro-react-native-babel-preset@0.49.2:
     metro-babel7-plugin-react-transform "0.49.2"
     react-transform-hmr "^1.0.4"
 
-metro-react-native-babel-preset@^0.52.0:
+metro-react-native-babel-preset@0.52.0, metro-react-native-babel-preset@^0.52.0:
   version "0.52.0"
   resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.52.0.tgz#2b261d97c13cd14a617ba0d6b03e00a0b2168722"
   integrity sha512-Z/bWNIexZ5k4JXUjTjhmjoOpF1Cil+eEm1PNh4TVDvO3wEE3eKajMuuJCFa/a992OSpk3wUlFwQkYl7VO6NQSg==
@@ -5559,6 +5566,16 @@ metro-react-native-babel-preset@^0.52.0:
     "@babel/template" "^7.0.0"
     metro-babel7-plugin-react-transform "0.52.0"
     react-transform-hmr "^1.0.4"
+
+metro-react-native-babel-transformer@^0.52.0:
+  version "0.52.0"
+  resolved "https://registry.yarnpkg.com/metro-react-native-babel-transformer/-/metro-react-native-babel-transformer-0.52.0.tgz#627171c33a30953ef2cfd93ed3f5643569e46652"
+  integrity sha512-sePE4J6SfNUsIQApG2LbFEs1hLPLfYyRzbsTk709fXF7d300EGLDQSXdaD52o1kChIIeb+jLKEQ66XalDsy8QA==
+  dependencies:
+    "@babel/core" "^7.0.0"
+    babel-preset-fbjs "^3.1.2"
+    metro-babel-transformer "0.52.0"
+    metro-react-native-babel-preset "0.52.0"
 
 metro-resolver@0.49.2:
   version "0.49.2"

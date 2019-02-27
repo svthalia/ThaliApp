@@ -40,7 +40,7 @@
       "^.+\\.js$": "<rootDir>/jest/preprocessor.js"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!react-native|react-navigation)/"
+      "node_modules/(?!react-native|react-navigation/)"
     ],
     "moduleNameMapper": {
       "react-i18next": "<rootDir>/__mocks__/react-i18next-mock.js"
@@ -50,6 +50,7 @@
     "i18next": "^11.4.0",
     "i18next-react-native-language-detector": "^1.0.2",
     "metro-react-native-babel-preset": "^0.52.0",
+    "metro-react-native-babel-transformer": "^0.52.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",

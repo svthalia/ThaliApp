@@ -9,6 +9,6 @@
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-flow-strip-types",
     "@babel/plugin-transform-regenerator",
-    "@babel/plugin-transform-runtime"
+    "@babel/plugin-transform-runtime",
   ]
 }
