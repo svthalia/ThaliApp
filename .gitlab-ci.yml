@@ -49,6 +49,7 @@ build android:
           - $CI_PROJECT_DIR/.gradle/wrapper/
           - $CI_PROJECT_DIR/.gradle/caches/
     before_script:
+        - sysctl fs.inotify.max_user_watches=524288
         - set +o pipefail
         - yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
         - set -o pipefail
