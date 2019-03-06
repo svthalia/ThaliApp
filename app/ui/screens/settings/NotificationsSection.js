@@ -73,8 +73,11 @@ class NotificationsSection extends Component {
           <Switch
             value={this.state[category.key]}
             onValueChange={value => this.updateField(category.key, value)}
-            onTintColor={Colors.magenta}
-            thumbTintColor={this.state[category.key]
+            trackColor={{
+              false: Colors.lightGray,
+              true: Colors.magenta,
+            }}
+            thumbColor={this.state[category.key]
               ? Colors.darkMagenta : Colors.grey}
             disabled={category.key === GENERAL_KEY}
             style={styles.settingsSwitch}

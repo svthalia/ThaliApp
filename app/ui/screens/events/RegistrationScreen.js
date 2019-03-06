@@ -136,8 +136,11 @@ class RegistrationScreen extends Component {
                     <Switch
                       value={this.state[key]}
                       onValueChange={value => this.updateField(key, value)}
-                      thumbTintColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
-                      onTintColor={Colors.magenta}
+                      thumbColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
+                      trackColor={{
+                        false: Colors.lightGray,
+                        true: Colors.magenta,
+                      }}
                     />
                   </View>
                   <HTML
