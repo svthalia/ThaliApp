@@ -157,8 +157,11 @@ class EventAdminScreen extends Component {
             <Switch
               value={present}
               onValueChange={value => this.updateValue(item, value, payment)}
-              onTintColor={Colors.magenta}
-              thumbTintColor={present ? Colors.darkMagenta : Colors.grey}
+              trackColor={{
+                false: Colors.lightGray,
+                true: Colors.magenta,
+              }}
+              thumbColor={present ? Colors.darkMagenta : Colors.grey}
             />
           </View>
           <View style={styles.paymentContainer}>
