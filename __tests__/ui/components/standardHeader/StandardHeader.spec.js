@@ -1,9 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store';
-import StandardHeader from '../../../../app/ui/components/standardHeader/StandardHeader';
-import reducer from '../../../../app/reducers';
 import { Platform } from 'react-native';
+import renderer from 'react-test-renderer';
+import StandardHeader from '../../../../app/ui/components/standardHeader/StandardHeader';
 
 jest.mock('react-navigation', () => ({
   withNavigation: component => component,
@@ -14,7 +12,6 @@ const mockNavigation = {
 };
 
 describe('StandardHeader component', () => {
-  const mockStore = configureStore(reducer);
   const initialState = {
     navigation: {
       currentScene: 'home',
@@ -28,12 +25,11 @@ describe('StandardHeader component', () => {
       token: 'token123',
     },
   };
-  const store = mockStore(initialState);
 
   it('renders correctly on iOS', () => {
     Platform.OS = 'ios';
     const tree = renderer
-      .create(<StandardHeader store={store} navigation={mockNavigation} />)
+      .create(<StandardHeader store={initialState} navigation={mockNavigation} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -41,7 +37,7 @@ describe('StandardHeader component', () => {
   it('renders correctly on Android', () => {
     Platform.OS = 'android';
     const tree = renderer
-      .create(<StandardHeader store={store} navigation={mockNavigation} />)
+      .create(<StandardHeader store={initialState} navigation={mockNavigation} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
