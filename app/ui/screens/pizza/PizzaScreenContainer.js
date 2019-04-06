@@ -11,10 +11,10 @@ const mapStateToProps = state => ({
   pizzaList: state.pizza.pizzaList,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadPizzas: () => dispatch(retrievePizzaInfo()),
-  cancelPizza: () => dispatch(cancelOrder()),
-  orderPizza: (pk, hasOrder) => dispatch(orderPizza(pk, hasOrder)),
-});
+const mapDispatchToProps = {
+  loadPizzas: () => retrievePizzaInfo(),
+  cancelPizza: () => cancelOrder(),
+  orderPizza: (pk, hasOrder) => orderPizza(pk, hasOrder),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PizzaScreen);

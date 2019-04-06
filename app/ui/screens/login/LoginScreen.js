@@ -5,7 +5,6 @@ import {
   Image,
   KeyboardAvoidingView,
   LayoutAnimation,
-  Linking,
   Text,
   TextInput,
   View,
@@ -42,7 +41,9 @@ class LoginScreen extends Component {
 
   render() {
     configureNextAnimation();
-    const { login, t, status } = this.props;
+    const {
+      login, t, status, openUrl,
+    } = this.props;
 
     let content = (
       <View>
@@ -74,10 +75,10 @@ class LoginScreen extends Component {
           textStyle={styles.loginButtonText}
           underlayColor={Colors.white}
         />
-        <Text style={styles.linkText} onPress={() => Linking.openURL(`${url}/password_reset/`)}>
+        <Text style={styles.linkText} onPress={() => openUrl(`${url}/password_reset/`)}>
           {t('Forgot password?')}
         </Text>
-        <Text style={styles.linkText} onPress={() => Linking.openURL(`${url}/registration/`)}>
+        <Text style={styles.linkText} onPress={() => openUrl(`${url}/registration/`)}>
           {t('Become a member')}
         </Text>
       </View>
@@ -114,6 +115,7 @@ class LoginScreen extends Component {
 LoginScreen.propTypes = {
   login: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  openUrl: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
 };
 

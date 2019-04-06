@@ -1,16 +1,15 @@
-import { Linking } from 'react-native';
 import { connect } from 'react-redux';
 import * as eventActions from '../../../actions/event';
 import CalendarItem from './CalendarItem';
+import * as navigationActions from '../../../actions/navigation';
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   loadEvent: (event) => {
     if (event.partner) {
-      Linking.openURL(event.url);
-    } else {
-      dispatch(eventActions.event(event.pk));
+      return navigationActions.openWebsite(event.url);
     }
+    return eventActions.event(event.pk);
   },
-});
+};
 
 export default connect(() => ({}), mapDispatchToProps)(CalendarItem);

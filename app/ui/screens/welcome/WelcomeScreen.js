@@ -65,9 +65,9 @@ Footer.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapDispatchToFooterProps = dispatch => ({
-  openCalendar: () => dispatch(calendarActions.open()),
-});
+const mapDispatchToFooterProps = {
+  openCalendar: () => calendarActions.open(),
+};
 
 const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(translate('screens/welcome/WelcomeScreen')(Footer));
 

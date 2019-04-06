@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
   status: state.settings.pushNotifications.status,
 });
 
-const mapDispatchToProps = dispatch => ({
-  saveCategories: catList => dispatch(notificationsSettingsActions.saveCategories(catList)),
-});
+const mapDispatchToProps = {
+  saveCategories: catList => notificationsSettingsActions.saveCategories(catList),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationsSection);

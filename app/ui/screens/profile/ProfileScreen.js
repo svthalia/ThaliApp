@@ -1,140 +1,34 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
   Animated,
   ImageBackground,
-  Linking,
   Platform,
   ScrollView,
   StatusBar,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { translate } from 'react-i18next';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import Moment from 'moment';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import ErrorScreen from '../../components/errorScreen/ErrorScreen';
+import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 
 import StandardHeader from '../../components/standardHeader/StandardHeader';
-import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
-import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-
-import Colors from '../../style/Colors';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
+
+import Colors from '../../style/Colors';
+import AchievementSection from './AchievementSection';
+import DescriptionSection from './DescriptionSection';
+import PersonalInfoSection from './PersonalInfoSection';
 import styles, {
   HEADER_MAX_HEIGHT,
   HEADER_MIN_HEIGHT,
   HEADER_SCROLL_DISTANCE,
 } from './style/Profile';
-import CardSection from '../../components/cardSection/CardSection';
 
-const getDescription = (profile, t) => (
-  <CardSection
-    sectionHeader={`${t('About')} ${profile.display_name}`}
-  >
-    <Text
-      style={[
-        styles.data,
-        styles.item,
-        styles.profileText,
-        !profile.profile_description && styles.italics]}
-    >
-      {profile.profile_description || t('This member has not written a description yet.')}
-    </Text>
-  </CardSection>
-);
-
-const getPersonalInfo = (profile, t) => {
-  const profileInfo = {
-    starting_year: {
-      title: t('Cohort'),
-      display: x => x,
-    },
-    programme: {
-      title: t('Study programme'),
-      display: x => (x === 'computingscience' ? t('Computing science') : t('Information sciences')),
-    },
-    website: {
-      title: t('Website'),
-      display: x => x,
-    },
-    birthday: {
-      title: t('Birthday'),
-      display: x => Moment(x).format('D MMMM YYYY'),
-    },
-  };
-
-  const profileData = Object.keys(profileInfo).map((key) => {
-    if (profile[key]) {
-      return {
-        title: profileInfo[key].title,
-        value: profileInfo[key].display(profile[key]),
-      };
-    }
-    return null;
-  }).filter(n => n);
-
-  if (profileData) {
-    return (
-      <CardSection sectionHeader={t('Personal information')}>
-        {profileData.map((item, i) => (
-          <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
-            <Text style={styles.description}>
-              {item.title}
-            </Text>
-            <Text
-              style={item.title === 'Website' ? [styles.data, styles.url] : styles.data}
-              onPress={item.title === 'Website' ? () => Linking.openURL(`${item.value}`) : null}
-            >
-              {item.value}
-            </Text>
-          </View>
-        ))}
-      </CardSection>
-    );
-  }
-  return <View />;
-};
-
-const getMemberships = (memberships, sectionHeader, t) => {
-  if (memberships.length) {
-    return (
-      <CardSection
-        sectionHeader={sectionHeader}
-      >
-        {memberships.map((achievement, i) => (
-          <View style={[styles.item, i !== 0 && styles.borderTop]} key={achievement.name}>
-            <Text style={styles.description}>
-              {achievement.name}
-            </Text>
-            {achievement.periods && achievement.periods.map((period) => {
-              let start = Moment(period.since);
-              start = start.isSame(Moment([1970, 1, 1]), 'year') ? '?' : start.format('D MMMM YYYY');
-              const end = period.until ? Moment(period.until).format('D MMMM YYYY') : t('today');
-
-              let text = '';
-              if (period.role) {
-                text = `${period.role}: `;
-              } else if (period.chair) {
-                text = `${t('Chair')}: `;
-              }
-              text += `${start} - ${end}`;
-
-              return (
-                <Text style={styles.data} key={period.since}>
-                  {text}
-                </Text>
-              );
-            })}
-          </View>
-        ))}
-      </CardSection>
-    );
-  }
-  return <View />;
-};
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -246,18 +140,22 @@ class ProfileScreen extends Component {
   };
 
   render() {
-    if (!this.props.hasLoaded) {
+    const {
+      hasLoaded, profile, t, openUrl, success,
+    } = this.props;
+
+    if (!hasLoaded) {
       return (
         <View style={styles.container}>
           <StandardHeader />
           <LoadingScreen />
         </View>
       );
-    } if (!this.props.success) {
+    } if (!success) {
       return (
         <View style={styles.container}>
           <StandardHeader />
-          <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
+          <ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />
         </View>
       );
     }
@@ -276,10 +174,8 @@ class ProfileScreen extends Component {
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollY } } }])}
         >
           <View style={styles.content}>
-            {getDescription(this.props.profile, this.props.t)}
-            {getPersonalInfo(this.props.profile, this.props.t)}
-            {getMemberships(this.props.profile.achievements, this.props.t('Achievements for Thalia'), this.props.t)}
-            {getMemberships(this.props.profile.societies, this.props.t('Societies'), this.props.t)}
+            <DescriptionSection profile={profile} />
+            <PersonalInfoSection profile={profile} openUrl={openUrl} />
           </View>
         </ScrollView>
         {this.getAppbar()}
@@ -328,6 +224,7 @@ ProfileScreen.propTypes = {
   success: PropTypes.bool.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  openUrl: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,5 @@
 {
   "Are you sure you want to cancel your registration?": "Weet je je zeker dat je je wilt afmelden?",
-  "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
   "Cancel registration?": "Afmelden?",
   "No": "Nee",
   "Yes": "Ja",
@@ -21,7 +20,6 @@
   "No registration required.": "Aanmelden niet vereist.",
   "Registration will open {{start}}": "Aanmelden opent {{start}}",
   "Registration is not possible anymore.": "Aanmelden is niet meer mogelijk.",
-  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
   "Put me on the waiting list": "Zet me op de wachtlijst",
   "Register": "Aanmelden",
   "By registering, you confirm that you have read the": "Door te registreren, bevestig je dat je de",

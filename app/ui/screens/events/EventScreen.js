@@ -4,7 +4,6 @@ import {
   Alert,
   FlatList,
   Image,
-  Linking,
   RefreshControl,
   ScrollView,
   Text,
@@ -274,7 +273,7 @@ class EventScreen extends Component {
 
   eventActions = () => {
     const {
-      data, register, t,
+      data, register, t, openUrl,
     } = this.props;
 
     const {
@@ -293,7 +292,7 @@ class EventScreen extends Component {
               {t('By registering, you confirm that you have read the')}
               <Text
                 style={styles.termsUrl}
-                onPress={() => Linking.openURL(termsAndConditionsUrl)}
+                onPress={() => openUrl(termsAndConditionsUrl)}
               >
                 {' '}
                 {t('terms and conditions')}
@@ -380,7 +379,7 @@ class EventScreen extends Component {
 
   render() {
     const {
-      status, loading, openMaps, data, t, openAdmin,
+      status, loading, openMaps, data, t, openAdmin, openUrl,
     } = this.props;
 
     const shareButton = (
@@ -471,7 +470,7 @@ class EventScreen extends Component {
             <View style={styles.divider} />
             <HTML
               html={data.description}
-              onLinkPress={(event, href) => Linking.openURL(href)}
+              onLinkPress={(event, href) => openUrl(href)}
               baseFontStyle={fontStyles}
               tagsStyles={{
                 a: linkStyles,
@@ -553,6 +552,7 @@ EventScreen.propTypes = {
   openMaps: PropTypes.func.isRequired,
   retrievePizzaInfo: PropTypes.func.isRequired,
   openAdmin: PropTypes.func.isRequired,
+  openUrl: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 

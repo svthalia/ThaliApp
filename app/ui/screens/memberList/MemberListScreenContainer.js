@@ -10,9 +10,9 @@ const mapStateToProps = state => ({
   searchKey: state.members.searchKey,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadMembers: (keywords = '') => dispatch(memberActions.members(keywords)),
-  loadMoreMembers: url => dispatch(memberActions.more(url)),
-});
+const mapDispatchToProps = {
+  loadMembers: (keywords = '') => memberActions.members(keywords),
+  loadMoreMembers: url => memberActions.more(url),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberList);
