@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { translate } from 'react-i18next';
 import { Text, View } from 'react-native';
-import CardSection from '../../components/cardSection/CardSection';
 import Moment from 'moment';
+import CardSection from '../../components/cardSection/CardSection';
 import styles from './style/Profile';
 
 const AchievementSection = ({ profile, t, type }) => {

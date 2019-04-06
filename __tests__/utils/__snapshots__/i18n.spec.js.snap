@@ -51,10 +51,6 @@ I18n {
       "preload": false,
       "resources": Object {
         "nl": Object {
-          "app/App": Object {
-            "Dismiss": "Sluiten",
-            "Open": "Openen",
-          },
           "components/errorScreen/ErrorScreen": Object {
             "Try again later.": "Probeer het later opnieuw.",
           },
@@ -109,7 +105,6 @@ I18n {
             "Cancel registration": "Afmelden",
             "Cancel registration?": "Afmelden?",
             "Cancellation deadline": "Afmelddeadline",
-            "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
             "Could not load the event...": "Kan het evenement niet laden...",
             "From": "Van",
             "Location": "Locatie",
@@ -126,7 +121,6 @@ I18n {
             "Registration status": "Aanmeldstatus",
             "Registration will open {{start}}": "Aanmelden opent {{start}}",
             "Registrations": "Aanmeldingen",
-            "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
             "Until": "Tot",
             "Update registration": "Aanmelding bijwerken",
             "Yes": "Ja",
@@ -166,21 +160,27 @@ I18n {
             "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
             "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
           },
-          "screens/profile/ProfileScreen": Object {
-            "About": "Over",
+          "screens/profile/AchievementSection": Object {
             "Achievements for Thalia": "Verdiensten voor Thalia",
-            "Birthday": "Verjaardag",
             "Chair": "Voorzitter",
+            "Societies": "Gezelschappen",
+            "today": "heden",
+          },
+          "screens/profile/DescriptionSection": Object {
+            "About": "Over",
+            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+          },
+          "screens/profile/PersonalInfoSection": Object {
+            "Birthday": "Verjaardag",
             "Cohort": "Cohort",
             "Computing science": "Informatica",
             "Information sciences": "Informatiekunde",
             "Personal information": "Persoonlijke gegevens",
-            "Societies": "Gezelschappen",
-            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             "Study programme": "Studie",
-            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
             "Website": "Website",
-            "today": "heden",
+          },
+          "screens/profile/ProfileScreen": Object {
+            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           },
           "screens/settings/NotificationsSection": Object {
             "(required)": "(verplicht)",
@@ -272,10 +272,6 @@ I18n {
     "preload": false,
     "resources": Object {
       "nl": Object {
-        "app/App": Object {
-          "Dismiss": "Sluiten",
-          "Open": "Openen",
-        },
         "components/errorScreen/ErrorScreen": Object {
           "Try again later.": "Probeer het later opnieuw.",
         },
@@ -330,7 +326,6 @@ I18n {
           "Cancel registration": "Afmelden",
           "Cancel registration?": "Afmelden?",
           "Cancellation deadline": "Afmelddeadline",
-          "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
           "Could not load the event...": "Kan het evenement niet laden...",
           "From": "Van",
           "Location": "Locatie",
@@ -347,7 +342,6 @@ I18n {
           "Registration status": "Aanmeldstatus",
           "Registration will open {{start}}": "Aanmelden opent {{start}}",
           "Registrations": "Aanmeldingen",
-          "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
           "Until": "Tot",
           "Update registration": "Aanmelding bijwerken",
           "Yes": "Ja",
@@ -387,21 +381,27 @@ I18n {
           "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
           "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
         },
-        "screens/profile/ProfileScreen": Object {
-          "About": "Over",
+        "screens/profile/AchievementSection": Object {
           "Achievements for Thalia": "Verdiensten voor Thalia",
-          "Birthday": "Verjaardag",
           "Chair": "Voorzitter",
+          "Societies": "Gezelschappen",
+          "today": "heden",
+        },
+        "screens/profile/DescriptionSection": Object {
+          "About": "Over",
+          "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+        },
+        "screens/profile/PersonalInfoSection": Object {
+          "Birthday": "Verjaardag",
           "Cohort": "Cohort",
           "Computing science": "Informatica",
           "Information sciences": "Informatiekunde",
           "Personal information": "Persoonlijke gegevens",
-          "Societies": "Gezelschappen",
-          "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           "Study programme": "Studie",
-          "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
           "Website": "Website",
-          "today": "heden",
+        },
+        "screens/profile/ProfileScreen": Object {
+          "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
         },
         "screens/settings/NotificationsSection": Object {
           "(required)": "(verplicht)",
@@ -479,10 +479,6 @@ I18n {
             "preload": false,
             "resources": Object {
               "nl": Object {
-                "app/App": Object {
-                  "Dismiss": "Sluiten",
-                  "Open": "Openen",
-                },
                 "components/errorScreen/ErrorScreen": Object {
                   "Try again later.": "Probeer het later opnieuw.",
                 },
@@ -537,7 +533,6 @@ I18n {
                   "Cancel registration": "Afmelden",
                   "Cancel registration?": "Afmelden?",
                   "Cancellation deadline": "Afmelddeadline",
-                  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                   "Could not load the event...": "Kan het evenement niet laden...",
                   "From": "Van",
                   "Location": "Locatie",
@@ -554,7 +549,6 @@ I18n {
                   "Registration status": "Aanmeldstatus",
                   "Registration will open {{start}}": "Aanmelden opent {{start}}",
                   "Registrations": "Aanmeldingen",
-                  "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                   "Until": "Tot",
                   "Update registration": "Aanmelding bijwerken",
                   "Yes": "Ja",
@@ -594,21 +588,27 @@ I18n {
                   "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                   "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
                 },
-                "screens/profile/ProfileScreen": Object {
-                  "About": "Over",
+                "screens/profile/AchievementSection": Object {
                   "Achievements for Thalia": "Verdiensten voor Thalia",
-                  "Birthday": "Verjaardag",
                   "Chair": "Voorzitter",
+                  "Societies": "Gezelschappen",
+                  "today": "heden",
+                },
+                "screens/profile/DescriptionSection": Object {
+                  "About": "Over",
+                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+                },
+                "screens/profile/PersonalInfoSection": Object {
+                  "Birthday": "Verjaardag",
                   "Cohort": "Cohort",
                   "Computing science": "Informatica",
                   "Information sciences": "Informatiekunde",
                   "Personal information": "Persoonlijke gegevens",
-                  "Societies": "Gezelschappen",
-                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                   "Study programme": "Studie",
-                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                   "Website": "Website",
-                  "today": "heden",
+                },
+                "screens/profile/ProfileScreen": Object {
+                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 },
                 "screens/settings/NotificationsSection": Object {
                   "(required)": "(verplicht)",
@@ -673,10 +673,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -731,7 +727,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -748,7 +743,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -788,21 +782,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -877,10 +877,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -935,7 +931,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -952,7 +947,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -992,21 +986,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -1076,10 +1076,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -1134,7 +1130,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -1151,7 +1146,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -1191,21 +1185,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -1241,10 +1241,6 @@ I18n {
       "state": Object {},
       "store": Object {
         "nl": Object {
-          "app/App": Object {
-            "Dismiss": "Sluiten",
-            "Open": "Openen",
-          },
           "components/errorScreen/ErrorScreen": Object {
             "Try again later.": "Probeer het later opnieuw.",
           },
@@ -1299,7 +1295,6 @@ I18n {
             "Cancel registration": "Afmelden",
             "Cancel registration?": "Afmelden?",
             "Cancellation deadline": "Afmelddeadline",
-            "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
             "Could not load the event...": "Kan het evenement niet laden...",
             "From": "Van",
             "Location": "Locatie",
@@ -1316,7 +1311,6 @@ I18n {
             "Registration status": "Aanmeldstatus",
             "Registration will open {{start}}": "Aanmelden opent {{start}}",
             "Registrations": "Aanmeldingen",
-            "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
             "Until": "Tot",
             "Update registration": "Aanmelding bijwerken",
             "Yes": "Ja",
@@ -1356,21 +1350,27 @@ I18n {
             "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
             "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
           },
-          "screens/profile/ProfileScreen": Object {
-            "About": "Over",
+          "screens/profile/AchievementSection": Object {
             "Achievements for Thalia": "Verdiensten voor Thalia",
-            "Birthday": "Verjaardag",
             "Chair": "Voorzitter",
+            "Societies": "Gezelschappen",
+            "today": "heden",
+          },
+          "screens/profile/DescriptionSection": Object {
+            "About": "Over",
+            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+          },
+          "screens/profile/PersonalInfoSection": Object {
+            "Birthday": "Verjaardag",
             "Cohort": "Cohort",
             "Computing science": "Informatica",
             "Information sciences": "Informatiekunde",
             "Personal information": "Persoonlijke gegevens",
-            "Societies": "Gezelschappen",
-            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             "Study programme": "Studie",
-            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
             "Website": "Website",
-            "today": "heden",
+          },
+          "screens/profile/ProfileScreen": Object {
+            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           },
           "screens/settings/NotificationsSection": Object {
             "(required)": "(verplicht)",
@@ -1438,10 +1438,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -1496,7 +1492,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -1513,7 +1508,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -1553,21 +1547,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -1636,10 +1636,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -1694,7 +1690,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -1711,7 +1706,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -1751,21 +1745,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -1853,10 +1853,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -1911,7 +1907,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -1928,7 +1923,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -1968,21 +1962,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -2047,10 +2047,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -2105,7 +2101,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -2122,7 +2117,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -2162,21 +2156,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -2250,10 +2250,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -2308,7 +2304,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -2325,7 +2320,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -2365,21 +2359,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -2456,10 +2456,6 @@ I18n {
             "preload": false,
             "resources": Object {
               "nl": Object {
-                "app/App": Object {
-                  "Dismiss": "Sluiten",
-                  "Open": "Openen",
-                },
                 "components/errorScreen/ErrorScreen": Object {
                   "Try again later.": "Probeer het later opnieuw.",
                 },
@@ -2514,7 +2510,6 @@ I18n {
                   "Cancel registration": "Afmelden",
                   "Cancel registration?": "Afmelden?",
                   "Cancellation deadline": "Afmelddeadline",
-                  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                   "Could not load the event...": "Kan het evenement niet laden...",
                   "From": "Van",
                   "Location": "Locatie",
@@ -2531,7 +2526,6 @@ I18n {
                   "Registration status": "Aanmeldstatus",
                   "Registration will open {{start}}": "Aanmelden opent {{start}}",
                   "Registrations": "Aanmeldingen",
-                  "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                   "Until": "Tot",
                   "Update registration": "Aanmelding bijwerken",
                   "Yes": "Ja",
@@ -2571,21 +2565,27 @@ I18n {
                   "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                   "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
                 },
-                "screens/profile/ProfileScreen": Object {
-                  "About": "Over",
+                "screens/profile/AchievementSection": Object {
                   "Achievements for Thalia": "Verdiensten voor Thalia",
-                  "Birthday": "Verjaardag",
                   "Chair": "Voorzitter",
+                  "Societies": "Gezelschappen",
+                  "today": "heden",
+                },
+                "screens/profile/DescriptionSection": Object {
+                  "About": "Over",
+                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+                },
+                "screens/profile/PersonalInfoSection": Object {
+                  "Birthday": "Verjaardag",
                   "Cohort": "Cohort",
                   "Computing science": "Informatica",
                   "Information sciences": "Informatiekunde",
                   "Personal information": "Persoonlijke gegevens",
-                  "Societies": "Gezelschappen",
-                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                   "Study programme": "Studie",
-                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                   "Website": "Website",
-                  "today": "heden",
+                },
+                "screens/profile/ProfileScreen": Object {
+                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 },
                 "screens/settings/NotificationsSection": Object {
                   "(required)": "(verplicht)",
@@ -2650,10 +2650,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -2708,7 +2704,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -2725,7 +2720,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -2765,21 +2759,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -2854,10 +2854,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -2912,7 +2908,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -2929,7 +2924,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -2969,21 +2963,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -3954,10 +3954,6 @@ I18n {
     },
     "resourceStore": Object {
       "nl": Object {
-        "app/App": Object {
-          "Dismiss": "Sluiten",
-          "Open": "Openen",
-        },
         "components/errorScreen/ErrorScreen": Object {
           "Try again later.": "Probeer het later opnieuw.",
         },
@@ -4012,7 +4008,6 @@ I18n {
           "Cancel registration": "Afmelden",
           "Cancel registration?": "Afmelden?",
           "Cancellation deadline": "Afmelddeadline",
-          "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
           "Could not load the event...": "Kan het evenement niet laden...",
           "From": "Van",
           "Location": "Locatie",
@@ -4029,7 +4024,6 @@ I18n {
           "Registration status": "Aanmeldstatus",
           "Registration will open {{start}}": "Aanmelden opent {{start}}",
           "Registrations": "Aanmeldingen",
-          "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
           "Until": "Tot",
           "Update registration": "Aanmelding bijwerken",
           "Yes": "Ja",
@@ -4069,21 +4063,27 @@ I18n {
           "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
           "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
         },
-        "screens/profile/ProfileScreen": Object {
-          "About": "Over",
+        "screens/profile/AchievementSection": Object {
           "Achievements for Thalia": "Verdiensten voor Thalia",
-          "Birthday": "Verjaardag",
           "Chair": "Voorzitter",
+          "Societies": "Gezelschappen",
+          "today": "heden",
+        },
+        "screens/profile/DescriptionSection": Object {
+          "About": "Over",
+          "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+        },
+        "screens/profile/PersonalInfoSection": Object {
+          "Birthday": "Verjaardag",
           "Cohort": "Cohort",
           "Computing science": "Informatica",
           "Information sciences": "Informatiekunde",
           "Personal information": "Persoonlijke gegevens",
-          "Societies": "Gezelschappen",
-          "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           "Study programme": "Studie",
-          "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
           "Website": "Website",
-          "today": "heden",
+        },
+        "screens/profile/ProfileScreen": Object {
+          "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
         },
         "screens/settings/NotificationsSection": Object {
           "(required)": "(verplicht)",
@@ -4107,10 +4107,6 @@ I18n {
   },
   "store": Object {
     "nl": Object {
-      "app/App": Object {
-        "Dismiss": "Sluiten",
-        "Open": "Openen",
-      },
       "components/errorScreen/ErrorScreen": Object {
         "Try again later.": "Probeer het later opnieuw.",
       },
@@ -4165,7 +4161,6 @@ I18n {
         "Cancel registration": "Afmelden",
         "Cancel registration?": "Afmelden?",
         "Cancellation deadline": "Afmelddeadline",
-        "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
         "Could not load the event...": "Kan het evenement niet laden...",
         "From": "Van",
         "Location": "Locatie",
@@ -4182,7 +4177,6 @@ I18n {
         "Registration status": "Aanmeldstatus",
         "Registration will open {{start}}": "Aanmelden opent {{start}}",
         "Registrations": "Aanmeldingen",
-        "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
         "Until": "Tot",
         "Update registration": "Aanmelding bijwerken",
         "Yes": "Ja",
@@ -4222,21 +4216,27 @@ I18n {
         "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
         "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
       },
-      "screens/profile/ProfileScreen": Object {
-        "About": "Over",
+      "screens/profile/AchievementSection": Object {
         "Achievements for Thalia": "Verdiensten voor Thalia",
-        "Birthday": "Verjaardag",
         "Chair": "Voorzitter",
+        "Societies": "Gezelschappen",
+        "today": "heden",
+      },
+      "screens/profile/DescriptionSection": Object {
+        "About": "Over",
+        "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+      },
+      "screens/profile/PersonalInfoSection": Object {
+        "Birthday": "Verjaardag",
         "Cohort": "Cohort",
         "Computing science": "Informatica",
         "Information sciences": "Informatiekunde",
         "Personal information": "Persoonlijke gegevens",
-        "Societies": "Gezelschappen",
-        "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
         "Study programme": "Studie",
-        "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
         "Website": "Website",
-        "today": "heden",
+      },
+      "screens/profile/ProfileScreen": Object {
+        "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
       },
       "screens/settings/NotificationsSection": Object {
         "(required)": "(verplicht)",
@@ -4302,10 +4302,6 @@ I18n {
             "preload": false,
             "resources": Object {
               "nl": Object {
-                "app/App": Object {
-                  "Dismiss": "Sluiten",
-                  "Open": "Openen",
-                },
                 "components/errorScreen/ErrorScreen": Object {
                   "Try again later.": "Probeer het later opnieuw.",
                 },
@@ -4360,7 +4356,6 @@ I18n {
                   "Cancel registration": "Afmelden",
                   "Cancel registration?": "Afmelden?",
                   "Cancellation deadline": "Afmelddeadline",
-                  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                   "Could not load the event...": "Kan het evenement niet laden...",
                   "From": "Van",
                   "Location": "Locatie",
@@ -4377,7 +4372,6 @@ I18n {
                   "Registration status": "Aanmeldstatus",
                   "Registration will open {{start}}": "Aanmelden opent {{start}}",
                   "Registrations": "Aanmeldingen",
-                  "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                   "Until": "Tot",
                   "Update registration": "Aanmelding bijwerken",
                   "Yes": "Ja",
@@ -4417,21 +4411,27 @@ I18n {
                   "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                   "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
                 },
-                "screens/profile/ProfileScreen": Object {
-                  "About": "Over",
+                "screens/profile/AchievementSection": Object {
                   "Achievements for Thalia": "Verdiensten voor Thalia",
-                  "Birthday": "Verjaardag",
                   "Chair": "Voorzitter",
+                  "Societies": "Gezelschappen",
+                  "today": "heden",
+                },
+                "screens/profile/DescriptionSection": Object {
+                  "About": "Over",
+                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+                },
+                "screens/profile/PersonalInfoSection": Object {
+                  "Birthday": "Verjaardag",
                   "Cohort": "Cohort",
                   "Computing science": "Informatica",
                   "Information sciences": "Informatiekunde",
                   "Personal information": "Persoonlijke gegevens",
-                  "Societies": "Gezelschappen",
-                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                   "Study programme": "Studie",
-                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                   "Website": "Website",
-                  "today": "heden",
+                },
+                "screens/profile/ProfileScreen": Object {
+                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 },
                 "screens/settings/NotificationsSection": Object {
                   "(required)": "(verplicht)",
@@ -4496,10 +4496,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -4554,7 +4550,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -4571,7 +4566,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -4611,21 +4605,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -4700,10 +4700,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -4758,7 +4754,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -4775,7 +4770,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -4815,21 +4809,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -4899,10 +4899,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -4957,7 +4953,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -4974,7 +4969,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -5014,21 +5008,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -5064,10 +5064,6 @@ I18n {
       "state": Object {},
       "store": Object {
         "nl": Object {
-          "app/App": Object {
-            "Dismiss": "Sluiten",
-            "Open": "Openen",
-          },
           "components/errorScreen/ErrorScreen": Object {
             "Try again later.": "Probeer het later opnieuw.",
           },
@@ -5122,7 +5118,6 @@ I18n {
             "Cancel registration": "Afmelden",
             "Cancel registration?": "Afmelden?",
             "Cancellation deadline": "Afmelddeadline",
-            "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
             "Could not load the event...": "Kan het evenement niet laden...",
             "From": "Van",
             "Location": "Locatie",
@@ -5139,7 +5134,6 @@ I18n {
             "Registration status": "Aanmeldstatus",
             "Registration will open {{start}}": "Aanmelden opent {{start}}",
             "Registrations": "Aanmeldingen",
-            "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
             "Until": "Tot",
             "Update registration": "Aanmelding bijwerken",
             "Yes": "Ja",
@@ -5179,21 +5173,27 @@ I18n {
             "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
             "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
           },
-          "screens/profile/ProfileScreen": Object {
-            "About": "Over",
+          "screens/profile/AchievementSection": Object {
             "Achievements for Thalia": "Verdiensten voor Thalia",
-            "Birthday": "Verjaardag",
             "Chair": "Voorzitter",
+            "Societies": "Gezelschappen",
+            "today": "heden",
+          },
+          "screens/profile/DescriptionSection": Object {
+            "About": "Over",
+            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+          },
+          "screens/profile/PersonalInfoSection": Object {
+            "Birthday": "Verjaardag",
             "Cohort": "Cohort",
             "Computing science": "Informatica",
             "Information sciences": "Informatiekunde",
             "Personal information": "Persoonlijke gegevens",
-            "Societies": "Gezelschappen",
-            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             "Study programme": "Studie",
-            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
             "Website": "Website",
-            "today": "heden",
+          },
+          "screens/profile/ProfileScreen": Object {
+            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           },
           "screens/settings/NotificationsSection": Object {
             "(required)": "(verplicht)",
@@ -5261,10 +5261,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -5319,7 +5315,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -5336,7 +5331,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -5376,21 +5370,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -5459,10 +5459,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -5517,7 +5513,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -5534,7 +5529,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -5574,21 +5568,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -5670,10 +5670,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -5728,7 +5724,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -5745,7 +5740,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -5785,21 +5779,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -5864,10 +5864,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -5922,7 +5918,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -5939,7 +5934,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -5979,21 +5973,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -6068,10 +6068,6 @@ I18n {
         "preload": false,
         "resources": Object {
           "nl": Object {
-            "app/App": Object {
-              "Dismiss": "Sluiten",
-              "Open": "Openen",
-            },
             "components/errorScreen/ErrorScreen": Object {
               "Try again later.": "Probeer het later opnieuw.",
             },
@@ -6126,7 +6122,6 @@ I18n {
               "Cancel registration": "Afmelden",
               "Cancel registration?": "Afmelden?",
               "Cancellation deadline": "Afmelddeadline",
-              "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
               "Could not load the event...": "Kan het evenement niet laden...",
               "From": "Van",
               "Location": "Locatie",
@@ -6143,7 +6138,6 @@ I18n {
               "Registration status": "Aanmeldstatus",
               "Registration will open {{start}}": "Aanmelden opent {{start}}",
               "Registrations": "Aanmeldingen",
-              "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
               "Until": "Tot",
               "Update registration": "Aanmelding bijwerken",
               "Yes": "Ja",
@@ -6183,21 +6177,27 @@ I18n {
               "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
               "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
             },
-            "screens/profile/ProfileScreen": Object {
-              "About": "Over",
+            "screens/profile/AchievementSection": Object {
               "Achievements for Thalia": "Verdiensten voor Thalia",
-              "Birthday": "Verjaardag",
               "Chair": "Voorzitter",
+              "Societies": "Gezelschappen",
+              "today": "heden",
+            },
+            "screens/profile/DescriptionSection": Object {
+              "About": "Over",
+              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+            },
+            "screens/profile/PersonalInfoSection": Object {
+              "Birthday": "Verjaardag",
               "Cohort": "Cohort",
               "Computing science": "Informatica",
               "Information sciences": "Informatiekunde",
               "Personal information": "Persoonlijke gegevens",
-              "Societies": "Gezelschappen",
-              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               "Study programme": "Studie",
-              "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
               "Website": "Website",
-              "today": "heden",
+            },
+            "screens/profile/ProfileScreen": Object {
+              "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             },
             "screens/settings/NotificationsSection": Object {
               "(required)": "(verplicht)",
@@ -6267,10 +6267,6 @@ I18n {
       "preload": false,
       "resources": Object {
         "nl": Object {
-          "app/App": Object {
-            "Dismiss": "Sluiten",
-            "Open": "Openen",
-          },
           "components/errorScreen/ErrorScreen": Object {
             "Try again later.": "Probeer het later opnieuw.",
           },
@@ -6325,7 +6321,6 @@ I18n {
             "Cancel registration": "Afmelden",
             "Cancel registration?": "Afmelden?",
             "Cancellation deadline": "Afmelddeadline",
-            "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
             "Could not load the event...": "Kan het evenement niet laden...",
             "From": "Van",
             "Location": "Locatie",
@@ -6342,7 +6337,6 @@ I18n {
             "Registration status": "Aanmeldstatus",
             "Registration will open {{start}}": "Aanmelden opent {{start}}",
             "Registrations": "Aanmeldingen",
-            "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
             "Until": "Tot",
             "Update registration": "Aanmelding bijwerken",
             "Yes": "Ja",
@@ -6382,21 +6376,27 @@ I18n {
             "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
             "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
           },
-          "screens/profile/ProfileScreen": Object {
-            "About": "Over",
+          "screens/profile/AchievementSection": Object {
             "Achievements for Thalia": "Verdiensten voor Thalia",
-            "Birthday": "Verjaardag",
             "Chair": "Voorzitter",
+            "Societies": "Gezelschappen",
+            "today": "heden",
+          },
+          "screens/profile/DescriptionSection": Object {
+            "About": "Over",
+            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+          },
+          "screens/profile/PersonalInfoSection": Object {
+            "Birthday": "Verjaardag",
             "Cohort": "Cohort",
             "Computing science": "Informatica",
             "Information sciences": "Informatiekunde",
             "Personal information": "Persoonlijke gegevens",
-            "Societies": "Gezelschappen",
-            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
             "Study programme": "Studie",
-            "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
             "Website": "Website",
-            "today": "heden",
+          },
+          "screens/profile/ProfileScreen": Object {
+            "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           },
           "screens/settings/NotificationsSection": Object {
             "(required)": "(verplicht)",
@@ -6471,10 +6471,6 @@ I18n {
             "preload": false,
             "resources": Object {
               "nl": Object {
-                "app/App": Object {
-                  "Dismiss": "Sluiten",
-                  "Open": "Openen",
-                },
                 "components/errorScreen/ErrorScreen": Object {
                   "Try again later.": "Probeer het later opnieuw.",
                 },
@@ -6529,7 +6525,6 @@ I18n {
                   "Cancel registration": "Afmelden",
                   "Cancel registration?": "Afmelden?",
                   "Cancellation deadline": "Afmelddeadline",
-                  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                   "Could not load the event...": "Kan het evenement niet laden...",
                   "From": "Van",
                   "Location": "Locatie",
@@ -6546,7 +6541,6 @@ I18n {
                   "Registration status": "Aanmeldstatus",
                   "Registration will open {{start}}": "Aanmelden opent {{start}}",
                   "Registrations": "Aanmeldingen",
-                  "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                   "Until": "Tot",
                   "Update registration": "Aanmelding bijwerken",
                   "Yes": "Ja",
@@ -6586,21 +6580,27 @@ I18n {
                   "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                   "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
                 },
-                "screens/profile/ProfileScreen": Object {
-                  "About": "Over",
+                "screens/profile/AchievementSection": Object {
                   "Achievements for Thalia": "Verdiensten voor Thalia",
-                  "Birthday": "Verjaardag",
                   "Chair": "Voorzitter",
+                  "Societies": "Gezelschappen",
+                  "today": "heden",
+                },
+                "screens/profile/DescriptionSection": Object {
+                  "About": "Over",
+                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+                },
+                "screens/profile/PersonalInfoSection": Object {
+                  "Birthday": "Verjaardag",
                   "Cohort": "Cohort",
                   "Computing science": "Informatica",
                   "Information sciences": "Informatiekunde",
                   "Personal information": "Persoonlijke gegevens",
-                  "Societies": "Gezelschappen",
-                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                   "Study programme": "Studie",
-                  "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                   "Website": "Website",
-                  "today": "heden",
+                },
+                "screens/profile/ProfileScreen": Object {
+                  "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 },
                 "screens/settings/NotificationsSection": Object {
                   "(required)": "(verplicht)",
@@ -6665,10 +6665,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -6723,7 +6719,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -6740,7 +6735,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -6780,21 +6774,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -6869,10 +6869,6 @@ I18n {
           "preload": false,
           "resources": Object {
             "nl": Object {
-              "app/App": Object {
-                "Dismiss": "Sluiten",
-                "Open": "Openen",
-              },
               "components/errorScreen/ErrorScreen": Object {
                 "Try again later.": "Probeer het later opnieuw.",
               },
@@ -6927,7 +6923,6 @@ I18n {
                 "Cancel registration": "Afmelden",
                 "Cancel registration?": "Afmelden?",
                 "Cancellation deadline": "Afmelddeadline",
-                "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
                 "Could not load the event...": "Kan het evenement niet laden...",
                 "From": "Van",
                 "Location": "Locatie",
@@ -6944,7 +6939,6 @@ I18n {
                 "Registration status": "Aanmeldstatus",
                 "Registration will open {{start}}": "Aanmelden opent {{start}}",
                 "Registrations": "Aanmeldingen",
-                "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
                 "Until": "Tot",
                 "Update registration": "Aanmelding bijwerken",
                 "Yes": "Ja",
@@ -6984,21 +6978,27 @@ I18n {
                 "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
                 "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
               },
-              "screens/profile/ProfileScreen": Object {
-                "About": "Over",
+              "screens/profile/AchievementSection": Object {
                 "Achievements for Thalia": "Verdiensten voor Thalia",
-                "Birthday": "Verjaardag",
                 "Chair": "Voorzitter",
+                "Societies": "Gezelschappen",
+                "today": "heden",
+              },
+              "screens/profile/DescriptionSection": Object {
+                "About": "Over",
+                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+              },
+              "screens/profile/PersonalInfoSection": Object {
+                "Birthday": "Verjaardag",
                 "Cohort": "Cohort",
                 "Computing science": "Informatica",
                 "Information sciences": "Informatiekunde",
                 "Personal information": "Persoonlijke gegevens",
-                "Societies": "Gezelschappen",
-                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
                 "Study programme": "Studie",
-                "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
                 "Website": "Website",
-                "today": "heden",
+              },
+              "screens/profile/ProfileScreen": Object {
+                "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
               },
               "screens/settings/NotificationsSection": Object {
                 "(required)": "(verplicht)",
@@ -7969,10 +7969,6 @@ I18n {
     },
     "resourceStore": Object {
       "nl": Object {
-        "app/App": Object {
-          "Dismiss": "Sluiten",
-          "Open": "Openen",
-        },
         "components/errorScreen/ErrorScreen": Object {
           "Try again later.": "Probeer het later opnieuw.",
         },
@@ -8027,7 +8023,6 @@ I18n {
           "Cancel registration": "Afmelden",
           "Cancel registration?": "Afmelden?",
           "Cancellation deadline": "Afmelddeadline",
-          "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden. ",
           "Could not load the event...": "Kan het evenement niet laden...",
           "From": "Van",
           "Location": "Locatie",
@@ -8044,7 +8039,6 @@ I18n {
           "Registration status": "Aanmeldstatus",
           "Registration will open {{start}}": "Aanmelden opent {{start}}",
           "Registrations": "Aanmeldingen",
-          "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
           "Until": "Tot",
           "Update registration": "Aanmelding bijwerken",
           "Yes": "Ja",
@@ -8084,21 +8078,27 @@ I18n {
           "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
           "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
         },
-        "screens/profile/ProfileScreen": Object {
-          "About": "Over",
+        "screens/profile/AchievementSection": Object {
           "Achievements for Thalia": "Verdiensten voor Thalia",
-          "Birthday": "Verjaardag",
           "Chair": "Voorzitter",
+          "Societies": "Gezelschappen",
+          "today": "heden",
+        },
+        "screens/profile/DescriptionSection": Object {
+          "About": "Over",
+          "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
+        },
+        "screens/profile/PersonalInfoSection": Object {
+          "Birthday": "Verjaardag",
           "Cohort": "Cohort",
           "Computing science": "Informatica",
           "Information sciences": "Informatiekunde",
           "Personal information": "Persoonlijke gegevens",
-          "Societies": "Gezelschappen",
-          "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
           "Study programme": "Studie",
-          "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
           "Website": "Website",
-          "today": "heden",
+        },
+        "screens/profile/ProfileScreen": Object {
+          "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
         },
         "screens/settings/NotificationsSection": Object {
           "(required)": "(verplicht)",

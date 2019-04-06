@@ -176,6 +176,8 @@ class ProfileScreen extends Component {
           <View style={styles.content}>
             <DescriptionSection profile={profile} />
             <PersonalInfoSection profile={profile} openUrl={openUrl} />
+            <AchievementSection profile={profile} type="achievements" />
+            <AchievementSection profile={profile} type="societies" />
           </View>
         </ScrollView>
         {this.getAppbar()}
