@@ -33,8 +33,8 @@ class EventScreen extends Component {
     const cancelDeadlineDate = new Date(data.cancel_deadline);
     let message = t('Are you sure you want to cancel your registration?');
     if (data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
-      message = t('The deadline has passed, are you sure you want to cancel your '
-        + 'registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
+      message = t('The deadline has passed, are you sure you want to cancel your \
+registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
       { fine: data.fine });
     }
     return Alert.alert(
@@ -255,8 +255,8 @@ class EventScreen extends Component {
         text += ' ';
       }
       text += t(
-        'Cancellation isn\'t possible anymore without having to pay the full '
-        + 'costs of €{{fine}}. Also note that you will be unable to re-register.',
+        'Cancellation isn\'t possible anymore without having to pay the full \
+costs of €{{fine}}. Also note that you will be unable to re-register.',
         { fine: data.fine },
       );
     }

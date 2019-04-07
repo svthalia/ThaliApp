@@ -12,13 +12,13 @@ const mapStateToProps = state => ({
   photo: state.session.photo,
 });
 
-const mapToProps = {
-  loadProfile: () => profileActions.profile(),
-  openCalendar: () => calendarActions.open(),
-  openMemberList: () => membersActions.members(),
-  openWelcome: () => welcomeActions.open(),
-  openSettings: () => settingsActions.open(),
-  signOut: () => loginActions.signOut(),
+const mapDispatchToProps = {
+  loadProfile: profileActions.profile,
+  openCalendar: calendarActions.open,
+  openMemberList: membersActions.members,
+  openWelcome: welcomeActions.open,
+  openSettings: settingsActions.open,
+  signOut: loginActions.signOut,
 };
 
-export default connect(mapStateToProps, mapToProps)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

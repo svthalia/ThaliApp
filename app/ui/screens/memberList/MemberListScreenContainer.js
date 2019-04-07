@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadMembers: (keywords = '') => memberActions.members(keywords),
-  loadMoreMembers: url => memberActions.more(url),
+  loadMoreMembers: memberActions.more,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberList);

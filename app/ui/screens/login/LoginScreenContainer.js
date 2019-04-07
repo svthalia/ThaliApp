@@ -10,7 +10,7 @@ const mapDispatchToProps = {
     Keyboard.dismiss();
     return actions.signIn(username, password);
   },
-  openUrl: url => navigationActions.openWebsite(url),
+  openUrl: navigationActions.openWebsite,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

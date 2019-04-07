@@ -29,5 +29,7 @@
   "Cancel registration": "Afmelden",
   "Registrations": "Aanmeldingen",
   "Could not load the event...": "Kan het evenement niet laden...",
-  "Registration is not allowed anymore, as you cancelled your registration after the deadline.": "Aanmelden is niet meer toegestaan omdat je bent afgemeld na de afmelddeadline."
+  "Registration is not allowed anymore, as you cancelled your registration after the deadline.": "Aanmelden is niet meer toegestaan omdat je bent afgemeld na de afmelddeadline.",
+  "The deadline has passed, are you sure you want to cancel your registration and pay the full costs of €{{ fine }}? You will not be able to undo this!": "De deadline is verstreken, weet je zeker dat je je wilt afmelden? Dit betekent dat je de volledige kosten van €{{ fine }} zult moeten betalen. Je kunt dit niet ongedaan maken!",
+  "Cancellation isn't possible anymore without having to pay the full costs of €{{fine}}. Also note that you will be unable to re-register.": "Afmelden is niet meer mogelijk zonder de volledige kosten van €{{fine}} te betalen. Let op: je kunt je hierna niet meer aanmelden."
 }

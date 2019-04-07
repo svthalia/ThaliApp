@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  init: () => settingsActions.initStart(),
+  init: settingsActions.initStart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

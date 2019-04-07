@@ -14,14 +14,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  refresh: pk => eventActions.event(pk),
-  register: event => registrationActions.register(event),
-  cancel: registration => registrationActions.cancel(registration),
-  fields: registration => registrationActions.retrieveFields(registration),
+  refresh: eventActions.event,
+  register: registrationActions.register,
+  cancel: registrationActions.cancel,
+  fields: registrationActions.retrieveFields,
   openMaps: location => this.openUrl(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
-  openUrl: url => navigationActions.openWebsite(url),
-  retrievePizzaInfo: () => pizzaActions.retrievePizzaInfo(),
-  openAdmin: () => eventActions.admin(),
+  openUrl: navigationActions.openWebsite,
+  retrievePizzaInfo: pizzaActions.retrievePizzaInfo,
+  openAdmin: eventActions.admin,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);

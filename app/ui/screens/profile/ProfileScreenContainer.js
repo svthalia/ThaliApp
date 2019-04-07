@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  goBack: () => navigationActions.goBack(),
-  openUrl: url => navigationActions.openWebsite(url),
+  goBack: navigationActions.goBack,
+  openUrl: navigationActions.openWebsite,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

@@ -66,7 +66,7 @@ Footer.propTypes = {
 };
 
 const mapDispatchToFooterProps = {
-  openCalendar: () => calendarActions.open(),
+  openCalendar: calendarActions.open,
 };
 
 const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(translate('screens/welcome/WelcomeScreen')(Footer));

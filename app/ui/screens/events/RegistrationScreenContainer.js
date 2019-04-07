@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  update: (registration, fields) => registrationActions.update(registration, fields),
-  openUrl: url => navigationActions.openWebsite(url),
+  update: registrationActions.update,
+  openUrl: navigationActions.openWebsite,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationScreen);

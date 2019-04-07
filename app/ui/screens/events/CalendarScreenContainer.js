@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  refresh: () => calendarActions.refresh(),
+  refresh: calendarActions.refresh,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);
