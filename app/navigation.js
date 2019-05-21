@@ -6,18 +6,18 @@ import {
   DrawerActions,
 } from 'react-navigation';
 
-import Login from './ui/screens/login/LoginScreenContainer';
-import Welcome from './ui/screens/welcome/WelcomeScreenContainer';
-import Event from './ui/screens/events/EventScreenContainer';
-import Calendar from './ui/screens/events/CalendarScreenContainer';
-import Profile from './ui/screens/profile/ProfileScreenContainer';
-import Pizza from './ui/screens/pizza/PizzaScreenContainer';
-import Registration from './ui/screens/events/RegistrationScreenContainer';
-import MemberList from './ui/screens/memberList/MemberListScreenContainer';
+import Login from './ui/screens/login/LoginScreenConnector';
+import Welcome from './ui/screens/welcome/WelcomeScreenConnector';
+import Event from './ui/screens/events/EventScreenConnector';
+import Calendar from './ui/screens/events/CalendarScreenConnector';
+import Profile from './ui/screens/profile/ProfileScreenConnector';
+import Pizza from './ui/screens/pizza/PizzaScreenConnector';
+import Registration from './ui/screens/events/RegistrationScreenConnector';
+import MemberList from './ui/screens/memberList/MemberListScreenConnector';
 import SplashScreen from './ui/screens/splash/SplashScreen';
-import Settings from './ui/screens/settings/SettingsScreenContainer';
-import EventAdmin from './ui/screens/events/EventAdminScreenContainer';
-import Sidebar from './ui/components/sidebar/SidebarContainer';
+import Settings from './ui/screens/settings/SettingsScreenConnector';
+import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
+import Sidebar from './ui/components/sidebar/SidebarConnector';
 
 const MainNavigator = createDrawerNavigator({
   Welcome,

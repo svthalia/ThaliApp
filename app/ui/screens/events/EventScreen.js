@@ -18,7 +18,7 @@ import Share from 'react-native-share';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles, { memberSize } from './style/EventScreen';
-import MemberView from '../../components/memberView/MemberViewContainer';
+import MemberView from '../../components/memberView/MemberViewConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import Colors from '../../style/Colors';
