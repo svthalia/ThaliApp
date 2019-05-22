@@ -41,6 +41,7 @@ jest:
 #             - .gradle/caches/
 
 build android:
+    allow_failure: true
     image: thalia/android-react-native:latest
     stage: build
     cache:
