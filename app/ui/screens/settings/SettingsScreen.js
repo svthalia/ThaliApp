@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './style/Settings';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
-import NotificationsSection from './NotificationsSectionContainer';
+import NotificationsSection from './NotificationsSectionConnector';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 

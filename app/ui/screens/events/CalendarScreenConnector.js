@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
   status: state.calendar.status,
 });
 
-const mapDispatchToProps = dispatch => ({
-  refresh: () => dispatch(calendarActions.refresh()),
-});
+const mapDispatchToProps = {
+  refresh: calendarActions.refresh,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { cancelOrder, orderPizza, retrievePizzaInfo } from '../../../actions/pizza';
+import * as pizzaActions from '../../../actions/pizza';
 import PizzaScreen from './PizzaScreen';
 
 const mapStateToProps = state => ({
@@ -11,10 +11,10 @@ const mapStateToProps = state => ({
   pizzaList: state.pizza.pizzaList,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadPizzas: () => dispatch(retrievePizzaInfo()),
-  cancelPizza: () => dispatch(cancelOrder()),
-  orderPizza: (pk, hasOrder) => dispatch(orderPizza(pk, hasOrder)),
-});
+const mapDispatchToProps = {
+  loadPizzas: pizzaActions.retrievePizzaInfo,
+  cancelPizza: pizzaActions.cancelOrder,
+  orderPizza: pizzaActions.orderPizza,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PizzaScreen);

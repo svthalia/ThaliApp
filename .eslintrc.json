@@ -46,7 +46,8 @@
         "prefer-destructuring": 0,
         "react/jsx-filename-extension": 0,
         "react/prefer-stateless-function": 1,
-        "import/prefer-default-export": 1
+        "import/prefer-default-export": 1,
+        "no-multi-str": 0
     },
     "settings": {
         "import/resolver": {

@@ -1,3 +1,4 @@
+import { Linking } from 'react-native';
 import { takeEvery, call } from 'redux-saga/effects';
 import * as navigationActions from '../actions/navigation';
 import * as eventActions from '../actions/event';
@@ -23,9 +24,14 @@ function* toggleDrawer() {
   yield call(NavigationService.toggleDrawer);
 }
 
+function openWebsite({ payload: url }) {
+  Linking.openURL(url);
+}
+
 const routerSaga = function* eventSaga() {
   yield takeEvery(navigationActions.BACK, back);
   yield takeEvery(navigationActions.TOGGLE_DRAWER, toggleDrawer);
+  yield takeEvery(navigationActions.OPEN_WEBSITE, openWebsite);
   yield takeEvery(welcomeActions.OPEN, navigate, 'Welcome');
   yield takeEvery(settingsActions.OPEN, navigate, 'Settings');
   yield takeEvery(calendarActions.OPEN, navigate, 'Calendar');

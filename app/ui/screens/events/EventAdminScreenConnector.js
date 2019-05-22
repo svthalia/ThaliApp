@@ -10,12 +10,10 @@ const mapStateToProps = state => ({
   loading: state.event.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  refresh: pk => dispatch(eventActions.event(pk, false)),
-  updateRegistration: (pk, present, payment) => dispatch(
-    eventActions.updateRegistration(pk, present, payment),
-  ),
-  goBack: () => dispatch(navigationActions.goBack()),
-});
+const mapDispatchToProps = {
+  refresh: pk => eventActions.event(pk, false),
+  updateRegistration: eventActions.updateRegistration,
+  goBack: navigationActions.goBack,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventAdminScreen);

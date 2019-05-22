@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
-  Linking,
   Modal,
   ScrollView,
   Switch,
@@ -90,11 +89,15 @@ class RegistrationScreen extends Component {
   };
 
   render() {
-    if (this.props.status === 'failure') {
-      return <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />;
+    const {
+      status, fields, openUrl, update, t, registration,
+    } = this.props;
+
+    if (status === 'failure') {
+      return <ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />;
     }
 
-    const keys = Object.keys(this.props.fields);
+    const keys = Object.keys(fields);
 
     const linkStyles = {
       color: Colors.magenta,
@@ -111,7 +114,7 @@ class RegistrationScreen extends Component {
           keyboardShouldPersistTaps="handled"
         >
           <Modal
-            visible={this.props.status === 'loading'}
+            visible={status === 'loading'}
             transparent
             onRequestClose={() => ({})}
           >
@@ -124,7 +127,7 @@ class RegistrationScreen extends Component {
             </View>
           </Modal>
           {keys.map((key) => {
-            const field = this.props.fields[key];
+            const field = fields[key];
             const validity = this.getFieldValidity(key);
             if (field.type === 'boolean') {
               return (
@@ -145,7 +148,7 @@ class RegistrationScreen extends Component {
                   </View>
                   <HTML
                     html={field.description}
-                    onLinkPress={(event, href) => Linking.openURL(href)}
+                    onLinkPress={(event, href) => openUrl(href)}
                     baseFontStyle={styles.description}
                     tagsStyles={{
                       a: linkStyles,
@@ -166,7 +169,7 @@ class RegistrationScreen extends Component {
                   </Text>
                   <HTML
                     html={field.description}
-                    onLinkPress={(event, href) => Linking.openURL(href)}
+                    onLinkPress={(event, href) => openUrl(href)}
                     baseFontStyle={styles.description}
                     tagsStyles={{
                       a: linkStyles,
@@ -190,12 +193,12 @@ class RegistrationScreen extends Component {
             }
             return <View />;
           })}
-          {this.props.status !== 'loading' && (
+          {status !== 'loading' && (
             <View style={styles.buttonView}>
               <Button
-                title={this.props.t('Save')}
+                title={t('Save')}
                 color={Colors.magenta}
-                onPress={() => this.props.update(this.props.registration, this.state)}
+                onPress={() => update(registration, this.state)}
                 disabled={!this.isFormValid()}
               />
             </View>
@@ -211,6 +214,7 @@ RegistrationScreen.propTypes = {
   fields: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   status: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
+  openUrl: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 

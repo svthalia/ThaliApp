@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
   status: state.welcome.status,
 });
 
-const mapDispatchToProps = dispatch => ({
-  refresh: () => dispatch(welcomeActions.refresh()),
-});
+const mapDispatchToProps = {
+  refresh: welcomeActions.refresh,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

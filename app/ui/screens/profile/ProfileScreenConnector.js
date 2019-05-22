@@ -8,8 +8,9 @@ const mapStateToProps = state => ({
   hasLoaded: state.profile.hasLoaded,
 });
 
-const mapDispatchToProps = dispatch => ({
-  goBack: () => dispatch(navigationActions.goBack()),
-});
+const mapDispatchToProps = {
+  goBack: navigationActions.goBack,
+  openUrl: navigationActions.openWebsite,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
