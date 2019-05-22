@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Moment from 'moment';
-import EventDetailCard from './EventDetailCardContainer';
+import EventDetailCard from './EventDetailCardConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import styles from './style/Welcome';
@@ -65,9 +65,9 @@ Footer.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const mapDispatchToFooterProps = dispatch => ({
-  openCalendar: () => dispatch(calendarActions.open()),
-});
+const mapDispatchToFooterProps = {
+  openCalendar: calendarActions.open,
+};
 
 const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(translate('screens/welcome/WelcomeScreen')(Footer));
 

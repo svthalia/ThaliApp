@@ -13,7 +13,7 @@ import Colors from '../../style/Colors';
 import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import SearchHeader from '../../components/searchHeader/SearchHeaderContainer';
+import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import Button from '../../components/button/Button';
 
 const PAYMENT_TYPES = {

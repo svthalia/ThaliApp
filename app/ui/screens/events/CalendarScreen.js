@@ -6,7 +6,7 @@ import {
 import { translate } from 'react-i18next';
 import Moment from 'moment';
 import locale from 'react-native-locale-detector';
-import CalendarItem from './CalendarItemContainer';
+import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 

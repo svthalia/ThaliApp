@@ -6,8 +6,8 @@ const mapStateToProps = state => ({
   loading: state.settings.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  init: () => dispatch(settingsActions.initStart()),
-});
+const mapDispatchToProps = {
+  init: settingsActions.initStart,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

@@ -2,6 +2,9 @@ import { Platform, StyleSheet as ReactStyleSheet } from 'react-native';
 
 export default class StyleSheet {
   static create(styles) {
+    if (styles === undefined) {
+      return ReactStyleSheet.create();
+    }
     const platformStyles = {};
     Object.keys(styles).forEach((name) => {
       // eslint-disable-next-line prefer-const

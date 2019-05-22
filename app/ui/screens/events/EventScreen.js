@@ -4,7 +4,6 @@ import {
   Alert,
   FlatList,
   Image,
-  Linking,
   RefreshControl,
   ScrollView,
   Text,
@@ -19,7 +18,7 @@ import Share from 'react-native-share';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles, { memberSize } from './style/EventScreen';
-import MemberView from '../../components/memberView/MemberViewContainer';
+import MemberView from '../../components/memberView/MemberViewConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import Colors from '../../style/Colors';
@@ -34,8 +33,8 @@ class EventScreen extends Component {
     const cancelDeadlineDate = new Date(data.cancel_deadline);
     let message = t('Are you sure you want to cancel your registration?');
     if (data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
-      message = t('The deadline has passed, are you sure you want to cancel your '
-        + 'registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
+      message = t('The deadline has passed, are you sure you want to cancel your \
+registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
       { fine: data.fine });
     }
     return Alert.alert(
@@ -256,8 +255,8 @@ class EventScreen extends Component {
         text += ' ';
       }
       text += t(
-        'Cancellation isn\'t possible anymore without having to pay the full '
-        + 'costs of €{{fine}}. Also note that you will be unable to re-register.',
+        'Cancellation isn\'t possible anymore without having to pay the full \
+costs of €{{fine}}. Also note that you will be unable to re-register.',
         { fine: data.fine },
       );
     }
@@ -274,7 +273,7 @@ class EventScreen extends Component {
 
   eventActions = () => {
     const {
-      data, register, t,
+      data, register, t, openUrl,
     } = this.props;
 
     const {
@@ -293,7 +292,7 @@ class EventScreen extends Component {
               {t('By registering, you confirm that you have read the')}
               <Text
                 style={styles.termsUrl}
-                onPress={() => Linking.openURL(termsAndConditionsUrl)}
+                onPress={() => openUrl(termsAndConditionsUrl)}
               >
                 {' '}
                 {t('terms and conditions')}
@@ -380,7 +379,7 @@ class EventScreen extends Component {
 
   render() {
     const {
-      status, loading, openMaps, data, t, openAdmin,
+      status, loading, openMaps, data, t, openAdmin, openUrl,
     } = this.props;
 
     const shareButton = (
@@ -471,7 +470,7 @@ class EventScreen extends Component {
             <View style={styles.divider} />
             <HTML
               html={data.description}
-              onLinkPress={(event, href) => Linking.openURL(href)}
+              onLinkPress={(event, href) => openUrl(href)}
               baseFontStyle={fontStyles}
               tagsStyles={{
                 a: linkStyles,
@@ -553,6 +552,7 @@ EventScreen.propTypes = {
   openMaps: PropTypes.func.isRequired,
   retrievePizzaInfo: PropTypes.func.isRequired,
   openAdmin: PropTypes.func.isRequired,
+  openUrl: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 

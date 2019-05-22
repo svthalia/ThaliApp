@@ -12,13 +12,13 @@ const mapStateToProps = state => ({
   photo: state.session.photo,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadProfile: () => dispatch(profileActions.profile()),
-  openCalendar: () => dispatch(calendarActions.open()),
-  openMemberList: () => dispatch(membersActions.members()),
-  openWelcome: () => dispatch(welcomeActions.open()),
-  openSettings: () => dispatch(settingsActions.open()),
-  signOut: () => dispatch(loginActions.signOut()),
-});
+const mapDispatchToProps = {
+  loadProfile: profileActions.profile,
+  openCalendar: calendarActions.open,
+  openMemberList: membersActions.members,
+  openWelcome: welcomeActions.open,
+  openSettings: settingsActions.open,
+  signOut: loginActions.signOut,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

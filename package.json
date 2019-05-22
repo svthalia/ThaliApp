@@ -49,6 +49,7 @@
   "dependencies": {
     "i18next": "^11.4.0",
     "i18next-react-native-language-detector": "^1.0.2",
+    "metro-config": "^0.53.1",
     "metro-react-native-babel-preset": "^0.52.0",
     "metro-react-native-babel-transformer": "^0.52.0",
     "moment": "^2.24.0",
@@ -89,7 +90,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-native": "^3.6.0",
-    "i18next-scanner": "^2.6.3",
+    "i18next-scanner": "^2.10.1",
     "jest": "^23.4.2",
     "react-native-git-upgrade": "^0.2.7",
     "react-test-renderer": "^16.8.2",

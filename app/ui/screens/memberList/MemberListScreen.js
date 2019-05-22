@@ -3,10 +3,10 @@ import { FlatList, View } from 'react-native';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-import MemberView from '../../components/memberView/MemberViewContainer';
+import MemberView from '../../components/memberView/MemberViewConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import SearchHeader from '../../components/searchHeader/SearchHeaderContainer';
+import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 
 import styles, { memberSize } from './style/MemberList';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
