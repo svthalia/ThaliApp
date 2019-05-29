@@ -12,7 +12,7 @@ function* register(action) {
   const token = yield select(tokenSelector);
   const { categories } = action;
 
-  if (token === undefined) {
+  if (!token) {
     // There is no token, thus do nothing
     return;
   }
