@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StatusBar, Text, TouchableOpacity, View, SafeAreaView
+  StatusBar, Text, TouchableOpacity, View, SafeAreaView,
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
