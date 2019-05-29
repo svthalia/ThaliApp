@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -61,7 +62,6 @@
 		BE352A2FF03A4DFCBC212D20 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 380716DB628F4CBF8859F06F /* FontAwesome5_Regular.ttf */; };
 		C8DC36F2E75C421391FE7443 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B659ACB63B94E3FA4D28634 /* Foundation.ttf */; };
 		C93A939392B042B9A91C58F0 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 620B1E415CFE41A486D41EF8 /* Entypo.ttf */; };
-		CFDFC2E80A664438AFB0DEC6 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBEE8FD4C1D42BEBE4D8BC8 /* libRNI18n.a */; };
 		D13DD0FB97FFF6E508D016A7 /* libPods-ThaliApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E879B26C462C7F97AAE66B84 /* libPods-ThaliApp.a */; };
 		D1655AD483AA43B5B9824968 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD085901ADC14158AF3FDED5 /* AntDesign.ttf */; };
 		D69A89316A03410282D32507 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05FB677721F74722AE7ADF2E /* Octicons.ttf */; };
@@ -252,20 +252,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNFirebase;
-		};
-		327DC49D229EB42A00DE29E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22C296C90CCF4315A310E20B /* RNI18n.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD7BF781B2D5125006FDA75;
-			remoteInfo = RNI18n;
-		};
-		327DC49F229EB42A00DE29E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22C296C90CCF4315A310E20B /* RNI18n.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD7BF831B2D5126006FDA75;
-			remoteInfo = RNI18nTests;
 		};
 		327DC4E0229EB5A700DE29E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -484,7 +470,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ThaliApp/main.m; sourceTree = "<group>"; };
 		13BDFD6446B9442B9FDACCF9 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		22C296C90CCF4315A310E20B /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-locale-detector/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		2B659ACB63B94E3FA4D28634 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ThaliApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThaliApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ThaliApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ThaliApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -564,7 +549,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				D13DD0FB97FFF6E508D016A7 /* libPods-ThaliApp.a in Frameworks */,
 				FABAFD09693B40C6BB12473C /* libRNFirebase.a in Frameworks */,
-				CFDFC2E80A664438AFB0DEC6 /* libRNI18n.a in Frameworks */,
 				551DB1D439844F9A9B05A645 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -777,15 +761,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		327DC499229EB42A00DE29E9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				327DC49E229EB42A00DE29E9 /* libRNI18n.a */,
-				327DC4A0229EB42A00DE29E9 /* RNI18nTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		327DC4B3229EB5A700DE29E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -898,7 +873,6 @@
 				327DC528229EB6B500DE29E9 /* RNVectorIcons.xcodeproj */,
 				327DC531229EB6C300DE29E9 /* BVLinearGradient.xcodeproj */,
 				327DC53A229EB6D000DE29E9 /* RNSnackbar.xcodeproj */,
-				22C296C90CCF4315A310E20B /* RNI18n.xcodeproj */,
 				13BDFD6446B9442B9FDACCF9 /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
@@ -1133,10 +1107,6 @@
 					ProjectRef = 327DC542229EB76A00DE29E9 /* RNGestureHandler.xcodeproj */;
 				},
 				{
-					ProductGroup = 327DC499229EB42A00DE29E9 /* Products */;
-					ProjectRef = 22C296C90CCF4315A310E20B /* RNI18n.xcodeproj */;
-				},
-				{
 					ProductGroup = 327DC523229EB68D00DE29E9 /* Products */;
 					ProjectRef = 327DC522229EB68D00DE29E9 /* RNScreens.xcodeproj */;
 				},
@@ -1334,20 +1304,6 @@
 			fileType = archive.ar;
 			path = libRNFirebase.a;
 			remoteRef = 327DC497229EB42900DE29E9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		327DC49E229EB42A00DE29E9 /* libRNI18n.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNI18n.a;
-			remoteRef = 327DC49D229EB42A00DE29E9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		327DC4A0229EB42A00DE29E9 /* RNI18nTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RNI18nTests.xctest;
-			remoteRef = 327DC49F229EB42A00DE29E9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		327DC4E1229EB5A700DE29E9 /* libRNSentry.a */ = {

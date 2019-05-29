@@ -5,12 +5,17 @@ I18n {
   "addResource": [Function],
   "addResourceBundle": [Function],
   "addResources": [Function],
+  "default": [Circular],
   "format": undefined,
   "getDataByLanguage": [Function],
   "getResource": [Function],
   "getResourceBundle": [Function],
   "hasResourceBundle": [Function],
   "isInitialized": true,
+  "language": "en",
+  "languages": Array [
+    "en",
+  ],
   "logger": Logger {
     "debug": false,
     "logger": Object {
@@ -5681,6 +5686,7 @@ I18n {
       "unescapeSuffix": "",
       "useRawValueToEscape": false,
     },
+    "language": "en",
     "languageUtils": LanguageUtil {
       "logger": Logger {
         "debug": false,
