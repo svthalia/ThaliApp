@@ -1,5 +1,3 @@
-import * as reactNativeLocaleDetector from 'react-native-locale-detector';
-
 import {
   apiRequest,
   apiUrl,
@@ -8,6 +6,8 @@ import {
   ServerError,
   TokenInvalidError,
 } from '../../app/utils/url';
+
+import DeviceInfo from 'react-native-device-info';
 
 const fetchPromiseResult = {
   status: 200,
@@ -18,11 +18,6 @@ global.fetch = jest.fn().mockReturnValue(
   Promise.resolve(fetchPromiseResult),
 );
 fetchPromiseResult.clone = global.fetch;
-
-jest.mock('react-native-locale-detector', () => ({
-  __esModule: true,
-  default: 'nl',
-}));
 
 describe('url helper', () => {
   beforeEach(() => {
@@ -41,7 +36,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'nl' } });
+          { headers: { 'Accept-Language': 'en' } });
         expect(response).toEqual('responseJson');
       });
   });
@@ -52,7 +47,7 @@ describe('url helper', () => {
       params: 'value',
     }).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`,
-        { headers: { 'Accept-Language': 'nl' } });
+        { headers: { 'Accept-Language': 'en' } });
     });
   });
 
@@ -60,7 +55,7 @@ describe('url helper', () => {
     expect.assertions(1);
     return apiRequest('route', { headers: { Authorization: 'Token abc' } }, null).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-        { headers: { 'Accept-Language': 'nl', Authorization: 'Token abc' } });
+        { headers: { 'Accept-Language': 'en', Authorization: 'Token abc' } });
     });
   });
 
@@ -69,7 +64,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'nl' } });
+          { headers: { 'Accept-Language': 'en' } });
         expect(response).toEqual('responseJson');
       });
   });
@@ -138,7 +133,7 @@ describe('url helper', () => {
   });
 
   it('should default to an English locales', () => {
-    reactNativeLocaleDetector.default = 'fr';
+    DeviceInfo.getDeviceLocale = () => 'fr';
     expect.assertions(1);
     return apiRequest('route', {}, null)
       .then(() => {

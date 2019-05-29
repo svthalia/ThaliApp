@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
-import locale from 'react-native-locale-detector';
+import DeviceInfo from 'react-native-device-info';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -30,7 +30,7 @@ const addEventToSection = (sections, date, event) => {
   if (!(day in sections[sectionKey].data)) {
     sections[sectionKey].data[day] = {
       dayNumber: day,
-      dayOfWeek: locale.startsWith('nl') ? date.format('dd') : date.format('ddd'),
+      dayOfWeek: DeviceInfo.getDeviceLocale().startsWith('nl') ? date.format('dd') : date.format('ddd'),
       events: [],
     };
   }

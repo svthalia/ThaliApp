@@ -1,11 +1,16 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import i18nextReactNative from 'i18next-react-native-language-detector';
+import DeviceInfo from 'react-native-device-info';
 import locales from '../assets/locales/index';
 
 i18n
   .use(initReactI18next)
-  .use(i18nextReactNative)
+  .use({
+    init: Function.prototype,
+    type: 'languageDetector',
+    detect: DeviceInfo.getDeviceLocale,
+    cacheUserLanguage: Function.prototype,
+  })
   .init({
     nsSeparator: false,
     keySeparator: false,

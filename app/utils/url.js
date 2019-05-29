@@ -1,4 +1,4 @@
-import locale from 'react-native-locale-detector';
+import DeviceInfo from 'react-native-device-info';
 
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
@@ -49,6 +49,7 @@ export const apiRequest = (route, fetchOpts, params) => {
     requestOptions.headers = {};
   }
 
+  const locale = DeviceInfo.getDeviceLocale();
   if (locale.includes('en') || locale.includes('nl')) {
     requestOptions.headers['Accept-Language'] = locale;
   } else {

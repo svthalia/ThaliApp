@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { I18nextProvider, withTranslation } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import firebase from 'react-native-firebase';
-import locale from 'react-native-locale-detector';
+import DeviceInfo from 'react-native-device-info';
 import Moment from 'moment';
 import 'moment/locale/nl';
 import PropTypes from 'prop-types';
@@ -35,7 +35,7 @@ sagaMiddleware.run(sagas);
 class Main extends Component {
   constructor() {
     super();
-    if (locale.startsWith('nl')) {
+    if (DeviceInfo.getDeviceLocale().startsWith('nl')) {
       Moment.locale('nl');
     } else {
       Moment.locale('en');

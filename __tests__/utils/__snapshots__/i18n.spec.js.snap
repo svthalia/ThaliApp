@@ -12,6 +12,10 @@ I18n {
   "getResourceBundle": [Function],
   "hasResourceBundle": [Function],
   "isInitialized": true,
+  "language": "en",
+  "languages": Array [
+    "en",
+  ],
   "logger": Logger {
     "debug": false,
     "logger": Object {
@@ -5682,6 +5686,7 @@ I18n {
       "unescapeSuffix": "",
       "useRawValueToEscape": false,
     },
+    "language": "en",
     "languageUtils": LanguageUtil {
       "logger": Logger {
         "debug": false,
