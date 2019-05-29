@@ -54,7 +54,7 @@
     "metro-core": "0.51.1",
     "moment": "2.24.0",
     "prop-types": "15.7.2",
-    "react": "16.8.3",
+    "react": "16.8.6",
     "react-i18next": "9.0.10",
     "react-native": "0.59.8",
     "react-native-dotenv": "0.2.0",
