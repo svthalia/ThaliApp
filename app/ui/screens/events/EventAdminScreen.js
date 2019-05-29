@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Snackbar from 'react-native-snackbar';
+import unorm from 'unorm';
 
 import styles from './style/EventAdminScreen';
 import Colors from '../../style/Colors';
@@ -89,9 +90,12 @@ class EventAdminScreen extends Component {
     return result;
   };
 
+  cleanSearchTerm = term => unorm.nfd(term.toLowerCase()).replace(/[\u0300-\u036f]/g, '');
+
   containsSearchKey = (pk) => {
-    const name = this.state.registrations[pk].name.toLowerCase();
-    return name.indexOf(this.state.searchKey.toLowerCase()) >= 0;
+    const name = this.cleanSearchTerm(this.state.registrations[pk].name);
+    console.log('name', name);
+    return name.indexOf(this.cleanSearchTerm(this.state.searchKey)) >= 0;
   };
 
   handleRefresh = () => {
