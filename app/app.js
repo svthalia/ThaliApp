@@ -109,7 +109,7 @@ class Main extends Component {
     return (
       <I18nextProvider i18n={i18n}>
         <Provider store={store}>
-          <NavigationService.AppNavigator
+          <NavigationService.AppContainer
             ref={(navigatorRef) => {
               NavigationService.setTopLevelNavigator(navigatorRef);
             }}
