@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Text, TouchableHighlight, TouchableOpacity, View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 
 import styles from './style/EventDetailCard';
@@ -96,4 +96,4 @@ EventDetailCard.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate(['screens/welcome/EventDetailCard'])(EventDetailCard);
+export default withTranslation('screens/welcome/EventDetailCard')(EventDetailCard);

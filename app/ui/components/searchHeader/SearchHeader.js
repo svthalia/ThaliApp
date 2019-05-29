@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  SafeAreaView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -154,17 +155,19 @@ class SearchHeader extends Component {
           animated
           barStyle={isSearching ? 'dark-content' : 'light-content'}
         />
-        <View style={styles.appBar}>
-          {isAnimating && (
-            <Animated.View
-              style={[
-                styles.animationView, { transform: [{ scale: scaleValue }] }]}
-            />
-          )}
-          {this.getLeftIcon()}
-          {this.getCenter()}
-          {this.getRightIcon()}
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+          <View style={styles.appBar}>
+            {isAnimating && (
+              <Animated.View
+                style={[
+                  styles.animationView, { transform: [{ scale: scaleValue }] }]}
+              />
+            )}
+            {this.getLeftIcon()}
+            {this.getCenter()}
+            {this.getRightIcon()}
+          </View>
+        </SafeAreaView>
       </View>
     );
   }

@@ -1,9 +1,9 @@
 import locale from 'react-native-locale-detector';
 
-let server = 'https://thalia.nu';
+let server = 'https://staging.thalia.nu';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
-  server = 'http://localhost:8000';
+  // server = 'http://localhost:8000';
 }
 
 export const url = server;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import MemberView from '../../components/memberView/MemberViewConnector';
@@ -115,4 +115,4 @@ MemberListScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/memberList/MemberListScreen')(MemberListScreen);
+export default withTranslation('screens/memberList/MemberListScreen')(MemberListScreen);

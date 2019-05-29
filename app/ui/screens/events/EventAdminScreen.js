@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   View, Text, Switch, RefreshControl, ScrollView, FlatList, TouchableHighlight,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Snackbar from 'react-native-snackbar';
@@ -340,4 +340,4 @@ EventAdminScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/EventAdminScreen')(EventAdminScreen);
+export default withTranslation('screens/events/EventAdminScreen')(EventAdminScreen);

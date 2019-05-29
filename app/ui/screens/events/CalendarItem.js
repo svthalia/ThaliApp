@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, TouchableHighlight, View } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 
 import styles from './style/CalendarItem';
@@ -57,4 +57,4 @@ CalendarItem.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screen/events/CalendarItem')(CalendarItem);
+export default withTranslation('screen/events/CalendarItem')(CalendarItem);

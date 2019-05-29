@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   RefreshControl, ScrollView, Text, TouchableHighlight, View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -277,4 +277,4 @@ PizzaScreen.defaultProps = {
   order: null,
 };
 
-export default translate('screens/pizza/PizzaScreen')(withStandardHeader(PizzaScreen));
+export default withTranslation('screens/pizza/PizzaScreen')(withStandardHeader(PizzaScreen));

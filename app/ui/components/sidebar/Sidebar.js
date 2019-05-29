@@ -4,7 +4,7 @@ import {
   Alert, Image, ImageBackground, Text, TouchableHighlight, View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/Sidebar';
 import Colors from '../../style/Colors';
@@ -125,4 +125,4 @@ Sidebar.propTypes = {
   openMemberList: PropTypes.func.isRequired,
 };
 
-export default translate('components/sidebar/Sidebar')(Sidebar);
+export default withTranslation('components/sidebar/Sidebar')(Sidebar);

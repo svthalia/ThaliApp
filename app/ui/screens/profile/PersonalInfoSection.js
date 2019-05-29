@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import Moment from 'moment';
 import CardSection from '../../components/cardSection/CardSection';
@@ -70,4 +70,4 @@ PersonalInfoSection.propTypes = {
   openUrl: PropTypes.func.isRequired,
 };
 
-export default translate('screens/profile/PersonalInfoSection')(PersonalInfoSection);
+export default withTranslation('screens/profile/PersonalInfoSection')(PersonalInfoSection);

@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import HTML from 'react-native-render-html';
 
@@ -218,4 +218,4 @@ RegistrationScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/RegistrationScreen')(withStandardHeader(RegistrationScreen));
+export default withTranslation('screens/events/RegistrationScreen')(withStandardHeader(RegistrationScreen));

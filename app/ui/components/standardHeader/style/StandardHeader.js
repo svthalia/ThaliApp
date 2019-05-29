@@ -1,9 +1,13 @@
 import { Platform, StatusBar } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 import StyleSheet from '../../../style/StyleSheet';
 import Colors from '../../../style/Colors';
 
-export const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+
+// eslint-disable-next-line no-nested-ternary
+export const STATUSBAR_HEIGHT = Platform.OS === 'ios'
+  ? DeviceInfo.hasNotch() ? 44 : 20 : StatusBar.currentHeight;
 export const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export const TOTAL_BAR_HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
@@ -19,13 +23,8 @@ const styles = StyleSheet.create({
       elevation: 4,
     },
   },
-  appBar: {
+  safeArea: {
     backgroundColor: Colors.magenta,
-    height: APPBAR_HEIGHT,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexWrap: 'wrap',
     android: {
       height: APPBAR_HEIGHT,
       elevation: 4,
@@ -35,6 +34,14 @@ const styles = StyleSheet.create({
       borderBottomColor: Colors.darkMagenta,
       borderBottomWidth: 1,
     },
+  },
+  appBar: {
+    backgroundColor: Colors.magenta,
+    height: APPBAR_HEIGHT,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'wrap',
   },
   title: {
     color: Colors.white,
