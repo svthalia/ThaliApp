@@ -1,22 +1,36 @@
 import { Dimensions } from 'react-native';
+import Colors from '../../../style/Colors';
 
 import StyleSheet from '../../../style/StyleSheet';
-import Colors from '../../../style/Colors';
-import { STATUSBAR_HEIGHT, APPBAR_HEIGHT }
-  from '../../standardHeader/style/StandardHeader';
+import { APPBAR_HEIGHT, STATUSBAR_HEIGHT } from '../../standardHeader/style/StandardHeader';
 
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: Colors.magenta,
+    android: {
+      elevation: 4,
+    },
+    ios: {
+      borderStyle: 'solid',
+      borderBottomColor: Colors.darkMagenta,
+      borderBottomWidth: 1,
+    },
+  },
   appBar: {
     backgroundColor: Colors.magenta,
-    height: APPBAR_HEIGHT + STATUSBAR_HEIGHT,
-    paddingTop: STATUSBAR_HEIGHT,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    elevation: 4,
+    android: {
+      height: APPBAR_HEIGHT + STATUSBAR_HEIGHT,
+      paddingTop: STATUSBAR_HEIGHT,
+    },
+    ios: {
+      height: APPBAR_HEIGHT,
+    },
   },
   title: {
     color: Colors.white,

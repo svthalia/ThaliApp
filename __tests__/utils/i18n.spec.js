@@ -2,7 +2,7 @@ import i18n from '../../app/utils/i18n';
 
 
 jest.mock('react-i18next', () => ({
-  reactI18nextModule: {},
+  initReactI18next: {},
 }));
 
 describe('i18n helper', () => {

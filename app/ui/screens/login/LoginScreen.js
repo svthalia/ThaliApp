@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { url } from '../../../utils/url';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 import Button from '../../components/button/Button';
@@ -119,4 +119,4 @@ LoginScreen.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-export default translate(['screens/user/LoginScreen'])(LoginScreen);
+export default withTranslation(['screens/user/LoginScreen'])(LoginScreen);

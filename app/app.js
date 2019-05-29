@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { I18nextProvider, translate } from 'react-i18next';
+import { I18nextProvider, withTranslation } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import firebase from 'react-native-firebase';
 import locale from 'react-native-locale-detector';
@@ -124,4 +124,4 @@ Main.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('app/App')(Main);
+export default withTranslation('app/App')(Main);

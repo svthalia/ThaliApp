@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import styles from './style/NotificationsSection';
 import Colors from '../../style/Colors';
@@ -106,4 +106,4 @@ NotificationsSection.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/settings/NotificationsSection')(NotificationsSection);
+export default withTranslation('screens/settings/NotificationsSection')(NotificationsSection);

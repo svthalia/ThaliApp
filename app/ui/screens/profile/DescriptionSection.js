@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Text } from 'react-native';
 import CardSection from '../../components/cardSection/CardSection';
 import styles from './style/Profile';
@@ -31,4 +31,4 @@ DescriptionSection.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/profile/DescriptionSection')(DescriptionSection);
+export default withTranslation('screens/profile/DescriptionSection')(DescriptionSection);

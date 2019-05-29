@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  StatusBar, Text, TouchableOpacity, View,
+  StatusBar, Text, TouchableOpacity, View, SafeAreaView,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -43,24 +43,26 @@ const StandardHeader = props => (
         barStyle="light-content"
       />
     </View>
-    <View style={styles.appBar}>
-      <TouchableOpacity
-        style={styles.iconButton}
-        onPress={() => (props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack())}
-      >
-        <Icon
-          name={props.menu ? 'menu' : 'arrow-back'}
-          style={styles.icon}
-          size={24}
-        />
-      </TouchableOpacity>
-      <Text style={styles.title}>
-        {sceneToTitle(props.navigation.state.routeName, props.t)}
-      </Text>
-      <View style={styles.rightView}>
-        {props.rightView}
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.appBar}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => (props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack())}
+        >
+          <Icon
+            name={props.menu ? 'menu' : 'arrow-back'}
+            style={styles.icon}
+            size={24}
+          />
+        </TouchableOpacity>
+        <Text style={styles.title}>
+          {sceneToTitle(props.navigation.state.routeName, props.t)}
+        </Text>
+        <View style={styles.rightView}>
+          {props.rightView}
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   </View>
 );
 
@@ -76,7 +78,7 @@ StandardHeader.defaultProps = {
   menu: false,
 };
 
-const StandardHeaderContainer = withNavigation(translate('components/standardHeader/StandardHeader')(StandardHeader));
+const StandardHeaderContainer = withNavigation(withTranslation('components/standardHeader/StandardHeader')(StandardHeader));
 export default StandardHeaderContainer;
 
 export function withStandardHeader(Component, menu) {

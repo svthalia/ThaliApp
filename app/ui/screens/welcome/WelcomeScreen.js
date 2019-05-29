@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 import EventDetailCard from './EventDetailCardConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -69,7 +69,7 @@ const mapDispatchToFooterProps = {
   openCalendar: calendarActions.open,
 };
 
-const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(translate('screens/welcome/WelcomeScreen')(Footer));
+const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(withTranslation('screens/welcome/WelcomeScreen')(Footer));
 
 class WelcomeScreen extends Component {
   handleRefresh = () => {
@@ -160,4 +160,4 @@ WelcomeScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/welcome/WelcomeScreen')(withStandardHeader(WelcomeScreen, true));
+export default withTranslation('screens/welcome/WelcomeScreen')(withStandardHeader(WelcomeScreen, true));

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   RefreshControl, ScrollView, SectionList, Text, View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 import locale from 'react-native-locale-detector';
 import CalendarItem from './CalendarItemConnector';
@@ -205,4 +205,4 @@ CalendarScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/CalendarScreen')(withStandardHeader(CalendarScreen, true));
+export default withTranslation('screens/events/CalendarScreen')(withStandardHeader(CalendarScreen, true));

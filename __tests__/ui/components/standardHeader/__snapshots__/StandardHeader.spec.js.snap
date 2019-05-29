@@ -10,88 +10,97 @@ exports[`StandardHeader component renders correctly on Android 1`] = `
       }
     }
   />
-  <View
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
     style={
       Object {
-        "alignItems": "center",
         "backgroundColor": "#E62272",
         "borderBottomColor": "#C2185B",
         "borderBottomWidth": 1,
         "borderStyle": "solid",
-        "flexDirection": "row",
-        "flexWrap": "wrap",
-        "height": 44,
-        "justifyContent": "flex-start",
       }
     }
   >
     <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "opacity": 1,
-          "zIndex": 2,
+          "alignItems": "center",
+          "backgroundColor": "#E62272",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "height": 44,
+          "justifyContent": "flex-start",
         }
       }
     >
-      <Text
-        allowFontScaling={false}
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 24,
-            },
-            Object {
-              "color": "#FFFFFF",
-              "paddingLeft": 10,
-              "paddingRight": 16,
-            },
-            Object {
-              "fontFamily": "Material Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
-          ]
+          Object {
+            "opacity": 1,
+            "zIndex": 2,
+          }
         }
       >
-        
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 24,
+              },
+              Object {
+                "color": "#FFFFFF",
+                "paddingLeft": 10,
+                "paddingRight": 16,
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "System",
+            "fontSize": 18,
+            "fontWeight": "600",
+            "left": 40,
+            "position": "absolute",
+            "right": 40,
+            "textAlign": "center",
+            "zIndex": 0,
+          }
+        }
+      >
+        ThaliApp
       </Text>
+      <View
+        style={
+          Object {
+            "position": "absolute",
+            "right": 0,
+          }
+        }
+      />
     </View>
-    <Text
-      style={
-        Object {
-          "color": "#FFFFFF",
-          "fontFamily": "System",
-          "fontSize": 18,
-          "fontWeight": "600",
-          "left": 40,
-          "position": "absolute",
-          "right": 40,
-          "textAlign": "center",
-          "zIndex": 0,
-        }
-      }
-    >
-      ThaliApp
-    </Text>
-    <View
-      style={
-        Object {
-          "position": "absolute",
-          "right": 0,
-        }
-      }
-    />
-  </View>
+  </RCTSafeAreaView>
 </View>
 `;
 
@@ -105,87 +114,96 @@ exports[`StandardHeader component renders correctly on iOS 1`] = `
       }
     }
   />
-  <View
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
     style={
       Object {
-        "alignItems": "center",
         "backgroundColor": "#E62272",
         "borderBottomColor": "#C2185B",
         "borderBottomWidth": 1,
         "borderStyle": "solid",
-        "flexDirection": "row",
-        "flexWrap": "wrap",
-        "height": 44,
-        "justifyContent": "flex-start",
       }
     }
   >
     <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "opacity": 1,
-          "zIndex": 2,
+          "alignItems": "center",
+          "backgroundColor": "#E62272",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "height": 44,
+          "justifyContent": "flex-start",
         }
       }
     >
-      <Text
-        allowFontScaling={false}
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 24,
-            },
-            Object {
-              "color": "#FFFFFF",
-              "paddingLeft": 10,
-              "paddingRight": 16,
-            },
-            Object {
-              "fontFamily": "Material Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
-          ]
+          Object {
+            "opacity": 1,
+            "zIndex": 2,
+          }
         }
       >
-        
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 24,
+              },
+              Object {
+                "color": "#FFFFFF",
+                "paddingLeft": 10,
+                "paddingRight": 16,
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "System",
+            "fontSize": 18,
+            "fontWeight": "600",
+            "left": 40,
+            "position": "absolute",
+            "right": 40,
+            "textAlign": "center",
+            "zIndex": 0,
+          }
+        }
+      >
+        ThaliApp
       </Text>
+      <View
+        style={
+          Object {
+            "position": "absolute",
+            "right": 0,
+          }
+        }
+      />
     </View>
-    <Text
-      style={
-        Object {
-          "color": "#FFFFFF",
-          "fontFamily": "System",
-          "fontSize": 18,
-          "fontWeight": "600",
-          "left": 40,
-          "position": "absolute",
-          "right": 40,
-          "textAlign": "center",
-          "zIndex": 0,
-        }
-      }
-    >
-      ThaliApp
-    </Text>
-    <View
-      style={
-        Object {
-          "position": "absolute",
-          "right": 0,
-        }
-      }
-    />
-  </View>
+  </RCTSafeAreaView>
 </View>
 `;

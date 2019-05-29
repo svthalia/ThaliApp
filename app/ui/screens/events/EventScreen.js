@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 import HTML from 'react-native-render-html';
 import Share from 'react-native-share';
@@ -556,4 +556,4 @@ EventScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('screens/events/EventScreen')(EventScreen);
+export default withTranslation('screens/events/EventScreen')(EventScreen);

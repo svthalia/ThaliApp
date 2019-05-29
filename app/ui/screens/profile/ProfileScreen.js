@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -230,4 +230,4 @@ ProfileScreen.propTypes = {
   goBack: PropTypes.func.isRequired,
 };
 
-export default translate('screens/profile/ProfileScreen')(ProfileScreen);
+export default withTranslation('screens/profile/ProfileScreen')(ProfileScreen);

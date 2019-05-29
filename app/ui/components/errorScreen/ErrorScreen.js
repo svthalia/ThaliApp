@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import styles from './style/ErrorScreen';
@@ -29,4 +29,4 @@ ErrorScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default translate('components/errorScreen/ErrorScreen')(ErrorScreen);
+export default withTranslation('components/errorScreen/ErrorScreen')(ErrorScreen);
