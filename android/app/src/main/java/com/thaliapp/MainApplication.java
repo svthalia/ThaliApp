@@ -15,7 +15,6 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.instanceid.RNFirebaseInstanceIdPackage;
 import io.sentry.RNSentryPackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
-import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -44,7 +43,6 @@ public class MainApplication extends Application implements ShareApplication, Re
             new RNSharePackage(),
             new RNSentryPackage(),
             new SnackbarPackage(),
-            new ReactNativeI18n(),
             new RNFirebasePackage(),
             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage(),
