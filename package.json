@@ -58,7 +58,6 @@
     "react-i18next": "9.0.10",
     "react-native": "0.59.8",
     "react-native-dotenv": "0.2.0",
-    "react-native-drawer": "2.5.1",
     "react-native-firebase": "5.0.0-rc0",
     "react-native-linear-gradient": "2.5.4",
     "react-native-locale-detector": "1.0.1",
