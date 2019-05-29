@@ -37,9 +37,6 @@
     "testPathIgnorePatterns": [
       "<rootDir>/__tests__/setup.js"
     ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/jest/preprocessor.js"
-    },
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|@react-navigation|i18next-react-native-language-detector|react-navigation-drawer|react-navigation-stack/)"
     ],
