@@ -6977,7 +6977,7 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-native-device-info@^2.0.2:
+react-native-device-info@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.0.2.tgz#ec0f30c882da376cd729c90d7c80a37e2df5ffaf"
   integrity sha512-+AbBBFkxJdFqHrXajVMzowLUhpU77QGeLwxVlkWuZA7u9NVbUrkyGBr6B9+6TPeGKzzRFAy+ciFqnGwuER4roQ==
