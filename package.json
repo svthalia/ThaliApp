@@ -89,7 +89,7 @@
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.13.0",
     "eslint-plugin-react-native": "3.7.0",
-    "i18next-scanner": "2.10.1",
+    "i18next-scanner": "2.10.2",
     "jest": "24.8.0",
     "metro-react-native-babel-preset": "0.54.1",
     "metro-react-native-babel-transformer": "0.54.1",
