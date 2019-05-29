@@ -2,6 +2,7 @@ import {
   createDrawerNavigator,
   createStackNavigator,
   createSwitchNavigator,
+  createAppContainer,
   NavigationActions,
   DrawerActions,
 } from 'react-navigation';
@@ -45,6 +46,8 @@ const AppNavigator = createSwitchNavigator({
   SignedIn: SignedInNavigator,
 });
 
+const AppContainer = createAppContainer(AppNavigator);
+
 let navigator;
 
 function setTopLevelNavigator(navigatorRef) {
@@ -73,7 +76,7 @@ function toggleDrawer() {
 }
 
 export default {
-  AppNavigator,
+  AppContainer,
   navigate,
   goBack,
   toggleDrawer,
