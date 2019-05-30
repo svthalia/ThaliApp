@@ -34,7 +34,7 @@ const register = function* register(action) {
     const registration = yield call(apiRequest, `events/${event}/registrations`, data);
 
     yield put(eventActions.event(event, false));
-    if (registration.fields) {
+    if (registration.fields && Object.keys(registration.fields).length > 0) {
       yield put(registrationActions.retrieveFields(registration.pk));
     }
     Snackbar.show({ title: 'Registration successful!' });
@@ -53,7 +53,9 @@ const update = function* update(action) {
   const body = {};
 
   Object.keys(fields).forEach((key) => {
-    body[`fields[${key}]`] = fields[key];
+    if (fields[key] !== undefined && fields[key] !== '') {
+      body[`fields[${key}]`] = fields[key];
+    }
   });
 
   const data = {
@@ -72,8 +74,12 @@ const update = function* update(action) {
     yield delay(50);
     Snackbar.show({ title: 'Successfully updated registration' });
   } catch (error) {
-    Sentry.captureException(error);
-    yield put(registrationActions.failure());
+    if (error.response.status === 400) {
+      Snackbar.show({ title: 'The field values are not correct' });
+    } else {
+      Sentry.captureException(error);
+      yield put(registrationActions.failure());
+    }
   }
 };
 

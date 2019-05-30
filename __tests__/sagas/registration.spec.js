@@ -9,6 +9,8 @@ import { apiRequest } from '../../app/utils/url';
 import * as eventActions from '../../app/actions/event';
 import { tokenSelector } from '../../app/selectors/session';
 
+const { ServerError } = jest.requireActual('../../app/utils/url');
+
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
   show: jest.fn(),
@@ -31,7 +33,8 @@ describe('event selector', () => {
 });
 
 describe('registration saga', () => {
-  const error = new Error('error');
+  const errorResponse = { status: 500 };
+  const error = new ServerError('Invalid status code: 500', errorResponse);
 
   beforeEach(() => {
     apiRequest.mockReset();
