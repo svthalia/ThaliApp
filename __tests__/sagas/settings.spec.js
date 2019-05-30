@@ -3,7 +3,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
 import { select } from 'redux-saga/effects';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Sentry } from 'react-native-sentry';
 
 import settingsSaga from '../../app/sagas/settings';
@@ -12,13 +12,6 @@ import * as pushNotificationActions from '../../app/actions/pushNotifications';
 
 import { tokenSelector } from '../../app/selectors/session';
 import { apiRequest } from '../../app/utils/url';
-
-jest.mock('react-native', () => ({
-  AsyncStorage: {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-  },
-}));
 
 jest.mock('react-native-sentry', () => ({
   Sentry: {

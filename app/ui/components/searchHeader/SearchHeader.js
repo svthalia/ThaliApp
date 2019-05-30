@@ -4,7 +4,6 @@ import {
   BackHandler,
   Easing,
   Platform,
-  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import StatusBar from '@react-native-community/status-bar';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 

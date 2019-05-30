@@ -5,10 +5,10 @@ import {
   ImageBackground,
   Platform,
   ScrollView,
-  StatusBar,
   TouchableOpacity,
   View,
 } from 'react-native';
+import StatusBar from '@react-native-community/status-bar';
 import { withTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';

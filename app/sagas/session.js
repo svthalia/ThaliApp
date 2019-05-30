@@ -2,7 +2,7 @@ import {
   call, put, takeEvery, select,
 } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
 import i18next from '../utils/i18n';

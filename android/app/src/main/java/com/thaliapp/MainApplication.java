@@ -3,6 +3,8 @@ package com.thaliapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.statusbar.RNCStatusBarPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -37,6 +39,8 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
             new MainReactPackage(),
+            new RNCStatusBarPackage(),
+            new AsyncStoragePackage(),
             new RNDeviceInfo(),
             new RNScreensPackage(),
             new RNGestureHandlerPackage(),
