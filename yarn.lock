@@ -982,7 +982,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@react-native-community/async-storage@^1.4.2":
+"@react-native-community/async-storage@1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.4.2.tgz#b29d2fa1b294fec8526f69b852a3deda248c8d81"
   integrity sha512-gDQENh7uPLGPKbRFI07GiUXZPhm2j17K4FT308OwAmIiOKbfO/cxy0sCWB0YzD/SLw9F3D9tLBRPJY6GG9YZLw==
@@ -1067,7 +1067,7 @@
     xcode "^2.0.0"
     xmldoc "^0.4.0"
 
-"@react-native-community/status-bar@^1.0.3":
+"@react-native-community/status-bar@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@react-native-community/status-bar/-/status-bar-1.0.3.tgz#e90ba515adb97dcffd956f90e965d5e7e2de95b8"
   integrity sha512-5gwhG1gBTXqgSi/e9DbraBQBCtUtTCSrI9kuwEpwLOCa/pKLIyxQG/HM96ZjvytbZOTZXeaTiKtqLFvYNYSx3A==
@@ -6984,10 +6984,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-native-device-info@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.0.2.tgz#ec0f30c882da376cd729c90d7c80a37e2df5ffaf"
-  integrity sha512-+AbBBFkxJdFqHrXajVMzowLUhpU77QGeLwxVlkWuZA7u9NVbUrkyGBr6B9+6TPeGKzzRFAy+ciFqnGwuER4roQ==
+react-native-device-info@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.0.3.tgz#599502a7da165185bd853396df00e488ef8d7c83"
+  integrity sha512-Vb/IDhSz+BfjSM769s/YdA3JOuMg/a5u6hhkmf7VDHYIoCCFRJWAR0U8ud+nrkvl+4So26jt/krtcFoS1RAjcg==
 
 react-native-dotenv@0.2.0:
   version "0.2.0"
