@@ -48,26 +48,7 @@ class Main extends Component {
     this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(() => {
       store.dispatch(register());
     });
-    this.notificationListener = firebase.notifications().onNotification((notification) => {
-      let buttons;
-      if (notification.data.url) {
-        buttons = [
-          { text: this.props.t('Dismiss') },
-          {
-            text: this.props.t('Open'),
-            onPress: () => store.dispatch(
-              deepLinkingActions.deepLink(notification.data.url, false),
-            ),
-          },
-        ];
-      } else {
-        buttons = [
-          { text: 'OK' },
-        ];
-      }
-
-      Alert.alert(notification.title, notification.body, buttons);
-    });
+    this.notificationListener = firebase.notifications().onNotification(this.showNotification);
 
     this.notificationOpenedListener = firebase.notifications()
       .onNotificationOpened(this.handleOpenNotification);
@@ -92,6 +73,31 @@ class Main extends Component {
     }
   };
 
+  showNotification = (notification) => {
+    let buttons;
+    if (notification.data.url) {
+      buttons = [
+        { text: this.props.t('Dismiss') },
+        {
+          text: this.props.t('Open'),
+          onPress: () => store.dispatch(
+            deepLinkingActions.deepLink(notification.data.url, false),
+          ),
+        },
+      ];
+    } else {
+      buttons = [
+        { text: 'OK' },
+      ];
+    }
+
+    if (notification.body !== undefined) {
+      Alert.alert(notification.title, notification.body, buttons);
+    } else if (notification.data.body !== undefined) {
+      Alert.alert(notification.data.title, notification.data.body, buttons);
+    }
+  };
+
   handleOpenURL = (event) => {
     store.dispatch(deepLinkingActions.deepLink(event.url));
   };
@@ -101,6 +107,8 @@ class Main extends Component {
       const notification = notificationOpen.notification;
       if (notification.data.url) {
         store.dispatch(deepLinkingActions.deepLink(notification.data.url, false));
+      } else {
+        this.showNotification(notification);
       }
     }
   };
