@@ -198,7 +198,7 @@ describe('pizza saga', () => {
               Authorization: 'Token token',
               'Content-Type': 'application/json',
             },
-            method: 'PUT',
+            method: 'PATCH',
             body: '{"product":1}',
           });
         }));
