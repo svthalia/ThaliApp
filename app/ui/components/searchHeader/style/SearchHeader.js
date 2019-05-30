@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
       borderBottomColor: Colors.darkMagenta,
       borderBottomWidth: 1,
     },
+    overflow: 'hidden',
   },
   appBar: {
     backgroundColor: Colors.magenta,
