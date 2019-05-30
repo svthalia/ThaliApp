@@ -210,7 +210,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
           </Text>
           <Button
             color={Colors.magenta}
-            title="Bestel"
+            title={t('Order')}
             onPress={this.props.retrievePizzaInfo}
           />
         </View>,

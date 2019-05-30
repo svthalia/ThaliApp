@@ -73,6 +73,9 @@ class PizzaScreen extends Component {
 
     if (order) {
       const productInfo = this.getProductFromList(order.product, pizzaList);
+      if (!productInfo) {
+        return null;
+      }
 
       return (
         <CardSection sectionHeader={t('Current order')}>
@@ -255,6 +258,7 @@ PizzaScreen.propTypes = {
   order: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     paid: PropTypes.bool.isRequired,
+    payment: PropTypes.string.isRequired,
     product: PropTypes.number.isRequired,
     name: PropTypes.string,
     member: PropTypes.number,

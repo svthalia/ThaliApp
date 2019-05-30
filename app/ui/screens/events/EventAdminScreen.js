@@ -94,7 +94,6 @@ class EventAdminScreen extends Component {
 
   containsSearchKey = (pk) => {
     const name = this.cleanSearchTerm(this.state.registrations[pk].name);
-    console.log('name', name);
     return name.indexOf(this.cleanSearchTerm(this.state.searchKey)) >= 0;
   };
 

@@ -7,6 +7,12 @@ import { apiRequest } from '../utils/url';
 import * as pizzaActions from '../actions/pizza';
 import { tokenSelector } from '../selectors/session';
 
+export const Payment = {
+  NONE: 'no_payment',
+  CARD: 'card_payment',
+  CASH: 'cash_payment',
+};
+
 const NOT_FOUND = 404;
 
 const retrievePizzaInfo = function* retrievePizzaInfo() {
@@ -71,7 +77,7 @@ const order = function* order(action) {
   const { pk, hasOrder } = action.payload;
   const token = yield select(tokenSelector);
   const data = {
-    method: hasOrder ? 'PUT' : 'POST',
+    method: hasOrder ? 'PATCH' : 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
