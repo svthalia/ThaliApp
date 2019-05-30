@@ -10,5 +10,10 @@ import App from './app/app';
 
 Sentry.config(SENTRY_DSN).install();
 
+Sentry.setTagsContext({
+  // eslint-disable-next-line no-undef
+  environment: __DEV__ ? 'development' : 'production',
+  react: true,
+});
 
 AppRegistry.registerComponent('ThaliApp', () => App);
