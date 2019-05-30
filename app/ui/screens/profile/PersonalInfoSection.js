@@ -70,4 +70,4 @@ PersonalInfoSection.propTypes = {
   openUrl: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/profile/PersonalInfoSection')(PersonalInfoSection);
+export default withTranslation('ui/screens/profile/PersonalInfoSection')(PersonalInfoSection);

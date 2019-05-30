@@ -4,16 +4,16 @@ import {
 } from 'redux-saga/effects';
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
+import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
 
 import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
 import { tokenSelector } from '../selectors/session';
+import { currentEventSelector } from '../selectors/events';
 
-
-export const eventSelector = state => state.event.data.pk;
-
+const t = i18next.getFixedT(undefined, 'sagas/registration');
 
 const register = function* register(action) {
   const { event } = action.payload;
@@ -37,7 +37,7 @@ const register = function* register(action) {
     if (registration.fields) {
       yield put(registrationActions.retrieveFields(registration.pk));
     }
-    Snackbar.show({ title: 'Registration successful!' });
+    Snackbar.show({ title: t('Registration successful!') });
   } catch (error) {
     Sentry.captureException(error);
     yield put(eventActions.failure());
@@ -70,7 +70,7 @@ const update = function* update(action) {
     yield call(apiRequest, `registrations/${registration}`, data);
     yield put(registrationActions.success());
     yield delay(50);
-    Snackbar.show({ title: 'Successfully updated registration' });
+    Snackbar.show({ title: t('Successfully updated registration') });
   } catch (error) {
     Sentry.captureException(error);
     yield put(registrationActions.failure());
@@ -80,7 +80,7 @@ const update = function* update(action) {
 const cancel = function* cancel(action) {
   const { registration } = action.payload;
   const token = yield select(tokenSelector);
-  const event = yield select(eventSelector);
+  const event = yield select(currentEventSelector);
 
   yield put(eventActions.fetching());
 
@@ -95,7 +95,7 @@ const cancel = function* cancel(action) {
 
   try {
     yield call(apiRequest, `registrations/${registration}`, data);
-    Snackbar.show({ title: 'Successfully cancelled registration' });
+    Snackbar.show({ title: t('Successfully cancelled registration') });
   } catch (error) {
     Sentry.captureException(error);
   }

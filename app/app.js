@@ -124,4 +124,4 @@ Main.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('app/App')(Main);
+export default withTranslation('app')(Main);

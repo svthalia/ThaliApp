@@ -281,4 +281,4 @@ PizzaScreen.defaultProps = {
   order: null,
 };
 
-export default withTranslation('screens/pizza/PizzaScreen')(withStandardHeader(PizzaScreen));
+export default withTranslation('ui/screens/pizza/PizzaScreen')(withStandardHeader(PizzaScreen));

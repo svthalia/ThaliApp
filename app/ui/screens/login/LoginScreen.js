@@ -119,4 +119,4 @@ LoginScreen.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-export default withTranslation(['screens/user/LoginScreen'])(LoginScreen);
+export default withTranslation('ui/screens/login/LoginScreen')(LoginScreen);

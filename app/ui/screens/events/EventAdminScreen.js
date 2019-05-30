@@ -343,4 +343,4 @@ EventAdminScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/events/EventAdminScreen')(EventAdminScreen);
+export default withTranslation('ui/screens/events/EventAdminScreen')(EventAdminScreen);

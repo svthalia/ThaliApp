@@ -23,7 +23,8 @@ function mkDirByPathSync(targetDir, { isRelativeToScript = false } = {}) {
   }, initDir);
 }
 
-const componentsPath = 'app/ui';
+const appPath = 'app';
+
 const options = {
   nsSeparator: false,
   keySeparator: false,
@@ -45,12 +46,7 @@ options.lngs.forEach((lang) => {
   indexFiles[lang] = [];
 });
 
-const components = execFileSync('find', [componentsPath]).toString('utf8')
-  .split('\n')
-  .filter(p => p.indexOf('/style') < 0 && p.length > 0)
-  .filter(p => fs.statSync(p).isFile());
-
-components.forEach((f) => {
+const parseAndSaveResource = (f) => {
   options.defaultNs = f.substr(0, 1).toLowerCase() + f.substr(1, f.length - 4);
   const parser = new Parser(options);
   const content = fs.readFileSync(path.join(f), 'utf-8');
@@ -77,7 +73,13 @@ components.forEach((f) => {
       }
     });
   });
-});
+};
+
+execFileSync('find', [appPath]).toString('utf8')
+  .split('\n')
+  .filter(p => p.indexOf('/style') < 0 && p.indexOf('/assets') < 0 && p.length > 0)
+  .filter(p => fs.statSync(p).isFile())
+  .forEach(parseAndSaveResource);
 
 const indexStream = fs.createWriteStream('app/assets/locales/index.js');
 indexStream.once('open', () => {
@@ -96,7 +98,7 @@ indexStream.once('open', () => {
     const files = indexFiles[lang];
     const langName = lang.toUpperCase();
     files.forEach((fileName) => {
-      const ns = fileName.substring(7);
+      const ns = fileName.substring(4);
       indexStream.write(`    '${ns}': files['${fileName}${langName}'],\n`);
     });
     indexStream.write('  },\n');

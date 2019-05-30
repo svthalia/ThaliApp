@@ -69,7 +69,7 @@ const mapDispatchToFooterProps = {
   openCalendar: calendarActions.open,
 };
 
-const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(withTranslation('screens/welcome/WelcomeScreen')(Footer));
+const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(withTranslation('ui/screens/welcome/WelcomeScreen')(Footer));
 
 class WelcomeScreen extends Component {
   handleRefresh = () => {
@@ -160,4 +160,4 @@ WelcomeScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/welcome/WelcomeScreen')(withStandardHeader(WelcomeScreen, true));
+export default withTranslation('ui/screens/welcome/WelcomeScreen')(withStandardHeader(WelcomeScreen, true));

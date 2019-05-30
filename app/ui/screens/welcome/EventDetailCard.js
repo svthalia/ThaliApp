@@ -96,4 +96,4 @@ EventDetailCard.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/welcome/EventDetailCard')(EventDetailCard);
+export default withTranslation('ui/screens/welcome/EventDetailCard')(EventDetailCard);

@@ -4,10 +4,11 @@ import { expectSaga } from 'redux-saga-test-plan';
 import Snackbar from 'react-native-snackbar';
 import { select } from 'redux-saga/effects';
 import * as registrationActions from '../../app/actions/registration';
-import registrationSaga, { eventSelector } from '../../app/sagas/registration';
+import registrationSaga from '../../app/sagas/registration';
 import { apiRequest } from '../../app/utils/url';
 import * as eventActions from '../../app/actions/event';
 import { tokenSelector } from '../../app/selectors/session';
+import { currentEventSelector } from '../../app/selectors/events';
 
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
@@ -26,7 +27,7 @@ jest.mock('../../app/utils/url', () => ({
 
 describe('event selector', () => {
   it('should select the event pk', () => {
-    expect(eventSelector({ event: { data: { pk: 2 } } })).toEqual(2);
+    expect(currentEventSelector({ event: { data: { pk: 2 } } })).toEqual(2);
   });
 });
 
@@ -160,7 +161,7 @@ describe('registration saga', () => {
     it('should put a fetching action', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
         [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
       ])
       .dispatch(registrationActions.cancel(1))
@@ -170,7 +171,7 @@ describe('registration saga', () => {
     it('should show a snackbar on success', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
         [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
       ])
       .dispatch(registrationActions.cancel(1))
@@ -184,7 +185,7 @@ describe('registration saga', () => {
     it('should put event action when the request succeeds', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
         [matchers.call.fn(apiRequest), {}],
       ])
       .dispatch(registrationActions.cancel(1))
@@ -194,7 +195,7 @@ describe('registration saga', () => {
     it('should put event action when the request fails', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
       .dispatch(registrationActions.cancel(1))
@@ -203,7 +204,7 @@ describe('registration saga', () => {
     it('should not show snackbar when the request fails', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
       .dispatch(registrationActions.cancel(1))
@@ -215,7 +216,7 @@ describe('registration saga', () => {
     it('should do a DELETE request', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
       ])
       .dispatch(registrationActions.cancel(2))
       .silentRun()
@@ -270,7 +271,7 @@ describe('registration saga', () => {
     it('should put event failure action when the request fails', () => expectSaga(registrationSaga)
       .provide([
         [select(tokenSelector), 'token'],
-        [select(eventSelector), 1],
+        [select(currentEventSelector), 1],
         [matchers.call.fn(apiRequest), throwError(error)],
       ])
       .dispatch(eventActions.failure())
