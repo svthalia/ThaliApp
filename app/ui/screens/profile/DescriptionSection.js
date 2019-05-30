@@ -31,4 +31,4 @@ DescriptionSection.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/profile/DescriptionSection')(DescriptionSection);
+export default withTranslation('ui/screens/profile/DescriptionSection')(DescriptionSection);

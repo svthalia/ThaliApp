@@ -5,6 +5,7 @@ import { delay } from 'redux-saga';
 import { AsyncStorage } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { Sentry } from 'react-native-sentry';
+import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
 import * as sessionActions from '../actions/session';
@@ -22,6 +23,8 @@ const pairsToObject = (obj, pair) => {
   obj2[pair[0]] = pair[1];
   return obj2;
 };
+
+const t = i18next.getFixedT(undefined, 'sagas/session');
 
 function* init() {
   try {
@@ -77,7 +80,7 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    Snackbar.show({ title: 'Login successful' });
+    Snackbar.show({ title: t('Login successful') });
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
@@ -87,7 +90,7 @@ function* signIn(action) {
 
     yield put(sessionActions.tokenInvalid());
     Sentry.captureException(e);
-    Snackbar.show({ title: 'Login failed' });
+    Snackbar.show({ title: t('Login failed') });
   }
 }
 
@@ -98,7 +101,7 @@ function* clearUserInfo() {
 
 function* signOut() {
   yield call(clearUserInfo);
-  Snackbar.show({ title: 'Logout successful' });
+  Snackbar.show({ title: t('Logout successful') });
 }
 
 function* signedIn({ payload }) {

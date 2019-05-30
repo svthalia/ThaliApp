@@ -3,10 +3,24 @@
 exports[`translations should expose the translations 1`] = `
 Object {
   "nl": Object {
-    "components/errorScreen/ErrorScreen": Object {
+    "app": Object {
+      "Dismiss": "Sluiten",
+      "Open": "Openen",
+    },
+    "sagas/registration": Object {
+      "Registration successful!": "Registratie succesvol!",
+      "Successfully cancelled registration": "Afmelding succesvol",
+      "Successfully updated registration": "Registratie succesvol bijgewerkt",
+    },
+    "sagas/session": Object {
+      "Login failed": "Inloggen mislukt",
+      "Login successful": "Succesvol ingelogd",
+      "Logout successful": "Succesvol uitgelogd",
+    },
+    "ui/components/errorScreen/ErrorScreen": Object {
       "Try again later.": "Probeer het later opnieuw.",
     },
-    "components/sidebar/Sidebar": Object {
+    "ui/components/sidebar/Sidebar": Object {
       "Are you sure you want to log out?": "Weet je zeker dat je wilt uitloggen?",
       "Calendar": "Agenda",
       "Log out?": "Uitloggen?",
@@ -17,7 +31,7 @@ Object {
       "Welcome": "Welkom",
       "Yes": "Ja",
     },
-    "components/standardHeader/StandardHeader": Object {
+    "ui/components/standardHeader/StandardHeader": Object {
       "Calendar": "Agenda",
       "Event": "Evenement",
       "Pizza": "Pizza",
@@ -27,16 +41,16 @@ Object {
       "Settings": "Instellingen",
       "Welcome": "Welkom",
     },
-    "screens/events/CalendarItem": Object {
+    "ui/screens/events/CalendarItem": Object {
       "From": "Tot",
       "Until": "Van",
     },
-    "screens/events/CalendarScreen": Object {
+    "ui/screens/events/CalendarScreen": Object {
       "No events found!": "Geen evenementen gevonden!",
       "Sorry, we couldn't load any data.": "Sorry, we konden geen gegevens laden.",
       "day": "dag",
     },
-    "screens/events/EventAdminScreen": Object {
+    "ui/screens/events/EventAdminScreen": Object {
       "CARD": "PIN",
       "CASH": "CONTANT",
       "Could not load the event...": "Kon het evenement niet laden...",
@@ -50,7 +64,7 @@ Object {
       "Present": "Aanwezig",
       "Registrations": "Inschrijvingen",
     },
-    "screens/events/EventScreen": Object {
+    "ui/screens/events/EventScreen": Object {
       ", that you understand them and that you agree to be bound by them.": "hebt gelezen, dat je ze begrijpt en dat je accepteert eraan gebonden te zijn.",
       "Are you sure you want to cancel your registration?": "Weet je je zeker dat je je wilt afmelden?",
       "By registering, you confirm that you have read the": "Door te registreren, bevestig je dat je de",
@@ -86,26 +100,26 @@ Object {
       "registrations": "aanmeldingen",
       "terms and conditions": "voorwaarden",
     },
-    "screens/events/RegistrationScreen": Object {
+    "ui/screens/events/RegistrationScreen": Object {
       "Save": "Aanpassen",
       "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
       "This field is required and must be an integer.": "Dit veld is verplicht en moet een getal zijn.",
       "This field is required.": "Dit veld is verplicht.",
     },
-    "screens/login/LoginScreen": Object {
+    "ui/screens/login/LoginScreen": Object {
       "Become a member": "Lid worden",
       "Forgot password?": "Wachtwoord vergeten?",
       "LOGIN": "INLOGGEN",
       "Password": "Wachtwoord",
       "Username": "Gebruikersnaam",
     },
-    "screens/memberList/MemberListScreen": Object {
+    "ui/screens/memberList/MemberListScreen": Object {
       "Couldn't find any members...": "Er zijn geen leden gevonden...",
       "Find a member": "Zoek een lid",
       "Member List": "Ledenlijst",
       "Sorry! We couldn't load any data.": "Sorry, we konden geen gegevens laden.",
     },
-    "screens/pizza/PizzaScreen": Object {
+    "ui/screens/pizza/PizzaScreen": Object {
       "Changing your order": "Bestelling bewerken",
       "Current order": "Huidige bestelling",
       "Order pizza for {{title}}": "Bestelling voor {{title}}",
@@ -115,17 +129,17 @@ Object {
       "There is currently no event for which you can order food.": "Er is geen evenement waarvoor je eten kunt bestellen.",
       "You did not place an order.": "Je hebt nog geen bestelling geplaatst.",
     },
-    "screens/profile/AchievementSection": Object {
+    "ui/screens/profile/AchievementSection": Object {
       "Achievements for Thalia": "Verdiensten voor Thalia",
       "Chair": "Voorzitter",
       "Societies": "Gezelschappen",
       "today": "heden",
     },
-    "screens/profile/DescriptionSection": Object {
+    "ui/screens/profile/DescriptionSection": Object {
       "About": "Over",
       "This member has not written a description yet.": "Dit lid heeft nog geen beschrijving geschreven.",
     },
-    "screens/profile/PersonalInfoSection": Object {
+    "ui/screens/profile/PersonalInfoSection": Object {
       "Birthday": "Verjaardag",
       "Cohort": "Cohort",
       "Computing science": "Informatica",
@@ -134,19 +148,19 @@ Object {
       "Study programme": "Studie",
       "Website": "Website",
     },
-    "screens/profile/ProfileScreen": Object {
+    "ui/screens/profile/ProfileScreen": Object {
       "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
     },
-    "screens/settings/NotificationsSection": Object {
+    "ui/screens/settings/NotificationsSection": Object {
       "(required)": "(verplicht)",
       "Notifications": "Notificaties",
       "Notifications settings could not be loaded.": "De instellingen voor notificaties konden niet worden geladen.",
     },
-    "screens/welcome/EventDetailCard": Object {
+    "ui/screens/welcome/EventDetailCard": Object {
       "MORE INFO": "MEER INFO",
       "PIZZA": "PIZZA",
     },
-    "screens/welcome/WelcomeScreen": Object {
+    "ui/screens/welcome/WelcomeScreen": Object {
       "No events found!": "Geen evenementen gevonden!",
       "SHOW THE ENTIRE AGENDA": "TOON DE GEHELE AGENDA",
       "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",

@@ -230,4 +230,4 @@ ProfileScreen.propTypes = {
   goBack: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/profile/ProfileScreen')(ProfileScreen);
+export default withTranslation('ui/screens/profile/ProfileScreen')(ProfileScreen);

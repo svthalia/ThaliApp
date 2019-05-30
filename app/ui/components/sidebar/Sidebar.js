@@ -125,4 +125,4 @@ Sidebar.propTypes = {
   openMemberList: PropTypes.func.isRequired,
 };
 
-export default withTranslation('components/sidebar/Sidebar')(Sidebar);
+export default withTranslation('ui/components/sidebar/Sidebar')(Sidebar);

@@ -78,7 +78,7 @@ StandardHeader.defaultProps = {
   menu: false,
 };
 
-const StandardHeaderContainer = withNavigation(withTranslation('components/standardHeader/StandardHeader')(StandardHeader));
+const StandardHeaderContainer = withNavigation(withTranslation('ui/components/standardHeader/StandardHeader')(StandardHeader));
 export default StandardHeaderContainer;
 
 export function withStandardHeader(Component, menu) {

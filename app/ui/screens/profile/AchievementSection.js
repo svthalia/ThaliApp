@@ -73,4 +73,4 @@ AchievementSection.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default withTranslation('screens/profile/AchievementSection')(AchievementSection);
+export default withTranslation('ui/screens/profile/AchievementSection')(AchievementSection);

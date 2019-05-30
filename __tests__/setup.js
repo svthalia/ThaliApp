@@ -7,8 +7,3 @@ NativeModules.RNFirebase = {
 NativeModules.RNShare = {
 
 };
-
-jest.mock('react-native-device-info', () => ({
-  hasNotch: () => false,
-  getDeviceLocale: () => 'en',
-}));

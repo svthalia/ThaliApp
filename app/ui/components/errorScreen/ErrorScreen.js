@@ -29,4 +29,4 @@ ErrorScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('components/errorScreen/ErrorScreen')(ErrorScreen);
+export default withTranslation('ui/components/errorScreen/ErrorScreen')(ErrorScreen);

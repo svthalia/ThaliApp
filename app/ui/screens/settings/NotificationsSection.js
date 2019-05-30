@@ -106,4 +106,4 @@ NotificationsSection.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/settings/NotificationsSection')(NotificationsSection);
+export default withTranslation('ui/screens/settings/NotificationsSection')(NotificationsSection);

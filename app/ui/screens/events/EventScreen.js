@@ -556,4 +556,4 @@ EventScreen.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screens/events/EventScreen')(EventScreen);
+export default withTranslation('ui/screens/events/EventScreen')(EventScreen);
