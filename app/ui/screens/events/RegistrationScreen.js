@@ -66,6 +66,11 @@ class RegistrationScreen extends Component {
           reason: this.props.t('This field is required.'),
         };
       }
+    } else if (field.type === 'integer' && !(value === '' || value === null) && !value.match(/^-?\d+$/)) {
+      return {
+        isValid: false,
+        reason: this.props.t('This field must be an integer.'),
+      };
     }
     return {
       isValid: true,
