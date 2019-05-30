@@ -1,4 +1,5 @@
-import { Platform, StatusBar } from 'react-native';
+import { Platform } from 'react-native';
+import StatusBar from '@react-native-community/status-bar';
 import DeviceInfo from 'react-native-device-info';
 
 import StyleSheet from '../../../style/StyleSheet';
