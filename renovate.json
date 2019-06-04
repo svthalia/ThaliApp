@@ -6,5 +6,6 @@
     "every weekday except on Wednesday",
     "every weekend",
     "before 5pm on Wednesday"
-  ]
+  ],
+  "rangeStrategy": "bump"
 }
