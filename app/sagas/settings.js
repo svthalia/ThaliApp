@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { Sentry } from 'react-native-sentry';
 import {
   all, call, put, select, takeEvery,
 } from 'redux-saga/effects';
@@ -9,6 +8,7 @@ import { notificationsSettingsActions, settingsActions } from '../actions/settin
 import { apiRequest } from '../utils/url';
 import * as pushNotifactionsActions from '../actions/pushNotifications';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 
@@ -41,7 +41,7 @@ function* pushNotifications() {
 
     yield put(notificationsSettingsActions.success(categoryList));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(notificationsSettingsActions.failure());
   }
 }
@@ -53,7 +53,7 @@ function* saveCategories(action) {
     yield call(AsyncStorage.setItem, PUSHCATEGORYKEY, JSON.stringify(categories));
     yield put(pushNotifactionsActions.register(categories));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
   }
 }
 
@@ -64,9 +64,7 @@ function* init() {
   yield put(settingsActions.initComplete());
 }
 
-function* settingsSaga() {
+export default function* () {
   yield takeEvery(settingsActions.INIT_START, init);
   yield takeEvery(notificationsSettingsActions.SAVE_CATEGORIES, saveCategories);
 }
-
-export default settingsSaga;

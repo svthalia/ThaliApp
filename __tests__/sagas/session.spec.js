@@ -119,7 +119,7 @@ describe('session saga', () => {
       .dispatch(sessionActions.signOut())
       .silentRun()
       .then(() => {
-        expect(AsyncStorage.clear).toBeCalled();
+        expect(AsyncStorage.multiRemove).toBeCalled();
       }));
 
     it('should put a push notification invalidation action', () => expectSaga(sessionSaga)

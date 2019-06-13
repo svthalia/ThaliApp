@@ -1,18 +1,20 @@
 import ImagePicker from 'react-native-image-picker';
 import {
-  call, put, select, takeEvery, cps
+  call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Sentry } from 'react-native-sentry';
+import { Alert, Platform } from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 const t = i18next.getFixedT(undefined, 'sagas/profile');
 
 const openImageLibrary = options => new Promise((resolve, reject) => {
-  ImagePicker.launchImageLibrary(options, (response) => {
+  ImagePicker.showImagePicker(options, (response) => {
     if (response.error || response.didCancel) {
       reject(response);
     }
@@ -39,7 +41,7 @@ function* profile(action) {
     const profileData = yield call(apiRequest, `members/${member}`, data);
     yield put(profileActions.success(profileData));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(profileActions.failure());
   }
 }
@@ -54,39 +56,50 @@ function* updateAvatar() {
   };
 
   try {
-    const response = yield call(openImageLibrary, options);
-    const source = response.uri;
-    console.log(source);
+    const photo = yield call(openImageLibrary, options);
+
+    const formData = new FormData();
+
+    formData.append('photo', {
+      name: photo.fileName,
+      type: photo.type,
+      uri:
+        Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+    });
+
+    const token = yield select(tokenSelector);
+
+    const data = {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+      body: formData,
+    };
+
+    try {
+      yield call([Snackbar, 'show'], { title: t('Uploading your new profile picture...'), duration: Snackbar.LENGTH_INDEFINITE });
+      const profileData = yield call(apiRequest, 'members/me', data);
+      yield call([Snackbar, 'dismiss']);
+      yield put(profileActions.success(profileData));
+    } catch (error) {
+      yield call([Snackbar, 'dismiss']);
+      yield call(reportError, error);
+      if ('photo' in error.response.jsonData) {
+        yield call(Alert.alert, t('Could not update profile picture'), error.response.jsonData.photo.join(' '));
+      } else {
+        yield call([Snackbar, 'show'], { title: t('Could not update profile picture') });
+      }
+    }
   } catch (e) {
     // eat error, om nom nom
     // error from the picker that we cannot do anything about
   }
-
-  // const { member } = action.payload;
-  // const token = yield select(tokenSelector);
-  // yield put(profileActions.updating());
-  //
-  // const data = {
-  //   method: 'PUT',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Token ${token}`,
-  //   },
-  // };
-  //
-  // try {
-  //   const profileData = yield call(apiRequest, `members/${member}`, data);
-  //   yield put(profileActions.updateSuccess(profileData));
-  // } catch (error) {
-  //   Sentry.captureException(error);
-  //   yield put(profileActions.updateFail());
-  // }
 }
 
-function* profileSaga() {
+export default function* () {
   yield takeEvery(profileActions.PROFILE, profile);
   yield takeEvery(profileActions.CHANGE_AVATAR, updateAvatar);
 }
-
-export default profileSaga;

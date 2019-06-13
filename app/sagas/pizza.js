@@ -1,11 +1,11 @@
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Sentry } from 'react-native-sentry';
 import { apiRequest } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 export const Payment = {
   NONE: 'no_payment',
@@ -39,7 +39,7 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
       if (error.response !== null && error.response.status === NOT_FOUND) {
         yield put(pizzaActions.success(event, null, pizzaList));
       } else {
-        Sentry.captureException(error);
+        yield call(reportError, error);
         yield put(pizzaActions.failure());
       }
     }
@@ -47,7 +47,7 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
     if (error.response !== null && error.response.status === NOT_FOUND) {
       yield put(pizzaActions.success(null, null, []));
     } else {
-      Sentry.captureException(error);
+      yield call(reportError, error);
       yield put(pizzaActions.failure());
     }
   }
@@ -68,7 +68,7 @@ const cancel = function* cancel() {
     yield call(apiRequest, 'pizzas/orders/me', data);
     yield put(pizzaActions.cancelSuccess());
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(pizzaActions.failure());
   }
 };
@@ -93,15 +93,13 @@ const order = function* order(action) {
     const orderData = yield call(apiRequest, route, data);
     yield put(pizzaActions.orderSuccess(orderData));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(pizzaActions.failure());
   }
 };
 
-const pizzaSaga = function* pizzaSaga() {
+export default function* () {
   yield takeEvery(pizzaActions.PIZZA, retrievePizzaInfo);
   yield takeEvery(pizzaActions.CANCEL, cancel);
   yield takeEvery(pizzaActions.ORDER, order);
-};
-
-export default pizzaSaga;
+}

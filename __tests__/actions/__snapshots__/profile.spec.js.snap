@@ -8,9 +8,7 @@ Object {
 
 exports[`profile actions should create an action for a successful profile load 1`] = `
 Object {
-  "payload": Object {
-    "profileData": "profile",
-  },
+  "payload": "profile",
   "type": "PROFILE_SUCCESS",
 }
 `;

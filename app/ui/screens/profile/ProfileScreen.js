@@ -31,7 +31,6 @@ class ProfileScreen extends Component {
     };
 
     this.scrollY.addListener(({ value }) => {
-      console.log('scrolling', value, this.state.headerEnabled, value > (HEADER_SCROLL_DISTANCE / 2));
       if (this.state.headerEnabled && value > (HEADER_SCROLL_DISTANCE / 2)) {
         this.setState({
           headerEnabled: false,

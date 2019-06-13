@@ -1,12 +1,12 @@
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Sentry } from 'react-native-sentry';
 
 import { apiRequest } from '../utils/url';
 import * as welcomeActions from '../actions/welcome';
 import * as sessionActions from '../actions/session';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 const welcome = function* welcome() {
   const token = yield select(tokenSelector);
@@ -31,13 +31,11 @@ const welcome = function* welcome() {
     if (error.name === 'TokenInvalidError') {
       yield put(sessionActions.tokenInvalid());
     }
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(welcomeActions.failure());
   }
 };
 
-const welcomeSaga = function* eventSaga() {
+export default function* () {
   yield takeEvery([sessionActions.SIGNED_IN, welcomeActions.REFRESH], welcome);
-};
-
-export default welcomeSaga;
+}

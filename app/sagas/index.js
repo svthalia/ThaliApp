@@ -13,7 +13,7 @@ import deepLinkingSaga from './deepLinking';
 import membersSaga from './members';
 import settingsSaga from './settings';
 
-const sagas = function* sagas() {
+export default function* () {
   yield all([
     fork(sessionSaga),
     fork(navigationSaga),
@@ -28,6 +28,4 @@ const sagas = function* sagas() {
     fork(membersSaga),
     fork(settingsSaga),
   ]);
-};
-
-export default sagas;
+}

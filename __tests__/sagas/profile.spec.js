@@ -7,6 +7,12 @@ import { apiRequest } from '../../app/utils/url';
 import * as profileActions from '../../app/actions/profile';
 import { tokenSelector } from '../../app/selectors/session';
 
+jest.mock('react-native-snackbar', () => ({
+  LENGTH_LONG: 100,
+  show: jest.fn(),
+  dismiss: jest.fn(),
+}));
+
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
 }));

@@ -36,6 +36,6 @@ describe('session actions', () => {
   });
 
   it('should create an action to set user info', () => {
-    expect(actions.setUserInfo('displayName', 'photo')).toMatchSnapshot();
+    expect(actions.setUserInfo('pk', 'displayName', 'photo')).toMatchSnapshot();
   });
 });

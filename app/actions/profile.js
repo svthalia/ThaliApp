@@ -3,9 +3,7 @@ export const FETCHING = 'PROFILE_FETCHING';
 export const SUCCESS = 'PROFILE_SUCCESS';
 export const FAILURE = 'PROFILE_FAILURE';
 export const UPDATE = 'PROFILE_UPDATE';
-export const UPDATING = 'PROFILE_UPDATING';
 export const UPDATE_SUCCESS = 'PROFILE_UPDATE_SUCCESS';
-export const UPDATE_FAIL = 'PROFILE_UPDATE_FAIL';
 export const CHANGE_AVATAR = 'PROFILE_CHANGE_AVATAR';
 
 export function profile(member = 'me') {
@@ -27,35 +25,17 @@ export function changeAvatar() {
   };
 }
 
-export function update() {
-  return {
-    type: UPDATE,
-  };
-}
-
-export function updating() {
-  return {
-    type: UPDATING,
-  };
-}
-
 export function updateSuccess(profileData) {
   return {
     type: UPDATE_SUCCESS,
-    payload: { profileData },
-  };
-}
-
-export function updateFail() {
-  return {
-    type: UPDATE_FAIL,
+    payload: profileData,
   };
 }
 
 export function success(profileData) {
   return {
     type: SUCCESS,
-    payload: { profileData },
+    payload: profileData,
   };
 }
 

@@ -11,6 +11,7 @@ import { apiRequest } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 export const IDENTIFIERKEY = '@MyStore:identifier';
 export const USERNAMEKEY = '@MyStore:username';
@@ -50,7 +51,7 @@ function* init() {
       yield put(sessionActions.tokenInvalid());
     }
   } catch (e) {
-    Sentry.captureException(e);
+    yield call(reportError, e);
   }
 }
 
@@ -82,7 +83,7 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    Snackbar.show({ title: t('Login successful') });
+    yield call([Snackbar, 'show'], { title: t('Login successful') });
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
@@ -91,19 +92,21 @@ function* signIn(action) {
     }
 
     yield put(sessionActions.tokenInvalid());
-    Sentry.captureException(e);
-    Snackbar.show({ title: t('Login failed') });
+    yield call(reportError, e);
+    yield call([Snackbar, 'show'], { title: t('Login failed') });
   }
 }
 
 function* clearUserInfo() {
-  yield call(AsyncStorage.clear);
+  yield call([AsyncStorage, 'multiRemove'], [
+    IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
+  ]);
   yield put(pushNotificationsActions.invalidate());
 }
 
 function* signOut() {
   yield call(clearUserInfo);
-  Snackbar.show({ title: t('Logout successful') });
+  yield call([Snackbar, 'show'], { title: t('Logout successful') });
 }
 
 function* signedIn({ payload }) {
@@ -135,11 +138,11 @@ function* userInfo() {
       userProfile.pk, userProfile.display_name, userProfile.avatar.medium,
     ));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
   }
 }
 
-function* sessionSaga() {
+export default function* () {
   yield takeEvery(sessionActions.INIT, init);
   yield takeEvery(sessionActions.SIGN_IN, signIn);
   yield takeEvery(sessionActions.SIGN_OUT, signOut);
@@ -147,5 +150,3 @@ function* sessionSaga() {
   yield takeEvery(sessionActions.FETCH_USER_INFO, userInfo);
   yield takeEvery(sessionActions.TOKEN_INVALID, clearUserInfo);
 }
-
-export default sessionSaga;
