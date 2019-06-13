@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import Moment from 'moment';
 import CardSection from '../../components/cardSection/CardSection';
-import styles from './style/Profile';
+import styles from './style/ProfileScreen';
 
 const PersonalInfoSection = ({ profile, t, openUrl }) => {
   const profileInfo = {

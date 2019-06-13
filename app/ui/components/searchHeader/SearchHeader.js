@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Animated,
-  BackHandler,
-  Easing,
-  Platform,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  SafeAreaView,
+  Animated, BackHandler, Easing, Platform, SafeAreaView, Text, TextInput, View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import StatusBar from '@react-native-community/status-bar';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import styles from './style/SearchHeader';
 import Colors from '../../style/Colors';
+import IconButton from '../button/IconButton';
 
 class SearchHeader extends Component {
   constructor(props) {
@@ -43,15 +34,11 @@ class SearchHeader extends Component {
     const { leftIcon, leftIconAction } = this.props;
     const { isSearching } = this.state;
     return (
-      <TouchableOpacity
+      <IconButton
         onPress={() => (isSearching ? this.updateSearch(false) : leftIconAction())}
-      >
-        <Icon
-          name={isSearching ? 'arrow-back' : leftIcon}
-          style={[styles.leftIcon, isSearching ? styles.magenta : styles.white]}
-          size={24}
-        />
-      </TouchableOpacity>
+        name={isSearching ? 'arrow-back' : leftIcon}
+        style={[styles.leftIcon, isSearching ? styles.magenta : styles.white]}
+      />
     );
   };
 
@@ -80,27 +67,19 @@ class SearchHeader extends Component {
     const { searchKey, isSearching } = this.state;
     if (!isSearching) {
       return (
-        <TouchableOpacity
+        <IconButton
           onPress={() => this.updateSearch(true)}
-        >
-          <Icon
-            name="search"
-            style={[styles.rightIcon, styles.white]}
-            size={24}
-          />
-        </TouchableOpacity>
+          name="search"
+          style={[styles.rightIcon, styles.white]}
+        />
       );
     } if (searchKey) {
       return (
-        <TouchableOpacity
+        <IconButton
           onPress={() => this.updateSearchKey('')}
-        >
-          <Icon
-            name="close"
-            style={[styles.rightIcon, styles.gray]}
-            size={24}
-          />
-        </TouchableOpacity>
+          name="close"
+          style={[styles.rightIcon, styles.gray]}
+        />
       );
     }
     return null;

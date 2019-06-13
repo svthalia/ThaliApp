@@ -6,7 +6,6 @@ const initialState = {
   profile: {
     pk: -1,
     display_name: '',
-    photo: defaultProfileImage,
     avatar: {
       full: defaultProfileImage,
       large: defaultProfileImage,
@@ -52,17 +51,11 @@ export default function profile(state = initialState, action = {}) {
         ...state,
         updating: true,
       };
+    case profileActions.UPDATE_FAIL:
     case profileActions.UPDATE_SUCCESS:
       return {
         ...state,
         updating: false,
-        success: true,
-      };
-    case profileActions.UPDATE_FAIL:
-      return {
-        ...state,
-        updating: false,
-        success: true,
       };
     default:
       return state;

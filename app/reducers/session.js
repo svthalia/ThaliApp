@@ -32,9 +32,9 @@ export default function session(state = initialState, action = {}) {
     case sessionActions.SET_USER_INFO:
       return {
         ...state,
+        pk: action.payload.pk,
         displayName: action.payload.displayName,
         photo: action.payload.photo,
-        pk: action.payload.pk,
       };
     case sessionActions.TOKEN_INVALID:
     case sessionActions.SIGN_OUT:

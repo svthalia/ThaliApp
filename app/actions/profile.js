@@ -2,9 +2,11 @@ export const PROFILE = 'PROFILE_PROFILE';
 export const FETCHING = 'PROFILE_FETCHING';
 export const SUCCESS = 'PROFILE_SUCCESS';
 export const FAILURE = 'PROFILE_FAILURE';
+export const UPDATE = 'PROFILE_UPDATE';
 export const UPDATING = 'PROFILE_UPDATING';
 export const UPDATE_SUCCESS = 'PROFILE_UPDATE_SUCCESS';
 export const UPDATE_FAIL = 'PROFILE_UPDATE_FAIL';
+export const CHANGE_AVATAR = 'PROFILE_CHANGE_AVATAR';
 
 export function profile(member = 'me') {
   return {
@@ -16,6 +18,18 @@ export function profile(member = 'me') {
 export function fetching() {
   return {
     type: FETCHING,
+  };
+}
+
+export function changeAvatar() {
+  return {
+    type: CHANGE_AVATAR,
+  };
+}
+
+export function update() {
+  return {
+    type: UPDATE,
   };
 }
 

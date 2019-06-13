@@ -1,40 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Animated,
-  ImageBackground,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  Image,
-  Modal,
+  Animated, ImageBackground, Platform, ScrollView, TouchableHighlight, View,
 } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
 import { withTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Moment from 'moment';
-import ImagePicker from 'react-native-image-picker';
 import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
-
-import StandardHeader from '../../components/standardHeader/StandardHeader';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
 
 import Colors from '../../style/Colors';
+import AvatarModal from './AvatarModal';
 import AchievementSection from './AchievementSection';
 import DescriptionSection from './DescriptionSection';
 import PersonalInfoSection from './PersonalInfoSection';
-import styles, {
-  HEADER_MAX_HEIGHT,
-  HEADER_MIN_HEIGHT,
-  HEADER_SCROLL_DISTANCE,
-} from './style/Profile';
+import styles, { HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/ProfileScreen';
+import IconButton from '../../components/button/IconButton';
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -43,8 +27,21 @@ class ProfileScreen extends Component {
     this.textHeight = Platform.OS === 'android' ? 27 : 22;
     this.state = {
       modalVisible: false,
-      image: this.props.profile.avatar.full,
+      headerEnabled: true,
     };
+
+    this.scrollY.addListener(({ value }) => {
+      console.log('scrolling', value, this.state.headerEnabled, value > (HEADER_SCROLL_DISTANCE / 2));
+      if (this.state.headerEnabled && value > (HEADER_SCROLL_DISTANCE / 2)) {
+        this.setState({
+          headerEnabled: false,
+        });
+      } else if (!this.state.headerEnabled && value < (HEADER_SCROLL_DISTANCE / 2)) {
+        this.setState({
+          headerEnabled: true,
+        });
+      }
+    });
   }
 
   setModalVisible = (visible) => {
@@ -53,9 +50,7 @@ class ProfileScreen extends Component {
     });
   };
 
-  isOwnProfilePage = () => {
-    return this.props.pk === this.props.profile.pk;
-  };
+  isOwnProfilePage = () => this.props.userPk === this.props.profile.pk;
 
   getAppbar = () => {
     const headerHeight = this.scrollY.interpolate({
@@ -120,73 +115,46 @@ class ProfileScreen extends Component {
     }
 
     return (
-      <TouchableWithoutFeedback
-        onPress={() => this.setModalVisible(true)}
-      >
-        <Animated.View style={[styles.header, { height: headerHeight }]}>
-          <Animated.View
-            style={[
-              styles.backgroundImage,
-              {
-                opacity: imageOpacity,
-                transform: [{ translateY: imageTranslate }],
-              },
-            ]}
+      <Animated.View style={[styles.header, { height: headerHeight }]}>
+        <Animated.View
+          style={[
+            styles.backgroundImage,
+            {
+              opacity: imageOpacity,
+              transform: [{ translateY: imageTranslate }],
+            },
+          ]}
+        >
+          <ImageBackground
+            source={{ uri: this.props.profile.avatar.full }}
+            style={styles.backgroundImage}
+            resizeMode="cover"
           >
-            <ImageBackground
-              source={{ uri: this.state.image }}
-              style={styles.backgroundImage}
-              resizeMode="cover"
-            >
-              <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient}/>
-            </ImageBackground>
-          </Animated.View>
-          <Animated.View style={[styles.appBar, appBarBorderStyle]}>
-            <TouchableOpacity
-              onPress={this.props.goBack}
-            >
-              <Icon
-                name="arrow-back"
-                style={styles.icon}
-                size={24}
-              />
-            </TouchableOpacity>
-            <Animated.Text
-              style={[styles.title, textStyle]}
-            >
-              {this.props.profile.display_name}
-            </Animated.Text>
-          </Animated.View>
+            <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
+          </ImageBackground>
         </Animated.View>
-      </TouchableWithoutFeedback>
+        <Animated.View style={[styles.appBar, appBarBorderStyle]}>
+          <Animated.Text
+            style={[styles.title, textStyle]}
+          >
+            {this.props.profile.display_name}
+          </Animated.Text>
+          <TouchableHighlight
+            activeOpacity={0}
+            style={styles.touchableHeader}
+            underlayColor={this.state.headerEnabled ? Colors.semiTransparent : Colors.transparent}
+            onPress={() => (this.state.headerEnabled ? this.setModalVisible(true) : null)}
+          >
+            <View style={styles.touchableHeader} />
+          </TouchableHighlight>
+          <IconButton
+            onPress={this.props.goBack}
+            name="arrow-back"
+            style={styles.icon}
+          />
+        </Animated.View>
+      </Animated.View>
     );
-  };
-
-  handleEditPress = () => {
-    const options = {
-      title: 'Select Avatar',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    ImagePicker.launchImageLibrary(options, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = response.uri;
-
-        this.setState({
-          image: source,
-        });
-      }
-    });
   };
 
   render() {
@@ -197,11 +165,12 @@ class ProfileScreen extends Component {
     if (!hasLoaded) {
       return (
         <View style={styles.container}>
-          <StandardHeader/>
-          <LoadingScreen/>
+          <StandardHeader />
+          <LoadingScreen />
         </View>
       );
-    } if (!success) {
+    }
+    if (!success) {
       return (
         <View style={styles.container}>
           <StandardHeader />
@@ -218,44 +187,13 @@ class ProfileScreen extends Component {
           translucent
           animated
         />
-        <Modal
+        <AvatarModal
           visible={this.state.modalVisible}
-          transparent={true}
-          onRequestClose={() => this.setModalVisible(false)}
-          animationType={'fade'}
-        >
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'rgba(52, 52, 52, 0.8)',
-              width: '100%',
-              height: '100%'
-            }}
-          >
-            <Image
-              source={{ uri: this.state.image }}
-              style={{ width: '90%', height: '60%' }}
-              resizeMode={'contain'}
-            />
-            <View
-              style={{ justifyContent: 'space-around', flexDirection: 'row' }}
-            >
-              {this.isOwnProfilePage() && (
-                <Icon
-                  name="edit"
-                  style={{ flex: 1, fontSize: 24, color: 'white', textAlign: 'center' }}
-                  onPress={this.handleEditPress}
-                />
-              )}
-              <Icon
-                name="cancel"
-                style={{ flex: 1, fontSize: 24, color: 'white', textAlign: 'center' }}
-                onPress={() => this.setModalVisible(false)}
-              />
-            </View>
-          </View>
-        </Modal>
+          close={() => this.setModalVisible(false)}
+          image={this.props.profile.avatar.full}
+          canEdit={this.isOwnProfilePage()}
+          changeAvatar={this.props.changeAvatar}
+        />
         <ScrollView
           style={styles.container}
           scrollEventThrottle={16}
@@ -275,7 +213,7 @@ class ProfileScreen extends Component {
 }
 
 ProfileScreen.propTypes = {
-  pk: PropTypes.number.isRequired,
+  userPk: PropTypes.number.isRequired,
   profile: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
@@ -316,6 +254,7 @@ ProfileScreen.propTypes = {
   hasLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
+  changeAvatar: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
 

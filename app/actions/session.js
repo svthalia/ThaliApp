@@ -30,6 +30,6 @@ export function fetchUserInfo() {
   return { type: FETCH_USER_INFO };
 }
 
-export function setUserInfo(displayName, photo, pk) {
-  return { type: SET_USER_INFO, payload: { displayName, photo, pk } };
+export function setUserInfo(pk, displayName, photo) {
+  return { type: SET_USER_INFO, payload: { pk, displayName, photo } };
 }

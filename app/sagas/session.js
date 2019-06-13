@@ -12,6 +12,7 @@ import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import { tokenSelector } from '../selectors/session';
 
+export const IDENTIFIERKEY = '@MyStore:identifier';
 export const USERNAMEKEY = '@MyStore:username';
 export const TOKENKEY = '@MyStore:token';
 export const DISPLAYNAMEKEY = '@MyStore:displayName';
@@ -29,10 +30,11 @@ const t = i18next.getFixedT(undefined, 'sagas/session');
 function* init() {
   try {
     const result = yield call([AsyncStorage, 'multiGet'], [
-      USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
+      IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
     ]);
     const values = result.reduce(pairsToObject, {});
 
+    const id = values[IDENTIFIERKEY];
     const username = values[USERNAMEKEY];
     const token = values[TOKENKEY];
     const displayName = values[DISPLAYNAMEKEY];
@@ -41,7 +43,7 @@ function* init() {
 
     if (username !== null && token !== null) {
       yield put(sessionActions.signedIn(username, token));
-      yield put(sessionActions.setUserInfo(displayName, photo));
+      yield put(sessionActions.setUserInfo(id, displayName, photo));
       yield put(sessionActions.fetchUserInfo());
       yield put(pushNotificationsActions.register(pushCategories));
     } else {
@@ -125,10 +127,13 @@ function* userInfo() {
     const userProfile = yield call(apiRequest, 'members/me', data);
 
     yield call(AsyncStorage.multiSet, [
+      [IDENTIFIERKEY, userProfile.pk],
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);
-    yield put(sessionActions.setUserInfo(userProfile.display_name, userProfile.avatar.medium, userProfile.pk));
+    yield put(sessionActions.setUserInfo(
+      userProfile.pk, userProfile.display_name, userProfile.avatar.medium,
+    ));
   } catch (error) {
     Sentry.captureException(error);
   }
