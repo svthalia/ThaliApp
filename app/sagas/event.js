@@ -1,11 +1,11 @@
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Sentry } from 'react-native-sentry';
 
 import { apiRequest } from '../utils/url';
 import * as eventActions from '../actions/event';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 function* event(action) {
   const { pk, navigateToEventScreen } = action.payload;
@@ -40,7 +40,7 @@ function* event(action) {
       eventRegistrations,
     ));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(eventActions.failure());
   }
 }
@@ -69,14 +69,12 @@ function* updateRegistration(action) {
 
     yield put(eventActions.done());
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(eventActions.failure());
   }
 }
 
-function* eventSaga() {
+export default function* () {
   yield takeEvery(eventActions.EVENT, event);
   yield takeEvery(eventActions.UPDATE_REGISTRATION, updateRegistration);
 }
-
-export default eventSaga;

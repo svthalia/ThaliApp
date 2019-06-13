@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Sentry } from 'react-native-sentry';
 
 import sessionSaga, {
-  DISPLAYNAMEKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY,
+  DISPLAYNAMEKEY, IDENTIFIERKEY, PHOTOKEY, TOKENKEY, USERNAMEKEY,
 } from '../../app/sagas/session';
 import { apiRequest } from '../../app/utils/url';
 import * as sessionActions from '../../app/actions/session';
@@ -119,7 +119,7 @@ describe('session saga', () => {
       .dispatch(sessionActions.signOut())
       .silentRun()
       .then(() => {
-        expect(AsyncStorage.clear).toBeCalled();
+        expect(AsyncStorage.multiRemove).toBeCalled();
       }));
 
     it('should put a push notification invalidation action', () => expectSaga(sessionSaga)
@@ -141,19 +141,21 @@ describe('session saga', () => {
     it('should put the result data when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['members/me'] }), {
+          pk: 12,
           display_name: 'Johnny Test',
           avatar: {
             medium: 'http://example.org/photo.png',
           },
         }],
       ])
-      .put(sessionActions.setUserInfo('Johnny Test', 'http://example.org/photo.png'))
+      .put(sessionActions.setUserInfo(12, 'Johnny Test', 'http://example.org/photo.png'))
       .dispatch(sessionActions.fetchUserInfo())
       .silentRun());
 
     it('should save the token in the AsyncStorage when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['members/me'] }), {
+          pk: 12,
           display_name: 'Johnny Test',
           avatar: {
             medium: 'http://example.org/photo.png',
@@ -164,6 +166,7 @@ describe('session saga', () => {
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiSet).toBeCalledWith([
+          [IDENTIFIERKEY, 12],
           [DISPLAYNAMEKEY, 'Johnny Test'],
           [PHOTOKEY, 'http://example.org/photo.png'],
         ]);

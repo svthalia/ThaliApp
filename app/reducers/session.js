@@ -11,6 +11,7 @@ const initialState = {
   token: '',
   username: '',
   displayName: '',
+  pk: -1,
   photo: defaultProfileImage,
 };
 
@@ -31,6 +32,7 @@ export default function session(state = initialState, action = {}) {
     case sessionActions.SET_USER_INFO:
       return {
         ...state,
+        pk: action.payload.pk,
         displayName: action.payload.displayName,
         photo: action.payload.photo,
       };

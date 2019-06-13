@@ -28,19 +28,14 @@ export class TokenInvalidError extends Error {
 }
 
 const detectInvalidToken = (response) => {
-  const responseCopy = response.clone();
-
-  if (response.status === 403) {
-    return response.json().then((json) => {
-      const contentLang = response.headers.get('content-language');
-      if ((contentLang === 'en' && json.detail === 'Invalid token.')
-        || (contentLang === 'nl' && json.detail === 'Ongeldige token.')) {
-        throw new TokenInvalidError(responseCopy);
-      }
-      return responseCopy;
-    });
+  if (response.status === 403 && response.jsonData) {
+    const contentLang = response.headers.get('content-language');
+    if ((contentLang === 'en' && response.jsonData.detail === 'Invalid token.')
+      || (contentLang === 'nl' && response.jsonData.detail === 'Ongeldige token.')) {
+      throw new TokenInvalidError(response);
+    }
   }
-  return Promise.resolve(responseCopy);
+  return response;
 };
 
 export const apiRequest = (route, fetchOpts, params) => {
@@ -63,7 +58,16 @@ export const apiRequest = (route, fetchOpts, params) => {
       .join('&')}`;
   }
 
-  return fetch(`${apiUrl}/${route}/${query}`, requestOptions)
+  let requestUrl = `${apiUrl}/${route}/${query}`;
+  if (route.startsWith('http')) {
+    requestUrl = route;
+  }
+
+  return fetch(requestUrl, requestOptions)
+    .then(detectInvalidToken)
+    .then(response => response.json()
+      .then(data => ({ ...response, jsonData: data }))
+      .catch(() => response))
     .then(detectInvalidToken)
     .then((response) => {
       if (response.status >= 400 && response.status <= 500) {
@@ -71,6 +75,6 @@ export const apiRequest = (route, fetchOpts, params) => {
       } else if (response.status === 204) {
         return {};
       }
-      return response.json();
+      return response.jsonData;
     });
 };

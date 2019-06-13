@@ -11,6 +11,7 @@ export default {
   darkGrey: '#373737',
   dividerGrey: 'rgba(0, 0, 0, 0.12)',
   semiTransparent: 'rgba(0, 0, 0, 0.20)',
+  modalBackground: 'rgba(52, 52, 52, 0.8)',
   transparent: 'transparent',
   lightGreen: '#8fcc74',
   darkGreen: '#81b968',

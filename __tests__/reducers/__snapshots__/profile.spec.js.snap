@@ -14,7 +14,6 @@ Object {
     "birthday": "",
     "display_name": "",
     "membership_type": "",
-    "photo": "http://localhost:8000/static/members/images/default-avatar.jpg",
     "pk": -1,
     "profile_description": "",
     "programme": "",

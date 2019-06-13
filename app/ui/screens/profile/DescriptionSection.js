@@ -3,7 +3,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Text } from 'react-native';
 import CardSection from '../../components/cardSection/CardSection';
-import styles from './style/Profile';
+import styles from './style/ProfileScreen';
 
 const DescriptionSection = (
   { profile: { display_name: name, profile_description: description }, t },

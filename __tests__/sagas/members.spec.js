@@ -142,19 +142,11 @@ describe('members saga', () => {
     it('should load more members', () => expectSaga(membersSaga)
       .provide([
         [select(tokenSelector), 'token'],
+        [matchers.call.like({ fn: apiRequest, args: ['moreUrl'] }), { results: [{ pk: 1 }], next: 'moreUrl2' }],
       ])
       .dispatch(memberActions.more('moreUrl'))
-      .silentRun()
-      .then(() => {
-        expect(fetch).toBeCalledWith('moreUrl', {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: 'Token token',
-          },
-        });
-      }));
+      .put(memberActions.moreSuccess([{ pk: 1 }], 'moreUrl2'))
+      .silentRun());
 
     it('should put the result data when the request succeeds', () => {
       const response = {

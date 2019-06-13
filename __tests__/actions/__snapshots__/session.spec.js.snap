@@ -49,6 +49,7 @@ Object {
   "payload": Object {
     "displayName": "displayName",
     "photo": "photo",
+    "pk": "pk",
   },
   "type": "SESSION_SET_USER_INFO",
 }

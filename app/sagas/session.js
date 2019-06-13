@@ -11,7 +11,9 @@ import { apiRequest } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
+export const IDENTIFIERKEY = '@MyStore:identifier';
 export const USERNAMEKEY = '@MyStore:username';
 export const TOKENKEY = '@MyStore:token';
 export const DISPLAYNAMEKEY = '@MyStore:displayName';
@@ -29,10 +31,11 @@ const t = i18next.getFixedT(undefined, 'sagas/session');
 function* init() {
   try {
     const result = yield call([AsyncStorage, 'multiGet'], [
-      USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
+      IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
     ]);
     const values = result.reduce(pairsToObject, {});
 
+    const id = values[IDENTIFIERKEY];
     const username = values[USERNAMEKEY];
     const token = values[TOKENKEY];
     const displayName = values[DISPLAYNAMEKEY];
@@ -41,14 +44,14 @@ function* init() {
 
     if (username !== null && token !== null) {
       yield put(sessionActions.signedIn(username, token));
-      yield put(sessionActions.setUserInfo(displayName, photo));
+      yield put(sessionActions.setUserInfo(id, displayName, photo));
       yield put(sessionActions.fetchUserInfo());
       yield put(pushNotificationsActions.register(pushCategories));
     } else {
       yield put(sessionActions.tokenInvalid());
     }
   } catch (e) {
-    Sentry.captureException(e);
+    yield call(reportError, e);
   }
 }
 
@@ -80,7 +83,7 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    Snackbar.show({ title: t('Login successful') });
+    yield call([Snackbar, 'show'], { title: t('Login successful') });
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
@@ -89,19 +92,21 @@ function* signIn(action) {
     }
 
     yield put(sessionActions.tokenInvalid());
-    Sentry.captureException(e);
-    Snackbar.show({ title: t('Login failed') });
+    yield call(reportError, e);
+    yield call([Snackbar, 'show'], { title: t('Login failed') });
   }
 }
 
 function* clearUserInfo() {
-  yield call(AsyncStorage.clear);
+  yield call([AsyncStorage, 'multiRemove'], [
+    IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
+  ]);
   yield put(pushNotificationsActions.invalidate());
 }
 
 function* signOut() {
   yield call(clearUserInfo);
-  Snackbar.show({ title: t('Logout successful') });
+  yield call([Snackbar, 'show'], { title: t('Logout successful') });
 }
 
 function* signedIn({ payload }) {
@@ -125,16 +130,19 @@ function* userInfo() {
     const userProfile = yield call(apiRequest, 'members/me', data);
 
     yield call(AsyncStorage.multiSet, [
+      [IDENTIFIERKEY, userProfile.pk],
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);
-    yield put(sessionActions.setUserInfo(userProfile.display_name, userProfile.avatar.medium));
+    yield put(sessionActions.setUserInfo(
+      userProfile.pk, userProfile.display_name, userProfile.avatar.medium,
+    ));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
   }
 }
 
-function* sessionSaga() {
+export default function* () {
   yield takeEvery(sessionActions.INIT, init);
   yield takeEvery(sessionActions.SIGN_IN, signIn);
   yield takeEvery(sessionActions.SIGN_OUT, signOut);
@@ -142,5 +150,3 @@ function* sessionSaga() {
   yield takeEvery(sessionActions.FETCH_USER_INFO, userInfo);
   yield takeEvery(sessionActions.TOKEN_INVALID, clearUserInfo);
 }
-
-export default sessionSaga;

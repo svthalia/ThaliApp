@@ -41,6 +41,7 @@
 		3238F61D229F16FE00BEB7F8 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3238F61A229F16F400BEB7F8 /* libRNDeviceInfo.a */; };
 		32472E7522A00BB7002A0BC5 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32472E6822A00BB1002A0BC5 /* libRNCAsyncStorage.a */; };
 		32472E7E22A00FBC002A0BC5 /* libRNCStatusBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32472E7D22A00FB4002A0BC5 /* libRNCStatusBar.a */; };
+		3269FBC722B2B8D100969EDE /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FBBF22B2B8C800969EDE /* libRNImagePicker.a */; };
 		327DC4A2229EB48000DE29E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327DC4A1229EB48000DE29E9 /* GoogleService-Info.plist */; };
 		327DC54B229EB8E100DE29E9 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 327DC537229EB6C300DE29E9 /* libBVLinearGradient.a */; };
 		327DC54C229EB8E100DE29E9 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 327DC527229EB68D00DE29E9 /* libRNScreens.a */; };
@@ -225,6 +226,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNCStatusBar;
+		};
+		3269FBBE22B2B8C800969EDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3269FB8D22B2B8C800969EDE /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
 		};
 		327DC48C229EB42900DE29E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -485,6 +493,7 @@
 		3238F614229F16F300BEB7F8 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		32472E3B22A00BB1002A0BC5 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		32472E7822A00FB4002A0BC5 /* RNCStatusBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCStatusBar.xcodeproj; path = "../node_modules/@react-native-community/status-bar/ios/RNCStatusBar.xcodeproj"; sourceTree = "<group>"; };
+		3269FB8D22B2B8C800969EDE /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		327DC4A1229EB48000DE29E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		327DC4A3229EB53A00DE29E9 /* ThaliApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = ThaliApp.entitlements; path = ThaliApp/ThaliApp.entitlements; sourceTree = "<group>"; };
 		327DC4B2229EB5A700DE29E9 /* RNSentry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
@@ -535,6 +544,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3269FBC722B2B8D100969EDE /* libRNImagePicker.a in Frameworks */,
 				32472E7E22A00FBC002A0BC5 /* libRNCStatusBar.a in Frameworks */,
 				32472E7522A00BB7002A0BC5 /* libRNCAsyncStorage.a in Frameworks */,
 				3238F61D229F16FE00BEB7F8 /* libRNDeviceInfo.a in Frameworks */,
@@ -761,6 +771,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3269FB8E22B2B8C800969EDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3269FBBF22B2B8C800969EDE /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		327DC466229EB42900DE29E9 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,6 +889,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3269FB8D22B2B8C800969EDE /* RNImagePicker.xcodeproj */,
 				32472E7822A00FB4002A0BC5 /* RNCStatusBar.xcodeproj */,
 				32472E3B22A00BB1002A0BC5 /* RNCAsyncStorage.xcodeproj */,
 				3238F614229F16F300BEB7F8 /* RNDeviceInfo.xcodeproj */,
@@ -1130,6 +1149,10 @@
 					ProjectRef = 327DC542229EB76A00DE29E9 /* RNGestureHandler.xcodeproj */;
 				},
 				{
+					ProductGroup = 3269FB8E22B2B8C800969EDE /* Products */;
+					ProjectRef = 3269FB8D22B2B8C800969EDE /* RNImagePicker.xcodeproj */;
+				},
+				{
 					ProductGroup = 327DC523229EB68D00DE29E9 /* Products */;
 					ProjectRef = 327DC522229EB68D00DE29E9 /* RNScreens.xcodeproj */;
 				},
@@ -1299,6 +1322,13 @@
 			fileType = archive.ar;
 			path = libRNCStatusBar.a;
 			remoteRef = 32472E7C22A00FB4002A0BC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3269FBBF22B2B8C800969EDE /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = 3269FBBE22B2B8C800969EDE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		327DC48D229EB42900DE29E9 /* libjsi.a */ = {

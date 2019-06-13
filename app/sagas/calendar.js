@@ -1,11 +1,11 @@
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Sentry } from 'react-native-sentry';
 
 import { apiRequest } from '../utils/url';
 import * as calendarActions from '../actions/calendar';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 const calendar = function* calendar() {
   const token = yield select(tokenSelector);
@@ -31,17 +31,15 @@ const calendar = function* calendar() {
         partner: true,
       }));
     } catch (error) {
-      Sentry.captureException(error);
+      yield call(reportError, error);
     }
     yield put(calendarActions.success(events.concat(partnerEvents)));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(calendarActions.failure());
   }
 };
 
-const calendarSaga = function* eventSaga() {
+export default function* () {
   yield takeEvery(calendarActions.REFRESH, calendar);
-};
-
-export default calendarSaga;
+}

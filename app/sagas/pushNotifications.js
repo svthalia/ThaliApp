@@ -1,11 +1,11 @@
 import { call, takeEvery, select } from 'redux-saga/effects';
 import { Platform } from 'react-native';
 import firebase from 'react-native-firebase';
-import { Sentry } from 'react-native-sentry';
 
 import { apiRequest } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 function* register(action) {
   const messaging = firebase.messaging();
@@ -54,8 +54,8 @@ function* register(action) {
 
   try {
     yield call(apiRequest, 'devices', data);
-  } catch (err) {
-    Sentry.captureException(err);
+  } catch (error) {
+    yield call(reportError, error);
     // eat error, om nom nom
   }
 }
@@ -64,9 +64,7 @@ function* invalidate() {
   yield call([firebase.iid(), 'delete']);
 }
 
-function* pushNotificationsSaga() {
+export default function* () {
   yield takeEvery(pushNotificationsActions.REGISTER, register);
   yield takeEvery(pushNotificationsActions.INVALIDATE, invalidate);
 }
-
-export default pushNotificationsSaga;

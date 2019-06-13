@@ -2,7 +2,6 @@ import { Dimensions } from 'react-native';
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Sentry } from 'react-native-sentry';
 
 import { TOTAL_BAR_HEIGHT } from '../ui/components/standardHeader/style/StandardHeader';
 import { memberSize } from '../ui/screens/memberList/style/MemberList';
@@ -10,6 +9,7 @@ import { memberSize } from '../ui/screens/memberList/style/MemberList';
 import { apiRequest } from '../utils/url';
 import * as memberActions from '../actions/members';
 import { tokenSelector } from '../selectors/session';
+import reportError from '../utils/errorReporting';
 
 const members = function* members(action) {
   const { keywords } = action.payload;
@@ -40,7 +40,7 @@ const members = function* members(action) {
     const response = yield call(apiRequest, 'members', data, params);
     yield put(memberActions.success(response.results, response.next, keywords));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(memberActions.failure());
   }
 };
@@ -61,17 +61,15 @@ const more = function* more(action) {
   };
 
   try {
-    const responseJson = yield fetch(url, data).then(response => response.json());
-    yield put(memberActions.moreSuccess(responseJson.results, responseJson.next));
+    const response = yield call(apiRequest, url, data);
+    yield put(memberActions.moreSuccess(response.results, response.next));
   } catch (error) {
-    Sentry.captureException(error);
+    yield call(reportError, error);
     yield put(memberActions.moreSuccess([], null));
   }
 };
 
-const membersSaga = function* membersSaga() {
+export default function* () {
   yield takeEvery(memberActions.MEMBERS, members);
   yield takeEvery(memberActions.MORE, more);
-};
-
-export default membersSaga;
+}

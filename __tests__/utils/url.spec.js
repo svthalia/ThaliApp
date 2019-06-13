@@ -1,3 +1,4 @@
+import DeviceInfo from 'react-native-device-info';
 import {
   apiRequest,
   apiUrl,
@@ -7,20 +8,17 @@ import {
   TokenInvalidError,
 } from '../../app/utils/url';
 
-import DeviceInfo from 'react-native-device-info';
 
 const fetchPromiseResult = {
   status: 200,
-  json: () => Promise.resolve('responseJson'),
-  clone: global.fetch,
+  json: () => Promise.resolve({ exampleJson: 'val' }),
 };
-global.fetch = jest.fn().mockReturnValue(
-  Promise.resolve(fetchPromiseResult),
-);
-fetchPromiseResult.clone = global.fetch;
 
 describe('url helper', () => {
   beforeEach(() => {
+    global.fetch = jest.fn().mockReturnValue(
+      Promise.resolve(fetchPromiseResult),
+    );
   });
 
   it('should expose the constants', () => {
@@ -37,7 +35,7 @@ describe('url helper', () => {
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
           { headers: { 'Accept-Language': 'en' } });
-        expect(response).toEqual('responseJson');
+        expect(response).toEqual({ exampleJson: 'val' });
       });
   });
 
@@ -65,7 +63,7 @@ describe('url helper', () => {
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
           { headers: { 'Accept-Language': 'en' } });
-        expect(response).toEqual('responseJson');
+        expect(response).toEqual({ exampleJson: 'val' });
       });
   });
 
@@ -74,7 +72,6 @@ describe('url helper', () => {
     const response = {
       status: 404,
       json: () => Promise.resolve('responseJson'),
-      clone: () => ({ status: 404 }),
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
@@ -86,7 +83,6 @@ describe('url helper', () => {
     const response = {
       status: 204,
       json: () => Promise.resolve('responseJson'),
-      clone: () => ({ status: 204 }),
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
@@ -99,7 +95,6 @@ describe('url helper', () => {
       status: 403,
       headers: { get: key => (key === 'content-language' ? 'en' : 'nl') },
       json: () => Promise.resolve({ detail: 'Invalid token.' }),
-      clone: () => 'responseCopy',
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
@@ -112,7 +107,6 @@ describe('url helper', () => {
       status: 403,
       headers: { get: key => (key === 'content-language' ? 'nl' : 'en') },
       json: () => Promise.resolve({ detail: 'Ongeldige token.' }),
-      clone: () => 'responseCopy',
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
@@ -125,16 +119,14 @@ describe('url helper', () => {
       status: 403,
       headers: { get: key => (key === 'content-language' ? 'en' : 'nl') },
       json: () => Promise.resolve({ detail: 'Not authorized.' }),
-      clone: () => ({ json: () => 'jsonResult' }),
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
-      .then(res => expect(res).toEqual('jsonResult'));
+      .catch(res => expect(res).toEqual(new ServerError('Invalid status code: 403')));
   });
 
   it('should default to an English locales', () => {
     DeviceInfo.getDeviceLocale = () => 'fr';
-    expect.assertions(1);
     return apiRequest('route', {}, null)
       .then(() => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,

@@ -54,8 +54,12 @@ describe('session reducer', () => {
   describe('has retrieved user info', () => {
     const state = reducer(
       emptyState,
-      actions.setUserInfo('John Doe', 'imageUrl'),
+      actions.setUserInfo('pk', 'John Doe', 'imageUrl'),
     );
+
+    it('should contain the primary key', () => {
+      expect(state).toHaveProperty('pk', 'pk');
+    });
 
     it('should contain the display name', () => {
       expect(state).toHaveProperty('displayName', 'John Doe');

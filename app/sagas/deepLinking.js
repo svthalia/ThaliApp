@@ -81,8 +81,6 @@ const deepLink = function* deepLink(action) {
   }
 };
 
-const deepLinkingSaga = function* deepLinkingSaga() {
+export default function* () {
   yield takeEvery(deepLinkingActions.DEEPLINK, deepLink);
-};
-
-export default deepLinkingSaga;
+}

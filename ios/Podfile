@@ -9,6 +9,8 @@ target 'ThaliApp' do
   pod 'Firebase/Core', '~> 5.20.1'
   pod 'Firebase/Messaging', '~> 5.20.1'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
   target 'ThaliAppTests' do
     inherit! :search_paths
     # Pods for testing

@@ -6,7 +6,6 @@ const initialState = {
   profile: {
     pk: -1,
     display_name: '',
-    photo: defaultProfileImage,
     avatar: {
       full: defaultProfileImage,
       large: defaultProfileImage,
@@ -26,8 +25,8 @@ const initialState = {
   hasLoaded: false,
 };
 
-export default function profile(state = initialState, action = {}) {
-  switch (action.type) {
+export default function profile(state = initialState, { type, payload } = {}) {
+  switch (type) {
     case profileActions.FETCHING:
       return {
         ...state,
@@ -36,7 +35,7 @@ export default function profile(state = initialState, action = {}) {
     case profileActions.SUCCESS:
       return {
         ...state,
-        profile: action.payload.profileData,
+        profile: payload,
         success: true,
         hasLoaded: true,
       };
@@ -45,6 +44,14 @@ export default function profile(state = initialState, action = {}) {
         ...state,
         success: false,
         hasLoaded: true,
+      };
+    case profileActions.UPDATE_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          ...payload,
+        },
       };
     default:
       return state;

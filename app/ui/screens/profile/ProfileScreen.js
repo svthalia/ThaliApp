@@ -1,41 +1,55 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Animated,
-  ImageBackground,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
-  View,
+  Animated, ImageBackground, Platform, ScrollView, TouchableHighlight, View,
 } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
 import { withTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import ErrorScreen from '../../components/errorScreen/ErrorScreen';
-import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
-
 import StandardHeader from '../../components/standardHeader/StandardHeader';
+import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
+import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
 import { STATUSBAR_HEIGHT } from '../../components/standardHeader/style/StandardHeader';
 
 import Colors from '../../style/Colors';
+import AvatarModal from './AvatarModal';
 import AchievementSection from './AchievementSection';
 import DescriptionSection from './DescriptionSection';
 import PersonalInfoSection from './PersonalInfoSection';
-import styles, {
-  HEADER_MAX_HEIGHT,
-  HEADER_MIN_HEIGHT,
-  HEADER_SCROLL_DISTANCE,
-} from './style/Profile';
-
+import styles, { HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/ProfileScreen';
+import IconButton from '../../components/button/IconButton';
 
 class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.scrollY = new Animated.Value(0);
     this.textHeight = Platform.OS === 'android' ? 27 : 22;
+    this.state = {
+      modalVisible: false,
+      headerEnabled: true,
+    };
+
+    this.scrollY.addListener(({ value }) => {
+      if (this.state.headerEnabled && value > (HEADER_SCROLL_DISTANCE / 2)) {
+        this.setState({
+          headerEnabled: false,
+        });
+      } else if (!this.state.headerEnabled && value < (HEADER_SCROLL_DISTANCE / 2)) {
+        this.setState({
+          headerEnabled: true,
+        });
+      }
+    });
   }
+
+  setModalVisible = (visible) => {
+    this.setState({
+      modalVisible: visible,
+    });
+  };
+
+  isOwnProfilePage = () => this.props.userPk === this.props.profile.pk;
 
   getAppbar = () => {
     const headerHeight = this.scrollY.interpolate({
@@ -76,8 +90,7 @@ class ProfileScreen extends Component {
       fontSize: textSize,
       bottom: textPosBottom,
     };
-    let appBarBorderStyle = {
-    };
+    let appBarBorderStyle = {};
     if (Platform.OS === 'android') {
       textStyle = {
         ...textStyle,
@@ -120,20 +133,24 @@ class ProfileScreen extends Component {
           </ImageBackground>
         </Animated.View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
-          <TouchableOpacity
-            onPress={this.props.goBack}
-          >
-            <Icon
-              name="arrow-back"
-              style={styles.icon}
-              size={24}
-            />
-          </TouchableOpacity>
           <Animated.Text
             style={[styles.title, textStyle]}
           >
             {this.props.profile.display_name}
           </Animated.Text>
+          <TouchableHighlight
+            activeOpacity={0}
+            style={styles.touchableHeader}
+            underlayColor={this.state.headerEnabled ? Colors.semiTransparent : Colors.transparent}
+            onPress={() => (this.state.headerEnabled ? this.setModalVisible(true) : null)}
+          >
+            <View style={styles.touchableHeader} />
+          </TouchableHighlight>
+          <IconButton
+            onPress={this.props.goBack}
+            name="arrow-back"
+            style={styles.icon}
+          />
         </Animated.View>
       </Animated.View>
     );
@@ -151,7 +168,8 @@ class ProfileScreen extends Component {
           <LoadingScreen />
         </View>
       );
-    } if (!success) {
+    }
+    if (!success) {
       return (
         <View style={styles.container}>
           <StandardHeader />
@@ -167,6 +185,13 @@ class ProfileScreen extends Component {
           barStyle="light-content"
           translucent
           animated
+        />
+        <AvatarModal
+          visible={this.state.modalVisible}
+          close={() => this.setModalVisible(false)}
+          image={this.props.profile.avatar.full}
+          canEdit={this.isOwnProfilePage()}
+          changeAvatar={this.props.changeAvatar}
         />
         <ScrollView
           style={styles.container}
@@ -187,6 +212,7 @@ class ProfileScreen extends Component {
 }
 
 ProfileScreen.propTypes = {
+  userPk: PropTypes.number.isRequired,
   profile: PropTypes.shape({
     pk: PropTypes.number.isRequired,
     display_name: PropTypes.string.isRequired,
@@ -227,6 +253,7 @@ ProfileScreen.propTypes = {
   hasLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
+  changeAvatar: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
 
