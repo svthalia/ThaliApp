@@ -987,10 +987,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.4.2.tgz#b29d2fa1b294fec8526f69b852a3deda248c8d81"
   integrity sha512-gDQENh7uPLGPKbRFI07GiUXZPhm2j17K4FT308OwAmIiOKbfO/cxy0sCWB0YzD/SLw9F3D9tLBRPJY6GG9YZLw==
 
-"@react-native-community/cli@1.9.8":
-  version "1.9.8"
-  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.9.8.tgz#8488699f78b146cab2d7451951c4218671812cdc"
-  integrity sha512-/qd1fRJzisTjYpfNJ4NGYYM6cWhnTbmTTUPzi3yHTpfWWtyepAl8MLf6RbXaC8menCkg1jGkke6hD4rDoUJK0A==
+"@react-native-community/cli@1.9.9":
+  version "1.9.9"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.9.9.tgz#79bba50258ad8cac2d66148ef649bdbf7b1a5aca"
+  integrity sha512-puO2sfbAEimXCtJQK0N2CHzQCKPd97HQKfOG7V6sq8pmcjHPg7Q1MT6fjJjrlzhR0tKOGltpb6N8hcWsg9pNgg==
   dependencies:
     chalk "^1.1.1"
     commander "^2.19.0"
