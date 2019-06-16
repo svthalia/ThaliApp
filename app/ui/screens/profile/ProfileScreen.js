@@ -146,6 +146,7 @@ class ProfileScreen extends Component {
           >
             <View style={styles.touchableHeader} />
           </TouchableHighlight>
+          <View style={styles.headerIconPressBlocker} />
           <IconButton
             onPress={this.props.goBack}
             name="arrow-back"

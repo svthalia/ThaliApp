@@ -1,8 +1,8 @@
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
-import { Alert, Platform } from 'react-native';
+import { Alert } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import i18next from '../utils/i18n';
 
@@ -10,17 +10,9 @@ import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
 import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import * as sessionActions from '../actions/session';
 
 const t = i18next.getFixedT(undefined, 'sagas/profile');
-
-const openImageLibrary = options => new Promise((resolve, reject) => {
-  ImagePicker.showImagePicker(options, (response) => {
-    if (response.error || response.didCancel) {
-      reject(response);
-    }
-    resolve(response);
-  });
-});
 
 function* profile(action) {
   const { member } = action.payload;
@@ -49,22 +41,22 @@ function* profile(action) {
 function* updateAvatar() {
   const options = {
     title: t('Change profile picture'),
-    storageOptions: {
-      skipBackup: true,
-      path: 'images',
-    },
+    width: 500,
+    height: 500,
+    cropping: true,
+    mediaType: 'photo',
   };
 
   try {
-    const photo = yield call(openImageLibrary, options);
+    const photo = yield call([ImagePicker, 'openPicker'], options);
+    const fileName = photo.path.split('/').pop();
 
     const formData = new FormData();
 
     formData.append('photo', {
-      name: photo.fileName,
-      type: photo.type,
-      uri:
-        Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+      name: fileName,
+      type: photo.mime,
+      uri: photo.path,
     });
 
     const token = yield select(tokenSelector);
@@ -73,7 +65,7 @@ function* updateAvatar() {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `Token ${token}`,
       },
       body: formData,
@@ -84,6 +76,7 @@ function* updateAvatar() {
       const profileData = yield call(apiRequest, 'members/me', data);
       yield call([Snackbar, 'dismiss']);
       yield put(profileActions.success(profileData));
+      yield put(sessionActions.fetchUserInfo());
     } catch (error) {
       yield call([Snackbar, 'dismiss']);
       yield call(reportError, error);

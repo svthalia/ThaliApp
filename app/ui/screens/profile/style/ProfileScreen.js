@@ -122,6 +122,14 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
   },
+  headerIconPressBlocker: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: 64,
+    height: (HEADER_MIN_HEIGHT - 24) + STATUSBAR_HEIGHT,
+    backgroundColor: Colors.transparent,
+  },
   overlayGradient: {
     position: 'absolute',
     top: '50%',
