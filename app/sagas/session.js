@@ -35,7 +35,7 @@ function* init() {
     ]);
     const values = result.reduce(pairsToObject, {});
 
-    const id = values[IDENTIFIERKEY];
+    const id = parseInt(values[IDENTIFIERKEY], 0);
     const username = values[USERNAMEKEY];
     const token = values[TOKENKEY];
     const displayName = values[DISPLAYNAMEKEY];
@@ -130,7 +130,7 @@ function* userInfo() {
     const userProfile = yield call(apiRequest, 'members/me', data);
 
     yield call(AsyncStorage.multiSet, [
-      [IDENTIFIERKEY, userProfile.pk],
+      [IDENTIFIERKEY, userProfile.pk.toString()],
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);

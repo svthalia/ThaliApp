@@ -166,7 +166,7 @@ describe('session saga', () => {
       .silentRun()
       .then(() => {
         expect(AsyncStorage.multiSet).toBeCalledWith([
-          [IDENTIFIERKEY, 12],
+          [IDENTIFIERKEY, '12'],
           [DISPLAYNAMEKEY, 'Johnny Test'],
           [PHOTOKEY, 'http://example.org/photo.png'],
         ]);
