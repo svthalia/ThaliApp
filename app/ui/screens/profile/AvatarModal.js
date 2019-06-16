@@ -9,6 +9,7 @@ const AvatarModal = props => (
     visible={props.visible}
     transparent
     animationType="fade"
+    onRequestClose={props.close}
   >
     <View
       style={styles.background}

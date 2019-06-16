@@ -8,7 +8,7 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.imagepicker.ImagePickerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import cl.json.ShareApplication;
 import cl.json.RNSharePackage;
 
@@ -45,7 +45,7 @@ public class MainApplication extends Application implements ShareApplication, Re
             new RNDeviceInfo(),
             new RNScreensPackage(),
             new RNGestureHandlerPackage(),
-            new ImagePickerPackage(),
+            new PickerPackage(),
             new RNSharePackage(),
             new RNSentryPackage(),
             new SnackbarPackage(),
