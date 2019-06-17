@@ -7252,10 +7252,10 @@ react-native-safe-area-view@^0.14.1:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"
   integrity sha512-kSyAt0AeVU6N7ZonfV6dP6iZF8B7Bce+tk3eujXhzBGsLg0VSLnU7uE9VqJF0xdQrHR91ZjGgVMieo/8df9KTA==
 
-react-native-sentry@0.43.1:
-  version "0.43.1"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.43.1.tgz#52029e5244a1667614d961c342f0c82419266d24"
-  integrity sha512-oDWPLlXBbTFOEzqqxGihFO3DoBkEiQCQKgkF4av07aMdW+dKJxagwFjQW4vkoclNdK3w0Nfjc8kd7I7loDAcnA==
+react-native-sentry@0.43.2:
+  version "0.43.2"
+  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.43.2.tgz#1505d16d334656f25f4d515e004d0c5a4ac5a01b"
+  integrity sha512-MDrMkt/ntyQhhn+b3EVUuB/lXvQbSLvCOpkAvioNOzddoyo2R6i3rVZ3aZmPN1oK3O9GFE4tSa0M+eTHni7AaQ==
   dependencies:
     "@sentry/wizard" "^0.13.0"
     raven-js "^3.27.1"
