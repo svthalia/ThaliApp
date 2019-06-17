@@ -7174,10 +7174,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-native-device-info@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.1.1.tgz#c6ddc022033756a5e4c5899eb83e390b5a18cc17"
-  integrity sha512-H0qq9UdP3zGESYH4HMPuv2A/FwOMszVbktj0JWuT/eVhW97PyRkYcobhFd1ggW0U+ksVSewSyX+JenQejGp7+w==
+react-native-device-info@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.1.2.tgz#5c553498e8930410aa65796b83f8f8c8fb9893b4"
+  integrity sha512-q14hVR0eLRXnKeRyKX4naydXstCWetCIL+K+vUqREGkVj6qKoBouKd2yd8AxBfyomQN4uP3XRT6hTCwErIj9Ew==
 
 react-native-dotenv@0.2.0:
   version "0.2.0"
