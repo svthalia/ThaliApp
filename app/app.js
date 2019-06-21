@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {
-  Linking, Platform, NativeModules, Alert,
+  Alert, Linking, NativeModules, Platform,
 } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { I18nextProvider, withTranslation } from 'react-i18next';
+import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import firebase from 'react-native-firebase';
 import DeviceInfo from 'react-native-device-info';
 import Moment from 'moment';
 import 'moment/locale/nl';
-import PropTypes from 'prop-types';
 
+import { i18n as i18next } from 'i18next';
 import reducers from './reducers';
 
 import i18n from './utils/i18n';
@@ -74,12 +74,13 @@ class Main extends Component {
   };
 
   showNotification = (notification) => {
+    const t = i18next.getFixedT(undefined, 'app');
     let buttons;
     if (notification.data.url) {
       buttons = [
-        { text: this.props.t('Dismiss') },
+        { text: t('Dismiss') },
         {
-          text: this.props.t('Open'),
+          text: t('Open'),
           onPress: () => store.dispatch(
             deepLinkingActions.deepLink(notification.data.url, false),
           ),
@@ -128,8 +129,4 @@ class Main extends Component {
   }
 }
 
-Main.propTypes = {
-  t: PropTypes.func.isRequired,
-};
-
-export default withTranslation('app')(Main);
+export default Main;

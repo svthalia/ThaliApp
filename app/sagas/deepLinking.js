@@ -10,6 +10,7 @@ import * as pizzaActions from '../actions/pizza';
 import * as loginActions from '../actions/session';
 import * as eventActions from '../actions/event';
 import * as calendarActions from '../actions/calendar';
+import * as photosActions from '../actions/photos';
 
 export const parseURL = (url) => {
   const matches = new RegExp(`^${siteURL}(/[^?]+)(?:\\?(.+))?`).exec(url);
@@ -63,6 +64,16 @@ const deepLink = function* deepLink(action) {
     {
       regexp: new RegExp('^/events/$'),
       action: calendarActions.open,
+      args: [],
+    },
+    {
+      regexp: new RegExp('^/photos/([-\\w]+)/$'),
+      action: photosActions.openAlbumWithSlug,
+      args: [],
+    },
+    {
+      regexp: new RegExp('^/photos/$'),
+      action: photosActions.openAlbums,
       args: [],
     },
   ];

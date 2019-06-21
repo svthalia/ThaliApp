@@ -4,6 +4,7 @@ import * as profileActions from '../../../actions/profile';
 import * as welcomeActions from '../../../actions/welcome';
 import * as calendarActions from '../../../actions/calendar';
 import * as loginActions from '../../../actions/session';
+import * as photosActions from '../../../actions/photos';
 import * as membersActions from '../../../actions/members';
 import Sidebar from './Sidebar';
 
@@ -12,13 +13,14 @@ const mapStateToProps = state => ({
   photo: state.session.photo,
 });
 
-const mapDispatchToProps = {
-  loadProfile: profileActions.profile,
-  openCalendar: calendarActions.open,
-  openMemberList: membersActions.members,
-  openWelcome: welcomeActions.open,
-  openSettings: settingsActions.open,
-  signOut: loginActions.signOut,
-};
+const mapDispatchToProps = dispatch => ({
+  loadProfile: () => dispatch(profileActions.profile()),
+  openCalendar: () => dispatch(calendarActions.open()),
+  openMemberList: () => dispatch(membersActions.members()),
+  openWelcome: () => dispatch(welcomeActions.open()),
+  openSettings: () => dispatch(settingsActions.open()),
+  openPhotos: () => dispatch(photosActions.openAlbums()),
+  signOut: () => dispatch(loginActions.signOut()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

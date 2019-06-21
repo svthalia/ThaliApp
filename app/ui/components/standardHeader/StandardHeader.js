@@ -25,6 +25,10 @@ const sceneToTitle = (routeName, t) => {
       return t('Profile');
     case 'Registration':
       return t('Registration');
+    case 'Photos':
+      return t('Photos');
+    case 'PhotoAlbum':
+      return t('Album');
     case 'Settings':
       return t('Settings');
     case 'EventAdmin':
