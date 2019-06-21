@@ -73,7 +73,7 @@
     "redux-saga": "0.16.2",
     "unorm": "1.5.0",
     "i18next-react-native-language-detector": "^1.0.2",
-    "react-native-drawer": "^2.3.0",
+    "react-native-drawer": "^2.5.1",
     "react-native-image-gallery": "^2.1.5",
     "react-native-locale-detector": "^1.0.1",
     "react-native-image-zoom-viewer": "^2.2.15"
