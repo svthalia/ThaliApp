@@ -5,17 +5,14 @@ import SquareView from '../../components/memberView/SquareView';
 import styles from './style/PhotoListItem';
 
 const PhotoListItem = props => (
-  <TouchableHighlight
-    style={styles.touchable}
-    onPress={() => props.onPress()}
-  >
-    <SquareView style={props.style} size={props.size} >
+  <SquareView style={props.style} size={props.size}>
+    <TouchableHighlight
+      style={styles.touchable}
+      onPress={() => props.onPress()}
+    >
       <Image
         source={{
           uri: props.photo.file.small,
-          headers: {
-            Authorization: `Token ${props.token}`,
-          },
         }}
         style={[
           styles.image,
@@ -26,8 +23,8 @@ const PhotoListItem = props => (
           },
         ]}
       />
-    </SquareView>
-  </TouchableHighlight>
+    </TouchableHighlight>
+  </SquareView>
 );
 
 PhotoListItem.propTypes = {
@@ -46,7 +43,6 @@ PhotoListItem.propTypes = {
     }).isRequired,
     size: PropTypes.string,
   }).isRequired,
-  token: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 

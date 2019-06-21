@@ -69,6 +69,14 @@ export default function photos(state = initialState, action = {}) {
           selection: undefined,
         },
       };
+    case photosActions.PHOTOS_GALLERY_OPEN:
+      return {
+        ...state,
+        album: {
+          ...state.album,
+          selection: action.payload.selection,
+        },
+      };
     default:
       return state;
   }

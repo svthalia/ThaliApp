@@ -16,15 +16,12 @@ const AlbumListItem = (props) => {
     <SquareView style={props.style} size={props.size}>
       <TouchableHighlight
         style={styles.image}
-        onPress={() => props.openAlbum(props.album.pk)}
+        onPress={() => props.onPress(props.album.pk)}
       >
         <ImageBackground
           style={styles.image}
           source={{
             uri: props.album.cover.file.small,
-            headers: {
-              Authorization: `Token ${props.token}`,
-            },
           }}
         >
           <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
@@ -54,8 +51,7 @@ AlbumListItem.propTypes = {
     hidden: PropTypes.bool.isRequired,
     cover: PropTypes.shape(PhotoListItem.propTypes.photo),
   }).isRequired,
-  openAlbum: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 AlbumListItem.defaultProps = {

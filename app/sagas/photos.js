@@ -25,8 +25,10 @@ function* loadAlbums() {
 
   try {
     const response = yield call(apiRequest, 'photos/albums', data, params);
-
-    yield put(photosActions.successAlbums(response.results, response.next));
+    yield put(photosActions.successAlbums(
+      response.results.filter(item => item.accessible && !item.hidden && item.cover != null),
+      response.next,
+    ));
   } catch (error) {
     yield put(photosActions.failureAlbums());
   }

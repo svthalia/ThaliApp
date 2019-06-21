@@ -7,6 +7,7 @@ export const PHOTOS_ALBUM_SUCCESS = 'PHOTOS_ALBUM_SUCCESS';
 export const PHOTOS_ALBUM_FAILURE = 'PHOTOS_ALBUM_FAILURE';
 export const PHOTOS_ALBUM_FETCHING = 'PHOTOS_ALBUM_FETCHING';
 export const PHOTOS_PHOTO_SHOW = 'PHOTOS_PHOTO_SHOW';
+export const PHOTOS_GALLERY_OPEN = 'PHOTOS_GALLERY_OPEN';
 
 export function openAlbums() {
   return {
@@ -28,6 +29,13 @@ export function failureAlbums() {
 export function fetchingAlbums() {
   return {
     type: PHOTOS_ALBUMS_FETCHING,
+  };
+}
+
+export function openGallery(selection) {
+  return {
+    type: PHOTOS_GALLERY_OPEN,
+    payload: { selection },
   };
 }
 

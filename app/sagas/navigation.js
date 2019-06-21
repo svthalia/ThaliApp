@@ -45,6 +45,7 @@ export default function* () {
   yield takeEvery(pizzaActions.PIZZA, navigate, 'Pizza');
   yield takeEvery(photosActions.PHOTOS_ALBUMS_OPEN, navigate, 'Photos');
   yield takeEvery(photosActions.PHOTOS_ALBUM_OPEN, navigate, 'PhotoAlbum');
+  yield takeEvery(photosActions.PHOTOS_GALLERY_OPEN, navigate, 'PhotoGallery');
   yield takeEvery(sessionActions.SIGNED_IN, navigate, 'SignedIn');
   yield takeEvery([sessionActions.TOKEN_INVALID, sessionActions.SIGN_OUT], navigate, 'Auth');
 }
