@@ -46,6 +46,13 @@ export function openAlbum(pk) {
   };
 }
 
+export function openAlbumWithSlug(slug) {
+  return {
+    type: PHOTOS_ALBUM_OPEN,
+    payload: { slug },
+  };
+}
+
 export function successAlbum(album) {
   return {
     type: PHOTOS_ALBUM_SUCCESS,

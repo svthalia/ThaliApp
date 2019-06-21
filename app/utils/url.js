@@ -3,7 +3,7 @@ import DeviceInfo from 'react-native-device-info';
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
-  // server = 'http://localhost:8000';
+  server = 'http://localhost:8000';
 }
 
 export const url = server;

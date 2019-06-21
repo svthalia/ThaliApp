@@ -67,8 +67,8 @@ const deepLink = function* deepLink(action) {
       args: [],
     },
     {
-      regexp: new RegExp('^/photos/([0-9]+)/$'),
-      action: photosActions.openAlbum,
+      regexp: new RegExp('^/photos/([-\\w]+)/$'),
+      action: photosActions.openAlbumWithSlug,
       args: [],
     },
     {

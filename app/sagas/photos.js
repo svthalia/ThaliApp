@@ -35,7 +35,7 @@ function* loadAlbums() {
 }
 
 function* loadAlbum(action) {
-  const { pk } = action.payload;
+  const { pk, slug } = action.payload;
   const token = yield select(tokenSelector);
 
   yield put(photosActions.fetchingAlbum());
@@ -50,9 +50,21 @@ function* loadAlbum(action) {
   };
 
   try {
-    const album = yield call(apiRequest, `photos/albums/${pk}`, data);
+    let album;
+    if (pk !== undefined) {
+      album = yield call(apiRequest, `photos/albums/${pk}`, data);
+    } else {
+      const albums = yield call(apiRequest, 'photos/albums', data, {
+        search: slug,
+      });
+      album = yield call(apiRequest, `photos/albums/${albums[0].pk}`, data);
+    }
 
-    yield put(photosActions.successAlbum(album));
+    if (album !== undefined) {
+      yield put(photosActions.successAlbum(album));
+    } else {
+      yield put(photosActions.failureAlbum());
+    }
   } catch (error) {
     yield put(photosActions.failureAlbum());
   }

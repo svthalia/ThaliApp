@@ -472,7 +472,7 @@ exports[`Sidebar component renders correctly 1`] = `
             ]
           }
         >
-          
+          
         </Text>
         <Text
           style={
@@ -489,7 +489,7 @@ exports[`Sidebar component renders correctly 1`] = `
             ]
           }
         >
-          Settings
+          Photos
         </Text>
       </View>
     </View>
@@ -537,10 +537,7 @@ exports[`Sidebar component renders correctly 1`] = `
         }
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
-          onPress={[Function]}
           style={
             Array [
               Object {
@@ -562,19 +559,19 @@ exports[`Sidebar component renders correctly 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
-          
+          
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
+                "color": "#313131",
+                "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "600",
               },
               Object {
@@ -583,20 +580,13 @@ exports[`Sidebar component renders correctly 1`] = `
             ]
           }
         >
-          Photos
+          Settings
         </Text>
       </View>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -614,8 +604,6 @@ exports[`Sidebar component renders correctly 1`] = `
           },
         ]
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <View
         style={

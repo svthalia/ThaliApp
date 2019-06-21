@@ -36,6 +36,7 @@
                 <data android:host="thalia.nu" />
                 <data android:path="/pizzas/" />
                 <data android:pathPattern="/events/.*/" />
+                <data android:pathPattern="/photos/.*/" />
             </intent-filter>
         </activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
