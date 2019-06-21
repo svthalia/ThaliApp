@@ -10,6 +10,7 @@ export const url = server;
 export const apiUrl = `${server}/api/v1`;
 export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
 export const termsAndConditionsUrl = `${server}/event-registration-terms/`;
+export const tokenSelector = state => state.session.token;
 
 export class ServerError extends Error {
   constructor(message, response) {

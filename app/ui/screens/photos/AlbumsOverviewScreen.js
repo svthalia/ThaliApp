@@ -10,7 +10,8 @@ import AlbumListItemContainer from './AlbumListItemContainer';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
 const windowWidth = Dimensions.get('window').width;
-export const albumSize = (windowWidth - 48) / 3;
+const numColumns = 2;
+export const albumSize = (windowWidth - 48) / numColumns;
 
 const AlbumsOverviewScreen = (props) => {
   const { t, fetching, status } = props;
@@ -37,7 +38,7 @@ const AlbumsOverviewScreen = (props) => {
           )
         }
         keyExtractor={item => item.pk}
-        numColumns={3}
+        numColumns={numColumns}
       />
     </View>);
 };

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import AlbumDetailScreen from './AlbumDetailScreen';
 import { tokenSelector } from '../../../utils/url';
 
@@ -10,4 +10,4 @@ const mapStateToProps = state => ({
   token: tokenSelector(state),
 });
 
-export default connect(mapStateToProps)(translate(['screens/photos/AlbumDetail'])(AlbumDetailScreen));
+export default connect(mapStateToProps)(withTranslation(['screens/photos/AlbumDetail'])(AlbumDetailScreen));

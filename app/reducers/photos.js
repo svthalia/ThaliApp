@@ -1,5 +1,4 @@
 import * as photosActions from '../actions/photos';
-import { PHOTO_SHOWING } from '../actions/photos';
 
 export const STATUS_INITIAL = 'initial';
 export const STATUS_SUCCESS = 'success';
