@@ -1,4 +1,5 @@
 export const PHOTOS_ALBUMS_OPEN = 'PHOTOS_ALBUMS_OPEN';
+export const PHOTOS_ALBUMS_LOAD = 'PHOTOS_ALBUMS_LOAD';
 export const PHOTOS_ALBUMS_SUCCESS = 'PHOTOS_ALBUMS_SUCCESS';
 export const PHOTOS_ALBUMS_FAILURE = 'PHOTOS_ALBUMS_FAILURE';
 export const PHOTOS_ALBUMS_FETCHING = 'PHOTOS_ALBUMS_FETCHING';
@@ -6,7 +7,6 @@ export const PHOTOS_ALBUM_OPEN = 'PHOTOS_ALBUM_OPEN';
 export const PHOTOS_ALBUM_SUCCESS = 'PHOTOS_ALBUM_SUCCESS';
 export const PHOTOS_ALBUM_FAILURE = 'PHOTOS_ALBUM_FAILURE';
 export const PHOTOS_ALBUM_FETCHING = 'PHOTOS_ALBUM_FETCHING';
-export const PHOTOS_PHOTO_SHOW = 'PHOTOS_PHOTO_SHOW';
 export const PHOTOS_GALLERY_OPEN = 'PHOTOS_GALLERY_OPEN';
 
 export function openAlbums() {
@@ -15,10 +15,17 @@ export function openAlbums() {
   };
 }
 
-export function successAlbums(albums, more) {
+export function loadAlbums(keywords, next) {
+  return {
+    type: PHOTOS_ALBUMS_LOAD,
+    payload: { keywords, next },
+  };
+}
+
+export function successAlbums(data, next, isNext) {
   return {
     type: PHOTOS_ALBUMS_SUCCESS,
-    payload: { albums, more },
+    payload: { data, next, isNext },
   };
 }
 
@@ -53,10 +60,10 @@ export function openAlbumWithSlug(slug) {
   };
 }
 
-export function successAlbum(album) {
+export function successAlbum(data) {
   return {
     type: PHOTOS_ALBUM_SUCCESS,
-    payload: album,
+    payload: { data },
   };
 }
 
@@ -67,12 +74,5 @@ export function failureAlbum() {
 export function fetchingAlbum() {
   return {
     type: PHOTOS_ALBUM_FETCHING,
-  };
-}
-
-export function showPhoto(photo) {
-  return {
-    type: PHOTOS_PHOTO_SHOW,
-    payload: photo,
   };
 }

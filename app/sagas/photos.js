@@ -5,7 +5,7 @@ import {
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as photosActions from '../actions/photos';
 
-function* loadAlbums() {
+function* loadAlbums({ payload: { keywords, next } }) {
   const token = yield select(tokenSelector);
 
   yield put(photosActions.fetchingAlbums());
@@ -23,11 +23,21 @@ function* loadAlbums() {
     limit: 12,
   };
 
+  if (keywords) {
+    params.search = keywords;
+  }
+
   try {
-    const response = yield call(apiRequest, 'photos/albums', data, params);
+    let response;
+    if (next) {
+      response = yield call(apiRequest, next, data);
+    } else {
+      response = yield call(apiRequest, 'photos/albums', data, params);
+    }
     yield put(photosActions.successAlbums(
       response.results.filter(item => item.accessible && !item.hidden && item.cover != null),
       response.next,
+      next !== undefined,
     ));
   } catch (error) {
     yield put(photosActions.failureAlbums());
@@ -72,5 +82,6 @@ function* loadAlbum(action) {
 
 export default function* photosSaga() {
   yield takeEvery(photosActions.PHOTOS_ALBUMS_OPEN, loadAlbums);
+  yield takeEvery(photosActions.PHOTOS_ALBUMS_LOAD, loadAlbums);
   yield takeEvery(photosActions.PHOTOS_ALBUM_OPEN, loadAlbum);
 }

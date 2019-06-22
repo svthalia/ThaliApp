@@ -1,6 +1,8 @@
 export const photosStore = state => state.photos;
 
 export const albumsData = state => photosStore(state).albums.data;
+export const albumsKeywords = state => photosStore(state).albums.keywords;
+export const albumsNext = state => photosStore(state).albums.next;
 export const albumsStatus = state => photosStore(state).albums.status;
 export const isFetchingAlbums = state => photosStore(state).albums.fetching;
 
