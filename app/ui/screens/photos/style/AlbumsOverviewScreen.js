@@ -23,4 +23,7 @@ export default StyleSheet.create({
   errorScreen: {
     flex: 1,
   },
+  keyboardView: {
+    flex: 1,
+  },
 });

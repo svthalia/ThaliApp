@@ -6,6 +6,7 @@ export const STATUS_FAILURE = 'failure';
 
 const initialState = {
   albums: {
+    keywords: undefined,
     status: STATUS_INITIAL,
     fetching: true,
     data: [],
@@ -18,27 +19,40 @@ const initialState = {
   },
 };
 
-export default function photos(state = initialState, action = {}) {
-  switch (action.type) {
+export default function photos(state = initialState, { type, payload }) {
+  switch (type) {
     case photosActions.PHOTOS_ALBUMS_FETCHING:
       return {
         ...state,
-        albums: initialState.albums,
+        albums: {
+          ...state.albums,
+          fetching: true,
+        },
+      };
+    case photosActions.PHOTOS_ALBUMS_LOAD:
+      return {
+        ...state,
+        albums: {
+          ...state.albums,
+          keywords: payload.keywords,
+        },
       };
     case photosActions.PHOTOS_ALBUMS_SUCCESS:
       return {
         ...state,
         albums: {
+          ...state.albums,
           status: STATUS_SUCCESS,
           fetching: false,
-          data: action.payload.albums,
-          more: action.payload.more,
+          data: payload.isNext ? [...state.albums.data, ...payload.data] : payload.data,
+          next: payload.next,
         },
       };
     case photosActions.PHOTOS_ALBUMS_FAILURE:
       return {
         ...state,
         albums: {
+          ...state.albums,
           status: STATUS_FAILURE,
           fetching: false,
           data: [],
@@ -55,7 +69,7 @@ export default function photos(state = initialState, action = {}) {
         album: {
           status: STATUS_SUCCESS,
           fetching: false,
-          data: action.payload,
+          data: payload.data,
           selection: undefined,
         },
       };
@@ -74,7 +88,7 @@ export default function photos(state = initialState, action = {}) {
         ...state,
         album: {
           ...state.album,
-          selection: action.payload.selection,
+          selection: payload.selection,
         },
       };
     default:

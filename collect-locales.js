@@ -99,7 +99,11 @@ indexStream.once('open', () => {
     const langName = lang.toUpperCase();
     files.forEach((fileName) => {
       const ns = fileName.substring(4);
-      indexStream.write(`    '${ns}': files['${fileName}${langName}'],\n`);
+      if (ns.indexOf('/') > -1) {
+        indexStream.write(`    '${ns}': files['${fileName}${langName}'],\n`);
+      } else {
+        indexStream.write(`    ${ns}: files['${fileName}${langName}'],\n`);
+      }
     });
     indexStream.write('  },\n');
   });

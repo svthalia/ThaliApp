@@ -153,6 +153,7 @@ class SearchHeader extends Component {
 }
 
 SearchHeader.defaultProps = {
+  searchKey: '',
   leftIcon: 'menu',
 };
 
@@ -160,7 +161,7 @@ SearchHeader.propTypes = {
   title: PropTypes.string.isRequired,
   searchText: PropTypes.string.isRequired,
   search: PropTypes.func.isRequired,
-  searchKey: PropTypes.string.isRequired,
+  searchKey: PropTypes.string,
   leftIcon: PropTypes.string,
   leftIconAction: PropTypes.func.isRequired,
 };
