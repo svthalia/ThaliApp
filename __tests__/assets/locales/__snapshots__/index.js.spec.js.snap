@@ -7,6 +7,11 @@ Object {
       "Dismiss": "Sluiten",
       "Open": "Openen",
     },
+    "sagas/profile": Object {
+      "Change profile picture": "Profielafbeelding veranderen",
+      "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
+      "Uploading your new profile picture...": "Nieuwe profielafbeelding uploaden...",
+    },
     "sagas/registration": Object {
       "Registration successful!": "Registratie succesvol!",
       "Successfully cancelled registration": "Afmelding succesvol",
@@ -27,13 +32,16 @@ Object {
       "Logout": "Uitloggen",
       "Member List": "Ledenlijst",
       "No": "Nee",
+      "Photos": "Foto's",
       "Settings": "Instellingen",
       "Welcome": "Welkom",
       "Yes": "Ja",
     },
     "ui/components/standardHeader/StandardHeader": Object {
+      "Album": "Album",
       "Calendar": "Agenda",
       "Event": "Evenement",
+      "Photos": "Foto's",
       "Pizza": "Pizza",
       "Profile": "Profiel",
       "Registration": "Registratie",
@@ -105,6 +113,7 @@ Object {
       "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
       "This field is required and must be an integer.": "Dit veld is verplicht en moet een getal zijn.",
       "This field is required.": "Dit veld is verplicht.",
+      "This field must be an integer.": "Dit veld moet een cijfer zijn.",
     },
     "ui/screens/login/LoginScreen": Object {
       "Become a member": "Lid worden",
@@ -117,6 +126,15 @@ Object {
       "Couldn't find any members...": "Er zijn geen leden gevonden...",
       "Find a member": "Zoek een lid",
       "Member List": "Ledenlijst",
+      "Sorry! We couldn't load any data.": "Sorry, we konden geen gegevens laden.",
+    },
+    "ui/screens/photos/AlbumDetailScreen": Object {
+      "Sorry! We couldn't load any data.": "Sorry, we konden geen gegevens laden.",
+    },
+    "ui/screens/photos/AlbumsOverviewScreen": Object {
+      "Couldn't find any albums...": "Er zijn geen albums gevonden...",
+      "Find an album": "Vind een album",
+      "Photos": "Foto's",
       "Sorry! We couldn't load any data.": "Sorry, we konden geen gegevens laden.",
     },
     "ui/screens/pizza/PizzaScreen": Object {

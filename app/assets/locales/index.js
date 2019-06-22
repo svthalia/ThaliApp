@@ -12,11 +12,14 @@ files['app/ui/screens/events/RegistrationScreenNL'] = require('./nl/app/ui/scree
 files['app/ui/screens/events/EventAdminScreenNL'] = require('./nl/app/ui/screens/events/EventAdminScreen.json');
 files['app/ui/screens/events/CalendarScreenNL'] = require('./nl/app/ui/screens/events/CalendarScreen.json');
 files['app/ui/screens/events/EventScreenNL'] = require('./nl/app/ui/screens/events/EventScreen.json');
+files['app/ui/screens/photos/AlbumsOverviewScreenNL'] = require('./nl/app/ui/screens/photos/AlbumsOverviewScreen.json');
+files['app/ui/screens/photos/AlbumDetailScreenNL'] = require('./nl/app/ui/screens/photos/AlbumDetailScreen.json');
 files['app/ui/screens/pizza/PizzaScreenNL'] = require('./nl/app/ui/screens/pizza/PizzaScreen.json');
 files['app/ui/screens/login/LoginScreenNL'] = require('./nl/app/ui/screens/login/LoginScreen.json');
 files['app/ui/components/sidebar/SidebarNL'] = require('./nl/app/ui/components/sidebar/Sidebar.json');
 files['app/ui/components/standardHeader/StandardHeaderNL'] = require('./nl/app/ui/components/standardHeader/StandardHeader.json');
 files['app/ui/components/errorScreen/ErrorScreenNL'] = require('./nl/app/ui/components/errorScreen/ErrorScreen.json');
+files['app/sagas/profileNL'] = require('./nl/app/sagas/profile.json');
 files['app/sagas/sessionNL'] = require('./nl/app/sagas/session.json');
 files['app/sagas/registrationNL'] = require('./nl/app/sagas/registration.json');
 files['app/appNL'] = require('./nl/app/app.json');
@@ -36,11 +39,14 @@ export default {
     'ui/screens/events/EventAdminScreen': files['app/ui/screens/events/EventAdminScreenNL'],
     'ui/screens/events/CalendarScreen': files['app/ui/screens/events/CalendarScreenNL'],
     'ui/screens/events/EventScreen': files['app/ui/screens/events/EventScreenNL'],
+    'ui/screens/photos/AlbumsOverviewScreen': files['app/ui/screens/photos/AlbumsOverviewScreenNL'],
+    'ui/screens/photos/AlbumDetailScreen': files['app/ui/screens/photos/AlbumDetailScreenNL'],
     'ui/screens/pizza/PizzaScreen': files['app/ui/screens/pizza/PizzaScreenNL'],
     'ui/screens/login/LoginScreen': files['app/ui/screens/login/LoginScreenNL'],
     'ui/components/sidebar/Sidebar': files['app/ui/components/sidebar/SidebarNL'],
     'ui/components/standardHeader/StandardHeader': files['app/ui/components/standardHeader/StandardHeaderNL'],
     'ui/components/errorScreen/ErrorScreen': files['app/ui/components/errorScreen/ErrorScreenNL'],
+    'sagas/profile': files['app/sagas/profileNL'],
     'sagas/session': files['app/sagas/sessionNL'],
     'sagas/registration': files['app/sagas/registrationNL'],
     app: files['app/appNL'],
