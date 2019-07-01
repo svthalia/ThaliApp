@@ -3678,6 +3678,14 @@ I18n {
           ],
           "plurals": [Function],
         },
+        "cnr": Object {
+          "numbers": Array [
+            1,
+            2,
+            5,
+          ],
+          "plurals": [Function],
+        },
         "cs": Object {
           "numbers": Array [
             1,
@@ -8266,6 +8274,14 @@ I18n {
         "cgg": Object {
           "numbers": Array [
             1,
+          ],
+          "plurals": [Function],
+        },
+        "cnr": Object {
+          "numbers": Array [
+            1,
+            2,
+            5,
           ],
           "plurals": [Function],
         },
