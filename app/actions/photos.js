@@ -12,6 +12,7 @@ export const PHOTOS_GALLERY_OPEN = 'PHOTOS_GALLERY_OPEN';
 export function openAlbums() {
   return {
     type: PHOTOS_ALBUMS_OPEN,
+    payload: {},
   };
 }
 
