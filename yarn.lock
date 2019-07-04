@@ -5621,6 +5621,16 @@ metro-core@0.54.1:
     metro-resolver "0.54.1"
     wordwrap "^1.0.0"
 
+metro-core@0.55.0:
+  version "0.55.0"
+  resolved "https://registry.yarnpkg.com/metro-core/-/metro-core-0.55.0.tgz#d5448c7a83d1f01793f74b5941a3405d77843dd8"
+  integrity sha512-Mrw+WPG1Oozmie4gNhrpW4BC8bmSJJrFQFaIPbbTy4oAc4hoTn+Cf+3Efgl1NFd8o7LYzUJOeMrLW0p+eAQLwA==
+  dependencies:
+    jest-haste-map "^24.7.1"
+    lodash.throttle "^4.1.1"
+    metro-resolver "0.55.0"
+    wordwrap "^1.0.0"
+
 metro-inspector-proxy@0.54.1:
   version "0.54.1"
   resolved "https://registry.yarnpkg.com/metro-inspector-proxy/-/metro-inspector-proxy-0.54.1.tgz#0ef48ee3feb11c6da47aa100151a9bf2a7c358ee"
@@ -5816,6 +5826,13 @@ metro-resolver@0.54.1:
   version "0.54.1"
   resolved "https://registry.yarnpkg.com/metro-resolver/-/metro-resolver-0.54.1.tgz#0295b38624b678b88b16bf11d47288845132b087"
   integrity sha512-Byv1LIawYAASy9CFRwzrncYnqaFGLe8vpw178EtzStqP05Hu6hXSqkNTrfoXa+3V9bPFGCrVzFx2NY3gFp2btg==
+  dependencies:
+    absolute-path "^0.0.0"
+
+metro-resolver@0.55.0:
+  version "0.55.0"
+  resolved "https://registry.yarnpkg.com/metro-resolver/-/metro-resolver-0.55.0.tgz#2988318bfca705d182998bb47378df3cf7eb1957"
+  integrity sha512-1Zv0Y5nW+eIDjJ12pFX8Bud7D+4NTWRXFFRR4LEg+Qg0KK7O1OLBdQkiXT+MOK9Hkb20x21A82HJ5D18iOkDeQ==
   dependencies:
     absolute-path "^0.0.0"
 

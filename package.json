@@ -50,7 +50,7 @@
     "@react-native-community/status-bar": "1.0.3",
     "i18next": "17.0.6",
     "metro-config": "0.54.1",
-    "metro-core": "0.54.1",
+    "metro-core": "0.55.0",
     "moment": "2.24.0",
     "prop-types": "15.7.2",
     "react": "16.8.6",
