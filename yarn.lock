@@ -7122,10 +7122,10 @@ react-mixin@^3.0.5:
     object-assign "^4.0.1"
     smart-mixin "^2.0.0"
 
-react-native-device-info@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.2.0.tgz#bde1dc2c59fd56e0d3e7510d5304ecc7a7038b73"
-  integrity sha512-8FteA5fOco/UsI+BVrUDY1GvzsCtRb0sfk9FK1DiuF8iE+1ayULMJxjOldAJZ4zm8CVZhkFtPcCD90isvpTgew==
+react-native-device-info@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.2.2.tgz#777388b8cff4594c8db2ea3a53f2f1f9e2c611a1"
+  integrity sha512-2b0TycUJbW/9T7L070L6q4+ce8guD4c0c8mWWjiVNuvCrZVf7VNomvNk1BqIVXcnYbZO43V0SVN6z1fvp2HTyg==
 
 react-native-dotenv@0.2.0:
   version "0.2.0"
