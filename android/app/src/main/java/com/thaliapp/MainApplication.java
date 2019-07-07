@@ -3,6 +3,7 @@ package com.thaliapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.reactnativecommunity.statusbar.RNCStatusBarPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -40,6 +41,7 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
             new MainReactPackage(),
+            new RNFSPackage(),
             new RNCStatusBarPackage(),
             new AsyncStoragePackage(),
             new RNDeviceInfo(),

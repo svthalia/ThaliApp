@@ -17,3 +17,7 @@ NativeModules.RNCStatusBarManager = {
   setBackgroundColor: jest.fn(),
   setTranslucent: jest.fn(),
 };
+
+jest.mock('react-native-fs', () => ({
+  downloadFile: jest.fn(),
+}));
