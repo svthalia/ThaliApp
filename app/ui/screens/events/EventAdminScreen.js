@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, Text, Switch, RefreshControl, ScrollView, FlatList, TouchableHighlight,
+  FlatList, RefreshControl, ScrollView, Switch, Text, TouchableHighlight, View,
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';

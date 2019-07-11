@@ -54,7 +54,7 @@ exports[`StandardHeader component renders correctly on Android 1`] = `
           style={
             Array [
               Object {
-                "color": undefined,
+                "color": "#FFFFFF",
                 "fontSize": 24,
               },
               Object {
@@ -158,7 +158,7 @@ exports[`StandardHeader component renders correctly on iOS 1`] = `
           style={
             Array [
               Object {
-                "color": undefined,
+                "color": "#FFFFFF",
                 "fontSize": 24,
               },
               Object {

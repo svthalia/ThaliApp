@@ -150,7 +150,7 @@ class ProfileScreen extends Component {
           <IconButton
             onPress={this.props.goBack}
             name="arrow-back"
-            style={styles.icon}
+            iconStyle={styles.icon}
           />
         </Animated.View>
       </Animated.View>

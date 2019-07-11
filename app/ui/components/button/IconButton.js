@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ViewPropTypes } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import Colors from '../../style/Colors';
@@ -8,10 +8,11 @@ const IconButton = props => (
   <TouchableOpacity
     disabled={props.disabled}
     onPress={props.disabled ? null : props.onPress}
+    style={props.style}
   >
     <Icon
       name={props.name}
-      style={props.style}
+      style={props.iconStyle}
       color={props.color}
       size={props.size}
     />
@@ -24,14 +25,16 @@ IconButton.propTypes = {
   color: PropTypes.string,
   disabled: PropTypes.bool,
   size: PropTypes.number,
-  style: Icon.propTypes.style,
+  iconStyle: Icon.propTypes.style,
+  style: ViewPropTypes.style,
 };
 
 IconButton.defaultProps = {
   color: Colors.white,
   disabled: false,
   size: 24,
-  style: Icon.defaultProps.style,
+  iconStyle: Icon.defaultProps.style,
+  style: {},
 };
 
 export default IconButton;

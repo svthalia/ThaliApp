@@ -37,7 +37,7 @@ class SearchHeader extends Component {
       <IconButton
         onPress={() => (isSearching ? this.updateSearch(false) : leftIconAction())}
         name={isSearching ? 'arrow-back' : leftIcon}
-        style={[styles.leftIcon, isSearching ? styles.magenta : styles.white]}
+        iconStyle={[styles.leftIcon, isSearching ? styles.magenta : styles.white]}
       />
     );
   };
@@ -70,7 +70,7 @@ class SearchHeader extends Component {
         <IconButton
           onPress={() => this.updateSearch(true)}
           name="search"
-          style={[styles.rightIcon, styles.white]}
+          iconStyle={[styles.rightIcon, styles.white]}
         />
       );
     } if (searchKey) {
@@ -78,7 +78,7 @@ class SearchHeader extends Component {
         <IconButton
           onPress={() => this.updateSearchKey('')}
           name="close"
-          style={[styles.rightIcon, styles.gray]}
+          iconStyle={[styles.rightIcon, styles.gray]}
         />
       );
     }
