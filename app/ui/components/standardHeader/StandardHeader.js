@@ -1,15 +1,13 @@
 import React from 'react';
-import {
-  Text, TouchableOpacity, View, SafeAreaView,
-} from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { withNavigation } from 'react-navigation';
 import Colors from '../../style/Colors';
 import styles from './style/StandardHeader';
+import IconButton from '../button/IconButton';
 
 const sceneToTitle = (routeName, t) => {
   switch (routeName) {
@@ -50,16 +48,12 @@ const StandardHeader = props => (
     </View>
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.appBar}>
-        <TouchableOpacity
-          style={styles.iconButton}
+        <IconButton
           onPress={() => (props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack())}
-        >
-          <Icon
-            name={props.menu ? 'menu' : 'arrow-back'}
-            style={styles.icon}
-            size={24}
-          />
-        </TouchableOpacity>
+          name={props.menu ? 'menu' : 'arrow-back'}
+          style={styles.iconButton}
+          iconStyle={styles.icon}
+        />
         <Text style={styles.title}>
           {sceneToTitle(props.navigation.state.routeName, props.t)}
         </Text>
