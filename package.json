@@ -45,7 +45,7 @@
     }
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.5.1",
+    "@react-native-community/async-storage": "1.6.1",
     "@react-native-community/cli": "2.8.3",
     "@react-native-community/status-bar": "1.0.3",
     "i18next": "17.0.6",
