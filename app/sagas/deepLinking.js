@@ -67,12 +67,12 @@ const deepLink = function* deepLink(action) {
       args: [],
     },
     {
-      regexp: new RegExp('^/photos/([-\\w]+)/$'),
+      regexp: new RegExp('^/members/photos/([-\\w]+)/$'),
       action: photosActions.openAlbumWithSlug,
       args: [],
     },
     {
-      regexp: new RegExp('^/photos/$'),
+      regexp: new RegExp('^/members/photos/$'),
       action: photosActions.openAlbums,
       args: [],
     },
