@@ -8,6 +8,8 @@ export const PHOTOS_ALBUM_SUCCESS = 'PHOTOS_ALBUM_SUCCESS';
 export const PHOTOS_ALBUM_FAILURE = 'PHOTOS_ALBUM_FAILURE';
 export const PHOTOS_ALBUM_FETCHING = 'PHOTOS_ALBUM_FETCHING';
 export const PHOTOS_GALLERY_OPEN = 'PHOTOS_GALLERY_OPEN';
+export const PHOTOS_PHOTO_DOWNLOAD = 'PHOTOS_PHOTO_DOWNLOAD';
+export const PHOTOS_PHOTO_SHARE = 'PHOTOS_PHOTO_SHARE';
 
 export function openAlbums() {
   return {
@@ -19,14 +21,21 @@ export function openAlbums() {
 export function loadAlbums(keywords, next) {
   return {
     type: PHOTOS_ALBUMS_LOAD,
-    payload: { keywords, next },
+    payload: {
+      keywords,
+      next,
+    },
   };
 }
 
 export function successAlbums(data, next, isNext) {
   return {
     type: PHOTOS_ALBUMS_SUCCESS,
-    payload: { data, next, isNext },
+    payload: {
+      data,
+      next,
+      isNext,
+    },
   };
 }
 
@@ -75,5 +84,19 @@ export function failureAlbum() {
 export function fetchingAlbum() {
   return {
     type: PHOTOS_ALBUM_FETCHING,
+  };
+}
+
+export function downloadPhoto(url) {
+  return {
+    type: PHOTOS_PHOTO_DOWNLOAD,
+    payload: { url },
+  };
+}
+
+export function sharePhoto(url) {
+  return {
+    type: PHOTOS_PHOTO_SHARE,
+    payload: { url },
   };
 }
