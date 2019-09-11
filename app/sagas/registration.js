@@ -54,7 +54,7 @@ const update = function* update(action) {
   const body = {};
 
   Object.keys(fields).forEach((key) => {
-    if (fields[key] !== undefined && fields[key] !== '') {
+    if (fields[key] !== undefined) {
       body[`fields[${key}]`] = fields[key];
     }
   });
