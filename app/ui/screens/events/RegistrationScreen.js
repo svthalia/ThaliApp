@@ -151,14 +151,16 @@ class RegistrationScreen extends Component {
                       }}
                     />
                   </View>
-                  <HTML
-                    html={field.description}
-                    onLinkPress={(event, href) => openUrl(href)}
-                    baseFontStyle={styles.description}
-                    tagsStyles={{
-                      a: linkStyles,
-                    }}
-                  />
+                  {!field.description || (
+                    <HTML
+                      html={field.description}
+                      onLinkPress={(event, href) => openUrl(href)}
+                      baseFontStyle={styles.description}
+                      tagsStyles={{
+                        a: linkStyles,
+                      }}
+                    />
+                  )}
                   {validity.isValid || (
                     <Text style={styles.invalid}>
                       {validity.reason}
@@ -172,14 +174,16 @@ class RegistrationScreen extends Component {
                   <Text style={styles.field}>
                     {field.label}
                   </Text>
-                  <HTML
-                    html={field.description}
-                    onLinkPress={(event, href) => openUrl(href)}
-                    baseFontStyle={styles.description}
-                    tagsStyles={{
-                      a: linkStyles,
-                    }}
-                  />
+                  {!field.description || (
+                    <HTML
+                      html={field.description}
+                      onLinkPress={(event, href) => openUrl(href)}
+                      baseFontStyle={styles.description}
+                      tagsStyles={{
+                        a: linkStyles,
+                      }}
+                    />
+                  )}
                   <TextInput
                     value={this.state[key]}
                     onChangeText={value => this.updateField(key, value)}
