@@ -57,7 +57,7 @@
     "react": "16.8.6",
     "react-i18next": "10.12.2",
     "react-native": "0.59.10",
-    "react-native-device-info": "2.3.2",
+    "react-native-device-info": "3.1.4",
     "react-native-dotenv": "0.2.0",
     "react-native-firebase": "5.5.6",
     "react-native-fs": "^2.14.1",
