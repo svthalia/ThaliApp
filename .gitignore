@@ -25,6 +25,7 @@ project.xcworkspace
 # Pods
 #
 ios/Pods
+ios/Podfile.lock
 
 # Android/IntelliJ
 #
