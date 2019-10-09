@@ -36,8 +36,6 @@ const styles = StyleSheet.create({
     ios: {
       fontFamily: 'System',
       fontWeight: '600',
-      borderBottomWidth: 1,
-      borderBottomColor: Colors.dividerGrey,
     },
     fontSize: 14,
     color: Colors.textColour,
