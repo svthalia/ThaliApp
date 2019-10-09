@@ -188,6 +188,7 @@ class RegistrationScreen extends Component {
                     value={this.state[key]}
                     onChangeText={value => this.updateField(key, value)}
                     keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
+                    placeholder="Lorem ipsum"
                     style={styles.field}
                     underlineColorAndroid={validity.isValid ? Colors.lightGray
                       : Colors.lightRed}
