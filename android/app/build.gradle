@@ -37,8 +37,8 @@ android {
         applicationId "com.thaliapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 434
-        versionName "2.8.0"
+        versionCode 435
+        versionName "2.8.1"
     }
 
     splits {
