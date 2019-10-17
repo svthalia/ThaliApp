@@ -42,8 +42,6 @@
 		32472E7522A00BB7002A0BC5 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32472E6822A00BB1002A0BC5 /* libRNCAsyncStorage.a */; };
 		32472E7E22A00FBC002A0BC5 /* libRNCStatusBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32472E7D22A00FB4002A0BC5 /* libRNCStatusBar.a */; };
 		3269FC3822B39E1A00969EDE /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3722B39E0F00969EDE /* libimageCropPicker.a */; };
-		3269FC3A22B39E2D00969EDE /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3922B39E2D00969EDE /* RSKImageCropper.framework */; };
-		3269FC3C22B39E3A00969EDE /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3B22B39E3A00969EDE /* QBImagePicker.framework */; };
 		327DC4A2229EB48000DE29E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327DC4A1229EB48000DE29E9 /* GoogleService-Info.plist */; };
 		327DC54B229EB8E100DE29E9 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 327DC537229EB6C300DE29E9 /* libBVLinearGradient.a */; };
 		327DC54C229EB8E100DE29E9 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 327DC527229EB68D00DE29E9 /* libRNScreens.a */; };
@@ -53,6 +51,10 @@
 		327DC550229EB8E100DE29E9 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 327DC52E229EB6B500DE29E9 /* libRNVectorIcons.a */; };
 		327DC59C229EBC1500DE29E9 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 327DC548229EB76B00DE29E9 /* libRNGestureHandler.a */; };
 		551DB1D439844F9A9B05A645 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33887E49731D4893B6E6ED7A /* libz.tbd */; };
+		605294E22357BB13007DE671 /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3B22B39E3A00969EDE /* QBImagePicker.framework */; };
+		605294E32357BB13007DE671 /* QBImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3B22B39E3A00969EDE /* QBImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6052951D2357BB14007DE671 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3922B39E2D00969EDE /* RSKImageCropper.framework */; };
+		6052951E2357BB14007DE671 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3269FC3922B39E2D00969EDE /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60D59B4F22D141B500FBD174 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D59B2122D1418D00FBD174 /* libRCTCameraRoll.a */; };
 		60D59B5922D1447400FBD174 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D59B5622D1446200FBD174 /* libRNFS.a */; };
 		63A2AC2C5803461381047FEC /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D02DBB9DA749469711667C /* EvilIcons.ttf */; };
@@ -485,6 +487,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		605294E42357BB13007DE671 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				605294E32357BB13007DE671 /* QBImagePicker.framework in Embed Frameworks */,
+				6052951E2357BB14007DE671 /* RSKImageCropper.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -574,11 +591,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				60D59B5922D1447400FBD174 /* libRNFS.a in Frameworks */,
+				6052951D2357BB14007DE671 /* RSKImageCropper.framework in Frameworks */,
 				60D59B4F22D141B500FBD174 /* libRCTCameraRoll.a in Frameworks */,
-				3269FC3C22B39E3A00969EDE /* QBImagePicker.framework in Frameworks */,
-				3269FC3A22B39E2D00969EDE /* RSKImageCropper.framework in Frameworks */,
 				3269FC3822B39E1A00969EDE /* libimageCropPicker.a in Frameworks */,
 				32472E7E22A00FBC002A0BC5 /* libRNCStatusBar.a in Frameworks */,
+				605294E22357BB13007DE671 /* QBImagePicker.framework in Frameworks */,
 				32472E7522A00BB7002A0BC5 /* libRNCAsyncStorage.a in Frameworks */,
 				3238F61D229F16FE00BEB7F8 /* libRNDeviceInfo.a in Frameworks */,
 				327DC59C229EBC1500DE29E9 /* libRNGestureHandler.a in Frameworks */,
@@ -1048,6 +1065,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				411CCC7AF1D04702B6AA03C6 /* Upload Debug Symbols to Sentry */,
+				605294E42357BB13007DE671 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1914,7 +1932,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_ENTITLEMENTS = ThaliApp/ThaliApp.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 21;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = FRD6Y7E88Y;
 				HEADER_SEARCH_PATHS = (
@@ -1944,7 +1962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ThaliApp/ThaliApp.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = FRD6Y7E88Y;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
