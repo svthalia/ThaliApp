@@ -75,10 +75,10 @@ class LoginScreen extends Component {
           textStyle={styles.loginButtonText}
           underlayColor={Colors.white}
         />
-        <Text style={styles.linkText} onPress={() => openUrl(`${url}/password_reset/`)}>
+        <Text style={styles.linkText} onPress={() => openUrl(`${url}/user/password_reset/`)}>
           {t('Forgot password?')}
         </Text>
-        <Text style={styles.linkText} onPress={() => openUrl(`${url}/registration/`)}>
+        <Text style={styles.linkText} onPress={() => openUrl(`${url}/association/register/`)}>
           {t('Become a member')}
         </Text>
       </View>
