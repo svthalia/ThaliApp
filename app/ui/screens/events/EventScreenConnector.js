@@ -18,7 +18,7 @@ const mapDispatchToProps = {
   register: registrationActions.register,
   cancel: registrationActions.cancel,
   fields: registrationActions.retrieveFields,
-  openMaps: location => this.openUrl(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
+  openMaps: location => navigationActions.openWebsite(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
   openUrl: navigationActions.openWebsite,
   retrievePizzaInfo: pizzaActions.retrievePizzaInfo,
   openAdmin: eventActions.admin,
