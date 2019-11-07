@@ -4,13 +4,14 @@ const initialState = {
   eventList: [],
   loading: true,
   status: 'initial',
+  keywords: undefined,
 };
 
-export default function calendar(state = initialState, action = {}) {
-  switch (action.type) {
+export default function calendar(state = initialState, { type, payload }) {
+  switch (type) {
     case calendarActions.SUCCESS:
       return {
-        eventList: action.payload.eventList,
+        eventList: payload.eventList,
         loading: false,
         status: 'success',
       };
@@ -21,8 +22,12 @@ export default function calendar(state = initialState, action = {}) {
         status: 'failure',
       };
     case calendarActions.REFRESH:
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+        keywords: payload.keywords,
+      };
     default:
-      return { ...state };
+      return state;
   }
 }

@@ -7,8 +7,11 @@ import * as calendarActions from '../actions/calendar';
 import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
 
-const calendar = function* calendar() {
+const calendar = function* calendar({ payload: { keywords } }) {
   const token = yield select(tokenSelector);
+
+  yield put(calendarActions.fetching());
+
   const data = {
     method: 'GET',
     headers: {
@@ -18,13 +21,16 @@ const calendar = function* calendar() {
     },
   };
 
-  yield put(calendarActions.fetching());
+  const params = {};
+  if (keywords) {
+    params.search = keywords;
+  }
 
   try {
-    const events = yield call(apiRequest, 'events', data);
+    const events = yield call(apiRequest, 'events', data, params);
     let partnerEvents = [];
     try {
-      partnerEvents = yield call(apiRequest, 'partners/events', data);
+      partnerEvents = yield call(apiRequest, 'partners/events', data, params);
       partnerEvents = partnerEvents.map(event => ({
         ...event,
         pk: -event.pk,

@@ -10,9 +10,10 @@ export function open() {
   };
 }
 
-export function refresh() {
+export function refresh(keywords) {
   return {
     type: REFRESH,
+    payload: { keywords },
   };
 }
 
