@@ -7,11 +7,11 @@ const initialState = {
   keywords: undefined,
 };
 
-export default function calendar(state = initialState, { type, payload }) {
-  switch (type) {
+export default function calendar(state = initialState, action = {}) {
+  switch (action.type) {
     case calendarActions.SUCCESS:
       return {
-        eventList: payload.eventList,
+        eventList: action.payload.eventList,
         loading: false,
         status: 'success',
       };
@@ -25,7 +25,7 @@ export default function calendar(state = initialState, { type, payload }) {
       return {
         ...state,
         loading: true,
-        keywords: payload.keywords,
+        keywords: action.payload.keywords,
       };
     default:
       return state;
