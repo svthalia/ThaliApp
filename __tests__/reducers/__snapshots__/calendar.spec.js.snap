@@ -3,6 +3,7 @@
 exports[`calendar reducer initially should not be fetched 1`] = `
 Object {
   "eventList": Array [],
+  "keywords": undefined,
   "loading": true,
   "status": "initial",
 }

@@ -62,7 +62,7 @@ describe('calendar saga', () => {
           'Content-Type': 'application/json',
         },
         method: 'GET',
-      });
+      }, {});
       expect(apiRequest).toBeCalledWith('partners/events', {
         headers: {
           Accept: 'application/json',
@@ -70,6 +70,6 @@ describe('calendar saga', () => {
           'Content-Type': 'application/json',
         },
         method: 'GET',
-      });
+      }, {});
     }));
 });
