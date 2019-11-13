@@ -49,6 +49,10 @@ Object {
       "Settings": "Instellingen",
       "Welcome": "Welkom",
     },
+    "ui/screens/admin/AdminScreen": Object {
+      "Find a member": "Zoek een lid",
+      "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
+    },
     "ui/screens/events/CalendarItem": Object {
       "From": "Tot",
       "Until": "Van",
@@ -65,9 +69,7 @@ Object {
       "Disabled filter": "Filter uitgeschakeld",
       "Filtering on payment": "Filteren op betaling",
       "Filtering on presence": "Filteren op aanwezigheid",
-      "Find a member": "Zoek een lid",
       "NOT PAID": "NIET BETAALD",
-      "No registrations found with this filter.": "Geen inschrijvingen gevonden met dit filter.",
       "No registrations found...": "Geen inschrijvingen gevonden...",
       "Present": "Aanwezig",
       "Registrations": "Inschrijvingen",
