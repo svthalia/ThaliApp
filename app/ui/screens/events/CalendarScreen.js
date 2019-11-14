@@ -150,58 +150,6 @@ class CalendarScreen extends Component {
       />
     );
 
-    // if (status === 'initial') {
-    //   return <LoadingScreen />;
-    // } if (status === 'failure') {
-    //   return (
-    //     <ScrollView
-    //       contentContainerStyle={styles.content}
-    //       refreshControl={(
-    //         <RefreshControl
-    //           onRefresh={refresh}
-    //           refreshing={loading}
-    //         />
-    //       )}
-    //     >
-    //       <ErrorScreen message={t('Sorry, we couldn\'t load any data.')} />
-    //     </ScrollView>
-    //   );
-    // } if (eventList.length === 0) {
-    //   return (
-    //     <ScrollView
-    //       contentContainerStyle={styles.content}
-    //       refreshControl={(
-    //         <RefreshControl
-    //           onRefresh={refresh}
-    //           refreshing={loading}
-    //         />
-    //       )}
-    //     >
-    //       <ErrorScreen message={t('No events found!')} />
-    //     </ScrollView>
-    //   );
-    // }
-    // return (
-    //   <View style={styles.content}>
-    //     <SectionList
-    //       style={styles.sectionList}
-    //       renderItem={renderItem}
-    //       renderSectionHeader={
-    //         itemHeader => (
-    //           <Text style={styles.sectionHeader}>
-    //             {itemHeader.section.key}
-    //           </Text>
-    //         )
-    //       }
-    //       sections={eventListToSections(eventList, t)}
-    //       keyExtractor={item => item.dayNumber}
-    //       stickySectionHeadersEnabled
-    //       onRefresh={refresh}
-    //       refreshing={loading}
-    //     />
-    //   </View>
-    // );
-
     let content = (
       <SectionList
         style={styles.sectionList}
