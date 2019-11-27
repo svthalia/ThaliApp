@@ -250,7 +250,12 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       text = t('Registration is not allowed anymore, as you cancelled your registration after the deadline.');
     }
 
-    if (afterCancelDeadline && !isLateCancellation) {
+    if (data.user_registration
+      && !data.user_registration.is_cancelled
+      && registrationRequired
+      && registrationStarted
+      && afterCancelDeadline
+      && !isLateCancellation) {
       if (text.length > 0) {
         text += ' ';
       }
