@@ -21,6 +21,7 @@ import PhotoGallery from './ui/screens/photos/AlbumGalleryScreenConnector';
 import SplashScreen from './ui/screens/splash/SplashScreen';
 import Settings from './ui/screens/settings/SettingsScreenConnector';
 import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
+import PizzaAdmin from './ui/screens/pizza/PizzaAdminScreenConnector';
 import Sidebar from './ui/components/sidebar/SidebarConnector';
 
 const MainNavigator = createDrawerNavigator({
@@ -42,6 +43,7 @@ const SignedInNavigator = createStackNavigator({
   PhotoGallery,
   Registration,
   EventAdmin,
+  PizzaAdmin,
 }, {
   headerMode: 'none',
 });

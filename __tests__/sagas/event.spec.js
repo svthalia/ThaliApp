@@ -8,6 +8,7 @@ import eventSaga from '../../app/sagas/event';
 
 import * as eventActions from '../../app/actions/event';
 import { tokenSelector } from '../../app/selectors/session';
+import { currentEventSelector } from '../../app/selectors/events';
 
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
@@ -98,6 +99,7 @@ describe('event saga', () => {
     it('should start fetching', () => expectSaga(eventSaga)
       .provide([
         [select(tokenSelector), 'token'],
+        [select(currentEventSelector), 1],
       ])
       .dispatch(eventActions.updateRegistration(1, true, 'payment'))
       .put(eventActions.fetching())
@@ -106,6 +108,7 @@ describe('event saga', () => {
     it('should do a PATCH request', () => expectSaga(eventSaga)
       .provide([
         [select(tokenSelector), 'token'],
+        [select(currentEventSelector), 1],
       ])
       .dispatch(eventActions.updateRegistration(1, true, 'payment'))
       .silentRun()
@@ -121,18 +124,20 @@ describe('event saga', () => {
         });
       }));
 
-    it('should be done when the request is successful', () => expectSaga(eventSaga)
+    it('should refresh the event when the request is successful', () => expectSaga(eventSaga)
       .provide([
         [select(tokenSelector), 'token'],
+        [select(currentEventSelector), 1],
         [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] }), 'response'],
       ])
       .dispatch(eventActions.updateRegistration(1, true, 'payment'))
-      .put(eventActions.done())
+      .put(eventActions.event(1, false))
       .silentRun());
 
     it('should put an error when the request fails', () => expectSaga(eventSaga)
       .provide([
         [select(tokenSelector), 'token'],
+        [select(currentEventSelector), 1],
         [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] }), throwError(error)],
       ])
       .dispatch(eventActions.updateRegistration(1, true, 'payment'))
