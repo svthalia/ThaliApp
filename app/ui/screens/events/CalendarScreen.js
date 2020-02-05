@@ -128,7 +128,7 @@ class CalendarScreen extends Component {
   componentDidMount() {
     this.props.refresh();
   }
-
+  
   search = (keywords) => {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
@@ -150,7 +150,25 @@ class CalendarScreen extends Component {
       />
     );
     
-    let content;
+    // let content;
+    let content = (
+      <SectionList
+        style={styles.sectionList}
+        renderItem={renderItem}
+        renderSectionHeader={
+          itemHeader => (
+            <Text style={styles.sectionHeader}>
+              {itemHeader.section.key}
+            </Text>
+          )
+        }
+        sections={eventListToSections(eventList, t)}
+        keyExtractor={item => item.dayNumber}
+        stickySectionHeadersEnabled
+        onRefresh={refresh}
+        refreshing={loading}
+      />
+    );
 
     if (status === 'initial') {
       content = <LoadingScreen />;
@@ -159,24 +177,6 @@ class CalendarScreen extends Component {
     } else if (eventList.length === 0) {
       content = <ErrorScreen message={t('No events found!')} />;
     } else {
-      content = (
-        <SectionList
-          style={styles.sectionList}
-          renderItem={renderItem}
-          renderSectionHeader={
-            itemHeader => (
-              <Text style={styles.sectionHeader}>
-                {itemHeader.section.key}
-              </Text>
-            )
-          }
-          sections={eventListToSections(eventList, t)}
-          keyExtractor={item => item.dayNumber}
-          stickySectionHeadersEnabled
-          onRefresh={refresh}
-          refreshing={loading}
-        />
-      );
 
       return (
         <View style={styles.wrapper}>
@@ -190,9 +190,8 @@ class CalendarScreen extends Component {
 
     return (
       <View style={styles.wrapper}>
+        {header}
         <ScrollView
-          // backgroundColor={Colors.background}
-          // contentContainerStyle={styles.rootWrapper}
           refreshControl={(
             <RefreshControl
             refreshing={loading}
@@ -200,7 +199,6 @@ class CalendarScreen extends Component {
             />
             )}
             >
-          {header}
           <DismissKeyboardView contentStyle={styles.keyboardView}>
             {content}
           </DismissKeyboardView>

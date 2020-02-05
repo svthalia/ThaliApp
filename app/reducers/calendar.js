@@ -4,7 +4,7 @@ const initialState = {
   eventList: [],
   loading: true,
   status: 'initial',
-  keywords: undefined,
+  keywords: '',
 };
 
 export default function calendar(state = initialState, action = {}) {
