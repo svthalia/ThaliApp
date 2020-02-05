@@ -2,15 +2,21 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {
   all, call, put, select, takeEvery,
 } from 'redux-saga/effects';
+import Snackbar from 'react-native-snackbar';
 
-import { notificationsSettingsActions, settingsActions } from '../actions/settings';
+import { GITLAB_TOKEN } from 'react-native-dotenv';
 
-import { apiRequest } from '../utils/url';
+import { notificationsSettingsActions, settingsActions, bugReportActions } from '../actions/settings';
+import * as navigationActions from '../actions/navigation';
+import { apiRequest, issueUrl } from '../utils/url';
 import * as pushNotifactionsActions from '../actions/pushNotifications';
-import { tokenSelector } from '../selectors/session';
+import { tokenSelector, usernameSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import i18next from '../utils/i18n';
 
 const PUSHCATEGORYKEY = '@MyStore:pushCategories';
+
+const t = i18next.getFixedT(undefined, 'sagas/settings');
 
 function* pushNotifications() {
   const token = yield select(tokenSelector);
@@ -64,7 +70,37 @@ function* init() {
   yield put(settingsActions.initComplete());
 }
 
+function* reportBug(action) {
+  const { payload } = action;
+  const username = yield select(usernameSelector);
+  try {
+    const response = yield call(fetch, issueUrl, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${GITLAB_TOKEN}`,
+      },
+      body: JSON.stringify({
+        title: payload.title,
+        description: `Issue submitted by: ${username}\n\n${payload.content}`,
+        labels: 'in-app, bug',
+      }),
+    });
+    if (response.status < 400) {
+      yield call([Snackbar, 'show'], { title: t('Issue sent!') });
+    } else {
+      yield call([Snackbar, 'show'], { title: t('Failed to send issue, try again later.') });
+    }
+  } catch (error) {
+    yield call(reportError, error);
+    yield call([Snackbar, 'show'], { title: t('An issue was encountered while performing the request.') });
+  }
+  yield put(navigationActions.goBack());
+}
+
 export default function* () {
   yield takeEvery(settingsActions.INIT_START, init);
   yield takeEvery(notificationsSettingsActions.SAVE_CATEGORIES, saveCategories);
+  yield takeEvery(bugReportActions.REPORT_BUG, reportBug);
 }

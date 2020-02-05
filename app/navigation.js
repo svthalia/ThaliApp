@@ -20,6 +20,7 @@ import PhotoAlbum from './ui/screens/photos/AlbumDetailScreenConnector';
 import PhotoGallery from './ui/screens/photos/AlbumGalleryScreenConnector';
 import SplashScreen from './ui/screens/splash/SplashScreen';
 import Settings from './ui/screens/settings/SettingsScreenConnector';
+import BugReport from './ui/screens/settings/BugReportScreenConnector';
 import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
 import Sidebar from './ui/components/sidebar/SidebarConnector';
 
@@ -42,6 +43,7 @@ const SignedInNavigator = createStackNavigator({
   PhotoGallery,
   Registration,
   EventAdmin,
+  BugReport,
 }, {
   headerMode: 'none',
 });

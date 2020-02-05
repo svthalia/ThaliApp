@@ -1,10 +1,13 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import styles from './style/Settings';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import NotificationsSection from './NotificationsSectionConnector';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
+import Colors from '../../style/Colors';
+import Button from '../../components/button/Button';
 
 
 class SettingsScreen extends React.Component {
@@ -13,7 +16,7 @@ class SettingsScreen extends React.Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, openReportBug, t } = this.props;
 
     if (loading) {
       return <LoadingScreen />;
@@ -26,6 +29,11 @@ class SettingsScreen extends React.Component {
         >
           <View style={styles.content}>
             <NotificationsSection />
+            <Button
+              color={Colors.magenta}
+              title={t('Report a bug')}
+              onPress={openReportBug}
+            />
           </View>
         </ScrollView>
       </View>
@@ -35,7 +43,9 @@ class SettingsScreen extends React.Component {
 
 SettingsScreen.propTypes = {
   init: PropTypes.func.isRequired,
+  openReportBug: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
-export default withStandardHeader(SettingsScreen, true);
+export default withTranslation('ui/screens/settings/SettingsScreen')(withStandardHeader(SettingsScreen, true));
