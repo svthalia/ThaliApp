@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  SectionList, Text, View,
+  SectionList, Text, View, ScrollView, RefreshControl
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
@@ -143,53 +143,75 @@ class CalendarScreen extends Component {
 
     const header = (
       <SearchHeader
-        title={t('Calendar')}
-        searchText={t('Find an event')}
-        search={this.search}
-        searchKey={keywords}
+      title={t('Calendar')}
+      searchText={t('Find an event')}
+      search={this.search}
+      searchKey={keywords}
       />
     );
+    
+    let content;
 
-    let content = (
-      <SectionList
-        style={styles.sectionList}
-        renderItem={renderItem}
-        renderSectionHeader={
-          itemHeader => (
-            <Text style={styles.sectionHeader}>
-              {itemHeader.section.key}
-            </Text>
-          )
-        }
-        sections={eventListToSections(eventList, t)}
-        keyExtractor={item => item.dayNumber}
-        stickySectionHeadersEnabled
-        onRefresh={refresh}
-        refreshing={loading}
-      />
-    );
-
-    if (status === 'intitial') {
-      content = (<LoadingScreen />);
+    if (status === 'initial') {
+      content = <LoadingScreen />;
     } else if (status === 'failure') {
-      content = (<ErrorScreen message={t('Sorry, we couldn\'t load any data.')} />);
+      content = <ErrorScreen message={t('Sorry, we couldn\'t load any data.')} />;
     } else if (eventList.length === 0) {
-      content = (<ErrorScreen message={t('No events found!')} />);
+      content = <ErrorScreen message={t('No events found!')} />;
+    } else {
+      content = (
+        <SectionList
+          style={styles.sectionList}
+          renderItem={renderItem}
+          renderSectionHeader={
+            itemHeader => (
+              <Text style={styles.sectionHeader}>
+                {itemHeader.section.key}
+              </Text>
+            )
+          }
+          sections={eventListToSections(eventList, t)}
+          keyExtractor={item => item.dayNumber}
+          stickySectionHeadersEnabled
+          onRefresh={refresh}
+          refreshing={loading}
+        />
+      );
+
+      return (
+        <View style={styles.wrapper}>
+          {header}
+          <DismissKeyboardView contentStyle={styles.keyboardView}>
+            {content}
+          </DismissKeyboardView>
+        </View>
+      );
     }
 
     return (
       <View style={styles.wrapper}>
-        {header}
-        <DismissKeyboardView contentStyle={styles.keyboardView}>
-          {content}
-        </DismissKeyboardView>
+        <ScrollView
+          // backgroundColor={Colors.background}
+          // contentContainerStyle={styles.rootWrapper}
+          refreshControl={(
+            <RefreshControl
+            refreshing={loading}
+            onRefresh={refresh}
+            />
+            )}
+            >
+          {header}
+          <DismissKeyboardView contentStyle={styles.keyboardView}>
+            {content}
+          </DismissKeyboardView>
+        </ScrollView>
       </View>
     );
   }
 }
 
 CalendarScreen.defaultProps = {
-  keywords: undefined,
+  keywords: '',
 };
 CalendarScreen.propTypes = {
   eventList: PropTypes.arrayOf(PropTypes.shape({
