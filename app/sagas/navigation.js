@@ -9,7 +9,7 @@ import * as sessionActions from '../actions/session';
 import * as calendarActions from '../actions/calendar';
 import * as membersActions from '../actions/members';
 import * as welcomeActions from '../actions/welcome';
-import { settingsActions } from '../actions/settings';
+import { settingsActions, bugReportActions } from '../actions/settings';
 import NavigationService from '../navigation';
 import * as photosActions from '../actions/photos';
 
@@ -35,6 +35,7 @@ export default function* () {
   yield takeEvery(navigationActions.OPEN_WEBSITE, openWebsite);
   yield takeEvery(welcomeActions.OPEN, navigate, 'Welcome');
   yield takeEvery(settingsActions.OPEN, navigate, 'Settings');
+  yield takeEvery(bugReportActions.OPEN, navigate, 'BugReport');
   yield takeEvery(calendarActions.OPEN, navigate, 'Calendar');
   yield takeEvery(membersActions.MEMBERS, navigate, 'MemberList');
   yield takeEvery(eventActions.OPEN, navigate, 'Event');

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { settingsActions } from '../../../actions/settings';
+import { settingsActions, bugReportActions } from '../../../actions/settings';
 import SettingsScreen from './SettingsScreen';
 
 const mapStateToProps = state => ({
@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   init: settingsActions.initStart,
+  openReportBug: bugReportActions.open,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

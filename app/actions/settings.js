@@ -32,3 +32,20 @@ export const notificationsSettingsActions = {
     categories,
   }),
 };
+
+export const bugReportActions = {
+  OPEN: 'BUGREPORT_OPEN',
+  REPORT_BUG: 'BUGREPORT_REPORT_BUG',
+
+  reportBug: (title, content) => ({
+    type: bugReportActions.REPORT_BUG,
+    payload: {
+      title,
+      content,
+    },
+  }),
+
+  open: () => ({
+    type: bugReportActions.OPEN,
+  }),
+}
