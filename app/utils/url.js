@@ -52,6 +52,10 @@ export const apiRequest = (route, fetchOpts, params) => {
     requestOptions.headers['Accept-Language'] = 'en';
   }
 
+  requestOptions.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+  requestOptions.headers.Pragma = 'no-cache';
+  requestOptions.headers.Expires = 0;
+
   let query = '';
   if (params !== null && params === Object(params)) {
     query = `?${Object.keys(params)

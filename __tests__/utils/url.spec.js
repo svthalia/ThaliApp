@@ -14,6 +14,13 @@ const fetchPromiseResult = {
   json: () => Promise.resolve({ exampleJson: 'val' }),
 };
 
+const defaultHeaders = {
+  'Accept-Language': 'en',
+  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  Pragma: 'no-cache',
+  Expires: 0,
+};
+
 describe('url helper', () => {
   beforeEach(() => {
     global.fetch = jest.fn().mockReturnValue(
@@ -34,7 +41,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+          { headers: defaultHeaders });
         expect(response).toEqual({ exampleJson: 'val' });
       });
   });
@@ -45,7 +52,7 @@ describe('url helper', () => {
       params: 'value',
     }).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`,
-        { headers: { 'Accept-Language': 'en' } });
+        { headers: defaultHeaders });
     });
   });
 
@@ -53,7 +60,7 @@ describe('url helper', () => {
     expect.assertions(1);
     return apiRequest('route', { headers: { Authorization: 'Token abc' } }, null).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-        { headers: { 'Accept-Language': 'en', Authorization: 'Token abc' } });
+        { headers: { ...defaultHeaders, Authorization: 'Token abc' } });
     });
   });
 
@@ -62,7 +69,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then((response) => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+          { headers: defaultHeaders });
         expect(response).toEqual({ exampleJson: 'val' });
       });
   });
@@ -130,7 +137,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, null)
       .then(() => {
         expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+          { headers: { ...defaultHeaders, 'Accept-Language': 'en' } });
       });
   });
 
