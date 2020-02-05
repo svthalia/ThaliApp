@@ -12,9 +12,7 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 
-
 import styles from './style/CalendarScreen';
-
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
@@ -149,8 +147,7 @@ class CalendarScreen extends Component {
       searchKey={keywords}
       />
     );
-    
-    // let content;
+  
     let content = (
       <SectionList
         style={styles.sectionList}
