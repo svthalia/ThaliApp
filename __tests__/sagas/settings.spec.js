@@ -17,11 +17,6 @@ jest.mock('react-native-snackbar', () => ({
   Snackbar: jest.fn(),
 }));
 
-jest.mock('react-native-dotenv', () => ({
-  __esModule: true,
-  GITLAB_TOKEN: 'gitlab_token',
-}));
-
 jest.mock('react-native-sentry', () => ({
   Sentry: {
     captureException: jest.fn(),
