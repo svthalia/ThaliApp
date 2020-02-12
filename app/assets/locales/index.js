@@ -1,4 +1,6 @@
 const files = {};
+files['app/ui/screens/settings/SettingsScreenNL'] = require('./nl/app/ui/screens/settings/SettingsScreen.json');
+files['app/ui/screens/settings/BugReportScreenNL'] = require('./nl/app/ui/screens/settings/BugReportScreen.json');
 files['app/ui/screens/settings/NotificationsSectionNL'] = require('./nl/app/ui/screens/settings/NotificationsSection.json');
 files['app/ui/screens/welcome/EventDetailCardNL'] = require('./nl/app/ui/screens/welcome/EventDetailCard.json');
 files['app/ui/screens/welcome/WelcomeScreenNL'] = require('./nl/app/ui/screens/welcome/WelcomeScreen.json');
@@ -22,10 +24,13 @@ files['app/ui/components/errorScreen/ErrorScreenNL'] = require('./nl/app/ui/comp
 files['app/sagas/profileNL'] = require('./nl/app/sagas/profile.json');
 files['app/sagas/sessionNL'] = require('./nl/app/sagas/session.json');
 files['app/sagas/registrationNL'] = require('./nl/app/sagas/registration.json');
+files['app/sagas/settingsNL'] = require('./nl/app/sagas/settings.json');
 files['app/appNL'] = require('./nl/app/app.json');
 
 export default {
   nl: {
+    'ui/screens/settings/SettingsScreen': files['app/ui/screens/settings/SettingsScreenNL'],
+    'ui/screens/settings/BugReportScreen': files['app/ui/screens/settings/BugReportScreenNL'],
     'ui/screens/settings/NotificationsSection': files['app/ui/screens/settings/NotificationsSectionNL'],
     'ui/screens/welcome/EventDetailCard': files['app/ui/screens/welcome/EventDetailCardNL'],
     'ui/screens/welcome/WelcomeScreen': files['app/ui/screens/welcome/WelcomeScreenNL'],
@@ -49,6 +54,7 @@ export default {
     'sagas/profile': files['app/sagas/profileNL'],
     'sagas/session': files['app/sagas/sessionNL'],
     'sagas/registration': files['app/sagas/registrationNL'],
+    'sagas/settings': files['app/sagas/settingsNL'],
     app: files['app/appNL'],
   },
 };
