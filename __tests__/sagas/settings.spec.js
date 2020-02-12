@@ -13,6 +13,10 @@ import * as pushNotificationActions from '../../app/actions/pushNotifications';
 import { tokenSelector } from '../../app/selectors/session';
 import { apiRequest } from '../../app/utils/url';
 
+jest.mock('react-native-dotenv', () => ({
+  GITLAB_TOKEN: 'gitlab_token',
+}));
+
 jest.mock('react-native-sentry', () => ({
   Sentry: {
     captureException: jest.fn(),
