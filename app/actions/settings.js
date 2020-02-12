@@ -48,4 +48,4 @@ export const bugReportActions = {
   open: () => ({
     type: bugReportActions.OPEN,
   }),
-}
+};
