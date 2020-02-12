@@ -14,6 +14,7 @@ import { tokenSelector } from '../../app/selectors/session';
 import { apiRequest } from '../../app/utils/url';
 
 jest.mock('react-native-dotenv', () => ({
+  __esModule: true,
   GITLAB_TOKEN: 'gitlab_token',
 }));
 
