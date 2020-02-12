@@ -1,7 +1,7 @@
 import DeviceInfo from 'react-native-device-info';
 
 let server = 'https://thalia.nu';
-let gitlab = 'https://gitlab.science.ru.nl';
+const gitlab = 'https://gitlab.science.ru.nl';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
   server = 'http://localhost:8000';

@@ -22,6 +22,11 @@ Object {
       "Login successful": "Succesvol ingelogd",
       "Logout successful": "Succesvol uitgelogd",
     },
+    "sagas/settings": Object {
+      "An issue was encountered while performing the request.": "Er heeft zich een probleem voorgedaan bij het verzenden van de request.",
+      "Failed to send issue, try again later.": "Issue verzonden mislukt, probeer het later opnieuw.",
+      "Issue sent!": "Issue verzonden!",
+    },
     "ui/components/errorScreen/ErrorScreen": Object {
       "Try again later.": "Probeer het later opnieuw.",
     },
@@ -169,10 +174,19 @@ Object {
     "ui/screens/profile/ProfileScreen": Object {
       "Sorry! We couldn't load any data.": "Sorry! We konden geen gegevens laden.",
     },
+    "ui/screens/settings/BugReportScreen": Object {
+      "Bug reporting": "Bug reporting",
+      "Description of the bug (in English)": "Beschrijving van de bug (in het Engels)",
+      "Report a bug": "Verzend bug report",
+      "Title": "Titel",
+    },
     "ui/screens/settings/NotificationsSection": Object {
       "(required)": "(verplicht)",
       "Notifications": "Notificaties",
       "Notifications settings could not be loaded.": "De instellingen voor notificaties konden niet worden geladen.",
+    },
+    "ui/screens/settings/SettingsScreen": Object {
+      "Report a bug": "Meld een bug",
     },
     "ui/screens/welcome/EventDetailCard": Object {
       "MORE INFO": "MEER INFO",
