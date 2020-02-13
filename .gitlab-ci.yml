@@ -41,8 +41,7 @@ jest:
 #             - .gradle/caches/
 
 build android:
-    allow_failure: true
-    image: thalia/android-react-native:latest
+    image: reactnativecommunity/react-native-android:latest
     stage: build
     cache:
       key: gradle cache
@@ -50,9 +49,7 @@ build android:
           - $CI_PROJECT_DIR/.gradle/wrapper/
           - $CI_PROJECT_DIR/.gradle/caches/
     before_script:
-        - set +o pipefail
-        - yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
-        - set -o pipefail
+        - echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
         - yarn install
     script:
         - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
