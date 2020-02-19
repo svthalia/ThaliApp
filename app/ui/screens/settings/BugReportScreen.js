@@ -11,7 +11,6 @@ import styles from './style/BugReportScreen';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 import Button from '../../components/button/Button';
 import Colors from '../../style/Colors';
-import CardSection from '../../components/cardSection/CardSection';
 
 class BugReportScreen extends React.Component {
   render() {
@@ -22,40 +21,38 @@ class BugReportScreen extends React.Component {
           style={styles.container}
         >
           <View style={styles.content}>
-            <CardSection sectionHeader={t('Bug reporting')}>
-              <View style={styles.categoryContainer}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.label}>
-                    Title
-                  </Text>
-                  <TextInput
-                    onChangeText={title => this.setState({ title })}
-                    keyboardType="default"
-                    placeholder={t('Title')}
-                    style={styles.fieldInputLine}
+            <View style={styles.categoryContainer}>
+              <View style={styles.textContainer}>
+                <Text style={styles.label}>
+                  Title
+                </Text>
+                <TextInput
+                  onChangeText={title => this.setState({ title })}
+                  keyboardType="default"
+                  placeholder={t('Title of the bug')}
+                  style={styles.fieldInputLine}
+                />
+                <Text style={[styles.label, styles.borderTop]}>
+                  Description
+                </Text>
+                <TextInput
+                  onChangeText={description => this.setState({ description })}
+                  keyboardType="default"
+                  placeholder={t('Description of the bug (in English)')}
+                  style={styles.fieldInput}
+                  multiline
+                />
+                <View style={styles.buttonView}>
+                  <Button
+                    title={t('Report bug')}
+                    color={Colors.magenta}
+                    onPress={() => {
+                      reportBug(this.state.title, this.state.description);
+                    }}
                   />
-                  <Text style={[styles.label, styles.borderTop]}>
-                    Description
-                  </Text>
-                  <TextInput
-                    onChangeText={description => this.setState({ description })}
-                    keyboardType="default"
-                    placeholder={t('Description of the bug (in English)')}
-                    style={styles.fieldInput}
-                    multiline
-                  />
-                  <View style={styles.buttonView}>
-                    <Button
-                      title={t('Report a bug')}
-                      color={Colors.magenta}
-                      onPress={() => {
-                        reportBug(this.state.title, this.state.description);
-                      }}
-                    />
-                  </View>
                 </View>
               </View>
-            </CardSection>
+            </View>
           </View>
         </ScrollView>
       </View>

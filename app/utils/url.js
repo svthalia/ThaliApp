@@ -1,14 +1,13 @@
 import DeviceInfo from 'react-native-device-info';
 
 let server = 'https://thalia.nu';
-const gitlab = 'https://gitlab.science.ru.nl';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
   server = 'http://localhost:8000';
 }
 
 export const url = server;
-export const issueUrl = `${gitlab}/api/v4/projects/1232/issues`;
+export const issueUrl = 'https://gitlab.science.ru.nl/api/v4/projects/1232/issues';
 export const apiUrl = `${server}/api/v1`;
 export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
 export const termsAndConditionsUrl = `${server}/event-registration-terms/`;

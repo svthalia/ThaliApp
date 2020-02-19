@@ -71,7 +71,7 @@ function* init() {
 }
 
 function* reportBug(action) {
-  const { payload } = action;
+  const { bugContent, bugTitle } = action.payload;
   const username = yield select(usernameSelector);
   try {
     const response = yield call(fetch, issueUrl, {
@@ -82,8 +82,8 @@ function* reportBug(action) {
         Authorization: `Bearer ${GITLAB_TOKEN}`,
       },
       body: JSON.stringify({
-        title: payload.title,
-        description: `Issue submitted by: ${username}\n\n${payload.content}`,
+        title: bugTitle,
+        description: `Issue submitted by: ${username}\n\n${bugContent}`,
         labels: 'in-app, bug',
       }),
     });
