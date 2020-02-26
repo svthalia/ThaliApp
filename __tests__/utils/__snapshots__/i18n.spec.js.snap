@@ -107,10 +107,6 @@ I18n {
             "Settings": "Instellingen",
             "Welcome": "Welkom",
           },
-          "ui/screens/admin/AdminScreen": Object {
-            "Find a member": "Zoek een lid",
-            "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-          },
           "ui/screens/events/CalendarItem": Object {
             "From": "Tot",
             "Until": "Van",
@@ -362,10 +358,6 @@ I18n {
           "Registrations": "Inschrijvingen",
           "Settings": "Instellingen",
           "Welcome": "Welkom",
-        },
-        "ui/screens/admin/AdminScreen": Object {
-          "Find a member": "Zoek een lid",
-          "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
         },
         "ui/screens/events/CalendarItem": Object {
           "From": "Tot",
@@ -622,10 +614,6 @@ I18n {
                   "Settings": "Instellingen",
                   "Welcome": "Welkom",
                 },
-                "ui/screens/admin/AdminScreen": Object {
-                  "Find a member": "Zoek een lid",
-                  "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-                },
                 "ui/screens/events/CalendarItem": Object {
                   "From": "Tot",
                   "Until": "Van",
@@ -867,10 +855,6 @@ I18n {
                 "Registrations": "Inschrijvingen",
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
-              },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
               },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
@@ -1124,10 +1108,6 @@ I18n {
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
               },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-              },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
                 "Until": "Van",
@@ -1375,10 +1355,6 @@ I18n {
               "Settings": "Instellingen",
               "Welcome": "Welkom",
             },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-            },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
               "Until": "Van",
@@ -1590,10 +1566,6 @@ I18n {
             "Registrations": "Inschrijvingen",
             "Settings": "Instellingen",
             "Welcome": "Welkom",
-          },
-          "ui/screens/admin/AdminScreen": Object {
-            "Find a member": "Zoek een lid",
-            "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
           },
           "ui/screens/events/CalendarItem": Object {
             "From": "Tot",
@@ -1840,10 +1812,6 @@ I18n {
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
               },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-              },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
                 "Until": "Van",
@@ -2089,10 +2057,6 @@ I18n {
               "Registrations": "Inschrijvingen",
               "Settings": "Instellingen",
               "Welcome": "Welkom",
-            },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
             },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
@@ -2359,10 +2323,6 @@ I18n {
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
               },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-              },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
                 "Until": "Van",
@@ -2604,10 +2564,6 @@ I18n {
               "Registrations": "Inschrijvingen",
               "Settings": "Instellingen",
               "Welcome": "Welkom",
-            },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
             },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
@@ -2859,10 +2815,6 @@ I18n {
               "Registrations": "Inschrijvingen",
               "Settings": "Instellingen",
               "Welcome": "Welkom",
-            },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
             },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
@@ -3118,10 +3070,6 @@ I18n {
                   "Settings": "Instellingen",
                   "Welcome": "Welkom",
                 },
-                "ui/screens/admin/AdminScreen": Object {
-                  "Find a member": "Zoek een lid",
-                  "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-                },
                 "ui/screens/events/CalendarItem": Object {
                   "From": "Tot",
                   "Until": "Van",
@@ -3363,10 +3311,6 @@ I18n {
                 "Registrations": "Inschrijvingen",
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
-              },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
               },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
@@ -3619,10 +3563,6 @@ I18n {
                 "Registrations": "Inschrijvingen",
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
-              },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
               },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
@@ -4781,10 +4721,6 @@ I18n {
           "Settings": "Instellingen",
           "Welcome": "Welkom",
         },
-        "ui/screens/admin/AdminScreen": Object {
-          "Find a member": "Zoek een lid",
-          "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-        },
         "ui/screens/events/CalendarItem": Object {
           "From": "Tot",
           "Until": "Van",
@@ -4984,10 +4920,6 @@ I18n {
         "Registrations": "Inschrijvingen",
         "Settings": "Instellingen",
         "Welcome": "Welkom",
-      },
-      "ui/screens/admin/AdminScreen": Object {
-        "Find a member": "Zoek een lid",
-        "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
       },
       "ui/screens/events/CalendarItem": Object {
         "From": "Tot",
@@ -5232,10 +5164,6 @@ I18n {
                   "Settings": "Instellingen",
                   "Welcome": "Welkom",
                 },
-                "ui/screens/admin/AdminScreen": Object {
-                  "Find a member": "Zoek een lid",
-                  "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-                },
                 "ui/screens/events/CalendarItem": Object {
                   "From": "Tot",
                   "Until": "Van",
@@ -5477,10 +5405,6 @@ I18n {
                 "Registrations": "Inschrijvingen",
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
-              },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
               },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
@@ -5734,10 +5658,6 @@ I18n {
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
               },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-              },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
                 "Until": "Van",
@@ -5985,10 +5905,6 @@ I18n {
               "Settings": "Instellingen",
               "Welcome": "Welkom",
             },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-            },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
               "Until": "Van",
@@ -6200,10 +6116,6 @@ I18n {
             "Registrations": "Inschrijvingen",
             "Settings": "Instellingen",
             "Welcome": "Welkom",
-          },
-          "ui/screens/admin/AdminScreen": Object {
-            "Find a member": "Zoek een lid",
-            "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
           },
           "ui/screens/events/CalendarItem": Object {
             "From": "Tot",
@@ -6450,10 +6362,6 @@ I18n {
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
               },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-              },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
                 "Until": "Van",
@@ -6699,10 +6607,6 @@ I18n {
               "Registrations": "Inschrijvingen",
               "Settings": "Instellingen",
               "Welcome": "Welkom",
-            },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
             },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
@@ -6964,10 +6868,6 @@ I18n {
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
               },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-              },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
                 "Until": "Van",
@@ -7209,10 +7109,6 @@ I18n {
               "Registrations": "Inschrijvingen",
               "Settings": "Instellingen",
               "Welcome": "Welkom",
-            },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
             },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
@@ -7466,10 +7362,6 @@ I18n {
               "Settings": "Instellingen",
               "Welcome": "Welkom",
             },
-            "ui/screens/admin/AdminScreen": Object {
-              "Find a member": "Zoek een lid",
-              "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-            },
             "ui/screens/events/CalendarItem": Object {
               "From": "Tot",
               "Until": "Van",
@@ -7716,10 +7608,6 @@ I18n {
             "Registrations": "Inschrijvingen",
             "Settings": "Instellingen",
             "Welcome": "Welkom",
-          },
-          "ui/screens/admin/AdminScreen": Object {
-            "Find a member": "Zoek een lid",
-            "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
           },
           "ui/screens/events/CalendarItem": Object {
             "From": "Tot",
@@ -7973,10 +7861,6 @@ I18n {
                   "Settings": "Instellingen",
                   "Welcome": "Welkom",
                 },
-                "ui/screens/admin/AdminScreen": Object {
-                  "Find a member": "Zoek een lid",
-                  "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
-                },
                 "ui/screens/events/CalendarItem": Object {
                   "From": "Tot",
                   "Until": "Van",
@@ -8218,10 +8102,6 @@ I18n {
                 "Registrations": "Inschrijvingen",
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
-              },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
               },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
@@ -8474,10 +8354,6 @@ I18n {
                 "Registrations": "Inschrijvingen",
                 "Settings": "Instellingen",
                 "Welcome": "Welkom",
-              },
-              "ui/screens/admin/AdminScreen": Object {
-                "Find a member": "Zoek een lid",
-                "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
               },
               "ui/screens/events/CalendarItem": Object {
                 "From": "Tot",
@@ -9635,10 +9511,6 @@ I18n {
           "Registrations": "Inschrijvingen",
           "Settings": "Instellingen",
           "Welcome": "Welkom",
-        },
-        "ui/screens/admin/AdminScreen": Object {
-          "Find a member": "Zoek een lid",
-          "No entries found with this filter.": "Geen gegevens gevonden met dit filter.",
         },
         "ui/screens/events/CalendarItem": Object {
           "From": "Tot",
