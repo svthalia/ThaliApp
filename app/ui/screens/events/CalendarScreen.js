@@ -23,7 +23,7 @@ const addEventToSection = (sections, date, event) => {
 
   if (!(sectionKey in sections)) {
     sections[sectionKey] = {
-      key: date.format('MMMM'),
+      key: date.format('MMMM YYYY'),
       data: {},
     };
   }
