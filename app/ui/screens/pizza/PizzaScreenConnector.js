@@ -20,6 +20,7 @@ const mapDispatchToProps = {
   loadPizzas: pizzaActions.retrievePizzaInfo,
   cancelPizza: pizzaActions.cancelOrder,
   orderPizza: pizzaActions.orderPizza,
+  openAdmin: pizzaActions.openAdmin,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PizzaScreen);

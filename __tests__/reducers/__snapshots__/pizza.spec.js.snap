@@ -2,6 +2,11 @@
 
 exports[`pizza reducer initially should return the initial state 1`] = `
 Object {
+  "admin": Object {
+    "loading": false,
+    "orders": Array [],
+    "status": "initial",
+  },
   "event": null,
   "hasLoaded": false,
   "loading": false,

@@ -2,6 +2,9 @@ import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
 
 const styles = StyleSheet.create({
+  rootWrapper: {
+    flex: 1,
+  },
   scrollView: {
     flex: 1,
     backgroundColor: Colors.background,
@@ -188,6 +191,20 @@ const styles = StyleSheet.create({
     ios: {
       padding: 12,
       borderRadius: 100,
+    },
+  },
+  adminIcon: {
+    marginLeft: 24,
+    color: Colors.white,
+  },
+  rightView: {
+    android: {
+      paddingLeft: 32,
+      paddingRight: 20,
+    },
+    ios: {
+      paddingLeft: 16,
+      paddingRight: 10,
     },
   },
 });

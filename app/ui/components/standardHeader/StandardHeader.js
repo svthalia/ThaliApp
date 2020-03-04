@@ -31,6 +31,8 @@ const sceneToTitle = (routeName, t) => {
       return t('Settings');
     case 'EventAdmin':
       return t('Registrations');
+    case 'PizzaAdmin':
+      return t('Orders');
     default:
       return 'ThaliApp';
   }

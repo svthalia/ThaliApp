@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  RefreshControl, ScrollView, Text, TouchableHighlight, View,
+  RefreshControl, ScrollView, Text, TouchableHighlight, TouchableOpacity, View,
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -10,7 +10,7 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import styles from './style/PizzaScreen';
 import Colors from '../../style/Colors';
-import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
+import StandardHeader from '../../components/standardHeader/StandardHeader';
 import CardSection from '../../components/cardSection/CardSection';
 
 class PizzaScreen extends Component {
@@ -165,44 +165,50 @@ class PizzaScreen extends Component {
 
   render() {
     const {
-      hasLoaded, success, event, loading, t, pizzaList, order,
+      hasLoaded, success, event, loading, t, pizzaList, order, openAdmin,
     } = this.props;
 
     if (!hasLoaded) {
       return <LoadingScreen />;
     } if (!success) {
       return (
-        <ScrollView
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={this.handleRefresh}
-            />
-          )}
-          style={styles.scrollView}
-          contentContainerStyle={styles.content}
-        >
-          <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
-        </ScrollView>
+        <View style={styles.rootWrapper}>
+          <StandardHeader />
+          <ScrollView
+            refreshControl={(
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={this.handleRefresh}
+              />
+            )}
+            style={styles.scrollView}
+            contentContainerStyle={styles.content}
+          >
+            <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
+          </ScrollView>
+        </View>
       );
     } if (!event) {
       return (
-        <ScrollView
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={this.handleRefresh}
-            />
-          )}
-          style={styles.scrollView}
-          contentContainerStyle={styles.content}
-        >
-          <Text
-            style={styles.title}
+        <View style={styles.rootWrapper}>
+          <StandardHeader />
+          <ScrollView
+            refreshControl={(
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={this.handleRefresh}
+              />
+            )}
+            style={styles.scrollView}
+            contentContainerStyle={styles.content}
           >
-            {t('There is currently no event for which you can order food.')}
-          </Text>
-        </ScrollView>
+            <Text
+              style={styles.title}
+            >
+              {t('There is currently no event for which you can order food.')}
+            </Text>
+          </ScrollView>
+        </View>
       );
     }
 
@@ -222,25 +228,45 @@ class PizzaScreen extends Component {
       subtitle = t(`You can order until ${end.format('HH:mm')}`);
     }
 
-    return (
-      <ScrollView
-        refreshControl={(
-          <RefreshControl
-            refreshing={loading}
-            onRefresh={this.handleRefresh}
+    const hasAdminView = event.is_admin && !inFuture;
+    const adminButton = (
+      <View style={styles.rightView}>
+        <TouchableOpacity
+          onPress={() => openAdmin()}
+        >
+          <Icon
+            name="settings"
+            style={styles.adminIcon}
+            size={24}
           />
-        )}
-        ref={(ref) => { this.pizzaScroll = ref; }}
-        style={styles.scrollView}
-      >
-        <View style={styles.content}>
-          {this.getEventInfo(subtitle)}
-          {hasEnded && this.getOverview()}
-          {this.getOrder(hasEnded)}
-          {inFuture || hasEnded || (order && order.paid)
-            || this.getPizzaList(pizzaList, !!order)}
-        </View>
-      </ScrollView>
+        </TouchableOpacity>
+      </View>
+    );
+
+    const header = <StandardHeader rightView={hasAdminView && adminButton} />;
+
+    return (
+      <View style={styles.rootWrapper}>
+        {header}
+        <ScrollView
+          refreshControl={(
+            <RefreshControl
+              refreshing={loading}
+              onRefresh={this.handleRefresh}
+            />
+          )}
+          ref={(ref) => { this.pizzaScroll = ref; }}
+          style={styles.scrollView}
+        >
+          <View style={styles.content}>
+            {this.getEventInfo(subtitle)}
+            {hasEnded && this.getOverview()}
+            {this.getOrder(hasEnded)}
+            {inFuture || hasEnded || (order && order.paid)
+              || this.getPizzaList(pizzaList, !!order)}
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -254,6 +280,7 @@ PizzaScreen.propTypes = {
     end: PropTypes.string.isRequired,
     event: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    is_admin: PropTypes.bool.isRequired,
   }),
   order: PropTypes.shape({
     pk: PropTypes.number.isRequired,
@@ -273,6 +300,7 @@ PizzaScreen.propTypes = {
   loadPizzas: PropTypes.func.isRequired,
   cancelPizza: PropTypes.func.isRequired,
   orderPizza: PropTypes.func.isRequired,
+  openAdmin: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 
@@ -281,4 +309,4 @@ PizzaScreen.defaultProps = {
   order: null,
 };
 
-export default withTranslation('ui/screens/pizza/PizzaScreen')(withStandardHeader(PizzaScreen));
+export default withTranslation('ui/screens/pizza/PizzaScreen')(PizzaScreen);
