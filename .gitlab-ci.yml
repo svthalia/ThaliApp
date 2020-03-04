@@ -40,24 +40,25 @@ jest:
 #             - .gradle/wrapper/
 #             - .gradle/caches/
 
-build android:
-    image: reactnativecommunity/react-native-android:latest
-    stage: build
-    cache:
-      key: gradle cache
-      paths:
-          - $CI_PROJECT_DIR/.gradle/wrapper/
-          - $CI_PROJECT_DIR/.gradle/caches/
-    before_script:
-        - echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
-        - yarn install
-    script:
-        - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
-        - echo $PROD_ENV | base64 -d > .env
-        - cd $CI_PROJECT_DIR/android/
-        - ./gradlew --no-daemon ":app:assemble"
-    artifacts:
-        paths:
-            - $CI_PROJECT_DIR/android/app/build/outputs/apk/debug/app-debug.apk
-            - $CI_PROJECT_DIR/android/app/build/outputs/apk/release/app-release-unsigned.apk
-            - $CI_PROJECT_DIR/android/app/build/outputs/apk/release/app-release.apk
+# This build does not work currently. Should be re-enabled when we've migrated to GitHub.
+# build android:
+#     image: reactnativecommunity/react-native-android:latest
+#     stage: build
+#     cache:
+#       key: gradle cache
+#       paths:
+#           - $CI_PROJECT_DIR/.gradle/wrapper/
+#           - $CI_PROJECT_DIR/.gradle/caches/
+#     before_script:
+#         - echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
+#         - yarn install
+#     script:
+#         - echo $SENTRY_PROPS | base64 -d > ./android/sentry.properties
+#         - echo $PROD_ENV | base64 -d > .env
+#         - cd $CI_PROJECT_DIR/android/
+#         - ./gradlew --no-daemon ":app:assemble"
+#     artifacts:
+#         paths:
+#             - $CI_PROJECT_DIR/android/app/build/outputs/apk/debug/app-debug.apk
+#             - $CI_PROJECT_DIR/android/app/build/outputs/apk/release/app-release-unsigned.apk
+#             - $CI_PROJECT_DIR/android/app/build/outputs/apk/release/app-release.apk
