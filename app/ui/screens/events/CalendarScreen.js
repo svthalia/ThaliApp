@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  SectionList, Text, View, ScrollView, RefreshControl
+  SectionList, Text, View, ScrollView, RefreshControl,
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
@@ -126,7 +126,7 @@ class CalendarScreen extends Component {
   componentDidMount() {
     this.props.refresh();
   }
-  
+
   search = (keywords) => {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
@@ -141,13 +141,13 @@ class CalendarScreen extends Component {
 
     const header = (
       <SearchHeader
-      title={t('Calendar')}
-      searchText={t('Find an event')}
-      search={this.search}
-      searchKey={keywords}
+        title={t('Calendar')}
+        searchText={t('Find an event')}
+        search={this.search}
+        searchKey={keywords}
       />
     );
-  
+
     let content = (
       <SectionList
         style={styles.sectionList}
@@ -174,7 +174,6 @@ class CalendarScreen extends Component {
     } else if (eventList.length === 0) {
       content = <ErrorScreen message={t('No events found!')} />;
     } else {
-
       return (
         <View style={styles.wrapper}>
           {header}
@@ -191,11 +190,11 @@ class CalendarScreen extends Component {
         <ScrollView
           refreshControl={(
             <RefreshControl
-            refreshing={loading}
-            onRefresh={refresh}
+              refreshing={loading}
+              onRefresh={refresh}
             />
-            )}
-            >
+          )}
+        >
           <DismissKeyboardView contentStyle={styles.keyboardView}>
             {content}
           </DismissKeyboardView>
