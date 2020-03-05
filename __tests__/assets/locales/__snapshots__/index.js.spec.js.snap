@@ -7,6 +7,9 @@ Object {
       "Dismiss": "Sluiten",
       "Open": "Openen",
     },
+    "sagas/photos": Object {
+      "Photo has been saved successfully": "Foto succesvol opgeslagen",
+    },
     "sagas/profile": Object {
       "Change profile picture": "Profielafbeelding veranderen",
       "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",

@@ -60,6 +60,9 @@ I18n {
             "Dismiss": "Sluiten",
             "Open": "Openen",
           },
+          "sagas/photos": Object {
+            "Photo has been saved successfully": "Foto succesvol opgeslagen",
+          },
           "sagas/profile": Object {
             "Change profile picture": "Profielafbeelding veranderen",
             "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -301,6 +304,9 @@ I18n {
         "app": Object {
           "Dismiss": "Sluiten",
           "Open": "Openen",
+        },
+        "sagas/photos": Object {
+          "Photo has been saved successfully": "Foto succesvol opgeslagen",
         },
         "sagas/profile": Object {
           "Change profile picture": "Profielafbeelding veranderen",
@@ -547,6 +553,9 @@ I18n {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
                 },
+                "sagas/photos": Object {
+                  "Photo has been saved successfully": "Foto succesvol opgeslagen",
+                },
                 "sagas/profile": Object {
                   "Change profile picture": "Profielafbeelding veranderen",
                   "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -778,6 +787,9 @@ I18n {
               "app": Object {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
+              },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
               },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
@@ -1021,6 +1033,9 @@ I18n {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
               },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
+              },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
                 "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -1258,6 +1273,9 @@ I18n {
               "Dismiss": "Sluiten",
               "Open": "Openen",
             },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
+            },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
               "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -1459,6 +1477,9 @@ I18n {
           "app": Object {
             "Dismiss": "Sluiten",
             "Open": "Openen",
+          },
+          "sagas/photos": Object {
+            "Photo has been saved successfully": "Foto succesvol opgeslagen",
           },
           "sagas/profile": Object {
             "Change profile picture": "Profielafbeelding veranderen",
@@ -1695,6 +1716,9 @@ I18n {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
               },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
+              },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
                 "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -1930,6 +1954,9 @@ I18n {
             "app": Object {
               "Dismiss": "Sluiten",
               "Open": "Openen",
+            },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
             },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
@@ -2186,6 +2213,9 @@ I18n {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
               },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
+              },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
                 "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -2417,6 +2447,9 @@ I18n {
             "app": Object {
               "Dismiss": "Sluiten",
               "Open": "Openen",
+            },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
             },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
@@ -2658,6 +2691,9 @@ I18n {
             "app": Object {
               "Dismiss": "Sluiten",
               "Open": "Openen",
+            },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
             },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
@@ -2903,6 +2939,9 @@ I18n {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
                 },
+                "sagas/photos": Object {
+                  "Photo has been saved successfully": "Foto succesvol opgeslagen",
+                },
                 "sagas/profile": Object {
                   "Change profile picture": "Profielafbeelding veranderen",
                   "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -3134,6 +3173,9 @@ I18n {
               "app": Object {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
+              },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
               },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
@@ -3376,6 +3418,9 @@ I18n {
               "app": Object {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
+              },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
               },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
@@ -4524,6 +4569,9 @@ I18n {
           "Dismiss": "Sluiten",
           "Open": "Openen",
         },
+        "sagas/photos": Object {
+          "Photo has been saved successfully": "Foto succesvol opgeslagen",
+        },
         "sagas/profile": Object {
           "Change profile picture": "Profielafbeelding veranderen",
           "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -4713,6 +4761,9 @@ I18n {
       "app": Object {
         "Dismiss": "Sluiten",
         "Open": "Openen",
+      },
+      "sagas/photos": Object {
+        "Photo has been saved successfully": "Foto succesvol opgeslagen",
       },
       "sagas/profile": Object {
         "Change profile picture": "Profielafbeelding veranderen",
@@ -4947,6 +4998,9 @@ I18n {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
                 },
+                "sagas/photos": Object {
+                  "Photo has been saved successfully": "Foto succesvol opgeslagen",
+                },
                 "sagas/profile": Object {
                   "Change profile picture": "Profielafbeelding veranderen",
                   "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -5178,6 +5232,9 @@ I18n {
               "app": Object {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
+              },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
               },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
@@ -5421,6 +5478,9 @@ I18n {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
               },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
+              },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
                 "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -5658,6 +5718,9 @@ I18n {
               "Dismiss": "Sluiten",
               "Open": "Openen",
             },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
+            },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
               "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -5859,6 +5922,9 @@ I18n {
           "app": Object {
             "Dismiss": "Sluiten",
             "Open": "Openen",
+          },
+          "sagas/photos": Object {
+            "Photo has been saved successfully": "Foto succesvol opgeslagen",
           },
           "sagas/profile": Object {
             "Change profile picture": "Profielafbeelding veranderen",
@@ -6095,6 +6161,9 @@ I18n {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
               },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
+              },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
                 "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -6330,6 +6399,9 @@ I18n {
             "app": Object {
               "Dismiss": "Sluiten",
               "Open": "Openen",
+            },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
             },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
@@ -6581,6 +6653,9 @@ I18n {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
               },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
+              },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
                 "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -6812,6 +6887,9 @@ I18n {
             "app": Object {
               "Dismiss": "Sluiten",
               "Open": "Openen",
+            },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
             },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
@@ -7055,6 +7133,9 @@ I18n {
               "Dismiss": "Sluiten",
               "Open": "Openen",
             },
+            "sagas/photos": Object {
+              "Photo has been saved successfully": "Foto succesvol opgeslagen",
+            },
             "sagas/profile": Object {
               "Change profile picture": "Profielafbeelding veranderen",
               "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -7291,6 +7372,9 @@ I18n {
           "app": Object {
             "Dismiss": "Sluiten",
             "Open": "Openen",
+          },
+          "sagas/photos": Object {
+            "Photo has been saved successfully": "Foto succesvol opgeslagen",
           },
           "sagas/profile": Object {
             "Change profile picture": "Profielafbeelding veranderen",
@@ -7534,6 +7618,9 @@ I18n {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
                 },
+                "sagas/photos": Object {
+                  "Photo has been saved successfully": "Foto succesvol opgeslagen",
+                },
                 "sagas/profile": Object {
                   "Change profile picture": "Profielafbeelding veranderen",
                   "Could not update profile picture": "De profielafbeelding kon niet worden bijgewerkt",
@@ -7765,6 +7852,9 @@ I18n {
               "app": Object {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
+              },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
               },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
@@ -8007,6 +8097,9 @@ I18n {
               "app": Object {
                 "Dismiss": "Sluiten",
                 "Open": "Openen",
+              },
+              "sagas/photos": Object {
+                "Photo has been saved successfully": "Foto succesvol opgeslagen",
               },
               "sagas/profile": Object {
                 "Change profile picture": "Profielafbeelding veranderen",
@@ -9154,6 +9247,9 @@ I18n {
         "app": Object {
           "Dismiss": "Sluiten",
           "Open": "Openen",
+        },
+        "sagas/photos": Object {
+          "Photo has been saved successfully": "Foto succesvol opgeslagen",
         },
         "sagas/profile": Object {
           "Change profile picture": "Profielafbeelding veranderen",
