@@ -17,6 +17,7 @@ import HTML from 'react-native-render-html';
 import Share from 'react-native-share';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import CommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles, { memberSize } from './style/EventScreen';
 import MemberView from '../../components/memberView/MemberViewConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -379,8 +380,25 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
 
   render() {
     const {
-      status, loading, openMaps, data, t, openAdmin, openUrl,
+      status, loading, openMaps, data, t, openAdmin, openUrl, addToCalendar,
     } = this.props;
+
+    const addCalendarButton = (
+      <TouchableOpacity
+        onPress={() => addToCalendar(
+          this.props.data.title,
+          this.props.data.location,
+          this.props.data.start,
+          this.props.data.end,
+        )}
+      >
+        <CommunityIcon
+          name="calendar-export"
+          style={styles.calendarIcon}
+          size={24}
+        />
+      </TouchableOpacity>
+    );
 
     const shareButton = (
       <TouchableOpacity
@@ -414,6 +432,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
 
     const rightView = (
       <View style={styles.rightView}>
+        {addCalendarButton}
         {shareButton}
         {hasAdminView && adminButton}
       </View>
@@ -553,6 +572,7 @@ EventScreen.propTypes = {
   retrievePizzaInfo: PropTypes.func.isRequired,
   openAdmin: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
+  addToCalendar: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 

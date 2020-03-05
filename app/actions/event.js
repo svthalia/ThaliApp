@@ -6,6 +6,7 @@ export const DONE = 'EVENT_DONE';
 export const FAILURE = 'EVENT_FAILURE';
 export const ADMIN = 'EVENT_ADMIN';
 export const UPDATE_REGISTRATION = 'EVENT_UPDATE_REGISTRATION';
+export const ADD_TO_CALENDAR = 'EVENT_ADD_CALENDAR';
 
 export function event(pk, navigateToEventScreen = true) {
   return {
@@ -55,5 +56,17 @@ export function updateRegistration(pk, present, payment) {
   return {
     type: UPDATE_REGISTRATION,
     payload: { pk, present, payment },
+  };
+}
+
+export function addToCalendar(eventName, eventLocation, eventStart, eventEnd) {
+  return {
+    type: ADD_TO_CALENDAR,
+    payload: {
+      eventName,
+      eventLocation,
+      eventStart,
+      eventEnd,
+    },
   };
 }

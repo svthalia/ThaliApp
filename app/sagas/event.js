@@ -2,10 +2,16 @@ import {
   call, put, select, takeEvery,
 } from 'redux-saga/effects';
 
+import Moment from 'moment';
+import Snackbar from 'react-native-snackbar';
+import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import { apiRequest } from '../utils/url';
 import * as eventActions from '../actions/event';
 import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import i18next from '../utils/i18n';
+
+const t = i18next.getFixedT(undefined, 'sagas/event');
 
 function* event(action) {
   const { pk, navigateToEventScreen } = action.payload;
@@ -74,7 +80,31 @@ function* updateRegistration(action) {
   }
 }
 
+function* addToCalendar(action) {
+  const {
+    eventName,
+    eventLocation,
+    eventStart,
+    eventEnd,
+  } = action.payload;
+  const eventConfig = {
+    title: eventName,
+    startDate: Moment(eventStart).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+    endDate: Moment(eventEnd).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+    location: eventLocation,
+  };
+  try {
+    const eventInfo = yield call(AddCalendarEvent.presentEventCreatingDialog, eventConfig);
+    if (eventInfo.action === 'SAVED') {
+      yield call([Snackbar, 'show'], { title: t('Event added to calendar!') });
+    }
+  } catch (error) {
+    yield call([Snackbar, 'show'], { title: t('Failed to add event to calendar!') });
+  }
+}
+
 export default function* () {
   yield takeEvery(eventActions.EVENT, event);
   yield takeEvery(eventActions.UPDATE_REGISTRATION, updateRegistration);
+  yield takeEvery(eventActions.ADD_TO_CALENDAR, addToCalendar);
 }
