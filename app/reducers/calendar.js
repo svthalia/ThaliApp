@@ -4,6 +4,7 @@ const initialState = {
   eventList: [],
   loading: true,
   status: 'initial',
+  keywords: '',
 };
 
 export default function calendar(state = initialState, action = {}) {
@@ -21,8 +22,12 @@ export default function calendar(state = initialState, action = {}) {
         status: 'failure',
       };
     case calendarActions.REFRESH:
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+        keywords: action.payload.keywords,
+      };
     default:
-      return { ...state };
+      return state;
   }
 }
