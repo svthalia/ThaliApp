@@ -19,6 +19,7 @@ Getting started
 3. Clone this repository
 4. Run `yarn install` to get all the required dependencies
 5. Start the development server using `yarn start`
+5a. (iOS only) Copy sentry.properties to the ios folder
 6. Deploy the app on a running emulator or connected Android device by running `yarn start:android`
 
 
