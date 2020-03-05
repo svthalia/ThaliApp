@@ -21,6 +21,7 @@ files['app/ui/screens/profile/ProfileScreenNL'] = require('./nl/app/ui/screens/p
 files['app/ui/screens/photos/AlbumDetailScreenNL'] = require('./nl/app/ui/screens/photos/AlbumDetailScreen.json');
 files['app/ui/screens/photos/AlbumsOverviewScreenNL'] = require('./nl/app/ui/screens/photos/AlbumsOverviewScreen.json');
 files['app/ui/screens/login/LoginScreenNL'] = require('./nl/app/ui/screens/login/LoginScreen.json');
+files['app/sagas/photosNL'] = require('./nl/app/sagas/photos.json');
 files['app/sagas/sessionNL'] = require('./nl/app/sagas/session.json');
 files['app/sagas/registrationNL'] = require('./nl/app/sagas/registration.json');
 files['app/sagas/profileNL'] = require('./nl/app/sagas/profile.json');
@@ -49,6 +50,7 @@ export default {
     'ui/screens/photos/AlbumDetailScreen': files['app/ui/screens/photos/AlbumDetailScreenNL'],
     'ui/screens/photos/AlbumsOverviewScreen': files['app/ui/screens/photos/AlbumsOverviewScreenNL'],
     'ui/screens/login/LoginScreen': files['app/ui/screens/login/LoginScreenNL'],
+    'sagas/photos': files['app/sagas/photosNL'],
     'sagas/session': files['app/sagas/sessionNL'],
     'sagas/registration': files['app/sagas/registrationNL'],
     'sagas/profile': files['app/sagas/profileNL'],
