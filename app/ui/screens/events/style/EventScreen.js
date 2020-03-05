@@ -105,7 +105,11 @@ const styles = StyleSheet.create({
     lineHeight: 24.0,
     color: Colors.black,
   },
+  calendarIcon: {
+    color: Colors.white,
+  },
   shareIcon: {
+    marginLeft: 24,
     color: Colors.white,
   },
   adminIcon: {

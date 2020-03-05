@@ -7788,6 +7788,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-add-calendar-event@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-add-calendar-event/-/react-native-add-calendar-event-3.0.1.tgz#db36550cac119221b60be4841fe859a54c1f89fd"
+  integrity sha512-uHjf1TH0hFTKc9dzW7Hjh3UoDY31AGZtUpbvJoDEFqnseysZrSnL+sDokQ5yvDYjeBEUgMHw6KuBoiHB0bT7bg==
+
 react-native-device-info@2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.3.2.tgz#db2b8f135aaf2515583e367ab791dcc7d2f0d14c"
