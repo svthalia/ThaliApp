@@ -7,6 +7,7 @@ if (__DEV__) { // eslint-disable-line no-undef
 }
 
 export const url = server;
+export const issueUrl = 'https://gitlab.science.ru.nl/api/v4/projects/1232/issues';
 export const apiUrl = `${server}/api/v1`;
 export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
 export const termsAndConditionsUrl = `${server}/event-registration-terms/`;
