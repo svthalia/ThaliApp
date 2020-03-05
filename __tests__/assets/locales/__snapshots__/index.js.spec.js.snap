@@ -7,6 +7,10 @@ Object {
       "Dismiss": "Sluiten",
       "Open": "Openen",
     },
+    "sagas/event": Object {
+      "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+      "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
+    },
     "sagas/photos": Object {
       "Photo has been saved successfully": "Foto succesvol opgeslagen",
     },
