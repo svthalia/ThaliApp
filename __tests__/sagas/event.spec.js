@@ -9,6 +9,10 @@ import eventSaga from '../../app/sagas/event';
 import * as eventActions from '../../app/actions/event';
 import { tokenSelector } from '../../app/selectors/session';
 
+jest.mock('react-native-snackbar', () => ({
+  Snackbar: jest.fn(),
+}));
+
 jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
 }));
