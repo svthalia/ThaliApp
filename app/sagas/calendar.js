@@ -7,7 +7,8 @@ import * as calendarActions from '../actions/calendar';
 import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
 
-const calendar = function* calendar({ payload: { keywords } }) {
+const calendar = function* calendar(action) {
+  const { keywords } = action.payload;
   const token = yield select(tokenSelector);
 
   yield put(calendarActions.fetching());
@@ -39,7 +40,7 @@ const calendar = function* calendar({ payload: { keywords } }) {
     } catch (error) {
       yield call(reportError, error);
     }
-    yield put(calendarActions.success(events.concat(partnerEvents)));
+    yield put(calendarActions.success(events.concat(partnerEvents), keywords));
   } catch (error) {
     yield call(reportError, error);
     yield put(calendarActions.failure());

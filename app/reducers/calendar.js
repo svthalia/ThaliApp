@@ -14,6 +14,7 @@ export default function calendar(state = initialState, action = {}) {
         eventList: action.payload.eventList,
         loading: false,
         status: 'success',
+        keywords: action.payload.keywords,
       };
     case calendarActions.FAILURE:
       return {

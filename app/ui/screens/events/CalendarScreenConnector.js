@@ -6,10 +6,11 @@ const mapStateToProps = state => ({
   eventList: state.calendar.eventList,
   loading: state.calendar.loading,
   status: state.calendar.status,
+  keywords: state.calendar.keywords,
 });
 
 const mapDispatchToProps = {
-  refresh: calendarActions.refresh,
+  refresh: (keywords = '') => calendarActions.refresh(keywords),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);

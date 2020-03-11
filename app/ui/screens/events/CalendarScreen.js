@@ -124,7 +124,8 @@ const renderItem = (item) => {
 
 class CalendarScreen extends Component {
   componentDidMount() {
-    this.props.refresh();
+    const { keywords } = this.props;
+    this.props.refresh(keywords);
   }
 
   search = (keywords) => {
@@ -134,9 +135,14 @@ class CalendarScreen extends Component {
     }, 500);
   };
 
+  handleRefresh = () => {
+    const { keywords } = this.props;
+    this.props.refresh(keywords);
+  };
+
   render() {
     const {
-      eventList, loading, status, keywords, refresh, t,
+      eventList, loading, status, keywords, t,
     } = this.props;
 
     const header = (
@@ -162,7 +168,7 @@ class CalendarScreen extends Component {
         sections={eventListToSections(eventList, t)}
         keyExtractor={item => item.dayNumber}
         stickySectionHeadersEnabled
-        onRefresh={refresh}
+        onRefresh={this.handleRefresh}
         refreshing={loading}
       />
     );
@@ -188,10 +194,11 @@ class CalendarScreen extends Component {
       <View style={styles.wrapper}>
         {header}
         <ScrollView
+          contentContainerStyle={styles.wrapper}
           refreshControl={(
             <RefreshControl
+              onRefresh={this.handleRefresh}
               refreshing={loading}
-              onRefresh={refresh}
             />
           )}
         >
@@ -204,9 +211,6 @@ class CalendarScreen extends Component {
   }
 }
 
-CalendarScreen.defaultProps = {
-  keywords: '',
-};
 CalendarScreen.propTypes = {
   eventList: PropTypes.arrayOf(PropTypes.shape({
     pk: PropTypes.number,
@@ -223,7 +227,7 @@ CalendarScreen.propTypes = {
   })).isRequired,
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
-  keywords: PropTypes.string,
+  keywords: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };

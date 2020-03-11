@@ -10,17 +10,17 @@ export function open() {
   };
 }
 
-export function refresh(keywords) {
+export function refresh(keywords = '') {
   return {
     type: REFRESH,
     payload: { keywords },
   };
 }
 
-export function success(eventList) {
+export function success(eventList, keywords) {
   return {
     type: SUCCESS,
-    payload: { eventList },
+    payload: { eventList, keywords},
   };
 }
 
