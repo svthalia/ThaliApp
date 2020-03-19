@@ -1,14 +1,10 @@
 ThaliApp
 ==============
 
-[![pipeline status](https://gitlab.science.ru.nl/thalia/ThaliApp/badges/master/pipeline.svg)](https://gitlab.science.ru.nl/thalia/ThaliApp/commits/master) [![coverage report](https://gitlab.science.ru.nl/thalia/ThaliApp/badges/master/coverage.svg)](https://gitlab.science.ru.nl/thalia/ThaliApp/commits/master)
-Android: [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=59b91aadba233f000121b9d3&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/59b91aadba233f000121b9d3/build/latest?branch=master)
-iOS: [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=59b56f51ff3d3c000160a8fa&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/59b56f51ff3d3c000160a8fa/build/latest?branch=master)
+[![Linting and Testing](https://github.com/svthalia/thaliapp/workflows/Linting%20and%20Testing/badge.svg)](https://github.com/svthalia/thaliapp/actions)
+[![Code Style](https://img.shields.io/badge/code%20style-airbnb-f30000.svg)](https://github.com/psf/black)
 
 The new and improved ThaliApp. Because there's an App for Everything.
-
-
-
 
 Getting started
 ---------------
