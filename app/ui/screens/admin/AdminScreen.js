@@ -130,7 +130,7 @@ class AdminScreen extends Component {
           {name}
         </Text>
         <View style={styles.itemControls}>
-          {checkboxLabel && (
+          {checkboxLabel ? (
             <View style={styles.checkboxContainer}>
               <Text style={[styles.text, styles.label]}>
                 {checkboxLabel}
@@ -145,7 +145,7 @@ class AdminScreen extends Component {
                 thumbColor={checkbox ? Colors.darkMagenta : Colors.grey}
               />
             </View>
-          )}
+          ) : null}
           <View style={styles.selectContainer}>
             {
               select.options.map(({ key, label }, buttonIndex) => (
