@@ -2,6 +2,7 @@ import { call, takeEvery, select } from 'redux-saga/effects';
 import { Platform } from 'react-native';
 import firebase from '@react-native-firebase/app';
 import messaging from '@react-native-firebase/messaging';
+import iid from '@react-native-firebase/iid';
 
 import { apiRequest } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';

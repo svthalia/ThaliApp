@@ -104,7 +104,7 @@ function* downloadPhoto({ payload: { url } }) {
   if (file === null) {
     return;
   }
-  yield call([Snackbar, 'show'], { title: t('Photo has been saved successfully') });
+  yield call([Snackbar, 'show'], { text: t('Photo has been saved successfully') });
 }
 
 function* sharePhoto({ payload: { url } }) {

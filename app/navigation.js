@@ -2,10 +2,9 @@ import {
   createSwitchNavigator,
   createAppContainer,
   NavigationActions,
-  DrawerActions,
 } from 'react-navigation';
 
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Login from './ui/screens/login/LoginScreenConnector';

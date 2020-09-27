@@ -103,7 +103,7 @@ class AdminScreen extends Component {
     const newFilter = (currentFilter + 1) % filterTypes.length;
 
     if (newFilter !== currentFilter) {
-      Snackbar.show({ title: filterTypes[newFilter].label });
+      Snackbar.show({ text: filterTypes[newFilter].label });
       this.setState({ currentFilter: newFilter });
     }
   };

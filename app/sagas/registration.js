@@ -37,8 +37,8 @@ const register = function* register(action) {
     if (registration.fields && Object.keys(registration.fields).length > 0) {
       yield put(registrationActions.retrieveFields(registration.pk));
     }
-    yield call([Snackbar, 'show'], { title: t('Registration successful!') });
-    yield call([Snackbar, 'show'], { title: t('Registration successful!') });
+    yield call([Snackbar, 'show'], { text: t('Registration successful!') });
+    yield call([Snackbar, 'show'], { text: t('Registration successful!') });
   } catch (error) {
     yield call(reportError, error);
     yield put(eventActions.failure());
@@ -73,10 +73,10 @@ const update = function* update(action) {
     yield call(apiRequest, `registrations/${registration}`, data);
     yield put(registrationActions.success());
     yield delay(50);
-    yield call([Snackbar, 'show'], { title: t('Successfully updated registration') });
+    yield call([Snackbar, 'show'], { text: t('Successfully updated registration') });
   } catch (error) {
     if (error.response.status === 400) {
-      yield call([Snackbar, 'show'], { title: 'The field values are not correct' });
+      yield call([Snackbar, 'show'], { text: 'The field values are not correct' });
     } else {
       yield call(reportError, error);
       yield put(registrationActions.failure());
@@ -102,7 +102,7 @@ const cancel = function* cancel(action) {
 
   try {
     yield call(apiRequest, `registrations/${registration}`, data);
-    yield call([Snackbar, 'show'], { title: t('Successfully cancelled registration') });
+    yield call([Snackbar, 'show'], { text: t('Successfully cancelled registration') });
   } catch (error) {
     yield call(reportError, error);
   }

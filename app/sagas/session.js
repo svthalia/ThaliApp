@@ -88,7 +88,7 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    yield call([Snackbar, 'show'], {title: t('Login successful')});
+    yield call([Snackbar, 'show'], {text: t('Login successful')});
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
@@ -98,7 +98,7 @@ function* signIn(action) {
 
     yield put(sessionActions.tokenInvalid());
     yield call(reportError, e);
-    yield call([Snackbar, 'show'], {title: t('Login failed')});
+    yield call([Snackbar, 'show'], {text: t('Login failed')});
   }
 }
 
@@ -119,7 +119,7 @@ function* clearUserInfo() {
 
 function* signOut() {
   yield call(clearUserInfo);
-  yield call([Snackbar, 'show'], {title: t('Logout successful')});
+  yield call([Snackbar, 'show'], {text: t('Logout successful')});
 }
 
 function* signedIn({payload}) {
