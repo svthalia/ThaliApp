@@ -9,6 +9,7 @@ target 'ThaliApp' do
   use_react_native!(:path => config["reactNativePath"])
 
 
+
   target 'ThaliAppTests' do
     inherit! :complete
     # Pods for testing
