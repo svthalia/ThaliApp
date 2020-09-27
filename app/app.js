@@ -9,8 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
 import notifications from '@react-native-firebase/messaging';
-import DeviceInfo from 'react-native-device-info';
-import {getLocales} from 'react-native-localize';
+import { getLocales } from 'react-native-localize';
 import Moment from 'moment';
 import 'moment/locale/nl';
 

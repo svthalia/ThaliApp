@@ -5,10 +5,10 @@ import * as navigationActions from '../../../actions/navigation';
 import * as photosActions from '../../../actions/photos';
 import { albumData, albumSelection } from '../../../selectors/photos';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   photos: Object.values(albumData(state).photos)
-    .filter(photo => !photo.hidden)
-    .map(photo => ({
+    .filter((photo) => !photo.hidden)
+    .map((photo) => ({
       url: photo.file.large,
     })),
   selection: albumSelection(state),

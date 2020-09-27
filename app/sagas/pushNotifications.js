@@ -62,7 +62,7 @@ function* register(action) {
 }
 
 function* invalidate() {
-  yield call([firebase.iid(), 'delete']);
+  yield call([iid(), 'delete']);
 }
 
 export default function* () {

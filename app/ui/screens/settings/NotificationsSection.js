@@ -35,7 +35,7 @@ class NotificationsSection extends Component {
     const update = {};
     update[key] = value;
     this.setState(update, () => {
-      const categories = Object.keys(this.state).filter(k => this.state[k]);
+      const categories = Object.keys(this.state).filter((k) => this.state[k]);
       this.props.saveCategories(categories);
     });
   };
@@ -72,7 +72,7 @@ class NotificationsSection extends Component {
           </View>
           <Switch
             value={this.state[category.key]}
-            onValueChange={value => this.updateField(category.key, value)}
+            onValueChange={(value) => this.updateField(category.key, value)}
             trackColor={{
               false: Colors.lightGray,
               true: Colors.magenta,

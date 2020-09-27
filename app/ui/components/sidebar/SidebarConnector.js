@@ -8,12 +8,12 @@ import * as photosActions from '../../../actions/photos';
 import * as membersActions from '../../../actions/members';
 import Sidebar from './Sidebar';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   displayName: state.session.displayName,
   photo: state.session.photo,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   loadProfile: () => dispatch(profileActions.profile()),
   openCalendar: () => dispatch(calendarActions.open()),
   openMemberList: () => dispatch(membersActions.members()),

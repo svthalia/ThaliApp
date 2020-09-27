@@ -41,7 +41,7 @@ function* loadAlbums({ payload: { keywords, next } }) {
       response = yield call(apiRequest, 'photos/albums', data, params);
     }
     yield put(photosActions.successAlbums(
-      response.results.filter(item => item.accessible && !item.hidden && item.cover != null),
+      response.results.filter((item) => item.accessible && !item.hidden && item.cover != null),
       response.next,
       next !== undefined,
     ));

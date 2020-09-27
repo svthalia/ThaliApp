@@ -43,13 +43,13 @@ const eventListToSections = (eventList, t) => {
     eventLists.push(list);
   }
 
-  return eventLists.map(list => ({
+  return eventLists.map((list) => ({
     key: Moment(list[0].start).calendar(null, calendarFormat),
     data: list,
   }));
 };
 
-const Footer = props => (
+const Footer = (props) => (
   <TouchableOpacity
     onPress={props.openCalendar}
     style={styles.footer}
@@ -119,16 +119,16 @@ class WelcomeScreen extends Component {
         <View style={styles.content}>
           <SectionList
             style={styles.sectionList}
-            renderItem={item => <EventDetailCard event={item.item} />}
+            renderItem={(item) => <EventDetailCard event={item.item} />}
             renderSectionHeader={
-              itemHeader => (
+              (itemHeader) => (
                 <Text style={styles.sectionHeader}>
                   {itemHeader.section.key}
                 </Text>
               )
             }
             sections={eventListToSections(eventList, t)}
-            keyExtractor={event => event.pk}
+            keyExtractor={(event) => event.pk}
             stickySectionHeadersEnabled
             onRefresh={this.handleRefresh}
             refreshing={loading}

@@ -6,7 +6,7 @@ import * as eventActions from '../../../actions/event';
 import EventScreen from './EventScreen';
 import * as navigationActions from '../../../actions/navigation';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   data: state.event.data,
   registrations: state.event.registrations,
   status: state.event.status,
@@ -18,7 +18,7 @@ const mapDispatchToProps = {
   register: registrationActions.register,
   cancel: registrationActions.cancel,
   fields: registrationActions.retrieveFields,
-  openMaps: location => navigationActions.openWebsite(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
+  openMaps: (location) => navigationActions.openWebsite(`https://maps.${Platform.OS === 'ios' ? 'apple' : 'google'}.com/maps?daddr=${location}`),
   openUrl: navigationActions.openWebsite,
   retrievePizzaInfo: pizzaActions.retrievePizzaInfo,
   openAdmin: eventActions.admin,

@@ -19,9 +19,9 @@ const AlbumDetailScreen = ({
       <FlatList
         style={styles.flatList}
         contentContainerStyle={styles.listContainer}
-        data={photos.filter(p => !p.hidden)}
+        data={photos.filter((p) => !p.hidden)}
         renderItem={
-          data => (
+          (data) => (
             <PhotoListItem
               photo={data.item}
               size={itemSize}
@@ -30,7 +30,7 @@ const AlbumDetailScreen = ({
             />
           )
         }
-        keyExtractor={item => item.pk}
+        keyExtractor={(item) => item.pk}
         numColumns={3}
       />
     </View>

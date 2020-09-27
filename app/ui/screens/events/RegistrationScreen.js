@@ -143,7 +143,7 @@ class RegistrationScreen extends Component {
                     </Text>
                     <Switch
                       value={this.state[key]}
-                      onValueChange={value => this.updateField(key, value)}
+                      onValueChange={(value) => this.updateField(key, value)}
                       thumbColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
                       trackColor={{
                         false: Colors.lightGray,
@@ -186,7 +186,7 @@ class RegistrationScreen extends Component {
                   )}
                   <TextInput
                     value={this.state[key]}
-                    onChangeText={value => this.updateField(key, value)}
+                    onChangeText={(value) => this.updateField(key, value)}
                     keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
                     placeholder={field.label}
                     style={styles.field}

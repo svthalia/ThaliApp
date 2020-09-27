@@ -6,7 +6,7 @@ import {
 } from '../../../selectors/photos';
 import * as photosActions from '../../../actions/photos';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   albums: albumsData(state),
   keywords: albumsKeywords(state),
   status: albumsStatus(state),

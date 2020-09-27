@@ -38,7 +38,7 @@ const sceneToTitle = (routeName, t) => {
   }
 };
 
-const StandardHeader = props => (
+const StandardHeader = (props) => (
   <View>
     <View style={styles.statusBar}>
       <StatusBar
@@ -83,7 +83,7 @@ const StandardHeaderContainer = withNavigation(withTranslation('ui/components/st
 export default StandardHeaderContainer;
 
 export function withStandardHeader(Component, menu) {
-  return props => (
+  return (props) => (
     <View style={styles.rootWrapper}>
       <StandardHeaderContainer menu={menu} />
       <Component

@@ -30,7 +30,7 @@ class EventAdminScreen extends Component {
       status, loading, registrations, t,
     } = this.props;
 
-    const items = registrations.map(item => ({
+    const items = registrations.map((item) => ({
       pk: item.pk,
       name: item.name,
       checkbox: item.present,
@@ -60,11 +60,11 @@ class EventAdminScreen extends Component {
       },
       {
         label: t('Filtering on payment'),
-        checkItem: item => item.select.value === PAYMENT_TYPES.NONE,
+        checkItem: (item) => item.select.value === PAYMENT_TYPES.NONE,
       },
       {
         label: t('Filtering on presence'),
-        checkItem: item => !item.checkbox,
+        checkItem: (item) => !item.checkbox,
       },
     ];
 

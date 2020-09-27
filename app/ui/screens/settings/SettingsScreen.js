@@ -6,7 +6,6 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import NotificationsSection from './NotificationsSectionConnector';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 
-
 class SettingsScreen extends React.Component {
   componentDidMount() {
     this.props.init();

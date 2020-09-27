@@ -1,8 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import DeviceInfo from 'react-native-device-info';
+import { getLocales } from 'react-native-localize';
 import locales from '../assets/locales/index';
-import {getLocales} from 'react-native-localize';
 
 i18n
   .use(initReactI18next)

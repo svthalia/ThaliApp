@@ -87,7 +87,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       <View key="start-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="start-title">
           {t('From')}
-:
+          :
         </Text>
         <Text style={styles.infoValueText} key="start-value">
           {startDate}
@@ -98,7 +98,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       <View key="end-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="end-title">
           {t('Until')}
-:
+          :
         </Text>
         <Text style={styles.infoValueText} key="end-value">
           {endDate}
@@ -109,7 +109,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       <View key="loc-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="loc-title">
           {t('Location')}
-:
+          :
         </Text>
         <Text style={styles.infoValueText} key="loc-value">
           {data.location}
@@ -120,10 +120,10 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       <View key="price-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="price-title">
           {t('Price')}
-:
+          :
         </Text>
         <Text style={styles.infoValueText} key="price-value">
-€
+          €
           {data.price}
         </Text>
       </View>,
@@ -138,7 +138,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
         <View key="registrationend-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="registrationend-title">
             {t('Registration deadline')}
-:
+            :
           </Text>
           <Text style={styles.infoValueText} key="registrationend-value">
             {registrationDeadline}
@@ -149,7 +149,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
         <View key="canceldeadline-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="canceldeadline-title">
             {t('Cancellation deadline')}
-:
+            :
           </Text>
           <Text style={styles.infoValueText} key="canceldeadline-value">
             {cancelDeadline}
@@ -166,7 +166,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
         <View key="participants-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="participants-title">
             {t('Number of registrations')}
-:
+            :
           </Text>
           <Text style={styles.infoValueText} key="participants-value">
             {participantsText}
@@ -192,7 +192,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
           <View key="status-holder" style={styles.infoHolder}>
             <Text style={styles.infoText} key="status-title">
               {t('Registration status')}
-:
+              :
             </Text>
             <Text style={styles.infoValueText} key="status-value">
               {registrationState}
@@ -352,7 +352,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
           <FlatList
             numColumns={3}
             data={registrations}
-            renderItem={item => (
+            renderItem={(item) => (
               <MemberView
                 key={item.item.pk}
                 member={{
@@ -364,7 +364,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
                 size={memberSize}
               />
             )}
-            keyExtractor={item => item.pk}
+            keyExtractor={(item) => item.pk}
           />
         </View>
       );

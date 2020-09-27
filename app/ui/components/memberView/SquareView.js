@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ViewPropTypes, StyleSheet } from 'react-native';
 
-const SquareView = props => (
+const SquareView = (props) => (
   <View
     style={[props.style, { width: props.size, height: props.size }]}
   >

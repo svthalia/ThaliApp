@@ -197,7 +197,7 @@ class ProfileScreen extends Component {
         <ScrollView
           style={styles.container}
           scrollEventThrottle={16}
-          onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollY } } }])}
+          onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollY } } }], { useNativeDriver: false })}
         >
           <View style={styles.content}>
             <DescriptionSection profile={profile} />

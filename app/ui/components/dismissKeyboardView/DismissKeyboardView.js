@@ -4,7 +4,7 @@ import {
   View, Keyboard, TouchableWithoutFeedback, StyleSheet, ViewPropTypes,
 } from 'react-native';
 
-const DismissKeyboardView = props => (
+const DismissKeyboardView = (props) => (
   <TouchableWithoutFeedback
     onPress={Keyboard.dismiss}
     accessible={false}

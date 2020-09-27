@@ -4,7 +4,7 @@ import { Image, Modal, View } from 'react-native';
 import styles from './style/AvatarModal';
 import IconButton from '../../components/button/IconButton';
 
-const AvatarModal = props => (
+const AvatarModal = (props) => (
   <Modal
     visible={props.visible}
     transparent

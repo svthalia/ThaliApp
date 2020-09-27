@@ -6,7 +6,6 @@ const initialState = {
   status: 'loading',
 };
 
-
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case registrationActions.SHOW_FIELDS: {

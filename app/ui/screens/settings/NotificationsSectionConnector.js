@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { notificationsSettingsActions } from '../../../actions/settings';
 import NotificationsSection from './NotificationsSection';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   categoryList: state.settings.pushNotifications.categoryList,
   status: state.settings.pushNotifications.status,
 });

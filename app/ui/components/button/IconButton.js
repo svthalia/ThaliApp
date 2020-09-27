@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import Colors from '../../style/Colors';
 
-const IconButton = props => (
+const IconButton = (props) => (
   <TouchableOpacity
     disabled={props.disabled}
     onPress={props.disabled ? null : props.onPress}

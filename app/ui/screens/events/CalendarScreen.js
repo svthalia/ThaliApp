@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
-import {getLocales} from 'react-native-localize';
+import { getLocales } from 'react-native-localize';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -114,7 +114,7 @@ const renderItem = (item) => {
       </View>
       <View style={styles.eventList}>
         {events.map(
-          event => <CalendarItem event={event} key={`${event.pk}:${event.title}`} />,
+          (event) => <CalendarItem event={event} key={`${event.pk}:${event.title}`} />,
         )}
       </View>
     </View>
@@ -168,14 +168,14 @@ class CalendarScreen extends Component {
           style={styles.sectionList}
           renderItem={renderItem}
           renderSectionHeader={
-            itemHeader => (
+            (itemHeader) => (
               <Text style={styles.sectionHeader}>
                 {itemHeader.section.key}
               </Text>
             )
           }
           sections={eventListToSections(this.props.eventList, this.props.t)}
-          keyExtractor={item => item.dayNumber}
+          keyExtractor={(item) => item.dayNumber}
           stickySectionHeadersEnabled
           onRefresh={this.handleRefresh}
           refreshing={this.props.loading}
