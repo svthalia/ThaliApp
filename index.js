@@ -2,18 +2,14 @@
  * @format
  */
 
-import { AppRegistry } from 'react-native';
-import { Sentry } from 'react-native-sentry';
-import { SENTRY_DSN } from 'react-native-dotenv';
+import {AppRegistry} from 'react-native';
 import App from './app/app';
+import * as Sentry from '@sentry/react-native';
+import { SENTRY_DSN } from '@env';
+import {name as appName} from './app.json';
 
-
-Sentry.config(SENTRY_DSN).install();
-
-Sentry.setTagsContext({
-  // eslint-disable-next-line no-undef
-  environment: __DEV__ ? 'development' : 'production',
-  react: true,
+Sentry.init({
+    dsn: SENTRY_DSN,
 });
 
-AppRegistry.registerComponent('ThaliApp', () => App);
+AppRegistry.registerComponent(appName, () => App);

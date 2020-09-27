@@ -1,4 +1,4 @@
-import { Sentry, SentrySeverity } from 'react-native-sentry';
+import { Sentry, SentrySeverity } from '@sentry/react-native';
 
 export default (error, extra = {}) => {
   if (error.response && error.response.jsonData) {

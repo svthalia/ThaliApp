@@ -6,8 +6,11 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
-import firebase from 'react-native-firebase';
+import messaging from '@react-native-firebase/messaging';
+import firebase from '@react-native-firebase/app';
+import notifications from '@react-native-firebase/messaging';
 import DeviceInfo from 'react-native-device-info';
+import {getLocales} from 'react-native-localize';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
@@ -35,7 +38,7 @@ sagaMiddleware.run(sagas);
 class Main extends Component {
   constructor() {
     super();
-    if (DeviceInfo.getDeviceLocale().startsWith('nl')) {
+    if (getLocales()[0].languageCode.startsWith('nl')) {
       Moment.locale('nl');
     } else {
       Moment.locale('en');
@@ -45,15 +48,14 @@ class Main extends Component {
   componentDidMount() {
     store.dispatch(sessionActions.init());
     this.addDeepLinkingHandler();
-    this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(() => {
+    this.onTokenRefreshListener = messaging().onTokenRefresh(() => {
       store.dispatch(register());
     });
-    this.notificationListener = firebase.notifications().onNotification(this.showNotification);
+    this.notificationListener = messaging().onMessage(this.showNotification);
+    this.notificationOpenedListener = messaging()
+      .onNotificationOpenedApp(this.handleOpenNotification);
 
-    this.notificationOpenedListener = firebase.notifications()
-      .onNotificationOpened(this.handleOpenNotification);
-
-    firebase.notifications().getInitialNotification().then(this.handleOpenNotification);
+    notifications().getInitialNotification().then(this.handleOpenNotification);
   }
 
   componentWillUnmount() {

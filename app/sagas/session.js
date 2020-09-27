@@ -1,16 +1,14 @@
-import {
-  call, put, takeEvery, select,
-} from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import {call, put, takeEvery, select} from 'redux-saga/effects';
+import {delay} from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
-import { Sentry } from 'react-native-sentry';
+import {Sentry} from '@sentry/react-native';
 import i18next from '../utils/i18n';
 
-import { apiRequest } from '../utils/url';
+import {apiRequest} from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
-import { tokenSelector } from '../selectors/session';
+import {tokenSelector} from '../selectors/session';
 import reportError from '../utils/errorReporting';
 
 export const IDENTIFIERKEY = '@MyStore:identifier';
@@ -21,7 +19,7 @@ export const PHOTOKEY = '@MyStore:photo';
 export const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 
 const pairsToObject = (obj, pair) => {
-  const obj2 = { ...obj };
+  const obj2 = {...obj};
   obj2[pair[0]] = pair[1];
   return obj2;
 };
@@ -30,9 +28,17 @@ const t = i18next.getFixedT(undefined, 'sagas/session');
 
 function* init() {
   try {
-    const result = yield call([AsyncStorage, 'multiGet'], [
-      IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
-    ]);
+    const result = yield call(
+      [AsyncStorage, 'multiGet'],
+      [
+        IDENTIFIERKEY,
+        USERNAMEKEY,
+        TOKENKEY,
+        DISPLAYNAMEKEY,
+        PHOTOKEY,
+        PUSHCATEGORYKEY,
+      ],
+    );
     const values = result.reduce(pairsToObject, {});
 
     const id = parseInt(values[IDENTIFIERKEY], 0);
@@ -56,8 +62,7 @@ function* init() {
 }
 
 function* signIn(action) {
-  const { user, pass } = action.payload;
-
+  const {user, pass} = action.payload;
   const data = {
     method: 'POST',
     headers: {
@@ -74,7 +79,7 @@ function* signIn(action) {
 
   try {
     const response = yield call(apiRequest, 'token-auth', data);
-    const { token } = response;
+    const {token} = response;
 
     yield call(AsyncStorage.multiSet, [
       [USERNAMEKEY, user],
@@ -83,7 +88,7 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    yield call([Snackbar, 'show'], { title: t('Login successful') });
+    yield call([Snackbar, 'show'], {title: t('Login successful')});
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
@@ -93,25 +98,33 @@ function* signIn(action) {
 
     yield put(sessionActions.tokenInvalid());
     yield call(reportError, e);
-    yield call([Snackbar, 'show'], { title: t('Login failed') });
+    yield call([Snackbar, 'show'], {title: t('Login failed')});
   }
 }
 
 function* clearUserInfo() {
-  yield call([AsyncStorage, 'multiRemove'], [
-    IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
-  ]);
+  yield call(
+    [AsyncStorage, 'multiRemove'],
+    [
+      IDENTIFIERKEY,
+      USERNAMEKEY,
+      TOKENKEY,
+      DISPLAYNAMEKEY,
+      PHOTOKEY,
+      PUSHCATEGORYKEY,
+    ],
+  );
   yield put(pushNotificationsActions.invalidate());
 }
 
 function* signOut() {
   yield call(clearUserInfo);
-  yield call([Snackbar, 'show'], { title: t('Logout successful') });
+  yield call([Snackbar, 'show'], {title: t('Logout successful')});
 }
 
-function* signedIn({ payload }) {
-  const { username } = payload;
-  yield call(Sentry.setUserContext, { username });
+function* signedIn({payload}) {
+  const {username} = payload;
+  //yield call(Sentry.setContext, 'user', { username: username });
 }
 
 function* userInfo() {
@@ -134,9 +147,13 @@ function* userInfo() {
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);
-    yield put(sessionActions.setUserInfo(
-      userProfile.pk, userProfile.display_name, userProfile.avatar.medium,
-    ));
+    yield put(
+      sessionActions.setUserInfo(
+        userProfile.pk,
+        userProfile.display_name,
+        userProfile.avatar.medium,
+      ),
+    );
   } catch (error) {
     yield call(reportError, error);
   }
