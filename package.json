@@ -17,6 +17,33 @@
     "coverage": "jest --coverage",
     "locales:collect": "node collect-locales.js"
   },
+  "jest": {
+    "preset": "react-native",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "app/**/*.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "text-summary"
+    ],
+    "modulePaths": [
+      ".yarn/"
+    ],
+    "setupFiles": [
+      "<rootDir>/__tests__/setup.js",
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|@react-native-community|@react-navigation|react-navigation-drawer|react-navigation-stack/)"
+    ],
+    "moduleNameMapper": {
+      "react-i18next": "<rootDir>/__mocks__/react-i18next-mock.js"
+    }
+  },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",
     "@react-native-community/cli": "^4.13.0",
@@ -34,6 +61,7 @@
     "react": "16.13.1",
     "react-i18next": "^11.7.3",
     "react-native": "0.63.2",
+    "react-native-cli": "^2.0.1",
     "react-native-device-info": "^6.0.4",
     "react-native-dotenv": "^2.4.0",
     "react-native-fs": "^2.16.6",
