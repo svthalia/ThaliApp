@@ -1,6 +1,6 @@
 {
   "name": "ThaliApp",
-  "version": "3.0.0",
+  "version": "2.8.8",
   "private": true,
   "scripts": {
     "start": "react-native start",
@@ -102,8 +102,5 @@
     "jest": "^26.4.2",
     "metro-react-native-babel-preset": "^0.63.0",
     "react-test-renderer": "16.13.1"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

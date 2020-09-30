@@ -14,6 +14,8 @@ Getting started
 2. Set up the Android (and/or if you're running macOS: iOS) development environment using [this guide](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment)
 3. Clone this repository
 4. Run `yarn install` to get all the required dependencies
+4a. For iOS development, install `cocoapods` and run `pod install` within the `ios` folder. Also note that you must configure app signing in Xcode settings.
+4b. For Android Development you must download the Android SDK, you can do this with, for example, [Android Studio](https://developer.android.com/studio/). After downloading the Android SDK you must specify the SDK location within a `local.properties` file in the `android` folder. Specify it with `sdk.dir=[SDK location]`.
 5. Start the development server using `yarn start`
 6. Deploy the app on a running emulator or connected Android device by running `yarn start:android`
 
