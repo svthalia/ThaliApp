@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
@@ -184,6 +185,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    /* Needed for react-native status bar */
+    implementation project(':@react-native-community_status-bar')
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

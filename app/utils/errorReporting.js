@@ -1,11 +1,11 @@
-import { Sentry, SentrySeverity } from '@sentry/react-native';
+import * as Sentry from '@sentry/react-native';
 
 export default (error, extra = {}) => {
   if (error.response && error.response.jsonData) {
-    Sentry.captureBreadcrumb({
+    Sentry.addBreadcrumb({
       message: 'JSON Data',
       category: 'json',
-      level: SentrySeverity.Info,
+      level: Sentry.Severity.Info,
       data: error.response.jsonData,
       type: 'http',
     });

@@ -58,6 +58,7 @@
     "i18next-scanner": "^2.11.0",
     "jetifier": "^1.6.6",
     "moment": "^2.29.0",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-i18next": "^11.7.3",
     "react-native": "0.63.2",
@@ -101,6 +102,7 @@
     "eslint-plugin-react-native": "^3.9.1",
     "jest": "^26.4.2",
     "metro-react-native-babel-preset": "^0.63.0",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "16.13.1",
+    "redux-saga-test-plan": "^4.0.0-rc.3"
   }
 }

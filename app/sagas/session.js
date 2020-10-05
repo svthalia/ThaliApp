@@ -4,7 +4,7 @@ import {
 import { delay } from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
-import { Sentry } from '@sentry/react-native';
+import * as Sentry from '@sentry/react-native';
 import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
@@ -126,7 +126,7 @@ function* signOut() {
 
 function* signedIn({ payload }) {
   const { username } = payload;
-  // yield call(Sentry.setContext, 'user', { username: username });
+  yield call(Sentry.setContext, 'user', { username });
 }
 
 function* userInfo() {

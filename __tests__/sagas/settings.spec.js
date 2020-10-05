@@ -4,7 +4,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 
 import { select } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Sentry } from 'react-native-sentry';
+import * as Sentry from "@sentry/react-native";
 
 import settingsSaga from '../../app/sagas/settings';
 import { notificationsSettingsActions, settingsActions } from '../../app/actions/settings';

@@ -8,7 +8,6 @@ import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
-import notifications from '@react-native-firebase/messaging';
 import { getLocales } from 'react-native-localize';
 import Moment from 'moment';
 import 'moment/locale/nl';
@@ -54,7 +53,7 @@ class Main extends Component {
     this.notificationOpenedListener = messaging()
       .onNotificationOpenedApp(this.handleOpenNotification);
 
-    notifications().getInitialNotification().then(this.handleOpenNotification);
+    messaging().getInitialNotification().then(this.handleOpenNotification);
   }
 
   componentWillUnmount() {
