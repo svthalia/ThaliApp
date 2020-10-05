@@ -1,9 +1,10 @@
 import { getLocales } from 'react-native-localize';
+import { Platform } from 'react-native';
 
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
-  server = 'http://localhost:8000';
+  server = Platform.OS === 'android' ? 'http://10.0.2.2:8000' : 'http://localhost:8000';
 }
 
 export const url = server;
@@ -51,7 +52,6 @@ export const apiRequest = (route, fetchOpts, params) => {
   } else {
     requestOptions.headers['Accept-Language'] = 'en';
   }
-
   let query = '';
   if (params !== null && params === Object(params)) {
     query = `?${Object.keys(params)
@@ -63,7 +63,6 @@ export const apiRequest = (route, fetchOpts, params) => {
   if (route.startsWith('http')) {
     requestUrl = route;
   }
-
   return fetch(requestUrl, requestOptions)
     .then(detectInvalidToken)
     .then((response) => response.json()

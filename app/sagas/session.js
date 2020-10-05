@@ -1,7 +1,6 @@
 import {
-  call, put, takeEvery, select,
+  call, put, takeEvery, select, delay,
 } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
 import * as Sentry from '@sentry/react-native';
@@ -78,7 +77,6 @@ function* signIn(action) {
   };
 
   const currentTimestamp = Date.now();
-
   try {
     const response = yield call(apiRequest, 'token-auth', data);
     const { token } = response;
@@ -95,7 +93,7 @@ function* signIn(action) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
     if (now - currentTimestamp < 150) {
-      yield call(delay, now - currentTimestamp);
+      yield delay(now - currentTimestamp);
     }
 
     yield put(sessionActions.tokenInvalid());
