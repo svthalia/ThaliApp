@@ -12,7 +12,6 @@ import { apiRequest } from '../../app/utils/url';
 import * as sessionActions from '../../app/actions/session';
 import * as pushNotificationsActions from '../../app/actions/pushNotifications';
 
-
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
   show: jest.fn(),
@@ -31,11 +30,9 @@ jest.mock('../../app/navigation', () => ({
   navigate: jest.fn(),
 }));
 
-jest.mock('react-native-sentry', () => ({
-  Sentry: {
-    setUserContext: () => {},
-    captureException: jest.fn(),
-  },
+jest.mock('@sentry/react-native', () => ({
+  setContext: () => {},
+  captureException: jest.fn(),
 }));
 
 describe('session saga', () => {
@@ -55,13 +52,13 @@ describe('session saga', () => {
     it('should show a snackbar when the request succeeds', () => expectSaga(sessionSaga)
       .provide([
         [matchers.call.like({ fn: apiRequest, args: ['token-auth'] }), { token: 'abc123' }],
-        [matchers.call.like({ fn: Sentry.setUserContext }), {}],
+        [matchers.call.like({ fn: Sentry.setContext }), {}],
       ])
       .dispatch(sessionActions.signIn('username', 'password'))
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Login successful' },
+          { text: 'Login successful' },
         );
       }));
 
@@ -95,7 +92,7 @@ describe('session saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Login failed' },
+          { text: 'Login failed' },
         );
       }));
 
@@ -132,7 +129,7 @@ describe('session saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Logout successful' },
+          { text: 'Logout successful' },
         );
       }));
   });

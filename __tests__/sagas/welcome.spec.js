@@ -52,7 +52,7 @@ describe('welcome saga', () => {
 
   it('should handle an invalid token correctly', () => {
     jest.resetModules();
-    const { TokenInvalidError } = require.requireActual('../../app/utils/url');
+    const { TokenInvalidError } = jest.requireActual('../../app/utils/url');
     expectSaga(welcomeSaga)
       .provide([
         [select(tokenSelector), 'token'],

@@ -35,7 +35,8 @@ exports[`StandardHeader component renders correctly on Android 1`] = `
     >
       <View
         accessible={true}
-        isTVSelectable={true}
+        focusable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -139,7 +140,8 @@ exports[`StandardHeader component renders correctly on iOS 1`] = `
     >
       <View
         accessible={true}
-        isTVSelectable={true}
+        focusable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}

@@ -69,7 +69,7 @@ describe('registration saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Registration successful!' },
+          { text: 'Registration successful!' },
         );
       }));
 
@@ -128,7 +128,7 @@ describe('registration saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Successfully updated registration' },
+          { text: 'Successfully updated registration' },
         );
       }));
 
@@ -181,7 +181,7 @@ describe('registration saga', () => {
       .silentRun()
       .then(() => {
         expect(Snackbar.show).toBeCalledWith(
-          { title: 'Successfully cancelled registration' },
+          { text: 'Successfully cancelled registration' },
         );
       }));
 

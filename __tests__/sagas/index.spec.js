@@ -6,6 +6,8 @@ jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
 }));
 
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
+
 describe('index saga', () => {
   it('should yield to all indexSaga as forks', () => {
     testSaga(indexSaga)

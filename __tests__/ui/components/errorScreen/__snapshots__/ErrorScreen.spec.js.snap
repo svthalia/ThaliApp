@@ -30,9 +30,7 @@ exports[`ErrorScreen component renders correctly 1`] = `
     style={
       Object {
         "color": "#616161",
-        "fontFamily": "System",
         "fontSize": 16,
-        "fontWeight": "500",
         "textAlign": "center",
       }
     }
@@ -43,9 +41,7 @@ exports[`ErrorScreen component renders correctly 1`] = `
     style={
       Object {
         "color": "#616161",
-        "fontFamily": "System",
         "fontSize": 16,
-        "fontWeight": "500",
         "textAlign": "center",
       }
     }

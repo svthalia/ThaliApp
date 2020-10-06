@@ -1,8 +1,5 @@
 import { NativeModules } from 'react-native';
-
-NativeModules.RNFirebase = {
-  apps: [],
-};
+import * as ReactNative from 'react-native';
 
 NativeModules.RNShare = {
 
@@ -21,3 +18,39 @@ NativeModules.RNCStatusBarManager = {
 jest.mock('react-native-fs', () => ({
   downloadFile: jest.fn(),
 }));
+
+jest.doMock('react-native', () => Object.setPrototypeOf(
+  {
+    Platform: {
+      OS: 'android',
+      select: () => {},
+    },
+    NativeModules: {
+      ...ReactNative.NativeModules,
+      RNFBAppModule: {
+        NATIVE_FIREBASE_APPS: [
+          {
+            appConfig: {
+              name: '[DEFAULT]',
+            },
+            options: {},
+          },
+
+          {
+            appConfig: {
+              name: 'secondaryFromNative',
+            },
+            options: {},
+          },
+        ],
+      },
+      RNFBPerfModule: {},
+      RNFBAdMobModule: {},
+      RNFBAdMobInterstitialModule: {},
+      RNFBAdMobRewardedModule: {},
+      RNFBAdsConsentModule: {},
+      RNFBCrashlyticsModule: {},
+    },
+  },
+  ReactNative,
+));
