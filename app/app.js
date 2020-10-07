@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import messaging from '@react-native-firebase/messaging';
-import firebase from '@react-native-firebase/app';
 import { getLocales } from 'react-native-localize';
 import Moment from 'moment';
 import 'moment/locale/nl';

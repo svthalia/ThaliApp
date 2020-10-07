@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';

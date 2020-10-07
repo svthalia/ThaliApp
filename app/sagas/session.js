@@ -42,7 +42,7 @@ function* init() {
     );
     const values = result.reduce(pairsToObject, {});
 
-    const id = parseInt(values[IDENTIFIERKEY], 0);
+    const id = parseInt(values[IDENTIFIERKEY], 10);
     const username = values[USERNAMEKEY];
     const token = values[TOKENKEY];
     const displayName = values[DISPLAYNAMEKEY];

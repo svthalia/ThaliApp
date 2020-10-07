@@ -26,22 +26,25 @@ class RegistrationScreen extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps = (props) => {
+  static getDerivedStateFromProps = (nextProps, state) => {
     const update = {};
 
-    const keys = Object.keys(props.fields);
+    const keys = Object.keys(nextProps.fields);
+    const stateKeys = Object.keys(state);
     for (let i = 0; i < keys.length; i += 1) {
-      const field = props.fields[keys[i]];
-      if (field.type === 'boolean') {
-        update[keys[i]] = Boolean(field.value);
-      } else if (field.type === 'integer' || field.type === 'text') {
-        update[keys[i]] = field.value === null ? '' : String(field.value);
-      } else {
-        update[keys[i]] = field.value;
+      if (!stateKeys.includes(keys[i])) {
+        const field = nextProps.fields[keys[i]];
+        if (field.type === 'boolean') {
+          update[keys[i]] = Boolean(field.value);
+        } else if (field.type === 'integer' || field.type === 'text') {
+          update[keys[i]] = field.value === null ? '' : String(field.value);
+        } else {
+          update[keys[i]] = field.value;
+        }
       }
     }
 
-    this.setState(update);
+    return update;
   };
 
   getFieldValidity = (key) => {

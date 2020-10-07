@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { getLocales } from 'react-native-localize';
 import { Platform } from 'react-native';
 
