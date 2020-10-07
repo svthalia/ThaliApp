@@ -1,5 +1,5 @@
 import {
-  call, put, select, takeEvery, delay
+  call, put, select, takeEvery, delay,
 } from 'redux-saga/effects';
 import Snackbar from 'react-native-snackbar';
 import i18next from '../utils/i18n';

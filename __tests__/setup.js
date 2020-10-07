@@ -24,6 +24,9 @@ jest.doMock('react-native', () => Object.setPrototypeOf(
     Platform: {
       OS: 'android',
       select: () => {},
+      constants: {
+        version: 28,
+      },
     },
     NativeModules: {
       ...ReactNative.NativeModules,

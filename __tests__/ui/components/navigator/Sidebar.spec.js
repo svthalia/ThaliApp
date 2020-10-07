@@ -2,6 +2,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Sidebar from '../../../../app/ui/components/sidebar/Sidebar';
 
+jest.mock('react-native-vector-icons/MaterialIcons', () => ({
+  Button: 'IconButton',
+}));
+
+jest.mock('@react-native-community/status-bar', () => 'StatusBar');
+
 describe('Sidebar component', () => {
   it('renders correctly', () => {
     const tree = renderer
