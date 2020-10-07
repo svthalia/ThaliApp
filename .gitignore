@@ -70,3 +70,6 @@ sentry.properties
 # Google services
 google-services.json
 GoogleService-Info.plist
+
+# Environment
+.env
