@@ -31,6 +31,11 @@ jobs:
       - name: Setup Yarn
         run: yarn install --frozen-lockfile
 
+      - name: Decode google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG_JSON }}
+        run: echo $FIREBASE_CONFIG > android/app/google-services.json
+
       - name: Restore Gradle cache
         uses: actions/cache@v1
         with:
