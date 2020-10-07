@@ -66,3 +66,7 @@ buck-out/
 bundle.js
 sentry.properties
 .env.production
+
+# Google services
+google-services.json
+GoogleService-Info.plist
