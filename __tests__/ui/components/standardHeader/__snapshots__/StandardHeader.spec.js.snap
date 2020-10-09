@@ -31,7 +31,6 @@ exports[`StandardHeader component renders correctly on Android 1`] = `
           "alignItems": "center",
           "backgroundColor": "#E62272",
           "flexDirection": "row",
-          "flexWrap": "wrap",
           "height": 56,
           "justifyContent": "flex-start",
         }
@@ -104,7 +103,6 @@ exports[`StandardHeader component renders correctly on iOS 1`] = `
           "alignItems": "center",
           "backgroundColor": "#E62272",
           "flexDirection": "row",
-          "flexWrap": "wrap",
           "height": 56,
           "justifyContent": "flex-start",
         }
