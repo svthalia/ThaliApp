@@ -1,11 +1,10 @@
 /* eslint-disable max-classes-per-file */
 import { getLocales } from 'react-native-localize';
-import { Platform } from 'react-native';
 
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
-  server = Platform.OS === 'android' ? 'http://10.0.2.2:8000' : 'http://localhost:8000';
+  server = 'http://localhost:8000';
 }
 
 export const url = server;

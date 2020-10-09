@@ -23,10 +23,10 @@ describe('url helper', () => {
 
   it('should expose the constants', () => {
     const { url } = require('../../app/utils/url');
-    expect(url).toEqual('http://10.0.2.2:8000');
-    expect(apiUrl).toEqual('http://10.0.2.2:8000/api/v1');
-    expect(defaultProfileImage).toEqual('http://10.0.2.2:8000/static/members/images/default-avatar.jpg');
-    expect(termsAndConditionsUrl).toEqual('http://10.0.2.2:8000/event-registration-terms/');
+    expect(url).toEqual('http://localhost:8000');
+    expect(apiUrl).toEqual('http://localhost:8000/api/v1');
+    expect(defaultProfileImage).toEqual('http://localhost:8000/static/members/images/default-avatar.jpg');
+    expect(termsAndConditionsUrl).toEqual('http://localhost:8000/event-registration-terms/');
   });
 
   it('should do a fetch request', () => {

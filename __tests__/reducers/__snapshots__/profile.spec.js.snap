@@ -6,10 +6,10 @@ Object {
   "profile": Object {
     "achievements": Array [],
     "avatar": Object {
-      "full": "http://10.0.2.2:8000/static/members/images/default-avatar.jpg",
-      "large": "http://10.0.2.2:8000/static/members/images/default-avatar.jpg",
-      "medium": "http://10.0.2.2:8000/static/members/images/default-avatar.jpg",
-      "small": "http://10.0.2.2:8000/static/members/images/default-avatar.jpg",
+      "full": "http://localhost:8000/static/members/images/default-avatar.jpg",
+      "large": "http://localhost:8000/static/members/images/default-avatar.jpg",
+      "medium": "http://localhost:8000/static/members/images/default-avatar.jpg",
+      "small": "http://localhost:8000/static/members/images/default-avatar.jpg",
     },
     "birthday": "",
     "display_name": "",
