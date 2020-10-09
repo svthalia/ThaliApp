@@ -24,12 +24,3 @@ target 'ThaliApp' do
     flipper_post_install(installer)
   end
 end
-
-target 'ThaliApp-tvOS' do
-  # Pods for ThaliApp-tvOS
-
-  target 'ThaliApp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end

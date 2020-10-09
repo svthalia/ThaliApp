@@ -23,11 +23,8 @@ location within a `local.properties` file in the `android` folder. Specify it wi
 5. Also note that a `google-services.json` file is needed in the `android/app` folder and a `GoogleServices-Info.plist` 
 file is needed in the `ios` folder in order to build both platforms respectively. These files can be acquired from 
 [Firebase](https://firebase.google.com).
-6. We also need a `sentry.properties` file inside the `ios` directory. An iOS build requires the `sentry.properties`
-file before building, android does not. Another thing we must do before either of the builds will function is to add
-a `.env` file to the root of this repository and add a line containing the sentry DSN like so: 
-`SENTRY_DSN=https://[...].sentry.io/[...]`. The Sentry properties file and the Sentry DSN can be acquired from 
-[Sentry](https://sentry.io/).
+6. We also need to setup our Sentry integration using `npx @sentry/wizard -i reactNative -p ios android`.
+Alternatively you can setup Sentry using the example files below. The wizard will do this install for you.
 6. Start the development server using `yarn start`
 7. Deploy the app on a running emulator or connected Android device by running `yarn start:android` or `yarn start:ios`.
 Note that starting an Android device or iOS device requires you to configure them first. An alternative way to start
@@ -40,3 +37,23 @@ Logging and debugging
 Reading the basic logs is easy, you can run `yarn log:android` or `yarn log:ios` to oen the standard log output in 
 your terminal.
 Follow [this guide](https://facebook.github.io/react-native/docs/debugging.html) for more advanced debugging.
+
+
+### Sentry setup
+
+`sentry.properties`:
+```
+defaults.org=thalia
+defaults.project=thaliapp
+auth.token=<token>
+```
+
+You can find the auth token in your [Sentry account settings](https://sentry.io/settings/account/api/auth-tokens/).
+If you do not have a token yet, the default scopes will do to create one.
+
+`.env`:
+```
+SENTRY_DSN=https://123abc@o263149.ingest.sentry.io/1234abcd
+```
+
+You can find the Sentry DSN value in the [Sentry project settings](https://sentry.io/settings/thalia/projects/thaliapp/keys/).
