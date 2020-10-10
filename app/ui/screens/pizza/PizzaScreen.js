@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   RefreshControl, ScrollView, Text, TouchableHighlight, TouchableOpacity, View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -24,12 +23,12 @@ class PizzaScreen extends Component {
   };
 
   getEventInfo = (subtitle) => {
-    const { t, event } = this.props;
+    const { event } = this.props;
 
     return (
       <View style={styles.eventInfo}>
         <Text style={styles.eventTitle}>
-          {t('Order pizza for {{title}}', { title: event.title })}
+          {`Order pizza for ${event.title}`}
         </Text>
         <Text style={styles.eventSubtitle}>
           {subtitle}
@@ -39,7 +38,7 @@ class PizzaScreen extends Component {
   };
 
   getOverview = () => {
-    const { order, pizzaList, t } = this.props;
+    const { order, pizzaList } = this.props;
 
     if (order) {
       const productInfo = this.getProductFromList(order.product, pizzaList);
@@ -61,14 +60,14 @@ class PizzaScreen extends Component {
     }
     return (
       <Text style={styles.overviewNoOrder}>
-        {t('You did not place an order.')}
+        You did not place an order.
       </Text>
     );
   };
 
   getOrder = (hasEnded) => {
     const {
-      t, cancelPizza, order, pizzaList,
+      cancelPizza, order, pizzaList,
     } = this.props;
 
     if (order) {
@@ -78,13 +77,13 @@ class PizzaScreen extends Component {
       }
 
       return (
-        <CardSection sectionHeader={t('Current order')}>
+        <CardSection sectionHeader="Current order">
           <View
             style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
           >
             <Text style={styles.orderStatusText}>
-              {order.paid && t('The order has been paid for.')}
-              {!order.paid && t('The order has not yet been paid for.')}
+              {order.paid && 'The order has been paid for.'}
+              {!order.paid && 'The order has not yet been paid for.'}
             </Text>
           </View>
           <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
@@ -121,7 +120,7 @@ class PizzaScreen extends Component {
   };
 
   getPizzaList = (pizzaList, hasOrder) => (
-    <CardSection sectionHeader={hasOrder ? this.props.t('Changing your order') : null} contentStyle={styles.pizzaList}>
+    <CardSection sectionHeader={hasOrder ? 'Changing your order' : null} contentStyle={styles.pizzaList}>
       {pizzaList.map((pizza, i) => (
         <View
           key={pizza.pk}
@@ -165,7 +164,7 @@ class PizzaScreen extends Component {
 
   render() {
     const {
-      hasLoaded, success, event, loading, t, pizzaList, order, openAdmin,
+      hasLoaded, success, event, loading, pizzaList, order, openAdmin,
     } = this.props;
 
     if (!hasLoaded) {
@@ -184,7 +183,7 @@ class PizzaScreen extends Component {
             style={styles.scrollView}
             contentContainerStyle={styles.content}
           >
-            <ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />
+            <ErrorScreen message={'Sorry! We couldn\'t load any data.'} />
           </ScrollView>
         </View>
       );
@@ -205,7 +204,7 @@ class PizzaScreen extends Component {
             <Text
               style={styles.title}
             >
-              {t('There is currently no event for which you can order food.')}
+              There is currently no event for which you can order food.
             </Text>
           </ScrollView>
         </View>
@@ -221,11 +220,11 @@ class PizzaScreen extends Component {
 
     let subtitle;
     if (inFuture) {
-      subtitle = t(`It will be possible to order from ${start.format('HH:mm')}`);
+      subtitle = `It will be possible to order from ${start.format('HH:mm')}`;
     } else if (hasEnded) {
-      subtitle = t(`It was possible to order until ${end.format('HH:mm')}`);
+      subtitle = `It was possible to order until ${end.format('HH:mm')}`;
     } else {
-      subtitle = t(`You can order until ${end.format('HH:mm')}`);
+      subtitle = `You can order until ${end.format('HH:mm')}`;
     }
 
     const hasAdminView = event.is_admin && !inFuture;
@@ -301,7 +300,6 @@ PizzaScreen.propTypes = {
   cancelPizza: PropTypes.func.isRequired,
   orderPizza: PropTypes.func.isRequired,
   openAdmin: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 PizzaScreen.defaultProps = {
@@ -309,4 +307,4 @@ PizzaScreen.defaultProps = {
   order: null,
 };
 
-export default withTranslation('ui/screens/pizza/PizzaScreen')(PizzaScreen);
+export default PizzaScreen;

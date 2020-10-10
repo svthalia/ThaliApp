@@ -37,13 +37,13 @@ class AlbumsOverviewScreen extends Component {
 
   render() {
     const {
-      t, fetching, status, openAlbum, albums, keywords,
+      fetching, status, openAlbum, albums, keywords,
     } = this.props;
 
     const header = (
       <SearchHeader
-        title={t('Photos')}
-        searchText={t('Find an album')}
+        title="Photos"
+        searchText="Find an album"
         search={this.search}
         searchKey={keywords}
       />
@@ -76,9 +76,9 @@ class AlbumsOverviewScreen extends Component {
     if (fetching && status === STATUS_INITIAL) {
       content = (<LoadingScreen />);
     } else if (!fetching && status === STATUS_FAILURE) {
-      content = (<ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />);
+      content = (<ErrorScreen message={'Sorry! We couldn\'t load any data.'} />);
     } else if (albums.length === 0) {
-      content = (<ErrorScreen message={t('Couldn\'t find any albums...')} />);
+      content = (<ErrorScreen message={'Couldn\'t find any albums...'} />);
     }
 
     return (
@@ -104,7 +104,6 @@ AlbumsOverviewScreen.propTypes = {
   albums: PropTypes.arrayOf(AlbumListItem.propTypes.album).isRequired,
   openAlbum: PropTypes.func.isRequired,
   loadAlbums: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   next: PropTypes.string,
 };
 

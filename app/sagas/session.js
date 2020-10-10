@@ -4,7 +4,6 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
 import * as Sentry from '@sentry/react-native';
-import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
 import * as sessionActions from '../actions/session';
@@ -24,8 +23,6 @@ const pairsToObject = (obj, pair) => {
   obj2[pair[0]] = pair[1];
   return obj2;
 };
-
-const t = i18next.getFixedT(undefined, 'sagas/session');
 
 function* init() {
   try {
@@ -88,7 +85,7 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    yield call([Snackbar, 'show'], { text: t('Login successful') });
+    yield call([Snackbar, 'show'], { text: 'Login successful' });
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
@@ -98,7 +95,7 @@ function* signIn(action) {
 
     yield put(sessionActions.tokenInvalid());
     yield call(reportError, e);
-    yield call([Snackbar, 'show'], { text: t('Login failed') });
+    yield call([Snackbar, 'show'], { text: 'Login failed' });
   }
 }
 
@@ -119,7 +116,7 @@ function* clearUserInfo() {
 
 function* signOut() {
   yield call(clearUserInfo);
-  yield call([Snackbar, 'show'], { text: t('Logout successful') });
+  yield call([Snackbar, 'show'], { text: 'Logout successful' });
 }
 
 function* signedIn({ payload }) {

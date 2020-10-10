@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   FlatList, RefreshControl, Switch, Text, TouchableHighlight, View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Snackbar from 'react-native-snackbar';
@@ -168,7 +167,7 @@ class AdminScreen extends Component {
 
   render() {
     const {
-      loading, t, handleRefresh, title,
+      loading, handleRefresh, title,
     } = this.props;
 
     const keys = this.applyFilter(Object.keys(this.state.items));
@@ -176,7 +175,7 @@ class AdminScreen extends Component {
     const header = (
       <SearchHeader
         title={title}
-        searchText={t('Find a member')}
+        searchText="Find a member"
         search={(searchKey) => this.setState({ searchKey })}
         searchKey={this.state.searchKey}
         leftIcon="arrow-back"
@@ -206,7 +205,7 @@ class AdminScreen extends Component {
           <Text
             style={[styles.text, styles.noResultsMessage]}
           >
-            {t('No entries found with this filter.')}
+            No entries found with this filter.
           </Text>
           {filterButton}
         </View>
@@ -260,7 +259,6 @@ AdminScreen.propTypes = {
   loading: PropTypes.bool.isRequired,
   updateItem: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 AdminScreen.defaultProps = {
@@ -268,4 +266,4 @@ AdminScreen.defaultProps = {
   filterTypes: [],
 };
 
-export default withTranslation('ui/screens/admin/AdminScreen')(AdminScreen);
+export default AdminScreen;

@@ -9,7 +9,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import HTML from 'react-native-render-html';
 
@@ -54,25 +53,25 @@ class RegistrationScreen extends Component {
       if (field.type === 'integer' && (value === '' || value === null || !value.match(/^-?\d+$/))) {
         return {
           isValid: false,
-          reason: this.props.t('This field is required and must be an integer.'),
+          reason: 'This field is required and must be an integer.',
         };
       }
       if (field.type === 'text' && (value === '' || value === null)) {
         return {
           isValid: false,
-          reason: this.props.t('This field is required.'),
+          reason: 'This field is required.',
         };
       }
       if (field.type === 'boolean' && !value) {
         return {
           isValid: false,
-          reason: this.props.t('This field is required.'),
+          reason: 'This field is required.',
         };
       }
     } else if (field.type === 'integer' && !(value === '' || value === null) && !value.match(/^-?\d+$/)) {
       return {
         isValid: false,
-        reason: this.props.t('This field must be an integer.'),
+        reason: 'This field must be an integer.',
       };
     }
     return {
@@ -98,11 +97,11 @@ class RegistrationScreen extends Component {
 
   render() {
     const {
-      status, fields, openUrl, update, t, registration,
+      status, fields, openUrl, update, registration,
     } = this.props;
 
     if (status === 'failure') {
-      return <ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />;
+      return <ErrorScreen message={'Sorry! We couldn\'t load any data.'} />;
     }
 
     const keys = Object.keys(fields);
@@ -209,7 +208,7 @@ class RegistrationScreen extends Component {
           {status !== 'loading' && (
             <View style={styles.buttonView}>
               <Button
-                title={t('Save')}
+                title="Save"
                 color={Colors.magenta}
                 onPress={() => update(registration, this.state)}
                 disabled={!this.isFormValid()}
@@ -228,7 +227,6 @@ RegistrationScreen.propTypes = {
   status: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/events/RegistrationScreen')(withStandardHeader(RegistrationScreen));
+export default withStandardHeader(RegistrationScreen);
