@@ -1,5 +1,5 @@
 ---
-name: React Native Builds
+name: React Native Android Build
 on: [push]
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 12
 
-      - name: Cache NPM dependencies
+      - name: Cache Node dependencies
         uses: actions/cache@v1
         with:
           path: node_modules
@@ -36,7 +36,7 @@ jobs:
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG_JSON }}
         run: echo $FIREBASE_CONFIG > android/app/google-services.json
 
-      - name: Restore Gradle cache
+      - name: Cache Gradle dependencies
         uses: actions/cache@v1
         with:
           path: ~/.gradle/caches
@@ -50,3 +50,9 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: cd android && yarn jetify && ./gradlew assembleRelease
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
