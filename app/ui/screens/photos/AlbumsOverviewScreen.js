@@ -64,7 +64,7 @@ class AlbumsOverviewScreen extends Component {
             />
           )
         }
-        keyExtractor={item => item.pk}
+        keyExtractor={(item) => item.pk}
         numColumns={numColumns}
         onRefresh={this.handleRefresh}
         refreshing={fetching}

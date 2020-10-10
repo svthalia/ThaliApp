@@ -10,19 +10,19 @@ const PersonalInfoSection = ({ profile, t, openUrl }) => {
   const profileInfo = {
     starting_year: {
       title: t('Cohort'),
-      display: x => x,
+      display: (x) => x,
     },
     programme: {
       title: t('Study programme'),
-      display: x => (x === 'computingscience' ? t('Computing science') : t('Information sciences')),
+      display: (x) => (x === 'computingscience' ? t('Computing science') : t('Information sciences')),
     },
     website: {
       title: t('Website'),
-      display: x => x,
+      display: (x) => x,
     },
     birthday: {
       title: t('Birthday'),
-      display: x => Moment(x).format('D MMMM YYYY'),
+      display: (x) => Moment(x).format('D MMMM YYYY'),
     },
   };
 
@@ -34,7 +34,7 @@ const PersonalInfoSection = ({ profile, t, openUrl }) => {
       };
     }
     return null;
-  }).filter(n => n);
+  }).filter((n) => n);
 
   if (profileData) {
     return (

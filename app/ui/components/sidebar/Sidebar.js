@@ -11,7 +11,7 @@ import Colors from '../../style/Colors';
 
 const background = require('../../../assets/img/huygens.jpg');
 
-const logoutPrompt = props => () => Alert.alert(
+const logoutPrompt = (props) => () => Alert.alert(
   props.t('Log out?'),
   props.t('Are you sure you want to log out?'),
   [{ text: props.t('No') },
@@ -93,7 +93,7 @@ const Sidebar = (props) => {
         </ImageBackground>
       </TouchableHighlight>
       <View style={styles.buttonList}>
-        {buttons.map(button => (
+        {buttons.map((button) => (
           <Icon.Button
             onPress={button.onPress}
             name={button.iconName}

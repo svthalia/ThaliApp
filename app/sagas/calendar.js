@@ -25,7 +25,7 @@ const calendar = function* calendar() {
     let partnerEvents = [];
     try {
       partnerEvents = yield call(apiRequest, 'partners/events', data);
-      partnerEvents = partnerEvents.map(event => ({
+      partnerEvents = partnerEvents.map((event) => ({
         ...event,
         pk: -event.pk,
         partner: true,

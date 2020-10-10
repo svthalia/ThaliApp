@@ -1,10 +1,9 @@
 import {
-  call, put, takeEvery, select,
+  call, put, takeEvery, select, delay,
 } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
-import { Sentry } from 'react-native-sentry';
+import * as Sentry from '@sentry/react-native';
 import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
@@ -30,12 +29,20 @@ const t = i18next.getFixedT(undefined, 'sagas/session');
 
 function* init() {
   try {
-    const result = yield call([AsyncStorage, 'multiGet'], [
-      IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
-    ]);
+    const result = yield call(
+      [AsyncStorage, 'multiGet'],
+      [
+        IDENTIFIERKEY,
+        USERNAMEKEY,
+        TOKENKEY,
+        DISPLAYNAMEKEY,
+        PHOTOKEY,
+        PUSHCATEGORYKEY,
+      ],
+    );
     const values = result.reduce(pairsToObject, {});
 
-    const id = parseInt(values[IDENTIFIERKEY], 0);
+    const id = parseInt(values[IDENTIFIERKEY], 10);
     const username = values[USERNAMEKEY];
     const token = values[TOKENKEY];
     const displayName = values[DISPLAYNAMEKEY];
@@ -57,7 +64,6 @@ function* init() {
 
 function* signIn(action) {
   const { user, pass } = action.payload;
-
   const data = {
     method: 'POST',
     headers: {
@@ -71,7 +77,6 @@ function* signIn(action) {
   };
 
   const currentTimestamp = Date.now();
-
   try {
     const response = yield call(apiRequest, 'token-auth', data);
     const { token } = response;
@@ -83,35 +88,43 @@ function* signIn(action) {
     yield put(sessionActions.signedIn(user, token));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
-    yield call([Snackbar, 'show'], { title: t('Login successful') });
+    yield call([Snackbar, 'show'], { text: t('Login successful') });
   } catch (e) {
     // Delay failure to make sure animation is finished
     const now = Date.now();
     if (now - currentTimestamp < 150) {
-      yield call(delay, now - currentTimestamp);
+      yield delay(now - currentTimestamp);
     }
 
     yield put(sessionActions.tokenInvalid());
     yield call(reportError, e);
-    yield call([Snackbar, 'show'], { title: t('Login failed') });
+    yield call([Snackbar, 'show'], { text: t('Login failed') });
   }
 }
 
 function* clearUserInfo() {
-  yield call([AsyncStorage, 'multiRemove'], [
-    IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY,
-  ]);
+  yield call(
+    [AsyncStorage, 'multiRemove'],
+    [
+      IDENTIFIERKEY,
+      USERNAMEKEY,
+      TOKENKEY,
+      DISPLAYNAMEKEY,
+      PHOTOKEY,
+      PUSHCATEGORYKEY,
+    ],
+  );
   yield put(pushNotificationsActions.invalidate());
 }
 
 function* signOut() {
   yield call(clearUserInfo);
-  yield call([Snackbar, 'show'], { title: t('Logout successful') });
+  yield call([Snackbar, 'show'], { text: t('Logout successful') });
 }
 
 function* signedIn({ payload }) {
   const { username } = payload;
-  yield call(Sentry.setUserContext, { username });
+  yield call(Sentry.setContext, 'user', { username });
 }
 
 function* userInfo() {
@@ -134,9 +147,13 @@ function* userInfo() {
       [DISPLAYNAMEKEY, userProfile.display_name],
       [PHOTOKEY, userProfile.avatar.medium],
     ]);
-    yield put(sessionActions.setUserInfo(
-      userProfile.pk, userProfile.display_name, userProfile.avatar.medium,
-    ));
+    yield put(
+      sessionActions.setUserInfo(
+        userProfile.pk,
+        userProfile.display_name,
+        userProfile.avatar.medium,
+      ),
+    );
   } catch (error) {
     yield call(reportError, error);
   }

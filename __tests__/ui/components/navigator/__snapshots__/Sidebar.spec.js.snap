@@ -12,7 +12,8 @@ exports[`Sidebar component renders correctly 1`] = `
 >
   <View
     accessible={true}
-    isTVSelectable={true}
+    focusable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -21,7 +22,7 @@ exports[`Sidebar component renders correctly 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "height": 168,
+        "height": NaN,
       }
     }
   >
@@ -30,10 +31,10 @@ exports[`Sidebar component renders correctly 1`] = `
       style={
         Object {
           "flexDirection": "column",
-          "height": 168,
+          "height": NaN,
           "justifyContent": "space-between",
           "padding": 16,
-          "paddingTop": 36,
+          "paddingTop": NaN,
           "width": null,
         }
       }
@@ -55,7 +56,7 @@ exports[`Sidebar component renders correctly 1`] = `
               "top": 0,
             },
             Object {
-              "height": 168,
+              "height": NaN,
               "width": null,
             },
             undefined,
@@ -112,9 +113,7 @@ exports[`Sidebar component renders correctly 1`] = `
         style={
           Object {
             "color": "#FFFFFF",
-            "fontFamily": "System",
             "fontSize": 14,
-            "fontWeight": "600",
           }
         }
       >
@@ -129,555 +128,243 @@ exports[`Sidebar component renders correctly 1`] = `
       }
     }
   >
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+    <IconButton
+      backgroundColor="#FFFFFF"
+      borderRadius={0}
+      color="#E62272"
+      iconStyle={
+        Object {
+          "marginRight": 30,
+          "textAlign": "center",
+          "width": 28,
+        }
+      }
+      name="home"
+      onPress={[Function]}
+      size={24}
       style={
         Array [
           Object {
-            "overflow": "hidden",
+            "padding": 16,
+          },
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontSize": 14,
+            },
+            Object {
+              "color": "#E62272",
+            },
+          ]
+        }
+      >
+        Welcome
+      </Text>
+    </IconButton>
+    <IconButton
+      backgroundColor="#FFFFFF"
+      borderRadius={0}
+      color="#313131"
+      iconStyle={
+        Object {
+          "marginRight": 30,
+          "textAlign": "center",
+          "width": 28,
+        }
+      }
+      name="event"
+      onPress={[Function]}
+      size={24}
+      style={
+        Array [
+          Object {
+            "padding": 16,
+          },
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontSize": 14,
+            },
+            Object {
+              "color": "#313131",
+            },
+          ]
+        }
+      >
+        Calendar
+      </Text>
+    </IconButton>
+    <IconButton
+      backgroundColor="#FFFFFF"
+      borderRadius={0}
+      color="#313131"
+      iconStyle={
+        Object {
+          "marginRight": 30,
+          "textAlign": "center",
+          "width": 28,
+        }
+      }
+      name="people"
+      onPress={[Function]}
+      size={24}
+      style={
+        Array [
+          Object {
+            "padding": 16,
+          },
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontSize": 14,
+            },
+            Object {
+              "color": "#313131",
+            },
+          ]
+        }
+      >
+        Member List
+      </Text>
+    </IconButton>
+    <IconButton
+      backgroundColor="#FFFFFF"
+      borderRadius={0}
+      color="#313131"
+      iconStyle={
+        Object {
+          "marginRight": 30,
+          "textAlign": "center",
+          "width": 28,
+        }
+      }
+      name="photo"
+      onPress={[Function]}
+      size={24}
+      style={
+        Array [
+          Object {
+            "padding": 16,
+          },
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontSize": 14,
+            },
+            Object {
+              "color": "#313131",
+            },
+          ]
+        }
+      >
+        Photos
+      </Text>
+    </IconButton>
+    <IconButton
+      backgroundColor="#FFFFFF"
+      borderRadius={0}
+      color="#313131"
+      iconStyle={
+        Object {
+          "marginRight": 30,
+          "textAlign": "center",
+          "width": 28,
+        }
+      }
+      name="settings"
+      onPress={[Function]}
+      size={24}
+      style={
+        Array [
+          Object {
+            "padding": 16,
+          },
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontSize": 14,
+            },
+            Object {
+              "color": "#313131",
+            },
+          ]
+        }
+      >
+        Settings
+      </Text>
+    </IconButton>
+    <IconButton
+      backgroundColor="#FFFFFF"
+      borderRadius={0}
+      color="#313131"
+      iconStyle={
+        Object {
+          "marginRight": 30,
+          "textAlign": "center",
+          "width": 28,
+        }
+      }
+      name="lock"
+      onPress={[Function]}
+      size={24}
+      style={
+        Array [
+          Object {
+            "padding": 16,
           },
           Object {
-            "backgroundColor": "#FFFFFF",
-            "borderRadius": 0,
+            "borderTopColor": "#BBBBBB",
+            "borderTopWidth": 1,
           },
         ]
       }
     >
-      <View
+      <Text
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
+              "color": "#313131",
+              "fontSize": 14,
             },
             Object {
-              "backgroundColor": "#FFFFFF",
-              "borderRadius": 0,
+              "color": "#313131",
             },
-            Array [
-              Object {
-                "padding": 16,
-              },
-              Object {},
-            ],
           ]
         }
       >
-        <Text
-          allowFontScaling={false}
-          style={
-            Array [
-              Object {
-                "color": "#E62272",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "marginRight": 10,
-                },
-                Object {
-                  "marginRight": 30,
-                  "textAlign": "center",
-                  "width": 28,
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "600",
-              },
-              Object {
-                "color": "#E62272",
-              },
-            ]
-          }
-        >
-          Welcome
-        </Text>
-      </View>
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "borderRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
-            },
-            Object {
-              "backgroundColor": "#FFFFFF",
-              "borderRadius": 0,
-            },
-            Array [
-              Object {
-                "padding": 16,
-              },
-              Object {},
-            ],
-          ]
-        }
-      >
-        <Text
-          allowFontScaling={false}
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "marginRight": 10,
-                },
-                Object {
-                  "marginRight": 30,
-                  "textAlign": "center",
-                  "width": 28,
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "600",
-              },
-              Object {
-                "color": "#313131",
-              },
-            ]
-          }
-        >
-          Calendar
-        </Text>
-      </View>
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "borderRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
-            },
-            Object {
-              "backgroundColor": "#FFFFFF",
-              "borderRadius": 0,
-            },
-            Array [
-              Object {
-                "padding": 16,
-              },
-              Object {},
-            ],
-          ]
-        }
-      >
-        <Text
-          allowFontScaling={false}
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "marginRight": 10,
-                },
-                Object {
-                  "marginRight": 30,
-                  "textAlign": "center",
-                  "width": 28,
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "600",
-              },
-              Object {
-                "color": "#313131",
-              },
-            ]
-          }
-        >
-          Member List
-        </Text>
-      </View>
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "borderRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
-            },
-            Object {
-              "backgroundColor": "#FFFFFF",
-              "borderRadius": 0,
-            },
-            Array [
-              Object {
-                "padding": 16,
-              },
-              Object {},
-            ],
-          ]
-        }
-      >
-        <Text
-          allowFontScaling={false}
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "marginRight": 10,
-                },
-                Object {
-                  "marginRight": 30,
-                  "textAlign": "center",
-                  "width": 28,
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "600",
-              },
-              Object {
-                "color": "#313131",
-              },
-            ]
-          }
-        >
-          Photos
-        </Text>
-      </View>
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "borderRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
-            },
-            Object {
-              "backgroundColor": "#FFFFFF",
-              "borderRadius": 0,
-            },
-            Array [
-              Object {
-                "padding": 16,
-              },
-              Object {},
-            ],
-          ]
-        }
-      >
-        <Text
-          allowFontScaling={false}
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "marginRight": 10,
-                },
-                Object {
-                  "marginRight": 30,
-                  "textAlign": "center",
-                  "width": 28,
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "600",
-              },
-              Object {
-                "color": "#313131",
-              },
-            ]
-          }
-        >
-          Settings
-        </Text>
-      </View>
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "borderRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
-            },
-            Object {
-              "backgroundColor": "#FFFFFF",
-              "borderRadius": 0,
-            },
-            Array [
-              Object {
-                "padding": 16,
-              },
-              Object {
-                "borderTopColor": "#BBBBBB",
-                "borderTopWidth": 1,
-              },
-            ],
-          ]
-        }
-      >
-        <Text
-          allowFontScaling={false}
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "marginRight": 10,
-                },
-                Object {
-                  "marginRight": 30,
-                  "textAlign": "center",
-                  "width": 28,
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "600",
-              },
-              Object {
-                "color": "#313131",
-              },
-            ]
-          }
-        >
-          Logout
-        </Text>
-      </View>
-    </View>
+        Logout
+      </Text>
+    </IconButton>
   </View>
 </View>
 `;

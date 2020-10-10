@@ -1,4 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
+import { Platform } from 'react-native';
 import {
   apiRequest,
   apiUrl,
@@ -7,7 +8,6 @@ import {
   ServerError,
   TokenInvalidError,
 } from '../../app/utils/url';
-
 
 const fetchPromiseResult = {
   status: 200,

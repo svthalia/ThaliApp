@@ -4,7 +4,7 @@ import { Image, TouchableHighlight, ViewPropTypes } from 'react-native';
 import SquareView from '../../components/memberView/SquareView';
 import styles from './style/PhotoListItem';
 
-const PhotoListItem = props => (
+const PhotoListItem = (props) => (
   <SquareView style={props.style} size={props.size}>
     <TouchableHighlight
       style={styles.touchable}

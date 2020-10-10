@@ -3,7 +3,8 @@
 exports[`Button component renders correctly 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -13,9 +14,7 @@ exports[`Button component renders correctly 1`] = `
   style={
     Array [
       undefined,
-      Object {
-        "borderRadius": 100,
-      },
+      Object {},
     ]
   }
 >
@@ -23,10 +22,7 @@ exports[`Button component renders correctly 1`] = `
     style={
       Array [
         Object {
-          "borderRadius": 100,
           "padding": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
         },
         Object {},
         Object {
@@ -48,7 +44,7 @@ exports[`Button component renders correctly 1`] = `
         ]
       }
     >
-      title
+      TITLE
     </Text>
   </View>
 </View>
@@ -57,7 +53,8 @@ exports[`Button component renders correctly 1`] = `
 exports[`Button component renders disabled correctly 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -67,9 +64,7 @@ exports[`Button component renders disabled correctly 1`] = `
   style={
     Array [
       undefined,
-      Object {
-        "borderRadius": 100,
-      },
+      Object {},
       Object {
         "opacity": 0.8,
       },
@@ -80,10 +75,7 @@ exports[`Button component renders disabled correctly 1`] = `
     style={
       Array [
         Object {
-          "borderRadius": 100,
           "padding": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
         },
         Object {},
         Object {
@@ -105,7 +97,7 @@ exports[`Button component renders disabled correctly 1`] = `
         ]
       }
     >
-      title
+      TITLE
     </Text>
   </View>
 </View>
@@ -114,7 +106,8 @@ exports[`Button component renders disabled correctly 1`] = `
 exports[`Button component renders title correctly on Android 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -124,9 +117,7 @@ exports[`Button component renders title correctly on Android 1`] = `
   style={
     Array [
       undefined,
-      Object {
-        "borderRadius": 100,
-      },
+      Object {},
     ]
   }
 >
@@ -134,10 +125,7 @@ exports[`Button component renders title correctly on Android 1`] = `
     style={
       Array [
         Object {
-          "borderRadius": 100,
           "padding": 10,
-          "paddingLeft": 12,
-          "paddingRight": 12,
         },
         Object {},
         Object {

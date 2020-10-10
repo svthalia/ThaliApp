@@ -17,7 +17,7 @@ const getEventInfo = (event, t) => {
   return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format('HH:mm')} | ${event.location}`;
 };
 
-const CalendarItem = props => (
+const CalendarItem = (props) => (
   <TouchableHighlight
     onPress={() => props.loadEvent(props.event)}
     style={styles.button}

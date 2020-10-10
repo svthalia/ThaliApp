@@ -43,6 +43,7 @@ export default function* () {
   yield takeEvery(registrationActions.FIELDS, navigate, 'Registration');
   yield takeEvery(registrationActions.SUCCESS, back);
   yield takeEvery(pizzaActions.PIZZA, navigate, 'Pizza');
+  yield takeEvery(pizzaActions.ADMIN, navigate, 'PizzaAdmin');
   yield takeEvery(photosActions.PHOTOS_ALBUMS_OPEN, navigate, 'Photos');
   yield takeEvery(photosActions.PHOTOS_ALBUM_OPEN, navigate, 'PhotoAlbum');
   yield takeEvery(photosActions.PHOTOS_GALLERY_OPEN, navigate, 'PhotoGallery');

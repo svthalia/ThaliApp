@@ -21,7 +21,7 @@ jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(),
 }));
 
-jest.mock('Dimensions', () => ({
+jest.mock('react-native/Libraries/Utilities/Dimensions', () => ({
   __esModule: true,
   get: () => ({
     height: 40 * 3 + 20,

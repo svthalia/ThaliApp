@@ -8,6 +8,7 @@ import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import { apiRequest } from '../utils/url';
 import * as eventActions from '../actions/event';
 import { tokenSelector } from '../selectors/session';
+import { currentEventSelector } from '../selectors/events';
 import reportError from '../utils/errorReporting';
 import i18next from '../utils/i18n';
 
@@ -54,6 +55,7 @@ function* event(action) {
 function* updateRegistration(action) {
   const { pk, present, payment } = action.payload;
   const token = yield select(tokenSelector);
+  const currentEvent = yield select(currentEventSelector);
 
   yield put(eventActions.fetching());
 
@@ -72,8 +74,7 @@ function* updateRegistration(action) {
 
   try {
     yield call(apiRequest, `registrations/${pk}`, data);
-
-    yield put(eventActions.done());
+    yield put(eventActions.event(currentEvent, false));
   } catch (error) {
     yield call(reportError, error);
     yield put(eventActions.failure());

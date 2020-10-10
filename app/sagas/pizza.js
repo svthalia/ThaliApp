@@ -15,7 +15,7 @@ export const Payment = {
 
 const NOT_FOUND = 404;
 
-const retrievePizzaInfo = function* retrievePizzaInfo() {
+function* retrievePizzaInfo() {
   const token = yield select(tokenSelector);
 
   yield put(pizzaActions.fetching());
@@ -33,8 +33,8 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
     const event = yield call(apiRequest, 'pizzas/event', data);
     const pizzaList = yield call(apiRequest, 'pizzas', data);
     try {
-      const order = yield call(apiRequest, 'pizzas/orders/me', data);
-      yield put(pizzaActions.success(event, order, pizzaList));
+      const currentOrder = yield call(apiRequest, 'pizzas/orders/me', data);
+      yield put(pizzaActions.success(event, currentOrder, pizzaList));
     } catch (error) {
       if (error.response !== null && error.response.status === NOT_FOUND) {
         yield put(pizzaActions.success(event, null, pizzaList));
@@ -51,9 +51,9 @@ const retrievePizzaInfo = function* retrievePizzaInfo() {
       yield put(pizzaActions.failure());
     }
   }
-};
+}
 
-const cancel = function* cancel() {
+function* cancel() {
   const token = yield select(tokenSelector);
   const data = {
     method: 'DELETE',
@@ -71,9 +71,9 @@ const cancel = function* cancel() {
     yield call(reportError, error);
     yield put(pizzaActions.failure());
   }
-};
+}
 
-const order = function* order(action) {
+function* order(action) {
   const { pk, hasOrder } = action.payload;
   const token = yield select(tokenSelector);
   const data = {
@@ -96,10 +96,63 @@ const order = function* order(action) {
     yield call(reportError, error);
     yield put(pizzaActions.failure());
   }
-};
+}
+
+function* retrieveOrders() {
+  const token = yield select(tokenSelector);
+
+  yield put(pizzaActions.adminLoading());
+
+  const data = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  };
+
+  try {
+    const orders = yield call(apiRequest, 'pizzas/orders', data);
+    yield put(pizzaActions.adminSuccess(orders));
+  } catch (error) {
+    yield call(reportError, error);
+    yield put(pizzaActions.adminFailure());
+  }
+}
+
+function* updateOrder(action) {
+  const { pk, payment } = action.payload;
+
+  const token = yield select(tokenSelector);
+
+  yield put(pizzaActions.adminLoading());
+
+  const data = {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+    body: JSON.stringify({
+      payment,
+    }),
+  };
+
+  try {
+    yield call(apiRequest, `pizzas/orders/${pk}`, data);
+    yield put(pizzaActions.retrieveOrders());
+  } catch (error) {
+    yield call(reportError, error);
+    yield put(pizzaActions.adminFailure());
+  }
+}
 
 export default function* () {
   yield takeEvery(pizzaActions.PIZZA, retrievePizzaInfo);
   yield takeEvery(pizzaActions.CANCEL, cancel);
   yield takeEvery(pizzaActions.ORDER, order);
+  yield takeEvery([pizzaActions.ADMIN, pizzaActions.ADMIN_ORDERS], retrieveOrders);
+  yield takeEvery(pizzaActions.ADMIN_UPDATE_ORDER, updateOrder);
 }

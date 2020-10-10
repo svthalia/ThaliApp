@@ -77,8 +77,8 @@ const parseAndSaveResource = (f) => {
 
 execFileSync('find', [appPath]).toString('utf8')
   .split('\n')
-  .filter(p => p.indexOf('/style') < 0 && p.indexOf('/assets') < 0 && p.length > 0)
-  .filter(p => fs.statSync(p).isFile())
+  .filter((p) => p.indexOf('/style') < 0 && p.indexOf('/assets') < 0 && p.length > 0)
+  .filter((p) => fs.statSync(p).isFile())
   .forEach(parseAndSaveResource);
 
 const indexStream = fs.createWriteStream('app/assets/locales/index.js');

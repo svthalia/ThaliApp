@@ -41,7 +41,7 @@ function* loadAlbums({ payload: { keywords, next } }) {
       response = yield call(apiRequest, 'photos/albums', data, params);
     }
     yield put(photosActions.successAlbums(
-      response.results.filter(item => item.accessible && !item.hidden && item.cover != null),
+      response.results.filter((item) => item.accessible && !item.hidden && item.cover != null),
       response.next,
       next !== undefined,
     ));
@@ -104,7 +104,7 @@ function* downloadPhoto({ payload: { url } }) {
   if (file === null) {
     return;
   }
-  yield call([Snackbar, 'show'], { title: t('Photo has been saved successfully') });
+  yield call([Snackbar, 'show'], { text: t('Photo has been saved successfully') });
 }
 
 function* sharePhoto({ payload: { url } }) {

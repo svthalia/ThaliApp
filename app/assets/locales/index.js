@@ -16,8 +16,8 @@ files['app/ui/screens/events/EventScreenNL'] = require('./nl/app/ui/screens/even
 files['app/ui/screens/photos/AlbumsOverviewScreenNL'] = require('./nl/app/ui/screens/photos/AlbumsOverviewScreen.json');
 files['app/ui/screens/photos/AlbumDetailScreenNL'] = require('./nl/app/ui/screens/photos/AlbumDetailScreen.json');
 files['app/ui/screens/pizza/PizzaScreenNL'] = require('./nl/app/ui/screens/pizza/PizzaScreen.json');
+files['app/ui/screens/pizza/PizzaAdminScreenNL'] = require('./nl/app/ui/screens/pizza/PizzaAdminScreen.json');
 files['app/ui/screens/login/LoginScreenNL'] = require('./nl/app/ui/screens/login/LoginScreen.json');
-files['app/sagas/photosNL'] = require('./nl/app/sagas/photos.json');
 files['app/ui/components/sidebar/SidebarNL'] = require('./nl/app/ui/components/sidebar/Sidebar.json');
 files['app/ui/components/standardHeader/StandardHeaderNL'] = require('./nl/app/ui/components/standardHeader/StandardHeader.json');
 files['app/ui/components/errorScreen/ErrorScreenNL'] = require('./nl/app/ui/components/errorScreen/ErrorScreen.json');
@@ -47,6 +47,7 @@ export default {
     'ui/screens/photos/AlbumsOverviewScreen': files['app/ui/screens/photos/AlbumsOverviewScreenNL'],
     'ui/screens/photos/AlbumDetailScreen': files['app/ui/screens/photos/AlbumDetailScreenNL'],
     'ui/screens/pizza/PizzaScreen': files['app/ui/screens/pizza/PizzaScreenNL'],
+    'ui/screens/pizza/PizzaAdminScreen': files['app/ui/screens/pizza/PizzaAdminScreenNL'],
     'ui/screens/login/LoginScreen': files['app/ui/screens/login/LoginScreenNL'],
     'ui/components/sidebar/Sidebar': files['app/ui/components/sidebar/SidebarNL'],
     'ui/components/standardHeader/StandardHeader': files['app/ui/components/standardHeader/StandardHeaderNL'],

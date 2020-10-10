@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { settingsActions } from '../../../actions/settings';
 import SettingsScreen from './SettingsScreen';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: state.settings.loading,
 });
 

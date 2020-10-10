@@ -4,7 +4,7 @@ import * as actions from '../../../actions/session';
 import LoginScreen from './LoginScreen';
 import * as navigationActions from '../../../actions/navigation';
 
-const mapStateToProps = state => state.session;
+const mapStateToProps = (state) => state.session;
 const mapDispatchToProps = {
   login: (username, password) => {
     Keyboard.dismiss();

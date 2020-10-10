@@ -3,7 +3,7 @@ import * as eventActions from '../../../actions/event';
 import * as navigationActions from '../../../actions/navigation';
 import EventAdminScreen from './EventAdminScreen';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   registrations: state.event.registrations,
   event: state.event.data.pk,
   status: state.event.status,
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  refresh: pk => eventActions.event(pk, false),
+  refresh: (pk) => eventActions.event(pk, false),
   updateRegistration: eventActions.updateRegistration,
   goBack: navigationActions.goBack,
 };

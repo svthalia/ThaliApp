@@ -72,7 +72,7 @@ function* updateAvatar() {
     };
 
     try {
-      yield call([Snackbar, 'show'], { title: t('Uploading your new profile picture...'), duration: Snackbar.LENGTH_INDEFINITE });
+      yield call([Snackbar, 'show'], { text: t('Uploading your new profile picture...'), duration: Snackbar.LENGTH_INDEFINITE });
       const profileData = yield call(apiRequest, 'members/me', data);
       yield call([Snackbar, 'dismiss']);
       yield put(profileActions.success(profileData));
@@ -83,7 +83,7 @@ function* updateAvatar() {
       if ('photo' in error.response.jsonData) {
         yield call(Alert.alert, t('Could not update profile picture'), error.response.jsonData.photo.join(' '));
       } else {
-        yield call([Snackbar, 'show'], { title: t('Could not update profile picture') });
+        yield call([Snackbar, 'show'], { text: t('Could not update profile picture') });
       }
     }
   } catch (e) {

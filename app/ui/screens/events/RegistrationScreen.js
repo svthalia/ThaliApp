@@ -26,22 +26,25 @@ class RegistrationScreen extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps = (props) => {
+  static getDerivedStateFromProps = (nextProps, state) => {
     const update = {};
 
-    const keys = Object.keys(props.fields);
+    const keys = Object.keys(nextProps.fields);
+    const stateKeys = Object.keys(state);
     for (let i = 0; i < keys.length; i += 1) {
-      const field = props.fields[keys[i]];
-      if (field.type === 'boolean') {
-        update[keys[i]] = Boolean(field.value);
-      } else if (field.type === 'integer' || field.type === 'text') {
-        update[keys[i]] = field.value === null ? '' : String(field.value);
-      } else {
-        update[keys[i]] = field.value;
+      if (!stateKeys.includes(keys[i])) {
+        const field = nextProps.fields[keys[i]];
+        if (field.type === 'boolean') {
+          update[keys[i]] = Boolean(field.value);
+        } else if (field.type === 'integer' || field.type === 'text') {
+          update[keys[i]] = field.value === null ? '' : String(field.value);
+        } else {
+          update[keys[i]] = field.value;
+        }
       }
     }
 
-    this.setState(update);
+    return update;
   };
 
   getFieldValidity = (key) => {
@@ -143,7 +146,7 @@ class RegistrationScreen extends Component {
                     </Text>
                     <Switch
                       value={this.state[key]}
-                      onValueChange={value => this.updateField(key, value)}
+                      onValueChange={(value) => this.updateField(key, value)}
                       thumbColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
                       trackColor={{
                         false: Colors.lightGray,
@@ -186,7 +189,7 @@ class RegistrationScreen extends Component {
                   )}
                   <TextInput
                     value={this.state[key]}
-                    onChangeText={value => this.updateField(key, value)}
+                    onChangeText={(value) => this.updateField(key, value)}
                     keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
                     placeholder={field.label}
                     style={styles.field}

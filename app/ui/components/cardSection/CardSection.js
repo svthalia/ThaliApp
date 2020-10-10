@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import styles from './style/CardSection';
 
-const CardSection = props => (
+const CardSection = (props) => (
   <View style={[styles.section, props.style]}>
     {props.sectionHeader !== null && (
       <Text style={styles.sectionHeader}>

@@ -4,7 +4,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 
 import { select } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Sentry } from 'react-native-sentry';
+import * as Sentry from '@sentry/react-native';
 
 import settingsSaga from '../../app/sagas/settings';
 import { notificationsSettingsActions, settingsActions } from '../../app/actions/settings';
@@ -13,10 +13,8 @@ import * as pushNotificationActions from '../../app/actions/pushNotifications';
 import { tokenSelector } from '../../app/selectors/session';
 import { apiRequest } from '../../app/utils/url';
 
-jest.mock('react-native-sentry', () => ({
-  Sentry: {
-    captureException: jest.fn(),
-  },
+jest.mock('@sentry/react-native', () => ({
+  captureException: jest.fn(),
 }));
 
 jest.mock('../../app/utils/url', () => ({

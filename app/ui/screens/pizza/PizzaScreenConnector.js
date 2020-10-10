@@ -3,7 +3,7 @@ import * as pizzaActions from '../../../actions/pizza';
 import { Payment } from '../../../sagas/pizza';
 import PizzaScreen from './PizzaScreen';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   success: state.pizza.success,
   loading: state.pizza.loading,
   hasLoaded: state.pizza.hasLoaded,
@@ -20,6 +20,7 @@ const mapDispatchToProps = {
   loadPizzas: pizzaActions.retrievePizzaInfo,
   cancelPizza: pizzaActions.cancelOrder,
   orderPizza: pizzaActions.orderPizza,
+  openAdmin: pizzaActions.openAdmin,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PizzaScreen);

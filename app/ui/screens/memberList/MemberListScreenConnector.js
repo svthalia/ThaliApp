@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import * as memberActions from '../../../actions/members';
 import MemberList from './MemberListScreen';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   memberList: state.members.memberList,
   status: state.members.status,
   loading: state.members.loading,
