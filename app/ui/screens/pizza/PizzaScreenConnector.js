@@ -3,7 +3,7 @@ import * as pizzaActions from '../../../actions/pizza';
 import { Payment } from '../../../sagas/pizza';
 import PizzaScreen from './PizzaScreen';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   success: state.pizza.success,
   loading: state.pizza.loading,
   hasLoaded: state.pizza.hasLoaded,

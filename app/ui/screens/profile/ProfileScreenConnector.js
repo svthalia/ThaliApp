@@ -3,7 +3,7 @@ import * as navigationActions from '../../../actions/navigation';
 import * as profileActions from '../../../actions/profile';
 import ProfileScreen from './ProfileScreen';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile.profile,
   success: state.profile.success,
   hasLoaded: state.profile.hasLoaded,

@@ -5,7 +5,6 @@ import DeviceInfo from 'react-native-device-info';
 import StyleSheet from '../../../style/StyleSheet';
 import Colors from '../../../style/Colors';
 
-
 // eslint-disable-next-line no-nested-ternary
 export const STATUSBAR_HEIGHT = Platform.OS === 'ios'
   ? DeviceInfo.hasNotch() ? 44 : 20 : StatusBar.currentHeight;
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flexWrap: 'wrap',
   },
   title: {
     color: Colors.white,

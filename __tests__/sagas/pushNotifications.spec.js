@@ -20,10 +20,8 @@ const mockMessaging = {
   requestPermission: jest.fn(),
 };
 
-jest.mock('react-native-firebase', () => ({
-  iid: () => mockIid,
-  messaging: () => mockMessaging,
-}));
+jest.mock('@react-native-firebase/messaging', () => () => mockMessaging);
+jest.mock('@react-native-firebase/iid', () => () => mockIid);
 
 describe('pushNotifications saga', () => {
   beforeAll(() => {

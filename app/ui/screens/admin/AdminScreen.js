@@ -74,10 +74,10 @@ class AdminScreen extends Component {
     const { currentFilter } = this.state;
 
     return keys.filter(this.containsSearchKey)
-      .filter(pk => filterTypes[currentFilter].checkItem(this.state.items[pk]));
+      .filter((pk) => filterTypes[currentFilter].checkItem(this.state.items[pk]));
   };
 
-  cleanSearchTerm = term => unorm.nfd(term.toLowerCase()).replace(/[\u0300-\u036f]/g, '');
+  cleanSearchTerm = (term) => unorm.nfd(term.toLowerCase()).replace(/[\u0300-\u036f]/g, '');
 
   containsSearchKey = (pk) => {
     const name = this.cleanSearchTerm(this.state.items[pk].name);
@@ -103,7 +103,7 @@ class AdminScreen extends Component {
     const newFilter = (currentFilter + 1) % filterTypes.length;
 
     if (newFilter !== currentFilter) {
-      Snackbar.show({ title: filterTypes[newFilter].label });
+      Snackbar.show({ text: filterTypes[newFilter].label });
       this.setState({ currentFilter: newFilter });
     }
   };
@@ -137,7 +137,7 @@ class AdminScreen extends Component {
               </Text>
               <Switch
                 value={checkbox}
-                onValueChange={value => this.updateValue(item, value, select.value)}
+                onValueChange={(value) => this.updateValue(item, value, select.value)}
                 trackColor={{
                   false: Colors.lightGray,
                   true: Colors.magenta,
@@ -177,7 +177,7 @@ class AdminScreen extends Component {
       <SearchHeader
         title={title}
         searchText={t('Find a member')}
-        search={searchKey => this.setState({ searchKey })}
+        search={(searchKey) => this.setState({ searchKey })}
         searchKey={this.state.searchKey}
         leftIcon="arrow-back"
         leftIconAction={this.props.goBack}
@@ -229,7 +229,7 @@ class AdminScreen extends Component {
               onRefresh={handleRefresh}
             />
           )}
-          keyExtractor={item => item}
+          keyExtractor={(item) => item}
         />
         {filterButton}
       </View>

@@ -3,7 +3,7 @@ import * as registrationActions from '../../../actions/registration';
 import RegistrationScreen from './RegistrationScreen';
 import * as navigationActions from '../../../actions/navigation';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   registration: state.registration.registration,
   fields: state.registration.fields,
   status: state.registration.status,

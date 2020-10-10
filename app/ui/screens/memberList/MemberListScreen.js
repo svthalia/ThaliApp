@@ -55,7 +55,7 @@ class MemberListScreen extends Component {
         onEndReachedThreshold={0.5}
         onEndReached={this.handleEndReached}
         data={this.props.memberList}
-        renderItem={item => (
+        renderItem={(item) => (
           <MemberView
             key={item.item.pk}
             member={{
@@ -67,7 +67,7 @@ class MemberListScreen extends Component {
             size={memberSize}
           />
         )}
-        keyExtractor={item => item.pk}
+        keyExtractor={(item) => item.pk}
         numColumns={3}
       />
     );

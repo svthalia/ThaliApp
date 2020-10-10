@@ -29,7 +29,7 @@ class PizzaAdminScreen extends Component {
       status, loading, orders, t,
     } = this.props;
 
-    const items = orders.map(item => ({
+    const items = orders.map((item) => ({
       pk: item.pk,
       name: item.display_name,
       select: {
@@ -58,7 +58,7 @@ class PizzaAdminScreen extends Component {
       },
       {
         label: t('Filtering on payment'),
-        checkItem: item => item.select.value === PAYMENT_TYPES.NONE,
+        checkItem: (item) => item.select.value === PAYMENT_TYPES.NONE,
       },
     ];
 

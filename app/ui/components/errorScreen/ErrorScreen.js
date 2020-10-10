@@ -7,7 +7,7 @@ import styles from './style/ErrorScreen';
 
 const cloud = require('../../../assets/img/sad_cloud.png');
 
-const ErrorScreen = props => (
+const ErrorScreen = (props) => (
   <View
     style={styles.content}
   >

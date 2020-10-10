@@ -1,4 +1,5 @@
-import DeviceInfo from 'react-native-device-info';
+/* eslint-disable max-classes-per-file */
+import { getLocales } from 'react-native-localize';
 
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
@@ -10,7 +11,7 @@ export const url = server;
 export const apiUrl = `${server}/api/v1`;
 export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
 export const termsAndConditionsUrl = `${server}/event-registration-terms/`;
-export const tokenSelector = state => state.session.token;
+export const tokenSelector = (state) => state.session.token;
 
 export class ServerError extends Error {
   constructor(message, response) {
@@ -45,17 +46,16 @@ export const apiRequest = (route, fetchOpts, params) => {
     requestOptions.headers = {};
   }
 
-  const locale = DeviceInfo.getDeviceLocale();
+  const locale = getLocales()[0].languageCode;
   if (locale.includes('en') || locale.includes('nl')) {
     requestOptions.headers['Accept-Language'] = locale;
   } else {
     requestOptions.headers['Accept-Language'] = 'en';
   }
-
   let query = '';
   if (params !== null && params === Object(params)) {
     query = `?${Object.keys(params)
-      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+      .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
       .join('&')}`;
   }
 
@@ -63,11 +63,10 @@ export const apiRequest = (route, fetchOpts, params) => {
   if (route.startsWith('http')) {
     requestUrl = route;
   }
-
   return fetch(requestUrl, requestOptions)
     .then(detectInvalidToken)
-    .then(response => response.json()
-      .then(data => ({ ...response, jsonData: data }))
+    .then((response) => response.json()
+      .then((data) => ({ ...response, jsonData: data }))
       .catch(() => response))
     .then(detectInvalidToken)
     .then((response) => {

@@ -35,7 +35,6 @@ export const parseURL = (url) => {
   return { path, params };
 };
 
-
 const deepLink = function* deepLink(action) {
   const { url, stayInApp } = action.payload;
 

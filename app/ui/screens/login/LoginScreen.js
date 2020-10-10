@@ -25,7 +25,6 @@ const configureNextAnimation = () => {
     LayoutAnimation.Types.linear, LayoutAnimation.Properties.opacity));
 };
 
-
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +52,7 @@ class LoginScreen extends Component {
             placeholder={t('Username')}
             autoCapitalize="none"
             underlineColorAndroid={Colors.textColour}
-            onChangeText={username => this.setState({ username })}
+            onChangeText={(username) => this.setState({ username })}
           />
           <TextInput
             style={styles.input}
@@ -61,7 +60,7 @@ class LoginScreen extends Component {
             underlineColorAndroid={Colors.textColour}
             autoCapitalize="none"
             secureTextEntry
-            onChangeText={password => this.setState({ password })}
+            onChangeText={(password) => this.setState({ password })}
             onSubmitEditing={() => {
               login(this.state.username, this.state.password);
             }}

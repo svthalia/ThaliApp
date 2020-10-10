@@ -46,6 +46,8 @@ package-lock.json
 buck-out/
 \.buckd/
 *.keystore
+# But ignore debug.keystore as we use it in the CI
+!android/app/debug.keystore
 
 # fastlane
 #
@@ -64,3 +66,10 @@ buck-out/
 bundle.js
 sentry.properties
 .env.production
+
+# Google services
+google-services.json
+GoogleService-Info.plist
+
+# Environment
+.env

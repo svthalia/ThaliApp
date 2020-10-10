@@ -20,14 +20,14 @@ export const notificationsSettingsActions = {
   FAILURE: 'SETTINGS_PUSH_NOTIFICATIONS_FAILURE',
   SAVE_CATEGORIES: 'SETTINGS_PUSH_NOTIFICATIONS_SAVE_CATEGORIES',
 
-  success: categoryList => ({
+  success: (categoryList) => ({
     type: notificationsSettingsActions.SUCCESS,
     categoryList,
   }),
   failure: () => ({
     type: notificationsSettingsActions.FAILURE,
   }),
-  saveCategories: categories => ({
+  saveCategories: (categories) => ({
     type: notificationsSettingsActions.SAVE_CATEGORIES,
     categories,
   }),

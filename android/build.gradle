@@ -1,38 +1,38 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        buildToolsVersion = "29.0.3"
+        minSdkVersion = 21
+        compileSdkVersion = 29
+        targetSdkVersion = 29
+    }
     repositories {
         google()
-        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
-        classpath 'com.google.gms:google-services:4.2.0'
-
+        classpath("com.android.tools.build:gradle:3.5.4")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'com.google.gms:google-services:+'
     }
 }
 
 allprojects {
     repositories {
+        mavenLocal()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
+            url("$rootDir/../node_modules/react-native/android")
         }
-        mavenLocal()
-        maven { url "https://jitpack.io" }
-        google()
-        mavenCentral()
-        jcenter()
-    }
-}
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
 
-ext {
-    buildToolsVersion = "28.0.3"
-    minSdkVersion = 18
-    compileSdkVersion = 28
-    targetSdkVersion = 28
-    supportLibVersion = "28.0.0"
+        google()
+        jcenter()
+        maven { url 'https://www.jitpack.io' }
+    }
 }

@@ -12,7 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './style/MemberView';
 import SquareView from './SquareView';
 
-const MemberView = props => (
+const MemberView = (props) => (
   <SquareView style={props.style} size={props.size}>
     <TouchableHighlight
       style={styles.image}

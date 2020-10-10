@@ -4,12 +4,16 @@ import renderer from 'react-test-renderer';
 import StandardHeader from '../../../../app/ui/components/standardHeader/StandardHeader';
 
 jest.mock('react-navigation', () => ({
-  withNavigation: component => component,
+  withNavigation: (component) => component,
 }));
 
 const mockNavigation = {
   state: 'mock',
 };
+
+jest.mock('../../../../app/ui/components/button/IconButton', () => 'IconButton');
+
+jest.mock('@react-native-community/status-bar', () => 'StatusBar');
 
 describe('StandardHeader component', () => {
   const initialState = {

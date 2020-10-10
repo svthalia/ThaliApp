@@ -44,7 +44,7 @@ class AlbumGalleryScreen extends Component {
           <ImageViewer
             index={this.state.index}
             imageUrls={photos}
-            onChange={index => this.setState({ index })}
+            onChange={(index) => this.setState({ index })}
           />
           <TouchableOpacity
             style={styles.closeGalleryTouchable}

@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.magenta,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flexWrap: 'wrap',
     flexDirection: 'row',
     android: {
       height: APPBAR_HEIGHT + STATUSBAR_HEIGHT,

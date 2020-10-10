@@ -18,6 +18,7 @@ describe('StyleSheet', () => {
 
   it('should use the ios key for iOS styles', () => {
     Platform.OS = 'ios';
+    Platform.select = ({ ios }) => ios;
     expect(StyleSheet.create({
       test: {
         android: {
