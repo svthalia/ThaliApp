@@ -55,6 +55,7 @@
 	<string>$(PRODUCT_NAME) would like access to your contacts</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MaterialCommunityIcons.ttf</string>
 		<string>MaterialIcons.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>

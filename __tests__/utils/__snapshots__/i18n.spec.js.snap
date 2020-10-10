@@ -6391,6 +6391,10 @@ I18n {
                     "Dismiss": "Sluiten",
                     "Open": "Openen",
                   },
+                  "sagas/event": Object {
+                    "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                    "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
+                  },
                   "sagas/photos": Object {
                     "Photo has been saved successfully": "Foto succesvol opgeslagen",
                   },
@@ -6645,6 +6649,10 @@ I18n {
                 "app": Object {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
+                },
+                "sagas/event": Object {
+                  "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                  "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
                 },
                 "sagas/photos": Object {
                   "Photo has been saved successfully": "Foto succesvol opgeslagen",
@@ -6913,6 +6921,10 @@ I18n {
                     "Dismiss": "Sluiten",
                     "Open": "Openen",
                   },
+                  "sagas/event": Object {
+                    "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                    "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
+                  },
                   "sagas/photos": Object {
                     "Photo has been saved successfully": "Foto succesvol opgeslagen",
                   },
@@ -7162,6 +7174,10 @@ I18n {
                 "app": Object {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
+                },
+                "sagas/event": Object {
+                  "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                  "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
                 },
                 "sagas/photos": Object {
                   "Photo has been saved successfully": "Foto succesvol opgeslagen",
@@ -7422,6 +7438,10 @@ I18n {
                 "app": Object {
                   "Dismiss": "Sluiten",
                   "Open": "Openen",
+                },
+                "sagas/event": Object {
+                  "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                  "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
                 },
                 "sagas/photos": Object {
                   "Photo has been saved successfully": "Foto succesvol opgeslagen",
@@ -7685,6 +7705,10 @@ I18n {
                       "Dismiss": "Sluiten",
                       "Open": "Openen",
                     },
+                    "sagas/event": Object {
+                      "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                      "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
+                    },
                     "sagas/photos": Object {
                       "Photo has been saved successfully": "Foto succesvol opgeslagen",
                     },
@@ -7934,6 +7958,10 @@ I18n {
                   "app": Object {
                     "Dismiss": "Sluiten",
                     "Open": "Openen",
+                  },
+                  "sagas/event": Object {
+                    "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                    "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
                   },
                   "sagas/photos": Object {
                     "Photo has been saved successfully": "Foto succesvol opgeslagen",
@@ -8195,6 +8223,10 @@ I18n {
                   "app": Object {
                     "Dismiss": "Sluiten",
                     "Open": "Openen",
+                  },
+                  "sagas/event": Object {
+                    "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+                    "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
                   },
                   "sagas/photos": Object {
                     "Photo has been saved successfully": "Foto succesvol opgeslagen",
@@ -9372,6 +9404,10 @@ I18n {
             "app": Object {
               "Dismiss": "Sluiten",
               "Open": "Openen",
+            },
+            "sagas/event": Object {
+              "Event added to calendar!": "Evenement aan kalender toegevoegd!",
+              "Failed to add event to calendar!": "Evenement toevoegen mislukt!",
             },
             "sagas/photos": Object {
               "Photo has been saved successfully": "Foto succesvol opgeslagen",

@@ -109,11 +109,11 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   shareIcon: {
-    marginLeft: 24,
+    marginLeft: 12,
     color: Colors.white,
   },
   adminIcon: {
-    marginLeft: 24,
+    marginLeft: 12,
     color: Colors.white,
   },
   rightView: {

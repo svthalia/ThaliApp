@@ -90,17 +90,17 @@ function* addToCalendar(action) {
   } = action.payload;
   const eventConfig = {
     title: eventName,
-    startDate: Moment(eventStart).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
-    endDate: Moment(eventEnd).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+    startDate: Moment(eventStart).toDate().toISOString(),
+    endDate: Moment(eventEnd).toDate().toISOString(),
     location: eventLocation,
   };
   try {
     const eventInfo = yield call(AddCalendarEvent.presentEventCreatingDialog, eventConfig);
     if (eventInfo.action === 'SAVED') {
-      yield call([Snackbar, 'show'], { title: t('Event added to calendar!') });
+      yield call([Snackbar, 'show'], { text: t('Event added to calendar!') });
     }
   } catch (error) {
-    yield call([Snackbar, 'show'], { title: t('Failed to add event to calendar!') });
+    yield call([Snackbar, 'show'], { text: t('Failed to add event to calendar!') });
   }
 }
 
