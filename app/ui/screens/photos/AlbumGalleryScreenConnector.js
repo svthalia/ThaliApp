@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
 import AlbumGalleryScreen from './AlbumGalleryScreen';
 import * as navigationActions from '../../../actions/navigation';
 import * as photosActions from '../../../actions/photos';
@@ -20,4 +19,4 @@ const mapDispatchToProps = {
   sharePhoto: photosActions.sharePhoto,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(['screens/photos/AlbumDetail'])(AlbumGalleryScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumGalleryScreen);

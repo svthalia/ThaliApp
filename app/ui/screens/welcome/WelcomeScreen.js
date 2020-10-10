@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 import EventDetailCard from './EventDetailCardConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -18,12 +17,12 @@ import styles from './style/Welcome';
 import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
 import * as calendarActions from '../../../actions/calendar';
 
-const eventListToSections = (eventList, t) => {
+const eventListToSections = (eventList) => {
   const calendarFormat = {
-    sameDay: `[${t('Today')}]`,
-    nextDay: `[${t('Tomorrow')}]`,
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
     nextWeek: 'dddd D MMMM',
-    lastDay: `[${t('Yesterday')}]`,
+    lastDay: '[Yesterday]',
     lastWeek: 'dddd D MMMM',
     sameElse: 'dddd D MMMM',
   };
@@ -55,21 +54,20 @@ const Footer = (props) => (
     style={styles.footer}
   >
     <Text style={styles.footerText}>
-      {props.t('SHOW THE ENTIRE AGENDA')}
+      SHOW THE ENTIRE AGENDA
     </Text>
   </TouchableOpacity>
 );
 
 Footer.propTypes = {
   openCalendar: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 const mapDispatchToFooterProps = {
   openCalendar: calendarActions.open,
 };
 
-const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(withTranslation('ui/screens/welcome/WelcomeScreen')(Footer));
+const FooterComponent = connect(() => ({}), mapDispatchToFooterProps)(Footer);
 
 class WelcomeScreen extends Component {
   handleRefresh = () => {
@@ -79,7 +77,7 @@ class WelcomeScreen extends Component {
 
   render() {
     const {
-      status, t, loading, eventList,
+      status, loading, eventList,
     } = this.props;
 
     let content = null;
@@ -97,7 +95,7 @@ class WelcomeScreen extends Component {
             />
           )}
         >
-          <ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />
+          <ErrorScreen message="Sorry! We couldn't load any data." />
         </ScrollView>
       );
     } else if (eventList.length === 0) {
@@ -111,7 +109,7 @@ class WelcomeScreen extends Component {
             />
           )}
         >
-          <ErrorScreen message={t('No events found!')} />
+          <ErrorScreen message="No events found!" />
         </ScrollView>
       );
     } else {
@@ -127,7 +125,7 @@ class WelcomeScreen extends Component {
                 </Text>
               )
             }
-            sections={eventListToSections(eventList, t)}
+            sections={eventListToSections(eventList)}
             keyExtractor={(event) => event.pk}
             stickySectionHeadersEnabled
             onRefresh={this.handleRefresh}
@@ -157,7 +155,6 @@ WelcomeScreen.propTypes = {
   refresh: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/welcome/WelcomeScreen')(withStandardHeader(WelcomeScreen, true));
+export default withStandardHeader(WelcomeScreen, true);

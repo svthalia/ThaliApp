@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
 import AlbumDetailScreen from './AlbumDetailScreen';
 import * as photosActions from '../../../actions/photos';
 import { albumData, albumStatus, isFetchingAlbum } from '../../../selectors/photos';
@@ -14,4 +13,4 @@ const mapDispatchToProps = {
   openGallery: photosActions.openGallery,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(['screens/photos/AlbumDetail'])(AlbumDetailScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetailScreen);

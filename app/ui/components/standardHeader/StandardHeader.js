@@ -2,7 +2,6 @@
 import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
-import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import { withNavigation } from 'react-navigation';
@@ -10,30 +9,30 @@ import Colors from '../../style/Colors';
 import styles from './style/StandardHeader';
 import IconButton from '../button/IconButton';
 
-const sceneToTitle = (routeName, t) => {
+const sceneToTitle = (routeName) => {
   switch (routeName) {
     case 'Welcome':
-      return t('Welcome');
+      return 'Welcome';
     case 'Event':
-      return t('Event');
+      return 'Event';
     case 'Calendar':
-      return t('Calendar');
+      return 'Calendar';
     case 'Pizza':
-      return t('Pizza');
+      return 'Pizza';
     case 'Profile':
-      return t('Profile');
+      return 'Profile';
     case 'Registration':
-      return t('Registration');
+      return 'Registration';
     case 'Photos':
-      return t('Photos');
+      return 'Photos';
     case 'PhotoAlbum':
-      return t('Album');
+      return 'Album';
     case 'Settings':
-      return t('Settings');
+      return 'Settings';
     case 'EventAdmin':
-      return t('Registrations');
+      return 'Registrations';
     case 'PizzaAdmin':
-      return t('Orders');
+      return 'Orders';
     default:
       return 'ThaliApp';
   }
@@ -58,7 +57,7 @@ const StandardHeader = (props) => (
           iconStyle={styles.icon}
         />
         <Text style={styles.title}>
-          {sceneToTitle(props.navigation.state.routeName, props.t)}
+          {sceneToTitle(props.navigation.state.routeName)}
         </Text>
         <View style={styles.rightView}>
           {props.rightView}
@@ -71,7 +70,6 @@ const StandardHeader = (props) => (
 StandardHeader.propTypes = {
   menu: PropTypes.bool,
   rightView: PropTypes.element,
-  t: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -80,7 +78,7 @@ StandardHeader.defaultProps = {
   menu: false,
 };
 
-const StandardHeaderContainer = withNavigation(withTranslation('ui/components/standardHeader/StandardHeader')(StandardHeader));
+const StandardHeaderContainer = withNavigation(StandardHeader);
 export default StandardHeaderContainer;
 
 export function withStandardHeader(Component, menu) {

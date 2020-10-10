@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   RefreshControl, ScrollView, View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import styles from './style/EventAdminScreen';
@@ -27,7 +26,7 @@ class EventAdminScreen extends Component {
 
   render() {
     const {
-      status, loading, registrations, t,
+      status, loading, registrations,
     } = this.props;
 
     const items = registrations.map((item) => ({
@@ -38,15 +37,15 @@ class EventAdminScreen extends Component {
         options: [
           {
             key: PAYMENT_TYPES.NONE,
-            label: t('NOT PAID'),
+            label: 'NOT PAID',
           },
           {
             key: PAYMENT_TYPES.CARD,
-            label: t('CARD'),
+            label: 'CARD',
           },
           {
             key: PAYMENT_TYPES.CASH,
-            label: t('CASH'),
+            label: 'CASH',
           },
         ],
         value: item.payment,
@@ -55,15 +54,15 @@ class EventAdminScreen extends Component {
 
     const filterTypes = [
       {
-        label: t('Disabled filter'),
+        label: 'Disabled filter',
         checkItem: () => true,
       },
       {
-        label: t('Filtering on payment'),
+        label: 'Filtering on payment',
         checkItem: (item) => item.select.value === PAYMENT_TYPES.NONE,
       },
       {
-        label: t('Filtering on presence'),
+        label: 'Filtering on presence',
         checkItem: (item) => !item.checkbox,
       },
     ];
@@ -91,7 +90,7 @@ class EventAdminScreen extends Component {
                 />
               )}
             >
-              <ErrorScreen message={t('No registrations found...')} />
+              <ErrorScreen message="No registrations found..." />
             </ScrollView>
           </View>
         );
@@ -101,10 +100,10 @@ class EventAdminScreen extends Component {
         <View style={styles.rootWrapper}>
           <AdminScreen
             items={items}
-            checkboxLabel={t('Present')}
+            checkboxLabel="Present"
             filterTypes={filterTypes}
             handleRefresh={() => this.props.refresh(this.props.event)}
-            title={t('Registrations')}
+            title="Registrations"
             updateItem={this.props.updateRegistration}
             loading={loading}
           />
@@ -125,7 +124,7 @@ class EventAdminScreen extends Component {
             />
           )}
         >
-          <ErrorScreen message={t('Could not load the event...')} />
+          <ErrorScreen message="Could not load the event..." />
         </ScrollView>
       </View>
     );
@@ -144,7 +143,6 @@ EventAdminScreen.propTypes = {
   loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   updateRegistration: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/events/EventAdminScreen')(EventAdminScreen);
+export default EventAdminScreen;
