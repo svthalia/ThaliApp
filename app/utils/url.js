@@ -1,15 +1,11 @@
 /* eslint-disable max-classes-per-file */
-let server = 'https://thalia.nu';
-/* istanbul ignore next line */
-// eslint-disable-next-line no-undef
-if (__DEV__) {
-  server = 'http://localhost:8000';
-}
+// eslint-disable-next-line import/no-unresolved
+import { SERVER_URL } from '@env';
 
-export const url = server;
-export const apiUrl = `${server}/api/v1`;
-export const defaultProfileImage = `${server}/static/members/images/default-avatar.jpg`;
-export const termsAndConditionsUrl = `${server}/event-registration-terms/`;
+export const url = SERVER_URL || 'https://thalia.nu';
+export const apiUrl = `${url}/api/v1`;
+export const defaultProfileImage = `${url}/static/members/images/default-avatar.jpg`;
+export const termsAndConditionsUrl = `${url}/event-registration-terms/`;
 export const tokenSelector = (state) => state.session.token;
 
 export class ServerError extends Error {
