@@ -15,9 +15,9 @@ Getting started
 [this guide](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment)
 3. Clone this repository
 4. Run `yarn install` to get all the required dependencies
-4a. For iOS development, install `cocoapods` and run `pod install` within the `ios` folder. Also note that you must 
+   - For iOS development, install `cocoapods` and run `pod install` within the `ios` folder. Also note that you must 
 configure app signing in Xcode settings.
-4b. For Android Development you must download the Android SDK, you can do this with, for example, 
+   - For Android Development you must download the Android SDK, you can do this with, for example, 
 [Android Studio](https://developer.android.com/studio/). After downloading the Android SDK you must specify the SDK 
 location within a `local.properties` file in the `android` folder. Specify it with `sdk.dir=[SDK location]`.
 5. Also note that a `google-services.json` file is needed in the `android/app` folder and a `GoogleServices-Info.plist` 
@@ -25,10 +25,11 @@ file is needed in the `ios` folder in order to build both platforms respectively
 [Firebase](https://firebase.google.com).
 6. We also need to setup our Sentry integration using `npx @sentry/wizard -i reactNative -p ios android`.
 Alternatively you can setup Sentry using the example files below. The wizard will do this install for you.
-6. Start the development server using `yarn start`
-7. Deploy the app on a running emulator or connected Android device by running `yarn start:android` or `yarn start:ios`.
+7. Start the development server using `yarn start`
+8. Deploy the app on a running emulator or connected Android device by running `yarn start:android` or `yarn start:ios`.
 Note that starting an Android device or iOS device requires you to configure them first. An alternative way to start
 both the development server and the emulator is by configuring an environment in either Android Studio or Xcode.
+9. The default server url is set to the production website. Add `SERVER_URL=<url>` to your `.env` to change this setting.
 
 
 Logging and debugging
