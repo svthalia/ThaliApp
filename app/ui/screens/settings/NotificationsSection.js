@@ -42,7 +42,7 @@ class NotificationsSection extends Component {
     const { status, categoryList, t } = this.props;
     let content = (
       <Text style={styles.emptyText}>
-        {t('Notifications settings could not be loaded.')}
+        { 'Notifications settings could not be loaded.' }
       </Text>
     );
 
@@ -60,7 +60,7 @@ class NotificationsSection extends Component {
             >
               {category.name}
               {' '}
-              {category.key === GENERAL_KEY && this.props.t('(required)')}
+              {category.key === GENERAL_KEY && '(required)'}
             </Text>
             <Text
               style={styles.description}
@@ -101,7 +101,6 @@ NotificationsSection.propTypes = {
   })).isRequired,
   status: PropTypes.string.isRequired,
   saveCategories: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 export default NotificationsSection;
