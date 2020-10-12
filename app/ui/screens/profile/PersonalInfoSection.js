@@ -1,27 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { withTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import Moment from 'moment';
 import CardSection from '../../components/cardSection/CardSection';
 import styles from './style/ProfileScreen';
 
-const PersonalInfoSection = ({ profile, t, openUrl }) => {
+const PersonalInfoSection = ({ profile, openUrl }) => {
   const profileInfo = {
     starting_year: {
-      title: t('Cohort'),
+      title: 'Cohort',
       display: (x) => x,
     },
     programme: {
-      title: t('Study programme'),
-      display: (x) => (x === 'computingscience' ? t('Computing science') : t('Information sciences')),
+      title: 'Study programme',
+      display: (x) => (x === 'computingscience' ? 'Computing science' : 'Information sciences'),
     },
     website: {
-      title: t('Website'),
+      title: 'Website',
       display: (x) => x,
     },
     birthday: {
-      title: t('Birthday'),
+      title: 'Birthday',
       display: (x) => Moment(x).format('D MMMM YYYY'),
     },
   };
@@ -38,7 +37,7 @@ const PersonalInfoSection = ({ profile, t, openUrl }) => {
 
   if (profileData) {
     return (
-      <CardSection sectionHeader={t('Personal information')}>
+      <CardSection sectionHeader="Personal information">
         {profileData.map((item, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
             <Text style={styles.description}>
@@ -66,8 +65,7 @@ PersonalInfoSection.propTypes = {
     website: PropTypes.string,
     membership_type: PropTypes.string,
   }).isRequired,
-  t: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/profile/PersonalInfoSection')(PersonalInfoSection);
+export default PersonalInfoSection;

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-
 import styles from './style/NotificationsSection';
 import Colors from '../../style/Colors';
 import CardSection from '../../components/cardSection/CardSection';
@@ -41,10 +39,10 @@ class NotificationsSection extends Component {
   };
 
   render() {
-    const { status, categoryList, t } = this.props;
+    const { status, categoryList } = this.props;
     let content = (
       <Text style={styles.emptyText}>
-        {t('Notifications settings could not be loaded.')}
+        Notifications settings could not be loaded.
       </Text>
     );
 
@@ -62,7 +60,7 @@ class NotificationsSection extends Component {
             >
               {category.name}
               {' '}
-              {category.key === GENERAL_KEY && this.props.t('(required)')}
+              {category.key === GENERAL_KEY && '(required)'}
             </Text>
             <Text
               style={styles.description}
@@ -87,7 +85,7 @@ class NotificationsSection extends Component {
     }
 
     return (
-      <CardSection sectionHeader={t('Notifications')}>
+      <CardSection sectionHeader="Notifications">
         {content}
       </CardSection>
     );
@@ -103,7 +101,6 @@ NotificationsSection.propTypes = {
   })).isRequired,
   status: PropTypes.string.isRequired,
   saveCategories: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/settings/NotificationsSection')(NotificationsSection);
+export default NotificationsSection;

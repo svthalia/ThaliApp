@@ -9,7 +9,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import { url } from '../../../utils/url';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 import Button from '../../components/button/Button';
@@ -41,7 +40,7 @@ class LoginScreen extends Component {
   render() {
     configureNextAnimation();
     const {
-      login, t, status, openUrl,
+      login, status, openUrl,
     } = this.props;
 
     let content = (
@@ -49,14 +48,14 @@ class LoginScreen extends Component {
         <View>
           <TextInput
             style={styles.input}
-            placeholder={t('Username')}
+            placeholder="Username"
             autoCapitalize="none"
             underlineColorAndroid={Colors.textColour}
             onChangeText={(username) => this.setState({ username })}
           />
           <TextInput
             style={styles.input}
-            placeholder={t('Password')}
+            placeholder="Password"
             underlineColorAndroid={Colors.textColour}
             autoCapitalize="none"
             secureTextEntry
@@ -67,7 +66,7 @@ class LoginScreen extends Component {
           />
         </View>
         <Button
-          title={t('LOGIN')}
+          title="LOGIN"
           onPress={() => login(this.state.username, this.state.password)}
           color={Colors.darkGrey}
           style={styles.loginButton}
@@ -75,10 +74,10 @@ class LoginScreen extends Component {
           underlayColor={Colors.white}
         />
         <Text style={styles.linkText} onPress={() => openUrl(`${url}/user/password_reset/`)}>
-          {t('Forgot password?')}
+          Forgot password?
         </Text>
         <Text style={styles.linkText} onPress={() => openUrl(`${url}/association/register/`)}>
-          {t('Become a member')}
+          Become a member
         </Text>
       </View>
     );
@@ -113,9 +112,8 @@ class LoginScreen extends Component {
 
 LoginScreen.propTypes = {
   login: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
 };
 
-export default withTranslation('ui/screens/login/LoginScreen')(LoginScreen);
+export default LoginScreen;

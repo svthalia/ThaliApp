@@ -12,7 +12,7 @@ const windowWidth = Dimensions.get('window').width;
 export const itemSize = (windowWidth - 48) / 3;
 
 const AlbumDetailScreen = ({
-  t, fetching, status, photos, openGallery,
+  fetching, status, photos, openGallery,
 }) => {
   let content = (
     <View style={styles.wrapper}>
@@ -41,7 +41,7 @@ const AlbumDetailScreen = ({
   } else if (!fetching && status === STATUS_FAILURE) {
     content = (
       <View style={styles.wrapper}>
-        <ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />
+        <ErrorScreen message="Sorry! We couldn't load any data." />
       </View>
     );
   }
@@ -59,7 +59,6 @@ AlbumDetailScreen.propTypes = {
   fetching: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   photos: PropTypes.arrayOf(PhotoListItem.propTypes.photo),
-  t: PropTypes.func.isRequired,
 };
 
 AlbumDetailScreen.defaultProps = {

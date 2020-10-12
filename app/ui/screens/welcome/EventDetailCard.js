@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Text, TouchableHighlight, TouchableOpacity, View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 
 import styles from './style/EventDetailCard';
@@ -54,7 +53,7 @@ const EventDetailCard = (props) => {
         </Text>
         <View style={styles.buttonList}>
           <Text style={[styles.moreInfo, styles.button]}>
-            {props.t('MORE INFO')}
+            MORE INFO
           </Text>
           {props.event.pizza ? (
             <TouchableOpacity
@@ -62,7 +61,7 @@ const EventDetailCard = (props) => {
               style={styles.button}
             >
               <Text style={styles.orderPizza}>
-                {props.t('PIZZA')}
+                PIZZA
               </Text>
             </TouchableOpacity>
           ) : null}
@@ -93,7 +92,6 @@ EventDetailCard.propTypes = {
   }).isRequired,
   loadEvent: PropTypes.func.isRequired,
   retrievePizzaInfo: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/welcome/EventDetailCard')(EventDetailCard);
+export default EventDetailCard;

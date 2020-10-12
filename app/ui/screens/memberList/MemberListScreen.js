@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import MemberView from '../../components/memberView/MemberViewConnector';
@@ -39,8 +38,8 @@ class MemberListScreen extends Component {
   render() {
     const header = (
       <SearchHeader
-        title={this.props.t('Member List')}
-        searchText={this.props.t('Find a member')}
+        title="Member List"
+        searchText="Find a member"
         search={this.search}
         searchKey={this.props.searchKey}
       />
@@ -75,9 +74,9 @@ class MemberListScreen extends Component {
     if (this.props.status === 'initial') {
       content = (<LoadingScreen />);
     } else if (this.props.status === 'failure') {
-      content = (<ErrorScreen message={this.props.t('Sorry! We couldn\'t load any data.')} />);
+      content = (<ErrorScreen message={'Sorry! We couldn\'t load any data.'} />);
     } else if (this.props.memberList.length === 0) {
-      content = (<ErrorScreen message={this.props.t('Couldn\'t find any members...')} />);
+      content = (<ErrorScreen message={'Couldn\'t find any members...'} />);
     }
 
     return (
@@ -112,7 +111,6 @@ MemberListScreen.propTypes = {
   searchKey: PropTypes.string.isRequired,
   loadMembers: PropTypes.func.isRequired,
   loadMoreMembers: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/memberList/MemberListScreen')(MemberListScreen);
+export default MemberListScreen;

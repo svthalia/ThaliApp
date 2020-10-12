@@ -4,7 +4,6 @@ import {
   Animated, ImageBackground, Platform, ScrollView, TouchableHighlight, View,
 } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
-import { withTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 import StandardHeader from '../../components/standardHeader/StandardHeader';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -159,7 +158,7 @@ class ProfileScreen extends Component {
 
   render() {
     const {
-      hasLoaded, profile, t, openUrl, success,
+      hasLoaded, profile, openUrl, success,
     } = this.props;
 
     if (!hasLoaded) {
@@ -174,7 +173,7 @@ class ProfileScreen extends Component {
       return (
         <View style={styles.container}>
           <StandardHeader />
-          <ErrorScreen message={t('Sorry! We couldn\'t load any data.')} />
+          <ErrorScreen message="Sorry! We couldn't load any data." />
         </View>
       );
     }
@@ -253,10 +252,9 @@ ProfileScreen.propTypes = {
   }).isRequired,
   success: PropTypes.bool.isRequired,
   hasLoaded: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
   changeAvatar: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/profile/ProfileScreen')(ProfileScreen);
+export default ProfileScreen;

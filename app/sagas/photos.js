@@ -7,9 +7,6 @@ import * as RNFS from 'react-native-fs';
 import Snackbar from 'react-native-snackbar';
 import { apiRequest, tokenSelector } from '../utils/url';
 import * as photosActions from '../actions/photos';
-import i18next from '../utils/i18n';
-
-const t = i18next.getFixedT(undefined, 'sagas/photos');
 
 function* loadAlbums({ payload: { keywords, next } }) {
   const token = yield select(tokenSelector);
@@ -104,7 +101,7 @@ function* downloadPhoto({ payload: { url } }) {
   if (file === null) {
     return;
   }
-  yield call([Snackbar, 'show'], { text: t('Photo has been saved successfully') });
+  yield call([Snackbar, 'show'], { text: 'Photo has been saved successfully' });
 }
 
 function* sharePhoto({ payload: { url } }) {

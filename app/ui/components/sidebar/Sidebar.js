@@ -4,7 +4,6 @@ import {
   Alert, Image, ImageBackground, Text, TouchableHighlight, View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { withTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './style/Sidebar';
 import Colors from '../../style/Colors';
@@ -12,10 +11,10 @@ import Colors from '../../style/Colors';
 const background = require('../../../assets/img/huygens.jpg');
 
 const logoutPrompt = (props) => () => Alert.alert(
-  props.t('Log out?'),
-  props.t('Are you sure you want to log out?'),
-  [{ text: props.t('No') },
-    { text: props.t('Yes'), onPress: props.signOut },
+  ('Log out?'),
+  ('Are you sure you want to log out?'),
+  [{ text: ('No') },
+    { text: ('Yes'), onPress: props.signOut },
   ],
 );
 
@@ -24,42 +23,42 @@ const Sidebar = (props) => {
     {
       onPress: () => props.openWelcome(),
       iconName: 'home',
-      text: props.t('Welcome'),
+      text: 'Welcome',
       style: {},
       routeName: 'Welcome',
     },
     {
       onPress: () => props.openCalendar(),
       iconName: 'event',
-      text: props.t('Calendar'),
+      text: 'Calendar',
       style: {},
       routeName: 'Calendar',
     },
     {
       onPress: () => props.openMemberList(),
       iconName: 'people',
-      text: props.t('Member List'),
+      text: 'Member List',
       style: {},
       routeName: 'MemberList',
     },
     {
       onPress: () => props.openPhotos(),
       iconName: 'photo',
-      text: props.t('Photos'),
+      text: 'Photos',
       style: {},
       routeName: 'Photos',
     },
     {
       onPress: () => props.openSettings(),
       iconName: 'settings',
-      text: props.t('Settings'),
+      text: 'Settings',
       style: {},
       routeName: 'Settings',
     },
     {
       onPress: logoutPrompt(props),
       iconName: 'lock',
-      text: props.t('Logout'),
+      text: 'Logout',
       style: {
         borderTopColor: Colors.lightGray,
         borderTopWidth: 1,
@@ -125,7 +124,6 @@ Sidebar.propTypes = {
   displayName: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   loadProfile: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   openCalendar: PropTypes.func.isRequired,
   openWelcome: PropTypes.func.isRequired,
   openSettings: PropTypes.func.isRequired,
@@ -133,4 +131,4 @@ Sidebar.propTypes = {
   openPhotos: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/components/sidebar/Sidebar')(Sidebar);
+export default Sidebar;

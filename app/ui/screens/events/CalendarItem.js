@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, TouchableHighlight, View } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 
 import styles from './style/CalendarItem';
 
-const getEventInfo = (event, t) => {
+const getEventInfo = (event) => {
   if (event.start === null && event.end === null) {
     return event.location;
   } if (event.start === null) {
-    return `${t('Until')} ${Moment(event.end).format('HH:mm')} | ${event.location}`;
+    return `Until ${Moment(event.end).format('HH:mm')} | ${event.location}`;
   } if (event.end === null) {
-    return `${t('From')} ${Moment(event.start).format('HH:mm')} | ${event.location}`;
+    return `From ${Moment(event.start).format('HH:mm')} | ${event.location}`;
   }
   return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format('HH:mm')} | ${event.location}`;
 };
@@ -33,7 +32,7 @@ const CalendarItem = (props) => (
         {props.event.title}
       </Text>
       <Text style={[styles.eventInfo, props.event.partner ? styles.partnerEventInfo : null]}>
-        {getEventInfo(props.event, props.t)}
+        {getEventInfo(props.event)}
       </Text>
     </View>
   </TouchableHighlight>
@@ -54,7 +53,6 @@ CalendarItem.propTypes = {
     url: PropTypes.string,
   }).isRequired,
   loadEvent: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('screen/events/CalendarItem')(CalendarItem);
+export default CalendarItem;
