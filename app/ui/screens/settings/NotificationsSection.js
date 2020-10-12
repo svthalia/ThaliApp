@@ -39,10 +39,10 @@ class NotificationsSection extends Component {
   };
 
   render() {
-    const { status, categoryList, t } = this.props;
+    const { status, categoryList } = this.props;
     let content = (
       <Text style={styles.emptyText}>
-        { 'Notifications settings could not be loaded.' }
+        Notifications settings could not be loaded.
       </Text>
     );
 
