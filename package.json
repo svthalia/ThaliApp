@@ -59,7 +59,7 @@
     "react-i18next": "^11.7.3",
     "react-native": "0.63.2",
     "react-native-cli": "^2.0.1",
-    "react-native-device-info": "^6.0.4",
+    "react-native-device-info": "^6.2.0",
     "react-native-dotenv": "^2.4.0",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.8.0",
