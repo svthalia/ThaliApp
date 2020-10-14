@@ -48,7 +48,7 @@
     "@react-native-community/status-bar": "^1.0.3",
     "@react-native-firebase/app": "^8.4.5",
     "@react-native-firebase/iid": "^7.4.4",
-    "@react-native-firebase/messaging": "^7.8.6",
+    "@react-native-firebase/messaging": "^7.9.0",
     "@react-navigation/drawer": "^5.9.1",
     "@sentry/react-native": "^1.8.2",
     "i18next": "^19.7.0",
