@@ -1472,7 +1472,7 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/iid@^7.4.4":
+"@react-native-firebase/iid@^7.4.8":
   version "7.4.8"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/iid/-/iid-7.4.8.tgz#bf96412630ed2ab47a9a077a166829e7b8d9db2e"
   integrity sha512-BRsLw+ITIgGjmPfgshYdQ6vAHKMaUCFI9PDPDfhdpq3XraW6Cbq+N49LQiwXaihZsSSvWIlT0FPfNMDcE7Pd1g==
