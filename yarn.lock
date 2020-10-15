@@ -1492,10 +1492,10 @@
     query-string "^6.13.1"
     react-is "^16.13.0"
 
-"@react-navigation/drawer@^5.9.1":
-  version "5.9.2"
-  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.9.2.tgz#5c678b8ee208837a0ccf254d353e4ffe1d5493bf"
-  integrity sha512-hafBicPmUgiHouRXcGTFK6gYGFHT3nRBXKrYMjukt1HaUTKONKmIzJUoU41VajkSi75IzHd+SlLnxH8r3rYGPQ==
+"@react-navigation/drawer@^5.9.3":
+  version "5.9.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.9.3.tgz#d8b9a6d46a7fe436fcc8d410a10017852e420042"
+  integrity sha512-bc9cyJGONvTf6tsdwjgyMV5VMVIgJc9URMGbiXzj68Vp94lsxi6YbsOW01ErLpD8ltyCBNEC+Ll/1vv6CZiJaQ==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
@@ -7464,7 +7464,7 @@ react-navigation-drawer@^2.5.1:
   resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-2.5.2.tgz#ab6338596008ffc6198edf6126419f77936a5be1"
   integrity sha512-t8zp2o7h4rCOz5us1jv7Z6LZ7Bl1IIXnNmJMpMXxcSYxvpcDLDm4PPn74M6Mw1yTuDyKI5EhTo+gGAewnxTf5Q==
 
-react-navigation-stack@^2.8.3:
+react-navigation-stack@^2.8.4:
   version "2.8.4"
   resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-2.8.4.tgz#b5fccb136f8a8028c7e6490657e0609e8c524a29"
   integrity sha512-9ZZ52s6URWoXdTTU/BLEJwYiIFiIRZZF+GEfuLmM8I2w7RBxa0y01ylhL7bVy3aY0Gt/eCbBzslC/4sdRQFFKw==
@@ -7472,7 +7472,7 @@ react-navigation-stack@^2.8.3:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
 
-react-navigation@^4.4.1:
+react-navigation@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-4.4.2.tgz#a0250d7d76224c017518ad1222606614da264427"
   integrity sha512-QZaQL44ppzyeFA2o1f5HEKHbYJunRXEN7NFJVve51o5KANDadBvml84t7MKmarTmn01J69jZLIjDogkWNlaLQg==
