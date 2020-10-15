@@ -3,9 +3,7 @@
     "config:base"
   ],
   "schedule": [
-    "every weekday except on Monday",
-    "every weekend",
-    "before 5pm on Monday"
+    "every weekend"
   ],
   "rangeStrategy": "bump",
   "packageRules": [
