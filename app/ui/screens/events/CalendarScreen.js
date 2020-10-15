@@ -4,7 +4,6 @@ import {
   RefreshControl, ScrollView, SectionList, Text, View,
 } from 'react-native';
 import Moment from 'moment';
-import { getLocales } from 'react-native-localize';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -30,7 +29,7 @@ const addEventToSection = (sections, date, event) => {
   if (!(day in sections[sectionKey].data)) {
     sections[sectionKey].data[day] = {
       dayNumber: day,
-      dayOfWeek: getLocales()[0].languageCode.startsWith('nl') ? date.format('dd') : date.format('ddd'),
+      dayOfWeek: date.format('ddd'),
       events: [],
     };
   }
