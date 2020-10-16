@@ -1603,10 +1603,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/iid/-/iid-7.4.8.tgz#bf96412630ed2ab47a9a077a166829e7b8d9db2e"
   integrity sha512-BRsLw+ITIgGjmPfgshYdQ6vAHKMaUCFI9PDPDfhdpq3XraW6Cbq+N49LQiwXaihZsSSvWIlT0FPfNMDcE7Pd1g==
 
-"@react-native-firebase/messaging@^7.9.0":
-  version "7.9.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-7.9.0.tgz#d7b8bc5a7391c2363e16607610f301118c6049b9"
-  integrity sha512-DEcI3jl3VQz4/Lg/qtM9yeVP/PO4PlOq1qtf9aasQb4pZw5pG0LE6i+Laqcoo+i3GKnBSi1htE39IKzQGeaXFQ==
+"@react-native-firebase/messaging@^7.9.1":
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-7.9.1.tgz#4011272129ae36b034625a2b615934daa210537d"
+  integrity sha512-/BQPs4L9/Bz01cYHNzq40NmihpRn+I3Y/1LX/RXj8Nf6LGh3q+1xx02ycOwm2FqBrb1x6nUC95LCxfwe/lF8Ug==
 
 "@react-navigation/core@^3.7.8":
   version "3.7.8"
