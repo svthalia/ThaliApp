@@ -107,6 +107,6 @@
     "metro-react-native-babel-transformer": "^0.63.0",
     "react-test-renderer": "16.14.0",
     "redux-mock-store": "^1.5.4",
-    "redux-saga-test-plan": "^4.0.0-rc.3"
+    "redux-saga-test-plan": "^4.0.0"
   }
 }
