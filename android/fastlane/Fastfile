@@ -1,0 +1,65 @@
+update_fastlane
+
+default_platform(:android)
+sh("yarn jetify")
+
+def get_next_version_code
+  internal_version = google_play_track_version_codes(track: "internal")
+  alpha_version = google_play_track_version_codes(track: "alpha")
+  beta_version = google_play_track_version_codes(track: "beta")
+  production_version = google_play_track_version_codes(track: "production")
+
+  return [
+    internal_version[0],
+    alpha_version[0],
+    beta_version[0],
+    production_version[0]
+  ].select { |element| element.is_a?(Integer) }.max + 1
+end
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Runs a build"
+  lane :build do
+    sh("yarn jetify")
+    gradle(task: "clean build")
+  end
+
+  desc "Deploy a new alpha version to the Google Play"
+  lane :internal do
+    gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
+    changelog_from_git_commits
+    upload_to_play_store(
+      track: 'internal',
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy a new beta version to the Google Play"
+  lane :beta do
+    gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
+    changelog_from_git_commits
+    upload_to_play_store(
+      track: 'beta',
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
+    upload_to_play_store(
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+end

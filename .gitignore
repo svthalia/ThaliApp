@@ -33,6 +33,7 @@ build/
 .idea
 .gradle
 local.properties
+releaseSigning.properties
 *.iml
 
 # node.js
@@ -59,6 +60,7 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+**/fastlane/test_output
 
 # Bundle artifact
 *.jsbundle
@@ -70,6 +72,7 @@ sentry.properties
 # Google services
 google-services.json
 GoogleService-Info.plist
+google-play.json
 
 # Environment
 .env

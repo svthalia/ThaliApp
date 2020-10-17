@@ -58,7 +58,7 @@ android {
         applicationId "com.thaliapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 438
+        versionCode project.hasProperty('versionCode') ? project.property('versionCode') as int : 1
         versionName "3.0.0"
     }
 
@@ -71,8 +71,15 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            // placeholder  for code below
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -142,6 +149,38 @@ gradle.projectsEvaluated {
         def processBuilder = new ProcessBuilder(['adb', 'reverse', 'tcp:8000', 'tcp:8000'])
         processBuilder.start()
     }
+}
+
+/*
+
+This code loads signingConfig properties from the releaseSigning file
+Such a file should look like
+
+storeFile=../path/to/upload.keystore
+storePassword="myStorePass"
+keyPassword="myKeyPass"
+keyAlias="myKeyAlias"
+
+*/
+File propFile = file("../releaseSigning.properties");
+if (propFile.exists()) {
+    def Properties props = new Properties()
+    props.load(new FileInputStream(propFile))
+
+    if (props.containsKey("storeFile") &&
+            props.containsKey("storePassword") &&
+            props.containsKey("keyAlias") &&
+            props.containsKey("keyPassword")
+    ) {
+        android.signingConfigs.release.storeFile = file(props["storeFile"])
+        android.signingConfigs.release.storePassword = props["storePassword"]
+        android.signingConfigs.release.keyAlias = props["keyAlias"]
+        android.signingConfigs.release.keyPassword = props["keyPassword"]
+    } else {
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    android.buildTypes.release.signingConfig = null
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

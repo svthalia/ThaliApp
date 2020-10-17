@@ -15,7 +15,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
-    "locales:collect": "node collect-locales.js"
+    "locales:collect": "node collect-locales.js",
+    "fastlane:android": "cd android && bundle exec fastlane",
+    "fastlane:ios": "cd ios && bundle exec fastlane"
   },
   "jest": {
     "preset": "react-native",
