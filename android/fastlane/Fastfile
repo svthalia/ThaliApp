@@ -25,7 +25,6 @@ platform :android do
 
   desc "Runs a build"
   lane :build do
-    sh("yarn jetify")
     gradle(task: "clean build")
   end
 
