@@ -1930,23 +1930,23 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/status-bar/-/status-bar-1.0.3.tgz#e90ba515adb97dcffd956f90e965d5e7e2de95b8"
   integrity sha512-5gwhG1gBTXqgSi/e9DbraBQBCtUtTCSrI9kuwEpwLOCa/pKLIyxQG/HM96ZjvytbZOTZXeaTiKtqLFvYNYSx3A==
 
-"@react-native-firebase/app@^8.4.5":
-  version "8.4.5"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-8.4.5.tgz#a5194c34a1f75af8641153163700305ae578d31d"
-  integrity sha512-27qsFzX2Z1GPDyU8tUhYYCUkMlhYYCd/XJvteprTAjC8R6zPGdn/Y9Xxdrwkvhpj8Ply19lsxZ8UfvYIUbgOIQ==
+"@react-native-firebase/app@^8.4.6":
+  version "8.4.6"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-8.4.6.tgz#05b4a48f2cd452acc88dd7b816a4ca934140927f"
+  integrity sha512-4eZR133QuScvGs4IQQd6qMvQ5E1mtydVTy3DtuBCeiIqtvN8ZxBYoSMgcUmYGS4VafbS2nPh85g4e3BlaIJ2XA==
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/iid@^7.4.8":
-  version "7.4.8"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/iid/-/iid-7.4.8.tgz#bf96412630ed2ab47a9a077a166829e7b8d9db2e"
-  integrity sha512-BRsLw+ITIgGjmPfgshYdQ6vAHKMaUCFI9PDPDfhdpq3XraW6Cbq+N49LQiwXaihZsSSvWIlT0FPfNMDcE7Pd1g==
+"@react-native-firebase/iid@^7.4.9":
+  version "7.4.9"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/iid/-/iid-7.4.9.tgz#9a8281b7cbb46d9191c40cfb0ae141fc219d99f0"
+  integrity sha512-cRIPVKQax/MicfxV6SDKUkI0buFmXXL/5lqnstA4b+VgGecj6DEAgXTXJL7iKXPVq7DWoB6mSU2glZ77GcS+ow==
 
-"@react-native-firebase/messaging@^7.9.0":
-  version "7.9.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-7.9.0.tgz#d7b8bc5a7391c2363e16607610f301118c6049b9"
-  integrity sha512-DEcI3jl3VQz4/Lg/qtM9yeVP/PO4PlOq1qtf9aasQb4pZw5pG0LE6i+Laqcoo+i3GKnBSi1htE39IKzQGeaXFQ==
+"@react-native-firebase/messaging@^7.9.1":
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-7.9.1.tgz#4011272129ae36b034625a2b615934daa210537d"
+  integrity sha512-/BQPs4L9/Bz01cYHNzq40NmihpRn+I3Y/1LX/RXj8Nf6LGh3q+1xx02ycOwm2FqBrb1x6nUC95LCxfwe/lF8Ug==
 
 "@react-navigation/core@^3.7.8":
   version "3.7.8"
