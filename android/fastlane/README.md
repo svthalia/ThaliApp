@@ -26,6 +26,16 @@ Runs all the tests
 fastlane android build
 ```
 Runs a build
+### android release
+```
+fastlane android release
+```
+Build release APK
+### android release_and_upload
+```
+fastlane android release_and_upload
+```
+Build release APK and upload
 ### android internal
 ```
 fastlane android internal

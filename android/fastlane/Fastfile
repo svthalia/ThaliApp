@@ -28,37 +28,35 @@ platform :android do
     gradle(task: "clean build")
   end
 
-  desc "Deploy a new alpha version to the Google Play"
-  lane :internal do
+  desc "Build release APK"
+  lane :release do
     gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
+  end
+
+  desc "Build release APK and upload"
+  lane :release_and_upload do |options|
+    release
     changelog_from_git_commits
     upload_to_play_store(
-      track: 'internal',
+      track: options[:track],
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true
     )
+  end
+
+  desc "Deploy a new alpha version to the Google Play"
+  lane :internal do
+    release_and_upload(track: "internal")
   end
 
   desc "Deploy a new beta version to the Google Play"
   lane :beta do
-    gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
-    changelog_from_git_commits
-    upload_to_play_store(
-      track: 'beta',
-      skip_upload_metadata: true,
-      skip_upload_images: true,
-      skip_upload_screenshots: true
-    )
+    release_and_upload(track: "beta")
   end
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
-    upload_to_play_store(
-      skip_upload_metadata: true,
-      skip_upload_images: true,
-      skip_upload_screenshots: true
-    )
+    release_and_upload(track: "production")
   end
 end
