@@ -4,17 +4,14 @@ import {
 } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { I18nextProvider } from 'react-i18next';
 import createSagaMiddleware from 'redux-saga';
 import messaging from '@react-native-firebase/messaging';
 import { getLocales } from 'react-native-localize';
 import Moment from 'moment';
 import 'moment/locale/nl';
 
-import { i18n as i18next } from 'i18next';
 import reducers from './reducers';
 
-import i18n from './utils/i18n';
 import sagas from './sagas';
 import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
@@ -73,13 +70,12 @@ class Main extends Component {
   };
 
   showNotification = (notification) => {
-    const t = i18next.getFixedT(undefined, 'app');
     let buttons;
     if (notification.data.url) {
       buttons = [
-        { text: t('Dismiss') },
+        { text: 'Dismiss' },
         {
-          text: t('Open'),
+          text: 'Open',
           onPress: () => store.dispatch(
             deepLinkingActions.deepLink(notification.data.url, false),
           ),
@@ -115,15 +111,13 @@ class Main extends Component {
 
   render() {
     return (
-      <I18nextProvider i18n={i18n}>
-        <Provider store={store}>
-          <NavigationService.AppContainer
-            ref={(navigatorRef) => {
-              NavigationService.setTopLevelNavigator(navigatorRef);
-            }}
-          />
-        </Provider>
-      </I18nextProvider>
+      <Provider store={store}>
+        <NavigationService.AppContainer
+          ref={(navigatorRef) => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
+      </Provider>
     );
   }
 }

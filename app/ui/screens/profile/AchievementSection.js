@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { withTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import Moment from 'moment';
 import CardSection from '../../components/cardSection/CardSection';
 import styles from './style/ProfileScreen';
 
-const AchievementSection = ({ profile, t, type }) => {
+const AchievementSection = ({ profile, type }) => {
   const memberships = profile[type];
-  const sectionHeader = type === 'societies' ? t('Societies') : t('Achievements for Thalia');
+  const sectionHeader = type === 'societies' ? 'Societies' : 'Achievements for Thalia';
   if (memberships.length) {
     return (
       <CardSection
@@ -22,13 +21,13 @@ const AchievementSection = ({ profile, t, type }) => {
             {achievement.periods && achievement.periods.map((period) => {
               let start = Moment(period.since);
               start = start.isSame(Moment([1970, 1, 1]), 'year') ? '?' : start.format('D MMMM YYYY');
-              const end = period.until ? Moment(period.until).format('D MMMM YYYY') : t('today');
+              const end = period.until ? Moment(period.until).format('D MMMM YYYY') : 'today';
 
               let text = '';
               if (period.role) {
                 text = `${period.role}: `;
               } else if (period.chair) {
-                text = `${t('Chair')}: `;
+                text = 'Chair: ';
               }
               text += `${start} - ${end}`;
 
@@ -69,8 +68,7 @@ AchievementSection.propTypes = {
       })),
     })).isRequired,
   }).isRequired,
-  t: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
 };
 
-export default withTranslation('ui/screens/profile/AchievementSection')(AchievementSection);
+export default AchievementSection;

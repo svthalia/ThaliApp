@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 import HTML from 'react-native-render-html';
 import Share from 'react-native-share';
@@ -30,20 +29,19 @@ import StandardHeader from '../../components/standardHeader/StandardHeader';
 
 class EventScreen extends Component {
   cancelPrompt = (pk) => {
-    const { data, t, cancel } = this.props;
+    const { data, cancel } = this.props;
     const cancelDeadlineDate = new Date(data.cancel_deadline);
-    let message = t('Are you sure you want to cancel your registration?');
+    let message = 'Are you sure you want to cancel your registration?';
     if (data.cancel_deadline !== null && cancelDeadlineDate <= new Date()) {
-      message = t('The deadline has passed, are you sure you want to cancel your \
-registration and pay the full costs of €{{ fine }}? You will not be able to undo this!',
-      { fine: data.fine });
+      message = 'The deadline has passed, are you sure you want to cancel your registration'
+        + ` and pay the full costs of €${data.fine}? You will not be able to undo this!`;
     }
     return Alert.alert(
-      t('Cancel registration?'),
+      'Cancel registration?',
       message,
       [
-        { text: t('No') },
-        { text: t('Yes'), onPress: () => cancel(pk) },
+        { text: 'No' },
+        { text: 'Yes', onPress: () => cancel(pk) },
       ],
     );
   };
@@ -77,7 +75,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
   };
 
   eventDesc = () => {
-    const { t, data } = this.props;
+    const { data } = this.props;
 
     const startDate = Moment(data.start).format('D MMM YYYY, HH:mm');
     const endDate = Moment(data.end).format('D MMM YYYY, HH:mm');
@@ -87,7 +85,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
     infoTexts.push(
       <View key="start-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="start-title">
-          {t('From')}
+          From
           :
         </Text>
         <Text style={styles.infoValueText} key="start-value">
@@ -98,7 +96,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
     infoTexts.push(
       <View key="end-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="end-title">
-          {t('Until')}
+          Until
           :
         </Text>
         <Text style={styles.infoValueText} key="end-value">
@@ -109,7 +107,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
     infoTexts.push(
       <View key="loc-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="loc-title">
-          {t('Location')}
+          Location
           :
         </Text>
         <Text style={styles.infoValueText} key="loc-value">
@@ -120,7 +118,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
     infoTexts.push(
       <View key="price-holder" style={styles.infoHolder}>
         <Text style={styles.infoText} key="price-title">
-          {t('Price')}
+          Price
           :
         </Text>
         <Text style={styles.infoValueText} key="price-value">
@@ -138,7 +136,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       infoTexts.push(
         <View key="registrationend-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="registrationend-title">
-            {t('Registration deadline')}
+            Registration deadline
             :
           </Text>
           <Text style={styles.infoValueText} key="registrationend-value">
@@ -149,7 +147,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       infoTexts.push(
         <View key="canceldeadline-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="canceldeadline-title">
-            {t('Cancellation deadline')}
+            Cancellation deadline
             :
           </Text>
           <Text style={styles.infoValueText} key="canceldeadline-value">
@@ -158,15 +156,15 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
         </View>,
       );
 
-      let participantsText = `${data.num_participants} ${t('registrations')}`;
+      let participantsText = `${data.num_participants} registrations`;
       if (data.max_participants) {
-        participantsText += ` (${data.max_participants} ${t('max')})`;
+        participantsText += ` (${data.max_participants} max)`;
       }
 
       infoTexts.push(
         <View key="participants-holder" style={styles.infoHolder}>
           <Text style={styles.infoText} key="participants-title">
-            {t('Number of registrations')}
+            Number of registrations
             :
           </Text>
           <Text style={styles.infoValueText} key="participants-value">
@@ -178,21 +176,21 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
       if (data.user_registration) {
         let registrationState;
         if (data.user_registration.is_late_cancellation) {
-          registrationState = t('Your registration is cancelled after the cancellation deadline');
+          registrationState = 'Your registration is cancelled after the cancellation deadline';
         } else if (data.user_registration.is_cancelled) {
-          registrationState = t('Your registration is cancelled');
+          registrationState = 'Your registration is cancelled';
         } else if (data.user_registration.queue_position === null) {
-          registrationState = t('You are registered');
+          registrationState = 'You are registered';
         } else if (data.user_registration.queue_position > 0) {
-          registrationState = t('Queue position {{pos}}', { pos: data.user_registration.queue_position });
+          registrationState = `Queue position ${data.user_registration.queue_position}`;
         } else {
-          registrationState = t('Your registration is cancelled');
+          registrationState = 'Your registration is cancelled';
         }
 
         infoTexts.push(
           <View key="status-holder" style={styles.infoHolder}>
             <Text style={styles.infoText} key="status-title">
-              {t('Registration status')}
+              Registration status
               :
             </Text>
             <Text style={styles.infoValueText} key="status-value">
@@ -211,7 +209,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
           </Text>
           <Button
             color={Colors.magenta}
-            title={t('Order')}
+            title="Order"
             onPress={this.props.retrievePizzaInfo}
           />
         </View>,
@@ -226,7 +224,7 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
   };
 
   eventInfo = () => {
-    const { data, t } = this.props;
+    const { data } = this.props;
     let text = '';
 
     const {
@@ -238,28 +236,25 @@ registration and pay the full costs of €{{ fine }}? You will not be able to un
     } = this.eventProperties();
 
     if (!registrationRequired) {
-      text = t('No registration required.');
+      text = 'No registration required.';
       if (data.no_registration_message) {
         text = data.no_registration_message;
       }
     } else if (!registrationStarted) {
       const registrationStart = Moment(data.registration_start).format('D MMM YYYY, HH:mm');
-      text = t('Registration will open {{start}}', { start: registrationStart });
+      text = `Registration will open ${registrationStart}`;
     } else if (!registrationAllowed) {
-      text = t('Registration is not possible anymore.');
+      text = 'Registration is not possible anymore.';
     } else if (isLateCancellation) {
-      text = t('Registration is not allowed anymore, as you cancelled your registration after the deadline.');
+      text = 'Registration is not allowed anymore, as you cancelled your registration after the deadline.';
     }
 
     if (afterCancelDeadline && !isLateCancellation) {
       if (text.length > 0) {
         text += ' ';
       }
-      text += t(
-        'Cancellation isn\'t possible anymore without having to pay the full \
-costs of €{{fine}}. Also note that you will be unable to re-register.',
-        { fine: data.fine },
-      );
+      text += 'Cancellation isn\'t possible anymore without having to pay the full costs of ';
+      text += `€${data.fine}. Also note that you will be unable to re-register.`;
     }
 
     if (text.length > 0) {
@@ -274,7 +269,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
 
   eventActions = () => {
     const {
-      data, register, t, openUrl,
+      data, register, openUrl,
     } = this.props;
 
     const {
@@ -286,21 +281,21 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
     if (registrationAllowed) {
       if (data.user_registration === null || data.user_registration.is_cancelled) {
         const text = data.max_participants && data.max_participants <= data.num_participants
-          ? t('Put me on the waiting list') : t('Register');
+          ? 'Put me on the waiting list' : 'Register';
         return (
           <View>
             <Text style={styles.registrationText}>
-              {t('By registering, you confirm that you have read the')}
+              By registering, you confirm that you have read the
               <Text
                 style={styles.termsUrl}
                 onPress={() => openUrl(termsAndConditionsUrl)}
               >
                 {' '}
-                {t('terms and conditions')}
+                {'terms and conditions'}
                 {' '}
 
               </Text>
-              {t(', that you understand them and that you agree to be bound by them.')}
+              , that you understand them and that you agree to be bound by them.
             </Text>
             <View style={styles.registrationActions}>
               <Button
@@ -319,11 +314,11 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
             <View style={styles.registrationActions}>
               <Button
                 onPress={() => this.props.fields(data.user_registration.pk)}
-                title={t('Update registration')}
+                title="Update registration"
               />
               <View style={styles.secondButtonMargin}>
                 <Button
-                  title={t('Cancel registration')}
+                  title="Cancel registration"
                   onPress={() => this.cancelPrompt(data.user_registration.pk)}
                 />
               </View>
@@ -332,7 +327,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
         }
         return (
           <View style={styles.registrationActions}>
-            <Button title={t('Cancel registration')} onPress={() => this.cancelPrompt(data.user_registration.pk)} />
+            <Button title="Cancel registration" onPress={() => this.cancelPrompt(data.user_registration.pk)} />
           </View>
         );
       }
@@ -342,13 +337,13 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
   };
 
   registrationsGrid = () => {
-    const { registrations, t } = this.props;
+    const { registrations } = this.props;
     if (registrations !== undefined && registrations.length > 0) {
       return (
         <View>
           <View style={styles.divider} />
           <Text style={styles.registrationsTitle}>
-            {t('Registrations')}
+            Registrations
           </Text>
           <FlatList
             numColumns={3}
@@ -380,7 +375,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
 
   render() {
     const {
-      status, loading, openMaps, data, t, openAdmin, openUrl, addToCalendar,
+      status, loading, openMaps, data, openAdmin, openUrl, addToCalendar,
     } = this.props;
 
     const addCalendarButton = (
@@ -513,7 +508,7 @@ costs of €{{fine}}. Also note that you will be unable to re-register.',
             />
           )}
         >
-          <ErrorScreen message={t('Could not load the event...')} />
+          <ErrorScreen message="Could not load the event..." />
         </ScrollView>
       </View>
     );
@@ -573,7 +568,6 @@ EventScreen.propTypes = {
   openAdmin: PropTypes.func.isRequired,
   openUrl: PropTypes.func.isRequired,
   addToCalendar: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/events/EventScreen')(EventScreen);
+export default EventScreen;

@@ -10,9 +10,6 @@ import * as eventActions from '../actions/event';
 import { tokenSelector } from '../selectors/session';
 import { currentEventSelector } from '../selectors/events';
 import reportError from '../utils/errorReporting';
-import i18next from '../utils/i18n';
-
-const t = i18next.getFixedT(undefined, 'sagas/event');
 
 function* event(action) {
   const { pk, navigateToEventScreen } = action.payload;
@@ -97,10 +94,10 @@ function* addToCalendar(action) {
   try {
     const eventInfo = yield call(AddCalendarEvent.presentEventCreatingDialog, eventConfig);
     if (eventInfo.action === 'SAVED') {
-      yield call([Snackbar, 'show'], { text: t('Event added to calendar!') });
+      yield call([Snackbar, 'show'], { text: 'Event added to calendar!' });
     }
   } catch (error) {
-    yield call([Snackbar, 'show'], { text: t('Failed to add event to calendar!') });
+    yield call([Snackbar, 'show'], { text: 'Failed to add event to calendar!' });
   }
 }
 

@@ -4,15 +4,12 @@ import {
 } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import Snackbar from 'react-native-snackbar';
-import i18next from '../utils/i18n';
 
 import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
 import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
 import * as sessionActions from '../actions/session';
-
-const t = i18next.getFixedT(undefined, 'sagas/profile');
 
 function* profile(action) {
   const { member } = action.payload;
@@ -40,7 +37,7 @@ function* profile(action) {
 
 function* updateAvatar() {
   const options = {
-    title: t('Change profile picture'),
+    title: 'Change profile picture',
     width: 500,
     height: 500,
     cropping: true,
@@ -72,7 +69,7 @@ function* updateAvatar() {
     };
 
     try {
-      yield call([Snackbar, 'show'], { text: t('Uploading your new profile picture...'), duration: Snackbar.LENGTH_INDEFINITE });
+      yield call([Snackbar, 'show'], { text: 'Uploading your new profile picture...', duration: Snackbar.LENGTH_INDEFINITE });
       const profileData = yield call(apiRequest, 'members/me', data);
       yield call([Snackbar, 'dismiss']);
       yield put(profileActions.success(profileData));
@@ -81,9 +78,9 @@ function* updateAvatar() {
       yield call([Snackbar, 'dismiss']);
       yield call(reportError, error);
       if ('photo' in error.response.jsonData) {
-        yield call(Alert.alert, t('Could not update profile picture'), error.response.jsonData.photo.join(' '));
+        yield call(Alert.alert, 'Could not update profile picture', error.response.jsonData.photo.join(' '));
       } else {
-        yield call([Snackbar, 'show'], { text: t('Could not update profile picture') });
+        yield call([Snackbar, 'show'], { text: 'Could not update profile picture' });
       }
     }
   } catch (e) {

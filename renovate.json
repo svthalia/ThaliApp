@@ -3,9 +3,13 @@
     "config:base"
   ],
   "schedule": [
-    "every weekday except on Wednesday",
-    "every weekend",
-    "before 5pm on Wednesday"
+    "every weekend"
   ],
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "packagePatterns": [ "@react-native-firebase" ],
+      "groupName": "react-native-firebase"
+    }
+  ]
 }

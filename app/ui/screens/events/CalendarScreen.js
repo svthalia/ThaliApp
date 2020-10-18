@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   RefreshControl, ScrollView, SectionList, Text, View,
 } from 'react-native';
-import { withTranslation } from 'react-i18next';
 import Moment from 'moment';
 import { getLocales } from 'react-native-localize';
 import CalendarItem from './CalendarItemConnector';
@@ -43,7 +42,7 @@ const addEventToSection = (sections, date, event) => {
  * Any event that spans multiple days will be split into separate events.
  * The list of sections is sorted at the end.
  */
-const eventListToSections = (eventList, t) => {
+const eventListToSections = (eventList) => {
   const sections = {};
   for (let i = 0; i < eventList.length; i += 1) {
     const start = Moment(eventList[i].start);
@@ -59,7 +58,7 @@ const eventListToSections = (eventList, t) => {
       // Add start day
       addEventToSection(sections, start, {
         ...eventList[i],
-        title: `${eventList[i].title} (${t('day')} 1/${daySpan})`,
+        title: `${eventList[i].title} (day 1/${daySpan})`,
         end: null,
       });
 
@@ -69,13 +68,13 @@ const eventListToSections = (eventList, t) => {
           ...eventList[i],
           start: null,
           end: null,
-          title: `${eventList[i].title} (${t('day')} ${j}/${daySpan})`,
+          title: `${eventList[i].title} (day ${j}/${daySpan})`,
         });
       }
       // Add end day
       addEventToSection(sections, end, {
         ...eventList[i],
-        title: `${eventList[i].title} (${t('day')} ${daySpan}/${daySpan})`,
+        title: `${eventList[i].title} (day ${daySpan}/${daySpan})`,
         start: null,
       });
     }
@@ -144,7 +143,7 @@ class CalendarScreen extends Component {
             />
           )}
         >
-          <ErrorScreen message={this.props.t('Sorry, we couldn\'t load any data.')} />
+          <ErrorScreen message={('Sorry, we couldn\'t load any data.')} />
         </ScrollView>
       );
     } if (this.props.eventList.length === 0) {
@@ -158,7 +157,7 @@ class CalendarScreen extends Component {
             />
           )}
         >
-          <ErrorScreen message={this.props.t('No events found!')} />
+          <ErrorScreen message="No events found!" />
         </ScrollView>
       );
     }
@@ -174,7 +173,7 @@ class CalendarScreen extends Component {
               </Text>
             )
           }
-          sections={eventListToSections(this.props.eventList, this.props.t)}
+          sections={eventListToSections(this.props.eventList)}
           keyExtractor={(item) => item.dayNumber}
           stickySectionHeadersEnabled
           onRefresh={this.handleRefresh}
@@ -202,7 +201,6 @@ CalendarScreen.propTypes = {
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation('ui/screens/events/CalendarScreen')(withStandardHeader(CalendarScreen, true));
+export default withStandardHeader(CalendarScreen, true);

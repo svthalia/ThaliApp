@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
 import AlbumsOverview from './AlbumsOverviewScreen';
 import {
   albumsData, albumsStatus, isFetchingAlbums, albumsKeywords, albumsNext,
@@ -19,4 +18,4 @@ const mapDispatchToProps = {
   loadAlbums: photosActions.loadAlbums,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(['screens/photos/AlbumsOverview'])(AlbumsOverview));
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumsOverview);
