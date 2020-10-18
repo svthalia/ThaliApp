@@ -57,3 +57,24 @@ SENTRY_DSN=https://123abc@o263149.ingest.sentry.io/1234abcd
 ```
 
 You can find the Sentry DSN value in the [Sentry project settings](https://sentry.io/settings/thalia/projects/thaliapp/keys/).
+
+### Fastlane
+
+Our repository contains a [Fastlane configuration](https://fastlane.tools) that you can use to build and deploy the app for Android and iOS.
+To use Fastlane follow these steps:
+ 1. To be able to start you need [an installation of Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+ 2. The first time run `yarn fastlane:install`
+ 3. Then use fastlane by running `yarn fastlane:<platform> <command>`
+ 
+In the case of iOS we use [Fastlane Match](https://docs.fastlane.tools/actions/match/) to setup the certificates required to build apps.
+
+| Command           | Description                     | Platforms    |
+| :---------------- | :------------------------------ | :----------- |
+| test              | Runs native platform tests      | Android      |
+| build             | Build the native platform code  | Android, iOS |
+| deploy_adhoc      | Create a release or AdHoc build | Android, iOS |
+| deploy_internal   | Create a release and deploy to the internal Play Store track | Android |
+| deploy_beta       | Create a release and deploy to Play Store beta or Testflight | Android, iOS |
+| deploy_production | Create a release and deploy to Play Store or App Store | Android, iOS |
+| match             | Get the certificates to sign iOS apps | iOS |
+

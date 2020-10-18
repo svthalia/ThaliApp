@@ -1,7 +1,7 @@
 update_fastlane
+skip_docs
 
 default_platform(:android)
-sh("yarn jetify")
 
 def get_next_version_code
   internal_version = google_play_track_version_codes(track: "internal")
@@ -18,6 +18,13 @@ def get_next_version_code
 end
 
 platform :android do
+  private_lane :setup_project do
+    if is_ci?
+      sh("yarn install --frozen-lockfile")
+    end
+    sh("yarn jetify")
+  end
+
   desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
@@ -25,17 +32,19 @@ platform :android do
 
   desc "Runs a build"
   lane :build do
+    setup_project
     gradle(task: "clean build")
   end
 
   desc "Build release APK"
-  lane :release do
+  private_lane :assemble_release do
     gradle(task: "clean assembleRelease", properties: { 'versionCode' => get_next_version_code() })
   end
 
   desc "Build release APK and upload"
-  lane :release_and_upload do |options|
-    release
+  private_lane :release_and_upload do |options|
+    setup_project
+    assemble_release
     changelog_from_git_commits
     upload_to_play_store(
       track: options[:track],
@@ -45,18 +54,24 @@ platform :android do
     )
   end
 
+  desc "Continuous Integration build"
+  lane :deploy_adhoc do
+    setup_project
+    assemble_release
+  end
+
   desc "Deploy a new alpha version to the Google Play"
-  lane :internal do
+  lane :deploy_internal do
     release_and_upload(track: "internal")
   end
 
   desc "Deploy a new beta version to the Google Play"
-  lane :beta do
+  lane :deploy_beta do
     release_and_upload(track: "beta")
   end
 
   desc "Deploy a new version to the Google Play"
-  lane :deploy do
+  lane :deploy_production do |options|
     release_and_upload(track: "production")
   end
 end

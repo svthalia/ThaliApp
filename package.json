@@ -16,6 +16,7 @@
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
     "locales:collect": "node collect-locales.js",
+    "fastlane:install": "sudo gem install bundler && bundle install",
     "fastlane:android": "cd android && bundle exec fastlane",
     "fastlane:ios": "cd ios && bundle exec fastlane"
   },
