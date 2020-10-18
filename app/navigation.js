@@ -4,6 +4,8 @@ import {
   NavigationActions,
 } from 'react-navigation';
 
+import { NavigationContainer } from '@react-navigation/native';
+
 import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -60,7 +62,7 @@ const AppNavigator = createSwitchNavigator({
   SignedIn: SignedInNavigator,
 });
 
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = `<NavigationContainer>${{ AppNavigator }}</NavigationContainer>`;
 
 let navigator;
 
