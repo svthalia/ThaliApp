@@ -22,6 +22,7 @@ const mapDispatchToProps = {
   openUrl: navigationActions.openWebsite,
   retrievePizzaInfo: pizzaActions.retrievePizzaInfo,
   openAdmin: eventActions.admin,
+  addToCalendar: eventActions.addToCalendar,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);

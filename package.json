@@ -38,7 +38,7 @@
       "<rootDir>/__tests__/setup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|@react-native-community|react-navigation|react-navigation-drawer|react-navigation-stack|@sentry|react-native-gesture-handler|react-native-vector-icons|react-native-linear-gradient|@react-native-firebase|react-native-image-crop-picker|react-native-reanimated|react-native-iphone-x-helper|react-native-render-html|react-native-webview|react-native-share|react-native-image-zoom-viewer|react-native-image-pan-zoom)/)"
+      "node_modules/(?!(react-native|@react-native-community|react-navigation|react-navigation-drawer|react-navigation-stack|@sentry|react-native-gesture-handler|react-native-vector-icons|react-native-linear-gradient|@react-native-firebase|react-native-image-crop-picker|react-native-reanimated|react-native-iphone-x-helper|react-native-render-html|react-native-webview|react-native-share|react-native-image-zoom-viewer|react-native-image-pan-zoom|react-native-add-calendar-event)/)"
     ]
   },
   "dependencies": {
@@ -57,6 +57,7 @@
     "prop-types": "^15.7.2",
     "react": "16.14.0",
     "react-i18next": "^11.7.3",
+    "react-native-add-calendar-event": "^3.0.1",
     "react-native": "0.63.3",
     "react-native-cli": "^2.0.1",
     "react-native-device-info": "^6.2.1",
