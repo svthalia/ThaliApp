@@ -83,7 +83,7 @@ jobs:
       - name: Checkout passwords repo
         uses: actions/checkout@v2
         with:
-          repository: ${{ secrets.PASSWORDS_REPO }}
+          repository: svthalia/ThaliApp-passwords
           path: thaliapp-passwords
           ssh-key: ${{ secrets.PASSWORDS_REPO_DEPLOY_KEY }}
 
