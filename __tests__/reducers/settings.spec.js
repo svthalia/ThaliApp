@@ -1,5 +1,8 @@
 import reducer from '../../app/reducers/settings';
-import { settingsActions, notificationsSettingsActions } from '../../app/actions/settings';
+import {
+  settingsActions,
+  notificationsSettingsActions,
+} from '../../app/actions/settings';
 
 import pushNotifications from '../../app/reducers/settings/pushNotifications';
 
@@ -15,10 +18,7 @@ describe('settings reducer', () => {
   });
 
   describe('is initializing', () => {
-    const state = reducer(
-      emptyState,
-      settingsActions.initStart(),
-    );
+    const state = reducer(emptyState, settingsActions.initStart());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
@@ -26,10 +26,7 @@ describe('settings reducer', () => {
   });
 
   describe('is initialized', () => {
-    const state = reducer(
-      emptyState,
-      settingsActions.initComplete()
-    );
+    const state = reducer(emptyState, settingsActions.initComplete());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
@@ -46,10 +43,7 @@ describe('settings reducer', () => {
     });
 
     describe('is successful', () => {
-      const state = reducer(
-        emptyState,
-        notificationsSettingsActions.success(['cat'])
-      );
+      const state = reducer(emptyState, notificationsSettingsActions.success(['cat']));
 
       it('should be successful', () => {
         expect(state.pushNotifications).toHaveProperty('status', 'success');
@@ -61,10 +55,7 @@ describe('settings reducer', () => {
     });
 
     describe('is failure', () => {
-      const state = reducer(
-        emptyState,
-        notificationsSettingsActions.failure()
-      );
+      const state = reducer(emptyState, notificationsSettingsActions.failure());
 
       it('should be failure', () => {
         expect(state.pushNotifications).toHaveProperty('status', 'failure');

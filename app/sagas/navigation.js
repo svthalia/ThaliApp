@@ -29,7 +29,7 @@ function openWebsite({ payload: url }) {
   Linking.openURL(url);
 }
 
-export default function* () {
+export default function* navigationSaga() {
   yield takeEvery(navigationActions.BACK, back);
   yield takeEvery(navigationActions.TOGGLE_DRAWER, toggleDrawer);
   yield takeEvery(navigationActions.OPEN_WEBSITE, openWebsite);
@@ -48,5 +48,9 @@ export default function* () {
   yield takeEvery(photosActions.PHOTOS_ALBUM_OPEN, navigate, 'PhotoAlbum');
   yield takeEvery(photosActions.PHOTOS_GALLERY_OPEN, navigate, 'PhotoGallery');
   yield takeEvery(sessionActions.SIGNED_IN, navigate, 'SignedIn');
-  yield takeEvery([sessionActions.TOKEN_INVALID, sessionActions.SIGN_OUT], navigate, 'Auth');
+  yield takeEvery(
+    [sessionActions.TOKEN_INVALID, sessionActions.SIGN_OUT],
+    navigate,
+    'Auth'
+  );
 }

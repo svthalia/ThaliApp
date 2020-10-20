@@ -28,7 +28,9 @@ describe('member actions', () => {
   });
 
   it('should create an action to notify the member list was fetched successfully', () => {
-    expect(actions.success(['John Doe', 'Jane Doe'], 'nextUrl', 'John Doe')).toMatchSnapshot();
+    expect(
+      actions.success(['John Doe', 'Jane Doe'], 'nextUrl', 'John Doe')
+    ).toMatchSnapshot();
   });
 
   it('should create an action to notify of a failure fetching the member list', () => {

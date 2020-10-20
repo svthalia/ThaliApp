@@ -12,10 +12,7 @@ describe('events reducer', () => {
   });
 
   describe('is refreshing', () => {
-    const state = reducer(
-      emptyState,
-      actions.fetching(),
-    );
+    const state = reducer(emptyState, actions.fetching());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
@@ -31,10 +28,7 @@ describe('events reducer', () => {
   });
 
   describe('is successful', () => {
-    const state = reducer(
-      emptyState,
-      actions.success({ pk: 1 }, [{ pk: 2 }]),
-    );
+    const state = reducer(emptyState, actions.success({ pk: 1 }, [{ pk: 2 }]));
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
@@ -54,10 +48,7 @@ describe('events reducer', () => {
   });
 
   describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
+    const state = reducer(emptyState, actions.failure());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
@@ -69,10 +60,7 @@ describe('events reducer', () => {
   });
 
   describe('is done', () => {
-    const state = reducer(
-      emptyState,
-      actions.done(),
-    );
+    const state = reducer(emptyState, actions.done());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);

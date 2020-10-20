@@ -14,7 +14,7 @@ import membersSaga from './members';
 import settingsSaga from './settings';
 import photosSaga from './photos';
 
-export default function* () {
+export default function* indexSaga() {
   yield all([
     fork(sessionSaga),
     fork(navigationSaga),

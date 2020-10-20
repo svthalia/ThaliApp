@@ -1,6 +1,4 @@
-import {
-  call, put, takeEvery, select, delay,
-} from 'redux-saga/effects';
+import { call, put, takeEvery, select, delay } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
 import * as Sentry from '@sentry/react-native';
@@ -28,14 +26,7 @@ function* init() {
   try {
     const result = yield call(
       [AsyncStorage, 'multiGet'],
-      [
-        IDENTIFIERKEY,
-        USERNAMEKEY,
-        TOKENKEY,
-        DISPLAYNAMEKEY,
-        PHOTOKEY,
-        PUSHCATEGORYKEY,
-      ],
+      [IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY]
     );
     const values = result.reduce(pairsToObject, {});
 
@@ -102,14 +93,7 @@ function* signIn(action) {
 function* clearUserInfo() {
   yield call(
     [AsyncStorage, 'multiRemove'],
-    [
-      IDENTIFIERKEY,
-      USERNAMEKEY,
-      TOKENKEY,
-      DISPLAYNAMEKEY,
-      PHOTOKEY,
-      PUSHCATEGORYKEY,
-    ],
+    [IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY]
   );
   yield put(pushNotificationsActions.invalidate());
 }
@@ -148,15 +132,15 @@ function* userInfo() {
       sessionActions.setUserInfo(
         userProfile.pk,
         userProfile.display_name,
-        userProfile.avatar.medium,
-      ),
+        userProfile.avatar.medium
+      )
     );
   } catch (error) {
     yield call(reportError, error);
   }
 }
 
-export default function* () {
+export default function* sessionSaga() {
   yield takeEvery(sessionActions.INIT, init);
   yield takeEvery(sessionActions.SIGN_IN, signIn);
   yield takeEvery(sessionActions.SIGN_OUT, signOut);

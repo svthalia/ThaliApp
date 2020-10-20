@@ -13,10 +13,7 @@ describe('welcome reducer', () => {
   });
 
   describe('is successful', () => {
-    const state = reducer(
-      emptyState,
-      actions.success([{ pk: 1 }]),
-    );
+    const state = reducer(emptyState, actions.success([{ pk: 1 }]));
 
     it('should be successful', () => {
       expect(state).toHaveProperty('status', 'success');
@@ -32,10 +29,7 @@ describe('welcome reducer', () => {
   });
 
   describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
+    const state = reducer(emptyState, actions.failure());
 
     it('should be failure', () => {
       expect(state).toHaveProperty('status', 'failure');
@@ -47,10 +41,7 @@ describe('welcome reducer', () => {
   });
 
   describe('is refreshing', () => {
-    const state = reducer(
-      emptyState,
-      actions.refresh(),
-    );
+    const state = reducer(emptyState, actions.refresh());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);

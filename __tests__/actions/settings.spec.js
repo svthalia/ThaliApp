@@ -22,13 +22,23 @@ describe('base settings actions', () => {
 
 describe('notifications settings actions', () => {
   it('should expose the notifications settings actions', () => {
-    expect(actions.notificationsSettingsActions.SUCCESS).toEqual('SETTINGS_PUSH_NOTIFICATIONS_SUCCESS');
-    expect(actions.notificationsSettingsActions.FAILURE).toEqual('SETTINGS_PUSH_NOTIFICATIONS_FAILURE');
-    expect(actions.notificationsSettingsActions.SAVE_CATEGORIES).toEqual('SETTINGS_PUSH_NOTIFICATIONS_SAVE_CATEGORIES');
+    expect(actions.notificationsSettingsActions.SUCCESS).toEqual(
+      'SETTINGS_PUSH_NOTIFICATIONS_SUCCESS'
+    );
+    expect(actions.notificationsSettingsActions.FAILURE).toEqual(
+      'SETTINGS_PUSH_NOTIFICATIONS_FAILURE'
+    );
+    expect(actions.notificationsSettingsActions.SAVE_CATEGORIES).toEqual(
+      'SETTINGS_PUSH_NOTIFICATIONS_SAVE_CATEGORIES'
+    );
   });
 
   it('should create an action to notify the notifications settings were fetched successfully', () => {
-    expect(actions.notificationsSettingsActions.success([{ key: 'general', name: 'General' }])).toMatchSnapshot();
+    expect(
+      actions.notificationsSettingsActions.success([
+        { key: 'general', name: 'General' },
+      ])
+    ).toMatchSnapshot();
   });
 
   it('should create an action to notify of a failure fetching the notifications settings', () => {
@@ -36,6 +46,8 @@ describe('notifications settings actions', () => {
   });
 
   it('should create an action to save the push notifications category preferences', () => {
-    expect(actions.notificationsSettingsActions.saveCategories(['general'])).toMatchSnapshot();
+    expect(
+      actions.notificationsSettingsActions.saveCategories(['general'])
+    ).toMatchSnapshot();
   });
 });

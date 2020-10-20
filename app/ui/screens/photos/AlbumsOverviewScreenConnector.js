@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import AlbumsOverview from './AlbumsOverviewScreen';
 import {
-  albumsData, albumsStatus, isFetchingAlbums, albumsKeywords, albumsNext,
+  albumsData,
+  albumsStatus,
+  isFetchingAlbums,
+  albumsKeywords,
+  albumsNext,
 } from '../../../selectors/photos';
 import * as photosActions from '../../../actions/photos';
 

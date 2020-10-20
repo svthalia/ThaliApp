@@ -41,9 +41,7 @@ class NotificationsSection extends Component {
   render() {
     const { status, categoryList } = this.props;
     let content = (
-      <Text style={styles.emptyText}>
-        Notifications settings could not be loaded.
-      </Text>
+      <Text style={styles.emptyText}>Notifications settings could not be loaded.</Text>
     );
 
     if (status === 'success') {
@@ -52,21 +50,11 @@ class NotificationsSection extends Component {
           style={[styles.categoryContainer, i !== 0 && styles.borderTop]}
           key={category.key}
         >
-          <View
-            style={styles.textContainer}
-          >
-            <Text
-              style={styles.label}
-            >
-              {category.name}
-              {' '}
-              {category.key === GENERAL_KEY && '(required)'}
+          <View style={styles.textContainer}>
+            <Text style={styles.label}>
+              {category.name} {category.key === GENERAL_KEY && '(required)'}
             </Text>
-            <Text
-              style={styles.description}
-            >
-              {category.description}
-            </Text>
+            <Text style={styles.description}>{category.description}</Text>
           </View>
           <Switch
             value={this.state[category.key]}
@@ -75,8 +63,7 @@ class NotificationsSection extends Component {
               false: Colors.lightGray,
               true: Colors.magenta,
             }}
-            thumbColor={this.state[category.key]
-              ? Colors.darkMagenta : Colors.grey}
+            thumbColor={this.state[category.key] ? Colors.darkMagenta : Colors.grey}
             disabled={category.key === GENERAL_KEY}
             style={styles.settingsSwitch}
           />
@@ -84,21 +71,19 @@ class NotificationsSection extends Component {
       ));
     }
 
-    return (
-      <CardSection sectionHeader="Notifications">
-        {content}
-      </CardSection>
-    );
+    return <CardSection sectionHeader='Notifications'>{content}</CardSection>;
   }
 }
 
 NotificationsSection.propTypes = {
-  categoryList: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    enabled: PropTypes.bool.isRequired,
-  })).isRequired,
+  categoryList: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      enabled: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
   status: PropTypes.string.isRequired,
   saveCategories: PropTypes.func.isRequired,
 };

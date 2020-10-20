@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  RefreshControl, ScrollView, View,
-} from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './style/EventAdminScreen';
@@ -25,9 +23,7 @@ class EventAdminScreen extends Component {
   };
 
   render() {
-    const {
-      status, loading, registrations,
-    } = this.props;
+    const { status, loading, registrations } = this.props;
 
     const items = registrations.map((item) => ({
       pk: item.pk,
@@ -83,14 +79,11 @@ class EventAdminScreen extends Component {
             <ScrollView
               backgroundColor={Colors.background}
               contentContainerStyle={styles.rootWrapper}
-              refreshControl={(
-                <RefreshControl
-                  refreshing={loading}
-                  onRefresh={this.handleRefresh}
-                />
-              )}
+              refreshControl={
+                <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+              }
             >
-              <ErrorScreen message="No registrations found..." />
+              <ErrorScreen message='No registrations found...' />
             </ScrollView>
           </View>
         );
@@ -100,10 +93,10 @@ class EventAdminScreen extends Component {
         <View style={styles.rootWrapper}>
           <AdminScreen
             items={items}
-            checkboxLabel="Present"
+            checkboxLabel='Present'
             filterTypes={filterTypes}
             handleRefresh={() => this.props.refresh(this.props.event)}
-            title="Registrations"
+            title='Registrations'
             updateItem={this.props.updateRegistration}
             loading={loading}
           />
@@ -117,14 +110,11 @@ class EventAdminScreen extends Component {
         <ScrollView
           backgroundColor={Colors.background}
           contentContainerStyle={styles.rootWrapper}
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={this.handleRefresh}
-            />
-          )}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+          }
         >
-          <ErrorScreen message="Could not load the event..." />
+          <ErrorScreen message='Could not load the event...' />
         </ScrollView>
       </View>
     );
@@ -132,12 +122,14 @@ class EventAdminScreen extends Component {
 }
 
 EventAdminScreen.propTypes = {
-  registrations: PropTypes.arrayOf(PropTypes.shape({
-    pk: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    present: PropTypes.bool.isRequired,
-    payment: PropTypes.string.isRequired,
-  })).isRequired,
+  registrations: PropTypes.arrayOf(
+    PropTypes.shape({
+      pk: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      present: PropTypes.bool.isRequired,
+      payment: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   event: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,

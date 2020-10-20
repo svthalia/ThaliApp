@@ -36,33 +36,29 @@ describe('pushNotifications saga', () => {
       apiRequest.mockReset();
     });
 
-    it('should do nothing without a token', () => expectSaga(pushNotificationsSaga)
-      .provide([
-        [select(tokenSelector), undefined],
-      ])
-      .dispatch(pushActions.register())
-      .silentRun()
-      .then(({ effects }) => {
-        expect(effects.call).toBeUndefined();
-        expect(effects.put).toBeUndefined();
-      }));
+    it('should do nothing without a token', () =>
+      expectSaga(pushNotificationsSaga)
+        .provide([[select(tokenSelector), undefined]])
+        .dispatch(pushActions.register())
+        .silentRun()
+        .then(({ effects }) => {
+          expect(effects.call).toBeUndefined();
+          expect(effects.put).toBeUndefined();
+        }));
 
-    it('should request permissions when platform is iOS', () => expectSaga(pushNotificationsSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(pushActions.register())
-      .silentRun()
-      .then(() => {
-        expect(mockMessaging.requestPermission).toBeCalled();
-      }));
+    it('should request permissions when platform is iOS', () =>
+      expectSaga(pushNotificationsSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(pushActions.register())
+        .silentRun()
+        .then(() => {
+          expect(mockMessaging.requestPermission).toBeCalled();
+        }));
 
     it('should not request permissions when platform is Android', () => {
       Platform.OS = 'android';
       return expectSaga(pushNotificationsSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-        ])
+        .provide([[select(tokenSelector), 'token']])
         .dispatch(pushActions.register())
         .silentRun()
         .then(() => {
@@ -70,15 +66,13 @@ describe('pushNotifications saga', () => {
         });
     });
 
-    it('should post a token to the server', () => expectSaga(pushNotificationsSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(pushActions.register())
-      .silentRun()
-      .then(() => {
-        expect(apiRequest).toBeCalledWith('devices',
-          {
+    it('should post a token to the server', () =>
+      expectSaga(pushNotificationsSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(pushActions.register())
+        .silentRun()
+        .then(() => {
+          expect(apiRequest).toBeCalledWith('devices', {
             body: '{"type":"ios"}',
             headers: {
               Accept: 'application/json',
@@ -87,17 +81,15 @@ describe('pushNotifications saga', () => {
             },
             method: 'POST',
           });
-      }));
+        }));
 
-    it('should post the correct categories to the server', () => expectSaga(pushNotificationsSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(pushActions.register(['general', 'events']))
-      .silentRun()
-      .then(() => {
-        expect(apiRequest).toBeCalledWith('devices',
-          {
+    it('should post the correct categories to the server', () =>
+      expectSaga(pushNotificationsSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(pushActions.register(['general', 'events']))
+        .silentRun()
+        .then(() => {
+          expect(apiRequest).toBeCalledWith('devices', {
             body: '{"type":"ios","receive_category":["general","events"]}',
             headers: {
               Accept: 'application/json',
@@ -106,15 +98,16 @@ describe('pushNotifications saga', () => {
             },
             method: 'POST',
           });
-      }));
+        }));
   });
 
   describe('invalidate', () => {
-    it('should delete the instance id', () => expectSaga(pushNotificationsSaga)
-      .dispatch(pushActions.invalidate())
-      .silentRun()
-      .then(() => {
-        expect(mockIid.delete).toBeCalled();
-      }));
+    it('should delete the instance id', () =>
+      expectSaga(pushNotificationsSaga)
+        .dispatch(pushActions.invalidate())
+        .silentRun()
+        .then(() => {
+          expect(mockIid.delete).toBeCalled();
+        }));
   });
 });

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  RefreshControl, ScrollView, Text, TouchableHighlight, TouchableOpacity, View,
+  RefreshControl,
+  ScrollView,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Moment from 'moment';
@@ -27,12 +32,8 @@ class PizzaScreen extends Component {
 
     return (
       <View style={styles.eventInfo}>
-        <Text style={styles.eventTitle}>
-          {`Order pizza for ${event.title}`}
-        </Text>
-        <Text style={styles.eventSubtitle}>
-          {subtitle}
-        </Text>
+        <Text style={styles.eventTitle}>{`Order pizza for ${event.title}`}</Text>
+        <Text style={styles.eventSubtitle}>{subtitle}</Text>
       </View>
     );
   };
@@ -49,26 +50,17 @@ class PizzaScreen extends Component {
             order.paid ? styles.greenBackground : styles.redBackground,
           ]}
         >
-          <Text
-            style={styles.overviewText}
-            numberOfLines={3}
-          >
+          <Text style={styles.overviewText} numberOfLines={3}>
             {productInfo.name}
           </Text>
         </View>
       );
     }
-    return (
-      <Text style={styles.overviewNoOrder}>
-        You did not place an order.
-      </Text>
-    );
+    return <Text style={styles.overviewNoOrder}>You did not place an order.</Text>;
   };
 
   getOrder = (hasEnded) => {
-    const {
-      cancelPizza, order, pizzaList,
-    } = this.props;
+    const { cancelPizza, order, pizzaList } = this.props;
 
     if (order) {
       const productInfo = this.getProductFromList(order.product, pizzaList);
@@ -77,9 +69,12 @@ class PizzaScreen extends Component {
       }
 
       return (
-        <CardSection sectionHeader="Current order">
+        <CardSection sectionHeader='Current order'>
           <View
-            style={[styles.orderStatus, order.paid ? styles.paidStatus : styles.notPaidStatus]}
+            style={[
+              styles.orderStatus,
+              order.paid ? styles.paidStatus : styles.notPaidStatus,
+            ]}
           >
             <Text style={styles.orderStatusText}>
               {order.paid && 'The order has been paid for.'}
@@ -88,28 +83,17 @@ class PizzaScreen extends Component {
           </View>
           <View style={[styles.pizzaContainer, styles.orderedPizzaContainer]}>
             <View style={styles.pizzaInfo}>
-              <Text style={styles.pizzaName}>
-                {productInfo.name}
-              </Text>
-              <Text style={styles.pizzaDescription}>
-                {productInfo.description}
-              </Text>
-              <Text style={styles.pizzaPrice}>
-                €
-                {productInfo.price}
-              </Text>
+              <Text style={styles.pizzaName}>{productInfo.name}</Text>
+              <Text style={styles.pizzaDescription}>{productInfo.description}</Text>
+              <Text style={styles.pizzaPrice}>€{productInfo.price}</Text>
             </View>
-            {(!order.paid && !hasEnded) && (
+            {!order.paid && !hasEnded && (
               <TouchableHighlight
                 onPress={() => cancelPizza()}
                 style={styles.button}
                 underlayColor={Colors.darkMagenta}
               >
-                <Icon
-                  name="delete"
-                  color={Colors.white}
-                  size={18}
-                />
+                <Icon name='delete' color={Colors.white} size={18} />
               </TouchableHighlight>
             )}
           </View>
@@ -120,23 +104,21 @@ class PizzaScreen extends Component {
   };
 
   getPizzaList = (pizzaList, hasOrder) => (
-    <CardSection sectionHeader={hasOrder ? 'Changing your order' : null} contentStyle={styles.pizzaList}>
+    <CardSection
+      sectionHeader={hasOrder ? 'Changing your order' : null}
+      contentStyle={styles.pizzaList}
+    >
       {pizzaList.map((pizza, i) => (
         <View
           key={pizza.pk}
-          style={i === 0 ? styles.pizzaContainer : [styles.borderTop, styles.pizzaContainer]}
+          style={
+            i === 0 ? styles.pizzaContainer : [styles.borderTop, styles.pizzaContainer]
+          }
         >
           <View style={styles.pizzaInfo}>
-            <Text style={styles.pizzaName}>
-              {pizza.name}
-            </Text>
-            <Text style={styles.pizzaDescription}>
-              {pizza.description}
-            </Text>
-            <Text style={styles.pizzaPrice}>
-              €
-              {pizza.price}
-            </Text>
+            <Text style={styles.pizzaName}>{pizza.name}</Text>
+            <Text style={styles.pizzaDescription}>{pizza.description}</Text>
+            <Text style={styles.pizzaPrice}>€{pizza.price}</Text>
           </View>
           <TouchableHighlight
             onPress={() => {
@@ -146,11 +128,7 @@ class PizzaScreen extends Component {
             style={styles.button}
             underlayColor={Colors.darkMagenta}
           >
-            <Icon
-              name="add-shopping-cart"
-              color={Colors.white}
-              size={18}
-            />
+            <Icon name='add-shopping-cart' color={Colors.white} size={18} />
           </TouchableHighlight>
         </View>
       ))}
@@ -164,46 +142,46 @@ class PizzaScreen extends Component {
 
   render() {
     const {
-      hasLoaded, success, event, loading, pizzaList, order, openAdmin,
+      hasLoaded,
+      success,
+      event,
+      loading,
+      pizzaList,
+      order,
+      openAdmin,
     } = this.props;
 
     if (!hasLoaded) {
       return <LoadingScreen />;
-    } if (!success) {
+    }
+    if (!success) {
       return (
         <View style={styles.rootWrapper}>
           <StandardHeader />
           <ScrollView
-            refreshControl={(
-              <RefreshControl
-                refreshing={loading}
-                onRefresh={this.handleRefresh}
-              />
-            )}
+            refreshControl={
+              <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+            }
             style={styles.scrollView}
             contentContainerStyle={styles.content}
           >
-            <ErrorScreen message={'Sorry! We couldn\'t load any data.'} />
+            <ErrorScreen message={"Sorry! We couldn't load any data."} />
           </ScrollView>
         </View>
       );
-    } if (!event) {
+    }
+    if (!event) {
       return (
         <View style={styles.rootWrapper}>
           <StandardHeader />
           <ScrollView
-            refreshControl={(
-              <RefreshControl
-                refreshing={loading}
-                onRefresh={this.handleRefresh}
-              />
-            )}
+            refreshControl={
+              <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+            }
             style={styles.scrollView}
             contentContainerStyle={styles.content}
           >
-            <Text
-              style={styles.title}
-            >
+            <Text style={styles.title}>
               There is currently no event for which you can order food.
             </Text>
           </ScrollView>
@@ -230,14 +208,8 @@ class PizzaScreen extends Component {
     const hasAdminView = event.is_admin && !inFuture;
     const adminButton = (
       <View style={styles.rightView}>
-        <TouchableOpacity
-          onPress={() => openAdmin()}
-        >
-          <Icon
-            name="settings"
-            style={styles.adminIcon}
-            size={24}
-          />
+        <TouchableOpacity onPress={() => openAdmin()}>
+          <Icon name='settings' style={styles.adminIcon} size={24} />
         </TouchableOpacity>
       </View>
     );
@@ -248,21 +220,22 @@ class PizzaScreen extends Component {
       <View style={styles.rootWrapper}>
         {header}
         <ScrollView
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={this.handleRefresh}
-            />
-          )}
-          ref={(ref) => { this.pizzaScroll = ref; }}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+          }
+          ref={(ref) => {
+            this.pizzaScroll = ref;
+          }}
           style={styles.scrollView}
         >
           <View style={styles.content}>
             {this.getEventInfo(subtitle)}
             {hasEnded && this.getOverview()}
             {this.getOrder(hasEnded)}
-            {inFuture || hasEnded || (order && order.paid)
-              || this.getPizzaList(pizzaList, !!order)}
+            {inFuture ||
+              hasEnded ||
+              (order && order.paid) ||
+              this.getPizzaList(pizzaList, !!order)}
           </View>
         </ScrollView>
       </View>
@@ -289,13 +262,15 @@ PizzaScreen.propTypes = {
     name: PropTypes.string,
     member: PropTypes.number,
   }),
-  pizzaList: PropTypes.arrayOf(PropTypes.shape({
-    pk: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    available: PropTypes.bool.isRequired,
-  })).isRequired,
+  pizzaList: PropTypes.arrayOf(
+    PropTypes.shape({
+      pk: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      available: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
   loadPizzas: PropTypes.func.isRequired,
   cancelPizza: PropTypes.func.isRequired,
   orderPizza: PropTypes.func.isRequired,

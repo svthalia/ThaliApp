@@ -1,10 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  touchable: {
-  },
-  image: {
-  },
+  touchable: {},
+  image: {},
   overlayGradient: {
     position: 'absolute',
     top: '50%',

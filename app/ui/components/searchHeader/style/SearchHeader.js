@@ -2,7 +2,10 @@ import { Dimensions } from 'react-native';
 import Colors from '../../../style/Colors';
 
 import StyleSheet from '../../../style/StyleSheet';
-import { APPBAR_HEIGHT, STATUSBAR_HEIGHT } from '../../standardHeader/style/StandardHeader';
+import {
+  APPBAR_HEIGHT,
+  STATUSBAR_HEIGHT,
+} from '../../standardHeader/style/StandardHeader';
 
 const windowWidth = Dimensions.get('window').width;
 

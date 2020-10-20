@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text, TouchableHighlight, TouchableOpacity, View,
-} from 'react-native';
+import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import Moment from 'moment';
 
 import styles from './style/EventDetailCard';
@@ -14,19 +12,21 @@ const getInfo = (event, hasRegistrationIndicator) => {
 
   if (start.isSame(end, 'day')) {
     return (
-      <Text style={[styles.eventInfo, hasRegistrationIndicator && styles.indicatorMargin]}>
+      <Text
+        style={[styles.eventInfo, hasRegistrationIndicator && styles.indicatorMargin]}
+      >
         {`${start.format('HH:mm')} - ${end.format('HH:mm')} | ${event.location}`}
       </Text>
     );
   }
   return (
     <View>
-      <Text style={[styles.eventInfo, hasRegistrationIndicator && styles.indicatorMargin]}>
+      <Text
+        style={[styles.eventInfo, hasRegistrationIndicator && styles.indicatorMargin]}
+      >
         {`${start.format('D MMMM HH:mm')} - ${end.format('D MMMM HH:mm')}`}
       </Text>
-      <Text style={styles.eventInfo}>
-        {event.location}
-      </Text>
+      <Text style={styles.eventInfo}>{event.location}</Text>
     </View>
   );
 };
@@ -41,28 +41,26 @@ const EventDetailCard = (props) => {
       underlayColor={Colors.pressedWhite}
     >
       <View>
-        <Text style={[styles.eventTitle, hasRegistrationIndicator && styles.indicatorMargin]}>
+        <Text
+          style={[
+            styles.eventTitle,
+            hasRegistrationIndicator && styles.indicatorMargin,
+          ]}
+        >
           {props.event.title}
         </Text>
         {getInfo(props.event, hasRegistrationIndicator)}
-        <Text
-          numberOfLines={2}
-          style={styles.description}
-        >
+        <Text numberOfLines={2} style={styles.description}>
           {props.event.description}
         </Text>
         <View style={styles.buttonList}>
-          <Text style={[styles.moreInfo, styles.button]}>
-            MORE INFO
-          </Text>
+          <Text style={[styles.moreInfo, styles.button]}>MORE INFO</Text>
           {props.event.pizza ? (
             <TouchableOpacity
               onPress={() => props.retrievePizzaInfo()}
               style={styles.button}
             >
-              <Text style={styles.orderPizza}>
-                PIZZA
-              </Text>
+              <Text style={styles.orderPizza}>PIZZA</Text>
             </TouchableOpacity>
           ) : null}
         </View>
@@ -70,7 +68,8 @@ const EventDetailCard = (props) => {
           <View
             style={[
               styles.indicator,
-              props.event.registered ? styles.registered : styles.unregistered]}
+              props.event.registered ? styles.registered : styles.unregistered,
+            ]}
           />
         )}
       </View>

@@ -1,6 +1,4 @@
-import {
-  call, put, select, takeEvery, delay,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery, delay } from 'redux-saga/effects';
 import Snackbar from 'react-native-snackbar';
 
 import { apiRequest } from '../utils/url';
@@ -68,10 +66,14 @@ const update = function* update(action) {
     yield call(apiRequest, `registrations/${registration}`, data);
     yield put(registrationActions.success());
     yield delay(50);
-    yield call([Snackbar, 'show'], { text: 'Successfully updated registration' });
+    yield call([Snackbar, 'show'], {
+      text: 'Successfully updated registration',
+    });
   } catch (error) {
     if (error.response.status === 400) {
-      yield call([Snackbar, 'show'], { text: 'The field values are not correct' });
+      yield call([Snackbar, 'show'], {
+        text: 'The field values are not correct',
+      });
     } else {
       yield call(reportError, error);
       yield put(registrationActions.failure());
@@ -97,7 +99,9 @@ const cancel = function* cancel(action) {
 
   try {
     yield call(apiRequest, `registrations/${registration}`, data);
-    yield call([Snackbar, 'show'], { text: 'Successfully cancelled registration' });
+    yield call([Snackbar, 'show'], {
+      text: 'Successfully cancelled registration',
+    });
   } catch (error) {
     yield call(reportError, error);
   }
@@ -130,7 +134,7 @@ const fields = function* fields(action) {
   }
 };
 
-export default function* () {
+export default function* registrationSaga() {
   yield takeEvery(registrationActions.REGISTER, register);
   yield takeEvery(registrationActions.UPDATE, update);
   yield takeEvery(registrationActions.CANCEL, cancel);

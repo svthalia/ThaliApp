@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Animated, BackHandler, Easing, Platform, SafeAreaView, Text, TextInput, View,
+  Animated,
+  BackHandler,
+  Easing,
+  Platform,
+  SafeAreaView,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import StatusBar from '@react-native-community/status-bar';
@@ -52,7 +59,7 @@ class SearchHeader extends Component {
   getCenter = () => {
     const { title, searchText } = this.props;
     const { searchKey, isSearching } = this.state;
-    return (isSearching ? (
+    return isSearching ? (
       <TextInput
         style={styles.input}
         selectionColor={Colors.magenta}
@@ -64,10 +71,8 @@ class SearchHeader extends Component {
         autoFocus
       />
     ) : (
-      <Text style={styles.title}>
-        {title}
-      </Text>
-    ));
+      <Text style={styles.title}>{title}</Text>
+    );
   };
 
   getRightIcon = () => {
@@ -76,15 +81,16 @@ class SearchHeader extends Component {
       return (
         <IconButton
           onPress={() => this.updateSearch(true)}
-          name="search"
+          name='search'
           iconStyle={[styles.rightIcon, styles.white]}
         />
       );
-    } if (searchKey) {
+    }
+    if (searchKey) {
       return (
         <IconButton
           onPress={() => this.updateSearchKey('')}
-          name="close"
+          name='close'
           iconStyle={[styles.rightIcon, styles.gray]}
         />
       );
@@ -149,8 +155,7 @@ class SearchHeader extends Component {
           <View style={styles.appBar}>
             {isAnimating && (
               <Animated.View
-                style={[
-                  styles.animationView, { transform: [{ scale: scaleValue }] }]}
+                style={[styles.animationView, { transform: [{ scale: scaleValue }] }]}
               />
             )}
             {this.getLeftIcon()}

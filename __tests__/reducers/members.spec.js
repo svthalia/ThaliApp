@@ -13,10 +13,7 @@ describe('members reducer', () => {
   });
 
   describe('is fetching', () => {
-    const state = reducer(
-      { loading: false },
-      actions.fetching(),
-    );
+    const state = reducer({ loading: false }, actions.fetching());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
@@ -26,7 +23,7 @@ describe('members reducer', () => {
   describe('is successful', () => {
     const state = reducer(
       emptyState,
-      actions.success([{ pk: 1 }], 'nextUrl', 'searchKey'),
+      actions.success([{ pk: 1 }], 'nextUrl', 'searchKey')
     );
 
     it('should not be loading', () => {
@@ -51,10 +48,7 @@ describe('members reducer', () => {
   });
 
   describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
+    const state = reducer(emptyState, actions.failure());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
@@ -68,13 +62,10 @@ describe('members reducer', () => {
   describe('is successful with additional results', () => {
     let state = reducer(
       emptyState,
-      actions.success([{ pk: 1 }], 'nextUrl', 'searchKey'),
+      actions.success([{ pk: 1 }], 'nextUrl', 'searchKey')
     );
 
-    state = reducer(
-      state,
-      actions.moreSuccess([{ pk: 2 }], 'nextUrl'),
-    );
+    state = reducer(state, actions.moreSuccess([{ pk: 2 }], 'nextUrl'));
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);

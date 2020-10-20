@@ -1,6 +1,4 @@
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { apiRequest } from '../utils/url';
 import * as calendarActions from '../actions/calendar';
@@ -49,6 +47,6 @@ const calendar = function* calendar(action) {
   }
 };
 
-export default function* () {
+export default function* calendarSaga() {
   yield takeEvery(calendarActions.EVENTS, calendar);
 }

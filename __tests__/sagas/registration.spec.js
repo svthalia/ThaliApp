@@ -43,258 +43,282 @@ describe('registration saga', () => {
   });
 
   describe('registering', () => {
-    it('should put a fetching action', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(registrationActions.register(1))
-      .put(eventActions.fetching())
-      .silentRun());
+    it('should put a fetching action', () =>
+      expectSaga(registrationSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(registrationActions.register(1))
+        .put(eventActions.fetching())
+        .silentRun());
 
-    it('should put the result data when the request succeeds', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }), { }],
-      ])
-      .dispatch(registrationActions.register(1))
-      .put(eventActions.event(1, false))
-      .silentRun());
+    it('should put the result data when the request succeeds', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [
+            matchers.call.like({
+              fn: apiRequest,
+              args: ['events/1/registrations'],
+            }),
+            {},
+          ],
+        ])
+        .dispatch(registrationActions.register(1))
+        .put(eventActions.event(1, false))
+        .silentRun());
 
-    it('should show a snackbar when the request succeeds', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['events/1/registrations'] }), { }],
-      ])
-      .dispatch(registrationActions.register(1))
-      .silentRun()
-      .then(() => {
-        expect(Snackbar.show).toBeCalledWith(
-          { text: 'Registration successful!' },
-        );
-      }));
+    it('should show a snackbar when the request succeeds', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [
+            matchers.call.like({
+              fn: apiRequest,
+              args: ['events/1/registrations'],
+            }),
+            {},
+          ],
+        ])
+        .dispatch(registrationActions.register(1))
+        .silentRun()
+        .then(() => {
+          expect(Snackbar.show).toBeCalledWith({
+            text: 'Registration successful!',
+          });
+        }));
 
-    it('should show a failure action when the request fails', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), throwError(error)],
-      ])
-      .dispatch(registrationActions.register(1))
-      .put(eventActions.failure())
-      .silentRun());
+    it('should show a failure action when the request fails', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.fn(apiRequest), throwError(error)],
+        ])
+        .dispatch(registrationActions.register(1))
+        .put(eventActions.failure())
+        .silentRun());
 
-    it('should do a POST request', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(registrationActions.register(1))
-      .silentRun()
-      .then(() => {
-        expect(apiRequest).toBeCalledWith('events/1/registrations', {
-          headers: {
-            Accept: 'application/json',
-            Authorization: 'Token token',
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-        });
-      }));
+    it('should do a POST request', () =>
+      expectSaga(registrationSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(registrationActions.register(1))
+        .silentRun()
+        .then(() => {
+          expect(apiRequest).toBeCalledWith('events/1/registrations', {
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Token token',
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          });
+        }));
   });
 
   describe('updating', () => {
-    it('should put a loading action', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
-      ])
-      .dispatch(registrationActions.update(1, {}))
-      .put(registrationActions.loading())
-      .silentRun());
+    it('should put a loading action', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
+        ])
+        .dispatch(registrationActions.update(1, {}))
+        .put(registrationActions.loading())
+        .silentRun());
 
-    it('should put a success action on success', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
-      ])
-      .dispatch(registrationActions.update(1, {}))
-      .put(registrationActions.success())
-      .silentRun());
+    it('should put a success action on success', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
+        ])
+        .dispatch(registrationActions.update(1, {}))
+        .put(registrationActions.success())
+        .silentRun());
 
-    it('should show a snackbar on success', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
-      ])
-      .dispatch(registrationActions.update(1, {}))
-      .silentRun()
-      .then(() => {
-        expect(Snackbar.show).toBeCalledWith(
-          { text: 'Successfully updated registration' },
-        );
-      }));
+    it('should show a snackbar on success', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
+        ])
+        .dispatch(registrationActions.update(1, {}))
+        .silentRun()
+        .then(() => {
+          expect(Snackbar.show).toBeCalledWith({
+            text: 'Successfully updated registration',
+          });
+        }));
 
-    it('should put failure action when the request fails', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), throwError(error)],
-      ])
-      .dispatch(registrationActions.update(1, {}))
-      .put(registrationActions.failure())
-      .silentRun());
+    it('should put failure action when the request fails', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.fn(apiRequest), throwError(error)],
+        ])
+        .dispatch(registrationActions.update(1, {}))
+        .put(registrationActions.failure())
+        .silentRun());
 
-    it('should do a PATCH request with fields', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(registrationActions.update(2, { key: 'value' }))
-      .silentRun()
-      .then(() => {
-        expect(apiRequest).toBeCalledWith('registrations/2', {
-          body: '{"fields[key]":"value"}',
-          headers: {
-            Accept: 'application/json',
-            Authorization: 'Token token',
-            'Content-Type': 'application/json',
-          },
-          method: 'PATCH',
-        });
-      }));
+    it('should do a PATCH request with fields', () =>
+      expectSaga(registrationSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(registrationActions.update(2, { key: 'value' }))
+        .silentRun()
+        .then(() => {
+          expect(apiRequest).toBeCalledWith('registrations/2', {
+            body: '{"fields[key]":"value"}',
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Token token',
+              'Content-Type': 'application/json',
+            },
+            method: 'PATCH',
+          });
+        }));
   });
 
   describe('cancelling', () => {
-    it('should put a fetching action', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-        [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
-      ])
-      .dispatch(registrationActions.cancel(1))
-      .put(eventActions.fetching())
-      .silentRun());
+    it('should put a fetching action', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+          [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
+        ])
+        .dispatch(registrationActions.cancel(1))
+        .put(eventActions.fetching())
+        .silentRun());
 
-    it('should show a snackbar on success', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-        [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
-      ])
-      .dispatch(registrationActions.cancel(1))
-      .silentRun()
-      .then(() => {
-        expect(Snackbar.show).toBeCalledWith(
-          { text: 'Successfully cancelled registration' },
-        );
-      }));
+    it('should show a snackbar on success', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+          [matchers.call.like({ fn: apiRequest, args: ['registrations/1'] })],
+        ])
+        .dispatch(registrationActions.cancel(1))
+        .silentRun()
+        .then(() => {
+          expect(Snackbar.show).toBeCalledWith({
+            text: 'Successfully cancelled registration',
+          });
+        }));
 
-    it('should put event action when the request succeeds', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-        [matchers.call.fn(apiRequest), {}],
-      ])
-      .dispatch(registrationActions.cancel(1))
-      .put(eventActions.event(1, false))
-      .silentRun());
+    it('should put event action when the request succeeds', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+          [matchers.call.fn(apiRequest), {}],
+        ])
+        .dispatch(registrationActions.cancel(1))
+        .put(eventActions.event(1, false))
+        .silentRun());
 
-    it('should put event action when the request fails', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-        [matchers.call.fn(apiRequest), throwError(error)],
-      ])
-      .dispatch(registrationActions.cancel(1))
-      .silentRun());
+    it('should put event action when the request fails', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+          [matchers.call.fn(apiRequest), throwError(error)],
+        ])
+        .dispatch(registrationActions.cancel(1))
+        .silentRun());
 
-    it('should not show snackbar when the request fails', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-        [matchers.call.fn(apiRequest), throwError(error)],
-      ])
-      .dispatch(registrationActions.cancel(1))
-      .silentRun()
-      .then(() => {
-        expect(Snackbar.show).not.toBeCalled();
-      }));
+    it('should not show snackbar when the request fails', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+          [matchers.call.fn(apiRequest), throwError(error)],
+        ])
+        .dispatch(registrationActions.cancel(1))
+        .silentRun()
+        .then(() => {
+          expect(Snackbar.show).not.toBeCalled();
+        }));
 
-    it('should do a DELETE request', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-      ])
-      .dispatch(registrationActions.cancel(2))
-      .silentRun()
-      .then(() => {
-        expect(apiRequest).toBeCalledWith('registrations/2', {
-          headers: {
-            Accept: 'application/json',
-            Authorization: 'Token token',
-            'Content-Type': 'application/json',
-          },
-          method: 'DELETE',
-        });
-      }));
+    it('should do a DELETE request', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+        ])
+        .dispatch(registrationActions.cancel(2))
+        .silentRun()
+        .then(() => {
+          expect(apiRequest).toBeCalledWith('registrations/2', {
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Token token',
+              'Content-Type': 'application/json',
+            },
+            method: 'DELETE',
+          });
+        }));
   });
 
   describe('fields', () => {
-    it('should retrieve the fields after a successful registration', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), { pk: 1, fields: 'fields' }],
-      ])
-      .dispatch(registrationActions.register(2))
-      .put(registrationActions.retrieveFields(1))
-      .silentRun());
+    it('should retrieve the fields after a successful registration', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.fn(apiRequest), { pk: 1, fields: 'fields' }],
+        ])
+        .dispatch(registrationActions.register(2))
+        .put(registrationActions.retrieveFields(1))
+        .silentRun());
 
-    it('should put a loading action', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(registrationActions.retrieveFields(1))
-      .put(registrationActions.loading())
-      .silentRun());
+    it('should put a loading action', () =>
+      expectSaga(registrationSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(registrationActions.retrieveFields(1))
+        .put(registrationActions.loading())
+        .silentRun());
 
-    it('should put showFields action when the request succeeds', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), { fields: 'fields' }],
-      ])
-      .dispatch(registrationActions.retrieveFields(1))
-      .put(registrationActions.showFields(1, 'fields'))
-      .silentRun());
+    it('should put showFields action when the request succeeds', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.fn(apiRequest), { fields: 'fields' }],
+        ])
+        .dispatch(registrationActions.retrieveFields(1))
+        .put(registrationActions.showFields(1, 'fields'))
+        .silentRun());
 
-    it('should put events done action when the request succeeds', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), { fields: 'fields' }],
-      ])
-      .dispatch(registrationActions.retrieveFields(1))
-      .put(eventActions.done())
-      .silentRun());
+    it('should put events done action when the request succeeds', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [matchers.call.fn(apiRequest), { fields: 'fields' }],
+        ])
+        .dispatch(registrationActions.retrieveFields(1))
+        .put(eventActions.done())
+        .silentRun());
 
-    it('should put event failure action when the request fails', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [select(currentEventSelector), 1],
-        [matchers.call.fn(apiRequest), throwError(error)],
-      ])
-      .dispatch(eventActions.failure())
-      .silentRun());
+    it('should put event failure action when the request fails', () =>
+      expectSaga(registrationSaga)
+        .provide([
+          [select(tokenSelector), 'token'],
+          [select(currentEventSelector), 1],
+          [matchers.call.fn(apiRequest), throwError(error)],
+        ])
+        .dispatch(eventActions.failure())
+        .silentRun());
 
-    it('should do a GET request', () => expectSaga(registrationSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-      ])
-      .dispatch(registrationActions.retrieveFields(2))
-      .silentRun()
-      .then(() => {
-        expect(apiRequest).toBeCalledWith('registrations/2', {
-          headers: {
-            Accept: 'application/json',
-            Authorization: 'Token token',
-            'Content-Type': 'application/json',
-          },
-          method: 'GET',
-        });
-      }));
+    it('should do a GET request', () =>
+      expectSaga(registrationSaga)
+        .provide([[select(tokenSelector), 'token']])
+        .dispatch(registrationActions.retrieveFields(2))
+        .silentRun()
+        .then(() => {
+          expect(apiRequest).toBeCalledWith('registrations/2', {
+            headers: {
+              Accept: 'application/json',
+              Authorization: 'Token token',
+              'Content-Type': 'application/json',
+            },
+            method: 'GET',
+          });
+        }));
   });
 });

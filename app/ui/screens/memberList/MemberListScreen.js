@@ -38,8 +38,8 @@ class MemberListScreen extends Component {
   render() {
     const header = (
       <SearchHeader
-        title="Member List"
-        searchText="Find a member"
+        title='Member List'
+        searchText='Find a member'
         search={this.search}
         searchKey={this.props.searchKey}
       />
@@ -72,11 +72,11 @@ class MemberListScreen extends Component {
     );
 
     if (this.props.status === 'initial') {
-      content = (<LoadingScreen />);
+      content = <LoadingScreen />;
     } else if (this.props.status === 'failure') {
-      content = (<ErrorScreen message={'Sorry! We couldn\'t load any data.'} />);
+      content = <ErrorScreen message={"Sorry! We couldn't load any data."} />;
     } else if (this.props.memberList.length === 0) {
-      content = (<ErrorScreen message={'Couldn\'t find any members...'} />);
+      content = <ErrorScreen message={"Couldn't find any members..."} />;
     }
 
     return (
@@ -95,16 +95,18 @@ MemberListScreen.defaultProps = {
 };
 
 MemberListScreen.propTypes = {
-  memberList: PropTypes.arrayOf(PropTypes.shape({
-    pk: PropTypes.number.isRequired,
-    display_name: PropTypes.string.isRequired,
-    avatar: PropTypes.shape({
-      full: PropTypes.string.isRequired,
-      large: PropTypes.string.isRequired,
-      medium: PropTypes.string.isRequired,
-      small: PropTypes.string.isRequired,
-    }).isRequired,
-  })).isRequired,
+  memberList: PropTypes.arrayOf(
+    PropTypes.shape({
+      pk: PropTypes.number.isRequired,
+      display_name: PropTypes.string.isRequired,
+      avatar: PropTypes.shape({
+        full: PropTypes.string.isRequired,
+        large: PropTypes.string.isRequired,
+        medium: PropTypes.string.isRequired,
+        small: PropTypes.string.isRequired,
+      }).isRequired,
+    })
+  ).isRequired,
   status: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   more: PropTypes.string,

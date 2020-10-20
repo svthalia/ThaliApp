@@ -64,7 +64,7 @@ function* invalidate() {
   yield call([iid(), 'delete']);
 }
 
-export default function* () {
+export default function* pushNotificationsSaga() {
   yield takeEvery(pushNotificationsActions.REGISTER, register);
   yield takeEvery(pushNotificationsActions.INVALIDATE, invalidate);
 }

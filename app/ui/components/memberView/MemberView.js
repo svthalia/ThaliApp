@@ -26,10 +26,11 @@ const MemberView = (props) => (
       }}
     >
       <ImageBackground style={styles.image} source={{ uri: props.member.photo }}>
-        <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
-        <Text style={styles.nameText}>
-          {props.member.name}
-        </Text>
+        <LinearGradient
+          colors={['#55000000', '#000000']}
+          style={styles.overlayGradient}
+        />
+        <Text style={styles.nameText}>{props.member.name}</Text>
       </ImageBackground>
     </TouchableHighlight>
   </SquareView>
@@ -46,8 +47,7 @@ MemberView.propTypes = {
   loadProfile: PropTypes.func.isRequired,
 };
 
-const defaultStyles = StyleSheet.create({
-});
+const defaultStyles = StyleSheet.create({});
 
 MemberView.defaultProps = {
   style: defaultStyles,

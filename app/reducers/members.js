@@ -38,10 +38,7 @@ export default function loadEvent(state = initialState, action = {}) {
         ...state,
         status: 'success',
         loading: false,
-        memberList: [
-          ...state.memberList,
-          ...action.payload.memberList,
-        ],
+        memberList: [...state.memberList, ...action.payload.memberList],
         more: action.payload.next,
       };
     }

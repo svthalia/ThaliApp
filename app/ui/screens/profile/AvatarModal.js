@@ -8,31 +8,16 @@ const AvatarModal = (props) => (
   <Modal
     visible={props.visible}
     transparent
-    animationType="fade"
+    animationType='fade'
     onRequestClose={props.close}
   >
-    <View
-      style={styles.background}
-    >
-      <Image
-        source={{ uri: props.image }}
-        style={styles.image}
-      />
+    <View style={styles.background}>
+      <Image source={{ uri: props.image }} style={styles.image} />
 
-      <View
-        style={styles.buttonLayout}
-      >
-        {props.canEdit && (
-          <IconButton
-            name="edit"
-            onPress={props.changeAvatar}
-          />
-        )}
+      <View style={styles.buttonLayout}>
+        {props.canEdit && <IconButton name='edit' onPress={props.changeAvatar} />}
 
-        <IconButton
-          name="cancel"
-          onPress={props.close}
-        />
+        <IconButton name='cancel' onPress={props.close} />
       </View>
     </View>
   </Modal>

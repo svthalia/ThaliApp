@@ -1,7 +1,5 @@
 import ImagePicker from 'react-native-image-crop-picker';
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
@@ -69,7 +67,10 @@ function* updateAvatar() {
     };
 
     try {
-      yield call([Snackbar, 'show'], { text: 'Uploading your new profile picture...', duration: Snackbar.LENGTH_INDEFINITE });
+      yield call([Snackbar, 'show'], {
+        text: 'Uploading your new profile picture...',
+        duration: Snackbar.LENGTH_INDEFINITE,
+      });
       const profileData = yield call(apiRequest, 'members/me', data);
       yield call([Snackbar, 'dismiss']);
       yield put(profileActions.success(profileData));
@@ -78,9 +79,15 @@ function* updateAvatar() {
       yield call([Snackbar, 'dismiss']);
       yield call(reportError, error);
       if ('photo' in error.response.jsonData) {
-        yield call(Alert.alert, 'Could not update profile picture', error.response.jsonData.photo.join(' '));
+        yield call(
+          Alert.alert,
+          'Could not update profile picture',
+          error.response.jsonData.photo.join(' ')
+        );
       } else {
-        yield call([Snackbar, 'show'], { text: 'Could not update profile picture' });
+        yield call([Snackbar, 'show'], {
+          text: 'Could not update profile picture',
+        });
       }
     }
   } catch (e) {
@@ -89,7 +96,7 @@ function* updateAvatar() {
   }
 }
 
-export default function* () {
+export default function* profileSaga() {
   yield takeEvery(profileActions.PROFILE, profile);
   yield takeEvery(profileActions.CHANGE_AVATAR, updateAvatar);
 }

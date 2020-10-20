@@ -13,10 +13,7 @@ describe('pizza reducer', () => {
   });
 
   describe('is fetching', () => {
-    const state = reducer(
-      emptyState,
-      actions.fetching(),
-    );
+    const state = reducer(emptyState, actions.fetching());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
@@ -26,11 +23,7 @@ describe('pizza reducer', () => {
   describe('is successful', () => {
     const state = reducer(
       emptyState,
-      actions.success(
-        { title: 'pizzaEvent' },
-        { pk: 1 },
-        [{ pk: 2 }],
-      ),
+      actions.success({ title: 'pizzaEvent' }, { pk: 1 }, [{ pk: 2 }])
     );
 
     it('should not be loading', () => {
@@ -46,7 +39,7 @@ describe('pizza reducer', () => {
       expect(state).toHaveProperty('event', { title: 'pizzaEvent' });
     });
 
-    it('should contain the user\'s current order', () => {
+    it("should contain the user's current order", () => {
       expect(state).toHaveProperty('order', { pk: 1 });
     });
 
@@ -56,10 +49,7 @@ describe('pizza reducer', () => {
   });
 
   describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
+    const state = reducer(emptyState, actions.failure());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
@@ -72,10 +62,7 @@ describe('pizza reducer', () => {
   });
 
   describe('is cancelled successfully', () => {
-    const state = reducer(
-      emptyState,
-      actions.cancelSuccess(),
-    );
+    const state = reducer(emptyState, actions.cancelSuccess());
 
     it('should not contain an order', () => {
       expect(state).toHaveProperty('order', null);
@@ -83,12 +70,9 @@ describe('pizza reducer', () => {
   });
 
   describe('is ordered successfully', () => {
-    const state = reducer(
-      emptyState,
-      actions.orderSuccess({ pk: 1 }),
-    );
+    const state = reducer(emptyState, actions.orderSuccess({ pk: 1 }));
 
-    it('should contain the user\'s current order', () => {
+    it("should contain the user's current order", () => {
       expect(state).toHaveProperty('order', { pk: 1 });
     });
   });

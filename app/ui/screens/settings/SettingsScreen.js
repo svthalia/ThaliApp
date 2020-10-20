@@ -20,9 +20,7 @@ class SettingsScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-        >
+        <ScrollView style={styles.container}>
           <View style={styles.content}>
             <NotificationsSection />
           </View>

@@ -1,6 +1,9 @@
 import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
-import { TOTAL_BAR_HEIGHT, STATUSBAR_HEIGHT } from '../../../components/standardHeader/style/StandardHeader';
+import {
+  TOTAL_BAR_HEIGHT,
+  STATUSBAR_HEIGHT,
+} from '../../../components/standardHeader/style/StandardHeader';
 
 export const HEADER_MIN_HEIGHT = TOTAL_BAR_HEIGHT;
 export const HEADER_MAX_HEIGHT = 200 + STATUSBAR_HEIGHT;
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
-    marginTop: ((HEADER_MIN_HEIGHT - 24) + STATUSBAR_HEIGHT) / 2,
+    marginTop: (HEADER_MIN_HEIGHT - 24 + STATUSBAR_HEIGHT) / 2,
     color: Colors.white,
     android: {
       marginLeft: 16,
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     width: 64,
-    height: (HEADER_MIN_HEIGHT - 24) + STATUSBAR_HEIGHT,
+    height: HEADER_MIN_HEIGHT - 24 + STATUSBAR_HEIGHT,
     backgroundColor: Colors.transparent,
   },
   overlayGradient: {

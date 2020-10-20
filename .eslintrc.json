@@ -1,63 +1,35 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "react-native"
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            2,
-            {"SwitchCase": 1}
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "react-native/no-unused-styles": 2,
-        "react-native/split-platform-components": 2,
-        "react-native/no-inline-styles": 2,
-        "react-native/no-color-literals": 2,
-        "react/destructuring-assignment": 0,
-        "prefer-destructuring": 0,
-        "react/jsx-filename-extension": 0,
-        "react/prefer-stateless-function": 1,
-        "import/prefer-default-export": 1,
-        "no-multi-str": 0
-    },
-    "settings": {
-        "import/resolver": {
-            "node": {
-                "extensions": [
-                    ".js",
-                    ".android.js",
-                    ".ios.js"
-                ]
-            }
-        }
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": ["react", "react-native"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
+    "react/destructuring-assignment": 0,
+    "prefer-destructuring": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 1,
+    "import/prefer-default-export": 1
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".android.js", ".ios.js"]
+      }
     }
+  }
 }

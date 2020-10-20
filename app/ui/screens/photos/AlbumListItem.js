@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  ImageBackground, Text, TouchableHighlight, View, ViewPropTypes,
+  ImageBackground,
+  Text,
+  TouchableHighlight,
+  View,
+  ViewPropTypes,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Moment from 'moment/moment';
@@ -24,14 +28,13 @@ const AlbumListItem = (props) => {
             uri: props.album.cover.file.small,
           }}
         >
-          <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
+          <LinearGradient
+            colors={['#55000000', '#000000']}
+            style={styles.overlayGradient}
+          />
           <View style={styles.textWrapper}>
-            <Text style={styles.titleText}>
-              {props.album.title}
-            </Text>
-            <Text style={styles.dateText}>
-              {dateText}
-            </Text>
+            <Text style={styles.titleText}>{props.album.title}</Text>
+            <Text style={styles.dateText}>{dateText}</Text>
           </View>
         </ImageBackground>
       </TouchableHighlight>

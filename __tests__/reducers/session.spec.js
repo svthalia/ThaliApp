@@ -22,10 +22,7 @@ describe('session reducer', () => {
   });
 
   describe('is logging in', () => {
-    const state = reducer(
-      emptyState,
-      actions.signIn('user', 'pass'),
-    );
+    const state = reducer(emptyState, actions.signIn('user', 'pass'));
 
     it('should indicate it is signing in', () => {
       expect(state).toHaveProperty('status', STATUS_SIGNING_IN);
@@ -33,10 +30,7 @@ describe('session reducer', () => {
   });
 
   describe('is logged in', () => {
-    const state = reducer(
-      emptyState,
-      actions.signedIn('user', 'token'),
-    );
+    const state = reducer(emptyState, actions.signedIn('user', 'token'));
 
     it('should indicate it is logged in', () => {
       expect(state).toHaveProperty('status', STATUS_SIGNED_IN);
@@ -46,7 +40,7 @@ describe('session reducer', () => {
       expect(state).toHaveProperty('username', 'user');
     });
 
-    it('should contain the user\'s token', () => {
+    it("should contain the user's token", () => {
       expect(state).toHaveProperty('token', 'token');
     });
   });
@@ -54,7 +48,7 @@ describe('session reducer', () => {
   describe('has retrieved user info', () => {
     const state = reducer(
       emptyState,
-      actions.setUserInfo('pk', 'John Doe', 'imageUrl'),
+      actions.setUserInfo('pk', 'John Doe', 'imageUrl')
     );
 
     it('should contain the primary key', () => {
@@ -71,19 +65,13 @@ describe('session reducer', () => {
   });
 
   it('should log out with an invalid token', () => {
-    const state = reducer(
-      emptyState,
-      actions.tokenInvalid(),
-    );
+    const state = reducer(emptyState, actions.tokenInvalid());
 
     expect(state).toEqual(initialState);
   });
 
   it('should log out when the user presses the logout button', () => {
-    const state = reducer(
-      emptyState,
-      actions.signOut(),
-    );
+    const state = reducer(emptyState, actions.signOut());
 
     expect(state).toEqual(initialState);
   });

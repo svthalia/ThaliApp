@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Alert, Image, ImageBackground, Text, TouchableHighlight, View,
+  Alert,
+  Image,
+  ImageBackground,
+  Text,
+  TouchableHighlight,
+  View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -10,13 +15,11 @@ import Colors from '../../style/Colors';
 
 const background = require('../../../assets/img/huygens.jpg');
 
-const logoutPrompt = (props) => () => Alert.alert(
-  ('Log out?'),
-  ('Are you sure you want to log out?'),
-  [{ text: ('No') },
-    { text: ('Yes'), onPress: props.signOut },
-  ],
-);
+const logoutPrompt = (props) => () =>
+  Alert.alert('Log out?', 'Are you sure you want to log out?', [
+    { text: 'No' },
+    { text: 'Yes', onPress: props.signOut },
+  ]);
 
 const Sidebar = (props) => {
   const buttons = [
@@ -68,9 +71,7 @@ const Sidebar = (props) => {
   ];
 
   return (
-    <View
-      style={styles.sidebar}
-    >
+    <View style={styles.sidebar}>
       <TouchableHighlight
         onPress={() => props.loadProfile()}
         style={styles.headerButton}
@@ -78,17 +79,18 @@ const Sidebar = (props) => {
         <ImageBackground
           source={background}
           style={styles.headerImage}
-          resizeMode="cover"
+          resizeMode='cover'
         >
-          <LinearGradient colors={['#55000000', '#000000']} style={styles.headerGradient} />
+          <LinearGradient
+            colors={['#55000000', '#000000']}
+            style={styles.headerGradient}
+          />
           <Image
             source={{ uri: props.photo }}
             style={styles.profileImage}
-            resizeMode="cover"
+            resizeMode='cover'
           />
-          <Text style={styles.nameField}>
-            {props.displayName}
-          </Text>
+          <Text style={styles.nameField}>{props.displayName}</Text>
         </ImageBackground>
       </TouchableHighlight>
       <View style={styles.buttonList}>
@@ -98,17 +100,26 @@ const Sidebar = (props) => {
             name={button.iconName}
             borderRadius={0}
             backgroundColor={Colors.white}
-            color={props.activeItemKey === button.routeName
-              ? Colors.magenta : Colors.textColour}
+            color={
+              props.activeItemKey === button.routeName
+                ? Colors.magenta
+                : Colors.textColour
+            }
             size={24}
             iconStyle={styles.buttonIcon}
             style={[styles.button, button.style]}
             key={button.routeName}
           >
-            <Text style={[styles.buttonText, {
-              color: props.activeItemKey === button.routeName
-                ? Colors.magenta : Colors.textColour,
-            }]}
+            <Text
+              style={[
+                styles.buttonText,
+                {
+                  color:
+                    props.activeItemKey === button.routeName
+                      ? Colors.magenta
+                      : Colors.textColour,
+                },
+              ]}
             >
               {button.text}
             </Text>

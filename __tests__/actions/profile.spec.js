@@ -12,7 +12,7 @@ describe('profile actions', () => {
     expect(actions.profile(1)).toMatchSnapshot();
   });
 
-  it('should create an action to load the user\'s own profile as default', () => {
+  it("should create an action to load the user's own profile as default", () => {
     expect(actions.profile()).toMatchSnapshot();
   });
 

@@ -8,7 +8,7 @@ const image = require('../../../assets/img/logo.png');
 const SplashScreen = () => (
   <View style={styles.wrapper}>
     <Image style={styles.logo} source={image} />
-    <ActivityIndicator color={Colors.white} size="large" />
+    <ActivityIndicator color={Colors.white} size='large' />
   </View>
 );
 

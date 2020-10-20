@@ -10,8 +10,8 @@
     "menu:android": "adb shell input keyevent 82",
     "log:ios": "react-native log-ios",
     "log:android": "react-native log-android",
-    "lint": "eslint *.js app --fix",
-    "lint:ci": "eslint *.js app",
+    "lint": "prettier -w --loglevel silent app __tests__ && eslint *.js app __tests__",
+    "lint:ci": "prettier --check app __tests__ && eslint *.js app __tests__",
     "test": "jest",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
@@ -43,6 +43,11 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(react-native|@react-native-community|react-navigation|react-navigation-drawer|react-navigation-stack|@sentry|react-native-gesture-handler|react-native-vector-icons|react-native-linear-gradient|@react-native-firebase|react-native-image-crop-picker|react-native-reanimated|react-native-iphone-x-helper|react-native-render-html|react-native-webview|react-native-share|react-native-image-zoom-viewer|react-native-image-pan-zoom|react-native-add-calendar-event)/)"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 88
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -96,14 +101,17 @@
     "babel-jest": "^26.6.1",
     "eslint": "^7.12.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.13.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-react-native": "^3.10.0",
     "jest": "^26.6.1",
     "metro-react-native-babel-preset": "^0.63.0",
     "metro-react-native-babel-transformer": "^0.63.0",
+    "prettier": "^2.1.2",
     "react-test-renderer": "16.14.0",
     "redux-mock-store": "^1.5.4",
     "redux-saga-test-plan": "^4.0.1"
