@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { url } from '../../../utils/url';
+import { SERVER_URL } from '../../../constants';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 import Button from '../../components/button/Button';
 import styles from './style/LoginScreen';
@@ -78,13 +78,13 @@ class LoginScreen extends Component {
         />
         <Text
           style={styles.linkText}
-          onPress={() => openUrl(`${url}/user/password_reset/`)}
+          onPress={() => openUrl(`${SERVER_URL}/user/password_reset/`)}
         >
           Forgot password?
         </Text>
         <Text
           style={styles.linkText}
-          onPress={() => openUrl(`${url}/association/register/`)}
+          onPress={() => openUrl(`${SERVER_URL}/association/register/`)}
         >
           Become a member
         </Text>

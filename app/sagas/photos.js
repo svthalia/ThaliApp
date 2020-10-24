@@ -1,24 +1,13 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 import Share from 'react-native-share';
 import * as RNFS from 'react-native-fs';
 import Snackbar from 'react-native-snackbar';
-import { apiRequest, tokenSelector } from '../utils/url';
 import * as photosActions from '../actions/photos';
+import { getRequest } from './utils/api';
 
 function* loadAlbums({ payload: { keywords, next } }) {
-  const token = yield select(tokenSelector);
-
   yield put(photosActions.fetchingAlbums());
-
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
 
   const params = {
     limit: 12,
@@ -31,9 +20,9 @@ function* loadAlbums({ payload: { keywords, next } }) {
   try {
     let response;
     if (next) {
-      response = yield call(apiRequest, next, data);
+      response = yield call(getRequest, next);
     } else {
-      response = yield call(apiRequest, 'photos/albums', data, params);
+      response = yield call(getRequest, 'photos/albums', params);
     }
     yield put(
       photosActions.successAlbums(
@@ -51,28 +40,18 @@ function* loadAlbums({ payload: { keywords, next } }) {
 
 function* loadAlbum(action) {
   const { pk, slug } = action.payload;
-  const token = yield select(tokenSelector);
 
   yield put(photosActions.fetchingAlbum());
-
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
 
   try {
     let album;
     if (pk !== undefined) {
-      album = yield call(apiRequest, `photos/albums/${pk}`, data);
+      album = yield call(getRequest, `photos/albums/${pk}`);
     } else {
-      const albums = yield call(apiRequest, 'photos/albums', data, {
+      const albums = yield call(getRequest, 'photos/albums', {
         search: slug,
       });
-      album = yield call(apiRequest, `photos/albums/${albums[0].pk}`, data);
+      album = yield call(getRequest, `photos/albums/${albums[0].pk}`);
     }
 
     if (album !== undefined) {

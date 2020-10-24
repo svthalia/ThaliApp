@@ -1,6 +1,6 @@
 import { Linking } from 'react-native';
 import { put, take, takeEvery, select } from 'redux-saga/effects';
-import { url as siteURL } from '../utils/url';
+import { SERVER_URL as siteURL } from '../constants';
 import { loggedInSelector } from '../selectors/session';
 
 import * as deepLinkingActions from '../actions/deepLinking';

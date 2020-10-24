@@ -1,9 +1,8 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { apiRequest } from '../utils/url';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 import * as pizzaActions from '../actions/pizza';
-import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './utils/api';
 
 export const Payment = {
   NONE: 'no_payment',
@@ -14,24 +13,13 @@ export const Payment = {
 const NOT_FOUND = 404;
 
 function* retrievePizzaInfo() {
-  const token = yield select(tokenSelector);
-
   yield put(pizzaActions.fetching());
 
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const event = yield call(apiRequest, 'pizzas/event', data);
-    const pizzaList = yield call(apiRequest, 'pizzas', data);
+    const event = yield call(getRequest, 'pizzas/event');
+    const pizzaList = yield call(getRequest, 'pizzas');
     try {
-      const currentOrder = yield call(apiRequest, 'pizzas/orders/me', data);
+      const currentOrder = yield call(getRequest, 'pizzas/orders/me');
       yield put(pizzaActions.success(event, currentOrder, pizzaList));
     } catch (error) {
       if (error.response !== null && error.response.status === NOT_FOUND) {
@@ -52,18 +40,8 @@ function* retrievePizzaInfo() {
 }
 
 function* cancel() {
-  const token = yield select(tokenSelector);
-  const data = {
-    method: 'DELETE',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    yield call(apiRequest, 'pizzas/orders/me', data);
+    yield call(deleteRequest, 'pizzas/orders/me');
     yield put(pizzaActions.cancelSuccess());
   } catch (error) {
     yield call(reportError, error);
@@ -73,23 +51,18 @@ function* cancel() {
 
 function* order(action) {
   const { pk, hasOrder } = action.payload;
-  const token = yield select(tokenSelector);
   const data = {
-    method: hasOrder ? 'PATCH' : 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-    body: JSON.stringify({
-      product: pk,
-    }),
+    product: pk,
   };
 
-  const route = hasOrder ? 'pizzas/orders/me' : 'pizzas/orders';
   try {
-    const orderData = yield call(apiRequest, route, data);
-    yield put(pizzaActions.orderSuccess(orderData));
+    if (hasOrder) {
+      const orderData = yield call(patchRequest, 'pizzas/orders/me', data);
+      yield put(pizzaActions.orderSuccess(orderData));
+    } else {
+      const orderData = yield call(postRequest, 'pizzas/orders', data);
+      yield put(pizzaActions.orderSuccess(orderData));
+    }
   } catch (error) {
     yield call(reportError, error);
     yield put(pizzaActions.failure());
@@ -97,21 +70,10 @@ function* order(action) {
 }
 
 function* retrieveOrders() {
-  const token = yield select(tokenSelector);
-
   yield put(pizzaActions.adminLoading());
 
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const orders = yield call(apiRequest, 'pizzas/orders', data);
+    const orders = yield call(getRequest, 'pizzas/orders');
     yield put(pizzaActions.adminSuccess(orders));
   } catch (error) {
     yield call(reportError, error);
@@ -122,24 +84,10 @@ function* retrieveOrders() {
 function* updateOrder(action) {
   const { pk, payment } = action.payload;
 
-  const token = yield select(tokenSelector);
-
   yield put(pizzaActions.adminLoading());
 
-  const data = {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-    body: JSON.stringify({
-      payment,
-    }),
-  };
-
   try {
-    yield call(apiRequest, `pizzas/orders/${pk}`, data);
+    yield call(patchRequest, `pizzas/orders/${pk}`, payment);
     yield put(pizzaActions.retrieveOrders());
   } catch (error) {
     yield call(reportError, error);

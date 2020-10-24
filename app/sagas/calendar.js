@@ -1,26 +1,14 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { apiRequest } from '../utils/url';
 import * as calendarActions from '../actions/calendar';
-import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import { getRequest } from './utils/api';
 
 const calendar = function* calendar(action) {
   const { keywords } = action.payload;
-  const token = yield select(tokenSelector);
-
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   yield put(calendarActions.fetching());
 
-  let params = null;
+  let params;
   if (keywords) {
     params = {
       search: keywords,
@@ -28,10 +16,10 @@ const calendar = function* calendar(action) {
   }
 
   try {
-    const events = yield call(apiRequest, 'events', data, params);
+    const events = yield call(getRequest, 'events', params);
     let partnerEvents = [];
     try {
-      partnerEvents = yield call(apiRequest, 'partners/events', data, params);
+      partnerEvents = yield call(getRequest, 'partners/events', params);
       partnerEvents = partnerEvents.map((event) => ({
         ...event,
         pk: -event.pk,

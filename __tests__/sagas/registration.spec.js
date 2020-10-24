@@ -5,12 +5,12 @@ import Snackbar from 'react-native-snackbar';
 import { select } from 'redux-saga/effects';
 import * as registrationActions from '../../app/actions/registration';
 import registrationSaga from '../../app/sagas/registration';
-import { apiRequest } from '../../app/utils/url';
+import apiRequest from '../../app/utils/apiRequest';
 import * as eventActions from '../../app/actions/event';
 import { tokenSelector } from '../../app/selectors/session';
 import { currentEventSelector } from '../../app/selectors/events';
 
-const { ServerError } = jest.requireActual('../../app/utils/url');
+const { ServerError } = jest.requireActual('../../app/utils/SERVER_URL');
 
 jest.mock('react-native-snackbar', () => ({
   LENGTH_LONG: 100,
@@ -23,7 +23,7 @@ jest.mock('../../app/navigation', () => ({
   goBack: jest.fn(),
 }));
 
-jest.mock('../../app/utils/url', () => ({
+jest.mock('../../app/utils/SERVER_URL', () => ({
   apiRequest: jest.fn(() => {}),
 }));
 

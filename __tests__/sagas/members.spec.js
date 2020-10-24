@@ -7,7 +7,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import membersSaga from '../../app/sagas/members';
 import { tokenSelector } from '../../app/selectors/session';
 import * as memberActions from '../../app/actions/members';
-import { apiRequest } from '../../app/utils/url';
+import apiRequest from '../../app/utils/apiRequest';
 
 jest.mock('../../app/ui/components/standardHeader/style/StandardHeader', () => ({
   TOTAL_BAR_HEIGHT: 20,
@@ -17,7 +17,7 @@ jest.mock('../../app/ui/screens/memberList/style/MemberList', () => ({
   memberSize: 24,
 }));
 
-jest.mock('../../app/utils/url', () => ({
+jest.mock('../../app/utils/SERVER_URL', () => ({
   apiRequest: jest.fn(),
 }));
 

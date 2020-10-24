@@ -1,16 +1,16 @@
 import * as profileActions from '../actions/profile';
 
-import { defaultProfileImage } from '../utils/url';
+import { DEFAULT_PROFILE_PHOTO } from '../constants';
 
 const initialState = {
   profile: {
     pk: -1,
     display_name: '',
     avatar: {
-      full: defaultProfileImage,
-      large: defaultProfileImage,
-      medium: defaultProfileImage,
-      small: defaultProfileImage,
+      full: DEFAULT_PROFILE_PHOTO,
+      large: DEFAULT_PROFILE_PHOTO,
+      medium: DEFAULT_PROFILE_PHOTO,
+      small: DEFAULT_PROFILE_PHOTO,
     },
     profile_description: '',
     birthday: '',

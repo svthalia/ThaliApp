@@ -1,29 +1,17 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { all, call, put, select, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import { notificationsSettingsActions, settingsActions } from '../actions/settings';
 
-import { apiRequest } from '../utils/url';
 import * as pushNotifactionsActions from '../actions/pushNotifications';
-import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import { getRequest } from './utils/api';
 
 const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 
 function* pushNotifications() {
-  const token = yield select(tokenSelector);
-
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const categoryList = yield call(apiRequest, 'devices/categories', data);
+    const categoryList = yield call(getRequest, 'devices/categories');
     const preferencesJson = yield call(AsyncStorage.getItem, PUSHCATEGORYKEY);
 
     if (preferencesJson === null) {

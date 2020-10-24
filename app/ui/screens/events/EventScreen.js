@@ -23,7 +23,7 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import Colors from '../../style/Colors';
 
-import { termsAndConditionsUrl, url as serverUrl } from '../../../utils/url';
+import { TERMS_CONDITIONS_URL, SERVER_URL } from '../../../constants';
 import Button from '../../components/button/Button';
 import StandardHeader from '../../components/standardHeader/StandardHeader';
 
@@ -280,7 +280,7 @@ class EventScreen extends Component {
               By registering, you confirm that you have read the
               <Text
                 style={styles.termsUrl}
-                onPress={() => openUrl(termsAndConditionsUrl)}
+                onPress={() => openUrl(TERMS_CONDITIONS_URL)}
               >
                 {' '}
                 {'terms and conditions'}{' '}
@@ -404,7 +404,7 @@ class EventScreen extends Component {
         onPress={() =>
           Share.open({
             message: this.props.data.title,
-            url: `${serverUrl}/events/${this.props.data.pk}/`,
+            url: `${SERVER_URL}/events/${this.props.data.pk}/`,
           })
         }
       >

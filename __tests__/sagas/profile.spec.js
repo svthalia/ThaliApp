@@ -3,7 +3,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import profileSaga from '../../app/sagas/profile';
-import { apiRequest } from '../../app/utils/url';
+import apiRequest from '../../app/utils/apiRequest';
 import * as profileActions from '../../app/actions/profile';
 import { tokenSelector } from '../../app/selectors/session';
 
@@ -13,7 +13,7 @@ jest.mock('react-native-snackbar', () => ({
   dismiss: jest.fn(),
 }));
 
-jest.mock('../../app/utils/url', () => ({
+jest.mock('../../app/utils/SERVER_URL', () => ({
   apiRequest: jest.fn(() => {}),
 }));
 

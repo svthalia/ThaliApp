@@ -1,4 +1,4 @@
-import { defaultProfileImage } from '../utils/url';
+import { DEFAULT_PROFILE_PHOTO } from '../constants';
 
 import * as sessionActions from '../actions/session';
 
@@ -9,10 +9,9 @@ export const STATUS_SIGNING_IN = 'SIGNING_IN';
 const initialState = {
   status: STATUS_SIGNED_OUT,
   token: '',
-  username: '',
   displayName: '',
   pk: -1,
-  photo: defaultProfileImage,
+  photo: DEFAULT_PROFILE_PHOTO,
 };
 
 export default function session(state = initialState, action = {}) {
@@ -26,8 +25,7 @@ export default function session(state = initialState, action = {}) {
       return {
         ...state,
         status: STATUS_SIGNED_IN,
-        username: action.payload.username,
-        token: action.payload.token,
+        ...action.payload,
       };
     case sessionActions.SET_USER_INFO:
       return {

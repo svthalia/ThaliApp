@@ -2,11 +2,11 @@ import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { Platform } from 'react-native';
 import pushNotificationsSaga from '../../app/sagas/pushNotifications';
-import { apiRequest } from '../../app/utils/url';
+import apiRequest from '../../app/utils/apiRequest';
 import * as pushActions from '../../app/actions/pushNotifications';
 import { tokenSelector } from '../../app/selectors/session';
 
-jest.mock('../../app/utils/url', () => ({
+jest.mock('../../app/utils/SERVER_URL', () => ({
   apiRequest: jest.fn(),
 }));
 

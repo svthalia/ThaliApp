@@ -12,7 +12,7 @@ import sessionSaga, {
   TOKENKEY,
   USERNAMEKEY,
 } from '../../app/sagas/session';
-import { apiRequest } from '../../app/utils/url';
+import apiRequest from '../../app/utils/apiRequest';
 import * as sessionActions from '../../app/actions/session';
 import * as pushNotificationsActions from '../../app/actions/pushNotifications';
 
@@ -22,7 +22,7 @@ jest.mock('react-native-snackbar', () => ({
   dismiss: jest.fn(),
 }));
 
-jest.mock('../../app/utils/url', () => ({
+jest.mock('../../app/utils/SERVER_URL', () => ({
   apiRequest: jest.fn(() => {}),
 }));
 

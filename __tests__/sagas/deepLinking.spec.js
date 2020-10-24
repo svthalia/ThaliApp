@@ -3,7 +3,7 @@ import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import deepLinkingSaga, { parseURL } from '../../app/sagas/deepLinking';
-import { url as siteURL } from '../../app/utils/url';
+import { SERVER_URL as siteURL } from '../../app/constants';
 
 import * as actions from '../../app/actions/deepLinking';
 import * as sessionActions from '../../app/actions/session';
@@ -44,7 +44,7 @@ describe('deeplinking saga', () => {
       .take(sessionActions.SIGNED_IN)
       .silentRun());
 
-  it('should not open an unknown url outside the app if stayInApp is true', () =>
+  it('should not open an unknown SERVER_URL outside the app if stayInApp is true', () =>
     expectSaga(deepLinkingSaga)
       .provide([[select(loggedInSelector), true]])
       .dispatch(actions.deepLink('http://example.org/', true))
@@ -53,7 +53,7 @@ describe('deeplinking saga', () => {
         expect(Linking.openURL).not.toBeCalled();
       }));
 
-  it('should open an unknown url outside the app if specified', () =>
+  it('should open an unknown SERVER_URL outside the app if specified', () =>
     expectSaga(deepLinkingSaga)
       .provide([[select(loggedInSelector), true]])
       .dispatch(actions.deepLink('http://example.org/', false))
@@ -62,14 +62,14 @@ describe('deeplinking saga', () => {
         expect(Linking.openURL).toBeCalledWith('http://example.org/');
       }));
 
-  it('should open the pizza url', () =>
+  it('should open the pizza SERVER_URL', () =>
     expectSaga(deepLinkingSaga)
       .provide([[select(loggedInSelector), true]])
       .dispatch(actions.deepLink(`${siteURL}/pizzas/`))
       .put(pizzaActions.retrievePizzaInfo())
       .silentRun());
 
-  it('should open the events calendar url', () =>
+  it('should open the events calendar SERVER_URL', () =>
     expectSaga(deepLinkingSaga)
       .provide([[select(loggedInSelector), true]])
       .dispatch(actions.deepLink(`${siteURL}/events/`))

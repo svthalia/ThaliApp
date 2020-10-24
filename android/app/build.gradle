@@ -60,6 +60,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode project.hasProperty('versionCode') ? project.property('versionCode') as int : 1
         versionName "3.0.0"
+
+        manifestPlaceholders = [
+          appAuthRedirectScheme: 'com.thaliapp'
+        ]
     }
 
     splits {

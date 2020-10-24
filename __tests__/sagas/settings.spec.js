@@ -14,13 +14,13 @@ import {
 import * as pushNotificationActions from '../../app/actions/pushNotifications';
 
 import { tokenSelector } from '../../app/selectors/session';
-import { apiRequest } from '../../app/utils/url';
+import apiRequest from '../../app/utils/apiRequest';
 
 jest.mock('@sentry/react-native', () => ({
   captureException: jest.fn(),
 }));
 
-jest.mock('../../app/utils/url', () => ({
+jest.mock('../../app/utils/SERVER_URL', () => ({
   apiRequest: jest.fn(),
 }));
 

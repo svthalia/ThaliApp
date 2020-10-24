@@ -59,7 +59,7 @@ describe('session reducer', () => {
       expect(state).toHaveProperty('displayName', 'John Doe');
     });
 
-    it('should contain the url for the profile picture', () => {
+    it('should contain the SERVER_URL for the profile picture', () => {
       expect(state).toHaveProperty('photo', 'imageUrl');
     });
   });
