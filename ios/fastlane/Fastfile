@@ -1,4 +1,6 @@
-update_fastlane
+if not is_ci?
+  update_fastlane
+end
 skip_docs
 
 default_platform(:ios)

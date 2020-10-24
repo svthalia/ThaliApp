@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "fastlane"
+gem "fastlane", "~> 2.164"
 gem "dotenv"
 
 gem "cocoapods", "~> 1.9"
