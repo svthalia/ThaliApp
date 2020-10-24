@@ -21,7 +21,7 @@ jobs:
           node-version: 12
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/yarn.lock') }}
@@ -37,7 +37,7 @@ jobs:
         run: echo $FIREBASE_CONFIG > android/app/google-services.json
 
       - name: Restore Gradle cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
