@@ -7774,10 +7774,10 @@ react-native-device-info@^6.2.1:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-6.2.1.tgz#6b63faeef833d8959d636c0413ccd5066eada2bf"
   integrity sha512-+9Li07jD+7IiSIn9VVmb1YWYfJtgERVMsgO/hG+aUzsFD6uFklpM2TOEBlfKPWP/8J6s8MZgpGfA/Dl1WZrn2g==
 
-react-native-dotenv@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-2.4.1.tgz#f15fa3e4a8821a92a4297ca0ef416d84409d6a32"
-  integrity sha512-pt+769G395XNPiKtpLDXZC0+yCpl+DXyf7Qua3hTYKX/Kw/xA1heT5NWGSWvWIgYZ8b8mE1OjZYWctmIGIlAHg==
+react-native-dotenv@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-2.4.2.tgz#231071a1c3a9c29d96e6221b80d2cef6d9be39b7"
+  integrity sha512-j2ig8RTdv+PQ6JemHzIskqrbjfFpV82Wd5v9cIAEZsw5wto864R4BW7gn8r347SKystdokZbMosdIRyYMXVi1Q==
   dependencies:
     dotenv "^8.0.0"
 
