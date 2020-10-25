@@ -39,16 +39,6 @@ const update = function* update(action) {
     }
   });
 
-  const data = {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-    body: JSON.stringify(body),
-  };
-
   try {
     yield call(postRequest, `registrations/${registration}`, body);
     yield put(registrationActions.success());

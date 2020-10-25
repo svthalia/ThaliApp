@@ -35,7 +35,10 @@ export default function profile(state = initialState, { type, payload } = {}) {
     case profileActions.SUCCESS:
       return {
         ...state,
-        profile: payload,
+        profile: {
+          ...state.profile,
+          ...payload,
+        },
         success: true,
         hasLoaded: true,
       };

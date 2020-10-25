@@ -1,8 +1,20 @@
 /* eslint-disable max-classes-per-file */
-import { select, call, put } from 'redux-saga/effects';
+import AsyncStorage from '@react-native-community/async-storage';
+import { authorize, refresh } from 'react-native-app-auth';
+import { call, select, put } from 'redux-saga/effects';
 import * as sessionActions from '../../actions/session';
-import { API_URL } from '../../constants';
-import { accessTokenSelector } from '../../selectors/session';
+import {
+  API_URL,
+  OAUTH_CONFIG,
+  STORAGE_ACCESS_TOKEN,
+  STORAGE_REFRESH_TOKEN,
+  STORAGE_TOKEN_EXPIRATION,
+} from '../../constants';
+import {
+  accessTokenSelector,
+  refreshTokenSelector,
+  tokenExpirationSelector,
+} from '../../selectors/session';
 
 class ServerError extends Error {
   constructor(message, response) {
@@ -12,64 +24,42 @@ class ServerError extends Error {
   }
 }
 
-class TokenInvalidError extends Error {
-  constructor(response) {
-    super('Invalid token');
-    this.name = 'TokenInvalidError';
-    this.response = response;
+export function* authorizeUser(currentRefreshToken = null) {
+  let result;
+
+  if (currentRefreshToken) {
+    result = yield call(refresh, OAUTH_CONFIG, { currentRefreshToken });
+  } else {
+    result = yield call(authorize, OAUTH_CONFIG);
+  }
+
+  const {
+    accessToken, refreshToken, accessTokenExpirationDate: tokenExpiration,
+  } = result;
+
+  yield call([AsyncStorage, 'multiSet'], [
+    [STORAGE_ACCESS_TOKEN, accessToken],
+    [STORAGE_REFRESH_TOKEN, refreshToken],
+    [STORAGE_TOKEN_EXPIRATION, tokenExpiration],
+  ]);
+
+  return { accessToken, refreshToken, tokenExpiration };
+}
+
+function* checkTokenExpiration() {
+  const tokenExpiration = yield select(tokenExpirationSelector);
+  const expirationTimestamp = Date.parse(tokenExpiration);
+
+  if (expirationTimestamp < Date.now()) {
+    const refreshToken = yield select(refreshTokenSelector);
+    yield call(authorizeUser, refreshToken);
   }
 }
 
-const detectInvalidToken = (response) => {
-  if (response.status === 403 && response.jsonData) {
-    const contentLang = response.headers.get('content-language');
-    if (
-      (contentLang === 'en' && response.jsonData.detail === 'Invalid token.') ||
-      (contentLang === 'nl' && response.jsonData.detail === 'Ongeldige token.')
-    ) {
-      throw new TokenInvalidError(response);
-    }
-  }
-  return response;
-};
-
-const apiRequest = (route, fetchOpts, params = null) => {
-  const requestOptions = fetchOpts;
-  if (!requestOptions.headers) {
-    requestOptions.headers = {};
-  }
-
-  let query = '';
-  if (params !== null && params === Object(params)) {
-    query = `?${Object.keys(params)
-      .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-      .join('&')}`;
-  }
-
-  let requestUrl = `${API_URL}/${route}/${query}`;
-  if (route.startsWith('http')) {
-    requestUrl = route;
-  }
-  return fetch(requestUrl, requestOptions)
-    .then((response) =>
-      response
-        .json()
-        .then((data) => ({ ...response, jsonData: data }))
-        .catch(() => response)
-    )
-    .then(detectInvalidToken)
-    .then((response) => {
-      if (response.status >= 400 && response.status <= 500) {
-        throw new ServerError(`Invalid status code: ${response.status}`, response);
-      } else if (response.status === 204) {
-        return {};
-      }
-      return response.jsonData;
-    });
-};
-
-export function* request(method, route, requestBody, params) {
+function* request(method, route, requestBody, params, opts = {}) {
   const accessToken = yield select(accessTokenSelector);
+
+  yield call(checkTokenExpiration);
 
   let contentType = 'application/json';
   let body;
@@ -80,7 +70,7 @@ export function* request(method, route, requestBody, params) {
     body = JSON.stringify(requestBody);
   }
 
-  const data = {
+  const requestOptions = {
     method,
     headers: {
       Accept: 'application/json',
@@ -88,16 +78,32 @@ export function* request(method, route, requestBody, params) {
       Authorization: `Bearer ${accessToken}`,
     },
     body,
+    ...opts,
   };
 
-  try {
-    return yield call(apiRequest, route, data, params);
-  } catch (error) {
-    if (error.name === 'TokenInvalidError') {
-      yield put(sessionActions.tokenInvalid());
-    }
+  let query = '';
+  if (params === Object(params)) {
+    query = `?${Object.keys(params)
+      .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+      .join('&')}`;
   }
-  return {};
+
+  let requestUrl = `${API_URL}/${route}/${query}`;
+  if (route.startsWith('http')) {
+    requestUrl = route;
+  }
+
+  const response = yield call(fetch, requestUrl, requestOptions);
+
+  if (response.status === 403) {
+    yield put(sessionActions.tokenInvalid());
+  } else if (response.status >= 400 && response.status <= 500) {
+    throw new ServerError(`Invalid status code: ${response.status}`, response);
+  } else if (response.status === 204) {
+    return {};
+  }
+
+  return yield call([response, 'json']);
 }
 
 export function* getRequest(route, params) {

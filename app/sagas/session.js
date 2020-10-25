@@ -2,62 +2,30 @@ import { call, put, takeEvery, delay } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
 import * as Sentry from '@sentry/react-native';
-import { authorize, refresh } from 'react-native-app-auth';
-import { OAUTH_CONFIG } from '../constants';
 
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
+import {
+  STORAGE_ACCESS_TOKEN, STORAGE_DISPLAY_NAME, STORAGE_PROFILE_PHOTO, STORAGE_PUSH_CATEGORIES,
+  STORAGE_REFRESH_TOKEN,
+  STORAGE_TOKEN_EXPIRATION, STORAGE_USER_ID,
+} from '../constants';
 import reportError from '../utils/errorReporting';
-import { getRequest } from './utils/api';
-
-export const USER_ID = 'userId';
-export const ACCESS_TOKEN = 'accessToken';
-export const REFRESH_TOKEN = 'refreshToken';
-export const TOKEN_EXPIRATION = 'tokenExpiration';
-export const DISPLAY_NAME = 'displayName';
-export const PROFILE_PHOTO = 'profilePhoto';
-export const PUSH_CATEGORIES = '@MyStore:pushCategories';
-
-function* authorizeUser(currentRefreshToken = null) {
-  let result;
-
-  if (currentRefreshToken) {
-    result = yield call(refresh, OAUTH_CONFIG, { currentRefreshToken });
-  } else {
-    result = yield call(authorize, OAUTH_CONFIG);
-  }
-
-  const {
-    accessToken,
-    refreshToken,
-    accessTokenExpirationDate: tokenExpiration,
-  } = result;
-
-  yield call(
-    [AsyncStorage, 'multiSet'],
-    [
-      [ACCESS_TOKEN, accessToken],
-      [REFRESH_TOKEN, refreshToken],
-      [TOKEN_EXPIRATION, tokenExpiration],
-    ]
-  );
-
-  return { accessToken, refreshToken, tokenExpiration };
-}
+import { authorizeUser, getRequest } from './utils/api';
 
 function* init() {
   try {
     const result = yield call(
       [AsyncStorage, 'multiGet'],
       [
-        ACCESS_TOKEN,
-        REFRESH_TOKEN,
-        TOKEN_EXPIRATION,
-        USER_ID,
-        DISPLAY_NAME,
-        PROFILE_PHOTO,
-        PUSH_CATEGORIES,
-      ]
+        STORAGE_ACCESS_TOKEN,
+        STORAGE_REFRESH_TOKEN,
+        STORAGE_TOKEN_EXPIRATION,
+        STORAGE_USER_ID,
+        STORAGE_DISPLAY_NAME,
+        STORAGE_PROFILE_PHOTO,
+        STORAGE_PUSH_CATEGORIES,
+      ],
     );
 
     const values = result.reduce((obj, pair) => {
@@ -66,23 +34,19 @@ function* init() {
       return obj2;
     }, {});
 
-    if (values[ACCESS_TOKEN] !== null && values[USER_ID] !== null) {
-      yield put(
-        sessionActions.signedIn(
-          values[ACCESS_TOKEN],
-          values[REFRESH_TOKEN],
-          values[TOKEN_EXPIRATION]
-        )
-      );
-      yield put(
-        sessionActions.setUserInfo(
-          parseInt(values[USER_ID], 10),
-          values[DISPLAY_NAME],
-          values[PROFILE_PHOTO]
-        )
-      );
+    if (values[STORAGE_ACCESS_TOKEN] !== null && values[STORAGE_USER_ID] !== null) {
+      yield put(sessionActions.signedIn(
+        values[STORAGE_ACCESS_TOKEN],
+        values[STORAGE_REFRESH_TOKEN],
+        values[STORAGE_TOKEN_EXPIRATION],
+      ));
+      yield put(sessionActions.setUserInfo(
+        parseInt(values[STORAGE_USER_ID], 10),
+        values[STORAGE_DISPLAY_NAME],
+        values[STORAGE_PROFILE_PHOTO],
+      ));
       yield put(sessionActions.fetchUserInfo());
-      yield put(pushNotificationsActions.register(JSON.parse(values[PUSH_CATEGORIES])));
+      yield put(pushNotificationsActions.register(JSON.parse(values[STORAGE_PUSH_CATEGORIES])));
     } else {
       yield put(sessionActions.tokenInvalid());
     }
@@ -101,7 +65,6 @@ function* signIn() {
     yield put(pushNotificationsActions.register());
     yield call([Snackbar, 'show'], { text: 'Login successful' });
   } catch (e) {
-    console.error(JSON.stringify(e));
     // Delay failure to make sure animation is finished
     const now = Date.now();
     if (now - currentTimestamp < 150) {
@@ -118,14 +81,14 @@ function* clearUserInfo() {
   yield call(
     [AsyncStorage, 'multiRemove'],
     [
-      USER_ID,
-      ACCESS_TOKEN,
-      REFRESH_TOKEN,
-      TOKEN_EXPIRATION,
-      DISPLAY_NAME,
-      PROFILE_PHOTO,
-      PUSH_CATEGORIES,
-    ]
+      STORAGE_USER_ID,
+      STORAGE_ACCESS_TOKEN,
+      STORAGE_REFRESH_TOKEN,
+      STORAGE_TOKEN_EXPIRATION,
+      STORAGE_DISPLAY_NAME,
+      STORAGE_PROFILE_PHOTO,
+      STORAGE_PUSH_CATEGORIES,
+    ],
   );
   yield put(pushNotificationsActions.invalidate());
 }
@@ -145,9 +108,9 @@ function* userInfo() {
     const userProfile = yield call(getRequest, 'members/me');
 
     yield call(AsyncStorage.multiSet, [
-      [USER_ID, userProfile.pk.toString()],
-      [DISPLAY_NAME, userProfile.display_name],
-      [PROFILE_PHOTO, userProfile.avatar.medium],
+      [STORAGE_USER_ID, userProfile.pk.toString()],
+      [STORAGE_DISPLAY_NAME, userProfile.display_name],
+      [STORAGE_PROFILE_PHOTO, userProfile.avatar.medium],
     ]);
     yield put(
       sessionActions.setUserInfo(

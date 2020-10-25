@@ -44,10 +44,7 @@ function* updateAvatar() {
     });
 
     try {
-      yield call([Snackbar, 'show'], {
-        text: 'Uploading your new profile picture...',
-        duration: Snackbar.LENGTH_INDEFINITE,
-      });
+      yield call([Snackbar, 'show'], { text: 'Uploading your new profile picture...', duration: Snackbar.LENGTH_INDEFINITE });
       const profileData = yield call(patchRequest, 'members/me', formData);
       yield call([Snackbar, 'dismiss']);
       yield put(profileActions.success(profileData));
