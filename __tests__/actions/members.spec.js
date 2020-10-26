@@ -2,12 +2,17 @@ import * as actions from '../../app/actions/members';
 
 describe('member actions', () => {
   it('should expose the member actions', () => {
+    expect(actions.OPEN).toEqual('MEMBERS_OPEN');
     expect(actions.MEMBERS).toEqual('MEMBERS_MEMBERS');
     expect(actions.FETCHING).toEqual('MEMBERS_FETCHING');
     expect(actions.MEMBERS_SUCCESS).toEqual('MEMBERS_MEMBERS_SUCCESS');
     expect(actions.FAILURE).toEqual('MEMBERS_FAILURE');
     expect(actions.MORE).toEqual('MEMBERS_MORE');
     expect(actions.MORE_SUCCESS).toEqual('MEMBERS_MORE_SUCCESS');
+  });
+
+  it('should create an action to open the member list', () => {
+    expect(actions.members()).toMatchSnapshot();
   });
 
   it('should create an action to notify the member list should be fetched unfiltered', () => {

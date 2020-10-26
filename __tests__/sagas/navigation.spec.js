@@ -73,7 +73,7 @@ describe('navigation saga', () => {
       }));
 
     it('should open the members screen', () => expectSaga(navigationSaga)
-      .dispatch(membersActions.members())
+      .dispatch(membersActions.open())
       .silentRun()
       .then(() => {
         expect(NavigationService.navigate).toBeCalledWith('MemberList');
