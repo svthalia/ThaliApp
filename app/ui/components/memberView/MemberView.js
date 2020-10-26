@@ -8,6 +8,7 @@ import {
   ViewPropTypes,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Snackbar from 'react-native-snackbar';
 
 import styles from './style/MemberView';
 import SquareView from './SquareView';
@@ -16,7 +17,13 @@ const MemberView = (props) => (
   <SquareView style={props.style} size={props.size}>
     <TouchableHighlight
       style={styles.image}
-      onPress={() => props.loadProfile(props.member.pk)}
+      onPress={() => {
+        if (props.member.pk) {
+          props.loadProfile(props.member.pk);
+        } else {
+          Snackbar.show({ text: `${props.member.name} is not a member of Thalia` });
+        }
+      }}
     >
       <ImageBackground style={styles.image} source={{ uri: props.member.photo }}>
         <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
@@ -30,7 +37,7 @@ const MemberView = (props) => (
 
 MemberView.propTypes = {
   member: PropTypes.shape({
-    pk: PropTypes.number.isRequired,
+    pk: PropTypes.number,
     name: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
   }).isRequired,
