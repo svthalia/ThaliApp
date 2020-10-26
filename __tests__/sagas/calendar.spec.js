@@ -25,7 +25,7 @@ describe('calendar saga', () => {
       [select(tokenSelector), 'token'],
       [matchers.call.fn(apiRequest), []],
     ])
-    .dispatch(calendarActions.refresh())
+    .dispatch(calendarActions.events())
     .put(calendarActions.fetching())
     .silentRun());
 
@@ -34,7 +34,7 @@ describe('calendar saga', () => {
       [select(tokenSelector), 'token'],
       [matchers.call.fn(apiRequest), throwError(error)],
     ])
-    .dispatch(calendarActions.refresh())
+    .dispatch(calendarActions.events())
     .put(calendarActions.failure())
     .silentRun());
 
@@ -44,15 +44,25 @@ describe('calendar saga', () => {
       [matchers.call.like({ fn: apiRequest, args: ['events'] }), [{ pk: 1 }]],
       [matchers.call.like({ fn: apiRequest, args: ['partners/events'] }), [{ pk: 2 }]],
     ])
-    .dispatch(calendarActions.refresh())
-    .put(calendarActions.success([{ pk: 1 }, { pk: -2, partner: true }]))
+    .dispatch(calendarActions.events())
+    .put(calendarActions.success([{ pk: 1 }, { pk: -2, partner: true }], ''))
+    .silentRun());
+
+  it('should put keywords if they were passed', () => expectSaga(calendarSaga)
+    .provide([
+      [select(tokenSelector), 'token'],
+      [matchers.call.like({ fn: apiRequest, args: ['events'] }), [{ pk: 1 }]],
+      [matchers.call.like({ fn: apiRequest, args: ['partners/events'] }), [{ pk: 2 }]],
+    ])
+    .dispatch(calendarActions.events('keywords'))
+    .put(calendarActions.success([{ pk: 1 }, { pk: -2, partner: true }], 'keywords'))
     .silentRun());
 
   it('should do two GET requests', () => expectSaga(calendarSaga)
     .provide([
       [select(tokenSelector), 'usertoken'],
     ])
-    .dispatch(calendarActions.refresh())
+    .dispatch(calendarActions.events())
     .silentRun()
     .then(() => {
       expect(apiRequest).toBeCalledWith('events', {
@@ -62,7 +72,7 @@ describe('calendar saga', () => {
           'Content-Type': 'application/json',
         },
         method: 'GET',
-      });
+      }, null);
       expect(apiRequest).toBeCalledWith('partners/events', {
         headers: {
           Accept: 'application/json',
@@ -70,6 +80,6 @@ describe('calendar saga', () => {
           'Content-Type': 'application/json',
         },
         method: 'GET',
-      });
+      }, null);
     }));
 });
