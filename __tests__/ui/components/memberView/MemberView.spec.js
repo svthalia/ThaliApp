@@ -6,6 +6,10 @@ jest.mock('react-navigation', () => ({
   withNavigation: component => component,
 }));
 
+jest.mock('react-native-snackbar', () => ({
+  show: jest.fn(),
+}));
+
 describe('MemberView component', () => {
   const initialState = {
     session: {
