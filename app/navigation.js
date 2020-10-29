@@ -4,10 +4,10 @@ import {
   NavigationActions,
 } from 'react-navigation';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DrawerActions, NavigationAction } from '@react-navigation/native';
 
-import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './ui/screens/login/LoginScreenConnector';
 import Welcome from './ui/screens/welcome/WelcomeScreenConnector';
@@ -26,6 +26,7 @@ import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
 import PizzaAdmin from './ui/screens/pizza/PizzaAdminScreenConnector';
 import Sidebar from './ui/components/sidebar/SidebarConnector';
 
+<<<<<<< HEAD
 const MainNavigator = createDrawerNavigator(
   {
     Welcome,
@@ -55,6 +56,54 @@ const SignedInNavigator = createStackNavigator(
     headerMode: 'none',
   }
 );
+=======
+const Drawer = createDrawerNavigator();
+
+function MainNavigator() {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Welcome"
+    >
+      <Drawer.Screen
+        name="Welcome"
+        component={Welcome}
+    </Drawer.Navigator>
+  );
+}
+
+const MainNavigator = createDrawerNavigator({
+  Welcome,
+  Calendar,
+  MemberList,
+  Photos,
+  Settings,
+}, {
+  contentComponent: Sidebar,
+});
+
+const Stack = createStackNavigator();
+
+function SignedInNavigator() {
+  return (
+    <Stack.Navigator>
+    </Stack.Navigator>
+  );
+}
+
+const SignedInNavigator = createStackNavigator({
+  MainNavigator,
+  Event,
+  Profile,
+  Pizza,
+  PhotoAlbum,
+  PhotoGallery,
+  Registration,
+  EventAdmin,
+  PizzaAdmin,
+}, {
+  headerMode: 'none',
+});
+>>>>>>> Some changeS
 
 const AppNavigator = createSwitchNavigator({
   Splash: SplashScreen,
