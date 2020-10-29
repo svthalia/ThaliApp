@@ -3,13 +3,27 @@
     "config:base"
   ],
   "schedule": [
-    "every weekend"
+    "before 3am on the first day of the month"
   ],
   "rangeStrategy": "bump",
   "packageRules": [
     {
       "packagePatterns": [ "@react-native-firebase" ],
       "groupName": "react-native-firebase"
+    }
+    {
+      "packageNames": [
+        "babel-eslint"
+      ],
+      "packagePatterns": [
+        "^@typescript-eslint/",
+        "^eslint"
+      ],
+      "groupName": "eslint"
+    },
+    {
+      "extends": "monorepo:react-navigation",
+      "groupName": "react-navigation monorepo"
     }
   ]
 }
