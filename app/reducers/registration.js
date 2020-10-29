@@ -6,6 +6,20 @@ const initialState = {
   status: 'loading',
 };
 
+function updateFields(fields, values) {
+  /**
+   * Updates the registration fields with the newly entered values.
+   */
+  const newFields = {};
+  Object.keys(values).forEach((key) => {
+    newFields[key] = {
+      ...fields[key],
+      value: values[key],
+    };
+  });
+  return newFields;
+}
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case registrationActions.SHOW_FIELDS: {
@@ -13,6 +27,12 @@ export default function reducer(state = initialState, action = {}) {
         registration: action.payload.registration,
         fields: action.payload.fields,
         status: 'success',
+      };
+    }
+    case registrationActions.UPDATE: {
+      return {
+        ...state,
+        fields: updateFields(state.fields, action.payload.fields),
       };
     }
     case registrationActions.SUCCESS: {
