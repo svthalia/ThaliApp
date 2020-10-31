@@ -10,7 +10,8 @@ import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 
 import styles from './style/CalendarScreen';
-import { withStandardHeader } from '../../components/standardHeader/StandardHeader';
+import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
+import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
@@ -21,7 +22,7 @@ const addEventToSection = (sections, date, event) => {
 
   if (!(sectionKey in sections)) {
     sections[sectionKey] = {
-      key: date.format('MMMM'),
+      key: date.format('MMMM YYYY'),
       data: {},
     };
   }
@@ -122,18 +123,55 @@ const renderItem = (item) => {
 
 class CalendarScreen extends Component {
   componentDidMount() {
-    this.props.refresh();
+    const { keywords } = this.props;
+    this.props.events(keywords);
   }
 
   handleRefresh = () => {
-    this.props.refresh();
+    const { keywords } = this.props;
+    this.props.events(keywords);
+  };
+
+  search = (searchKey) => {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      this.props.events(searchKey);
+    }, 500);
   };
 
   render() {
+    const header = (
+      <SearchHeader
+        title="Calendar"
+        searchText="Find an event"
+        search={this.search}
+        searchKey={this.props.keywords}
+      />
+    );
+
+    let content = (
+      <SectionList
+        style={styles.sectionList}
+        renderItem={renderItem}
+        renderSectionHeader={
+          (itemHeader) => (
+            <Text style={styles.sectionHeader}>
+              {itemHeader.section.key}
+            </Text>
+          )
+        }
+        sections={eventListToSections(this.props.eventList)}
+        keyExtractor={(item) => item.dayNumber}
+        stickySectionHeadersEnabled
+        onRefresh={this.handleRefresh}
+        refreshing={this.props.loading}
+      />
+    );
+
     if (this.props.status === 'initial') {
-      return <LoadingScreen />;
-    } if (this.props.status === 'failure') {
-      return (
+      content = <LoadingScreen />;
+    } else if (this.props.status === 'failure') {
+      content = (
         <ScrollView
           contentContainerStyle={styles.content}
           refreshControl={(
@@ -146,8 +184,8 @@ class CalendarScreen extends Component {
           <ErrorScreen message={('Sorry, we couldn\'t load any data.')} />
         </ScrollView>
       );
-    } if (this.props.eventList.length === 0) {
-      return (
+    } else if (this.props.eventList.length === 0) {
+      content = (
         <ScrollView
           contentContainerStyle={styles.content}
           refreshControl={(
@@ -161,28 +199,21 @@ class CalendarScreen extends Component {
         </ScrollView>
       );
     }
+
     return (
-      <View style={styles.content}>
-        <SectionList
-          style={styles.sectionList}
-          renderItem={renderItem}
-          renderSectionHeader={
-            (itemHeader) => (
-              <Text style={styles.sectionHeader}>
-                {itemHeader.section.key}
-              </Text>
-            )
-          }
-          sections={eventListToSections(this.props.eventList)}
-          keyExtractor={(item) => item.dayNumber}
-          stickySectionHeadersEnabled
-          onRefresh={this.handleRefresh}
-          refreshing={this.props.loading}
-        />
+      <View style={styles.wrapper}>
+        {header}
+        <DismissKeyboardView contentStyle={styles.keyboardView}>
+          {content}
+        </DismissKeyboardView>
       </View>
     );
   }
 }
+
+CalendarScreen.defaultProps = {
+  keywords: '',
+};
 
 CalendarScreen.propTypes = {
   eventList: PropTypes.arrayOf(PropTypes.shape({
@@ -200,7 +231,8 @@ CalendarScreen.propTypes = {
   })).isRequired,
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
-  refresh: PropTypes.func.isRequired,
+  events: PropTypes.func.isRequired,
+  keywords: PropTypes.string,
 };
 
-export default withStandardHeader(CalendarScreen, true);
+export default CalendarScreen;

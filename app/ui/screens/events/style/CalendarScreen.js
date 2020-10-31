@@ -5,8 +5,9 @@ import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
 
 const styles = StyleSheet.create({
-  content: {
+  wrapper: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: Colors.background,
   },
   day: {
@@ -48,6 +49,9 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 12,
     paddingLeft: 16,
+  },
+  keyboardView: {
+    flex: 1,
   },
 });
 

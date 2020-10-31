@@ -1,5 +1,5 @@
 export const OPEN = 'CALENDAR_OPEN';
-export const REFRESH = 'CALENDAR_REFRESH';
+export const EVENTS = 'CALENDAR_EVENTS';
 export const SUCCESS = 'CALENDAR_SUCCESS';
 export const FAILURE = 'CALENDAR_FAILURE';
 export const FETCHING = 'CALENDAR_FETCHING';
@@ -10,16 +10,17 @@ export function open() {
   };
 }
 
-export function refresh() {
+export function events(keywords = '') {
   return {
-    type: REFRESH,
+    type: EVENTS,
+    payload: { keywords },
   };
 }
 
-export function success(eventList) {
+export function success(eventList, keywords) {
   return {
     type: SUCCESS,
-    payload: { eventList },
+    payload: { eventList, keywords },
   };
 }
 
