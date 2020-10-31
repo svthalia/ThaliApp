@@ -8,9 +8,11 @@
   "rangeStrategy": "bump",
   "packageRules": [
     {
-      "packagePatterns": [ "@react-native-firebase" ],
+      "packagePatterns": [
+        "@react-native-firebase"
+      ],
       "groupName": "react-native-firebase"
-    }
+    },
     {
       "packageNames": [
         "babel-eslint"
