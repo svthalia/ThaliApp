@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadProfile: () => dispatch(profileActions.profile()),
   openCalendar: () => dispatch(calendarActions.open()),
-  openMemberList: () => dispatch(membersActions.members()),
+  openMemberList: () => dispatch(membersActions.open()),
   openWelcome: () => dispatch(welcomeActions.open()),
   openSettings: () => dispatch(settingsActions.open()),
   openPhotos: () => dispatch(photosActions.openAlbums()),

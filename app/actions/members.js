@@ -1,9 +1,16 @@
+export const OPEN = 'MEMBERS_OPEN';
 export const MEMBERS = 'MEMBERS_MEMBERS';
 export const FETCHING = 'MEMBERS_FETCHING';
 export const MEMBERS_SUCCESS = 'MEMBERS_MEMBERS_SUCCESS';
 export const FAILURE = 'MEMBERS_FAILURE';
 export const MORE = 'MEMBERS_MORE';
 export const MORE_SUCCESS = 'MEMBERS_MORE_SUCCESS';
+
+export function open() {
+  return {
+    type: OPEN,
+  };
+}
 
 export function members(keywords = '') {
   return {

@@ -36,7 +36,7 @@ export default function* () {
   yield takeEvery(welcomeActions.OPEN, navigate, 'Welcome');
   yield takeEvery(settingsActions.OPEN, navigate, 'Settings');
   yield takeEvery(calendarActions.OPEN, navigate, 'Calendar');
-  yield takeEvery(membersActions.MEMBERS, navigate, 'MemberList');
+  yield takeEvery(membersActions.OPEN, navigate, 'MemberList');
   yield takeEvery(eventActions.OPEN, navigate, 'Event');
   yield takeEvery(eventActions.ADMIN, navigate, 'EventAdmin');
   yield takeEvery(profileActions.PROFILE, navigate, 'Profile');

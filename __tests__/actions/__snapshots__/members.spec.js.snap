@@ -65,3 +65,12 @@ Object {
   "type": "MEMBERS_MEMBERS_SUCCESS",
 }
 `;
+
+exports[`member actions should create an action to open the member list 1`] = `
+Object {
+  "payload": Object {
+    "keywords": "",
+  },
+  "type": "MEMBERS_MEMBERS",
+}
+`;
