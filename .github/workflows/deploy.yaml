@@ -1,5 +1,5 @@
 ---
-name: Build
+name: Deploy
 on:
   push:
     branches:
@@ -53,7 +53,7 @@ jobs:
         env:
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG_PLIST }}
         run: |
-          echo $FIREBASE_CONFIG > ios/GoogleService-Info.plist
+          echo $FIREBASE_CONFIG > $GITHUB_WORKSPACE/ios/GoogleService-Info.plist
 
       - name: Build app
         env:
@@ -83,6 +83,22 @@ jobs:
           repository: svthalia/ThaliApp-passwords
           path: thaliapp-passwords
           ssh-key: ${{ secrets.PASSWORDS_REPO_DEPLOY_KEY }}
+
+      - name: Decode secrets
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG_JSON }}
+          GOOGLE_PLAY_CONFIG: ${{ secrets.GOOGLE_PLAY_CONFIG_JSON }}
+          RELEASE_CONFIG_STORE_FILE: ${{ secrets.ANDROID_RELEASE_CONFIG_STORE_FILE }}
+          RELEASE_CONFIG_STORE_PASS: ${{ secrets.ANDROID_RELEASE_CONFIG_STORE_PASS }}
+          RELEASE_CONFIG_KEY_PASS: ${{ secrets.ANDROID_RELEASE_CONFIG_KEY_PASS }}
+          RELEASE_CONFIG_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_CONFIG_KEY_ALIAS }}
+        run: |
+          echo $GOOGLE_PLAY_CONFIG > $GITHUB_WORKSPACE/google-play.json
+          echo $FIREBASE_CONFIG > $GITHUB_WORKSPACE/android/app/google-services.json
+          echo "storeFile=$RELEASE_CONFIG_STORE_FILE" > $GITHUB_WORKSPACE/android/releaseSigning.properties
+          echo "storePassword=$RELEASE_CONFIG_STORE_PASS" >> $GITHUB_WORKSPACE/android/releaseSigning.properties
+          echo "keyPassword=$RELEASE_CONFIG_KEY_PASS" >> $GITHUB_WORKSPACE/android/releaseSigning.properties
+          echo "keyAlias=$RELEASE_CONFIG_KEY_ALIAS" >> $GITHUB_WORKSPACE/android/releaseSigning.properties
 
       - name: Setup JDK 1.8
         uses: actions/setup-java@v1
@@ -117,16 +133,6 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-
-      - name: Decode secrets
-        env:
-          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG_JSON }}
-          GOOGLE_PLAY_CONFIG: ${{ secrets.GOOGLE_PLAY_CONFIG_JSON }}
-          RELEASE_CONFIG: ${{ secrets.ANDROID_RELEASE_CONFIG }}
-        run: |
-          echo $GOOGLE_PLAY_CONFIG > google-play.json
-          echo $FIREBASE_CONFIG > android/app/google-services.json
-          echo $RELEASE_CONFIG > android/releaseSigning.properties
 
       - name: Setup Fastlane
         run: |
