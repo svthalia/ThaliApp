@@ -66,7 +66,7 @@
     "react-native-image-crop-picker": "^0.35.1",
     "react-native-image-zoom-viewer": "^3.0.1",
     "react-native-linear-gradient": "^2.5.6",
-    "react-native-localize": "^1.4.2",
+    "react-native-localize": "^1.4.3",
     "react-native-reanimated": "^1.13.1",
     "react-native-render-html": "^4.2.4",
     "react-native-safe-area-context": "^3.1.8",
