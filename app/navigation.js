@@ -1,11 +1,5 @@
-import {
-  createSwitchNavigator,
-  createAppContainer,
-  NavigationActions,
-} from 'react-navigation';
-
-import { NavigationContainer, DrawerActions, NavigationAction } from '@react-navigation/native';
-
+import { NavigationContainer, DrawerActions, CommonActions } from '@react-navigation/native';
+import { React } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -26,86 +20,91 @@ import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
 import PizzaAdmin from './ui/screens/pizza/PizzaAdminScreenConnector';
 import Sidebar from './ui/components/sidebar/SidebarConnector';
 
-<<<<<<< HEAD
-const MainNavigator = createDrawerNavigator(
-  {
-    Welcome,
-    Calendar,
-    MemberList,
-    Photos,
-    Settings,
-  },
-  {
-    contentComponent: Sidebar,
-  }
-);
-
-const SignedInNavigator = createStackNavigator(
-  {
-    MainNavigator,
-    Event,
-    Profile,
-    Pizza,
-    PhotoAlbum,
-    PhotoGallery,
-    Registration,
-    EventAdmin,
-    PizzaAdmin,
-  },
-  {
-    headerMode: 'none',
-  }
-);
-=======
 const Drawer = createDrawerNavigator();
 
 function MainNavigator() {
   return (
     <Drawer.Navigator
       initialRouteName="Welcome"
+      contentComponent={Sidebar}
     >
       <Drawer.Screen
         name="Welcome"
         component={Welcome}
+      />
+      <Drawer.Screen
+        name="Calendar"
+        component={Calendar}
+      />
+      <Drawer.Screen
+        name="MemberList"
+        component={MemberList}
+      />
+      <Drawer.Screen
+        name="Photos"
+        component={Photos}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={Settings}
+      />
     </Drawer.Navigator>
   );
 }
-
-const MainNavigator = createDrawerNavigator({
-  Welcome,
-  Calendar,
-  MemberList,
-  Photos,
-  Settings,
-}, {
-  contentComponent: Sidebar,
-});
 
 const Stack = createStackNavigator();
 
 function SignedInNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ headerMode: 'none' }}
+    >
+      <Stack.Screen
+        name="MainNavigator"
+        component={MainNavigator}
+      />
+      <Stack.Screen
+        name="Event"
+        component={Event}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+      />
+      <Stack.Screen
+        name="Pizza"
+        component={Pizza}
+      />
+      <Stack.Screen
+        name="PhotoAlbum"
+        component={PhotoAlbum}
+      />
+      <Stack.Screen
+        name="PhotoGallery"
+        component={PhotoGallery}
+      />
+      <Stack.Screen
+        name="Registration"
+        component={Registration}
+      />
+      <Stack.Screen
+        name="EventAdmin"
+        component={EventAdmin}
+      />
+      <Stack.Screen
+        name="PizzaAdmin"
+        component={PizzaAdmin}
+      />
     </Stack.Navigator>
   );
 }
 
-const SignedInNavigator = createStackNavigator({
-  MainNavigator,
-  Event,
-  Profile,
-  Pizza,
-  PhotoAlbum,
-  PhotoGallery,
-  Registration,
-  EventAdmin,
-  PizzaAdmin,
-}, {
-  headerMode: 'none',
-});
->>>>>>> Some changeS
-
-const AppNavigator = createSwitchNavigator({
+function AppNavigator() {
+  if (state.lo)
+  <Stack.Navigator>
+    { isLoggedIn ? ()}
+  </Stack.Navigator>
+}
   Splash: SplashScreen,
   Auth: Login,
   SignedIn: SignedInNavigator,
@@ -119,21 +118,25 @@ function setTopLevelNavigator(navigatorRef) {
   navigator = navigatorRef;
 }
 
-function navigate(routeName, params) {
+function navigate(name, params) {
   navigator.dispatch(
-    NavigationActions.navigate({
-      routeName,
+    CommonActions.navigate({
+      name,
       params,
-    })
+    }),
   );
 }
 
 function goBack() {
-  navigator.dispatch(NavigationActions.back());
+  navigator.dispatch(
+    CommonActions.goBack(),
+  );
 }
 
 function toggleDrawer() {
-  navigator.dispatch(DrawerActions.toggleDrawer());
+  navigator.dispatch(
+    DrawerActions.toggleDrawer(),
+  );
 }
 
 export default {
