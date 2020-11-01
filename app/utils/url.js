@@ -1,6 +1,4 @@
 /* eslint-disable max-classes-per-file */
-import { getLocales } from 'react-native-localize';
-
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
 if (__DEV__) { // eslint-disable-line no-undef
@@ -31,9 +29,7 @@ export class TokenInvalidError extends Error {
 
 const detectInvalidToken = (response) => {
   if (response.status === 403 && response.jsonData) {
-    const contentLang = response.headers.get('content-language');
-    if ((contentLang === 'en' && response.jsonData.detail === 'Invalid token.')
-      || (contentLang === 'nl' && response.jsonData.detail === 'Ongeldige token.')) {
+    if (response.jsonData.detail === 'Invalid token.') {
       throw new TokenInvalidError(response);
     }
   }
@@ -46,12 +42,6 @@ export const apiRequest = (route, fetchOpts, params) => {
     requestOptions.headers = {};
   }
 
-  const locale = getLocales()[0].languageCode;
-  if (locale.includes('en') || locale.includes('nl')) {
-    requestOptions.headers['Accept-Language'] = locale;
-  } else {
-    requestOptions.headers['Accept-Language'] = 'en';
-  }
   let query = '';
   if (params !== null && params === Object(params)) {
     query = `?${Object.keys(params)

@@ -33,8 +33,7 @@ describe('url helper', () => {
     expect.assertions(2);
     return apiRequest('route', {}, null)
       .then((response) => {
-        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`, { headers: {} });
         expect(response).toEqual({ exampleJson: 'val' });
       });
   });
@@ -44,8 +43,7 @@ describe('url helper', () => {
     return apiRequest('route', {}, {
       params: 'value',
     }).then(() => {
-      expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`,
-        { headers: { 'Accept-Language': 'en' } });
+      expect(global.fetch).toBeCalledWith(`${apiUrl}/route/?params=value`, { headers: {} });
     });
   });
 
@@ -53,7 +51,7 @@ describe('url helper', () => {
     expect.assertions(1);
     return apiRequest('route', { headers: { Authorization: 'Token abc' } }, null).then(() => {
       expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-        { headers: { 'Accept-Language': 'en', Authorization: 'Token abc' } });
+        { headers: { Authorization: 'Token abc' } });
     });
   });
 
@@ -61,8 +59,7 @@ describe('url helper', () => {
     expect.assertions(2);
     return apiRequest('route', {}, null)
       .then((response) => {
-        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
+        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`, { headers: {} });
         expect(response).toEqual({ exampleJson: 'val' });
       });
   });
@@ -75,7 +72,7 @@ describe('url helper', () => {
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
-      .catch(e => expect(e).toEqual(new ServerError('Invalid status code: 404', response)));
+      .catch((e) => expect(e).toEqual(new ServerError('Invalid status code: 404', response)));
   });
 
   it('should return an empty response on status 204', () => {
@@ -86,52 +83,30 @@ describe('url helper', () => {
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
-      .then(res => expect(res).toEqual({}));
+      .then((res) => expect(res).toEqual({}));
   });
 
   it('should detect an invalid token in English', () => {
     expect.assertions(1);
     const response = {
       status: 403,
-      headers: { get: key => (key === 'content-language' ? 'en' : 'nl') },
       json: () => Promise.resolve({ detail: 'Invalid token.' }),
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
-      .catch(e => expect(e).toEqual(new TokenInvalidError('responseCopy')));
-  });
-
-  it('should detect an invalid token in Dutch', () => {
-    expect.assertions(1);
-    const response = {
-      status: 403,
-      headers: { get: key => (key === 'content-language' ? 'nl' : 'en') },
-      json: () => Promise.resolve({ detail: 'Ongeldige token.' }),
-    };
-    global.fetch.mockReturnValue(Promise.resolve(response));
-    return apiRequest('route', {}, null)
-      .catch(e => expect(e).toEqual(new TokenInvalidError('responseCopy')));
+      .catch((e) => expect(e).toEqual(new TokenInvalidError('responseCopy')));
   });
 
   it('should not falsely claim the token is incorrect', () => {
     expect.assertions(1);
     const response = {
       status: 403,
-      headers: { get: key => (key === 'content-language' ? 'en' : 'nl') },
+      headers: { get: (key) => (key === 'content-language' ? 'en' : 'nl') },
       json: () => Promise.resolve({ detail: 'Not authorized.' }),
     };
     global.fetch.mockReturnValue(Promise.resolve(response));
     return apiRequest('route', {}, null)
-      .catch(res => expect(res).toEqual(new ServerError('Invalid status code: 403')));
-  });
-
-  it('should default to an English locales', () => {
-    DeviceInfo.getDeviceLocale = () => 'fr';
-    return apiRequest('route', {}, null)
-      .then(() => {
-        expect(global.fetch).toBeCalledWith(`${apiUrl}/route/`,
-          { headers: { 'Accept-Language': 'en' } });
-      });
+      .catch((res) => expect(res).toEqual(new ServerError('Invalid status code: 403')));
   });
 
   it('should use the correct url when in production mode', () => {

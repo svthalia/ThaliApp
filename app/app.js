@@ -6,9 +6,6 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import messaging from '@react-native-firebase/messaging';
-import { getLocales } from 'react-native-localize';
-import Moment from 'moment';
-import 'moment/locale/nl';
 
 import reducers from './reducers';
 
@@ -30,15 +27,6 @@ const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(sagas);
 
 class Main extends Component {
-  constructor() {
-    super();
-    if (getLocales()[0].languageCode.startsWith('nl')) {
-      Moment.locale('nl');
-    } else {
-      Moment.locale('en');
-    }
-  }
-
   componentDidMount() {
     store.dispatch(sessionActions.init());
     this.addDeepLinkingHandler();
