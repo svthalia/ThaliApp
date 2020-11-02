@@ -1,9 +1,13 @@
 import { Dimensions } from 'react-native';
 import StyleSheet from '../../../style/StyleSheet';
 import Colors from '../../../style/Colors';
-import { TOTAL_BAR_HEIGHT, STATUSBAR_HEIGHT, APPBAR_HEIGHT } from '../../../components/standardHeader/style/StandardHeader';
+import {
+  TOTAL_BAR_HEIGHT,
+  STATUSBAR_HEIGHT,
+  APPBAR_HEIGHT,
+} from '../../../components/standardHeader/style/StandardHeader';
 
-const MARGIN_TOP = STATUSBAR_HEIGHT + ((APPBAR_HEIGHT - 24) / 2);
+const MARGIN_TOP = STATUSBAR_HEIGHT + (APPBAR_HEIGHT - 24) / 2;
 
 export default StyleSheet.create({
   screenWrapper: {

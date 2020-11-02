@@ -1,7 +1,5 @@
 import { Linking } from 'react-native';
-import {
-  put, take, takeEvery, select,
-} from 'redux-saga/effects';
+import { put, take, takeEvery, select } from 'redux-saga/effects';
 import { url as siteURL } from '../utils/url';
 import { loggedInSelector } from '../selectors/session';
 
@@ -91,6 +89,6 @@ const deepLink = function* deepLink(action) {
   }
 };
 
-export default function* () {
+export default function* deepLinkingSaga() {
   yield takeEvery(deepLinkingActions.DEEPLINK, deepLink);
 }

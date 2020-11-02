@@ -6,7 +6,11 @@ import SquareView from '../../../../app/ui/components/memberView/SquareView';
 describe('SquareView component', () => {
   it('renders correctly', () => {
     const tree = renderer
-      .create(<SquareView size={20}><View /></SquareView>)
+      .create(
+        <SquareView size={20}>
+          <View />
+        </SquareView>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

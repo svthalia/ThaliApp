@@ -35,7 +35,10 @@ const eventListToSections = (eventList) => {
   for (let i = 0; i < numberOfDays && eventIndex < eventList.length; i += 1) {
     const first = eventList[eventIndex];
     const list = [];
-    while (eventIndex < eventList.length && Moment(first.start).isSame(eventList[eventIndex].start, 'day')) {
+    while (
+      eventIndex < eventList.length &&
+      Moment(first.start).isSame(eventList[eventIndex].start, 'day')
+    ) {
       list.push(eventList[eventIndex]);
       eventIndex += 1;
     }
@@ -49,13 +52,8 @@ const eventListToSections = (eventList) => {
 };
 
 const Footer = (props) => (
-  <TouchableOpacity
-    onPress={props.openCalendar}
-    style={styles.footer}
-  >
-    <Text style={styles.footerText}>
-      SHOW THE ENTIRE AGENDA
-    </Text>
+  <TouchableOpacity onPress={props.openCalendar} style={styles.footer}>
+    <Text style={styles.footerText}>SHOW THE ENTIRE AGENDA</Text>
   </TouchableOpacity>
 );
 
@@ -76,24 +74,19 @@ class WelcomeScreen extends Component {
   };
 
   render() {
-    const {
-      status, loading, eventList,
-    } = this.props;
+    const { status, loading, eventList } = this.props;
 
     let content = null;
 
     if (status === 'initial') {
-      content = (<LoadingScreen />);
+      content = <LoadingScreen />;
     } else if (status === 'failure') {
       content = (
         <ScrollView
           contentContainerStyle={styles.content}
-          refreshControl={(
-            <RefreshControl
-              onRefresh={this.handleRefresh}
-              refreshing={loading}
-            />
-          )}
+          refreshControl={
+            <RefreshControl onRefresh={this.handleRefresh} refreshing={loading} />
+          }
         >
           <ErrorScreen message="Sorry! We couldn't load any data." />
         </ScrollView>
@@ -102,14 +95,11 @@ class WelcomeScreen extends Component {
       content = (
         <ScrollView
           contentContainerStyle={styles.content}
-          refreshControl={(
-            <RefreshControl
-              onRefresh={this.handleRefresh}
-              refreshing={loading}
-            />
-          )}
+          refreshControl={
+            <RefreshControl onRefresh={this.handleRefresh} refreshing={loading} />
+          }
         >
-          <ErrorScreen message="No events found!" />
+          <ErrorScreen message='No events found!' />
         </ScrollView>
       );
     } else {
@@ -118,13 +108,9 @@ class WelcomeScreen extends Component {
           <SectionList
             style={styles.sectionList}
             renderItem={(item) => <EventDetailCard event={item.item} />}
-            renderSectionHeader={
-              (itemHeader) => (
-                <Text style={styles.sectionHeader}>
-                  {itemHeader.section.key}
-                </Text>
-              )
-            }
+            renderSectionHeader={(itemHeader) => (
+              <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+            )}
             sections={eventListToSections(eventList)}
             keyExtractor={(event) => event.pk}
             stickySectionHeadersEnabled
@@ -141,17 +127,19 @@ class WelcomeScreen extends Component {
 }
 
 WelcomeScreen.propTypes = {
-  eventList: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-    start: PropTypes.string,
-    end: PropTypes.string,
-    location: PropTypes.string,
-    price: PropTypes.string,
-    pk: PropTypes.number,
-    registered: PropTypes.bool,
-    pizza: PropTypes.bool,
-  })).isRequired,
+  eventList: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      start: PropTypes.string,
+      end: PropTypes.string,
+      location: PropTypes.string,
+      price: PropTypes.string,
+      pk: PropTypes.number,
+      registered: PropTypes.bool,
+      pizza: PropTypes.bool,
+    })
+  ).isRequired,
   refresh: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,

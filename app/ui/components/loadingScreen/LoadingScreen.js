@@ -5,14 +5,8 @@ import styles from './style/LoadingScreen';
 import Colors from '../../style/Colors';
 
 const LoadingScreen = () => (
-  <View
-    style={styles.indicatorView}
-  >
-    <ActivityIndicator
-      animating
-      color={Colors.magenta}
-      size="large"
-    />
+  <View style={styles.indicatorView}>
+    <ActivityIndicator animating color={Colors.magenta} size='large' />
   </View>
 );
 

@@ -1,7 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import {
-  all, call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { notificationsSettingsActions, settingsActions } from '../actions/settings';
 
@@ -58,13 +56,11 @@ function* saveCategories(action) {
 }
 
 function* init() {
-  yield all([
-    pushNotifications(),
-  ]);
+  yield all([pushNotifications()]);
   yield put(settingsActions.initComplete());
 }
 
-export default function* () {
+export default function* settingsSaga() {
   yield takeEvery(settingsActions.INIT_START, init);
   yield takeEvery(notificationsSettingsActions.SAVE_CATEGORIES, saveCategories);
 }

@@ -1,7 +1,8 @@
 /* eslint-disable max-classes-per-file */
 let server = 'https://thalia.nu';
 /* istanbul ignore next line */
-if (__DEV__) { // eslint-disable-line no-undef
+// eslint-disable-next-line no-undef
+if (__DEV__) {
   server = 'http://localhost:8000';
 }
 
@@ -55,9 +56,12 @@ export const apiRequest = (route, fetchOpts, params) => {
   }
   return fetch(requestUrl, requestOptions)
     .then(detectInvalidToken)
-    .then((response) => response.json()
-      .then((data) => ({ ...response, jsonData: data }))
-      .catch(() => response))
+    .then((response) =>
+      response
+        .json()
+        .then((data) => ({ ...response, jsonData: data }))
+        .catch(() => response)
+    )
     .then(detectInvalidToken)
     .then((response) => {
       if (response.status >= 400 && response.status <= 500) {

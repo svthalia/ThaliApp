@@ -10,8 +10,10 @@ const mapStateToProps = (state) => ({
   event: state.pizza.event,
   order: state.pizza.order && {
     ...state.pizza.order,
-    paid: state.pizza.order.paid !== undefined
-      ? state.pizza.order.paid : state.pizza.order.payment !== Payment.NONE,
+    paid:
+      state.pizza.order.paid !== undefined
+        ? state.pizza.order.paid
+        : state.pizza.order.payment !== Payment.NONE,
   },
   pizzaList: state.pizza.pizzaList,
 });

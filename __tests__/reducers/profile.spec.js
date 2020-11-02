@@ -13,10 +13,7 @@ describe('profile reducer', () => {
   });
 
   describe('is fetching', () => {
-    const state = reducer(
-      emptyState,
-      actions.fetching(),
-    );
+    const state = reducer(emptyState, actions.fetching());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('hasLoaded', false);
@@ -24,10 +21,7 @@ describe('profile reducer', () => {
   });
 
   describe('is successful', () => {
-    const state = reducer(
-      emptyState,
-      actions.success({ pk: 1 }),
-    );
+    const state = reducer(emptyState, actions.success({ pk: 1 }));
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('hasLoaded', true);
@@ -43,10 +37,7 @@ describe('profile reducer', () => {
   });
 
   describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
+    const state = reducer(emptyState, actions.failure());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('hasLoaded', true);

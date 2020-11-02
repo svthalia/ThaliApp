@@ -8,12 +8,16 @@ import styles from './style/CalendarItem';
 const getEventInfo = (event) => {
   if (event.start === null && event.end === null) {
     return event.location;
-  } if (event.start === null) {
+  }
+  if (event.start === null) {
     return `Until ${Moment(event.end).format('HH:mm')} | ${event.location}`;
-  } if (event.end === null) {
+  }
+  if (event.end === null) {
     return `From ${Moment(event.start).format('HH:mm')} | ${event.location}`;
   }
-  return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format('HH:mm')} | ${event.location}`;
+  return `${Moment(event.start).format('HH:mm')} - ${Moment(event.end).format(
+    'HH:mm'
+  )} | ${event.location}`;
 };
 
 const CalendarItem = (props) => (
@@ -28,10 +32,17 @@ const CalendarItem = (props) => (
         props.event.partner ? styles.partner : null,
       ]}
     >
-      <Text style={[styles.eventTitle, props.event.partner ? styles.partnerEventTitle : null]}>
+      <Text
+        style={[
+          styles.eventTitle,
+          props.event.partner ? styles.partnerEventTitle : null,
+        ]}
+      >
         {props.event.title}
       </Text>
-      <Text style={[styles.eventInfo, props.event.partner ? styles.partnerEventInfo : null]}>
+      <Text
+        style={[styles.eventInfo, props.event.partner ? styles.partnerEventInfo : null]}
+      >
         {getEventInfo(props.event)}
       </Text>
     </View>

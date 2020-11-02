@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import MemberView from '../../../../app/ui/components/memberView/MemberView';
 
 jest.mock('react-navigation', () => ({
-  withNavigation: component => component,
+  withNavigation: (component) => component,
 }));
 
 jest.mock('react-native-snackbar', () => ({

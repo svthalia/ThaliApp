@@ -1,7 +1,4 @@
-import {
-  tokenSelector,
-  loggedInSelector,
-} from '../../app/selectors/session';
+import { tokenSelector, loggedInSelector } from '../../app/selectors/session';
 
 import { STATUS_SIGNED_IN } from '../../app/reducers/session';
 

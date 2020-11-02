@@ -1,4 +1,6 @@
-import pushNotifications, { initialState as initialPushNotificationsState } from './settings/pushNotifications';
+import pushNotifications, {
+  initialState as initialPushNotificationsState,
+} from './settings/pushNotifications';
 import { settingsActions } from '../actions/settings';
 
 const initialState = {

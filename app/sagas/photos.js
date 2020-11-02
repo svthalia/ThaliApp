@@ -1,6 +1,4 @@
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import Share from 'react-native-share';
 import * as RNFS from 'react-native-fs';
@@ -37,11 +35,15 @@ function* loadAlbums({ payload: { keywords, next } }) {
     } else {
       response = yield call(apiRequest, 'photos/albums', data, params);
     }
-    yield put(photosActions.successAlbums(
-      response.results.filter((item) => item.accessible && !item.hidden && item.cover != null),
-      response.next,
-      next !== undefined,
-    ));
+    yield put(
+      photosActions.successAlbums(
+        response.results.filter(
+          (item) => item.accessible && !item.hidden && item.cover != null
+        ),
+        response.next,
+        next !== undefined
+      )
+    );
   } catch (error) {
     yield put(photosActions.failureAlbums());
   }
@@ -83,9 +85,11 @@ function* loadAlbum(action) {
   }
 }
 
-const downloadFile = (fromUrl, toFile) => RNFS.downloadFile({
-  fromUrl, toFile,
-}).promise;
+const downloadFile = (fromUrl, toFile) =>
+  RNFS.downloadFile({
+    fromUrl,
+    toFile,
+  }).promise;
 
 function* downloadPhotoToFile(url, root = RNFS.DocumentDirectoryPath) {
   const toFile = `${root}/photo-download.jpg`;

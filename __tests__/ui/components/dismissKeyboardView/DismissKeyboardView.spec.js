@@ -6,7 +6,11 @@ import DismissKeyboardView from '../../../../app/ui/components/dismissKeyboardVi
 describe('DismissKeyboardView component', () => {
   it('renders correctly', () => {
     const tree = renderer
-      .create(<DismissKeyboardView><Text>Text</Text></DismissKeyboardView>)
+      .create(
+        <DismissKeyboardView>
+          <Text>Text</Text>
+        </DismissKeyboardView>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

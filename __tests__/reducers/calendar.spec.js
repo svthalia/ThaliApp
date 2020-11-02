@@ -13,10 +13,7 @@ describe('calendar reducer', () => {
   });
 
   describe('is refreshing', () => {
-    const state = reducer(
-      emptyState,
-      actions.events(),
-    );
+    const state = reducer(emptyState, actions.events());
 
     it('should be loading', () => {
       expect(state).toHaveProperty('loading', true);
@@ -24,10 +21,7 @@ describe('calendar reducer', () => {
   });
 
   describe('is successful', () => {
-    const state = reducer(
-      emptyState,
-      actions.success([{ pk: 1 }], 'keywords'),
-    );
+    const state = reducer(emptyState, actions.success([{ pk: 1 }], 'keywords'));
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);
@@ -47,10 +41,7 @@ describe('calendar reducer', () => {
   });
 
   describe('is failure', () => {
-    const state = reducer(
-      emptyState,
-      actions.failure(),
-    );
+    const state = reducer(emptyState, actions.failure());
 
     it('should not be loading', () => {
       expect(state).toHaveProperty('loading', false);

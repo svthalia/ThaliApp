@@ -24,29 +24,35 @@ import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
 import PizzaAdmin from './ui/screens/pizza/PizzaAdminScreenConnector';
 import Sidebar from './ui/components/sidebar/SidebarConnector';
 
-const MainNavigator = createDrawerNavigator({
-  Welcome,
-  Calendar,
-  MemberList,
-  Photos,
-  Settings,
-}, {
-  contentComponent: Sidebar,
-});
+const MainNavigator = createDrawerNavigator(
+  {
+    Welcome,
+    Calendar,
+    MemberList,
+    Photos,
+    Settings,
+  },
+  {
+    contentComponent: Sidebar,
+  }
+);
 
-const SignedInNavigator = createStackNavigator({
-  MainNavigator,
-  Event,
-  Profile,
-  Pizza,
-  PhotoAlbum,
-  PhotoGallery,
-  Registration,
-  EventAdmin,
-  PizzaAdmin,
-}, {
-  headerMode: 'none',
-});
+const SignedInNavigator = createStackNavigator(
+  {
+    MainNavigator,
+    Event,
+    Profile,
+    Pizza,
+    PhotoAlbum,
+    PhotoGallery,
+    Registration,
+    EventAdmin,
+    PizzaAdmin,
+  },
+  {
+    headerMode: 'none',
+  }
+);
 
 const AppNavigator = createSwitchNavigator({
   Splash: SplashScreen,
@@ -67,20 +73,16 @@ function navigate(routeName, params) {
     NavigationActions.navigate({
       routeName,
       params,
-    }),
+    })
   );
 }
 
 function goBack() {
-  navigator.dispatch(
-    NavigationActions.back(),
-  );
+  navigator.dispatch(NavigationActions.back());
 }
 
 function toggleDrawer() {
-  navigator.dispatch(
-    DrawerActions.toggleDrawer(),
-  );
+  navigator.dispatch(DrawerActions.toggleDrawer());
 }
 
 export default {

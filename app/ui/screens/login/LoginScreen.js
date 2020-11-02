@@ -20,8 +20,13 @@ const image = require('../../../assets/img/logo.png');
 
 const configureNextAnimation = () => {
   /* istanbul ignore next */
-  LayoutAnimation.configureNext(LayoutAnimation.create(150,
-    LayoutAnimation.Types.linear, LayoutAnimation.Properties.opacity));
+  LayoutAnimation.configureNext(
+    LayoutAnimation.create(
+      150,
+      LayoutAnimation.Types.linear,
+      LayoutAnimation.Properties.opacity
+    )
+  );
 };
 
 class LoginScreen extends Component {
@@ -39,25 +44,23 @@ class LoginScreen extends Component {
 
   render() {
     configureNextAnimation();
-    const {
-      login, status, openUrl,
-    } = this.props;
+    const { login, status, openUrl } = this.props;
 
     let content = (
       <View>
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Username"
-            autoCapitalize="none"
+            placeholder='Username'
+            autoCapitalize='none'
             underlineColorAndroid={Colors.textColour}
             onChangeText={(username) => this.setState({ username })}
           />
           <TextInput
             style={styles.input}
-            placeholder="Password"
+            placeholder='Password'
             underlineColorAndroid={Colors.textColour}
-            autoCapitalize="none"
+            autoCapitalize='none'
             secureTextEntry
             onChangeText={(password) => this.setState({ password })}
             onSubmitEditing={() => {
@@ -66,17 +69,23 @@ class LoginScreen extends Component {
           />
         </View>
         <Button
-          title="LOGIN"
+          title='LOGIN'
           onPress={() => login(this.state.username, this.state.password)}
           color={Colors.darkGrey}
           style={styles.loginButton}
           textStyle={styles.loginButtonText}
           underlayColor={Colors.white}
         />
-        <Text style={styles.linkText} onPress={() => openUrl(`${url}/user/password_reset/`)}>
+        <Text
+          style={styles.linkText}
+          onPress={() => openUrl(`${url}/user/password_reset/`)}
+        >
           Forgot password?
         </Text>
-        <Text style={styles.linkText} onPress={() => openUrl(`${url}/association/register/`)}>
+        <Text
+          style={styles.linkText}
+          onPress={() => openUrl(`${url}/association/register/`)}
+        >
           Become a member
         </Text>
       </View>
@@ -87,7 +96,7 @@ class LoginScreen extends Component {
         <ActivityIndicator
           style={styles.activityIndicator}
           color={Colors.white}
-          size="large"
+          size='large'
           animating
         />
       );
@@ -96,12 +105,10 @@ class LoginScreen extends Component {
     return (
       <KeyboardAvoidingView
         style={styles.rootWrapper}
-        behavior="padding"
-        modalOpen="false"
+        behavior='padding'
+        modalOpen='false'
       >
-        <DismissKeyboardView
-          contentStyle={styles.wrapper}
-        >
+        <DismissKeyboardView contentStyle={styles.wrapper}>
           <Image style={styles.logo} source={image} />
           {content}
         </DismissKeyboardView>

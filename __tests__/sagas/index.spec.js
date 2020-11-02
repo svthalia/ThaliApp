@@ -15,7 +15,10 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => ({
   CommunityIcon: 'CommunityIcon',
 }));
 
-jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
+jest.mock('react-native-reanimated', () =>
+  // eslint-disable-next-line global-require
+  require('react-native-reanimated/mock')
+);
 
 describe('index saga', () => {
   it('should yield to all indexSaga as forks', () => {

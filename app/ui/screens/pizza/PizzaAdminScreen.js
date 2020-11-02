@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  RefreshControl, ScrollView, View,
-} from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './style/PizzaAdminScreen';
@@ -24,9 +22,7 @@ class PizzaAdminScreen extends Component {
   };
 
   render() {
-    const {
-      status, loading, orders,
-    } = this.props;
+    const { status, loading, orders } = this.props;
 
     const items = orders.map((item) => ({
       pk: item.pk,
@@ -77,14 +73,11 @@ class PizzaAdminScreen extends Component {
             <ScrollView
               backgroundColor={Colors.background}
               contentContainerStyle={styles.rootWrapper}
-              refreshControl={(
-                <RefreshControl
-                  refreshing={loading}
-                  onRefresh={this.handleRefresh}
-                />
-              )}
+              refreshControl={
+                <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+              }
             >
-              <ErrorScreen message="No registrations found..." />
+              <ErrorScreen message='No registrations found...' />
             </ScrollView>
           </View>
         );
@@ -96,7 +89,7 @@ class PizzaAdminScreen extends Component {
             items={items}
             filterTypes={filterTypes}
             handleRefresh={this.handleRefresh}
-            title="Orders"
+            title='Orders'
             updateItem={(pk, checkbox, select) => this.props.updateOrder(pk, select)}
             loading={loading}
           />
@@ -110,14 +103,11 @@ class PizzaAdminScreen extends Component {
         <ScrollView
           backgroundColor={Colors.background}
           contentContainerStyle={styles.rootWrapper}
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={this.handleRefresh}
-            />
-          )}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={this.handleRefresh} />
+          }
         >
-          <ErrorScreen message="Could not load the event..." />
+          <ErrorScreen message='Could not load the event...' />
         </ScrollView>
       </View>
     );
@@ -125,11 +115,13 @@ class PizzaAdminScreen extends Component {
 }
 
 PizzaAdminScreen.propTypes = {
-  orders: PropTypes.arrayOf(PropTypes.shape({
-    pk: PropTypes.number.isRequired,
-    display_name: PropTypes.string.isRequired,
-    payment: PropTypes.string.isRequired,
-  })).isRequired,
+  orders: PropTypes.arrayOf(
+    PropTypes.shape({
+      pk: PropTypes.number.isRequired,
+      display_name: PropTypes.string.isRequired,
+      payment: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   status: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   retrieveOrders: PropTypes.func.isRequired,

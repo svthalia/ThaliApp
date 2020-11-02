@@ -20,9 +20,7 @@ class AlbumsOverviewScreen extends Component {
   };
 
   handleEndReached = () => {
-    const {
-      keywords, next, loadAlbums, fetching,
-    } = this.props;
+    const { keywords, next, loadAlbums, fetching } = this.props;
     if (!fetching && next !== null) {
       loadAlbums(keywords, next);
     }
@@ -36,14 +34,12 @@ class AlbumsOverviewScreen extends Component {
   };
 
   render() {
-    const {
-      fetching, status, openAlbum, albums, keywords,
-    } = this.props;
+    const { fetching, status, openAlbum, albums, keywords } = this.props;
 
     const header = (
       <SearchHeader
-        title="Photos"
-        searchText="Find an album"
+        title='Photos'
+        searchText='Find an album'
         search={this.search}
         searchKey={keywords}
       />
@@ -54,16 +50,14 @@ class AlbumsOverviewScreen extends Component {
         style={styles.flatList}
         contentContainerStyle={styles.listContainer}
         data={albums}
-        renderItem={
-          ({ item }) => (
-            <AlbumListItem
-              album={item}
-              size={albumSize}
-              style={styles.listItem}
-              onPress={openAlbum}
-            />
-          )
-        }
+        renderItem={({ item }) => (
+          <AlbumListItem
+            album={item}
+            size={albumSize}
+            style={styles.listItem}
+            onPress={openAlbum}
+          />
+        )}
         keyExtractor={(item) => item.pk}
         numColumns={numColumns}
         onRefresh={this.handleRefresh}
@@ -74,11 +68,11 @@ class AlbumsOverviewScreen extends Component {
     );
 
     if (fetching && status === STATUS_INITIAL) {
-      content = (<LoadingScreen />);
+      content = <LoadingScreen />;
     } else if (!fetching && status === STATUS_FAILURE) {
-      content = (<ErrorScreen message={'Sorry! We couldn\'t load any data.'} />);
+      content = <ErrorScreen message={"Sorry! We couldn't load any data."} />;
     } else if (albums.length === 0) {
-      content = (<ErrorScreen message={'Couldn\'t find any albums...'} />);
+      content = <ErrorScreen message={"Couldn't find any albums..."} />;
     }
 
     return (

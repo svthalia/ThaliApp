@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Alert, Linking, NativeModules, Platform,
-} from 'react-native';
+import { Alert, Linking, NativeModules, Platform } from 'react-native';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
@@ -19,8 +17,8 @@ const { UIManager } = NativeModules;
 
 /* istanbul ignore next */
 // eslint-disable-next-line no-unused-expressions
-UIManager.setLayoutAnimationEnabledExperimental
-&& UIManager.setLayoutAnimationEnabledExperimental(true);
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
@@ -34,8 +32,9 @@ class Main extends Component {
       store.dispatch(register());
     });
     this.notificationListener = messaging().onMessage(this.showNotification);
-    this.notificationOpenedListener = messaging()
-      .onNotificationOpenedApp(this.handleOpenNotification);
+    this.notificationOpenedListener = messaging().onNotificationOpenedApp(
+      this.handleOpenNotification
+    );
 
     messaging().getInitialNotification().then(this.handleOpenNotification);
   }
@@ -64,15 +63,12 @@ class Main extends Component {
         { text: 'Dismiss' },
         {
           text: 'Open',
-          onPress: () => store.dispatch(
-            deepLinkingActions.deepLink(notification.data.url, false),
-          ),
+          onPress: () =>
+            store.dispatch(deepLinkingActions.deepLink(notification.data.url, false)),
         },
       ];
     } else {
-      buttons = [
-        { text: 'OK' },
-      ];
+      buttons = [{ text: 'OK' }];
     }
 
     if (notification.body !== undefined) {
@@ -88,7 +84,7 @@ class Main extends Component {
 
   handleOpenNotification = (notificationOpen) => {
     if (notificationOpen) {
-      const notification = notificationOpen.notification;
+      const { notification } = notificationOpen;
       if (notification.data.url) {
         store.dispatch(deepLinkingActions.deepLink(notification.data.url, false));
       } else {

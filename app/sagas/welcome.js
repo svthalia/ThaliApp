@@ -1,6 +1,4 @@
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { apiRequest } from '../utils/url';
 import * as welcomeActions from '../actions/welcome';
@@ -36,6 +34,6 @@ const welcome = function* welcome() {
   }
 };
 
-export default function* () {
+export default function* welcomeSaga() {
   yield takeEvery([sessionActions.SIGNED_IN, welcomeActions.REFRESH], welcome);
 }

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {
-  FlatList, RefreshControl, Switch, Text, TouchableHighlight, View,
+  FlatList,
+  RefreshControl,
+  Switch,
+  Text,
+  TouchableHighlight,
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -24,12 +29,12 @@ class AdminScreen extends Component {
     };
 
     for (let i = 0; i < this.props.items.length; i += 1) {
-      const {
-        pk, name, checkbox, select,
-      } = this.props.items[i];
+      const { pk, name, checkbox, select } = this.props.items[i];
 
       this.state.items[pk] = {
-        name, checkbox, select,
+        name,
+        checkbox,
+        select,
       };
     }
   }
@@ -38,12 +43,12 @@ class AdminScreen extends Component {
     if (!this.itemsAreEqual(this.props.items, prevProps.items)) {
       const items = {};
       for (let i = 0; i < this.props.items.length; i += 1) {
-        const {
-          pk, name, checkbox, select,
-        } = this.props.items[i];
+        const { pk, name, checkbox, select } = this.props.items[i];
 
         items[pk] = {
-          name, checkbox, select,
+          name,
+          checkbox,
+          select,
         };
       }
 
@@ -59,9 +64,11 @@ class AdminScreen extends Component {
     b.sort((x, y) => x.pk - y.pk);
 
     for (let i = 0; i < a.length; i += 1) {
-      if (a[i].pk !== b[i].pk
-          || a[i].checkbox !== b[i].checkbox
-          || a[i].select.value !== b[i].select.value) {
+      if (
+        a[i].pk !== b[i].pk ||
+        a[i].checkbox !== b[i].checkbox ||
+        a[i].select.value !== b[i].select.value
+      ) {
         return false;
       }
     }
@@ -72,11 +79,13 @@ class AdminScreen extends Component {
     const { filterTypes } = this.props;
     const { currentFilter } = this.state;
 
-    return keys.filter(this.containsSearchKey)
+    return keys
+      .filter(this.containsSearchKey)
       .filter((pk) => filterTypes[currentFilter].checkItem(this.state.items[pk]));
   };
 
-  cleanSearchTerm = (term) => unorm.nfd(term.toLowerCase()).replace(/[\u0300-\u036f]/g, '');
+  cleanSearchTerm = (term) =>
+    unorm.nfd(term.toLowerCase()).replace(/[\u0300-\u036f]/g, '');
 
   containsSearchKey = (pk) => {
     const name = this.cleanSearchTerm(this.state.items[pk].name);
@@ -118,22 +127,16 @@ class AdminScreen extends Component {
   };
 
   renderItem = ({ item, index }) => {
-    const {
-      name, checkbox, select,
-    } = this.state.items[item];
+    const { name, checkbox, select } = this.state.items[item];
     const { checkboxLabel } = this.props;
 
     return (
       <View key={item} style={[styles.item, index !== 0 && styles.borderTop]}>
-        <Text style={[styles.text, styles.name]}>
-          {name}
-        </Text>
+        <Text style={[styles.text, styles.name]}>{name}</Text>
         <View style={styles.itemControls}>
           {checkboxLabel ? (
             <View style={styles.checkboxContainer}>
-              <Text style={[styles.text, styles.label]}>
-                {checkboxLabel}
-              </Text>
+              <Text style={[styles.text, styles.label]}>{checkboxLabel}</Text>
               <Switch
                 value={checkbox}
                 onValueChange={(value) => this.updateValue(item, value, select.value)}
@@ -146,19 +149,17 @@ class AdminScreen extends Component {
             </View>
           ) : null}
           <View style={styles.selectContainer}>
-            {
-              select.options.map(({ key, label }, buttonIndex) => (
-                <Button
-                  key={`${item}_${key}`}
-                  onPress={() => this.updateValue(item, checkbox, key)}
-                  title={label}
-                  color={select.value === key ? Colors.magenta : Colors.grey}
-                  style={buttonIndex !== 0 && styles.buttonMargin}
-                  textStyle={styles.buttonText}
-                  containerStyle={styles.buttonTextContainer}
-                />
-              ))
-            }
+            {select.options.map(({ key, label }, buttonIndex) => (
+              <Button
+                key={`${item}_${key}`}
+                onPress={() => this.updateValue(item, checkbox, key)}
+                title={label}
+                color={select.value === key ? Colors.magenta : Colors.grey}
+                style={buttonIndex !== 0 && styles.buttonMargin}
+                textStyle={styles.buttonText}
+                containerStyle={styles.buttonTextContainer}
+              />
+            ))}
           </View>
         </View>
       </View>
@@ -166,34 +167,25 @@ class AdminScreen extends Component {
   };
 
   render() {
-    const {
-      loading, handleRefresh, title,
-    } = this.props;
+    const { loading, handleRefresh, title } = this.props;
 
     const keys = this.applyFilter(Object.keys(this.state.items));
 
     const header = (
       <SearchHeader
         title={title}
-        searchText="Find a member"
+        searchText='Find a member'
         search={(searchKey) => this.setState({ searchKey })}
         searchKey={this.state.searchKey}
-        leftIcon="arrow-back"
+        leftIcon='arrow-back'
         leftIconAction={this.props.goBack}
       />
     );
 
     const filterButton = this.props.filterTypes.length > 1 && (
-      <TouchableHighlight
-        onPress={this.updateFilter}
-        style={styles.filterButton}
-      >
+      <TouchableHighlight onPress={this.updateFilter} style={styles.filterButton}>
         <View style={styles.filterButtonWrapper}>
-          <Icon
-            name="filter-list"
-            size={32}
-            color={Colors.white}
-          />
+          <Icon name='filter-list' size={32} color={Colors.white} />
         </View>
       </TouchableHighlight>
     );
@@ -202,9 +194,7 @@ class AdminScreen extends Component {
       return (
         <View style={styles.rootWrapper}>
           {header}
-          <Text
-            style={[styles.text, styles.noResultsMessage]}
-          >
+          <Text style={[styles.text, styles.noResultsMessage]}>
             No entries found with this filter.
           </Text>
           {filterButton}
@@ -222,12 +212,9 @@ class AdminScreen extends Component {
           contentContainerStyle={styles.container}
           data={keys}
           renderItem={this.renderItem}
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={handleRefresh}
-            />
-          )}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
+          }
           keyExtractor={(item) => item}
         />
         {filterButton}
@@ -237,23 +224,29 @@ class AdminScreen extends Component {
 }
 
 AdminScreen.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    pk: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    checkbox: PropTypes.bool,
-    select: PropTypes.shape({
-      options: PropTypes.arrayOf(PropTypes.shape({
-        key: PropTypes.string,
-        label: PropTypes.string,
-      })),
-      value: PropTypes.string,
-    }),
-  })).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      pk: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      checkbox: PropTypes.bool,
+      select: PropTypes.shape({
+        options: PropTypes.arrayOf(
+          PropTypes.shape({
+            key: PropTypes.string,
+            label: PropTypes.string,
+          })
+        ),
+        value: PropTypes.string,
+      }),
+    })
+  ).isRequired,
   checkboxLabel: PropTypes.string,
-  filterTypes: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    checkItem: PropTypes.func.isRequired,
-  })),
+  filterTypes: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      checkItem: PropTypes.func.isRequired,
+    })
+  ),
   handleRefresh: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,

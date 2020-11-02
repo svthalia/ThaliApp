@@ -50,7 +50,10 @@ class RegistrationScreen extends Component {
     const field = this.props.fields[key];
     const value = this.state[key];
     if (field.required) {
-      if (field.type === 'integer' && (value === '' || value === null || !value.match(/^-?\d+$/))) {
+      if (
+        field.type === 'integer' &&
+        (value === '' || value === null || !value.match(/^-?\d+$/))
+      ) {
         return {
           isValid: false,
           reason: 'This field is required and must be an integer.',
@@ -68,7 +71,11 @@ class RegistrationScreen extends Component {
           reason: 'This field is required.',
         };
       }
-    } else if (field.type === 'integer' && !(value === '' || value === null) && !value.match(/^-?\d+$/)) {
+    } else if (
+      field.type === 'integer' &&
+      !(value === '' || value === null) &&
+      !value.match(/^-?\d+$/)
+    ) {
       return {
         isValid: false,
         reason: 'This field must be an integer.',
@@ -96,12 +103,10 @@ class RegistrationScreen extends Component {
   };
 
   render() {
-    const {
-      status, fields, openUrl, update, registration,
-    } = this.props;
+    const { status, fields, openUrl, update, registration } = this.props;
 
     if (status === 'failure') {
-      return <ErrorScreen message={'Sorry! We couldn\'t load any data.'} />;
+      return <ErrorScreen message={"Sorry! We couldn't load any data."} />;
     }
 
     const keys = Object.keys(fields);
@@ -113,24 +118,13 @@ class RegistrationScreen extends Component {
     return (
       <KeyboardAvoidingView
         style={styles.rootWrapper}
-        behavior="padding"
-        modalOpen="false"
+        behavior='padding'
+        modalOpen='false'
       >
-        <ScrollView
-          style={styles.content}
-          keyboardShouldPersistTaps="handled"
-        >
-          <Modal
-            visible={status === 'loading'}
-            transparent
-            onRequestClose={() => ({})}
-          >
+        <ScrollView style={styles.content} keyboardShouldPersistTaps='handled'>
+          <Modal visible={status === 'loading'} transparent onRequestClose={() => ({})}>
             <View style={styles.overlay}>
-              <ActivityIndicator
-                animating
-                color={Colors.magenta}
-                size="large"
-              />
+              <ActivityIndicator animating color={Colors.magenta} size='large' />
             </View>
           </Modal>
           {keys.map((key) => {
@@ -140,13 +134,13 @@ class RegistrationScreen extends Component {
               return (
                 <View key={key} style={styles.fieldContainer}>
                   <View style={styles.booleanContainer}>
-                    <Text style={styles.field}>
-                      {field.label}
-                    </Text>
+                    <Text style={styles.field}>{field.label}</Text>
                     <Switch
                       value={this.state[key]}
                       onValueChange={(value) => this.updateField(key, value)}
-                      thumbColor={this.state[key] ? Colors.darkMagenta : Colors.lightGray}
+                      thumbColor={
+                        this.state[key] ? Colors.darkMagenta : Colors.lightGray
+                      }
                       trackColor={{
                         false: Colors.lightGray,
                         true: Colors.magenta,
@@ -164,18 +158,15 @@ class RegistrationScreen extends Component {
                     />
                   )}
                   {validity.isValid || (
-                    <Text style={styles.invalid}>
-                      {validity.reason}
-                    </Text>
+                    <Text style={styles.invalid}>{validity.reason}</Text>
                   )}
                 </View>
               );
-            } if (field.type === 'integer' || field.type === 'text') {
+            }
+            if (field.type === 'integer' || field.type === 'text') {
               return (
                 <View key={key} style={styles.fieldContainer}>
-                  <Text style={styles.field}>
-                    {field.label}
-                  </Text>
+                  <Text style={styles.field}>{field.label}</Text>
                   {!field.description || (
                     <HTML
                       html={field.description}
@@ -192,13 +183,12 @@ class RegistrationScreen extends Component {
                     keyboardType={field.type === 'integer' ? 'numeric' : 'default'}
                     placeholder={field.label}
                     style={styles.field}
-                    underlineColorAndroid={validity.isValid ? Colors.lightGray
-                      : Colors.lightRed}
+                    underlineColorAndroid={
+                      validity.isValid ? Colors.lightGray : Colors.lightRed
+                    }
                   />
                   {validity.isValid || (
-                    <Text style={styles.invalid}>
-                      {validity.reason}
-                    </Text>
+                    <Text style={styles.invalid}>{validity.reason}</Text>
                   )}
                 </View>
               );
@@ -208,7 +198,7 @@ class RegistrationScreen extends Component {
           {status !== 'loading' && (
             <View style={styles.buttonView}>
               <Button
-                title="Save"
+                title='Save'
                 color={Colors.magenta}
                 onPress={() => update(registration, this.state)}
                 disabled={!this.isFormValid()}

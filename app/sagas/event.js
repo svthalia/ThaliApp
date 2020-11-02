@@ -1,6 +1,4 @@
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import Moment from 'moment';
 import Snackbar from 'react-native-snackbar';
@@ -37,12 +35,14 @@ function* event(action) {
       status: 'registered',
     };
 
-    const eventRegistrations = yield call(apiRequest, `events/${pk}/registrations`, data, params);
+    const eventRegistrations = yield call(
+      apiRequest,
+      `events/${pk}/registrations`,
+      data,
+      params
+    );
 
-    yield put(eventActions.success(
-      eventData,
-      eventRegistrations,
-    ));
+    yield put(eventActions.success(eventData, eventRegistrations));
   } catch (error) {
     yield call(reportError, error);
     yield put(eventActions.failure());
@@ -79,12 +79,7 @@ function* updateRegistration(action) {
 }
 
 function* addToCalendar(action) {
-  const {
-    eventName,
-    eventLocation,
-    eventStart,
-    eventEnd,
-  } = action.payload;
+  const { eventName, eventLocation, eventStart, eventEnd } = action.payload;
   const eventConfig = {
     title: eventName,
     startDate: Moment(eventStart).toDate().toISOString(),
@@ -92,16 +87,21 @@ function* addToCalendar(action) {
     location: eventLocation,
   };
   try {
-    const eventInfo = yield call(AddCalendarEvent.presentEventCreatingDialog, eventConfig);
+    const eventInfo = yield call(
+      AddCalendarEvent.presentEventCreatingDialog,
+      eventConfig
+    );
     if (eventInfo.action === 'SAVED') {
       yield call([Snackbar, 'show'], { text: 'Event added to calendar!' });
     }
   } catch (error) {
-    yield call([Snackbar, 'show'], { text: 'Failed to add event to calendar!' });
+    yield call([Snackbar, 'show'], {
+      text: 'Failed to add event to calendar!',
+    });
   }
 }
 
-export default function* () {
+export default function* eventSaga() {
   yield takeEvery(eventActions.EVENT, event);
   yield takeEvery(eventActions.UPDATE_REGISTRATION, updateRegistration);
   yield takeEvery(eventActions.ADD_TO_CALENDAR, addToCalendar);

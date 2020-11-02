@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet, Text, View, ViewPropTypes,
-} from 'react-native';
+import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import styles from './style/CardSection';
 
 const CardSection = (props) => (
   <View style={[styles.section, props.style]}>
     {props.sectionHeader !== null && (
-      <Text style={styles.sectionHeader}>
-        {props.sectionHeader}
-      </Text>
+      <Text style={styles.sectionHeader}>{props.sectionHeader}</Text>
     )}
-    <View style={[styles.card, props.contentStyle]}>
-      {props.children}
-    </View>
+    <View style={[styles.card, props.contentStyle]}>{props.children}</View>
   </View>
 );
 
@@ -25,8 +19,7 @@ CardSection.propTypes = {
   contentStyle: ViewPropTypes.style,
 };
 
-const defaultStyles = StyleSheet.create({
-});
+const defaultStyles = StyleSheet.create({});
 
 CardSection.defaultProps = {
   sectionHeader: null,

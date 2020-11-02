@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Keyboard, TouchableWithoutFeedback, StyleSheet, ViewPropTypes,
+  View,
+  Keyboard,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 
 const DismissKeyboardView = (props) => (
@@ -10,11 +14,7 @@ const DismissKeyboardView = (props) => (
     accessible={false}
     style={props.style}
   >
-    <View
-      style={props.contentStyle}
-    >
-      {props.children}
-    </View>
+    <View style={props.contentStyle}>{props.children}</View>
   </TouchableWithoutFeedback>
 );
 
@@ -24,8 +24,7 @@ DismissKeyboardView.propTypes = {
   contentStyle: ViewPropTypes.style,
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 DismissKeyboardView.defaultProps = {
   style: styles,

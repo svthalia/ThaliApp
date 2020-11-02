@@ -5,9 +5,9 @@ import DeviceInfo from 'react-native-device-info';
 import StyleSheet from '../../../style/StyleSheet';
 import Colors from '../../../style/Colors';
 
-// eslint-disable-next-line no-nested-ternary
-export const STATUSBAR_HEIGHT = Platform.OS === 'ios'
-  ? DeviceInfo.hasNotch() ? 44 : 20 : StatusBar.currentHeight;
+export const STATUSBAR_HEIGHT =
+  // eslint-disable-next-line no-nested-ternary
+  Platform.OS === 'ios' ? (DeviceInfo.hasNotch() ? 44 : 20) : StatusBar.currentHeight;
 export const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export const TOTAL_BAR_HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;

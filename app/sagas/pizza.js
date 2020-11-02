@@ -1,6 +1,4 @@
-import {
-  call, put, select, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { apiRequest } from '../utils/url';
 
 import * as pizzaActions from '../actions/pizza';
@@ -149,7 +147,7 @@ function* updateOrder(action) {
   }
 }
 
-export default function* () {
+export default function* pizzaSaga() {
   yield takeEvery(pizzaActions.PIZZA, retrievePizzaInfo);
   yield takeEvery(pizzaActions.CANCEL, cancel);
   yield takeEvery(pizzaActions.ORDER, order);

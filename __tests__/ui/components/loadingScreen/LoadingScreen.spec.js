@@ -4,9 +4,7 @@ import LoadingScreen from '../../../../app/ui/components/loadingScreen/LoadingSc
 
 describe('LoadingScreen component', () => {
   it('renders correctly', () => {
-    const tree = renderer
-      .create(<LoadingScreen />)
-      .toJSON();
+    const tree = renderer.create(<LoadingScreen />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

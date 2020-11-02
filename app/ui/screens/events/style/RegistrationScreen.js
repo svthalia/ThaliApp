@@ -1,4 +1,7 @@
-import { APPBAR_HEIGHT, TOTAL_BAR_HEIGHT } from '../../../components/standardHeader/style/StandardHeader';
+import {
+  APPBAR_HEIGHT,
+  TOTAL_BAR_HEIGHT,
+} from '../../../components/standardHeader/style/StandardHeader';
 import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
 

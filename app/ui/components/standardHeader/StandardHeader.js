@@ -45,13 +45,15 @@ const StandardHeader = (props) => (
         backgroundColor={Colors.semiTransparent}
         translucent
         animated
-        barStyle="light-content"
+        barStyle='light-content'
       />
     </View>
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.appBar}>
         <IconButton
-          onPress={() => (props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack())}
+          onPress={() =>
+            props.menu ? props.navigation.toggleDrawer() : props.navigation.goBack()
+          }
           name={props.menu ? 'menu' : 'arrow-back'}
           style={styles.iconButton}
           iconStyle={styles.icon}
@@ -59,9 +61,7 @@ const StandardHeader = (props) => (
         <Text style={styles.title}>
           {sceneToTitle(props.navigation.state.routeName)}
         </Text>
-        <View style={styles.rightView}>
-          {props.rightView}
-        </View>
+        <View style={styles.rightView}>{props.rightView}</View>
       </View>
     </SafeAreaView>
   </View>
@@ -85,9 +85,7 @@ export function withStandardHeader(Component, menu) {
   return (props) => (
     <View style={styles.rootWrapper}>
       <StandardHeaderContainer menu={menu} />
-      <Component
-        {...props}
-      />
+      <Component {...props} />
     </View>
   );
 }

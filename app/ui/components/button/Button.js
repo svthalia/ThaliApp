@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Platform, Text, TouchableHighlight, View,
-  ViewPropTypes,
-} from 'react-native';
+import { Platform, Text, TouchableHighlight, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './style/Button';
 import Colors from '../../style/Colors';
@@ -21,11 +18,13 @@ const Button = (props) => {
       underlayColor={props.underlayColor}
     >
       <View
-        style={[styles.container, props.containerStyle, { backgroundColor: props.color }]}
+        style={[
+          styles.container,
+          props.containerStyle,
+          { backgroundColor: props.color },
+        ]}
       >
-        <Text style={[styles.text, props.textStyle]}>
-          {title}
-        </Text>
+        <Text style={[styles.text, props.textStyle]}>{title}</Text>
       </View>
     </TouchableHighlight>
   );

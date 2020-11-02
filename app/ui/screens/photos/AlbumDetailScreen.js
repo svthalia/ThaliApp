@@ -11,25 +11,21 @@ import StandardHeader from '../../components/standardHeader/StandardHeader';
 const windowWidth = Dimensions.get('window').width;
 export const itemSize = (windowWidth - 48) / 3;
 
-const AlbumDetailScreen = ({
-  fetching, status, photos, openGallery,
-}) => {
+const AlbumDetailScreen = ({ fetching, status, photos, openGallery }) => {
   let content = (
     <View style={styles.wrapper}>
       <FlatList
         style={styles.flatList}
         contentContainerStyle={styles.listContainer}
         data={photos.filter((p) => !p.hidden)}
-        renderItem={
-          (data) => (
-            <PhotoListItem
-              photo={data.item}
-              size={itemSize}
-              style={styles.listItem}
-              onPress={() => openGallery(data.index)}
-            />
-          )
-        }
+        renderItem={(data) => (
+          <PhotoListItem
+            photo={data.item}
+            size={itemSize}
+            style={styles.listItem}
+            onPress={() => openGallery(data.index)}
+          />
+        )}
         keyExtractor={(item) => item.pk}
         numColumns={3}
       />
@@ -37,7 +33,7 @@ const AlbumDetailScreen = ({
   );
 
   if (fetching && status === STATUS_INITIAL) {
-    content = (<LoadingScreen />);
+    content = <LoadingScreen />;
   } else if (!fetching && status === STATUS_FAILURE) {
     content = (
       <View style={styles.wrapper}>

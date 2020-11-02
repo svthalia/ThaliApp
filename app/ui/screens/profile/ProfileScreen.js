@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Animated, ImageBackground, Platform, ScrollView, TouchableHighlight, View,
+  Animated,
+  ImageBackground,
+  Platform,
+  ScrollView,
+  TouchableHighlight,
+  View,
 } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
 import LinearGradient from 'react-native-linear-gradient';
@@ -16,7 +21,11 @@ import AvatarModal from './AvatarModal';
 import AchievementSection from './AchievementSection';
 import DescriptionSection from './DescriptionSection';
 import PersonalInfoSection from './PersonalInfoSection';
-import styles, { HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT, HEADER_SCROLL_DISTANCE } from './style/ProfileScreen';
+import styles, {
+  HEADER_MAX_HEIGHT,
+  HEADER_MIN_HEIGHT,
+  HEADER_SCROLL_DISTANCE,
+} from './style/ProfileScreen';
 import IconButton from '../../components/button/IconButton';
 
 class ProfileScreen extends Component {
@@ -30,11 +39,11 @@ class ProfileScreen extends Component {
     };
 
     this.scrollY.addListener(({ value }) => {
-      if (this.state.headerEnabled && value > (HEADER_SCROLL_DISTANCE / 2)) {
+      if (this.state.headerEnabled && value > HEADER_SCROLL_DISTANCE / 2) {
         this.setState({
           headerEnabled: false,
         });
-      } else if (!this.state.headerEnabled && value < (HEADER_SCROLL_DISTANCE / 2)) {
+      } else if (!this.state.headerEnabled && value < HEADER_SCROLL_DISTANCE / 2) {
         this.setState({
           headerEnabled: true,
         });
@@ -81,7 +90,11 @@ class ProfileScreen extends Component {
 
     const textPosBottom = this.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [16, 16, (HEADER_MIN_HEIGHT - this.textHeight - STATUSBAR_HEIGHT) / 2],
+      outputRange: [
+        16,
+        16,
+        (HEADER_MIN_HEIGHT - this.textHeight - STATUSBAR_HEIGHT) / 2,
+      ],
       extrapolate: 'clamp',
     });
 
@@ -101,11 +114,13 @@ class ProfileScreen extends Component {
         textAlign: 'center',
       };
 
-      const appBarBorder = this.props.success ? this.scrollY.interpolate({
-        inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-        outputRange: [0, 0, 1],
-        extrapolate: 'clamp',
-      }) : (HEADER_MIN_HEIGHT - 24) / 2;
+      const appBarBorder = this.props.success
+        ? this.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, 0, 1],
+            extrapolate: 'clamp',
+          })
+        : (HEADER_MIN_HEIGHT - 24) / 2;
 
       appBarBorderStyle = {
         borderBottomWidth: appBarBorder,
@@ -126,29 +141,34 @@ class ProfileScreen extends Component {
           <ImageBackground
             source={{ uri: this.props.profile.avatar.full }}
             style={styles.backgroundImage}
-            resizeMode="cover"
+            resizeMode='cover'
           >
-            <LinearGradient colors={['#55000000', '#000000']} style={styles.overlayGradient} />
+            <LinearGradient
+              colors={['#55000000', '#000000']}
+              style={styles.overlayGradient}
+            />
           </ImageBackground>
         </Animated.View>
         <Animated.View style={[styles.appBar, appBarBorderStyle]}>
-          <Animated.Text
-            style={[styles.title, textStyle]}
-          >
+          <Animated.Text style={[styles.title, textStyle]}>
             {this.props.profile.display_name}
           </Animated.Text>
           <TouchableHighlight
             activeOpacity={0}
             style={styles.touchableHeader}
-            underlayColor={this.state.headerEnabled ? Colors.semiTransparent : Colors.transparent}
-            onPress={() => (this.state.headerEnabled ? this.setModalVisible(true) : null)}
+            underlayColor={
+              this.state.headerEnabled ? Colors.semiTransparent : Colors.transparent
+            }
+            onPress={() =>
+              this.state.headerEnabled ? this.setModalVisible(true) : null
+            }
           >
             <View style={styles.touchableHeader} />
           </TouchableHighlight>
           <View style={styles.headerIconPressBlocker} />
           <IconButton
             onPress={this.props.goBack}
-            name="arrow-back"
+            name='arrow-back'
             iconStyle={styles.icon}
           />
         </Animated.View>
@@ -157,9 +177,7 @@ class ProfileScreen extends Component {
   };
 
   render() {
-    const {
-      hasLoaded, profile, openUrl, success,
-    } = this.props;
+    const { hasLoaded, profile, openUrl, success } = this.props;
 
     if (!hasLoaded) {
       return (
@@ -182,7 +200,7 @@ class ProfileScreen extends Component {
       <View style={styles.container}>
         <StatusBar
           backgroundColor={Colors.semiTransparent}
-          barStyle="light-content"
+          barStyle='light-content'
           translucent
           animated
         />
@@ -196,14 +214,16 @@ class ProfileScreen extends Component {
         <ScrollView
           style={styles.container}
           scrollEventThrottle={16}
-          onScroll={Animated.event([
-            { nativeEvent: { contentOffset: { y: this.scrollY } } }], { useNativeDriver: false })}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: this.scrollY } } }],
+            { useNativeDriver: false }
+          )}
         >
           <View style={styles.content}>
             <DescriptionSection profile={profile} />
             <PersonalInfoSection profile={profile} openUrl={openUrl} />
-            <AchievementSection profile={profile} type="achievements" />
-            <AchievementSection profile={profile} type="societies" />
+            <AchievementSection profile={profile} type='achievements' />
+            <AchievementSection profile={profile} type='societies' />
           </View>
         </ScrollView>
         {this.getAppbar()}
@@ -229,26 +249,34 @@ ProfileScreen.propTypes = {
     programme: PropTypes.string,
     website: PropTypes.string,
     membership_type: PropTypes.string,
-    achievements: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      earliest: PropTypes.string,
-      periods: PropTypes.arrayOf(PropTypes.shape({
-        chair: PropTypes.bool.isRequired,
-        until: PropTypes.string,
-        since: PropTypes.string.isRequired,
-        role: PropTypes.string,
-      })),
-    })).isRequired,
-    societies: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      earliest: PropTypes.string,
-      periods: PropTypes.arrayOf(PropTypes.shape({
-        chair: PropTypes.bool.isRequired,
-        until: PropTypes.string,
-        since: PropTypes.string.isRequired,
-        role: PropTypes.string,
-      })),
-    })).isRequired,
+    achievements: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        earliest: PropTypes.string,
+        periods: PropTypes.arrayOf(
+          PropTypes.shape({
+            chair: PropTypes.bool.isRequired,
+            until: PropTypes.string,
+            since: PropTypes.string.isRequired,
+            role: PropTypes.string,
+          })
+        ),
+      })
+    ).isRequired,
+    societies: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        earliest: PropTypes.string,
+        periods: PropTypes.arrayOf(
+          PropTypes.shape({
+            chair: PropTypes.bool.isRequired,
+            until: PropTypes.string,
+            since: PropTypes.string.isRequired,
+            role: PropTypes.string,
+          })
+        ),
+      })
+    ).isRequired,
   }).isRequired,
   success: PropTypes.bool.isRequired,
   hasLoaded: PropTypes.bool.isRequired,

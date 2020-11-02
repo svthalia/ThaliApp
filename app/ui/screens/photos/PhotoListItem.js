@@ -6,10 +6,7 @@ import styles from './style/PhotoListItem';
 
 const PhotoListItem = (props) => (
   <SquareView style={props.style} size={props.size}>
-    <TouchableHighlight
-      style={styles.touchable}
-      onPress={() => props.onPress()}
-    >
+    <TouchableHighlight style={styles.touchable} onPress={() => props.onPress()}>
       <Image
         source={{
           uri: props.photo.file.small,

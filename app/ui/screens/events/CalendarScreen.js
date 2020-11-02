@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  RefreshControl, ScrollView, SectionList, Text, View,
-} from 'react-native';
+import { RefreshControl, ScrollView, SectionList, Text, View } from 'react-native';
 import Moment from 'moment';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -17,7 +15,7 @@ const addEventToSection = (sections, date, event) => {
   const day = date.date();
   const month = date.month();
   const year = date.year();
-  const sectionKey = (year * 100) + month;
+  const sectionKey = year * 100 + month;
 
   if (!(sectionKey in sections)) {
     sections[sectionKey] = {
@@ -48,9 +46,7 @@ const eventListToSections = (eventList) => {
     const start = Moment(eventList[i].start);
     const end = Moment(eventList[i].end);
 
-    const daySpan = end.diff([
-      start.year(), start.month(), start.date(),
-    ], 'days') + 1;
+    const daySpan = end.diff([start.year(), start.month(), start.date()], 'days') + 1;
 
     if (daySpan === 1) {
       addEventToSection(sections, start, eventList[i]);
@@ -80,22 +76,28 @@ const eventListToSections = (eventList) => {
     }
   }
 
-  return Object.keys(sections).sort((a, b) => a - b).map((month) => {
-    sections[month].data = Object.keys(sections[month].data).sort((a, b) => a - b).map((day) => {
-      sections[month].data[day].events.sort((a, b) => {
-        if (a.start == null && b.start == null) {
-          return 0;
-        } if (a.start == null) {
-          return -1;
-        } if (b.start == null) {
-          return 1;
-        }
-        return Moment(a.start).diff(Moment(b.start));
-      });
-      return sections[month].data[day];
+  return Object.keys(sections)
+    .sort((a, b) => a - b)
+    .map((month) => {
+      sections[month].data = Object.keys(sections[month].data)
+        .sort((a, b) => a - b)
+        .map((day) => {
+          sections[month].data[day].events.sort((a, b) => {
+            if (a.start == null && b.start == null) {
+              return 0;
+            }
+            if (a.start == null) {
+              return -1;
+            }
+            if (b.start == null) {
+              return 1;
+            }
+            return Moment(a.start).diff(Moment(b.start));
+          });
+          return sections[month].data[day];
+        });
+      return sections[month];
     });
-    return sections[month];
-  });
 };
 
 const renderItem = (item) => {
@@ -104,17 +106,13 @@ const renderItem = (item) => {
   return (
     <View style={styles.day}>
       <View style={styles.dateInfo}>
-        <Text style={styles.dayNumber}>
-          {dayNumber}
-        </Text>
-        <Text style={styles.dayOfWeek}>
-          {dayOfWeek}
-        </Text>
+        <Text style={styles.dayNumber}>{dayNumber}</Text>
+        <Text style={styles.dayOfWeek}>{dayOfWeek}</Text>
       </View>
       <View style={styles.eventList}>
-        {events.map(
-          (event) => <CalendarItem event={event} key={`${event.pk}:${event.title}`} />,
-        )}
+        {events.map((event) => (
+          <CalendarItem event={event} key={`${event.pk}:${event.title}`} />
+        ))}
       </View>
     </View>
   );
@@ -141,8 +139,8 @@ class CalendarScreen extends Component {
   render() {
     const header = (
       <SearchHeader
-        title="Calendar"
-        searchText="Find an event"
+        title='Calendar'
+        searchText='Find an event'
         search={this.search}
         searchKey={this.props.keywords}
       />
@@ -152,13 +150,9 @@ class CalendarScreen extends Component {
       <SectionList
         style={styles.sectionList}
         renderItem={renderItem}
-        renderSectionHeader={
-          (itemHeader) => (
-            <Text style={styles.sectionHeader}>
-              {itemHeader.section.key}
-            </Text>
-          )
-        }
+        renderSectionHeader={(itemHeader) => (
+          <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+        )}
         sections={eventListToSections(this.props.eventList)}
         keyExtractor={(item) => item.dayNumber}
         stickySectionHeadersEnabled
@@ -173,28 +167,28 @@ class CalendarScreen extends Component {
       content = (
         <ScrollView
           contentContainerStyle={styles.content}
-          refreshControl={(
+          refreshControl={
             <RefreshControl
               onRefresh={this.handleRefresh}
               refreshing={this.props.loading}
             />
-          )}
+          }
         >
-          <ErrorScreen message={('Sorry, we couldn\'t load any data.')} />
+          <ErrorScreen message={"Sorry, we couldn't load any data."} />
         </ScrollView>
       );
     } else if (this.props.eventList.length === 0) {
       content = (
         <ScrollView
           contentContainerStyle={styles.content}
-          refreshControl={(
+          refreshControl={
             <RefreshControl
               onRefresh={this.handleRefresh}
               refreshing={this.props.loading}
             />
-          )}
+          }
         >
-          <ErrorScreen message="No events found!" />
+          <ErrorScreen message='No events found!' />
         </ScrollView>
       );
     }
@@ -215,19 +209,21 @@ CalendarScreen.defaultProps = {
 };
 
 CalendarScreen.propTypes = {
-  eventList: PropTypes.arrayOf(PropTypes.shape({
-    pk: PropTypes.number,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    start: PropTypes.string,
-    end: PropTypes.string,
-    location: PropTypes.string,
-    price: PropTypes.string,
-    registered: PropTypes.bool,
-    pizza: PropTypes.bool,
-    partner: PropTypes.bool,
-    url: PropTypes.string,
-  })).isRequired,
+  eventList: PropTypes.arrayOf(
+    PropTypes.shape({
+      pk: PropTypes.number,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      start: PropTypes.string,
+      end: PropTypes.string,
+      location: PropTypes.string,
+      price: PropTypes.string,
+      registered: PropTypes.bool,
+      pizza: PropTypes.bool,
+      partner: PropTypes.bool,
+      url: PropTypes.string,
+    })
+  ).isRequired,
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   events: PropTypes.func.isRequired,

@@ -13,7 +13,8 @@ const PersonalInfoSection = ({ profile, openUrl }) => {
     },
     programme: {
       title: 'Study programme',
-      display: (x) => (x === 'computingscience' ? 'Computing science' : 'Information sciences'),
+      display: (x) =>
+        x === 'computingscience' ? 'Computing science' : 'Information sciences',
     },
     website: {
       title: 'Website',
@@ -25,24 +26,24 @@ const PersonalInfoSection = ({ profile, openUrl }) => {
     },
   };
 
-  const profileData = Object.keys(profileInfo).map((key) => {
-    if (profile[key]) {
-      return {
-        title: profileInfo[key].title,
-        value: profileInfo[key].display(profile[key]),
-      };
-    }
-    return null;
-  }).filter((n) => n);
+  const profileData = Object.keys(profileInfo)
+    .map((key) => {
+      if (profile[key]) {
+        return {
+          title: profileInfo[key].title,
+          value: profileInfo[key].display(profile[key]),
+        };
+      }
+      return null;
+    })
+    .filter((n) => n);
 
   if (profileData) {
     return (
-      <CardSection sectionHeader="Personal information">
+      <CardSection sectionHeader='Personal information'>
         {profileData.map((item, i) => (
           <View style={[styles.item, i !== 0 && styles.borderTop]} key={item.title}>
-            <Text style={styles.description}>
-              {item.title}
-            </Text>
+            <Text style={styles.description}>{item.title}</Text>
             <Text
               style={item.title === 'Website' ? [styles.data, styles.url] : styles.data}
               onPress={item.title === 'Website' ? () => openUrl(`${item.value}`) : null}

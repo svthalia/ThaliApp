@@ -1,9 +1,7 @@
 import { NativeModules } from 'react-native';
 import * as ReactNative from 'react-native';
 
-NativeModules.RNShare = {
-
-};
+NativeModules.RNShare = {};
 
 NativeModules.RNCStatusBarManager = {
   HEIGHT: 42,
@@ -19,41 +17,43 @@ jest.mock('react-native-fs', () => ({
   downloadFile: jest.fn(),
 }));
 
-jest.doMock('react-native', () => Object.setPrototypeOf(
-  {
-    Platform: {
-      OS: 'android',
-      select: () => {},
-      constants: {
-        version: 28,
+jest.doMock('react-native', () =>
+  Object.setPrototypeOf(
+    {
+      Platform: {
+        OS: 'android',
+        select: () => {},
+        constants: {
+          version: 28,
+        },
       },
-    },
-    NativeModules: {
-      ...ReactNative.NativeModules,
-      RNFBAppModule: {
-        NATIVE_FIREBASE_APPS: [
-          {
-            appConfig: {
-              name: '[DEFAULT]',
+      NativeModules: {
+        ...ReactNative.NativeModules,
+        RNFBAppModule: {
+          NATIVE_FIREBASE_APPS: [
+            {
+              appConfig: {
+                name: '[DEFAULT]',
+              },
+              options: {},
             },
-            options: {},
-          },
 
-          {
-            appConfig: {
-              name: 'secondaryFromNative',
+            {
+              appConfig: {
+                name: 'secondaryFromNative',
+              },
+              options: {},
             },
-            options: {},
-          },
-        ],
+          ],
+        },
+        RNFBPerfModule: {},
+        RNFBAdMobModule: {},
+        RNFBAdMobInterstitialModule: {},
+        RNFBAdMobRewardedModule: {},
+        RNFBAdsConsentModule: {},
+        RNFBCrashlyticsModule: {},
       },
-      RNFBPerfModule: {},
-      RNFBAdMobModule: {},
-      RNFBAdMobInterstitialModule: {},
-      RNFBAdMobRewardedModule: {},
-      RNFBAdsConsentModule: {},
-      RNFBCrashlyticsModule: {},
     },
-  },
-  ReactNative,
-));
+    ReactNative
+  )
+);

@@ -14,14 +14,12 @@ class AlbumGalleryScreen extends Component {
   }
 
   render() {
-    const {
-      photos, goBack, downloadPhoto, sharePhoto,
-    } = this.props;
+    const { photos, goBack, downloadPhoto, sharePhoto } = this.props;
 
     const buttons = [
       <IconButton
-        key="share-button"
-        name="share"
+        key='share-button'
+        name='share'
         style={styles.sharePhotoTouchable}
         onPress={() => sharePhoto(photos[this.state.index].url)}
       />,
@@ -30,11 +28,11 @@ class AlbumGalleryScreen extends Component {
     if (Platform.OS === 'android') {
       buttons.push(
         <IconButton
-          key="download-button"
-          name="file-download"
+          key='download-button'
+          name='file-download'
           style={styles.downloadPhotoTouchable}
           onPress={() => downloadPhoto(photos[this.state.index].url)}
-        />,
+        />
       );
     }
 
@@ -46,16 +44,8 @@ class AlbumGalleryScreen extends Component {
             imageUrls={photos}
             onChange={(index) => this.setState({ index })}
           />
-          <TouchableOpacity
-            style={styles.closeGalleryTouchable}
-            onPress={goBack}
-          >
-            <Icon
-              name="close"
-              style={styles.icon}
-              size={24}
-              color={Colors.white}
-            />
+          <TouchableOpacity style={styles.closeGalleryTouchable} onPress={goBack}>
+            <Icon name='close' style={styles.icon} size={24} color={Colors.white} />
           </TouchableOpacity>
           {buttons}
         </View>
@@ -67,9 +57,11 @@ class AlbumGalleryScreen extends Component {
 AlbumGalleryScreen.propTypes = {
   goBack: PropTypes.func.isRequired,
   selection: PropTypes.number.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    url: PropTypes.string.isRequired,
-  })).isRequired,
+  photos: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   downloadPhoto: PropTypes.func.isRequired,
   sharePhoto: PropTypes.func.isRequired,
 };

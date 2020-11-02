@@ -27,64 +27,59 @@ describe('deeplinking saga', () => {
     expect(emptyUrl).toEqual({ params: {}, path: '' });
   });
 
-  it('should do nothing without a URL', () => expectSaga(deepLinkingSaga)
-    .dispatch(actions.deepLink())
-    .silentRun()
-    .then(({ effects }) => {
-      expect(effects.call).toBeUndefined();
-      expect(effects.select).toBeUndefined();
-      expect(effects.put).toBeUndefined();
-    }));
+  it('should do nothing without a URL', () =>
+    expectSaga(deepLinkingSaga)
+      .dispatch(actions.deepLink())
+      .silentRun()
+      .then(({ effects }) => {
+        expect(effects.call).toBeUndefined();
+        expect(effects.select).toBeUndefined();
+        expect(effects.put).toBeUndefined();
+      }));
 
-  it('should wait for the user to be logged in', () => expectSaga(deepLinkingSaga)
-    .provide([
-      [select(loggedInSelector), false],
-    ])
-    .dispatch(actions.deepLink('http://example.org/'))
-    .take(sessionActions.SIGNED_IN)
-    .silentRun());
+  it('should wait for the user to be logged in', () =>
+    expectSaga(deepLinkingSaga)
+      .provide([[select(loggedInSelector), false]])
+      .dispatch(actions.deepLink('http://example.org/'))
+      .take(sessionActions.SIGNED_IN)
+      .silentRun());
 
-  it('should not open an unknown url outside the app if stayInApp is true', () => expectSaga(deepLinkingSaga)
-    .provide([
-      [select(loggedInSelector), true],
-    ])
-    .dispatch(actions.deepLink('http://example.org/', true))
-    .silentRun()
-    .then(() => {
-      expect(Linking.openURL).not.toBeCalled();
-    }));
+  it('should not open an unknown url outside the app if stayInApp is true', () =>
+    expectSaga(deepLinkingSaga)
+      .provide([[select(loggedInSelector), true]])
+      .dispatch(actions.deepLink('http://example.org/', true))
+      .silentRun()
+      .then(() => {
+        expect(Linking.openURL).not.toBeCalled();
+      }));
 
-  it('should open an unknown url outside the app if specified', () => expectSaga(deepLinkingSaga)
-    .provide([
-      [select(loggedInSelector), true],
-    ])
-    .dispatch(actions.deepLink('http://example.org/', false))
-    .silentRun()
-    .then(() => {
-      expect(Linking.openURL).toBeCalledWith('http://example.org/');
-    }));
+  it('should open an unknown url outside the app if specified', () =>
+    expectSaga(deepLinkingSaga)
+      .provide([[select(loggedInSelector), true]])
+      .dispatch(actions.deepLink('http://example.org/', false))
+      .silentRun()
+      .then(() => {
+        expect(Linking.openURL).toBeCalledWith('http://example.org/');
+      }));
 
-  it('should open the pizza url', () => expectSaga(deepLinkingSaga)
-    .provide([
-      [select(loggedInSelector), true],
-    ])
-    .dispatch(actions.deepLink(`${siteURL}/pizzas/`))
-    .put(pizzaActions.retrievePizzaInfo())
-    .silentRun());
+  it('should open the pizza url', () =>
+    expectSaga(deepLinkingSaga)
+      .provide([[select(loggedInSelector), true]])
+      .dispatch(actions.deepLink(`${siteURL}/pizzas/`))
+      .put(pizzaActions.retrievePizzaInfo())
+      .silentRun());
 
-  it('should open the events calendar url', () => expectSaga(deepLinkingSaga)
-    .provide([
-      [select(loggedInSelector), true],
-    ])
-    .dispatch(actions.deepLink(`${siteURL}/events/`))
-    .put(calendarActions.open())
-    .silentRun());
+  it('should open the events calendar url', () =>
+    expectSaga(deepLinkingSaga)
+      .provide([[select(loggedInSelector), true]])
+      .dispatch(actions.deepLink(`${siteURL}/events/`))
+      .put(calendarActions.open())
+      .silentRun());
 
-  it('should open an event detail', () => expectSaga(deepLinkingSaga)
-    .provide([
-      [select(loggedInSelector), true],
-    ])
-    .dispatch(actions.deepLink(`${siteURL}/events/1/`))
-    .put(eventActions.event('1'))
-    .silentRun());
+  it('should open an event detail', () =>
+    expectSaga(deepLinkingSaga)
+      .provide([[select(loggedInSelector), true]])
+      .dispatch(actions.deepLink(`${siteURL}/events/1/`))
+      .put(eventActions.event('1'))
+      .silentRun());
 });
