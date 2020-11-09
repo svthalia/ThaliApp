@@ -100,9 +100,11 @@ function SignedInNavigator() {
 }
 
 function AppNavigator() {
-  if (state.lo)
+  if (state.status == )
   <Stack.Navigator>
-    { isLoggedIn ? ()}
+    {
+
+    }
   </Stack.Navigator>
 }
   Splash: SplashScreen,
