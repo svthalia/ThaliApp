@@ -10,7 +10,7 @@ import * as calendarActions from '../actions/calendar';
 import * as membersActions from '../actions/members';
 import * as welcomeActions from '../actions/welcome';
 import { settingsActions } from '../actions/settings';
-import NavigationService from '../navigation';
+import NavigationService from '../ui/components/navigation/Navigation';
 import * as photosActions from '../actions/photos';
 
 function* navigate(routeName) {

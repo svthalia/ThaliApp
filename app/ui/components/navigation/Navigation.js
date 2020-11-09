@@ -3,22 +3,22 @@ import { React } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from './ui/screens/login/LoginScreenConnector';
-import Welcome from './ui/screens/welcome/WelcomeScreenConnector';
-import Event from './ui/screens/events/EventScreenConnector';
-import Calendar from './ui/screens/events/CalendarScreenConnector';
-import Profile from './ui/screens/profile/ProfileScreenConnector';
-import Pizza from './ui/screens/pizza/PizzaScreenConnector';
-import Registration from './ui/screens/events/RegistrationScreenConnector';
-import MemberList from './ui/screens/memberList/MemberListScreenConnector';
-import Photos from './ui/screens/photos/AlbumsOverviewScreenConnector';
-import PhotoAlbum from './ui/screens/photos/AlbumDetailScreenConnector';
-import PhotoGallery from './ui/screens/photos/AlbumGalleryScreenConnector';
-import SplashScreen from './ui/screens/splash/SplashScreen';
-import Settings from './ui/screens/settings/SettingsScreenConnector';
-import EventAdmin from './ui/screens/events/EventAdminScreenConnector';
-import PizzaAdmin from './ui/screens/pizza/PizzaAdminScreenConnector';
-import Sidebar from './ui/components/sidebar/SidebarConnector';
+import Login from '../../screens/login/LoginScreenConnector';
+import Welcome from '../../screens/welcome/WelcomeScreenConnector';
+import Event from '../../screens/events/EventScreenConnector';
+import Calendar from '../../screens/events/CalendarScreenConnector';
+import Profile from '../../screens/profile/ProfileScreenConnector';
+import Pizza from '../../screens/pizza/PizzaScreenConnector';
+import Registration from '../../screens/events/RegistrationScreenConnector';
+import MemberList from '../../screens/memberList/MemberListScreenConnector';
+import Photos from '../../screens/photos/AlbumsOverviewScreenConnector';
+import PhotoAlbum from '../../screens/photos/AlbumDetailScreenConnector';
+import PhotoGallery from '../../screens/photos/AlbumGalleryScreenConnector';
+import SplashScreen from '../../screens/splash/SplashScreen';
+import Settings from '../../screens/settings/SettingsScreenConnector';
+import EventAdmin from '../../screens/events/EventAdminScreenConnector';
+import PizzaAdmin from '../../screens/pizza/PizzaAdminScreenConnector';
+import Sidebar from '../sidebar/SidebarConnector';
 
 const Drawer = createDrawerNavigator();
 

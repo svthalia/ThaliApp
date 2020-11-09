@@ -13,7 +13,7 @@ import * as membersActions from '../../app/actions/members';
 import * as welcomeActions from '../../app/actions/welcome';
 import { settingsActions } from '../../app/actions/settings';
 
-import NavigationService from '../../app/navigation';
+import NavigationService from '../../app/ui/components/navigation/Navigation';
 
 jest.mock('../../app/navigation', () => ({
   __esModule: true,

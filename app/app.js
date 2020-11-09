@@ -11,7 +11,7 @@ import sagas from './sagas';
 import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
-import NavigationService from './navigation';
+import NavigationService from './ui/components/navigation/Navigation';
 
 const { UIManager } = NativeModules;
 
