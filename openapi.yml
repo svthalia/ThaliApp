@@ -1,0 +1,2331 @@
+openapi: 3.0.2
+info:
+  title: API v1
+  version: unknown
+paths:
+  /api/v1/activemembers/groups/:
+    get:
+      operationId: listMemberGroups
+      description: Viewset that renders or edits a member.
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MemberGroup'
+          description: ''
+      tags:
+        - activemembers
+      security:
+        - oauth2:
+            - activemembers:read
+  /api/v1/activemembers/groups/{id}/:
+    get:
+      operationId: retrieveMemberGroup
+      description: Viewset that renders or edits a member.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this member group.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberGroup'
+          description: ''
+      tags:
+        - activemembers
+      security:
+        - oauth2:
+            - activemembers:read
+  /api/v1/events/:
+    get:
+      operationId: listEvents
+      description: 'Defines the viewset for events, requires an authenticated user
+
+        and enables ordering on the event start/end.'
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventList'
+          description: ''
+      tags:
+        - events
+  /api/v1/events/calendarjs/:
+    get:
+      operationId: calendarjsEvent
+      description: 'Defines a custom route that outputs the correctly formatted
+
+        events information for CalendarJS, published events only
+
+        :param request: the request object
+
+
+        :return: response containing the data'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsCalenderJS'
+          description: ''
+      tags:
+        - events
+  /api/v1/events/unpublished/:
+    get:
+      operationId: unpublishedEvent
+      description: 'Defines a custom route that outputs the correctly formatted
+
+        events information for CalendarJS, unpublished events only
+
+
+        :param request: the request object
+
+        :return: response containing the data'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsCalenderJS'
+          description: ''
+      tags:
+        - events
+  /api/v1/events/{id}/:
+    get:
+      operationId: retrieveEvent
+      description: 'Defines the viewset for events, requires an authenticated user
+
+        and enables ordering on the event start/end.'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this event.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRetrieve'
+          description: ''
+      tags:
+        - events
+  /api/v1/events/{id}/registrations/:
+    get:
+      operationId: retrieveRegistrationsEvent
+      description: 'Defines a custom route for the event''s registrations,
+
+        can filter on registration status if the user is an organiser
+
+
+        :param request: the request object
+
+        :param pk: the primary key of the event
+
+        :return: the registrations of the event'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this event.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRegistrationAdminList'
+          description: ''
+      tags:
+        - events
+    post:
+      operationId: updateRegistrationsEvent
+      description: 'Defines a custom route for the event''s registrations,
+
+        can filter on registration status if the user is an organiser
+
+
+        :param request: the request object
+
+        :param pk: the primary key of the event
+
+        :return: the registrations of the event'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this event.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRegistrationAdminList'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EventRegistrationAdminList'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EventRegistrationAdminList'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRegistrationAdminList'
+          description: ''
+      tags:
+        - events
+  /api/v1/registrations/{id}/:
+    get:
+      operationId: retrieveEventRegistration
+      description: 'Defines the viewset for registrations, requires an authenticated
+        user.
+
+        Has custom update and destroy methods that use the services.'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this Registration.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRegistration'
+          description: ''
+      tags:
+        - registrations
+    put:
+      operationId: updateEventRegistration
+      description: 'Defines the viewset for registrations, requires an authenticated
+        user.
+
+        Has custom update and destroy methods that use the services.'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this Registration.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRegistration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EventRegistration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EventRegistration'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRegistration'
+          description: ''
+      tags:
+        - registrations
+    patch:
+      operationId: partialUpdateEventRegistration
+      description: 'Defines the viewset for registrations, requires an authenticated
+        user.
+
+        Has custom update and destroy methods that use the services.'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this Registration.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRegistration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EventRegistration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EventRegistration'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventRegistration'
+          description: ''
+      tags:
+        - registrations
+    delete:
+      operationId: destroyEventRegistration
+      description: 'Defines the viewset for registrations, requires an authenticated
+        user.
+
+        Has custom update and destroy methods that use the services.'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this Registration.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+        - registrations
+  /api/v1/members/:
+    get:
+      operationId: listMembers
+      description: Viewset that renders or edits a member
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MemberList'
+          description: ''
+      tags:
+        - members
+      security:
+        - oauth2:
+            - members:read
+  /api/v1/members/birthdays/:
+    get:
+      operationId: birthdaysMember
+      description: Viewset that renders or edits a member
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberList'
+          description: ''
+      tags:
+        - members
+      security:
+        - oauth2:
+            - members:read
+  /api/v1/members/{id}/:
+    get:
+      operationId: retrieveMember
+      description: Viewset that renders or edits a member
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this member.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileEdit'
+          description: ''
+      tags:
+        - members
+      security:
+        - oauth2:
+            - members:read
+    put:
+      operationId: updateMember
+      description: Viewset that renders or edits a member
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this member.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileEdit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfileEdit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfileEdit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileEdit'
+          description: ''
+      tags:
+        - members
+      security:
+        - oauth2:
+            - members:read
+    patch:
+      operationId: partialUpdateMember
+      description: Viewset that renders or edits a member
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this member.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileEdit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfileEdit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfileEdit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileEdit'
+          description: ''
+      tags:
+        - members
+      security:
+        - oauth2:
+            - members:read
+  /api/v1/partners/events/:
+    get:
+      operationId: listPartnerEvents
+      description: View set for partner events.
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PartnerEvent'
+          description: ''
+      tags:
+        - partners
+  /api/v1/partners/events/{id}/:
+    get:
+      operationId: retrievePartnerEvent
+      description: View set for partner events.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this partner event.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerEvent'
+          description: ''
+      tags:
+        - partners
+  /api/v1/partners/:
+    get:
+      operationId: listPartners
+      description: View set for partners.
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Partner'
+          description: ''
+      tags:
+        - partners
+  /api/v1/partners/calendarjs/:
+    get:
+      operationId: calendarjsPartner
+      description: Return response with serialized partner event calender data.
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+          description: ''
+      tags:
+        - partners
+  /api/v1/partners/{id}/:
+    get:
+      operationId: retrievePartner
+      description: View set for partners.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this partner.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+          description: ''
+      tags:
+        - partners
+  /api/v1/pizzas/:
+    get:
+      operationId: listProducts
+      description: ''
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pizza'
+          description: ''
+      tags:
+        - pizzas
+  /api/v1/pizzas/event/:
+    get:
+      operationId: eventProduct
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pizza'
+          description: ''
+      tags:
+        - pizzas
+  /api/v1/pizzas/orders/:
+    get:
+      operationId: listOrders
+      description: ''
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+        - pizzas
+    post:
+      operationId: createOrder
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+        - pizzas
+  /api/v1/pizzas/orders/{id}/:
+    get:
+      operationId: retrieveOrder
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this order.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+        - pizzas
+    put:
+      operationId: updateOrder
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this order.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+        - pizzas
+    patch:
+      operationId: partialUpdateOrder
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this order.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+        - pizzas
+    delete:
+      operationId: destroyOrder
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this order.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+        - pizzas
+  /api/v1/photos/albums/:
+    get:
+      operationId: listAlbums
+      description: ViewSet class for an Album object.
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AlbumList'
+          description: ''
+      tags:
+        - photos
+    post:
+      operationId: createAlbum
+      description: Create album if the request user is allowed to.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Album'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Album'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Album'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+          description: ''
+      tags:
+        - photos
+  /api/v1/photos/albums/{id}/:
+    get:
+      operationId: retrieveAlbum
+      description: ViewSet class for an Album object.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this album.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+          description: ''
+      tags:
+        - photos
+    put:
+      operationId: updateAlbum
+      description: Create album if the request user is allowed to.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this album.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Album'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Album'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Album'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+          description: ''
+      tags:
+        - photos
+    patch:
+      operationId: partialUpdateAlbum
+      description: ViewSet class for an Album object.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this album.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Album'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Album'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Album'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+          description: ''
+      tags:
+        - photos
+    delete:
+      operationId: destroyAlbum
+      description: ViewSet class for an Album object.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this album.
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: A search term.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+        - photos
+  /api/v1/devices/:
+    get:
+      operationId: listDevices
+      description: ''
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Device'
+          description: ''
+      tags:
+        - devices
+    post:
+      operationId: createDevice
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Device'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+      tags:
+        - devices
+  /api/v1/devices/categories/:
+    get:
+      operationId: categoriesDevice
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+      tags:
+        - devices
+  /api/v1/devices/{id}/:
+    get:
+      operationId: retrieveDevice
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this device.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+      tags:
+        - devices
+    put:
+      operationId: updateDevice
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this device.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Device'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+      tags:
+        - devices
+    patch:
+      operationId: partialUpdateDevice
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this device.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Device'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+      tags:
+        - devices
+    delete:
+      operationId: destroyDevice
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this device.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+        - devices
+  /api/v1/notifications/:
+    get:
+      operationId: listMessages
+      description: ''
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          required: false
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+          description: ''
+      tags:
+        - notifications
+  /api/v1/notifications/{id}/:
+    get:
+      operationId: retrieveMessage
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this message.
+          schema:
+            type: string
+        - name: ordering
+          required: false
+          in: query
+          description: Which field to use when ordering the results.
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: ''
+      tags:
+        - notifications
+  /api/v1/token-auth/:
+    post:
+      operationId: createAuthToken
+      description: Custom override of the AuthToken view to force lowercase the username
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+      tags:
+        - token-auth
+  /api/v1/photos/images/:
+    post:
+      operationId: createPhoto
+      description: Create photo if the request user is allowed to.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoCreate'
+          description: ''
+      tags:
+        - photos
+  /api/v1/photos/images/{id}/:
+    put:
+      operationId: updatePhoto
+      description: Update photo if the request user is allowed to.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this photo.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoCreate'
+          description: ''
+      tags:
+        - photos
+    patch:
+      operationId: partialUpdatePhoto
+      description: ViewSet class for a Photo object.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this photo.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PhotoCreate'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoCreate'
+          description: ''
+      tags:
+        - photos
+components:
+  schemas:
+    MemberGroup:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 40
+        type:
+          type: string
+          readOnly: true
+        since:
+          type: string
+          format: date
+          nullable: true
+        until:
+          type: string
+          format: date
+          nullable: true
+        contact_address:
+          type: string
+          readOnly: true
+        photo:
+          type: string
+          format: binary
+          nullable: true
+        chair:
+          type: string
+          readOnly: true
+        members:
+          type: string
+          readOnly: true
+      required:
+        - name
+    EventList:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          readOnly: true
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        location:
+          type: string
+          readOnly: true
+        price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 1000
+          minimum: 0
+        registered:
+          type: string
+          readOnly: true
+        present:
+          type: string
+          readOnly: true
+        pizza:
+          type: string
+          readOnly: true
+        registration_allowed:
+          type: string
+          readOnly: true
+      required:
+        - start
+        - end
+    EventsCalenderJS:
+      type: object
+      properties:
+        start:
+          type: string
+          readOnly: true
+        end:
+          type: string
+          readOnly: true
+        allDay:
+          type: string
+          readOnly: true
+        isBirthday:
+          type: string
+          readOnly: true
+        url:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          readOnly: true
+        classNames:
+          type: string
+          readOnly: true
+        blank:
+          type: string
+          readOnly: true
+    EventRetrieve:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          readOnly: true
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        organiser:
+          type: integer
+        category:
+          enum:
+            - alumni
+            - education
+            - career
+            - leisure
+            - association
+            - other
+          type: string
+          description: 'Alumni: Events organised for alumni, Education: Education
+            focused events, Career: Career focused events, Leisure: borrels, parties,
+            game activities etc., Association Affairs: general meetings or any other
+            board related events, Other: anything else.'
+        registration_start:
+          type: string
+          format: date-time
+          nullable: true
+          description: If you set a registration period registration will be required.
+            If you don't set one, registration won't be required. Prefer times when
+            people don't have lectures, e.g. 12:30 instead of 13:37.
+        registration_end:
+          type: string
+          format: date-time
+          nullable: true
+          description: If you set a registration period registration will be required.
+            If you don't set one, registration won't be required.
+        cancel_deadline:
+          type: string
+          format: date-time
+          nullable: true
+        location:
+          type: string
+          readOnly: true
+        map_location:
+          type: string
+          description: 'Location of Huygens: Heyendaalseweg 135, Nijmegen. Location
+            of Mercator 1: Toernooiveld 212, Nijmegen. Not shown as text!!'
+          maxLength: 255
+        price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 1000
+          minimum: 0
+        fine:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 1000
+          minimum: 0
+          description: "Fine if participant does not show up (at least \u20AC5)."
+        max_participants:
+          type: integer
+          nullable: true
+        num_participants:
+          type: string
+          readOnly: true
+        user_registration:
+          type: string
+          readOnly: true
+        registration_allowed:
+          type: string
+          readOnly: true
+        no_registration_message:
+          type: string
+          readOnly: true
+        has_fields:
+          type: string
+          readOnly: true
+        is_pizza_event:
+          type: string
+          readOnly: true
+        google_maps_url:
+          type: string
+          readOnly: true
+        is_admin:
+          type: string
+          readOnly: true
+      required:
+        - start
+        - end
+        - organiser
+        - category
+        - map_location
+    EventRegistrationAdminList:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        member:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        registered_on:
+          type: string
+          format: date-time
+        is_cancelled:
+          type: string
+          readOnly: true
+        is_late_cancellation:
+          type: string
+          readOnly: true
+        queue_position:
+          type: string
+          readOnly: true
+        payment:
+          enum:
+            - cash_payment
+            - card_payment
+            - tpay_payment
+            - wire_payment
+            - no_payment
+          type: string
+        present:
+          type: boolean
+        avatar:
+          type: string
+          readOnly: true
+      required:
+        - registered_on
+        - payment
+    EventRegistration:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        member:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        photo:
+          type: string
+          readOnly: true
+        avatar:
+          type: string
+          readOnly: true
+        registered_on:
+          type: string
+          format: date-time
+          readOnly: true
+        is_late_cancellation:
+          type: string
+          readOnly: true
+        is_cancelled:
+          type: string
+          readOnly: true
+        queue_position:
+          type: string
+          readOnly: true
+        payment:
+          enum:
+            - cash_payment
+            - card_payment
+            - tpay_payment
+            - wire_payment
+            - no_payment
+          type: string
+        present:
+          type: boolean
+      required:
+        - payment
+    MemberList:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        starting_year:
+          type: string
+          readOnly: true
+        display_name:
+          type: string
+          readOnly: true
+        membership_type:
+          type: string
+          readOnly: true
+        avatar:
+          type: string
+          readOnly: true
+    ProfileEdit:
+      type: object
+      properties:
+        pk:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        address_street:
+          type: string
+          nullable: true
+          pattern: ^.+ \d+.*
+          maxLength: 100
+        address_street2:
+          type: string
+          nullable: true
+          maxLength: 100
+        address_postal_code:
+          type: string
+          nullable: true
+          maxLength: 10
+        address_city:
+          type: string
+          nullable: true
+          maxLength: 40
+        address_country:
+          enum:
+            - AX
+            - AL
+            - AD
+            - AT
+            - BY
+            - BE
+            - BA
+            - BG
+            - HR
+            - CZ
+            - DK
+            - EE
+            - FO
+            - FI
+            - FR
+            - DE
+            - GI
+            - GR
+            - GG
+            - VA
+            - HU
+            - IS
+            - IE
+            - IM
+            - IT
+            - JE
+            - LV
+            - LI
+            - LT
+            - LU
+            - MK
+            - MT
+            - MD
+            - MC
+            - ME
+            - NL
+            - 'NO'
+            - PL
+            - PT
+            - RO
+            - RU
+            - SM
+            - RS
+            - SK
+            - SI
+            - ES
+            - SJ
+            - SE
+            - CH
+            - UA
+            - GB
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+          description: Enter a phone number so Thalia may reach you
+          pattern: ^\+?\d+$
+          maxLength: 20
+        show_birthday:
+          type: boolean
+          description: Show your birthday to other members on your profile page and
+            in the birthday calendar
+        website:
+          type: string
+          format: uri
+          nullable: true
+          description: Website to display on your profile page
+          maxLength: 200
+          pattern: "^(?:[a-z0-9.+-]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+            d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:.]+\\\
+            ]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+            .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\z"
+        photo:
+          type: string
+          format: binary
+          nullable: true
+        emergency_contact:
+          type: string
+          nullable: true
+          description: Who should we contact in case of emergencies
+          maxLength: 255
+        emergency_contact_phone_number:
+          type: string
+          nullable: true
+          description: The phone number for the emergency contact
+          pattern: ^\+?\d+$
+          maxLength: 20
+        profile_description:
+          type: string
+          nullable: true
+          description: Text to display on your profile
+          maxLength: 4096
+        nickname:
+          type: string
+          nullable: true
+          maxLength: 30
+        display_name_preference:
+          enum:
+            - full
+            - nickname
+            - firstname
+            - initials
+            - fullnick
+            - nicklast
+          type: string
+        language:
+          type: string
+          readOnly: true
+        receive_optin:
+          type: boolean
+          description: Receive mailings about vacancies and events from Thalia's partners.
+        receive_newsletter:
+          type: boolean
+          description: Receive the Thalia Newsletter
+        receive_magazine:
+          type: boolean
+          description: Receive printed Thabloid magazines
+        display_name:
+          type: string
+          readOnly: true
+        avatar:
+          type: string
+          readOnly: true
+        birthday:
+          type: string
+          format: date
+          readOnly: true
+        starting_year:
+          type: integer
+          readOnly: true
+          description: The year this member started studying.
+        programme:
+          enum:
+            - computingscience
+            - informationscience
+          type: string
+          readOnly: true
+        membership_type:
+          type: string
+          readOnly: true
+        achievements:
+          type: string
+          readOnly: true
+        societies:
+          type: string
+          readOnly: true
+    PartnerEvent:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          readOnly: true
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        location:
+          type: string
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          maxLength: 200
+          pattern: "^(?:[a-z0-9.+-]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+            d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:.]+\\\
+            ]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+            .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\z"
+      required:
+        - start
+        - end
+        - url
+    Partner:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        link:
+          type: string
+          format: uri
+          pattern: "^(?:[a-z0-9.+-]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+            d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:.]+\\\
+            ]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+            .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\z"
+          maxLength: 255
+        company_profile:
+          type: string
+        address:
+          type: string
+          pattern: "^([1-9][e][\\s])*([\xEB\xE9\xC9\xCBa-zA-Z]+(([\\.][\\s])|([\\\
+            s]))?)+[1-9][0-9]*(([-][1-9][0-9]*)|([\\s]?[\xEB\xE9\xC9\xCBa-zA-Z]+))?$"
+          maxLength: 100
+        zip_code:
+          type: string
+          pattern: ^[1-9][0-9]{3}[\s]?[A-Za-z]{2}$
+          maxLength: 12
+        city:
+          type: string
+          maxLength: 100
+        logo:
+          type: string
+          format: binary
+      required:
+        - name
+        - address
+        - zip_code
+        - city
+        - logo
+    Pizza:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+          readOnly: true
+        price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 1000
+          minimum: -1000
+        available:
+          type: boolean
+      required:
+        - name
+        - price
+    Order:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        payment:
+          enum:
+            - cash_payment
+            - card_payment
+            - tpay_payment
+            - wire_payment
+            - no_payment
+          type: string
+          readOnly: true
+        product:
+          type: integer
+        name:
+          type: string
+          readOnly: true
+          description: Use this for non-members
+        member:
+          type: string
+          readOnly: true
+      required:
+        - product
+    AlbumList:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+        hidden:
+          type: boolean
+        shareable:
+          type: boolean
+        accessible:
+          type: string
+          readOnly: true
+        cover:
+          type: object
+          properties:
+            pk:
+              type: integer
+              readOnly: true
+            rotation:
+              enum:
+                - 0
+                - 90
+                - 180
+                - 270
+              type: integer
+              description: This does not modify the original image file.
+            hidden:
+              type: boolean
+            album:
+              type: integer
+            file:
+              type: string
+              readOnly: true
+          required:
+            - album
+      required:
+        - date
+        - cover
+    Album:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+        hidden:
+          type: boolean
+        shareable:
+          type: boolean
+        accessible:
+          type: string
+          readOnly: true
+        photos:
+          type: string
+          readOnly: true
+      required:
+        - date
+    Device:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        registration_id:
+          type: string
+        active:
+          type: boolean
+          default: true
+          description: Inactive devices will not be sent notifications
+        date_created:
+          type: string
+          format: date-time
+          readOnly: true
+        type:
+          enum:
+            - ios
+            - android
+          type: string
+        receive_category:
+          type: array
+          items:
+            type: string
+      required:
+        - registration_id
+        - type
+    Message:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        body:
+          type: string
+          readOnly: true
+        url:
+          type: string
+          nullable: true
+          maxLength: 256
+        category:
+          type: string
+        sent:
+          type: string
+          format: date-time
+          nullable: true
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+        - username
+        - password
+    PhotoCreate:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        rotation:
+          enum:
+            - 0
+            - 90
+            - 180
+            - 270
+          type: integer
+          description: This does not modify the original image file.
+        hidden:
+          type: boolean
+        album:
+          type: integer
+        file:
+          type: string
+          format: binary
+      required:
+        - album
+        - file
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth2
+      flows:
+        implicit:
+          authorizationUrl: /user/oauth/authorize/
+          scopes:
+            read: Authenticated read access to the website
+            write: Authenticated write access to the website
+            members:read: Read access to your member profile
+            activemembers:read: Read access to committee, society and board groups
