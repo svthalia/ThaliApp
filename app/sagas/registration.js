@@ -5,7 +5,7 @@ import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
 import { currentEventSelector } from '../selectors/events';
 import reportError from '../utils/errorReporting';
-import { deleteRequest, getRequest, postRequest } from './utils/api';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './utils/api';
 
 const register = function* register(action) {
   const { event } = action.payload;
@@ -40,7 +40,7 @@ const update = function* update(action) {
   });
 
   try {
-    yield call(postRequest, `registrations/${registration}`, body);
+    yield call(patchRequest, `registrations/${registration}`, body);
     yield put(registrationActions.success());
     yield delay(50);
     yield call([Snackbar, 'show'], {

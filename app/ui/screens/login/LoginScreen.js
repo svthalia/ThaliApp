@@ -40,14 +40,17 @@ class LoginScreen extends Component {
     let content = (
       <View>
         <Button
-          title="LOGIN"
+          title='LOGIN'
           onPress={login}
           color={Colors.darkGrey}
           style={styles.loginButton}
           textStyle={styles.loginButtonText}
           underlayColor={Colors.white}
         />
-        <Text style={styles.linkText} onPress={() => openUrl(`${SERVER_URL}/association/register/`)}>
+        <Text
+          style={styles.linkText}
+          onPress={() => openUrl(`${SERVER_URL}/association/register/`)}
+        >
           Become a member
         </Text>
       </View>

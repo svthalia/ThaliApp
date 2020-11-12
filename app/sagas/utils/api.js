@@ -16,7 +16,7 @@ import {
   tokenExpirationSelector,
 } from '../../selectors/session';
 
-class ServerError extends Error {
+export class ServerError extends Error {
   constructor(message, response) {
     super(message);
     this.name = 'ServerError';
@@ -34,14 +34,19 @@ export function* authorizeUser(currentRefreshToken = null) {
   }
 
   const {
-    accessToken, refreshToken, accessTokenExpirationDate: tokenExpiration,
+    accessToken,
+    refreshToken,
+    accessTokenExpirationDate: tokenExpiration,
   } = result;
 
-  yield call([AsyncStorage, 'multiSet'], [
-    [STORAGE_ACCESS_TOKEN, accessToken],
-    [STORAGE_REFRESH_TOKEN, refreshToken],
-    [STORAGE_TOKEN_EXPIRATION, tokenExpiration],
-  ]);
+  yield call(
+    [AsyncStorage, 'multiSet'],
+    [
+      [STORAGE_ACCESS_TOKEN, accessToken],
+      [STORAGE_REFRESH_TOKEN, refreshToken],
+      [STORAGE_TOKEN_EXPIRATION, tokenExpiration],
+    ]
+  );
 
   return { accessToken, refreshToken, tokenExpiration };
 }

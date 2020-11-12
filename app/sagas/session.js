@@ -6,9 +6,13 @@ import * as Sentry from '@sentry/react-native';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
 import {
-  STORAGE_ACCESS_TOKEN, STORAGE_DISPLAY_NAME, STORAGE_PROFILE_PHOTO, STORAGE_PUSH_CATEGORIES,
+  STORAGE_ACCESS_TOKEN,
+  STORAGE_DISPLAY_NAME,
+  STORAGE_PROFILE_PHOTO,
+  STORAGE_PUSH_CATEGORIES,
   STORAGE_REFRESH_TOKEN,
-  STORAGE_TOKEN_EXPIRATION, STORAGE_USER_ID,
+  STORAGE_TOKEN_EXPIRATION,
+  STORAGE_USER_ID,
 } from '../constants';
 import reportError from '../utils/errorReporting';
 import { authorizeUser, getRequest } from './utils/api';
@@ -25,7 +29,7 @@ function* init() {
         STORAGE_DISPLAY_NAME,
         STORAGE_PROFILE_PHOTO,
         STORAGE_PUSH_CATEGORIES,
-      ],
+      ]
     );
 
     const values = result.reduce((obj, pair) => {
@@ -35,18 +39,24 @@ function* init() {
     }, {});
 
     if (values[STORAGE_ACCESS_TOKEN] !== null && values[STORAGE_USER_ID] !== null) {
-      yield put(sessionActions.signedIn(
-        values[STORAGE_ACCESS_TOKEN],
-        values[STORAGE_REFRESH_TOKEN],
-        values[STORAGE_TOKEN_EXPIRATION],
-      ));
-      yield put(sessionActions.setUserInfo(
-        parseInt(values[STORAGE_USER_ID], 10),
-        values[STORAGE_DISPLAY_NAME],
-        values[STORAGE_PROFILE_PHOTO],
-      ));
+      yield put(
+        sessionActions.signedIn(
+          values[STORAGE_ACCESS_TOKEN],
+          values[STORAGE_REFRESH_TOKEN],
+          values[STORAGE_TOKEN_EXPIRATION]
+        )
+      );
+      yield put(
+        sessionActions.setUserInfo(
+          parseInt(values[STORAGE_USER_ID], 10),
+          values[STORAGE_DISPLAY_NAME],
+          values[STORAGE_PROFILE_PHOTO]
+        )
+      );
       yield put(sessionActions.fetchUserInfo());
-      yield put(pushNotificationsActions.register(JSON.parse(values[STORAGE_PUSH_CATEGORIES])));
+      yield put(
+        pushNotificationsActions.register(JSON.parse(values[STORAGE_PUSH_CATEGORIES]))
+      );
     } else {
       yield put(sessionActions.tokenInvalid());
     }
@@ -88,7 +98,7 @@ function* clearUserInfo() {
       STORAGE_DISPLAY_NAME,
       STORAGE_PROFILE_PHOTO,
       STORAGE_PUSH_CATEGORIES,
-    ],
+    ]
   );
   yield put(pushNotificationsActions.invalidate());
 }

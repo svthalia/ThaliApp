@@ -36,12 +36,12 @@ describe('session reducer', () => {
       expect(state).toHaveProperty('status', STATUS_SIGNED_IN);
     });
 
-    it('should contain the username', () => {
-      expect(state).toHaveProperty('username', 'user');
+    it('should contain the refreshToken', () => {
+      expect(state).toHaveProperty('refreshToken', 'token');
     });
 
-    it("should contain the user's token", () => {
-      expect(state).toHaveProperty('token', 'token');
+    it("should contain the user's accessToken", () => {
+      expect(state).toHaveProperty('accessToken', 'user');
     });
   });
 

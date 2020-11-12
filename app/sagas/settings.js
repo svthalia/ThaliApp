@@ -4,15 +4,17 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { notificationsSettingsActions, settingsActions } from '../actions/settings';
 
 import * as pushNotifactionsActions from '../actions/pushNotifications';
+import { STORAGE_PUSH_CATEGORIES } from '../constants';
 import reportError from '../utils/errorReporting';
 import { getRequest } from './utils/api';
-
-const PUSHCATEGORYKEY = '@MyStore:pushCategories';
 
 function* pushNotifications() {
   try {
     const categoryList = yield call(getRequest, 'devices/categories');
-    const preferencesJson = yield call(AsyncStorage.getItem, PUSHCATEGORYKEY);
+    const preferencesJson = yield call(
+      [AsyncStorage, 'getItem'],
+      STORAGE_PUSH_CATEGORIES
+    );
 
     if (preferencesJson === null) {
       for (let i = 0; i < categoryList.length; i += 1) {
@@ -36,7 +38,11 @@ function* saveCategories(action) {
   const { categories } = action;
 
   try {
-    yield call(AsyncStorage.setItem, PUSHCATEGORYKEY, JSON.stringify(categories));
+    yield call(
+      [AsyncStorage, 'setItem'],
+      STORAGE_PUSH_CATEGORIES,
+      JSON.stringify(categories)
+    );
     yield put(pushNotifactionsActions.register(categories));
   } catch (error) {
     yield call(reportError, error);

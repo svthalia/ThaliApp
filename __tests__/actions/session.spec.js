@@ -20,11 +20,11 @@ describe('session actions', () => {
   });
 
   it('should create an action to log the user in', () => {
-    expect(actions.signIn('username', 'password')).toMatchSnapshot();
+    expect(actions.signIn()).toMatchSnapshot();
   });
 
   it('should create an action for a successful login', () => {
-    expect(actions.signedIn('username', 'token')).toMatchSnapshot();
+    expect(actions.signedIn('accessToken', 'refreshToken')).toMatchSnapshot();
   });
 
   it('should create an action to log the user out', () => {

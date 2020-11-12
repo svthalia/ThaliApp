@@ -1,20 +1,14 @@
-import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import apiRequest from '../../app/utils/apiRequest';
-import calendarSaga from '../../app/sagas/calendar';
-
 import * as calendarActions from '../../app/actions/calendar';
-import { tokenSelector } from '../../app/selectors/session';
 
-jest.mock('../../app/utils/SERVER_URL', () => ({
-  apiRequest: jest.fn(() => {}),
-}));
+import calendarSaga from '../../app/sagas/calendar';
+import { getRequest } from '../../app/sagas/utils/api';
 
-jest.mock('../../app/selectors/session', () => ({
-  tokenSelector: () => 'token',
+jest.mock('../../app/sagas/utils/api', () => ({
+  getRequest: jest.fn(() => {}),
 }));
 
 describe('calendar saga', () => {
@@ -22,20 +16,14 @@ describe('calendar saga', () => {
 
   it('should start fetching on refresh', () =>
     expectSaga(calendarSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), []],
-      ])
+      .provide([[matchers.call.fn(getRequest), []]])
       .dispatch(calendarActions.events())
       .put(calendarActions.fetching())
       .silentRun());
 
   it('should put an error when the api request fails', () =>
     expectSaga(calendarSaga)
-      .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.fn(apiRequest), throwError(error)],
-      ])
+      .provide([[matchers.call.fn(getRequest), throwError(error)]])
       .dispatch(calendarActions.events())
       .put(calendarActions.failure())
       .silentRun());
@@ -43,10 +31,9 @@ describe('calendar saga', () => {
   it('should put the result data when the request succeeds', () =>
     expectSaga(calendarSaga)
       .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['events'] }), [{ pk: 1 }]],
+        [matchers.call.like({ fn: getRequest, args: ['events'] }), [{ pk: 1 }]],
         [
-          matchers.call.like({ fn: apiRequest, args: ['partners/events'] }),
+          matchers.call.like({ fn: getRequest, args: ['partners/events'] }),
           [{ pk: 2 }],
         ],
       ])
@@ -57,10 +44,9 @@ describe('calendar saga', () => {
   it('should put keywords if they were passed', () =>
     expectSaga(calendarSaga)
       .provide([
-        [select(tokenSelector), 'token'],
-        [matchers.call.like({ fn: apiRequest, args: ['events'] }), [{ pk: 1 }]],
+        [matchers.call.like({ fn: getRequest, args: ['events'] }), [{ pk: 1 }]],
         [
-          matchers.call.like({ fn: apiRequest, args: ['partners/events'] }),
+          matchers.call.like({ fn: getRequest, args: ['partners/events'] }),
           [{ pk: 2 }],
         ],
       ])
@@ -70,33 +56,10 @@ describe('calendar saga', () => {
 
   it('should do two GET requests', () =>
     expectSaga(calendarSaga)
-      .provide([[select(tokenSelector), 'usertoken']])
       .dispatch(calendarActions.events())
       .silentRun()
       .then(() => {
-        expect(apiRequest).toBeCalledWith(
-          'events',
-          {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token usertoken',
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
-          },
-          null
-        );
-        expect(apiRequest).toBeCalledWith(
-          'partners/events',
-          {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token usertoken',
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
-          },
-          null
-        );
+        expect(getRequest).toBeCalledWith('events', undefined);
+        expect(getRequest).toBeCalledWith('partners/events', undefined);
       }));
 });
