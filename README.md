@@ -46,8 +46,12 @@ Getting started
 6. Setup the Sentry integration using `npx @sentry/wizard -i reactNative -p ios android`
     - To be able to do this you need access to our Sentry organisation, we use SSO with our Github organisation for this
     - Alternatively you can setup Sentry using the example files below. The wizard will do these steps for you.
-7. Start the development server using `yarn start`
-8. Deploy the app on a running emulator or connected device by running `yarn start:android` or `yarn start:ios`
+7. Setup your local environment
+    - Create a `.env` file in the root of the repository based on `.env.example`
+    - Set the server and client id to those of your local concrexit installation or [the staging server](https://staging.thalia.nu/admin/oauth2_provider/application/)
+    - A client id can be obtained by creating an OAuth2 application in the concrexit admin
+8. Start the development server using `yarn start`
+9. Deploy the app on a running emulator or connected device by running `yarn start:android` or `yarn start:ios`
 
 
 Logging and debugging
