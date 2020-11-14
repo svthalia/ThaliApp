@@ -56,15 +56,15 @@ class Main extends Component {
     }
   };
 
-  showNotification = (notification) => {
+  showNotification = (notificationInput) => {
+    const { notification, data } = notificationInput;
     let buttons;
-    if (notification.data.url) {
+    if (data && data.url) {
       buttons = [
         { text: 'Dismiss' },
         {
           text: 'Open',
-          onPress: () =>
-            store.dispatch(deepLinkingActions.deepLink(notification.data.url, false)),
+          onPress: () => store.dispatch(deepLinkingActions.deepLink(data.url, false)),
         },
       ];
     } else {
@@ -72,9 +72,9 @@ class Main extends Component {
     }
 
     if (notification.body !== undefined) {
-      Alert.alert(notification.title, notification.body, buttons);
-    } else if (notification.data.body !== undefined) {
-      Alert.alert(notification.data.title, notification.data.body, buttons);
+      Alert.alert(notificationInput.title, notification.body, buttons);
+    } else if (data.body !== undefined) {
+      Alert.alert(data.title, data.body, buttons);
     }
   };
 
@@ -82,13 +82,13 @@ class Main extends Component {
     store.dispatch(deepLinkingActions.deepLink(event.url));
   };
 
-  handleOpenNotification = (notificationOpen) => {
-    if (notificationOpen) {
-      const { notification } = notificationOpen;
-      if (notification.data.url) {
-        store.dispatch(deepLinkingActions.deepLink(notification.data.url, false));
+  handleOpenNotification = (notificationInput) => {
+    if (notificationInput) {
+      const { data } = notificationInput;
+      if (data && data.url) {
+        store.dispatch(deepLinkingActions.deepLink(data.url, false));
       } else {
-        this.showNotification(notification);
+        this.showNotification(notificationInput);
       }
     }
   };
