@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { RefreshControl, ScrollView, SectionList, Text, View } from 'react-native';
+import {
+  RefreshControl,
+  ScrollView,
+  SectionList,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import Moment from 'moment';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
@@ -104,17 +111,19 @@ const renderItem = (item) => {
   const { dayNumber, dayOfWeek, events } = item.item;
 
   return (
-    <View style={styles.day}>
-      <View style={styles.dateInfo}>
-        <Text style={styles.dayNumber}>{dayNumber}</Text>
-        <Text style={styles.dayOfWeek}>{dayOfWeek}</Text>
+    <TouchableWithoutFeedback style={styles.day}>
+      <View style={styles.day}>
+        <View style={styles.dateInfo}>
+          <Text style={styles.dayNumber}>{dayNumber}</Text>
+          <Text style={styles.dayOfWeek}>{dayOfWeek}</Text>
+        </View>
+        <View style={styles.eventList}>
+          {events.map((event) => (
+            <CalendarItem event={event} key={`${event.pk}:${event.title}`} />
+          ))}
+        </View>
       </View>
-      <View style={styles.eventList}>
-        {events.map((event) => (
-          <CalendarItem event={event} key={`${event.pk}:${event.title}`} />
-        ))}
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -151,7 +160,9 @@ class CalendarScreen extends Component {
         style={styles.sectionList}
         renderItem={renderItem}
         renderSectionHeader={(itemHeader) => (
-          <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+          <TouchableWithoutFeedback>
+            <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
+          </TouchableWithoutFeedback>
         )}
         sections={eventListToSections(this.props.eventList)}
         keyExtractor={(item) => item.dayNumber}
