@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import StatusBar from '@react-native-community/status-bar';
-import { NavigationEvents } from '@react-navigation/native';
 
 import styles from './style/SearchHeader';
 import Colors from '../../style/Colors';

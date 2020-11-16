@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DrawerActions } from '@react-navigation/routers';
+import { DrawerActions } from '@react-navigation/native';
 
 export const navigationRef = React.createRef();
 
