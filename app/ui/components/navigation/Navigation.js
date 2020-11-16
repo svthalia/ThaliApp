@@ -1,8 +1,10 @@
-import { NavigationContainer, DrawerActions, CommonActions } from '@react-navigation/native';
-import { React } from 'react-native';
+import React, { Component } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import PropTypes from 'prop-types';
+import { navigationRef } from './RootNavigation';
 import Login from '../../screens/login/LoginScreenConnector';
 import Welcome from '../../screens/welcome/WelcomeScreenConnector';
 import Event from '../../screens/events/EventScreenConnector';
@@ -14,7 +16,6 @@ import MemberList from '../../screens/memberList/MemberListScreenConnector';
 import Photos from '../../screens/photos/AlbumsOverviewScreenConnector';
 import PhotoAlbum from '../../screens/photos/AlbumDetailScreenConnector';
 import PhotoGallery from '../../screens/photos/AlbumGalleryScreenConnector';
-import SplashScreen from '../../screens/splash/SplashScreen';
 import Settings from '../../screens/settings/SettingsScreenConnector';
 import EventAdmin from '../../screens/events/EventAdminScreenConnector';
 import PizzaAdmin from '../../screens/pizza/PizzaAdminScreenConnector';
@@ -25,29 +26,16 @@ const Drawer = createDrawerNavigator();
 function MainNavigator() {
   return (
     <Drawer.Navigator
-      initialRouteName="Welcome"
-      contentComponent={Sidebar}
+      initialRouteName='Welcome'
+      drawerContent={(s) => {
+        return <Sidebar activeItemKey={s.state.routeNames[s.state.index]} />;
+      }}
     >
-      <Drawer.Screen
-        name="Welcome"
-        component={Welcome}
-      />
-      <Drawer.Screen
-        name="Calendar"
-        component={Calendar}
-      />
-      <Drawer.Screen
-        name="MemberList"
-        component={MemberList}
-      />
-      <Drawer.Screen
-        name="Photos"
-        component={Photos}
-      />
-      <Drawer.Screen
-        name="Settings"
-        component={Settings}
-      />
+      <Drawer.Screen name='Welcome' component={Welcome} />
+      <Drawer.Screen name='Calendar' component={Calendar} />
+      <Drawer.Screen name='MemberList' component={MemberList} />
+      <Drawer.Screen name='Photos' component={Photos} />
+      <Drawer.Screen name='Settings' component={Settings} />
     </Drawer.Navigator>
   );
 }
@@ -57,94 +45,40 @@ const Stack = createStackNavigator();
 function SignedInNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerMode: 'none' }}
+      initialRouteName='MainNavigator'
+      screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen
-        name="MainNavigator"
-        component={MainNavigator}
-      />
-      <Stack.Screen
-        name="Event"
-        component={Event}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-      />
-      <Stack.Screen
-        name="Pizza"
-        component={Pizza}
-      />
-      <Stack.Screen
-        name="PhotoAlbum"
-        component={PhotoAlbum}
-      />
-      <Stack.Screen
-        name="PhotoGallery"
-        component={PhotoGallery}
-      />
-      <Stack.Screen
-        name="Registration"
-        component={Registration}
-      />
-      <Stack.Screen
-        name="EventAdmin"
-        component={EventAdmin}
-      />
-      <Stack.Screen
-        name="PizzaAdmin"
-        component={PizzaAdmin}
-      />
+      <Stack.Screen name='MainNavigator' component={MainNavigator} />
+      <Stack.Screen name='Event' component={Event} />
+      <Stack.Screen name='Profile' component={Profile} />
+      <Stack.Screen name='Pizza' component={Pizza} />
+      <Stack.Screen name='PhotoAlbum' component={PhotoAlbum} />
+      <Stack.Screen name='PhotoGallery' component={PhotoGallery} />
+      <Stack.Screen name='Registration' component={Registration} />
+      <Stack.Screen name='EventAdmin' component={EventAdmin} />
+      <Stack.Screen name='PizzaAdmin' component={PizzaAdmin} />
     </Stack.Navigator>
   );
 }
 
-function AppNavigator() {
-  if (state.status == )
-  <Stack.Navigator>
-    {
-
-    }
-  </Stack.Navigator>
-}
-  Splash: SplashScreen,
-  Auth: Login,
-  SignedIn: SignedInNavigator,
-});
-
-const AppContainer = `<NavigationContainer>${{ AppNavigator }}</NavigationContainer>`;
-
-let navigator;
-
-function setTopLevelNavigator(navigatorRef) {
-  navigator = navigatorRef;
-}
-
-function navigate(name, params) {
-  navigator.dispatch(
-    CommonActions.navigate({
-      name,
-      params,
-    }),
+const Navigation = (props) => {
+  return (
+    <NavigationContainer ref={navigationRef}>
+      {props.loggedIn ? (
+        <>
+          <SignedInNavigator />
+        </>
+      ) : (
+        <>
+          <Login />
+        </>
+      )}
+    </NavigationContainer>
   );
-}
-
-function goBack() {
-  navigator.dispatch(
-    CommonActions.goBack(),
-  );
-}
-
-function toggleDrawer() {
-  navigator.dispatch(
-    DrawerActions.toggleDrawer(),
-  );
-}
-
-export default {
-  AppContainer,
-  navigate,
-  goBack,
-  toggleDrawer,
-  setTopLevelNavigator,
 };
+
+Navigation.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+};
+
+export default Navigation;

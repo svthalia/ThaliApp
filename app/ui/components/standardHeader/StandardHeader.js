@@ -4,7 +4,7 @@ import { SafeAreaView, Text, View } from 'react-native';
 import StatusBar from '@react-native-community/status-bar';
 import PropTypes from 'prop-types';
 
-import { withNavigation } from 'react-navigation';
+import { withNavigation } from '@react-navigation/compat';
 import Colors from '../../style/Colors';
 import styles from './style/StandardHeader';
 import IconButton from '../button/IconButton';

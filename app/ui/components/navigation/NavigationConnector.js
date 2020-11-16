@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import * as profileActions from '../../../actions/profile';
-import MemberView from './MemberView';
+import Navigation from './Navigation';
+import { loggedInSelector } from '../../../selectors/session';
 
-const mapDispatchToProps = {
-  loadProfile: profileActions.profile,
-};
+const mapStateToProps = (state) => ({
+  loggedIn: loggedInSelector(state),
+});
 
-export default connect(() => ({}), mapDispatchToProps)(MemberView);
+export default connect(mapStateToProps)(Navigation);

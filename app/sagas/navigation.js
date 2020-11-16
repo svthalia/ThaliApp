@@ -5,24 +5,23 @@ import * as eventActions from '../actions/event';
 import * as profileActions from '../actions/profile';
 import * as pizzaActions from '../actions/pizza';
 import * as registrationActions from '../actions/registration';
-import * as sessionActions from '../actions/session';
 import * as calendarActions from '../actions/calendar';
 import * as membersActions from '../actions/members';
 import * as welcomeActions from '../actions/welcome';
 import { settingsActions } from '../actions/settings';
-import NavigationService from '../ui/components/navigation/Navigation';
+import * as RootNavigation from '../ui/components/navigation/RootNavigation';
 import * as photosActions from '../actions/photos';
 
 function* navigate(routeName) {
-  yield call(NavigationService.navigate, routeName);
+  yield call(RootNavigation.navigate, routeName);
 }
 
 function* back() {
-  yield call(NavigationService.goBack);
+  yield call(RootNavigation.goBack);
 }
 
 function* toggleDrawer() {
-  yield call(NavigationService.toggleDrawer);
+  yield call(RootNavigation.toggleDrawer);
 }
 
 function openWebsite({ payload: url }) {
@@ -47,10 +46,4 @@ export default function* navigationSaga() {
   yield takeEvery(photosActions.PHOTOS_ALBUMS_OPEN, navigate, 'Photos');
   yield takeEvery(photosActions.PHOTOS_ALBUM_OPEN, navigate, 'PhotoAlbum');
   yield takeEvery(photosActions.PHOTOS_GALLERY_OPEN, navigate, 'PhotoGallery');
-  yield takeEvery(sessionActions.SIGNED_IN, navigate, 'SignedIn');
-  yield takeEvery(
-    [sessionActions.TOKEN_INVALID, sessionActions.SIGN_OUT],
-    navigate,
-    'Auth'
-  );
 }

@@ -5,13 +5,18 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import messaging from '@react-native-firebase/messaging';
 
+import { select } from 'redux-saga/effects';
 import reducers from './reducers';
 
 import sagas from './sagas';
 import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
-import NavigationService from './ui/components/navigation/Navigation';
+import Navigation from './ui/components/navigation/NavigationConnector';
+import Colors from './ui/style/Colors';
+import styles from './ui/screens/login/style/LoginScreen';
+import Button from './ui/components/button/Button';
+import { loggedInSelector } from './selectors/session';
 
 const { UIManager } = NativeModules;
 
@@ -96,11 +101,7 @@ class Main extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationService.AppContainer
-          ref={(navigatorRef) => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
+        <Navigation />
       </Provider>
     );
   }
