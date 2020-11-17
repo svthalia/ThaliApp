@@ -2,7 +2,7 @@ import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
 
 const styles = StyleSheet.create({
-  filterButton: {
+  floatingActionButton: {
     position: 'absolute',
     bottom: 16,
     right: 16,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
       borderWidth: 0.5,
     },
   },
-  filterButtonWrapper: {
+  floatingActionButtonWrapper: {
     width: 56,
     height: 56,
     justifyContent: 'center',

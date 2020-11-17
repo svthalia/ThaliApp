@@ -6,8 +6,8 @@ import Colors from '../../style/Colors';
 import styles from './style/FloatingActionButton';
 
 const FloatingActionButton = (props) => (
-  <TouchableHighlight onPress={props.onPress} style={styles.filterButton}>
-    <View style={styles.filterButtonWrapper}>
+  <TouchableHighlight onPress={props.onPress} style={styles.floatingActionButton}>
+    <View style={styles.floatingActionButtonWrapper}>
       <Icon name={props.name} size={32} color={Colors.white} />
     </View>
   </TouchableHighlight>
