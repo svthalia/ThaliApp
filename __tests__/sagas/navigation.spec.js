@@ -7,7 +7,6 @@ import * as eventActions from '../../app/actions/event';
 import * as profileActions from '../../app/actions/profile';
 import * as pizzaActions from '../../app/actions/pizza';
 import * as registrationActions from '../../app/actions/registration';
-import * as sessionActions from '../../app/actions/session';
 import * as calendarActions from '../../app/actions/calendar';
 import * as membersActions from '../../app/actions/members';
 import * as welcomeActions from '../../app/actions/welcome';
