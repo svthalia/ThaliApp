@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     height: Dimensions.get('window').height - TOTAL_BAR_HEIGHT,
     android: {
-      paddingTop: 11,
+      marginTop: 11,
       paddingBottom: 11,
     },
   },
