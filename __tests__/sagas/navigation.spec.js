@@ -13,15 +13,30 @@ import * as membersActions from '../../app/actions/members';
 import * as welcomeActions from '../../app/actions/welcome';
 import { settingsActions } from '../../app/actions/settings';
 
-import NavigationService from '../../app/ui/components/navigation/Navigation';
+import {
+  goBack,
+  toggleDrawer,
+  navigate,
+} from '../../app/ui/components/navigation/RootNavigation';
 
-jest.mock('../../app/navigation', () => ({
-  __esModule: true,
-  default: {
-    goBack: jest.fn(),
-    toggleDrawer: jest.fn(),
-    navigate: jest.fn(),
-  },
+jest.mock('../../app/ui/components/navigation/RootNavigation', () => ({
+  goBack: jest.fn(),
+  toggleDrawer: jest.fn(),
+  navigate: jest.fn(),
+}));
+
+jest.mock('react-native-vector-icons/MaterialIcons', () => ({
+  propTypes: jest.fn(() => 'Icon'),
+  defaultProps: jest.fn(),
+  create: jest.fn(),
+}));
+
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => ({
+  CommunityIcon: 'CommunityIcon',
+}));
+
+jest.mock('react-native-snackbar', () => ({
+  Snackbar: jest.fn(),
 }));
 
 describe('navigation saga', () => {
@@ -31,7 +46,7 @@ describe('navigation saga', () => {
         .dispatch(navigationActions.goBack())
         .silentRun()
         .then(() => {
-          expect(NavigationService.goBack).toBeCalled();
+          expect(goBack).toBeCalled();
         }));
 
     it('should go back when a registration is saved', () =>
@@ -39,7 +54,7 @@ describe('navigation saga', () => {
         .dispatch(registrationActions.success())
         .silentRun()
         .then(() => {
-          expect(NavigationService.goBack).toBeCalled();
+          expect(goBack).toBeCalled();
         }));
   });
 
@@ -49,7 +64,7 @@ describe('navigation saga', () => {
         .dispatch(navigationActions.toggleDrawer())
         .silentRun()
         .then(() => {
-          expect(NavigationService.toggleDrawer).toBeCalled();
+          expect(toggleDrawer).toBeCalled();
         }));
   });
 
@@ -59,7 +74,7 @@ describe('navigation saga', () => {
         .dispatch(welcomeActions.open())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Welcome');
+          expect(navigate).toBeCalledWith('Welcome');
         }));
 
     it('should open the settings screen', () =>
@@ -67,7 +82,7 @@ describe('navigation saga', () => {
         .dispatch(settingsActions.open())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Settings');
+          expect(navigate).toBeCalledWith('Settings');
         }));
 
     it('should open the calendar screen', () =>
@@ -75,7 +90,7 @@ describe('navigation saga', () => {
         .dispatch(calendarActions.open())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Calendar');
+          expect(navigate).toBeCalledWith('Calendar');
         }));
 
     it('should open the members screen', () =>
@@ -83,7 +98,7 @@ describe('navigation saga', () => {
         .dispatch(membersActions.open())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('MemberList');
+          expect(navigate).toBeCalledWith('MemberList');
         }));
 
     it('should open the event screen', () =>
@@ -91,7 +106,7 @@ describe('navigation saga', () => {
         .dispatch(eventActions.open())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Event');
+          expect(navigate).toBeCalledWith('Event');
         }));
 
     it('should open the event admin screen', () =>
@@ -99,7 +114,7 @@ describe('navigation saga', () => {
         .dispatch(eventActions.admin())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('EventAdmin');
+          expect(navigate).toBeCalledWith('EventAdmin');
         }));
 
     it('should open the profile screen', () =>
@@ -107,7 +122,7 @@ describe('navigation saga', () => {
         .dispatch(profileActions.profile())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Profile');
+          expect(navigate).toBeCalledWith('Profile');
         }));
 
     it('should open the registration screen', () =>
@@ -115,7 +130,7 @@ describe('navigation saga', () => {
         .dispatch(registrationActions.retrieveFields(1))
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Registration');
+          expect(navigate).toBeCalledWith('Registration');
         }));
 
     it('should open the pizza screen', () =>
@@ -123,31 +138,7 @@ describe('navigation saga', () => {
         .dispatch(pizzaActions.retrievePizzaInfo())
         .silentRun()
         .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Pizza');
-        }));
-
-    it('should switch to the signed in navigator', () =>
-      expectSaga(navigationSaga)
-        .dispatch(sessionActions.signedIn('user', 'token'))
-        .silentRun()
-        .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('SignedIn');
-        }));
-
-    it('should sign out with invalid token', () =>
-      expectSaga(navigationSaga)
-        .dispatch(sessionActions.tokenInvalid())
-        .silentRun()
-        .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Auth');
-        }));
-
-    it('should sign out on a sign out action', () =>
-      expectSaga(navigationSaga)
-        .dispatch(sessionActions.signOut())
-        .silentRun()
-        .then(() => {
-          expect(NavigationService.navigate).toBeCalledWith('Auth');
+          expect(navigate).toBeCalledWith('Pizza');
         }));
   });
 });

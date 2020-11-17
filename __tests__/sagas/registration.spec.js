@@ -18,7 +18,7 @@ jest.mock('react-native-snackbar', () => ({
   dismiss: jest.fn(),
 }));
 
-jest.mock('../../app/navigation', () => ({
+jest.mock('../../app/ui/components/navigation/RootNavigation', () => ({
   navigate: jest.fn(),
   goBack: jest.fn(),
 }));

@@ -3,7 +3,8 @@ import { Platform } from 'react-native';
 import renderer from 'react-test-renderer';
 import StandardHeader from '../../../../app/ui/components/standardHeader/StandardHeader';
 
-jest.mock('react-navigation', () => ({
+jest.mock('@react-navigation/compat', () => ({
+  createNavigatorFactory: (component) => component,
   withNavigation: (component) => component,
 }));
 

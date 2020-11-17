@@ -42,7 +42,11 @@
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!(react-native|@react-native-community|react-navigation|react-navigation-drawer|react-navigation-stack|@sentry|react-native-gesture-handler|react-native-vector-icons|react-native-linear-gradient|@react-native-firebase|react-native-image-crop-picker|react-native-reanimated|react-native-iphone-x-helper|react-native-render-html|react-native-webview|react-native-share|react-native-image-zoom-viewer|react-native-image-pan-zoom|react-native-add-calendar-event)/)"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "prettier": {
     "singleQuote": true,
