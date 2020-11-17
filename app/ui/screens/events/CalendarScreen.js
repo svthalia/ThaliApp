@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl, ScrollView, SectionList, Text, View } from 'react-native';
 import Moment from 'moment';
+import Snackbar from 'react-native-snackbar';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -9,6 +10,22 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import styles from './style/CalendarScreen';
 import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
+import FloatingActionButton from '../../components/floatingActionButton/FloatingActionButton';
+
+const filterTypes = [
+  {
+    label: 'Showing all events',
+    checkItem: () => true,
+  },
+  {
+    label: 'Showing your registrations',
+    checkItem: (item) => item.registered,
+  },
+  {
+    label: 'Showing open registrations',
+    checkItem: (item) => item.registration_allowed,
+  },
+];
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
@@ -119,6 +136,13 @@ const renderItem = (item) => {
 };
 
 class CalendarScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentFilter: 0,
+    };
+  }
+
   componentDidMount() {
     const { keywords } = this.props;
     this.props.events(keywords);
@@ -136,7 +160,27 @@ class CalendarScreen extends Component {
     }, 500);
   };
 
+  filteredEvents = () => {
+    const { currentFilter } = this.state;
+    const { eventList } = this.props;
+
+    return eventList.filter((item) => filterTypes[currentFilter].checkItem(item));
+  };
+
+  updateFilter = () => {
+    const { currentFilter } = this.state;
+
+    const newFilter = (currentFilter + 1) % filterTypes.length;
+
+    if (newFilter !== currentFilter) {
+      Snackbar.show({ text: filterTypes[newFilter].label });
+      this.setState({ currentFilter: newFilter });
+    }
+  };
+
   render() {
+    const items = this.filteredEvents();
+
     const header = (
       <SearchHeader
         title='Calendar'
@@ -153,7 +197,7 @@ class CalendarScreen extends Component {
         renderSectionHeader={(itemHeader) => (
           <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
         )}
-        sections={eventListToSections(this.props.eventList)}
+        sections={eventListToSections(items)}
         keyExtractor={(item) => item.dayNumber}
         stickySectionHeadersEnabled
         onRefresh={this.handleRefresh}
@@ -199,6 +243,7 @@ class CalendarScreen extends Component {
         <DismissKeyboardView contentStyle={styles.keyboardView}>
           {content}
         </DismissKeyboardView>
+        <FloatingActionButton name='filter-list' onPress={this.updateFilter} />
       </View>
     );
   }
@@ -217,6 +262,7 @@ CalendarScreen.propTypes = {
       start: PropTypes.string,
       end: PropTypes.string,
       location: PropTypes.string,
+      registration_allowed: PropTypes.bool.isRequired,
       price: PropTypes.string,
       registered: PropTypes.bool,
       pizza: PropTypes.bool,
