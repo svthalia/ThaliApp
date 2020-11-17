@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import {
-  FlatList,
-  RefreshControl,
-  Switch,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import { FlatList, RefreshControl, Switch, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Snackbar from 'react-native-snackbar';
 import unorm from 'unorm';
 
@@ -17,6 +9,7 @@ import Colors from '../../style/Colors';
 
 import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import Button from '../../components/button/Button';
+import FloatingActionButton from '../../components/floatingActionButton/FloatingActionButton';
 
 class AdminScreen extends Component {
   constructor(props) {
@@ -183,11 +176,7 @@ class AdminScreen extends Component {
     );
 
     const filterButton = this.props.filterTypes.length > 1 && (
-      <TouchableHighlight onPress={this.updateFilter} style={styles.filterButton}>
-        <View style={styles.filterButtonWrapper}>
-          <Icon name='filter-list' size={32} color={Colors.white} />
-        </View>
-      </TouchableHighlight>
+      <FloatingActionButton name='filter-list' onPress={this.updateFilter} />
     );
 
     if (keys.length === 0) {
