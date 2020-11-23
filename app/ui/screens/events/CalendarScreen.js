@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl, ScrollView, SectionList, Text, View } from 'react-native';
 import Moment from 'moment';
-import Snackbar from 'react-native-snackbar';
+import { FloatingAction } from 'react-native-floating-action';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -10,7 +11,37 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import styles from './style/CalendarScreen';
 import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
-import FloatingActionButton from '../../components/floatingActionButton/FloatingActionButton';
+import Colors from '../../style/Colors';
+
+const actions = [
+  {
+    text: 'All',
+    icon: <Icon name='reorder' size={26} color={Colors.white} />,
+    name: 'filter_all',
+    color: Colors.magenta,
+    buttonSize: 46,
+    textColor: Colors.white,
+    textBackground: Colors.magenta,
+  },
+  {
+    text: 'Your registrations',
+    icon: <Icon name='account-circle' size={26} color={Colors.white} />,
+    name: 'filter_registered',
+    color: Colors.magenta,
+    buttonSize: 46,
+    textColor: Colors.white,
+    textBackground: Colors.magenta,
+  },
+  {
+    text: 'Open registrations',
+    icon: <Icon name='event-available' size={26} color={Colors.white} />,
+    name: 'filter_open',
+    color: Colors.magenta,
+    buttonSize: 46,
+    textColor: Colors.white,
+    textBackground: Colors.magenta,
+  },
+];
 
 const filterTypes = [
   {
@@ -167,15 +198,21 @@ class CalendarScreen extends Component {
     return eventList.filter((item) => filterTypes[currentFilter].checkItem(item));
   };
 
-  updateFilter = () => {
-    const { currentFilter } = this.state;
-
-    const newFilter = (currentFilter + 1) % filterTypes.length;
-
-    if (newFilter !== currentFilter) {
-      Snackbar.show({ text: filterTypes[newFilter].label });
-      this.setState({ currentFilter: newFilter });
+  updateFilter = (name) => {
+    let filter;
+    switch (name) {
+      case 'filter_registered':
+        filter = 1;
+        break;
+      case 'filter_open':
+        filter = 2;
+        break;
+      default:
+        filter = 0;
     }
+    this.setState({
+      currentFilter: filter,
+    });
   };
 
   render() {
@@ -243,7 +280,16 @@ class CalendarScreen extends Component {
         <DismissKeyboardView contentStyle={styles.keyboardView}>
           {content}
         </DismissKeyboardView>
-        <FloatingActionButton name='filter-list' onPress={this.updateFilter} />
+        <FloatingAction
+          color={Colors.magenta}
+          showBackground={false}
+          actions={actions}
+          floatingIcon={<Icon name='filter-list' size={32} color={Colors.white} />}
+          actionsPaddingTopBottom={4}
+          onPressItem={(name) => {
+            this.updateFilter(name);
+          }}
+        />
       </View>
     );
   }
