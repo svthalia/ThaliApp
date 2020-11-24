@@ -477,10 +477,25 @@ class EventScreen extends Component {
             <HTML
               html={data.description}
               onLinkPress={(event, href) => openUrl(href)}
+              alterNode={(node) => {
+                const newNode = node;
+                if (
+                  node.attribs &&
+                  node.attribs.style &&
+                  node.attribs.style.indexOf('text-decoration: line-through') >= 0
+                ) {
+                  newNode.attribs.style = node.attribs.style.replace(
+                    'text-decoration: line-through',
+                    'text-decoration-line: line-through'
+                  );
+                }
+                return newNode;
+              }}
               baseFontStyle={fontStyles}
               tagsStyles={{
                 a: linkStyles,
               }}
+              textSelectable
             />
             {this.registrationsGrid()}
           </ScrollView>
