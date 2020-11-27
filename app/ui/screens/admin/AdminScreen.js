@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, RefreshControl, Switch, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import Snackbar from 'react-native-snackbar';
 import unorm from 'unorm';
 
 import styles from './style/AdminScreen';
@@ -12,13 +11,18 @@ import Button from '../../components/button/Button';
 import FloatingActionButton from '../../components/floatingActionButton/FloatingActionButton';
 
 class AdminScreen extends Component {
+  actions = this.props.filterTypes.map((filterType) => ({
+    text: filterType.label,
+    onPress: () => this.updateFilter(filterType.checkItem),
+  }));
+
   constructor(props) {
     super(props);
 
     this.state = {
       items: {},
       searchKey: '',
-      currentFilter: 0,
+      currentFilter: props.filterTypes[0].checkItem,
     };
 
     for (let i = 0; i < this.props.items.length; i += 1) {
@@ -69,12 +73,11 @@ class AdminScreen extends Component {
   };
 
   applyFilter = (keys) => {
-    const { filterTypes } = this.props;
     const { currentFilter } = this.state;
 
     return keys
       .filter(this.containsSearchKey)
-      .filter((pk) => filterTypes[currentFilter].checkItem(this.state.items[pk]));
+      .filter((pk) => currentFilter(this.state.items[pk]));
   };
 
   cleanSearchTerm = (term) =>
@@ -97,14 +100,10 @@ class AdminScreen extends Component {
     return 0;
   };
 
-  updateFilter = () => {
+  updateFilter = (newFilter) => {
     const { currentFilter } = this.state;
-    const { filterTypes } = this.props;
-
-    const newFilter = (currentFilter + 1) % filterTypes.length;
 
     if (newFilter !== currentFilter) {
-      Snackbar.show({ text: filterTypes[newFilter].label });
       this.setState({ currentFilter: newFilter });
     }
   };
@@ -176,7 +175,7 @@ class AdminScreen extends Component {
     );
 
     const filterButton = this.props.filterTypes.length > 1 && (
-      <FloatingActionButton name='filter-list' onPress={this.updateFilter} />
+      <FloatingActionButton icon_name='filter-list' actions={this.actions} />
     );
 
     if (keys.length === 0) {

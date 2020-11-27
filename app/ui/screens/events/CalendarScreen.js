@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl, ScrollView, SectionList, Text, View } from 'react-native';
 import Moment from 'moment';
-import { FloatingAction } from 'react-native-floating-action';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import CalendarItem from './CalendarItemConnector';
 import LoadingScreen from '../../components/loadingScreen/LoadingScreen';
 import ErrorScreen from '../../components/errorScreen/ErrorScreen';
@@ -11,52 +9,13 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import styles from './style/CalendarScreen';
 import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
-import Colors from '../../style/Colors';
+import FloatingActionButton from '../../components/floatingActionButton/FloatingActionButton';
 
-const actions = [
-  {
-    text: 'All',
-    icon: <Icon name='reorder' size={26} color={Colors.white} />,
-    name: 'filter_all',
-    color: Colors.magenta,
-    buttonSize: 46,
-    textColor: Colors.white,
-    textBackground: Colors.magenta,
-  },
-  {
-    text: 'Your registrations',
-    icon: <Icon name='account-circle' size={26} color={Colors.white} />,
-    name: 'filter_registered',
-    color: Colors.magenta,
-    buttonSize: 46,
-    textColor: Colors.white,
-    textBackground: Colors.magenta,
-  },
-  {
-    text: 'Open registrations',
-    icon: <Icon name='event-available' size={26} color={Colors.white} />,
-    name: 'filter_open',
-    color: Colors.magenta,
-    buttonSize: 46,
-    textColor: Colors.white,
-    textBackground: Colors.magenta,
-  },
-];
-
-const filterTypes = [
-  {
-    label: 'Showing all events',
-    checkItem: () => true,
-  },
-  {
-    label: 'Showing your registrations',
-    checkItem: (item) => item.registered,
-  },
-  {
-    label: 'Showing open registrations',
-    checkItem: (item) => item.registration_allowed,
-  },
-];
+const filters = {
+  all: () => true,
+  registered: (item) => item.registered,
+  open: (item) => item.registration_allowed,
+};
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
@@ -167,10 +126,28 @@ const renderItem = (item) => {
 };
 
 class CalendarScreen extends Component {
+  actions = [
+    {
+      text: 'All',
+      icon_name: 'reorder',
+      onPress: () => this.updateFilter(filters.all),
+    },
+    {
+      text: 'Your registrations',
+      icon_name: 'account-circle',
+      onPress: () => this.updateFilter(filters.registered),
+    },
+    {
+      text: 'Open registrations',
+      icon_name: 'event-available',
+      onPress: () => this.updateFilter(filters.open),
+    },
+  ];
+
   constructor(props) {
     super(props);
     this.state = {
-      currentFilter: 0,
+      activeFilter: filters.all,
     };
   }
 
@@ -192,26 +169,15 @@ class CalendarScreen extends Component {
   };
 
   filteredEvents = () => {
-    const { currentFilter } = this.state;
+    const { activeFilter } = this.state;
     const { eventList } = this.props;
 
-    return eventList.filter((item) => filterTypes[currentFilter].checkItem(item));
+    return eventList.filter(activeFilter);
   };
 
-  updateFilter = (name) => {
-    let filter;
-    switch (name) {
-      case 'filter_registered':
-        filter = 1;
-        break;
-      case 'filter_open':
-        filter = 2;
-        break;
-      default:
-        filter = 0;
-    }
+  updateFilter = (filter) => {
     this.setState({
-      currentFilter: filter,
+      activeFilter: filter,
     });
   };
 
@@ -280,16 +246,7 @@ class CalendarScreen extends Component {
         <DismissKeyboardView contentStyle={styles.keyboardView}>
           {content}
         </DismissKeyboardView>
-        <FloatingAction
-          color={Colors.magenta}
-          showBackground={false}
-          actions={actions}
-          floatingIcon={<Icon name='filter-list' size={32} color={Colors.white} />}
-          actionsPaddingTopBottom={4}
-          onPressItem={(name) => {
-            this.updateFilter(name);
-          }}
-        />
+        <FloatingActionButton icon_name='filter-list' actions={this.actions} />
       </View>
     );
   }

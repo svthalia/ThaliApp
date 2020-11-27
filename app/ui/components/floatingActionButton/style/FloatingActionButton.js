@@ -2,28 +2,32 @@ import Colors from '../../../style/Colors';
 import StyleSheet from '../../../style/StyleSheet';
 
 const styles = StyleSheet.create({
-  floatingActionButton: {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-    borderRadius: 28,
-    overflow: 'hidden',
-    backgroundColor: Colors.grey,
-    android: {
-      elevation: 4,
-    },
-    ios: {
-      borderColor: Colors.lightGray,
-      borderStyle: 'solid',
-      borderWidth: 0.5,
-    },
+  floatingActionButtonItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  floatingActionButtonWrapper: {
-    width: 56,
-    height: 56,
+  floatingActionButtonItemIcon: {
+    backgroundColor: Colors.magenta,
+    width: 46,
+    height: 46,
+    marginLeft: 14,
+    borderRadius: 23,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 5,
+  },
+  floatingActionButtonItemTextWrapper: {
     backgroundColor: Colors.magenta,
+    paddingHorizontal: 10,
+    elevation: 5,
+    borderRadius: 6,
+    height: 28,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  floatingActionButtonItemText: {
+    color: Colors.white,
+    fontSize: 16,
   },
 });
 
