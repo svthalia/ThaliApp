@@ -26,14 +26,14 @@ const renderIcon = (iconName) => {
 const renderItem = (item) => (
   <View key='item' style={styles.floatingActionButtonItem}>
     {renderText(item.text)}
-    {renderIcon(item.icon_name)}
+    {renderIcon(item.iconName)}
   </View>
 );
 
 const FloatingActionButton = (props) => {
   const actions = props.actions.map((action, index) => ({
     text: action.text,
-    icon: <Icon name={action.icon_name} size={26} color={Colors.white} />,
+    icon: <Icon name={action.iconName} size={26} color={Colors.white} />,
     name: index.toString(),
     color: Colors.magenta,
     buttonSize: 46,

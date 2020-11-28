@@ -129,17 +129,17 @@ class CalendarScreen extends Component {
   actions = [
     {
       text: 'All',
-      icon_name: 'reorder',
+      iconName: 'reorder',
       onPress: () => this.updateFilter(filters.all),
     },
     {
       text: 'Your registrations',
-      icon_name: 'account-circle',
+      iconName: 'account-circle',
       onPress: () => this.updateFilter(filters.registered),
     },
     {
       text: 'Open registrations',
-      icon_name: 'event-available',
+      iconName: 'event-available',
       onPress: () => this.updateFilter(filters.open),
     },
   ];
