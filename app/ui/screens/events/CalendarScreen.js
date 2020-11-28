@@ -246,7 +246,7 @@ class CalendarScreen extends Component {
         <DismissKeyboardView contentStyle={styles.keyboardView}>
           {content}
         </DismissKeyboardView>
-        <FloatingActionButton icon_name='filter-list' actions={this.actions} />
+        <FloatingActionButton iconName='filter-list' actions={this.actions} />
       </View>
     );
   }

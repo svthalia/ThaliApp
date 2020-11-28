@@ -52,16 +52,16 @@ const FloatingActionButton = (props) => {
       showBackground={false}
       actions={actions}
       onPressItem={onPress}
-      floatingIcon={<Icon name={props.icon_name} size={32} color={Colors.white} />}
+      floatingIcon={<Icon name={props.iconName} size={32} color={Colors.white} />}
     />
   );
 };
 
 FloatingActionButton.propTypes = {
-  icon_name: PropTypes.string.isRequired,
+  iconName: PropTypes.string.isRequired,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      icon_name: PropTypes.string,
+      iconName: PropTypes.string,
       text: PropTypes.string,
       onPress: PropTypes.func.isRequired,
     })

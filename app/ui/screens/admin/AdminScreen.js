@@ -175,7 +175,7 @@ class AdminScreen extends Component {
     );
 
     const filterButton = this.props.filterTypes.length > 1 && (
-      <FloatingActionButton icon_name='filter-list' actions={this.actions} />
+      <FloatingActionButton iconName='filter-list' actions={this.actions} />
     );
 
     if (keys.length === 0) {
