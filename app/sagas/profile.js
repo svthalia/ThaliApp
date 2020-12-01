@@ -1,31 +1,20 @@
 import ImagePicker from 'react-native-image-crop-picker';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
-import { apiRequest } from '../utils/url';
 import * as profileActions from '../actions/profile';
-import { tokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
 import * as sessionActions from '../actions/session';
+import { getRequest, patchRequest } from './utils/api';
 
 function* profile(action) {
   const { member } = action.payload;
-  const token = yield select(tokenSelector);
 
   yield put(profileActions.fetching());
 
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const profileData = yield call(apiRequest, `members/${member}`, data);
+    const profileData = yield call(getRequest, `members/${member}`);
     yield put(profileActions.success(profileData));
   } catch (error) {
     yield call(reportError, error);
@@ -54,24 +43,12 @@ function* updateAvatar() {
       uri: photo.path,
     });
 
-    const token = yield select(tokenSelector);
-
-    const data = {
-      method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Token ${token}`,
-      },
-      body: formData,
-    };
-
     try {
       yield call([Snackbar, 'show'], {
         text: 'Uploading your new profile picture...',
         duration: Snackbar.LENGTH_INDEFINITE,
       });
-      const profileData = yield call(apiRequest, 'members/me', data);
+      const profileData = yield call(patchRequest, 'members/me', formData);
       yield call([Snackbar, 'dismiss']);
       yield put(profileActions.success(profileData));
       yield put(sessionActions.fetchUserInfo());

@@ -1,31 +1,19 @@
 import { call, put, select, takeEvery, delay } from 'redux-saga/effects';
 import Snackbar from 'react-native-snackbar';
 
-import { apiRequest } from '../utils/url';
-
 import * as eventActions from '../actions/event';
 import * as registrationActions from '../actions/registration';
-import { tokenSelector } from '../selectors/session';
 import { currentEventSelector } from '../selectors/events';
 import reportError from '../utils/errorReporting';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './utils/api';
 
 const register = function* register(action) {
   const { event } = action.payload;
-  const token = yield select(tokenSelector);
 
   yield put(eventActions.fetching());
 
-  const data = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const registration = yield call(apiRequest, `events/${event}/registrations`, data);
+    const registration = yield call(postRequest, `events/${event}/registrations`);
 
     yield put(eventActions.event(event, false));
     if (registration.fields && Object.keys(registration.fields).length > 0) {
@@ -40,7 +28,6 @@ const register = function* register(action) {
 
 const update = function* update(action) {
   const { registration, fields } = action.payload;
-  const token = yield select(tokenSelector);
 
   yield put(registrationActions.loading());
 
@@ -52,18 +39,8 @@ const update = function* update(action) {
     }
   });
 
-  const data = {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-    body: JSON.stringify(body),
-  };
-
   try {
-    yield call(apiRequest, `registrations/${registration}`, data);
+    yield call(patchRequest, `registrations/${registration}`, body);
     yield put(registrationActions.success());
     yield delay(50);
     yield call([Snackbar, 'show'], {
@@ -83,22 +60,12 @@ const update = function* update(action) {
 
 const cancel = function* cancel(action) {
   const { registration } = action.payload;
-  const token = yield select(tokenSelector);
   const event = yield select(currentEventSelector);
 
   yield put(eventActions.fetching());
 
-  const data = {
-    method: 'DELETE',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    yield call(apiRequest, `registrations/${registration}`, data);
+    yield call(deleteRequest, `registrations/${registration}`);
     yield call([Snackbar, 'show'], {
       text: 'Successfully cancelled registration',
     });
@@ -111,21 +78,11 @@ const cancel = function* cancel(action) {
 
 const fields = function* fields(action) {
   const { registration } = action.payload;
-  const token = yield select(tokenSelector);
 
   yield put(registrationActions.loading());
 
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const response = yield call(apiRequest, `registrations/${registration}`, data);
+    const response = yield call(getRequest, `registrations/${registration}`);
     yield put(registrationActions.showFields(registration, response.fields));
     yield put(eventActions.done());
   } catch (error) {

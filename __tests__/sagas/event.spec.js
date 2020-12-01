@@ -3,27 +3,23 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import { apiRequest } from '../../app/utils/url';
 import eventSaga from '../../app/sagas/event';
 
 import * as eventActions from '../../app/actions/event';
-import { tokenSelector } from '../../app/selectors/session';
+import { getRequest, patchRequest } from '../../app/sagas/utils/api';
 import { currentEventSelector } from '../../app/selectors/events';
 
 jest.mock('react-native-snackbar', () => ({
   Snackbar: jest.fn(),
 }));
 
-jest.mock('../../app/utils/url', () => ({
-  apiRequest: jest.fn(() => {}),
+jest.mock('../../app/sagas/utils/api', () => ({
+  getRequest: jest.fn(() => {}),
+  patchRequest: jest.fn(() => {}),
 }));
 
 jest.mock('../../app/navigation', () => ({
   navigate: jest.fn(),
-}));
-
-jest.mock('../../app/selectors/session', () => ({
-  tokenSelector: () => 'token',
 }));
 
 describe('event saga', () => {
@@ -32,31 +28,25 @@ describe('event saga', () => {
   describe('load event', () => {
     it('should start fetching', () =>
       expectSaga(eventSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(eventActions.event(1))
         .put(eventActions.fetching())
         .silentRun());
 
     it('should open the event screen when specified', () =>
       expectSaga(eventSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(eventActions.event(1))
         .put(eventActions.open())
         .silentRun());
 
     it('should not open the event screen when told not to', () =>
       expectSaga(eventSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(eventActions.event(1, false))
         .not.put(eventActions.open())
         .silentRun());
 
     it('should put an error when the api request fails', () =>
       expectSaga(eventSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [matchers.call.fn(apiRequest), throwError(error)],
-        ])
+        .provide([[matchers.call.fn(getRequest), throwError(error)]])
         .dispatch(eventActions.event(1))
         .put(eventActions.failure())
         .silentRun());
@@ -64,11 +54,10 @@ describe('event saga', () => {
     it('should put the result data when the request succeeds', () =>
       expectSaga(eventSaga)
         .provide([
-          [select(tokenSelector), 'token'],
-          [matchers.call.like({ fn: apiRequest, args: ['events/1'] }), 'eventData'],
+          [matchers.call.like({ fn: getRequest, args: ['events/1'] }), 'eventData'],
           [
             matchers.call.like({
-              fn: apiRequest,
+              fn: getRequest,
               args: ['events/1/registrations'],
             }),
             'regData',
@@ -80,71 +69,43 @@ describe('event saga', () => {
 
     it('should do two GET requests', () =>
       expectSaga(eventSaga)
-        .provide([[select(tokenSelector), 'usertoken']])
         .dispatch(eventActions.event(1))
         .silentRun()
         .then(() => {
-          expect(apiRequest).toBeCalledWith('events/1', {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token usertoken',
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
+          expect(getRequest).toBeCalledWith('events/1');
+          expect(getRequest).toBeCalledWith('events/1/registrations', {
+            status: 'registered',
           });
-          expect(apiRequest).toBeCalledWith(
-            'events/1/registrations',
-            {
-              headers: {
-                Accept: 'application/json',
-                Authorization: 'Token usertoken',
-                'Content-Type': 'application/json',
-              },
-              method: 'GET',
-            },
-            { status: 'registered' }
-          );
+          expect(getRequest).toBeCalledWith('events/1');
         }));
   });
 
   describe('update registration', () => {
     it('should start fetching', () =>
       expectSaga(eventSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [select(currentEventSelector), 1],
-        ])
+        .provide([[select(currentEventSelector), 1]])
         .dispatch(eventActions.updateRegistration(1, true, 'payment'))
         .put(eventActions.fetching())
         .silentRun());
 
     it('should do a PATCH request', () =>
       expectSaga(eventSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [select(currentEventSelector), 1],
-        ])
+        .provide([[select(currentEventSelector), 1]])
         .dispatch(eventActions.updateRegistration(1, true, 'payment'))
         .silentRun()
         .then(() => {
-          expect(apiRequest).toBeCalledWith('registrations/1', {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token token',
-              'Content-Type': 'application/json',
-            },
-            method: 'PATCH',
-            body: '{"present":true,"payment":"payment"}',
+          expect(patchRequest).toBeCalledWith('registrations/1', {
+            payment: 'payment',
+            present: true,
           });
         }));
 
     it('should refresh the event when the request is successful', () =>
       expectSaga(eventSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [select(currentEventSelector), 1],
           [
-            matchers.call.like({ fn: apiRequest, args: ['registrations/1'] }),
+            matchers.call.like({ fn: getRequest, args: ['registrations/1'] }),
             'response',
           ],
         ])
@@ -155,10 +116,9 @@ describe('event saga', () => {
     it('should put an error when the request fails', () =>
       expectSaga(eventSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [select(currentEventSelector), 1],
           [
-            matchers.call.like({ fn: apiRequest, args: ['registrations/1'] }),
+            matchers.call.like({ fn: patchRequest, args: ['registrations/1'] }),
             throwError(error),
           ],
         ])

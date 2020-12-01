@@ -3,16 +3,16 @@ import { Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import iid from '@react-native-firebase/iid';
 
-import { apiRequest } from '../utils/url';
 import * as pushNotificationsActions from '../actions/pushNotifications';
-import { tokenSelector } from '../selectors/session';
+import { accessTokenSelector } from '../selectors/session';
 import reportError from '../utils/errorReporting';
+import { postRequest } from './utils/api';
 
 function* register(action) {
-  const token = yield select(tokenSelector);
+  const accessToken = yield select(accessTokenSelector);
   const { categories } = action;
 
-  if (!token) {
+  if (!accessToken) {
     // There is no token, thus do nothing
     return;
   }
@@ -42,18 +42,8 @@ function* register(action) {
     body.receive_category = categories;
   }
 
-  const data = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-    body: JSON.stringify(body),
-  };
-
   try {
-    yield call(apiRequest, 'devices', data);
+    yield call(postRequest, 'devices', body);
   } catch (error) {
     yield call(reportError, error);
     // eat error, om nom nom

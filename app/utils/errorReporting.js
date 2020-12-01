@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react-native';
 
 export default (error, extra = {}) => {
-  if (error.response && error.response.jsonData) {
+  if (error.response && 'jsonData' in error.response) {
     Sentry.addBreadcrumb({
       message: 'JSON Data',
       category: 'json',

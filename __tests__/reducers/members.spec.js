@@ -38,7 +38,7 @@ describe('members reducer', () => {
       expect(state).toHaveProperty('memberList', [{ pk: 1 }]);
     });
 
-    it('should have the url for more results', () => {
+    it('should have the SERVER_URL for more results', () => {
       expect(state).toHaveProperty('more', 'nextUrl');
     });
 
@@ -79,7 +79,7 @@ describe('members reducer', () => {
       expect(state).toHaveProperty('memberList', [{ pk: 1 }, { pk: 2 }]);
     });
 
-    it('should have the url for more results', () => {
+    it('should have the SERVER_URL for more results', () => {
       expect(state).toHaveProperty('more', 'nextUrl');
     });
   });

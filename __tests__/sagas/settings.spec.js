@@ -2,9 +2,9 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import { select } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Sentry from '@sentry/react-native';
+import { STORAGE_PUSH_CATEGORIES } from '../../app/constants';
 
 import settingsSaga from '../../app/sagas/settings';
 import {
@@ -12,16 +12,10 @@ import {
   settingsActions,
 } from '../../app/actions/settings';
 import * as pushNotificationActions from '../../app/actions/pushNotifications';
-
-import { tokenSelector } from '../../app/selectors/session';
-import { apiRequest } from '../../app/utils/url';
+import { getRequest } from '../../app/sagas/utils/api';
 
 jest.mock('@sentry/react-native', () => ({
   captureException: jest.fn(),
-}));
-
-jest.mock('../../app/utils/url', () => ({
-  apiRequest: jest.fn(),
 }));
 
 describe('settings saga', () => {
@@ -32,26 +26,15 @@ describe('settings saga', () => {
       it('should load the categories from the website and the local storage', () =>
         expectSaga(settingsSaga)
           .dispatch(settingsActions.initStart())
-          .provide([[select(tokenSelector), 'token']])
-          .silentRun()
-          .then(() => {
-            expect(apiRequest).toBeCalledWith('devices/categories', {
-              method: 'GET',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Token token',
-              },
-            });
-            expect(AsyncStorage.getItem).toBeCalledWith('@MyStore:pushCategories');
-          }));
+          .call(getRequest, 'devices/categories')
+          .call([AsyncStorage, 'getItem'], STORAGE_PUSH_CATEGORIES)
+          .silentRun());
 
       it('should enable all categories initially if nothing found locally', () =>
         expectSaga(settingsSaga)
           .dispatch(settingsActions.initStart())
           .provide([
-            [select(tokenSelector), 'token'],
-            [matchers.call.fn(apiRequest), [{ key: 'cat1' }, { key: 'cat2' }]],
+            [matchers.call.fn(getRequest), [{ key: 'cat1' }, { key: 'cat2' }]],
             [matchers.call.fn(AsyncStorage.getItem), null],
           ])
           .put(
@@ -67,8 +50,7 @@ describe('settings saga', () => {
         expectSaga(settingsSaga)
           .dispatch(settingsActions.initStart())
           .provide([
-            [select(tokenSelector), 'token'],
-            [matchers.call.fn(apiRequest), [{ key: 'cat1' }, { key: 'cat2' }]],
+            [matchers.call.fn(getRequest), [{ key: 'cat1' }, { key: 'cat2' }]],
             [matchers.call.fn(AsyncStorage.getItem), JSON.stringify(['cat1'])],
           ])
           .put(
@@ -84,8 +66,7 @@ describe('settings saga', () => {
         expectSaga(settingsSaga)
           .dispatch(settingsActions.initStart())
           .provide([
-            [select(tokenSelector), 'token'],
-            [matchers.call.fn(apiRequest), throwError(error)],
+            [matchers.call.fn(getRequest), throwError(error)],
             [matchers.call.fn(AsyncStorage.getItem), null],
           ])
           .put(notificationsSettingsActions.failure())
@@ -101,13 +82,12 @@ describe('settings saga', () => {
     it('should store new preferences in local storage', () =>
       expectSaga(settingsSaga)
         .dispatch(notificationsSettingsActions.saveCategories(['cat1']))
-        .silentRun()
-        .then(() => {
-          expect(AsyncStorage.setItem).toBeCalledWith(
-            '@MyStore:pushCategories',
-            JSON.stringify(['cat1'])
-          );
-        }));
+        .call(
+          [AsyncStorage, 'setItem'],
+          STORAGE_PUSH_CATEGORIES,
+          JSON.stringify(['cat1'])
+        )
+        .silentRun());
 
     it('should call the action to update preferences remotely', () =>
       expectSaga(settingsSaga)

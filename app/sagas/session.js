@@ -1,47 +1,62 @@
-import { call, put, takeEvery, select, delay } from 'redux-saga/effects';
+import { call, put, takeEvery, delay } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar';
 import * as Sentry from '@sentry/react-native';
 
-import { apiRequest } from '../utils/url';
 import * as sessionActions from '../actions/session';
 import * as pushNotificationsActions from '../actions/pushNotifications';
-import { tokenSelector } from '../selectors/session';
+import {
+  STORAGE_ACCESS_TOKEN,
+  STORAGE_DISPLAY_NAME,
+  STORAGE_PROFILE_PHOTO,
+  STORAGE_PUSH_CATEGORIES,
+  STORAGE_REFRESH_TOKEN,
+  STORAGE_TOKEN_EXPIRATION,
+  STORAGE_USER_ID,
+} from '../constants';
 import reportError from '../utils/errorReporting';
-
-export const IDENTIFIERKEY = '@MyStore:identifier';
-export const USERNAMEKEY = '@MyStore:username';
-export const TOKENKEY = '@MyStore:token';
-export const DISPLAYNAMEKEY = '@MyStore:displayName';
-export const PHOTOKEY = '@MyStore:photo';
-export const PUSHCATEGORYKEY = '@MyStore:pushCategories';
-
-const pairsToObject = (obj, pair) => {
-  const obj2 = { ...obj };
-  obj2[pair[0]] = pair[1];
-  return obj2;
-};
+import { authorizeUser, getRequest } from './utils/api';
 
 function* init() {
   try {
     const result = yield call(
       [AsyncStorage, 'multiGet'],
-      [IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY]
+      [
+        STORAGE_ACCESS_TOKEN,
+        STORAGE_REFRESH_TOKEN,
+        STORAGE_TOKEN_EXPIRATION,
+        STORAGE_USER_ID,
+        STORAGE_DISPLAY_NAME,
+        STORAGE_PROFILE_PHOTO,
+        STORAGE_PUSH_CATEGORIES,
+      ]
     );
-    const values = result.reduce(pairsToObject, {});
 
-    const id = parseInt(values[IDENTIFIERKEY], 10);
-    const username = values[USERNAMEKEY];
-    const token = values[TOKENKEY];
-    const displayName = values[DISPLAYNAMEKEY];
-    const photo = values[PHOTOKEY];
-    const pushCategories = JSON.parse(values[PUSHCATEGORYKEY]);
+    const values = result.reduce((obj, pair) => {
+      const obj2 = { ...obj };
+      obj2[pair[0]] = pair[1];
+      return obj2;
+    }, {});
 
-    if (username !== null && token !== null) {
-      yield put(sessionActions.signedIn(username, token));
-      yield put(sessionActions.setUserInfo(id, displayName, photo));
+    if (values[STORAGE_ACCESS_TOKEN] !== null && values[STORAGE_USER_ID] !== null) {
+      yield put(
+        sessionActions.signedIn(
+          values[STORAGE_ACCESS_TOKEN],
+          values[STORAGE_REFRESH_TOKEN],
+          values[STORAGE_TOKEN_EXPIRATION]
+        )
+      );
+      yield put(
+        sessionActions.setUserInfo(
+          parseInt(values[STORAGE_USER_ID], 10),
+          values[STORAGE_DISPLAY_NAME],
+          values[STORAGE_PROFILE_PHOTO]
+        )
+      );
       yield put(sessionActions.fetchUserInfo());
-      yield put(pushNotificationsActions.register(pushCategories));
+      yield put(
+        pushNotificationsActions.register(JSON.parse(values[STORAGE_PUSH_CATEGORIES]))
+      );
     } else {
       yield put(sessionActions.tokenInvalid());
     }
@@ -50,30 +65,12 @@ function* init() {
   }
 }
 
-function* signIn(action) {
-  const { user, pass } = action.payload;
-  const data = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username: user,
-      password: pass,
-    }),
-  };
-
+function* signIn() {
   const currentTimestamp = Date.now();
   try {
-    const response = yield call(apiRequest, 'token-auth', data);
-    const { token } = response;
+    const { accessToken, refreshToken, tokenExpiration } = yield call(authorizeUser);
 
-    yield call(AsyncStorage.multiSet, [
-      [USERNAMEKEY, user],
-      [TOKENKEY, token],
-    ]);
-    yield put(sessionActions.signedIn(user, token));
+    yield put(sessionActions.signedIn(accessToken, refreshToken, tokenExpiration));
     yield put(sessionActions.fetchUserInfo());
     yield put(pushNotificationsActions.register());
     yield call([Snackbar, 'show'], { text: 'Login successful' });
@@ -93,7 +90,15 @@ function* signIn(action) {
 function* clearUserInfo() {
   yield call(
     [AsyncStorage, 'multiRemove'],
-    [IDENTIFIERKEY, USERNAMEKEY, TOKENKEY, DISPLAYNAMEKEY, PHOTOKEY, PUSHCATEGORYKEY]
+    [
+      STORAGE_USER_ID,
+      STORAGE_ACCESS_TOKEN,
+      STORAGE_REFRESH_TOKEN,
+      STORAGE_TOKEN_EXPIRATION,
+      STORAGE_DISPLAY_NAME,
+      STORAGE_PROFILE_PHOTO,
+      STORAGE_PUSH_CATEGORIES,
+    ]
   );
   yield put(pushNotificationsActions.invalidate());
 }
@@ -109,24 +114,13 @@ function* signedIn({ payload }) {
 }
 
 function* userInfo() {
-  const token = yield select(tokenSelector);
-
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const userProfile = yield call(apiRequest, 'members/me', data);
+    const userProfile = yield call(getRequest, 'members/me');
 
     yield call(AsyncStorage.multiSet, [
-      [IDENTIFIERKEY, userProfile.pk.toString()],
-      [DISPLAYNAMEKEY, userProfile.display_name],
-      [PHOTOKEY, userProfile.avatar.medium],
+      [STORAGE_USER_ID, userProfile.pk.toString()],
+      [STORAGE_DISPLAY_NAME, userProfile.display_name],
+      [STORAGE_PROFILE_PHOTO, userProfile.avatar.medium],
     ]);
     yield put(
       sessionActions.setUserInfo(

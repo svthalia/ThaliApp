@@ -3,15 +3,13 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import Moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
-import { apiRequest } from '../utils/url';
 import * as eventActions from '../actions/event';
-import { tokenSelector } from '../selectors/session';
 import { currentEventSelector } from '../selectors/events';
 import reportError from '../utils/errorReporting';
+import { getRequest, patchRequest } from './utils/api';
 
 function* event(action) {
   const { pk, navigateToEventScreen } = action.payload;
-  const token = yield select(tokenSelector);
 
   yield put(eventActions.fetching());
 
@@ -19,26 +17,16 @@ function* event(action) {
     yield put(eventActions.open());
   }
 
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const eventData = yield call(apiRequest, `events/${pk}`, data);
+    const eventData = yield call(getRequest, `events/${pk}`);
 
     const params = {
       status: 'registered',
     };
 
     const eventRegistrations = yield call(
-      apiRequest,
+      getRequest,
       `events/${pk}/registrations`,
-      data,
       params
     );
 
@@ -51,26 +39,17 @@ function* event(action) {
 
 function* updateRegistration(action) {
   const { pk, present, payment } = action.payload;
-  const token = yield select(tokenSelector);
   const currentEvent = yield select(currentEventSelector);
 
   yield put(eventActions.fetching());
 
   const data = {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-    body: JSON.stringify({
-      present,
-      payment,
-    }),
+    present,
+    payment,
   };
 
   try {
-    yield call(apiRequest, `registrations/${pk}`, data);
+    yield call(patchRequest, `registrations/${pk}`, data);
     yield put(eventActions.event(currentEvent, false));
   } catch (error) {
     yield call(reportError, error);

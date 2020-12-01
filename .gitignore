@@ -27,6 +27,9 @@ project.xcworkspace
 ios/Pods
 ios/Podfile.lock
 
+google-play.json
+releaseSigning.properties
+
 # Android/IntelliJ
 #
 build/

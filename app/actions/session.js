@@ -10,16 +10,16 @@ export function init() {
   return { type: INIT };
 }
 
-export function signIn(user, pass) {
-  return { type: SIGN_IN, payload: { user, pass } };
+export function signIn() {
+  return { type: SIGN_IN };
 }
 
 export function signOut() {
   return { type: SIGN_OUT };
 }
 
-export function signedIn(username, token) {
-  return { type: SIGNED_IN, payload: { username, token } };
+export function signedIn(accessToken, refreshToken, tokenExpiration) {
+  return { type: SIGNED_IN, payload: { accessToken, refreshToken, tokenExpiration } };
 }
 
 export function tokenInvalid() {

@@ -1,13 +1,11 @@
 import { Dimensions } from 'react-native';
-import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
 import membersSaga from '../../app/sagas/members';
-import { tokenSelector } from '../../app/selectors/session';
 import * as memberActions from '../../app/actions/members';
-import { apiRequest } from '../../app/utils/url';
+import { getRequest } from '../../app/sagas/utils/api';
 
 jest.mock('../../app/ui/components/standardHeader/style/StandardHeader', () => ({
   TOTAL_BAR_HEIGHT: 20,
@@ -15,10 +13,6 @@ jest.mock('../../app/ui/components/standardHeader/style/StandardHeader', () => (
 
 jest.mock('../../app/ui/screens/memberList/style/MemberList', () => ({
   memberSize: 24,
-}));
-
-jest.mock('../../app/utils/url', () => ({
-  apiRequest: jest.fn(),
 }));
 
 jest.mock('react-native/Libraries/Utilities/Dimensions', () => ({
@@ -34,64 +28,34 @@ describe('members saga', () => {
   describe('load members', () => {
     it('should indicate the member list is being loaded', () =>
       expectSaga(membersSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(memberActions.members())
         .put(memberActions.fetching())
         .silentRun());
 
     it('should load the member list without keywords', () =>
       expectSaga(membersSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(memberActions.members())
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith(
-            'members',
-            {
-              method: 'GET',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Token token',
-              },
-            },
-            {
-              limit: 3 * 6,
-            }
-          );
-        }));
+        .call(getRequest, 'members', {
+          limit: 3 * 6,
+        })
+        .silentRun());
 
     it('should base the amount to fetch on the window height', () => {
       Dimensions.get = () => ({ height: 40 * 4 + 20 });
       expectSaga(membersSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(memberActions.members())
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith(
-            'members',
-            {
-              method: 'GET',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Token token',
-              },
-            },
-            {
-              limit: 4 * 6,
-            }
-          );
-        });
+        .call(getRequest, 'members', {
+          limit: 4 * 6,
+        })
+        .silentRun();
       Dimensions.get = () => ({ height: 40 * 3 + 20 });
     });
 
     it('should put the result data when the request succeeds', () =>
       expectSaga(membersSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [
-            matchers.call.like({ fn: apiRequest, args: ['members'] }),
+            matchers.call.like({ fn: getRequest, args: ['members'] }),
             { results: [{ pk: 1 }], next: 'moreUrl' },
           ],
         ])
@@ -101,33 +65,18 @@ describe('members saga', () => {
 
     it('should load the member list with keywords', () =>
       expectSaga(membersSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(memberActions.members('John Doe'))
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith(
-            'members',
-            {
-              method: 'GET',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Token token',
-              },
-            },
-            {
-              limit: 3 * 6,
-              search: 'John Doe',
-            }
-          );
-        }));
+        .call(getRequest, 'members', {
+          limit: 3 * 6,
+          search: 'John Doe',
+        })
+        .silentRun());
 
     it('should put the result data and keywords when the request succeeds', () =>
       expectSaga(membersSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [
-            matchers.call.like({ fn: apiRequest, args: ['members'] }),
+            matchers.call.like({ fn: getRequest, args: ['members'] }),
             { results: [{ pk: 1 }], next: 'moreUrl' },
           ],
         ])
@@ -137,10 +86,7 @@ describe('members saga', () => {
 
     it('should put an error when the request fails', () =>
       expectSaga(membersSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [matchers.call.call(apiRequest, throwError)],
-        ])
+        .provide([[matchers.call.call(getRequest, throwError)]])
         .dispatch(memberActions.members())
         .put(memberActions.failure())
         .silentRun());
@@ -149,7 +95,6 @@ describe('members saga', () => {
   describe('load more members', () => {
     it('should indicate the member list is being loaded', () =>
       expectSaga(membersSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(memberActions.more('moreUrl'))
         .put(memberActions.fetching())
         .silentRun());
@@ -157,9 +102,8 @@ describe('members saga', () => {
     it('should load more members', () =>
       expectSaga(membersSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [
-            matchers.call.like({ fn: apiRequest, args: ['moreUrl'] }),
+            matchers.call.like({ fn: getRequest, args: ['moreUrl'] }),
             { results: [{ pk: 1 }], next: 'moreUrl2' },
           ],
         ])
@@ -177,7 +121,6 @@ describe('members saga', () => {
       global.fetch.mockReturnValueOnce(Promise.resolve(response));
 
       expectSaga(membersSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(memberActions.more('moreUrl'))
         .put(memberActions.moreSuccess([{ pk: 1 }], 'evenMoreUrl'))
         .silentRun();
@@ -185,10 +128,7 @@ describe('members saga', () => {
 
     it('should put empty result data when the request fails', () =>
       expectSaga(membersSaga)
-        .provide([
-          [select(tokenSelector), 'token'],
-          [matchers.call.call(fetch, throwError)],
-        ])
+        .provide([[matchers.call.call(fetch, throwError)]])
         .dispatch(memberActions.more('moreUrl'))
         .put(memberActions.moreSuccess([], null))
         .silentRun());

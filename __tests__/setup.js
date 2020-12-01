@@ -57,3 +57,14 @@ jest.doMock('react-native', () =>
     ReactNative
   )
 );
+
+jest.mock('../app/env.js');
+
+jest.mock('../app/sagas/utils/api', () => ({
+  getRequest: jest.fn(() => {}),
+  postRequest: jest.fn(() => {}),
+  patchRequest: jest.fn(() => {}),
+  deleteRequest: jest.fn(() => {}),
+}));
+
+jest.mock('react-native-app-auth');

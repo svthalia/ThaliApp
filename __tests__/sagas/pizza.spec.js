@@ -1,23 +1,18 @@
 import * as matchers from 'redux-saga-test-plan/matchers';
-import { select } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
-import { apiRequest } from '../../app/utils/url';
+import {
+  deleteRequest,
+  getRequest,
+  patchRequest,
+  postRequest,
+} from '../../app/sagas/utils/api';
 import pizzaSaga from '../../app/sagas/pizza';
 import * as pizzaActions from '../../app/actions/pizza';
-import { tokenSelector } from '../../app/selectors/session';
-
-jest.mock('../../app/utils/url', () => ({
-  apiRequest: jest.fn(() => {}),
-}));
 
 describe('pizza saga', () => {
   const error = new Error('error');
   error.response = null;
-
-  beforeEach(() => {
-    apiRequest.mockReset();
-  });
 
   describe('retrieve pizza info', () => {
     describe('failures', () => {
@@ -28,12 +23,11 @@ describe('pizza saga', () => {
       it('should put failure when the pizza event request fails', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas/event'] }),
+              matchers.call.like({ fn: getRequest, args: ['pizzas/event'] }),
               throwError(error),
             ],
-            [matchers.call.fn(apiRequest), []],
+            [matchers.call.fn(getRequest), []],
           ])
           .dispatch(pizzaActions.retrievePizzaInfo())
           .put(pizzaActions.failure())
@@ -42,12 +36,11 @@ describe('pizza saga', () => {
       it('should put failure when the pizzas request fails', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas'] }),
+              matchers.call.like({ fn: getRequest, args: ['pizzas'] }),
               throwError(error),
             ],
-            [matchers.call.fn(apiRequest), []],
+            [matchers.call.fn(getRequest), []],
           ])
           .dispatch(pizzaActions.retrievePizzaInfo())
           .put(pizzaActions.failure())
@@ -56,15 +49,14 @@ describe('pizza saga', () => {
       it('should put failure when the order request fails', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
               matchers.call.like({
-                fn: apiRequest,
+                fn: getRequest,
                 args: ['pizzas/orders/me'],
               }),
               throwError(error),
             ],
-            [matchers.call.fn(apiRequest), []],
+            [matchers.call.fn(getRequest), []],
           ])
           .dispatch(pizzaActions.retrievePizzaInfo())
           .put(pizzaActions.failure())
@@ -79,15 +71,14 @@ describe('pizza saga', () => {
       it('should put the result data when the requests all succeed', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas/event'] }),
+              matchers.call.like({ fn: getRequest, args: ['pizzas/event'] }),
               'pizzaEvent',
             ],
-            [matchers.call.like({ fn: apiRequest, args: ['pizzas'] }), 'pizzaList'],
+            [matchers.call.like({ fn: getRequest, args: ['pizzas'] }), 'pizzaList'],
             [
               matchers.call.like({
-                fn: apiRequest,
+                fn: getRequest,
                 args: ['pizzas/orders/me'],
               }),
               'pizzaOrder',
@@ -100,15 +91,14 @@ describe('pizza saga', () => {
       it('should put the result data when the order is not found', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas/event'] }),
+              matchers.call.like({ fn: getRequest, args: ['pizzas/event'] }),
               'pizzaEvent',
             ],
-            [matchers.call.like({ fn: apiRequest, args: ['pizzas'] }), 'pizzaList'],
+            [matchers.call.like({ fn: getRequest, args: ['pizzas'] }), 'pizzaList'],
             [
               matchers.call.like({
-                fn: apiRequest,
+                fn: getRequest,
                 args: ['pizzas/orders/me'],
               }),
               throwError(error),
@@ -121,13 +111,12 @@ describe('pizza saga', () => {
       it('should put the result data when the pizzas are not found', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas/event'] }),
+              matchers.call.like({ fn: getRequest, args: ['pizzas/event'] }),
               'pizzaEvent',
             ],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas'] }),
+              matchers.call.like({ fn: getRequest, args: ['pizzas'] }),
               throwError(error),
             ],
           ])
@@ -138,44 +127,19 @@ describe('pizza saga', () => {
 
     it('should do three GET requests', () =>
       expectSaga(pizzaSaga)
-        .provide([[select(tokenSelector), 'usertoken']])
         .dispatch(pizzaActions.retrievePizzaInfo())
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith('pizzas/event', {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token usertoken',
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
-          });
-          expect(apiRequest).toBeCalledWith('pizzas', {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token usertoken',
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
-          });
-          expect(apiRequest).toBeCalledWith('pizzas/orders/me', {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token usertoken',
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
-          });
-        }));
+        .call(getRequest, 'pizzas/event')
+        .call(getRequest, 'pizzas')
+        .call(getRequest, 'pizzas/orders/me')
+        .silentRun());
   });
 
   describe('cancel pizza order', () => {
     it('should put success when the request succeeds', () =>
       expectSaga(pizzaSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [
-            matchers.call.like({ fn: apiRequest, args: ['pizzas/orders/me'] }),
+            matchers.call.like({ fn: deleteRequest, args: ['pizzas/orders/me'] }),
             'pizzaOrder',
           ],
         ])
@@ -186,9 +150,8 @@ describe('pizza saga', () => {
     it('should put failure when the request fails', () =>
       expectSaga(pizzaSaga)
         .provide([
-          [select(tokenSelector), 'token'],
           [
-            matchers.call.like({ fn: apiRequest, args: ['pizzas/orders/me'] }),
+            matchers.call.like({ fn: deleteRequest, args: ['pizzas/orders/me'] }),
             throwError(error),
           ],
         ])
@@ -198,19 +161,9 @@ describe('pizza saga', () => {
 
     it('should do a DELETE request', () =>
       expectSaga(pizzaSaga)
-        .provide([[select(tokenSelector), 'token']])
         .dispatch(pizzaActions.cancelOrder())
-        .silentRun()
-        .then(() => {
-          expect(apiRequest).toBeCalledWith('pizzas/orders/me', {
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Token token',
-              'Content-Type': 'application/json',
-            },
-            method: 'DELETE',
-          });
-        }));
+        .call(deleteRequest, 'pizzas/orders/me')
+        .silentRun());
   });
 
   describe('create pizza order', () => {
@@ -218,10 +171,9 @@ describe('pizza saga', () => {
       it('should put success when the request succeeds', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
               matchers.call.like({
-                fn: apiRequest,
+                fn: patchRequest,
                 args: ['pizzas/orders/me'],
               }),
               'pizzaOrder',
@@ -234,10 +186,9 @@ describe('pizza saga', () => {
       it('should put failure when the request fails', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
               matchers.call.like({
-                fn: apiRequest,
+                fn: patchRequest,
                 args: ['pizzas/orders/me'],
               }),
               throwError(error),
@@ -249,29 +200,17 @@ describe('pizza saga', () => {
 
       it('should do a PUT request', () =>
         expectSaga(pizzaSaga)
-          .provide([[select(tokenSelector), 'token']])
           .dispatch(pizzaActions.orderPizza(1, true))
-          .silentRun()
-          .then(() => {
-            expect(apiRequest).toBeCalledWith('pizzas/orders/me', {
-              headers: {
-                Accept: 'application/json',
-                Authorization: 'Token token',
-                'Content-Type': 'application/json',
-              },
-              method: 'PATCH',
-              body: '{"product":1}',
-            });
-          }));
+          .call(patchRequest, 'pizzas/orders/me', { product: 1 })
+          .silentRun());
     });
 
     describe('new order', () => {
       it('should put success when the request succeeds', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas/orders'] }),
+              matchers.call.like({ fn: postRequest, args: ['pizzas/orders'] }),
               'pizzaOrder',
             ],
           ])
@@ -282,9 +221,8 @@ describe('pizza saga', () => {
       it('should put failure when the request fails', () =>
         expectSaga(pizzaSaga)
           .provide([
-            [select(tokenSelector), 'token'],
             [
-              matchers.call.like({ fn: apiRequest, args: ['pizzas/orders'] }),
+              matchers.call.like({ fn: postRequest, args: ['pizzas/orders'] }),
               throwError(error),
             ],
           ])
@@ -294,20 +232,9 @@ describe('pizza saga', () => {
 
       it('should do a POST request', () =>
         expectSaga(pizzaSaga)
-          .provide([[select(tokenSelector), 'token']])
           .dispatch(pizzaActions.orderPizza(2, false))
-          .silentRun()
-          .then(() => {
-            expect(apiRequest).toBeCalledWith('pizzas/orders', {
-              headers: {
-                Accept: 'application/json',
-                Authorization: 'Token token',
-                'Content-Type': 'application/json',
-              },
-              method: 'POST',
-              body: '{"product":2}',
-            });
-          }));
+          .call(postRequest, 'pizzas/orders', { product: 2 })
+          .silentRun());
     });
   });
 });

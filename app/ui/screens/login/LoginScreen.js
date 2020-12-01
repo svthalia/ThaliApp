@@ -6,10 +6,9 @@ import {
   KeyboardAvoidingView,
   LayoutAnimation,
   Text,
-  TextInput,
   View,
 } from 'react-native';
-import { url } from '../../../utils/url';
+import { SERVER_URL } from '../../../constants';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
 import Button from '../../components/button/Button';
 import styles from './style/LoginScreen';
@@ -30,14 +29,6 @@ const configureNextAnimation = () => {
 };
 
 class LoginScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-    };
-  }
-
   componentDidMount() {
     configureNextAnimation();
   }
@@ -48,29 +39,9 @@ class LoginScreen extends Component {
 
     let content = (
       <View>
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder='Username'
-            autoCapitalize='none'
-            underlineColorAndroid={Colors.textColour}
-            onChangeText={(username) => this.setState({ username })}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder='Password'
-            underlineColorAndroid={Colors.textColour}
-            autoCapitalize='none'
-            secureTextEntry
-            onChangeText={(password) => this.setState({ password })}
-            onSubmitEditing={() => {
-              login(this.state.username, this.state.password);
-            }}
-          />
-        </View>
         <Button
           title='LOGIN'
-          onPress={() => login(this.state.username, this.state.password)}
+          onPress={login}
           color={Colors.darkGrey}
           style={styles.loginButton}
           textStyle={styles.loginButtonText}
@@ -78,13 +49,7 @@ class LoginScreen extends Component {
         />
         <Text
           style={styles.linkText}
-          onPress={() => openUrl(`${url}/user/password_reset/`)}
-        >
-          Forgot password?
-        </Text>
-        <Text
-          style={styles.linkText}
-          onPress={() => openUrl(`${url}/association/register/`)}
+          onPress={() => openUrl(`${SERVER_URL}/association/register/`)}
         >
           Become a member
         </Text>

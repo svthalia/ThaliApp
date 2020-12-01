@@ -3,8 +3,9 @@
 exports[`session actions should create an action for a successful login 1`] = `
 Object {
   "payload": Object {
-    "token": "token",
-    "username": "username",
+    "accessToken": "accessToken",
+    "refreshToken": "refreshToken",
+    "tokenExpiration": undefined,
   },
   "type": "SESSION_SIGNED_IN",
 }
@@ -24,10 +25,6 @@ Object {
 
 exports[`session actions should create an action to log the user in 1`] = `
 Object {
-  "payload": Object {
-    "pass": "password",
-    "user": "username",
-  },
   "type": "SESSION_SIGN_IN",
 }
 `;

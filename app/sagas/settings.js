@@ -1,30 +1,20 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { all, call, put, select, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import { notificationsSettingsActions, settingsActions } from '../actions/settings';
 
-import { apiRequest } from '../utils/url';
 import * as pushNotifactionsActions from '../actions/pushNotifications';
-import { tokenSelector } from '../selectors/session';
+import { STORAGE_PUSH_CATEGORIES } from '../constants';
 import reportError from '../utils/errorReporting';
-
-const PUSHCATEGORYKEY = '@MyStore:pushCategories';
+import { getRequest } from './utils/api';
 
 function* pushNotifications() {
-  const token = yield select(tokenSelector);
-
-  const data = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
-
   try {
-    const categoryList = yield call(apiRequest, 'devices/categories', data);
-    const preferencesJson = yield call(AsyncStorage.getItem, PUSHCATEGORYKEY);
+    const categoryList = yield call(getRequest, 'devices/categories');
+    const preferencesJson = yield call(
+      [AsyncStorage, 'getItem'],
+      STORAGE_PUSH_CATEGORIES
+    );
 
     if (preferencesJson === null) {
       for (let i = 0; i < categoryList.length; i += 1) {
@@ -48,7 +38,11 @@ function* saveCategories(action) {
   const { categories } = action;
 
   try {
-    yield call(AsyncStorage.setItem, PUSHCATEGORYKEY, JSON.stringify(categories));
+    yield call(
+      [AsyncStorage, 'setItem'],
+      STORAGE_PUSH_CATEGORIES,
+      JSON.stringify(categories)
+    );
     yield put(pushNotifactionsActions.register(categories));
   } catch (error) {
     yield call(reportError, error);
