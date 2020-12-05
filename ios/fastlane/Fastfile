@@ -8,7 +8,7 @@ default_platform(:ios)
 platform :ios do
   private_lane :setup_project do |options|
     if is_ci?
-      xcversion(version: "~> 12.0")
+      xcversion(version: "~> 12.2")
       create_keychain(
         name: "fastlane-keychain",
         password: ENV["KEYCHAIN_PASSWORD"],
