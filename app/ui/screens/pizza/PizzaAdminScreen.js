@@ -48,11 +48,11 @@ class PizzaAdminScreen extends Component {
 
     const filterTypes = [
       {
-        label: 'Disabled filter',
+        label: 'Show all',
         checkItem: () => true,
       },
       {
-        label: 'Filtering on payment',
+        label: 'Hide paid',
         checkItem: (item) => item.select.value === PAYMENT_TYPES.NONE,
       },
     ];
