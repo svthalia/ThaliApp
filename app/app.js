@@ -11,7 +11,7 @@ import sagas from './sagas';
 import * as sessionActions from './actions/session';
 import * as deepLinkingActions from './actions/deepLinking';
 import { register } from './actions/pushNotifications';
-import NavigationService from './navigation';
+import Navigation from './ui/components/navigation/NavigationConnector';
 
 const { UIManager } = NativeModules;
 
@@ -96,11 +96,7 @@ class Main extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationService.AppContainer
-          ref={(navigatorRef) => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
+        <Navigation />
       </Provider>
     );
   }

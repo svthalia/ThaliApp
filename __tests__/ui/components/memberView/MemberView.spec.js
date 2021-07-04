@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import MemberView from '../../../../app/ui/components/memberView/MemberView';
 
-jest.mock('react-navigation', () => ({
+jest.mock('@react-navigation/compat', () => ({
   withNavigation: (component) => component,
 }));
 
