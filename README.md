@@ -1,4 +1,6 @@
-ThaliApp
+**This repository has been superseded by [svthalia/Reaxit](https://github.com/svthalia/Reaxit)**
+
+ThaliApp (React Native, up to v2.9.0)
 ==============
 
 [![Linting and Testing](https://github.com/svthalia/thaliapp/workflows/Linting%20and%20Testing/badge.svg)](https://github.com/svthalia/thaliapp/actions)
