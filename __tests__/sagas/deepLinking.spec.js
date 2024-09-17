@@ -13,7 +13,7 @@ import * as eventActions from '../../app/actions/event';
 
 import { loggedInSelector } from '../../app/selectors/session';
 
-jest.mock('../../app/navigation', () => ({
+jest.mock('../../app/ui/components/navigation/RootNavigation', () => ({
   navigate: jest.fn(),
 }));
 

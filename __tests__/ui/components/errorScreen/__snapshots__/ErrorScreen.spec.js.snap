@@ -12,11 +12,7 @@ exports[`ErrorScreen component renders correctly 1`] = `
   }
 >
   <Image
-    source={
-      Object {
-        "testUri": "../../../app/assets/img/sad_cloud.png",
-      }
-    }
+    source="test-file-stub"
     style={
       Object {
         "height": 200,

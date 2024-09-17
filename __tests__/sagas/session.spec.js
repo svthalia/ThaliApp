@@ -30,7 +30,7 @@ jest.mock('../../app/selectors/session', () => ({
   tokenSelector: () => 'abc123',
 }));
 
-jest.mock('../../app/navigation', () => ({
+jest.mock('../../app/ui/components/navigation/RootNavigation', () => ({
   navigate: jest.fn(),
 }));
 

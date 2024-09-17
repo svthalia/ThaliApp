@@ -18,7 +18,7 @@ jest.mock('../../app/utils/url', () => ({
   apiRequest: jest.fn(() => {}),
 }));
 
-jest.mock('../../app/navigation', () => ({
+jest.mock('../../app/ui/components/navigation/RootNavigation', () => ({
   navigate: jest.fn(),
 }));
 

@@ -41,11 +41,7 @@ exports[`Sidebar component renders correctly 1`] = `
     >
       <Image
         resizeMode="cover"
-        source={
-          Object {
-            "testUri": "../../../app/assets/img/huygens.jpg",
-          }
-        }
+        source="test-file-stub"
         style={
           Array [
             Object {

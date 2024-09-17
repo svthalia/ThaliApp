@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import StatusBar from '@react-native-community/status-bar';
-import { NavigationEvents } from 'react-navigation';
 
 import styles from './style/SearchHeader';
 import Colors from '../../style/Colors';
@@ -141,10 +140,6 @@ class SearchHeader extends Component {
     const { isAnimating, isSearching, scaleValue } = this.state;
     return (
       <View>
-        <NavigationEvents
-          onWillFocus={this.addBackHandler}
-          onDidBlur={this.removeBackHandler}
-        />
         <StatusBar
           backgroundColor={Colors.semiTransparent}
           translucent
