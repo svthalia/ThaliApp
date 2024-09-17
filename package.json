@@ -41,7 +41,7 @@
       "<rootDir>/__tests__/setup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|@react-native-community|react-navigation|react-navigation-drawer|react-navigation-stack|@sentry|react-native-gesture-handler|react-native-vector-icons|react-native-linear-gradient|@react-native-firebase|react-native-image-crop-picker|react-native-reanimated|react-native-iphone-x-helper|react-native-render-html|react-native-webview|react-native-share|react-native-image-zoom-viewer|react-native-image-pan-zoom|react-native-add-calendar-event)/)"
+      "node_modules/(?!(react-native|@react-native-community|react-navigation|react-navigation-drawer|react-navigation-stack|@sentry|react-native-gesture-handler|react-native-vector-icons|react-native-linear-gradient|@react-native-firebase|react-native-image-crop-picker|react-native-reanimated|react-native-iphone-x-helper|react-native-render-html|react-native-webview|react-native-share|react-native-image-zoom-viewer|react-native-image-pan-zoom|react-native-add-calendar-event|react-native-floating-action)/)"
     ]
   },
   "prettier": {
@@ -67,6 +67,7 @@
     "react-native-cli": "^2.0.1",
     "react-native-device-info": "^7.0.2",
     "react-native-dotenv": "^2.4.2",
+    "react-native-floating-action": "^1.21.0",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-image-crop-picker": "^0.35.1",
@@ -75,8 +76,8 @@
     "react-native-reanimated": "^1.13.1",
     "react-native-render-html": "^4.2.4",
     "react-native-safe-area-context": "^3.1.8",
-    "react-native-share": "^4.0.4",
     "react-native-screens": "^2.12.0",
+    "react-native-share": "^4.0.4",
     "react-native-snackbar": "^2.2.3",
     "react-native-vector-icons": "^7.1.0",
     "react-native-webview": "^10.10.0",

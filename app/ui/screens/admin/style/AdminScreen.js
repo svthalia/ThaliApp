@@ -63,29 +63,6 @@ const styles = StyleSheet.create({
   selected: {
     backgroundColor: Colors.magenta,
   },
-  filterButton: {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-    borderRadius: 28,
-    overflow: 'hidden',
-    backgroundColor: Colors.grey,
-    android: {
-      elevation: 4,
-    },
-    ios: {
-      borderColor: Colors.lightGray,
-      borderStyle: 'solid',
-      borderWidth: 0.5,
-    },
-  },
-  filterButtonWrapper: {
-    width: 56,
-    height: 56,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.magenta,
-  },
   noResultsMessage: {
     fontSize: 18,
     padding: 16,

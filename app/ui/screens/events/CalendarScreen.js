@@ -16,6 +16,13 @@ import ErrorScreen from '../../components/errorScreen/ErrorScreen';
 import styles from './style/CalendarScreen';
 import SearchHeader from '../../components/searchHeader/SearchHeaderConnector';
 import DismissKeyboardView from '../../components/dismissKeyboardView/DismissKeyboardView';
+import FloatingActionButton from '../../components/floatingActionButton/FloatingActionButton';
+
+const filters = {
+  all: () => true,
+  registered: (item) => item.registered,
+  open: (item) => item.registration_allowed,
+};
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const addEventToSection = (sections, date, event) => {
@@ -128,6 +135,31 @@ const renderItem = (item) => {
 };
 
 class CalendarScreen extends Component {
+  actions = [
+    {
+      text: 'All',
+      iconName: 'reorder',
+      onPress: () => this.updateFilter(filters.all),
+    },
+    {
+      text: 'Your registrations',
+      iconName: 'account-circle',
+      onPress: () => this.updateFilter(filters.registered),
+    },
+    {
+      text: 'Open registrations',
+      iconName: 'event-available',
+      onPress: () => this.updateFilter(filters.open),
+    },
+  ];
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeFilter: filters.all,
+    };
+  }
+
   componentDidMount() {
     const { keywords } = this.props;
     this.props.events(keywords);
@@ -145,7 +177,22 @@ class CalendarScreen extends Component {
     }, 500);
   };
 
+  filteredEvents = () => {
+    const { activeFilter } = this.state;
+    const { eventList } = this.props;
+
+    return eventList.filter(activeFilter);
+  };
+
+  updateFilter = (filter) => {
+    this.setState({
+      activeFilter: filter,
+    });
+  };
+
   render() {
+    const items = this.filteredEvents();
+
     const header = (
       <SearchHeader
         title='Calendar'
@@ -164,7 +211,7 @@ class CalendarScreen extends Component {
             <Text style={styles.sectionHeader}>{itemHeader.section.key}</Text>
           </TouchableWithoutFeedback>
         )}
-        sections={eventListToSections(this.props.eventList)}
+        sections={eventListToSections(items)}
         keyExtractor={(item) => item.dayNumber}
         stickySectionHeadersEnabled
         onRefresh={this.handleRefresh}
@@ -210,6 +257,7 @@ class CalendarScreen extends Component {
         <DismissKeyboardView contentStyle={styles.keyboardView}>
           {content}
         </DismissKeyboardView>
+        <FloatingActionButton iconName='filter-list' actions={this.actions} />
       </View>
     );
   }
@@ -228,6 +276,7 @@ CalendarScreen.propTypes = {
       start: PropTypes.string,
       end: PropTypes.string,
       location: PropTypes.string,
+      registration_allowed: PropTypes.bool.isRequired,
       price: PropTypes.string,
       registered: PropTypes.bool,
       pizza: PropTypes.bool,
